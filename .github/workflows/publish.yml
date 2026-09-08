@@ -1,0 +1,38 @@
+# Publish edge-compat to PyPI on a version tag, through PyPI trusted publishing
+# (no API token anywhere): PyPI must list this repository + workflow + the
+# `pypi` environment as a publisher for the project. Runs only in the public
+# mirror — tags are cut there — and builds from the tagged tree.
+name: publish
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv build
+      - run: uv run --frozen pytest -q
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
