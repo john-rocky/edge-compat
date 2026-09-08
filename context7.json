@@ -1,7 +1,7 @@
 {
   "$schema": "https://context7.com/schema/context7.json",
   "projectTitle": "edge-compat",
-  "description": "Measured delegate compatibility for LiteRT (formerly TensorFlow Lite): an op-level matrix per backend and runtime version, edge-lint (static .tflite pre-flight that predicts GPU/NPU/WebGPU fallback), model cards with dated device and browser measurements, and a browser demo zoo. Unofficial; not a Google product.",
+  "description": "Measured LiteRT (TensorFlow Lite) delegate compatibility: op-level matrix per backend and runtime version, edge-lint .tflite pre-flight for GPU/NPU/WebGPU fallback, dated device cards. Unofficial.",
   "branch": "main",
   "excludeFolders": ["tests", "site/static", "site/src", "web/sweep/src", "data/device_runs", "data/sweep", "data/sweep-ci"],
   "rules": [
