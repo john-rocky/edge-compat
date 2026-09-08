@@ -17,6 +17,13 @@ dependencies = [
     "pyyaml>=6.0",
 ]
 
+[project.urls]
+Homepage = "https://john-rocky.github.io/edge-compat/"
+Repository = "https://github.com/john-rocky/edge-compat"
+"Model cards" = "https://github.com/john-rocky/edge-compat/blob/main/cards/README.md"
+"Compatibility matrix" = "https://github.com/john-rocky/edge-compat/tree/main/data/matrix"
+Changelog = "https://github.com/john-rocky/edge-compat/blob/main/DELTA_LOG.md"
+
 [project.optional-dependencies]
 # The Phase 14 MCP server (mcp/server.py). The core toolkit stays
 # dependency-minimal; without this extra the server refuses to start and the

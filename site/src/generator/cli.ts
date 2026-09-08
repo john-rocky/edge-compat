@@ -297,6 +297,15 @@ async function main(): Promise<void> {
     path.join(REPO_ROOT, 'cards', 'index.json'),
     path.join(outDir, 'cards', 'index.json'),
   );
+  // The data llms.txt links to, under the same repo-relative paths, so an
+  // agent that fetched llms.txt from the site can follow every link.
+  for (const sub of ['matrix', 'sweep', 'device_runs', 'examples']) {
+    fs.cpSync(path.join(REPO_ROOT, 'data', sub), path.join(outDir, 'data', sub), {
+      recursive: true,
+      // the weights guard: no model binaries in the site output, fixtures included
+      filter: (src) => !src.endsWith('.tflite'),
+    });
+  }
 
   let demoPages = 0;
   const skipped: string[] = [];

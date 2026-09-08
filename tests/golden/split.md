@@ -57,3 +57,9 @@ Complete lookup signatures — sufficient to construct a probe without reopening
 |---|---|---|---|
 | RESHAPE | float32 | `{"dynamic_shape":false,"rank":2}` | gpu_mldrift |
 | SOFTMAX | float32 | `{"dynamic_shape":false,"rank":2}` | gpu_mldrift |
+
+## Next steps
+
+- fallback / incorrect / crash: apply the rewrite hint recorded above, or try the recorded transforms with `edge-fix run <model> --matrix <same snapshot> --rules data/transforms` (a dry run unless --apply is given).
+- unknown / needs probe: no measured entry for gpu_mldrift @ litert 0.0.0-example — generate probe fixtures with `edge-compat probe gen` and measure them on your device, or look for a newer snapshot at https://john-rocky.github.io/edge-compat/data/matrix/
+- verdicts hold for gpu_mldrift @ litert 0.0.0-example only; delegate support changes between runtime versions.

@@ -174,6 +174,36 @@ def build_report(
     }
 
 
+# Where a newer snapshot for the same backend may exist; named in the report
+# footer so the next step is in the output itself.
+SITE_MATRIX_URL = "https://john-rocky.github.io/edge-compat/data/matrix/"
+
+
+def _next_steps(report: dict[str, Any]) -> list[str]:
+    """The footer that names the next step for each kind of finding — the report
+    is what an agent or a CI log reads, so the way forward has to be in it."""
+    statuses = {f["status"] for f in report["findings"]}
+    axis = f"{report['backend']} @ litert {report['litert_version']}"
+    steps: list[str] = []
+    if statuses & {"fallback", "incorrect", "crash"}:
+        steps.append(
+            "fallback / incorrect / crash: apply the rewrite hint recorded above, or try the "
+            "recorded transforms with `edge-fix run <model> --matrix <same snapshot> "
+            "--rules data/transforms` (a dry run unless --apply is given)."
+        )
+    if "unknown" in statuses or report["needs_probe"] or report["custom_ops"]:
+        steps.append(
+            f"unknown / needs probe: no measured entry for {axis} — generate probe fixtures "
+            "with `edge-compat probe gen` and measure them on your device, or look for a "
+            f"newer snapshot at {SITE_MATRIX_URL}"
+        )
+    if steps:
+        steps.append(
+            f"verdicts hold for {axis} only; delegate support changes between runtime versions."
+        )
+    return steps
+
+
 def _plural(count: int, noun: str) -> str:
     return f"{count} {noun}" if count == 1 else f"{count} {noun}s"
 
@@ -354,6 +384,12 @@ def render_text(
         for c in report["custom_ops"]:
             lines.append(f"  s{c['subgraph']}/n{c['node_index']} CUSTOM {c['custom_code']!r}")
 
+    steps = _next_steps(report)
+    if steps:
+        lines.append("")
+        lines.append("Next steps:")
+        lines += [f"  {step}" for step in steps]
+
     return "\n".join(lines) + "\n"
 
 
@@ -452,6 +488,12 @@ def render_markdown(
                 f"- s{c['subgraph']}/n{c['node_index']} CUSTOM `{c['custom_code']}` "
                 "(outside the matrix vocabulary; not probeable)"
             )
+        lines.append("")
+
+    steps = _next_steps(report)
+    if steps:
+        lines += ["## Next steps", ""]
+        lines += [f"- {step}" for step in steps]
         lines.append("")
 
     while lines and lines[-1] == "":

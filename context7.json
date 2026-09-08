@@ -1,0 +1,13 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "edge-compat",
+  "description": "Measured delegate compatibility for LiteRT (formerly TensorFlow Lite): an op-level matrix per backend and runtime version, edge-lint (static .tflite pre-flight that predicts GPU/NPU/WebGPU fallback), model cards with dated device and browser measurements, and a browser demo zoo. Unofficial; not a Google product.",
+  "branch": "main",
+  "excludeFolders": ["tests", "site/static", "site/src", "web/sweep/src", "data/device_runs", "data/sweep", "data/sweep-ci"],
+  "rules": [
+    "Before deploying a .tflite to the LiteRT GPU or NPU delegate, run edge-lint with the matrix snapshot for that backend and runtime version; an op with no measured entry reports 'unknown', never a guess.",
+    "Matrix snapshots are per (backend, litert_version); delegate support changes between runtime versions, so match the snapshot to the runtime you ship.",
+    "Rewrite hints in lint output come verbatim from measured matrix entries; edge-fix applies the recorded transforms as a dry run and never modifies the input file in place.",
+    "Model cards (cards/<model>/CARD.md, card.json) are the source of measured latency and delegation results; every number carries its device, runtime version and date."
+  ]
+}

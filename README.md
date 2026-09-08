@@ -1,7 +1,44 @@
 # edge-compat
 
+**Will this `.tflite` run on the GPU, the NPU, or in the browser — and where will it fall back?**
+edge-compat answers that for [LiteRT](https://ai.google.dev/edge/litert) (Google's on-device
+runtime, the new name for TensorFlow Lite) with measurements, not guesses: an op-level delegate
+compatibility matrix (659 entries in 18 backend × runtime-version snapshots), `edge-lint` — a
+static pre-flight that reads a `.tflite` and predicts delegate fallback before you run it — 203
+model cards with 751 dated device runs (Galaxy S26, Pixel 8a, iPhone 17 Pro, Raspberry Pi 5,
+Apple M4 Max), and a browser sweep of 92 models on `@litertjs/core` 2.5.3. Passing and failing
+models are both listed. Counts as of 2026-09-08; every row carries its own date and environment.
+
 Built by john-rocky. Measurements and views are my own.
 edge-compat is an unofficial project for LiteRT, not an official Google product.
+
+**Try it in two commands** — no clone, Python ≥ 3.11 with [uv](https://docs.astral.sh/uv/):
+
+```sh
+curl -sO https://john-rocky.github.io/edge-compat/data/matrix/webgpu_mldrift__2.5.3.json
+uvx --from git+https://github.com/john-rocky/edge-compat edge-lint model.tflite --matrix webgpu_mldrift__2.5.3.json
+```
+
+Pick the snapshot for your backend and runtime version from [`data/matrix/`](data/matrix/)
+(one file per backend × version). An op with no measured entry reports `unknown` — never a
+guess. To verify an install, run the shipped example after `uv sync` in a clone:
+`uv run edge-lint data/examples/model_mixed_example.tflite --matrix data/examples/matrix_example.json`
+(exit 0, "40.0% of 5 ops delegated · 3 blocking ops").
+
+**Questions this repository answers**
+
+- Which TFLite ops does the LiteRT GPU delegate (ML Drift, the CompiledModel GPU accelerator)
+  run, fall back on, or compute wrong, per runtime version? → [`data/matrix/`](data/matrix/),
+  `gpu_mldrift*__<version>.json`; every entry carries its evidence and provenance.
+- Why does my model fall back to CPU, or return wrong numbers, on the GPU? → `edge-lint` names
+  the op, the matched entry, and the rewrite the matrix recorded; `edge-fix` applies recorded
+  transforms as a dry run.
+- Which ops does the Qualcomm NPU path (QNN / HTP) accept or reject? →
+  `data/matrix/npu_qnn_htp_android__*.json`.
+- Does this model run in the browser with LiteRT.js on WebGPU, and how fast? → the
+  [site table](https://john-rocky.github.io/edge-compat/) and [`data/sweep/`](data/sweep/).
+- How fast is model X on device Y with which runtime version? → its card under
+  [`cards/<model>/CARD.md`](cards/README.md), with the raw record under `data/device_runs/`.
 
 *(Disclosure line and affiliation notice — single-sourced in `src/litert_compat/branding.py`,
 mirrored in `site/src/shared/branding.ts`, rendered on every public surface and checked by
@@ -13,10 +50,10 @@ commit. Numbered `DECISIONS`/`PROGRESS` citations in this README refer to the la
 Site: https://john-rocky.github.io/edge-compat/ — `llms.txt` at the site root.
 
 Developer tooling built around one shared data asset: a **delegate compatibility matrix**
-for [LiteRT](https://ai.google.dev/edge/litert), derived from real conversions and real
-device measurements. LiteRT's GPU/NPU delegates are closed-source and there is no public
-ground truth for op coverage; this repo's matrix is that ground truth, exposed to humans,
-CI, and AI agents through stable JSON, exit codes, and clean markdown.
+for LiteRT, derived from real conversions and real device measurements. LiteRT's GPU/NPU
+delegates are closed-source and there is no public ground truth for op coverage; this repo's
+matrix is that ground truth, exposed to humans, CI, and AI agents through stable JSON, exit
+codes, and clean markdown.
 
 **Machine consumption first.** All generated output is deterministic (sorted keys, stable
 ordering, byte-identical reruns) so diffs are reviewable and pipelines can trigger on real
@@ -210,9 +247,9 @@ device are available.
 ```yaml
 - name: LiteRT delegate pre-flight
   run: |
-    pip install edge-compat
+    pip install git+https://github.com/john-rocky/edge-compat
     edge-lint model.tflite \
-      --matrix data/matrix/gpu_mldrift__1.2.0.json \
+      --matrix data/matrix/gpu_mldrift__2.2.0.json \
       --fail-on fallback --fail-on partitions:1 \
       --json > lint_report.json
   # exit 1 fails the job when any op falls back / crashes / is numerically
