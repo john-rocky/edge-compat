@@ -22,7 +22,7 @@
     "@types/node": "^24.0.0",
     "@webgpu/types": "^0.1.71",
     "eslint": "^9.30.0",
-    "playwright": "^1.54.0",
+    "playwright": "^1.63.0",
     "typescript": "^5.8.0",
     "typescript-eslint": "^8.35.0"
   }
