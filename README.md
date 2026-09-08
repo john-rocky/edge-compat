@@ -16,7 +16,7 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 
 ```sh
 curl -sO https://john-rocky.github.io/edge-compat/data/matrix/webgpu_mldrift__2.5.3.json
-uvx --from git+https://github.com/john-rocky/edge-compat edge-lint model.tflite --matrix webgpu_mldrift__2.5.3.json
+uvx --from edge-compat edge-lint model.tflite --matrix webgpu_mldrift__2.5.3.json
 ```
 
 Pick the snapshot for your backend and runtime version from [`data/matrix/`](data/matrix/)
@@ -247,7 +247,7 @@ device are available.
 ```yaml
 - name: LiteRT delegate pre-flight
   run: |
-    pip install git+https://github.com/john-rocky/edge-compat
+    pip install edge-compat
     edge-lint model.tflite \
       --matrix data/matrix/gpu_mldrift__2.2.0.json \
       --fail-on fallback --fail-on partitions:1 \
