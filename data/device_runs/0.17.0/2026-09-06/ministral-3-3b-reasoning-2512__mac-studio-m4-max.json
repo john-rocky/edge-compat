@@ -1,0 +1,42 @@
+{
+  "artifact": "model.litertlm",
+  "device": "mac-studio-m4-max",
+  "model_id": "ministral-3-3b-reasoning-2512",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-06",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.17.0/bin/litert-lm 0.17.0); fixed-question answer: '[thought] Okay, the question is asking for the sum of 17 and 25. Let me think about how to calculate this.\\n\\nFirst, I recall that addition is the process of combining two numbers to get their sum. So, I need to add 17 and 25.\\n\\nLet me break it down:\\n- 17 + 25\\n- I know that 10 + 20 = 30, so maybe I can use that as a base.\\n- 17 is 10 + 7, and 25 is 20 + 5.\\n- So, 10 + 20 = 30, and 7 + 5 = 12.\\n- Now, add those results: 30 + 12 = 42.\\n\\nWait, is that correct? Let me double-check.\\n\\nAlternatively, I can add them directly:\\n- 17 + 25\\n- 7 + 5 = 12, write down 2, carry over 1.\\n- 1 + 2 = 3, plus the carryover 1 makes 4.\\n- So, the result is 42.\\n\\nYes, that seems correct.\\n\\nNow, the user asked for a brief answer, so I should just provide the result without extra explanation.\\n\\nFinal answer: 42 [/thought]\\n42'"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

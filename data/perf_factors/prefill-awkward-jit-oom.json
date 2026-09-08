@@ -1,0 +1,30 @@
+{
+ "id": "prefill-awkward-jit-oom",
+ "category": "shape",
+ "title": "awkward prefill lengths >= ~1537 fail on-device JIT compile (OOM)",
+ "rewrite": {
+  "from": "T in {1537, 1663, 1665} at d=1024 decoder scale",
+  "to": "(no rewrite - a feasibility boundary)",
+  "equivalence": "not-equivalent",
+  "equivalence_evidence": "feasibility boundary - there is no after-form; the row records that these lengths do not compile on-device at all"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-28",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": null,
+  "after_ms": null,
+  "probe": "probe_pf1537: process killed by lmkd (low watermark) ~5.5 min into compile, replicated twice; pf1663: Scudo 'internal map failure (Out of memory)' SIGABRT ~7 min; pf1665 same class. pf1536/pf1664 compile in <40 s and run 22.9/23.9 ms"
+ },
+ "factor": null,
+ "scope": "d=1024 L=2 decoder block, on-device JIT only (AOT on a Linux host is untested for these lengths)",
+ "notes": "padding to mod-128 is not just a speed rewrite - past ~1.5k tokens it is the difference between compiling and not compiling on device",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

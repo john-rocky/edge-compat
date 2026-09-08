@@ -1,0 +1,49 @@
+{
+  "artifact": "PaddleOCR-VL-1.6.litertlm",
+  "artifact_sha256": "4dd0a268b1849a95e949f546de201c9957bf5acc98494c150bd02165c171cc76",
+  "device": "pixel-8a",
+  "model_id": "paddleocr-vl-1.6",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-05",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 1081,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-cold-cache-cooled",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": "generation gate FAIL: exit 0 but no answer text (journal generated=false); output tail …'𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦'",
+      "evidence": [
+        "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 0 (prefill_128).",
+        "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 1 (prefill_512).",
+        "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 2 (prefill_1024).",
+        "VERBOSE: Replacing 780 out of 859 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 110 partitions for subgraph 3 (decode).",
+        "community_accel_work/s7_manifest_backfill/logs_p8a/PaddleOCR-VL-1.6__PaddleOCR-VL-1.6.gatecpu.log: generation gate verdict FAIL (journal rows_p8a.jsonl, fail_class=None, exit=0, generated=False, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+        "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
+        "gate process peak 3386 MB (journal gate_peak_mb)"
+      ],
+      "failure_class": "degenerate_output",
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": 1124,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

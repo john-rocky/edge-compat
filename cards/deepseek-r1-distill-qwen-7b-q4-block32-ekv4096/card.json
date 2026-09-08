@@ -1,0 +1,138 @@
+{
+  "artifacts": [
+    {
+      "file": "DeepSeek-R1-Distill-Qwen-7B_q4_block32_ekv4096.litertlm",
+      "sha256": "511d59c11704f7ab39b9cb3a0eef1a88f8c05673d0b74bcb4b19c15845ab4a7f",
+      "size_mb": 4322.031
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "TODO (the HF card states the recipe, not the invocation)",
+    "quantization": "int4 blockwise (block 32) + OCTAV on linears, INT8 embedding externalized into its own bundle section; KV cache 4096 (HF card Conversion)",
+    "tool": "litert-torch export_hf — the official upstream converter run from a clean git worktree at upstream/main, dev-fork patches excluded; Qwen2ForCausalLM rides the stock converter with no custom code (HF card Conversion)",
+    "tool_version": "TODO (the HF card names the converter but not its version; no export log in the sources)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 8.43,
+          "delegated_ops": 1243,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1243 out of 1243 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1132 out of 1132 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (decode).",
+            "results block: prefill=107.53 decode=8.43 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 1089.0,
+            "init_s": 28.15477,
+            "prefill_tokens": 197.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 107.53,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1243,
+          "ttft_ms": 1950.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/deepseek-r1-distill-qwen-7b-q4-block32-ekv4096__galaxy-s26.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 1.76,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 306.0 s, output head \"[thought] I need to add 17 and 26 together. \\n\\nFirst, I'll add the units digits: \"",
+            "invocation 0: exit=0 wall_s=522.3 temp 48.3->53.8C throttled=0x0 prefill_tps=10.41 decode_tps=1.73 ttft_s=29.8071 init_s=111.3886 peak_rss_mb=5509",
+            "invocation 1: exit=0 wall_s=506.3 temp 49.9->53.8C throttled=0x0 prefill_tps=10.99 decode_tps=1.76 ttft_s=28.2533 init_s=111.3452 peak_rss_mb=5511",
+            "invocation 2: exit=0 wall_s=506.3 temp 49.9->54.3C throttled=0x0 prefill_tps=11.01 decode_tps=1.77 ttft_s=28.1467 init_s=111.5353 peak_rss_mb=5497"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.77,
+            "decode_tps_min": 1.73,
+            "init_s": 111.3886,
+            "init_s_max": 111.5353,
+            "init_s_min": 111.3452,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 11.01,
+            "prefill_tps_min": 10.41,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 29.8071,
+            "ttft_s_min": 28.1467
+          },
+          "output_match": null,
+          "peak_mem_mb": 5511.0,
+          "prefill_tokens_per_s": 10.99,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 28253.3
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/deepseek-r1-distill-qwen-7b-q4-block32-ekv4096__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "deepseek-r1-distill-qwen",
+    "id": "deepseek-r1-distill-qwen-7b-q4-block32-ekv4096",
+    "license": "mit",
+    "source_url": "https://huggingface.co/litert-community/DeepSeek-R1-Distill-Qwen-7B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "License: MIT for the model weights, inherited from deepseek-ai/DeepSeek-R1-Distill-Qwen-7B; the Qwen2.5 base is Apache-2.0; commercial use and derivatives permitted (HF card License).",
+    "A ~4.2 GB single bundle (4,531,978,224 bytes): desktop / high-memory devices; the Raspberry Pi 5 CPU row (litert-lm 0.16.1, --cache memory) is the only phone-class-or-below measurement in this repo (device runs).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/ (Pi 5 / S26 / Pixel 8a / Mac / iPhone as measured)."
+  ],
+  "schema_version": "1.2"
+}

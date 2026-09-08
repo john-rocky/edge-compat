@@ -1,0 +1,18 @@
+{
+ "runtime": "~/code/litertlm-convert/blog_gif_work/venv/bin/litert-lm",
+ "runtime_version": "0.15.0",
+ "checked": 1,
+ "broken": 0,
+ "skipped": [],
+ "results": [
+  {
+   "repo": "litert-community/granite-4.0-h-350m",
+   "file": "granite-4.0-h-350m_int8.litertlm",
+   "lane": "llm",
+   "source": "local",
+   "status": "ok",
+   "error": null,
+   "answer": "The answer to 17 + 25 is 42."
+  }
+ ]
+}

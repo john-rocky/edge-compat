@@ -1,0 +1,180 @@
+{
+  "artifacts": [
+    {
+      "file": "a4d8489cda4b282b93573e11d577d2712ee7816005f2545928302a31fb6182d6.tflite",
+      "sha256": "318e0cec4ded4e73e646ba876eab1244e667c3bc0fb52cfbd20edcce29214d3d",
+      "size_mb": 15.37
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 27817.165,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 483.59,
+        "loads": true,
+        "max_rel_diff": 103980.82894736843,
+        "output_match": false,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-11/tiger-dnr__tiger_dialog_fp16.json"
+  },
+  "conversion": {
+    "command": "python tiger/scripts/build_tiger.py",
+    "quantization": "fp16",
+    "tool": "litert-torch",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-08-26",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT (Hexagon, JIT on-device)"
+          },
+          "error": "process_crashed (likely OOM)",
+          "evidence": [
+            "process_crashed (likely OOM)"
+          ],
+          "failure_class": "process_crashed",
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": false,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-26/tiger-dnr__tiger_dialog_fp16__galaxy-s26.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert",
+            "runtime_version": "2.2.0.dev20260804",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+            "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "invocation 0: exit=0 wall_s=351.9 temp 50.5->56.0C throttled=0x0 xnnpack=True median_us=42421191.0 runs=4 footprint_peak_mb=1133.75",
+            "invocation 1: exit=0 wall_s=352.0 temp 51.0->56.5C throttled=0x0 xnnpack=True median_us=42386818.0 runs=4 footprint_peak_mb=1133.52",
+            "invocation 2: exit=0 wall_s=352.2 temp 49.9->56.0C throttled=0x0 xnnpack=True median_us=42460683.0 runs=4 footprint_peak_mb=1134.73"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 42421.191,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_ms": 12351.0,
+            "invocations": 3,
+            "iterations": 12,
+            "latency_max_ms": 42523.138,
+            "latency_min_ms": 42374.572,
+            "threads": 4,
+            "warmup_runs_per_invocation": 10
+          },
+          "output_match": null,
+          "peak_mem_mb": 1134.73,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0.dev20260804/2026-08-31/tiger-dnr__tiger_dialog_fp16__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "tiger",
+    "id": "tiger-dnr__tiger_dialog_fp16",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/TIGER-DnR-LiteRT",
+    "task": "audio-to-audio"
+  },
+  "pitfalls": [
+    "The caller must reflect-pad the 12.06 s chunk by 1024 samples on both sides (torch.stft(center=True) equivalent); iSTFT and overlap-add are host-side (HF card; zoo README L1254-1255)."
+  ],
+  "schema_version": "1.2"
+}

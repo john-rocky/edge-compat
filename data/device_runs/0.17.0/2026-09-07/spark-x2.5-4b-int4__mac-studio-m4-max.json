@@ -1,0 +1,76 @@
+{
+  "artifact": "Spark-X2.5-4B_int4.litertlm",
+  "artifact_sha256": "0b9ab47c1e65214995dc10f9833728941a73c05cfb219e3ddb05b0fe623b16a1",
+  "device": "mac-studio-m4-max",
+  "model_id": "spark-x2.5-4b-int4",
+  "quantization": "int4",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-07",
+      "decode_tokens_per_s": 18.37,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "results block: prefill=117.84 decode=18.37 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 117.84,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 2237.2
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-09-07",
+      "decode_tokens_per_s": 53.63,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "m4max-quiet-300s-gpu-rest",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "results block: prefill=825.98 decode=53.63 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 825.98,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 328.6
+    }
+  ],
+  "schema_version": "1.0"
+}

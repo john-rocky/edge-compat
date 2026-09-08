@@ -1,0 +1,20 @@
+# meta.yaml — human-authored card fields (example-provenance fixture).
+# Everything here is fictional pipeline-test data; see the bench file for the
+# matching example-provenance benchmark records.
+
+model:
+  id: example-tiny-clean            # catalog id; also the card directory name
+  family: example-family            # model family, e.g. "mobilenet", "olmo2"
+  task: image-classification        # free-text task label
+  source_url: https://example.invalid/models/example-tiny-clean
+  license: apache-2.0
+
+conversion:
+  tool: example-converter
+  tool_version: 0.0.0-example
+  command: example-converter --input model.onnx --output model_clean_example.tflite
+  quantization: none
+
+# Free-text pitfalls, surfaced verbatim on the card — never generated.
+pitfalls:
+  - Example pitfall — this entire card is a pipeline fixture, not a real model.

@@ -1,0 +1,79 @@
+{
+  "artifacts": [
+    {
+      "file": "model_execmeta.litertlm",
+      "sha256": "7ed2d8f9cc41eff47a0f2e21a5908b51c859bfbdf0a86c6403997d9caa49329d",
+      "size_mb": 1189.481
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "python hf-to-litertlm/lfm_work/convert_lfm25.py LiquidAI/LFM2.5-1.2B-Instruct out_wi8_composite_conv031 --keep-softmax-composite",
+    "quantization": "int8 dynamic weights / fp32 activations (litert-torch recipe dynamic_wi8_afp32)",
+    "tool": "litert-torch (via hf-to-litertlm lfm_work/convert_lfm25.py + litertlm-convert scripts/add_executor_metadata.py)",
+    "tool_version": "0.9.3 (litert-converter 0.3.1; venv ~/venvs/ltconv040dev per RESULTS.md 2026-08-11)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-12",
+          "decode_tokens_per_s": 262.55,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=4643.93 decode=262.55 tokens/s, init=1.3371 s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 1.3371,
+            "max_num_tokens": 1024.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 4643.93,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 58.9
+        },
+        "source": "data/device_runs/0.16.0/2026-08-12/lfm25-12b-wi8-composite__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "lfm2.5",
+    "id": "lfm25-12b-wi8-composite",
+    "license": "lfm-open-license-v1.0",
+    "source_url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "This variant deliberately KEEPS the odml.softmax composites (--keep-softmax-composite) to verify litert-converter 0.3.1 lowers them: 0.3.0 left 216 markers, 0.3.1 leaves 0, and the op histogram is IDENTICAL to the 0.4.0.dev20260806 baseline. Marker counts alone are not evidence — dead metadata can remain; compare op histograms (RESULTS.md 手順 2-3).",
+    "litert-torch 0.9.3 does not write the ExecutorMetadata section (unlike main); litert-lm >=0.15 requires it to bind the hybrid ShortConv/attention state buffers (22 here) — retrofitted with scripts/add_executor_metadata.py (RESULTS.md 手順 4, add_execmeta.log).",
+    "litert-torch 0.9.3 pins litert-converter==0.3.*, so a fresh install today pulls the lowering 0.3.1 — but the same install on 2026-08-08 pulled 0.3.0 (no lowering). Check the converter version, not just litert-torch (RESULTS.md 環境).",
+    "Mac GPU prefill numbers swing about +/-11% between sessions on op-identical graphs (4830 vs 4297 tok/s here); treat prefill deltas inside that band as measurement noise — decode and init are stable, and PASS/FAIL judgments are load-independent (RESULTS.md 数字の読み方)."
+  ],
+  "schema_version": "1.2"
+}

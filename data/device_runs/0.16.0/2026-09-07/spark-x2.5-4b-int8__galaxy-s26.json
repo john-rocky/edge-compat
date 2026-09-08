@@ -1,0 +1,92 @@
+{
+  "artifact": "Spark-X2.5-4B_int8.litertlm",
+  "artifact_sha256": "20179c7be4f2aa1a04e77c3b2cc64794a429417d83b89c7a91f7125b8ca5fea6",
+  "device": "galaxy-s26",
+  "model_id": "spark-x2.5-4b-int8",
+  "quantization": "int8",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-07",
+      "decode_tokens_per_s": 4.55,
+      "delegated_ops": 2150,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cl-pinned",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 2150 out of 2236 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 73 partitions for subgraph 0 (prefill_1024).",
+        "VERBOSE: Replacing 2150 out of 2236 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 73 partitions for subgraph 1 (prefill_256).",
+        "VERBOSE: Replacing 2150 out of 2236 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 73 partitions for subgraph 2 (prefill_64).",
+        "VERBOSE: Replacing 2150 out of 2236 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 73 partitions for subgraph 3 (prefill_16).",
+        "results block: prefill=65.14 decode=4.55 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 3883.0,
+        "init_s": 0.74965,
+        "prefill_tokens": 213.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 65.14,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 2236,
+      "ttft_ms": 3490.0
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-09-07",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 2236,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cl-pinned",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 2236 out of 2236 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+        "VERBOSE: Replacing 2236 out of 2236 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256).",
+        "VERBOSE: Replacing 2236 out of 2236 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_64).",
+        "VERBOSE: Replacing 2236 out of 2236 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_16).",
+        "7 LITERT_CL 'Replacing' lines, every subgraph fully delegated (largest 2236/2236); zero TfLiteXNNPackDelegate lines",
+        "spark_work/s26/spark_s4b_int8_gate_gpu.log (absl epoch 1788775064 = 2026-09-07 09:57 UTC); gate prompt 'What is 17 + 25? Answer briefly.' through the bundle's jinja, answered 42 through the thought channel (spark_work/FINDINGS.md S26 section; spark_work/s26/rows.json gate_ok=true)",
+        "peak_mem_mb 1674 = VmHWM of the gate process polled by s26_gate.py (rows.json spark_s4b_int8_gate_gpu peak_vmhwm_mb); this is the gate run, not a --benchmark run",
+        "no throughput cell: both --benchmark turns (spark_s4b_int8_bench_gpu1.log / _gpu2.log) exceeded the driver's 1200 s leg cap mid-decode - a ~3,900-token thinking response at ~5 tok/s - so prefill/decode/TTFT stay null; a harness wall-clock cap measures the harness, not the model (DECISIONS #164(e)); the same file's CPU cell and the int4 sibling's GPU cell are measured in this snapshot"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": 1674.0,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 2236,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

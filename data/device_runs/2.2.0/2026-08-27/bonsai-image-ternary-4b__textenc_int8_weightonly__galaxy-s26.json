@@ -1,0 +1,75 @@
+{
+  "artifact": "textenc_int8_weightonly.tflite",
+  "device": "galaxy-s26",
+  "model_id": "bonsai-image-ternary-4b__textenc_int8_weightonly",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-08-27",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "process_crashed (likely OOM)",
+      "evidence": [
+        "process_crashed (likely OOM)"
+      ],
+      "failure_class": "process_crashed",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "npu_qnn",
+      "context_length": null,
+      "date": "2026-08-27",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": "QAIRT (Hexagon, AOT host-compiled, SM8850 target)"
+      },
+      "error": "AOT compile failed on host (SM8850 target): sor_createGraphTensor started, graph = 0x1\n     0.0ms [  INFO ]   <I> QnnTensor_createGraphTensor graph 1 \n     0.0ms [  INFO ]   <I> QnnTensor_createGraphT …[trace truncated]",
+      "evidence": [
+        "AOT compile failed on host (SM8850 target): sor_createGraphTensor started, graph = 0x1\n     0.0ms [  INFO ]   <I> QnnTensor_createGraphTensor graph 1 \n     0.0ms [  INFO ]   <I> QnnTensor_createGraphT …[trace truncated]"
+      ],
+      "failure_class": "aot_compile_failed",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

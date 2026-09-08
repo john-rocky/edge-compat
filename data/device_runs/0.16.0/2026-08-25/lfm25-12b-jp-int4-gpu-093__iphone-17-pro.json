@@ -1,0 +1,50 @@
+{
+  "artifact": "LFM2.5-1.2B-JP_int4_gpu.litertlm",
+  "device": "iphone-17-pro",
+  "model_id": "lfm25-12b-jp-int4-gpu-093",
+  "quantization": "int4",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 1024,
+      "date": "2026-08-25",
+      "decode_tokens_per_s": 70.02,
+      "delegated_ops": null,
+      "env": {
+        "device": "iphone-17-pro",
+        "machine_label": "iphone-17-pro-charging",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "A19-Pro",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "maxNumTokens=1024; all Metal kernels initialize, zero half4/float4, coherent 128-token output (distinct phrasing from the Instruct file = no cache contamination across the slot swap)",
+        "prefill counter returned 0 on this cell (harness metric gap; generation itself normal); device charging",
+        "litertlm-convert/minicpm5_work/ship_lfm25_gpu_0160/device_gate_20260825_maxtok/console_jp_maxtok1024.log"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "short-chat.decode_tokens_per_s": 70.02,
+        "short-chat.generated_tokens": 128.0,
+        "short-chat.peak_mem_mb": 556.0,
+        "short-chat.ttft_ms": 91.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 556.0,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 91.0
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,52 @@
+{
+  "artifact": "Qwen2.5-Coder-1.5B-Instruct_int4.litertlm",
+  "artifact_sha256": "273ecc7771ba2dd5fe1bb6d4d4726ad0353102f04ad094082ccf59bca9f21213",
+  "device": "galaxy-s26",
+  "model_id": "qwen25-coder-1.5b-int4",
+  "quantization": "int4",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-05",
+      "decode_tokens_per_s": 29.73,
+      "delegated_ops": 1510,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cold-cache-cooled",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 1125 out of 1243 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 165 partitions for subgraph 0 (prefill_1024).",
+        "VERBOSE: Replacing 1125 out of 1243 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 165 partitions for subgraph 1 (prefill_256).",
+        "VERBOSE: Replacing 1125 out of 1243 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 165 partitions for subgraph 2 (prefill_64).",
+        "VERBOSE: Replacing 1125 out of 1243 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 165 partitions for subgraph 3 (prefill_16).",
+        "results block: prefill=106.0 decode=29.73 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 409.0,
+        "init_s": 2.73147,
+        "prefill_tokens": 223.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 106.0,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 1573,
+      "ttft_ms": 2140.0
+    }
+  ],
+  "schema_version": "1.0"
+}

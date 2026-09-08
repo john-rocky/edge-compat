@@ -1,0 +1,69 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x512:int32;1x512:int32",
+  "license": "other",
+  "model_id": "lfm2.5-embedding-350m__lfm2.5-embedding-350m_fp16",
+  "notes": "multi-signature model (4 subgraphs); harness runs subgraph 0",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-08-28",
+      "delegation_evidence": [],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": false,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "6.17.0-1022-azure",
+        "webgpu_adapter": null
+      },
+      "error": "init timed out after 60000ms",
+      "failure_class": "timeout",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-08-28",
+      "delegation_evidence": [],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": false,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "6.17.0-1022-azure",
+        "webgpu_adapter": null
+      },
+      "error": "init timed out after 60000ms",
+      "failure_class": "timeout",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/LFM2.5-Embedding-350M/resolve/main/LFM2.5-Embedding-350M_fp16.tflite"
+}

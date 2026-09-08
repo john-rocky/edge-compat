@@ -1,0 +1,127 @@
+{
+  "artifacts": [
+    {
+      "file": "Shieldstral-1.0-3B-vision_int4_gpu.litertlm",
+      "sha256": "d4b1a34690ed991892bfa8c8dcbafc78a681cbcb9b18e6c8b4544fccdc748339",
+      "size_mb": 2654.158
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "shieldstral_work/vision_gpu_20260827/build_decoder_gpu.sh -> build_shieldstral_bundle.py",
+    "quantization": "int4 decoder + int8 vision adapter/tower (per bundle inputs in s5_gate/ARTIFACTS.md)",
+    "tool": "litert-torch export (decoder re-export, composite-free) + bundle rebuild (build_shieldstral_bundle.py)",
+    "tool_version": "decoder re-export on ~/venvs/ltconv040dev, py3.10.13: litert-torch 0.9.3 / litert-converter 0.3.1 / ai-edge-quantizer 0.8.0 — the converter is the lever, not the torch bump (0.3.1 lowers odml.softmax natively where 0.3.0 cannot). Bundle repack: TODO(owner) — build_shieldstral_bundle.py imports only litert_lm_builder, but the interpreter that ran it is unrecorded, so no builder version is establishable."
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 1.33,
+          "delegated_ops": 1433,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1076 out of 1187 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 153 partitions for subgraph 0 (prefill_2048).",
+            "VERBOSE: Replacing 1076 out of 1187 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 153 partitions for subgraph 1 (prefill_1024).",
+            "VERBOSE: Replacing 1076 out of 1187 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 153 partitions for subgraph 2 (prefill_512).",
+            "VERBOSE: Replacing 1076 out of 1187 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 153 partitions for subgraph 3 (prefill_256).",
+            "results block: prefill=23.2 decode=1.33 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 2.0,
+            "init_s": 12.98185,
+            "prefill_tokens": 231.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 23.2,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1493,
+          "ttft_ms": 10710.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/shieldstral-1.0-3b-vision-int4-gpu__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-28",
+          "decode_tokens_per_s": 11.73,
+          "delegated_ops": 1187,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1187 out of 1187 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_2048).",
+            "VERBOSE: Replacing 1187 out of 1187 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_1024).",
+            "VERBOSE: Replacing 1187 out of 1187 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_512).",
+            "VERBOSE: Replacing 1187 out of 1187 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_256).",
+            "results block: prefill=314.18 decode=11.73 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 2.0,
+            "init_s": 10.11556,
+            "prefill_tokens": 231.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 314.18,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1187,
+          "ttft_ms": 820.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-28/shieldstral-1.0-3b-vision-int4-gpu__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "shieldstral",
+    "id": "shieldstral-1.0-3b-vision-int4-gpu",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/mistralai/Shieldstral-1.0-3B",
+    "task": "image-text-to-text"
+  },
+  "pitfalls": [
+    "The pre-rebundle published file refused GPU engine creation outright: STABLEHLO_COMPOSITE odml.softmax at 52/1187 ops on the first subgraph (S4 idx 034). The rebundled decoder is composite-free and delegates 1187/1187 x13 subgraphs on the Galaxy S26 — the text sibling's numbers exactly (s5_gate results, device_runs 2026-08-28).",
+    "The card's claim 'the vision bundle can replace the text one' was false on GPU for the old file and true again only after this rebundle — the sentence is true only of the _int4_gpu file; the old _int4 stays CPU-only (CARD_ADDITIONS.md §1).",
+    "Safety classifier usage: the model scores via a single-token output contract — use the scoring API pattern, not free generation, and letterboxing beats naive resize for image inputs (memory shieldstral-3b-shipped; published HF card)."
+  ],
+  "schema_version": "1.2"
+}

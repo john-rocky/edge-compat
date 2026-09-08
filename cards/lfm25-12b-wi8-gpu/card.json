@@ -1,0 +1,79 @@
+{
+  "artifacts": [
+    {
+      "file": "model.litertlm",
+      "sha256": "dcf7e0e17f7a4a829440151ab38f6b9f649b3a8736b559b73e3944f08a59ce94",
+      "size_mb": 1189.502
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "python hf-to-litertlm/lfm_work/convert_lfm25.py LiquidAI/LFM2.5-1.2B-Instruct ship_lfm25_gpu_0150/out_wi8",
+    "quantization": "int8 dynamic weights / fp32 activations (litert-torch recipe dynamic_wi8_afp32)",
+    "tool": "litert-torch (via hf-to-litertlm lfm_work/convert_lfm25.py)",
+    "tool_version": "main checkout 1b96312 (post-0.9.2; includes DUS-folder fix 1ed2caaaf; per DEVICE_GATE 2026-08-05)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-12",
+          "decode_tokens_per_s": 272.0,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=4836.61 decode=272.00 tokens/s, init=1.3414 s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 1.3414,
+            "max_num_tokens": 1024.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 4836.61,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 56.6
+        },
+        "source": "data/device_runs/0.16.0/2026-08-12/lfm25-12b-wi8-gpu__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "lfm2.5",
+    "id": "lfm25-12b-wi8-gpu",
+    "license": "lfm-open-license-v1.0",
+    "source_url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Exported on litert-torch main 1b96312 specifically to pick up the DUS-folder fix (1ed2caaaf, post-0.9.2) and the INT64-free ShortConv lowering; 0.9.1-lineage exports leave INT64 ADD/CAST/SUM + GATHER_ND in Lfm2ShortConv_conv and stall GPU delegation at 536/579 ops (DEVICE_GATE 2026-08-05; ship_lfm25_gpu_variant_20260812/RESULTS.md §1).",
+    "litert-torch main writes the ExecutorMetadata section natively — release 0.9.3 does not; litert-lm >=0.15 requires it for the hybrid conv/attention state buffers (regate_softmax_20260811/RESULTS.md 手順 4).",
+    "iOS Metal still fails engine creation on this file (ml_drift Metal codegen: implicit half4*float4 conversion, metal/common.mm) while the SAME file fully delegates and passes on Mac WebGPU at 4780/271.6 tok/s — runtime-side wall, re-test on each litert-lm release (DEVICE_GATE 2026-08-05).",
+    "odml.softmax composites are stripped at export in this build (converter 0.3.0-era did not lower them; litert-converter >=0.3.1 lowers natively — see the lfm25-12b-wi8-composite variant that verifies this) (DEVICE_GATE 2026-08-05; regate_softmax_20260811/RESULTS.md)."
+  ],
+  "schema_version": "1.2"
+}

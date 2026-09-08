@@ -1,0 +1,180 @@
+{
+  "artifacts": [
+    {
+      "file": "LFM2.5-1.2B-Thinking_int4.litertlm",
+      "sha256": "f4f091503ef33c9ad70e2a58f9cbad03a71b3d4d9fe4266b684e8889ec371669",
+      "size_mb": 701.919
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "python convert_lfm25.py LiquidAI/LFM2.5-1.2B-Thinking out_lfm25_12b_fp --fp && python ../minicpm_work/quantize_litertlm.py apply out_lfm25_12b_fp/model.litertlm lfm25_int4.litertlm --recipe wi4b32_wi8 --algo octav",
+    "quantization": "int4 blockwise-32 + OCTAV linears, int8 embedding, convs float",
+    "tool": "litert-torch",
+    "tool_version": "0.9.1"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 536,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": "runtime/core/engine_advanced_impl.cc:308",
+          "evidence": [
+            "VERBOSE: Replacing 536 out of 579 node(s) with delegate (LITERT_CL) node, yielding 2 partitions for subgraph 0 (prefill_1024).",
+            "ADD: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM_ …[trace truncated]",
+            "CAST: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM …[trace truncated]",
+            "CAST: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM …[trace truncated]",
+            "CAST: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM …[trace truncated]",
+            "GATHER_ND: Operation is not supported.",
+            "GREATER_EQUAL: Can't parse inputs with const tensors.",
+            "LESS_EQUAL: Can't parse inputs with const tensors.",
+            "SUM: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM_ …[trace truncated]",
+            "536 operations will run on the GPU, and the remaining 43 operations will run on the CPU.",
+            "runtime/core/engine_advanced_impl.cc:308"
+          ],
+          "failure_class": "engine_create_failed",
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": false,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "total_ops": 579,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/lfm2.5-1.2b-thinking-int4__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-06",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.17.0/bin/litert-lm 0.17.0); fixed-question answer: '[thought]  Okay, let\\'s see. The question is \"What is 17 + 25? Answer briefly.\" Hmm, I need to respond briefly. Well, adding 17 and 25... 17 plus 20 is 37, plus 5 more is 42. Wait, but maybe there\\'s a quicker way. Alternatively, 17 + 25 is 42. Since the user wants it brief, just the answer. So maybe just 42? Let me confirm: 17 +25 equals 42. Yeah, that\\'s straightforward. So the answer is 42. But the user said answer briefly, so just put 42. Wait, but maybe they expect the sum directly. Alternatively, maybe I should check again. 17 +25: 17+25=42. Yep. So the answer is 42. I\\'ll go with that.\\n [/thought]\\n\\n\\n42.'"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.17.0/2026-09-06/lfm2.5-1.2b-thinking-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 9.25,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 74.8 s, output head '[thought]  Okay, let\\'s see. The question is \"What is 17 plus 26? Answer with the'",
+            "invocation 0: exit=0 wall_s=92.0 temp 49.4->53.8C throttled=0x0 prefill_tps=55.0 decode_tps=9.39 ttft_s=4.7612 init_s=33.9622 peak_rss_mb=1450",
+            "invocation 1: exit=0 wall_s=100.0 temp 51.6->53.8C throttled=0x0 prefill_tps=54.83 decode_tps=9.25 ttft_s=4.7768 init_s=33.6004 peak_rss_mb=1447",
+            "invocation 2: exit=0 wall_s=100.1 temp 51.6->52.7C throttled=0x0 prefill_tps=54.22 decode_tps=9.22 ttft_s=4.8299 init_s=33.5684 peak_rss_mb=1449"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 9.39,
+            "decode_tps_min": 9.22,
+            "init_s": 33.6004,
+            "init_s_max": 33.9622,
+            "init_s_min": 33.5684,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 55.0,
+            "prefill_tps_min": 54.22,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 4.8299,
+            "ttft_s_min": 4.7612
+          },
+          "output_match": null,
+          "peak_mem_mb": 1450.0,
+          "prefill_tokens_per_s": 54.83,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 4776.8
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/lfm2.5-1.2b-thinking-int4__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "lfm2.5",
+    "id": "lfm2.5-1.2b-thinking-int4",
+    "license": "lfm-open-license-v1.0",
+    "source_url": "https://huggingface.co/litert-community/LFM2.5-1.2B-Thinking",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "This artifact cannot use a GPU delegate. It is litert-torch 0.9.1 lineage, whose ShortConv patch emits GATHER_ND and INT64 ops that GPU delegates reject; the delegate takes 536 of 579 operations and engine creation then aborts. The count was measured on the Instruct sibling of the same lineage (Pixel 8a and Galaxy S26, litert-lm v0.16.0); this file has not been separately gated. The repo also ships LFM2.5-1.2B-Thinking_int4_gpu.litertlm, a litert-torch 0.9.3 re-export that delegates fully — that file is a separate card.",
+    "The 0.9.1 exporter needs the ShortConv prefill-pad fix that convert_lfm25.py applies: the stock block saves its conv state from the padded columns of a prefill chunk, corrupting the first generated token of nearly every reply. It is easy to miss — the model recovers after about one token and GSM8K still parses answers, it just loses roughly 20 points.",
+    "Quantize convs at export time only. Post-hoc ALL_SUPPORTED int8 through ai-edge-quantizer kills the conv layers (no output); post-hoc recipes must stay on linears and the embedding (wi8fc, wi4b32_wi8).",
+    "litert-lm >= 0.15 needs an ExecutorMetadata section for this hybrid: files exported before that run on 0.14 but fail at inference on 0.15 with 'missing some output TensorBuffers'. The published files were repaired in place on 2026-08-04.",
+    "GSM8K (greedy, 0-shot CoT, n=100, max-tokens 2048 — a thinking model needs the budget) is 72 for this int4 file against a bf16 reference of 81; the int8 sibling scores 77. The reasoning stream arrives on the thought channel and the final answer follows after </think>, so a harness that reads the raw stream must strip it."
+  ],
+  "schema_version": "1.2"
+}

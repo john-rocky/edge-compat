@@ -1,0 +1,52 @@
+{
+  "artifact": "granite-4.0-h-350m_int8.litertlm",
+  "artifact_sha256": "feae9e8c2aa8832c254770e88d81e80c424ab9b5c0e9a3f3d2689b3ace4810f1",
+  "device": "pixel-8a",
+  "model_id": "granite-4.0-h-350m-int8",
+  "quantization": "int8",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-05",
+      "decode_tokens_per_s": 8.86,
+      "delegated_ops": 3835,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-cold-cache-cooled",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 3229 out of 3673 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 0 (prefill_1024).",
+        "VERBOSE: Replacing 3229 out of 3673 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 1 (prefill_512).",
+        "VERBOSE: Replacing 3229 out of 3673 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 2 (prefill_256).",
+        "VERBOSE: Replacing 3394 out of 3838 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 3 (prefill_128).",
+        "results block: prefill=8.03 decode=8.86 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 134.0,
+        "init_s": 3.58061,
+        "prefill_tokens": 224.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 8.03,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 4216,
+      "ttft_ms": 28010.0
+    }
+  ],
+  "schema_version": "1.0"
+}

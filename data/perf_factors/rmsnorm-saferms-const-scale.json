@@ -1,0 +1,30 @@
+{
+ "id": "rmsnorm-saferms-const-scale",
+ "category": "null-result",
+ "title": "SafeRMS scale-before-square (constant s): free on the NPU",
+ "rewrite": {
+  "from": "naive RMSNorm x*rsqrt(mean(x^2)+eps)",
+  "to": "scale-before-square with constant s=64 (Mali fp16 overflow guard)",
+  "equivalence": "identity",
+  "equivalence_evidence": "bit-exact on the host verify input (max_abs 0.0)"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-28",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 22.944,
+  "after_ms": 22.516,
+  "probe": "probe_pf1536 (naive) vs probe_pfrmssafe1536, one variable"
+ },
+ "factor": 0.98,
+ "scope": "decoder block d=1024 T=1536; no builtin RMS_NORM exists in any schema (2.1.6 / 2.3.0.dev checked) so decomposition choice is the only lever",
+ "notes": "the Mali-overflow guard costs nothing on Hexagon - keep it in shared recipes",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

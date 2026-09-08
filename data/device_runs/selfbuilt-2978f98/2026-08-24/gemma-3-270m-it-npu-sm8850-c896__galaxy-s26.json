@@ -1,0 +1,63 @@
+{
+  "artifact": "model_qualcomm_SM8850.litertlm (cache_length=896)",
+  "device": "galaxy-s26",
+  "model_id": "gemma-3-270m-it-npu-sm8850-c896",
+  "notes": "Same recipe with cache_length lowered from 1024 to 896, which puts the mask concat at 1,048,576 bytes instead of 1,179,648 and off the HTP threshold. The mask is then applied to all 512 rows. WARNING: this benchmark was taken after ~4 h of continuous load with the handset at 53 C; an interleaved A/B showed the 1024 and 896 bundles equal in speed under those conditions (108 tok/s decode both), so the numbers below are a thermally degraded floor, not this bundle being slower.",
+  "quantization": "a16w8 static-range (export dynamic_wi8_afp32 + Stage 3 SRQ), Stage 4 QNN AOT for SM8850",
+  "results": [
+    {
+      "accelerator": "npu",
+      "context_length": 896,
+      "date": "2026-08-24",
+      "decode_tokens_per_s": 108.88,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-2978f98",
+        "soc": "SM8850 (hexagon v81)",
+        "vendor_sdk": "QAIRT 2.47.0"
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+        "VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 1 (decode).",
+        "VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 2 (prefill_mask_128).",
+        "VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 3 (decode_mask).",
+        "INFO: [litert_dispatch_device_context.cc:248] Creating new QNN context for bytecode (size 282308608)",
+        "BenchmarkInfo: Init Total: 1869.30 ms; Prefill Speed: 13550.50 tokens/sec; Decode Speed: 108.88 tokens/sec",
+        "Peak private footprint: 868.75MB",
+        "effective mask (op34 - op32, dequantized): 512/512 rows match the input mask row on the HTP",
+        "45-prompt harness: 29/45 correct against fp32's 28/45; 18/45 byte-identical text",
+        "interleaved A/B vs the cache_length=1024 bundle, 3 blocks of 3 alternating runs: decode 107.9/109.4/107.8/108.7/104.8/106.5 tok/s -- indistinguishable",
+        "runtime: LiteRT-LM built from source at commit 2978f98 (2026-08-19); no release tag"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "bench_runs": 5,
+        "benchmark_decode_tokens": 64,
+        "benchmark_prefill_tokens": 128,
+        "harness_correct_of_45": 29,
+        "harness_fp32_correct_of_45": 28,
+        "harness_text_identical_to_fp32_of_45": 18,
+        "init_s": 1.8693,
+        "mask_rows_correct_of_512": 512,
+        "soc_temp_c_at_measurement": 53
+      },
+      "output_match": null,
+      "peak_mem_mb": 868.75,
+      "prefill_tokens_per_s": 13550.5,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 20.0
+    }
+  ],
+  "schema_version": "1.0"
+}

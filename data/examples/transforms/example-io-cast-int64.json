@@ -1,0 +1,27 @@
+{
+  "action": "io_cast",
+  "evidence": {
+    "date": "2026-08-10",
+    "litert_version": "0.0.0-example",
+    "source_model": "example-synthetic"
+  },
+  "expected_effect": "graph interface satisfies float32/int32 tensor I/O (the LiteRT.js constraint); interior graph unchanged",
+  "fixture": {
+    "matrix": "../matrix_fix_example.json",
+    "model": "../model_fix_io64_example.tflite"
+  },
+  "id": "example-io-cast-int64",
+  "match": {
+    "dtypes": [
+      "int64"
+    ]
+  },
+  "notes": "Exact only while I/O values fit in int32. Example rule exercising the engine on a synthetic fixture.",
+  "params": {
+    "io": "both",
+    "to": "int32"
+  },
+  "provenance": "example",
+  "schema_version": "1.0",
+  "title": "Re-expose int64 graph I/O as int32 (example)"
+}

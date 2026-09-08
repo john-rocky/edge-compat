@@ -1,0 +1,58 @@
+{
+  "artifact": "LFM2.5-1.2B-Instruct_int4_gpu.litertlm",
+  "device": "iphone-17-pro",
+  "model_id": "lfm25-12b-int4-gpu",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 1024,
+      "date": "2026-08-26",
+      "decode_tokens_per_s": 69.53,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 17 Pro",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "A19-Pro",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "device.modelIdentifier=iPhone18,1",
+        "throughput taken from task 'short-chat' (128 generated tokens, 2026-08-26T04:54:39Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 4 task file(s)",
+        "'short-chat': 4 runs of one task — throughput = median of 3 warm run(s); cold decode kept in metrics (1 cold run(s))",
+        "[short-chat 2026-08-26T04:54:32Z] prefill=514.2358732855223 decode=69.85446866407982 ttft_ms=92.0 peak_mb=412.17454528808594 stop=stop output='On-device AI means using artificial intelligence (AI) tec …[trace truncated]",
+        "[short-chat 2026-08-26T04:54:34Z] prefill=498.17237162596155 decode=69.52701952891378 ttft_ms=81.0 peak_mb=387.20581817626953 stop=stop output='On-device AI means using artificial intelligence (AI) te …[trace truncated]",
+        "[short-chat 2026-08-26T04:54:36Z] prefill=495.25868811680783 decode=69.20386200810998 ttft_ms=84.0 peak_mb=373.53394317626953 stop=stop output='On-device AI means using artificial intelligence (AI) te …[trace truncated]",
+        "[short-chat 2026-08-26T04:54:39Z] prefill=496.3663735985657 decode=70.75447039867409 ttft_ms=84.0 peak_mb=373.95581817626953 stop=length output='On-device AI means using artificial intelligence (AI) t …[trace truncated]"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "short_chat.cold_decode_tokens_per_s": 69.854469,
+        "short_chat.decode_spread_pct": 2.23,
+        "short_chat.decode_tokens_per_s": 69.52702,
+        "short_chat.generated_tokens": 128.0,
+        "short_chat.n_runs": 4.0,
+        "short_chat.peak_mem_mb": 412.174545,
+        "short_chat.prefill_tokens_per_s": 496.366374,
+        "short_chat.prompt_tokens": 21.0,
+        "short_chat.ttft_ms": 84.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 412.175,
+      "prefill_tokens_per_s": 496.37,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 84.0
+    }
+  ],
+  "schema_version": "1.0"
+}

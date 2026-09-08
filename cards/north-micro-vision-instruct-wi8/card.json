@@ -1,0 +1,192 @@
+{
+  "artifacts": [
+    {
+      "file": "North-Micro-Vision-Instruct_wi8.litertlm",
+      "sha256": "83e330f05c9077498324c7513f3786f953d9901734edb845f1155f72068b17fd",
+      "size_mb": 2929.052
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "bash scripts/ship_northmv.sh   # = prep_northmv_decoder.py (Cohere2 re-host, rope patch) -> export_northmv_decoder.py (RECIPE=dynamic_wi8_afp32, CACHE=4096, PREFILL=128,512,1024, externalize_embedder) -> convert_northmv_vision.py (IMG=512 DEEPSTACK=fold) -> build_northmv_bundle.py (TOK=hf, VENC/VADP=int8dyn, DEC_ACT=fp32_fp16)",
+    "quantization": "decoder int8 dynamic-range weights (dynamic_wi8_afp32) with prefer_activation_type=fp32_fp16 declared on the PREFILL_DECODE section; embedder int8; vision encoder + adapter int8 dynamic-range",
+    "tool": "litert-torch (hf-to-litertlm reproduce_vlm.sh key `north-micro-vision`; decoder export_hf + hand-assembled fast_vlm bundle via litert-lm-builder)",
+    "tool_version": "litert-torch 0.9.3 (ai-edge-quantizer 0.8.0, litert-lm-builder 0.16.0; vision/prep on transformers 5.16.0.dev0)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 10.4,
+          "delegated_ops": 1380,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1380 out of 1380 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1380 out of 1380 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 1380 out of 1380 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_1024).",
+            "VERBOSE: Replacing 1204 out of 1204 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (decode).",
+            "results block: prefill=280.01 decode=10.4 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 379.0,
+            "init_s": 7.18617,
+            "prefill_tokens": 199.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 280.01,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1380,
+          "ttft_ms": 810.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/north-micro-vision-instruct-wi8__galaxy-s26.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-19",
+          "decode_tokens_per_s": 13.64,
+          "delegated_ops": null,
+          "env": {
+            "device": "iPhone 17 Pro",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "device.modelIdentifier=iPhone18,1",
+            "throughput taken from task 'quality' (39 generated tokens, 2026-08-19T16:48:26Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 3 task(s)",
+            "[quality 2026-08-19T16:48:26Z] prefill=243.92240126953922 decode=13.637124168288407 ttft_ms=685.0 peak_mb=2257.986885070801 stop=stop output='1. 13\\\\n2. Tokyo\\\\n3. Cold\\\\n4. 7\\\\n5. Merci\\\\n6. 56\\\\n7.  …[trace truncated]",
+            "[vision-has-text 2026-08-19T16:48:20Z] prefill=361.5979577943534 decode=9.31310240027566 ttft_ms=2256.0 peak_mb=3046.315559387207 stop=stop output='Yes'",
+            "[vision-no-text 2026-08-19T16:48:15Z] prefill=322.43369812147364 decode=5.872954055513365 ttft_ms=5022.0 peak_mb=2938.8329010009766 stop=stop output='No'"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "quality.decode_tokens_per_s": 13.637124,
+            "quality.generated_tokens": 39.0,
+            "quality.load_s": 0.523434,
+            "quality.peak_mem_mb": 2257.986885,
+            "quality.prefill_tokens_per_s": 243.922401,
+            "quality.prompt_tokens": 132.0,
+            "quality.ttft_ms": 685.0,
+            "vision_has_text.decode_tokens_per_s": 9.313102,
+            "vision_has_text.generated_tokens": 2.0,
+            "vision_has_text.load_s": 0.93697,
+            "vision_has_text.peak_mem_mb": 3046.315559,
+            "vision_has_text.prefill_tokens_per_s": 361.597958,
+            "vision_has_text.prompt_tokens": 302.0,
+            "vision_has_text.ttft_ms": 2256.0,
+            "vision_no_text.decode_tokens_per_s": 5.872954,
+            "vision_no_text.generated_tokens": 2.0,
+            "vision_no_text.load_s": 7.515937,
+            "vision_no_text.peak_mem_mb": 2938.832901,
+            "vision_no_text.prefill_tokens_per_s": 322.433698,
+            "vision_no_text.prompt_tokens": 302.0,
+            "vision_no_text.ttft_ms": 5022.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 3046.316,
+          "prefill_tokens_per_s": 243.92,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 685.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-19/north-micro-vision-instruct-wi8__iphone-17-pro.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-19",
+          "decode_tokens_per_s": 4.3,
+          "delegated_ops": 1380,
+          "env": {
+            "device": "Pixel 8a",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1380 out of 1380 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1380 out of 1380 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 1380 out of 1380 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_1024).",
+            "VERBOSE: Replacing 1204 out of 1204 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (decode).",
+            "results block: prefill=124.19 decode=4.3 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 29.0,
+            "init_s": 40.36799,
+            "prefill_tokens": 271.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 124.19,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1380,
+          "ttft_ms": 2410.0
+        },
+        "source": "data/device_runs/0.16.1/2026-08-19/north-micro-vision-instruct-wi8__pixel-8a.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "cohere-compass",
+    "id": "north-micro-vision-instruct-wi8",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/North-Micro-Vision-Instruct",
+    "task": "image-text-to-text"
+  },
+  "pitfalls": [
+    "fast_vlm carries ONE image embedding; this model's three DeepStack vision embeddings (HF injects them after decoder layers 0/1/2) are folded into it in the adapter. Exactly representable (corr 1.0), but greedy-exact parity with the released model is not achievable — gate on teacher-forced top-1 (0.96 fold / 0.93 fold+1-D) and generation reading (FINDINGS.md).",
+    "The decoder is re-hosted as Cohere2ForCausalLM with its rope patched to the checkpoint's Llama-style half-split layout; stock Cohere2 rope lowers to BROADCAST_TO + a 5-D CONCATENATION that the GPU delegate rejects (FINDINGS.md).",
+    "Mali OpenCL fp16 decoder answers image turns as if blind (echoes the question) while text-only is perfect — fp16 accumulation overflows at the 256 image-token positions; the bundle declares prefer_activation_type=fp32_fp16 on the decoder section, which fixes it without runtime flags (measured Pixel 8a 2026-08-19).",
+    "fp16 vision encoder compiled on Mali OpenCL hard-reboots the phone (twice, same stage); vision ships int8. Decoder on the CPU of an 8 GB phone pages against the 2.5 GB decoder (0.6 tok/s) — run the decoder on the GPU (FINDINGS.md).",
+    "Tokenizer: the HF tokenizer.json is bundled; the sentencepiece conversion crashes on null-byte pieces and splits digits differently from Cohere's per-digit pre-tokenizer (FINDINGS.md).",
+    "Runtime contract: 1-D positions replace M-RoPE — 2-D table cross-cell questions and digit-dense OCR degrade; describe/VQA/spatial preserved (HF card note)."
+  ],
+  "schema_version": "1.2"
+}

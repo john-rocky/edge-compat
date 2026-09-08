@@ -1,0 +1,42 @@
+{
+  "artifact": "model.litertlm",
+  "device": "mac-studio-m4-max",
+  "model_id": "phi-4-mini-reasoning",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-06",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.17.0/bin/litert-lm 0.17.0); fixed-question answer: \"[thought] Okay, so I need to find the sum of 17 and 25. Letaho, let's see. Let me start by adding the two numbers together. Hmm, 17 plus 25. Let me break it down. If I take 17 and add 20, that would be 37, right? Then I still need to add 5 more because 25 is 20 + 5. So adding 5 to 37 gives me 42. Wait, does that make sense? Let me check again. 17 + 20 is 37, and then 37 + 5 is 42. Yeah, that seems correct. Alternatively, I could add them another way. Let's try the standard addition algorithm. 17 + 25. Add the units first: 7 + 5 is 12, so that's 2 with a carryover of 1. Then add the tens: 1 + 2 + the carryover 1 is 4. So putting it all together, 42. Yep, that checks out. I think that's the right answer. [/thought]\\n\\n\\nThe result of 17 + 25 is calculated by adding the units (7 + 5 = 12) and then the tens (1 + 2 = 3), plus the carryover 1, resulting in 42.\\n\\n**Answer:** \\\\boxed{42}\""
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

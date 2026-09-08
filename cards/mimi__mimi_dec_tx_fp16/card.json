@@ -1,0 +1,233 @@
+{
+  "artifacts": [
+    {
+      "file": "f2f0421f2ac6d3fb17892450bf765ca57cfaea2b58b5af79955997d41c2f1db4.tflite",
+      "sha256": "35556c72093aaea15aab2dce41946398d216fb1fdf0803d225a5719a64c740f8",
+      "size_mb": 48.196
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 40.158,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 4.683,
+        "loads": true,
+        "max_rel_diff": 7026.186693822132,
+        "output_match": false,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-11/mimi__mimi_dec_tx_fp16.json"
+  },
+  "conversion": {
+    "command": "python mimi/scripts/build_hybrid_graphs.py",
+    "quantization": "fp16",
+    "tool": "litert-torch",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-08-26",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.6666667->0.66333336 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 4.097,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "latency_max_ms": 4.298,
+            "latency_min_ms": 3.822,
+            "load_ms": 1001.5
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-26/mimi__mimi_dec_tx_fp16__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-08-26",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT (Hexagon, JIT on-device)"
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.66999996->0.66999996 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 2.088,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "jit_first_load_ms": 2069.7,
+            "latency_max_ms": 2.191,
+            "latency_min_ms": 2.053,
+            "load_ms": 125.1,
+            "qnn_partition_lines": 57
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-26/mimi__mimi_dec_tx_fp16__galaxy-s26.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert",
+            "runtime_version": "2.2.0.dev20260804",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+            "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "invocation 0: exit=0 wall_s=2.4 temp 45.5->56.5C throttled=0x0 xnnpack=True median_us=35364.0 runs=50 footprint_peak_mb=184.05",
+            "invocation 1: exit=0 wall_s=2.4 temp 46.6->56.0C throttled=0x0 xnnpack=True median_us=35148.0 runs=50 footprint_peak_mb=184.06",
+            "invocation 2: exit=0 wall_s=2.4 temp 48.3->58.2C throttled=0x0 xnnpack=True median_us=35907.0 runs=50 footprint_peak_mb=185.05"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 35.364,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_ms": 80.965,
+            "invocations": 3,
+            "iterations": 150,
+            "latency_max_ms": 36.617,
+            "latency_min_ms": 34.908,
+            "threads": 4,
+            "warmup_runs_per_invocation": 10
+          },
+          "output_match": null,
+          "peak_mem_mb": 185.05,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0.dev20260804/2026-08-31/mimi__mimi_dec_tx_fp16__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "mimi",
+    "id": "mimi__mimi_dec_tx_fp16",
+    "license": "cc-by-4.0",
+    "source_url": "https://huggingface.co/litert-community/Mimi",
+    "task": "neural-codec"
+  },
+  "pitfalls": [
+    "The decoder transformer runs on CompiledModel CPU: its residual stream reaches |x|=27 and Mali fp16 compute loses precision (full-GPU decode ~12 dB); this is fp16 precision, not a fusion bug (zoo README L1174)."
+  ],
+  "schema_version": "1.2"
+}

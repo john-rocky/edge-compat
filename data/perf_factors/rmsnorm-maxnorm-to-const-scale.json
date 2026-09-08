@@ -1,0 +1,30 @@
+{
+ "id": "rmsnorm-maxnorm-to-const-scale",
+ "category": "rewrite",
+ "title": "max-norm SafeRMS (runtime s=amax|x|) -> constant-scale form: 1.23x",
+ "rewrite": {
+  "from": "max-norm SafeRMS: ABS + REDUCE_MAX + MAXIMUM + DIV per norm, runtime scale",
+  "to": "constant-scale SafeRMS (or naive RMSNorm)",
+  "equivalence": "identity",
+  "equivalence_evidence": "exact-math identity; host max_abs 1.9e-06 vs naive"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-28",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 28.228,
+  "after_ms": 22.944,
+  "probe": "probe_pfrmsmax1536 vs probe_pf1536"
+ },
+ "factor": 1.23,
+ "scope": "decoder block d=1024 T=1536. Real-model flip candidate: qwen3 embedder carries max-norm SafeRMS x113 (opscan 2026-08-25)",
+ "notes": "",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

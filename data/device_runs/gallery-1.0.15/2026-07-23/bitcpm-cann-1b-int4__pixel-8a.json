@@ -1,0 +1,47 @@
+{
+  "artifact": "unknown (Gallery import; bundle file name not recorded in MATRIX.md)",
+  "device": "pixel-8a",
+  "model_id": "bitcpm-cann-1b-int4",
+  "quantization": "int4",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-07-23",
+      "decode_tokens_per_s": 7.84,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-gallery",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "gallery-1.0.15",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "hand-recorded device phase: litertlm-convert reports/gpu_audit/MATRIX.md 実機フェーズ table (committed 0559ad3, 2026-07-23; Gallery 1.0.15 official Benchmark, ML Drift GPU, p256/d256 x3 runs; runtime version axis = the Gallery app version — the embedded litert-lm version is not recorded)",
+        "row: '✅ 合格 | 136.6 / 7.84 (TTFT 2.0s, 初回 init 48.8s)' — model-specific slowness on real ML Drift"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "benchmark_runs": 3.0,
+        "init_first_s": 48.8
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 136.6,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 2000.0
+    }
+  ],
+  "schema_version": "1.0"
+}

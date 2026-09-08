@@ -1,0 +1,103 @@
+{
+  "artifacts": [
+    {
+      "file": "Qwen3.5-0.8B_int8.litertlm",
+      "sha256": "684d4d34adf7176eb47f6026ff65c33d42584737254e5524a8d1ad62edc21b98",
+      "size_mb": 918.565
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "TODO (owner) — card points to the reproduction script + patch in hf-to-litertlm qwen35_work/ but does not record the command",
+    "quantization": "post-hoc dynamic int8 on linears + embedding; convs and the delta rule stay float. File Qwen3.5-0.8B_int8.litertlm, 963 MB. Text decoder only — vision tower and MTP heads dropped",
+    "tool": "litert-torch plus a hybrid-cache patch (export cache layers for linear_attention, state-continuation tracing, ExecutorMetadata appended at package time)",
+    "tool_version": "TODO (owner) — card names no version number for litert-torch or the patch"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 7.06,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 89.3 s, output head '43'",
+            "invocation 0: exit=0 wall_s=224.1 temp 47.7->53.2C throttled=0x0 prefill_tps=70.35 decode_tps=6.84 ttft_s=3.7853 init_s=139.6729 peak_rss_mb=2508",
+            "invocation 1: exit=0 wall_s=222.1 temp 49.4->52.7C throttled=0x0 prefill_tps=70.58 decode_tps=7.1 ttft_s=3.7681 init_s=139.9301 peak_rss_mb=2509",
+            "invocation 2: exit=0 wall_s=222.1 temp 49.9->54.3C throttled=0x0 prefill_tps=70.52 decode_tps=7.06 ttft_s=3.7719 init_s=140.5878 peak_rss_mb=2510"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 7.1,
+            "decode_tps_min": 6.84,
+            "init_s": 139.9301,
+            "init_s_max": 140.5878,
+            "init_s_min": 139.6729,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 70.58,
+            "prefill_tps_min": 70.35,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 3.7853,
+            "ttft_s_min": 3.7681
+          },
+          "output_match": null,
+          "peak_mem_mb": 2510.0,
+          "prefill_tokens_per_s": 70.52,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 3771.9
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/qwen35-0.8b__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3_5",
+    "id": "qwen35-0.8b",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Requires litert-lm >= 0.15 (per-layer states bind through an ExecutorMetadata section; both backends gated on 0.15.0 and 0.16.0).",
+    "GPU inference requires fp32 activations — the bundle's TOML declares prefer_activation_type = \"fp32\", required for correct GPU numerics on this family today. That is where the GPU memory multiple comes from: iPhone 17 Pro peak 5.48 GB (GPU) vs 1.21 GB (CPU). The fp16-activation formulation is unfinished: the residual issue is a real-weight fp16 range overflow in one layer-0 head — a property of the checkpoint, not the conversion.",
+    "Pixel 8a cannot compile this file on its GPU: fp32-expanded weights plus the full prefill-ladder of compiled programs exceed the phone's ~3.8 GB available memory (a reduced dev build of the same graph runs correctly, fully delegated — the limit is memory, not ops). CPU works.",
+    "GPU execution is verified on macOS (Metal), iPhone 17 Pro (Metal), and Pixel 8a Mali (OpenCL, dev build) only — NOT verified on Qualcomm Adreno; on Snapdragon use the CPU backend unless confirmed on-device.",
+    "GPU delegate miscomputes rank-3 non-final-axis PAD (reported upstream as LiteRT#9272) — the vendored chunk kernel avoids the shape by writing every tail-pad as a concat with a zeros constant, and keeps all tensors rank <= 4 with no BROADCAST_TO and no int64 index math.",
+    "GPU trap: a rank-0 scalar entering broadcast arithmetic is silently miscomputed by the GPU delegate — reductions in the prefill-pad guard keep their batch dimension (keepdim=True).",
+    "torch.eye inside the traced function lowers to STABLEHLO_IOTA, which no released TFLite kernel set registers — the identity matrix is lifted as a graph constant.",
+    "Stop-token trap: Qwen3.5 uses different tokens for chat turn-end and config.json's eos_token_id. <|im_end|> must be declared as a stop token alongside <|endoftext|>; with only the latter, the literal <|im_end|> text leaks into output and multi-turn history records the marker as text (fixed metadata-only 2026-08-07).",
+    "Chat template is a simplified ChatML template, not the stock Qwen3.5 template. Thinking is disabled via an empty <think>\\n\\n</think> block opening each assistant turn, and that block is deliberately kept in history renders — the stock template strips it from past turns, which breaks LiteRT-LM's incremental conversation rendering (each turn's render must be a string-extension of the previous one) and kills multi-turn on turn 2. Tool-calling and vision sections are not included.",
+    "Quality at 0.8B int8: GSM8K 11% vs 12% for the PyTorch bf16 reference (greedy, 0-shot CoT, max-tokens 512, n=100, non-thinking). The 8-question sanity gate is 8/8, but on a harder composite probe int8 measurably costs answers at this scale — ask for a float/fp16 variant for maximum fidelity.",
+    "On low-end Android GPUs decode is memory-bandwidth-bound and does not beat the CPU; the GPU win is on Apple hardware (and, generally, prefill/TTFT). Measured (litert-lm benchmark 0.16.0, M4 Max, -p 256 -d 256 --runs 3 --cache no): GPU 1972/161.8 tok/s prefill/decode, CPU 666/46.7.",
+    "Multi-length prefill signatures (1-1024) are exported so the runtime picks tight chunks; pad positions are made identity steps for the delta rule and the stored conv window is gathered at the last valid column."
+  ],
+  "schema_version": "1.2"
+}

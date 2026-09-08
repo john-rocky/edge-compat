@@ -1,0 +1,12 @@
+__pycache__/
+data/probes/
+*.py[cod]
+.venv/
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+node_modules/
+handover/

@@ -1,0 +1,75 @@
+{
+  "artifact": "whisper_large_v3_turbo_30s_i8.tflite",
+  "device": "galaxy-s26",
+  "model_id": "whisper-large-v3-turbo__whisper_large_v3_turbo_30s_i8",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-08-27",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "LiteRtException: Failed to compile model",
+      "evidence": [
+        "LiteRtException: Failed to compile model"
+      ],
+      "failure_class": "compile_failed",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "npu_qnn",
+      "context_length": null,
+      "date": "2026-08-27",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": "QAIRT (Hexagon, AOT host-compiled, SM8850 target)"
+      },
+      "error": "LiteRtException: Failed to compile model",
+      "evidence": [
+        "LiteRtException: Failed to compile model"
+      ],
+      "failure_class": "compile_failed",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

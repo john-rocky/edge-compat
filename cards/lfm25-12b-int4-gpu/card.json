@@ -1,0 +1,185 @@
+{
+  "artifacts": [
+    {
+      "file": "LFM2.5-1.2B-Instruct_int4_gpu.litertlm",
+      "sha256": "36f7f0221bcc42c75291da1d7e3422901024a5b06b9bfa3c02d7feface04f70a",
+      "size_mb": 702.115
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "python minicpm5_work/convert_lfm25_patchless_092.py LiquidAI/LFM2.5-1.2B-Instruct <outdir> && python minicpm5_work/quantize_minicpm5.py apply <in>.litertlm <out>.litertlm --recipe wi4b32_wi8 --algo <unrecorded: minmax or octav; not recoverable, owner does not recall> && python scripts/add_executor_metadata.py <out>.litertlm   # export 2026-07-29; metadata retrofit 2026-08-11",
+    "quantization": "int4 blockwise-32 weights (fp16 per-block scales) + int8 embedding/lm_head; convs float — artifact tensor census; algorithm unrecorded",
+    "tool": "litert-torch (via litertlm-convert minicpm5_work/convert_lfm25_patchless_092.py + quantize_minicpm5.py + litert-lm-builder)",
+    "tool_version": "0.9.2 (stock release, per convert_lfm25_patchless_092.py docstring + .venv-092 dist-info)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": 1024,
+          "date": "2026-08-26",
+          "decode_tokens_per_s": 69.53,
+          "delegated_ops": null,
+          "env": {
+            "device": "iPhone 17 Pro",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "A19-Pro",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "device.modelIdentifier=iPhone18,1",
+            "throughput taken from task 'short-chat' (128 generated tokens, 2026-08-26T04:54:39Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 4 task file(s)",
+            "'short-chat': 4 runs of one task — throughput = median of 3 warm run(s); cold decode kept in metrics (1 cold run(s))",
+            "[short-chat 2026-08-26T04:54:32Z] prefill=514.2358732855223 decode=69.85446866407982 ttft_ms=92.0 peak_mb=412.17454528808594 stop=stop output='On-device AI means using artificial intelligence (AI) tec …[trace truncated]",
+            "[short-chat 2026-08-26T04:54:34Z] prefill=498.17237162596155 decode=69.52701952891378 ttft_ms=81.0 peak_mb=387.20581817626953 stop=stop output='On-device AI means using artificial intelligence (AI) te …[trace truncated]",
+            "[short-chat 2026-08-26T04:54:36Z] prefill=495.25868811680783 decode=69.20386200810998 ttft_ms=84.0 peak_mb=373.53394317626953 stop=stop output='On-device AI means using artificial intelligence (AI) te …[trace truncated]",
+            "[short-chat 2026-08-26T04:54:39Z] prefill=496.3663735985657 decode=70.75447039867409 ttft_ms=84.0 peak_mb=373.95581817626953 stop=length output='On-device AI means using artificial intelligence (AI) t …[trace truncated]"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "short_chat.cold_decode_tokens_per_s": 69.854469,
+            "short_chat.decode_spread_pct": 2.23,
+            "short_chat.decode_tokens_per_s": 69.52702,
+            "short_chat.generated_tokens": 128.0,
+            "short_chat.n_runs": 4.0,
+            "short_chat.peak_mem_mb": 412.174545,
+            "short_chat.prefill_tokens_per_s": 496.366374,
+            "short_chat.prompt_tokens": 21.0,
+            "short_chat.ttft_ms": 84.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 412.175,
+          "prefill_tokens_per_s": 496.37,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 84.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-26/lfm25-12b-int4-gpu__iphone-17-pro.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": 1024,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": 325.76,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "os_build": "iOS Version 27.0 (Build 26A5416b)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "device.modelIdentifier=Mac16,9",
+            "throughput taken from task 'short-chat' (113 generated tokens, 2026-08-27T01:11:57Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 4 task file(s)",
+            "'short-chat': 4 runs of one task — throughput = median of 3 warm run(s); cold decode kept in metrics (1 cold run(s))",
+            "[short-chat 2026-08-27T01:11:55Z] prefill=22.019852207470525 decode=335.2382056134992 ttft_ms=1730.0 peak_mb=711.8138046264648 stop=length output='On-device AI means using artificial intelligence (AI) …[trace truncated]",
+            "[short-chat 2026-08-27T01:11:56Z] prefill=1454.1510333889696 decode=325.14974229465145 ttft_ms=27.0 peak_mb=706.5169296264648 stop=stop output='On-device AI means using artificial intelligence (AI) te …[trace truncated]",
+            "[short-chat 2026-08-27T01:11:56Z] prefill=1522.1251766752437 decode=328.39361571535466 ttft_ms=27.0 peak_mb=707.0169296264648 stop=stop output='On-device AI means using artificial intelligence (AI) te …[trace truncated]",
+            "[short-chat 2026-08-27T01:11:57Z] prefill=1505.1605504587155 decode=325.76243934973644 ttft_ms=27.0 peak_mb=707.0794296264648 stop=stop output='On-device AI means using artificial intelligence (AI) te …[trace truncated]"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "short_chat.cold_decode_tokens_per_s": 335.238206,
+            "short_chat.decode_spread_pct": 1.0,
+            "short_chat.decode_tokens_per_s": 325.762439,
+            "short_chat.generated_tokens": 113.0,
+            "short_chat.n_runs": 4.0,
+            "short_chat.peak_mem_mb": 711.813805,
+            "short_chat.prefill_tokens_per_s": 1505.16055,
+            "short_chat.prompt_tokens": 21.0,
+            "short_chat.ttft_ms": 27.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 711.814,
+          "prefill_tokens_per_s": 1505.16,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 27.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-27/lfm25-12b-int4-gpu__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-12",
+          "decode_tokens_per_s": 346.72,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=4662.61 decode=346.72 tokens/s, init=1.6247 s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 1.6247,
+            "max_num_tokens": 1024.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 4662.61,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 57.8
+        },
+        "source": "data/device_runs/0.16.0/2026-08-12/lfm25-12b-int4-gpu__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "lfm2.5",
+    "id": "lfm25-12b-int4-gpu",
+    "license": "lfm-open-license-v1.0",
+    "source_url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "The raw 0.9.2 export lacks the ExecutorMetadata section and dies at executor.cc:708 on litert-lm >=0.15; this artifact is the execmeta-retrofitted copy (2026-08-11) of the 2026-07-29 export (ship_lfm25_gpu_variant_20260812/RESULTS.md; file naming *_execmeta).",
+    "iPhone Metal fails engine creation on this file family (v0.14: DUS updated_slice>operand at delegate-resolved shapes; the static graph is clean across all 530 subgraphs — delegate-side) while Mac WebGPU compiles and passes the same file at maxtok 1024 AND 2048 (DEVICE_GATE_iphone17pro_20260729.md).",
+    "Superseded on HF: litert-community's LFM2.5-1.2B-Instruct_int4_gpu.litertlm is a 2026-08-12 re-export (litert-torch 0.9.3 + converter 0.3.1) with different bytes; this card's sha256 identifies the 07-29 0.9.2 canary file that the recorded device runs measured (ship_lfm25_gpu_variant_20260812/RESULTS.md).",
+    "Artifact identity is contradicted in this repo: cards lfm25-12b-int4-gpu and lfm25-12b-instruct-int4-gpu-093 both record sha256 36f7f0221bcc… (702.115 MB, same filename) while recording different conversion lineages — a 2026-07-29 convert_lfm25_patchless_092.py export with an unrecorded --algo, versus a 2026-08-12 convert_lfm25.py build on litert-torch 0.9.3 with converter 0.3.1. At most one can be true. The 07-29 artifact is no longer on disk, so which sha is wrong is UNMEASURED. Do not cite either conversion.command as settled until that export is reproduced and hashed; the published litert-community file hashes to this sha."
+  ],
+  "schema_version": "1.2"
+}

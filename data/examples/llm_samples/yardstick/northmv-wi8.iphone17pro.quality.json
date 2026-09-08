@@ -1,0 +1,67 @@
+{
+ "device": {
+  "batteryLevel": 0.5,
+  "batteryState": "charging",
+  "buildConfiguration": "Release",
+  "initialThermalState": "nominal",
+  "isLowPowerModeEnabled": false,
+  "modelIdentifier": "iPhone18,1",
+  "physicalMemoryMB": 11722,
+  "processorCount": 6,
+  "systemName": "iOS",
+  "systemVersion": "27.0"
+ },
+ "id": "CA474C99-A00F-4125-BDA0-EF4578010B11",
+ "metrics": {
+  "batteryDeltaPercent": 0,
+  "coldRun": true,
+  "decodeRateRollingWindow": [],
+  "decodeTokensPerSecond": 13.637124168288407,
+  "decodeTokensPerSecondWallClock": 14.332417882462206,
+  "finalThermalState": "nominal",
+  "firstTokenLatencyMS": 685,
+  "generatedTokenCount": 39,
+  "harnessStamp": "2026-07-26-comparability",
+  "initialThermalState": "nominal",
+  "interTokenLatencyP50MS": 71.27797603607178,
+  "interTokenLatencyP95MS": 73.25196266174316,
+  "interTokenLatencyP99MS": 73.96900653839111,
+  "loadTimeSeconds": 0.523434042930603,
+  "memoryAfterGenerationMB": 2133.7369079589844,
+  "memoryAfterLoadMB": 1264.84619140625,
+  "memoryBaselineMB": 15.314231872558594,
+  "memoryFinalResidentMB": 534.265625,
+  "memoryMedianMB": 2202.6587829589844,
+  "memoryMedianResidentMB": 589.953125,
+  "memoryPeakDuringDecodeMB": 2257.986885070801,
+  "memoryPeakResidentMB": 599.828125,
+  "peakThermalState": "nominal",
+  "promptTokenCount": 132,
+  "promptTokensPerSecond": 243.92240126953922,
+  "promptTokensPerSecondWallClock": 192.84149604963565,
+  "stopReason": "stop",
+  "streamedChunkCount": 38,
+  "totalGenerationTimeSeconds": 3.61905300617218
+ },
+ "model": {
+  "displayName": "North-Micro-Vision-Instruct (.litertlm, wi8 + fp16 vision)",
+  "hfFilePatterns": [
+   "*.litertlm"
+  ],
+  "hfRepoId": "litert-local/North-Micro-Vision-Instruct-wi8",
+  "id": "litert-local/northmv-wi8",
+  "onDiskSizeMB": 3480,
+  "parameterCountB": 2.48,
+  "primaryFile": "model.litertlm",
+  "quantization": "INT8 decoder (dynamic wi8) + fp16 vision encoder / int8 adapter, static 512, ekv4096"
+ },
+ "outputSample": "1. 13\n2. Tokyo\n3. Cold\n4. 7\n5. Merci\n6. 56\n7. 0.9\n8. Blushes",
+ "parameters": {
+  "maxTokens": 256,
+  "temperature": 0,
+  "topP": 1
+ },
+ "runtime": "litert-lm",
+ "task": "quality",
+ "timestamp": "2026-08-19T16:48:26Z"
+}

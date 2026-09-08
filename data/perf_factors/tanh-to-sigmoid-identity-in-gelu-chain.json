@@ -1,0 +1,30 @@
+{
+ "id": "tanh-to-sigmoid-identity-in-gelu-chain",
+ "category": "rewrite",
+ "title": "TANH -> 2*LOGISTIC(2y)-1 inside the GELU polynomial chain",
+ "rewrite": {
+  "to": "2*LOGISTIC(2y)-1 (identical polynomial around it)",
+  "equivalence": "identity",
+  "equivalence_evidence": "tanh(y) == 2*sigmoid(2y)-1; fp32 probe outputs max_abs_diff 8.2e-06",
+  "from": "TANH(y) within the gelu polynomial chain"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-24",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 53.81,
+  "after_ms": 22.111,
+  "probe": "probe_tanh1024 vs probe_tanhsig1024 (same chain, one op swapped)"
+ },
+ "factor": 2.43,
+ "scope": "INSIDE the gelu chain on [1,1024,1536] tensors only. Context-dependent: a naked tanh activation swapped the same way measured NO effect (throttled singles 10.8 vs 11.1 ms; gated row pending) \u2014 this is a fusion-pattern effect, not TANH kernel speed.",
+ "notes": "Do not blanket-replace TANH; measure per context.",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

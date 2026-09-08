@@ -1,0 +1,14 @@
+# meta.yaml — human-authored card fields (example-provenance fixture).
+
+model:
+  id: example-tiny-mixed
+  family: example-family
+  task: image-segmentation
+  source_url: https://example.invalid/models/example-tiny-mixed
+  license: apache-2.0
+
+conversion:
+  tool: example-converter
+  tool_version: 0.0.0-example
+  command: example-converter --input model.onnx --output model_mixed_example.tflite
+  quantization: int8-dynamic

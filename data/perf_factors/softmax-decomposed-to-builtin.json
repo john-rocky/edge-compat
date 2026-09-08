@@ -1,0 +1,30 @@
+{
+ "id": "softmax-decomposed-to-builtin",
+ "category": "rewrite",
+ "title": "hand-decomposed softmax (REDUCE_MAX/EXP/SUM/DIV) -> builtin SOFTMAX",
+ "rewrite": {
+  "from": "max-subtract + EXP + SUM + reciprocal-MUL decomposition",
+  "to": "builtin SOFTMAX op",
+  "equivalence": "bit-exact",
+  "equivalence_evidence": "same max-subtracted formulation; probe outputs max_abs_diff 1.4e-06"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-24",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 20.336,
+  "after_ms": 9.359,
+  "probe": "probe_smaxman1024 vs probe_t1024 (12 softmaxes over [6,1024,1024])"
+ },
+ "factor": 2.17,
+ "scope": "synthetic attention probe; softmax rows length 1024",
+ "notes": "The converter re-fuses the plain exp/sum/div pattern back into SOFTMAX; the probe had to use a reciprocal-mul form to stay decomposed. Conversions that keep softmax decomposed (e.g. for masking tricks) pay 2x on the NPU.",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

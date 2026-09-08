@@ -1,0 +1,233 @@
+{
+  "backend": "gpu_mldrift",
+  "entries": [
+    {
+      "conditions": "delegate error: tensor has bad input dims size: 5 — ML Drift GPU caps tensors at 4D; rank-5 tensors came from stock nn.MultiheadAttention head-split RESHAPEs (converter-lowering context); whole-model GPU compile then failed and the app fell back to CPU",
+      "constraints": {
+        "min_rank": 5
+      },
+      "evidence": {
+        "date": "2026-06-24",
+        "litert_version": "2.1.3",
+        "source_model": "open_clip ViT-B/32 image encoder"
+      },
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "full delegation: 739/739 nodes, 1 partition, GPU compiled model created",
+          "rewrite": "keep attention tensors at rank<=4 (4D head-split attention lowering / litert-torch ReduceViewRankPass)",
+          "symptom": "graph splits at the rank-5 RESHAPE (65/751 nodes delegated, 2 partitions, compiled model creation fails)"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "DRQ int8 channelwise weights + fp32 activations: an FC on a rank-3 [1,T,C] input whose OUTPUT feeds an ADD (residual or two-input) aborts delegate kernel creation — ml_drift delegate_opencl 'Unable to parse bc coord for BATCH axis. Layout is bhwc' — and the whole CompiledModel GPU compile fails (no CPU fallback). Isolated rank-3 DRQ FC compiles; rank-2 FC+ADD compiles; the identical graph in f32 compiles. Kills every DRQ transformer/conformer block with residual FCs. Minimal repro: 1.0 MB x+Linear(x) tflite (parakeet-ja-work/drq_probes/bisect_resadd1_i8.tflite).",
+      "dtypes": [
+        "float32",
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-13",
+        "litert_version": "2.1.5",
+        "source_model": "parakeet-tdt_ctc-0.6b-ja i8 DRQ + minimal probe bisect_resadd1_i8"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "whole-model GPU compile succeeds (f32: parakeet-ja 1862/1862+2083/2083 delegated)",
+          "rewrite": "run the i8 file on CPU or ship f32 weights for GPU (both verified)",
+          "symptom": "GPU compile fails instantly on any DRQ transformer block (residual FC)"
+        }
+      ],
+      "status": "crash"
+    },
+    {
+      "conditions": "Tensor type INT64 rejected by the device GPU delegate: `CAST: Tensor type(INT64) is not supported`; hit on RVQ code indices.",
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-06-24",
+        "litert_version": "2.1.3",
+        "source_model": "DAC 16kHz full decode graph"
+      },
+      "op": "CAST",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "device compile passes without the int64 CAST",
+          "rewrite": "keep index math in float or move the RVQ stage to host",
+          "symptom": "int64 index math blocks device GPU compile"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "Rejected when all inputs are constant: `input must be a runtime tensor`.",
+      "constraints": {
+        "inputs": "const_only"
+      },
+      "evidence": {
+        "date": "2026-04-08",
+        "litert_version": "2.1.3",
+        "source_model": "MoGe-2 (DINOv2 ViT-S)"
+      },
+      "op": "CONV_2D",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "device compile passes",
+          "rewrite": "taint the constant input with + image_slice * 1e-10 to prevent constant folding",
+          "symptom": "a conv fed only by constant buffers blocks device compile"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "On-device compile rejects DIV over constant-only inputs (softmax of a length-1 sequence folds to x/x).",
+      "constraints": {
+        "inputs": "const_only"
+      },
+      "evidence": {
+        "date": "2026-07-08",
+        "litert_version": "2.1.3",
+        "source_model": "EdgeTAM 2D Spatial Perceiver"
+      },
+      "op": "DIV",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "device compile passes",
+          "rewrite": "special-case seq_len==1 (the attention weight is identically 1.0)",
+          "symptom": "single-token self-attention blocks device compile"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "Rejected on an fp16 table: `EMBEDDING_LOOKUP: Empty quantization params`.",
+      "dtypes": [
+        "float16"
+      ],
+      "evidence": {
+        "date": "2026-06-24",
+        "litert_version": "2.1.3",
+        "source_model": "DAC 16kHz full decode graph"
+      },
+      "op": "EMBEDDING_LOOKUP",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "device compile passes without the op",
+          "rewrite": "host-side table lookup",
+          "symptom": "fp16 embedding lookup blocks device GPU compile"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "On-device compile rejects MEAN when every input is a constant: `MEAN: Expected 1 const input tensor(s), but node has 2 const input(s)`; the desktop blocklist check passes.",
+      "constraints": {
+        "inputs": "const_only"
+      },
+      "evidence": {
+        "date": "2026-07-08",
+        "litert_version": "2.1.3",
+        "source_model": "EdgeTAM 2D Spatial Perceiver"
+      },
+      "op": "MEAN",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "device compile passes",
+          "rewrite": "taint the constant to runtime with + 1e-9 * x.mean() (non-folding; numerically negligible)",
+          "symptom": "LayerNorm applied to a constant parameter blocks device compile"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "Dynamic output size rejected by the device delegate (nn.Upsample(scale_factor=2) lowering).",
+      "constraints": {
+        "output_size": "dynamic"
+      },
+      "evidence": {
+        "date": "2026-04-08",
+        "litert_version": "2.1.3",
+        "source_model": "MoGe-2 (DINOv2 ViT-S)"
+      },
+      "op": "RESIZE_BILINEAR",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "device compile passes",
+          "rewrite": "fixed-size F.interpolate",
+          "symptom": "dynamic upsample blocks device compile"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "On-device compile rejects SELECT when all inputs are constants (same constant-only-input class as MEAN/DIV; desktop check passes).",
+      "constraints": {
+        "inputs": "const_only"
+      },
+      "evidence": {
+        "date": "2026-07-08",
+        "litert_version": "2.1.3",
+        "source_model": "EdgeTAM 2D Spatial Perceiver"
+      },
+      "op": "SELECT",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "A single multi-axis reduction over a large spatial extent (~65k elements) compiles and runs but silently returns NaN — in FP32 as well, so not an fp16 overflow. Two sequential single-axis reductions and AVERAGE_POOL_2D are numerically identical and compute correctly; adaptive_avg_pool2d (which lowers to the same single multi-axis SUM) does not.",
+      "constraints": {
+        "reduce_axes": "multi"
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-06-23",
+        "litert_version": "2.1.3",
+        "source_model": "MoGe-2 / EdgeTAM RepViT SqueezeExcite"
+      },
+      "op": "SUM",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "exact output on device",
+          "rewrite": "split x.mean((2,3)) into x.mean(3).mean(2) or use AVERAGE_POOL_2D",
+          "symptom": "global average pool returns NaN on device while desktop output is fine"
+        }
+      ],
+      "status": "incorrect"
+    },
+    {
+      "conditions": "Rejected by the Pixel 8a device delegate even when the desktop compatibility checker reports the op compatible.",
+      "evidence": {
+        "date": "2026-06-24",
+        "litert_version": "2.1.3",
+        "source_model": "DAC 16kHz full decode graph; MoGe-2"
+      },
+      "op": "TRANSPOSE_CONV",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "decoders ship on the device GPU (DAC / Matcha / Mimi / EDSR / PP-OCR precedents)",
+          "rewrite": "ZeroStuffConvT1d/2d (nearest upsample x constant stuff-mask + flipped conv; exact incl. grouped/output_padding) or fixed-size interpolate + 1x1 conv",
+          "symptom": "deconv decoders fail on-device compile while the desktop checker passes"
+        }
+      ],
+      "status": "fallback"
+    }
+  ],
+  "generated_at": "2026-08-26",
+  "litert_version": "2.1.3",
+  "schema_version": "1.0"
+}

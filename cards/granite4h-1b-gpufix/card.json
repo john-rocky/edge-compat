@@ -1,0 +1,124 @@
+{
+  "artifacts": [
+    {
+      "file": "granite-4.0-h-1b_int8_fp32act.litertlm",
+      "sha256": "c4c5d09334b974abd2f80893b1b46df036a8ff28b54e70d36309326f9f50fa06",
+      "size_mb": 1605.158
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "PATH=$REPO/.venv-092/bin:$PATH PYTHONPATH=$HOME/code/litert-torch .venv-092/bin/python $HOME/code/hf-to-litertlm/granite_work/convert_granite4h.py ibm-granite/granite-4.0-h-1b <outdir>  # gpu_ship_20260813/build_1b_final.sh verbatim",
+    "quantization": "int8 dynamic on linears + embedding; convs and the selective scan stay float; fp32 activations declared (GPU requirement — HF card update note)",
+    "tool": "litert-torch, pinned base + granite hybrid patch, selective scan folded to batched matmuls (all tensors rank <= 4, no giant broadcast intermediates) — hf-to-litertlm granite_work/convert_granite4h.py via gpu_ship_20260813/build_1b_final.sh",
+    "tool_version": "editable checkout 115a136 + granite_hybrid_litert_torch.patch (hf-to-litertlm granite_work/README.md; folded-scan revision of 2026-08-13)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-13",
+          "decode_tokens_per_s": 4.34,
+          "delegated_ops": null,
+          "env": {
+            "device": "pixel-8a",
+            "machine_label": "pixel-8a-cl-pinned-thermally-loaded",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Google Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=5.14 decode=4.34 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 48.0,
+            "init_s": 19.01252,
+            "prefill_tokens": 40.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 5.14,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 8010.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-13/granite4h-1b-gpufix__pixel-8a.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-13",
+          "decode_tokens_per_s": 8.81,
+          "delegated_ops": 4488,
+          "env": {
+            "device": "pixel-8a",
+            "machine_label": "pixel-8a-cl-pinned",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Google Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 4346 out of 4346 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 4346 out of 4346 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 4310 out of 4310 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 4488 out of 4488 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=23.9 decode=8.81 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 52.0,
+            "init_s": 83.68662,
+            "prefill_tokens": 40.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 23.9,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 4488,
+          "ttft_ms": 1790.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-13/granite4h-1b-gpufix__pixel-8a.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "granite4h",
+    "id": "granite4h-1b-gpufix",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/ibm-granite/granite-4.0-h-1b",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "GPU execution requires fp32 activations (declared in this bundle) — the memory cost is stated on the HF card's honest notes; CPU decode is ~3.5x the previous file (11.4 -> 39.2 tok/s) from the folded scan alone (HF card update, measured).",
+    "Full GPU delegation on Android OpenCL, one partition per subgraph, zero rejections (4628/4628, 2240/2240, 2271/2271) — litertlm-convert commit 2cd79bf; end-to-end GPU verified on macOS, iPhone 17 Pro (Metal) and Pixel 8a per the HF card update.",
+    "First Mamba2-hybrid selective scan on a mobile GPU (HF card claim of record).",
+    "Family BOS trap unchanged from the 08-04 lineage: the 350m sibling's greedy flips with BOS (LlmMetadata start_token); the 1b is BOS-robust (commit 5f3176d)."
+  ],
+  "schema_version": "1.2"
+}

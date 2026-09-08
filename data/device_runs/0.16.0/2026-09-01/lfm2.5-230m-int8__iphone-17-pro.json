@@ -1,0 +1,98 @@
+{
+  "artifact": "LFM2.5-230M_int8.litertlm",
+  "artifact_sha256": "f8bc1a685e07e4f547d0390476b7d21b72c6dba3a7e4a76400b211b3d28628a9",
+  "device": "iphone-17-pro",
+  "model_id": "lfm2.5-230m-int8",
+  "quantization": "int8",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-01",
+      "decode_tokens_per_s": 86.55,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 17 Pro",
+        "machine_label": "iphone-17-pro-cold-unplugged",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "A19-Pro",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "device.modelIdentifier=iPhone18,1",
+        "throughput taken from task 'quality' (109 generated tokens, 2026-09-01T14:09:20Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 1 task file(s)",
+        "[quality 2026-09-01T14:09:20Z] prefill=1529.9117224202755 decode=86.55251510607201 ttft_ms=107.0 peak_mb=365.7368392944336 stop=stop output='1. 17 + 25 = 42  \\\\n2. Capital of Japan is Tokyo  \\\\n3. Opp …[trace truncated]"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "quality.decode_tokens_per_s": 86.552515,
+        "quality.generated_tokens": 109.0,
+        "quality.load_s": 0.259818,
+        "quality.peak_mem_mb": 365.736839,
+        "quality.prefill_tokens_per_s": 1529.911722,
+        "quality.prompt_tokens": 128.0,
+        "quality.ttft_ms": 107.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 365.737,
+      "prefill_tokens_per_s": 1529.91,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 107.0
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-09-01",
+      "decode_tokens_per_s": 143.19,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 17 Pro",
+        "machine_label": "iphone-17-pro-cold-unplugged",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "A19-Pro",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "device.modelIdentifier=iPhone18,1",
+        "throughput taken from task 'quality' (108 generated tokens, 2026-09-01T14:09:12Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 1 task file(s)",
+        "[quality 2026-09-01T14:09:12Z] prefill=3422.1434820277846 decode=143.19144563696992 ttft_ms=75.0 peak_mb=472.9398498535156 stop=stop output='1. 17 + 25 = 42  \\\\n2. Capital of Japan is Tokyo.  \\\\n3. Op …[trace truncated]"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "quality.decode_tokens_per_s": 143.191446,
+        "quality.generated_tokens": 108.0,
+        "quality.load_s": 4.853179,
+        "quality.peak_mem_mb": 472.93985,
+        "quality.prefill_tokens_per_s": 3422.143482,
+        "quality.prompt_tokens": 128.0,
+        "quality.ttft_ms": 75.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 472.94,
+      "prefill_tokens_per_s": 3422.14,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 75.0
+    }
+  ],
+  "schema_version": "1.0"
+}

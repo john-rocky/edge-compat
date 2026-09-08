@@ -1,0 +1,234 @@
+{
+  "artifacts": [
+    {
+      "file": "de20dcdb186be71368cbd668fd62e71e6089d0c94c100968975cfc6300c25a83.tflite",
+      "sha256": "39aa8e5027e6638cfa3c9025854a9d3e5e95121a3bcebd926ab08973d32d0910",
+      "size_mb": 118.826
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 1700.407,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 63.108,
+        "loads": true,
+        "max_rel_diff": 0.7315858145966206,
+        "output_match": true,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-11/yolact-resnet50.json"
+  },
+  "conversion": {
+    "command": "python yolact/scripts/build_yolact.py",
+    "quantization": "none — fp32 (artifact tensors: 279 float32, no float16/int8)",
+    "tool": "litert-torch",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-08-26",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.7733334->0.7733334 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 38.367,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "latency_max_ms": 43.657,
+            "latency_min_ms": 31.569,
+            "load_ms": 2059.5
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-26/yolact-resnet50__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-08-26",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT (Hexagon, JIT on-device)"
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.7733334->0.7699999 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 14.344,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "jit_first_load_ms": 11588.6,
+            "latency_max_ms": 14.729,
+            "latency_min_ms": 13.887,
+            "load_ms": 158.2,
+            "qnn_partition_lines": 57
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-26/yolact-resnet50__galaxy-s26.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert",
+            "runtime_version": "2.2.0.dev20260804",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+            "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "invocation 0: exit=0 wall_s=65.5 temp 51.0->73.0C throttled=0x0 xnnpack=True median_us=1091300.0 runs=50 footprint_peak_mb=376.05",
+            "invocation 1: exit=0 wall_s=65.9 temp 51.6->70.3C throttled=0x0 xnnpack=True median_us=1095560.0 runs=50 footprint_peak_mb=376.06",
+            "invocation 2: exit=0 wall_s=66.1 temp 51.6->72.5C throttled=0x0 xnnpack=True median_us=1101000.0 runs=50 footprint_peak_mb=376.05"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 1095.56,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_ms": 271.021,
+            "invocations": 3,
+            "iterations": 150,
+            "latency_max_ms": 1107.908,
+            "latency_min_ms": 1077.633,
+            "threads": 4,
+            "warmup_runs_per_invocation": 10
+          },
+          "output_match": null,
+          "peak_mem_mb": 376.06,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0.dev20260804/2026-08-31/yolact-resnet50__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "yolact",
+    "id": "yolact-resnet50",
+    "license": "mit",
+    "source_url": "https://huggingface.co/litert-community/YOLACT-ResNet50-LiteRT",
+    "task": "image-segmentation"
+  },
+  "pitfalls": [
+    "Decode is host-side: SSD box decode against the 19248 priors shipped as priors.bin (variances [0.1,0.2]), per-class NMS, then lincomb masks sigmoid(proto @ coeff) cropped to each box (zoo README L676-678).",
+    "Input is BGR with caffe-style normalization (x - [103.94,116.78,123.68]) / [57.38,57.12,58.40], no /255 (zoo README L678)."
+  ],
+  "schema_version": "1.2"
+}

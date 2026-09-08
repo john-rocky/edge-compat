@@ -1,0 +1,27 @@
+{
+  "action": "insert_cast",
+  "evidence": {
+    "date": "2026-08-10",
+    "litert_version": "0.0.0-example",
+    "source_model": "example-synthetic"
+  },
+  "expected_effect": "MUL delegates in float32 with CASTs at the edges; coverage reaches 100%",
+  "fixture": {
+    "matrix": "../matrix_fix_example.json",
+    "model": "../model_fix_int_mul_example.tflite"
+  },
+  "id": "example-insert-cast-mul-int32",
+  "match": {
+    "dtypes": [
+      "int32"
+    ],
+    "op": "MUL"
+  },
+  "notes": "Exact only while products stay exactly representable in float32 (|value| < 2^24). Example rule exercising the engine on a synthetic fixture.",
+  "params": {
+    "to": "float32"
+  },
+  "provenance": "example",
+  "schema_version": "1.0",
+  "title": "Compute integer MUL in float32 (example)"
+}

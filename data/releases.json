@@ -1,0 +1,21 @@
+{
+  "note": "Latest KNOWN upstream releases — the reference point for staleness surfacing (Phase 11). Maintained by autobump.yml (CI) or the owner; verified against the public registries named in 'source'. This is a registry, not measurement data: it never changes any verdict, only whether a verified-against version is flagged stale. Consumed by edge-lint (--releases soft warning), the site generator (stale flags), and freshness tooling.",
+  "releases": {
+    "litert": {
+      "checked_at": "2026-09-07",
+      "source": "pypi:ai-edge-litert",
+      "version": "2.2.0"
+    },
+    "litertjs_core": {
+      "checked_at": "2026-09-07",
+      "source": "npm:@litertjs/core",
+      "version": "2.5.3"
+    },
+    "litertlm": {
+      "checked_at": "2026-09-07",
+      "source": "github:google-ai-edge/LiteRT-LM",
+      "version": "0.16.1"
+    }
+  },
+  "schema_version": "1.0"
+}

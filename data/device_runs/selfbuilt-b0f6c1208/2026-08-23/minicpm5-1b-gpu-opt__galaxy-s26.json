@@ -1,0 +1,49 @@
+{
+  "artifact": "minicpm_wi4b32_wi8_afp32_gpu_opt.litertlm",
+  "device": "galaxy-s26",
+  "model_id": "minicpm5-1b-gpu-opt",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-23",
+      "decode_tokens_per_s": 64.43,
+      "delegated_ops": 1044,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cl-selfbuilt",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-b0f6c1208",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 1044 out of 1044 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+        "VERBOSE: Replacing 953 out of 953 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (decode).",
+        "results block: prefill=1529.11 decode=64.43 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 128.0,
+        "init_s": 4.13834,
+        "prefill_tokens": 128.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 1529.11,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 1044,
+      "ttft_ms": 100.0
+    }
+  ],
+  "schema_version": "1.0"
+}

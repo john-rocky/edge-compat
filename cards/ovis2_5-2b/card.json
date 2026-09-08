@@ -1,0 +1,82 @@
+{
+  "artifacts": [
+    {
+      "file": "Ovis2.5-2B.litertlm",
+      "sha256": "528485444515cef66d999dfa551be5740854612cf9bfc1003ff5b9c7281afc7b",
+      "size_mb": 2049.657
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "bash scripts/ship_ovis_2b.sh",
+    "quantization": "vision tower int8; Qwen3-1.7B decoder int4 blockwise-32 symmetric + OCTAV; input embedding int8 (externalized section)",
+    "tool": "litert-torch (litertlm-convert fast_vlm pipeline, scripts/ship_ovis_2b.sh)",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 26.83,
+          "delegated_ops": 1298,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 1244 out of 1244 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (decode).",
+            "results block: prefill=461.75 decode=26.83 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 853.0,
+            "init_s": 7.99207,
+            "prefill_tokens": 203.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 461.75,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1298,
+          "ttft_ms": 480.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/ovis2_5-2b__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "ovis",
+    "id": "ovis2_5-2b",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/AIDC-AI/Ovis2.5-2B",
+    "task": "image-text-to-text"
+  },
+  "pitfalls": [
+    "Reasoning VLM: the model may emit a <think>...</think> block before its final answer (matches the base model) — allow enough max-tokens (>=1024) for the answer to follow.",
+    "Vision-only bundle (no audio tower): bring up the engine with the vision modality only — requesting the audio tower (.all) on a bundle with no audio section fails at session creation.",
+    "The dynamic-resolution Siglip2-NaViT tower does not torch.export; shipped as a static 512x512 rewrite (valid because fullatt_block_indexes=None makes the window-reorder a no-op) — static-vs-original feature corr 0.99999964.",
+    "Siglip normalization ((x-0.5)/0.5) is baked into the encoder; the runtime feeds a [0,1] NHWC image resized to 512x512.",
+    "Ovis's two learned image-boundary indicator embeddings are omitted (the fast_vlm path splices only the atom embeddings) — verified to stay coherent in eager."
+  ],
+  "schema_version": "1.2"
+}

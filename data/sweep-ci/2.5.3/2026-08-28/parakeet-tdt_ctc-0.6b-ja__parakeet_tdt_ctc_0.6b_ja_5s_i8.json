@@ -1,0 +1,102 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x80x500:float32",
+  "license": "cc-by-4.0",
+  "model_id": "parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8",
+  "notes": "multi-signature model (122 subgraphs); harness runs subgraph 0 (encode)",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-08-28",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "6.17.0-1022-azure",
+        "webgpu_adapter": {
+          "architecture": "swiftshader",
+          "description": "",
+          "device": "",
+          "vendor": "google"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 879.06,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-08-28",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "warning: W0828 19:12:36.942000  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.064000  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.163000  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.313999  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.359000  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.452000  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.489999  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.568999  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.611000  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.668999  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.700999  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.760999  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.792000  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.865999  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.908000  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "warning: W0828 19:12:37.980000  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {63, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 63, 1, 1024}}",
+        "error: Aborted()"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "6.17.0-1022-azure",
+        "webgpu_adapter": {
+          "architecture": "swiftshader",
+          "description": "",
+          "device": "",
+          "vendor": "google"
+        }
+      },
+      "error": "RuntimeError: Aborted(). Build with -sASSERTIONS for more info.",
+      "failure_class": "compile_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/parakeet-tdt_ctc-0.6b-ja/resolve/main/parakeet_tdt_ctc_0.6b_ja_5s_i8.tflite"
+}

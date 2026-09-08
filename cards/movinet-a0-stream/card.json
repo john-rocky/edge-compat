@@ -1,0 +1,144 @@
+{
+  "artifacts": [
+    {
+      "file": "64841a4c8419d448019b54731d6d0dc77d6239d4d0c1a8e2a0415545377f56c7.tflite",
+      "sha256": "0565d6e2173caf3e144e6a0a6461edfef9dc5cccacf9a093f311f8a8f05434c8",
+      "size_mb": 14.431
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 7.13,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": false,
+        "latency_p50_ms": 13.255,
+        "loads": true,
+        "max_rel_diff": 0.04193414820059219,
+        "output_match": false,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-11/movinet-a0-stream.json"
+  },
+  "conversion": {
+    "command": "python movinet/scripts/build_movinet.py",
+    "quantization": "none (float32)",
+    "tool": "litert-torch",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert",
+            "runtime_version": "2.2.0.dev20260804",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+            "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "invocation 0: exit=0 wall_s=1.6 temp 51.0->58.7C throttled=0x0 xnnpack=True median_us=4604.0 runs=217 footprint_peak_mb=137.5",
+            "invocation 1: exit=0 wall_s=1.6 temp 51.0->56.0C throttled=0x0 xnnpack=True median_us=4628.0 runs=216 footprint_peak_mb=137.5",
+            "invocation 2: exit=0 wall_s=1.6 temp 49.9->56.5C throttled=0x0 xnnpack=True median_us=4629.0 runs=216 footprint_peak_mb=137.5"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 4.628,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_ms": 15.031,
+            "invocations": 3,
+            "iterations": 649,
+            "latency_max_ms": 5.592,
+            "latency_min_ms": 4.542,
+            "threads": 4,
+            "warmup_runs_per_invocation": 10
+          },
+          "output_match": null,
+          "peak_mem_mb": 137.5,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0.dev20260804/2026-08-31/movinet-a0-stream__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "movinet",
+    "id": "movinet-a0-stream",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/MoViNet-A0-Stream-LiteRT",
+    "task": "video-classification"
+  },
+  "pitfalls": [
+    "All recurrent-state plumbing is host-side: the stream-buffer shift register and pool running-sum accumulation are done by the caller; the graph consumes state and emits only fresh per-frame tensors (zoo README L400-402).",
+    "Each emitted stream frame is decoupled from its compute use by a multiply against the runtime 1.0 input (input[46]) to dodge three stated silent Mali CompiledModel bugs (zoo README L402)."
+  ],
+  "schema_version": "1.2"
+}

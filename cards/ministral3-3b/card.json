@@ -1,0 +1,264 @@
+{
+  "artifacts": [
+    {
+      "file": "Ministral-3-3B-Instruct-2512_q4_block32_ekv4096.litertlm",
+      "sha256": "e68fcf0d52e5e9d86663c819b8ab53998694a633190b9102b456e12de4f16270",
+      "size_mb": 2232.535
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "extract_ministral3_text.py (drops the Pixtral vision tower) -> CACHE=4096 EXTERNALIZE_EMBEDDER=1 export_simple_template.py <text-only src> <out> templates/mistral_simple.jinja BOCTAV4",
+    "quantization": "int4 weights, BLOCKWISE_32 symmetric + OCTAV; tied embedding/lm_head INT8",
+    "tool": "litert-torch (hf-to-litertlm reproduce_llm.sh key `ministral3-3b`)",
+    "tool_version": "TODO"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 11.26,
+          "delegated_ops": 1187,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1187 out of 1187 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1087 out of 1087 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (decode).",
+            "results block: prefill=223.58 decode=11.26 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 1429.0,
+            "init_s": 16.6479,
+            "prefill_tokens": 198.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 223.58,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1187,
+          "ttft_ms": 970.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/ministral3-3b__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-07-22",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.14.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "speed figures withheld: this measurement batch was retracted as contaminated (parallel GPU load; owner correction in gpu_audit MATRIX.md, 2026-07-23) — the PASS/FAIL verdict is load-independent and stands"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "max_num_tokens": 1024.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.14.0/2026-07-22/ministral3-3b__mac-studio-m4-max.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-07-23",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-gallery",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "gallery-1.0.15",
+            "soc": "Google Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": "app process died ~90 s into the benchmark (no Java exception) — suspected 3B-class GPU memory exhaustion on Pixel 8a",
+          "evidence": [
+            "hand-recorded device phase: litertlm-convert reports/gpu_audit/MATRIX.md 実機フェーズ table (committed 0559ad3, 2026-07-23; Gallery 1.0.15 official Benchmark, ML Drift GPU, p256/d256 x3 runs; runtime version axis = the Gallery app version — the embedded litert-lm version is not recorded)",
+            "row: '❌ アプリごと native 死 — ベンチ~90秒でプロセス死 = 3B 級 GPU メモリ枯渇の疑い'"
+          ],
+          "failure_class": "process_crash",
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {},
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/gallery-1.0.15/2026-07-23/ministral3-3b__pixel-8a.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-17",
+          "decode_tokens_per_s": 6.8,
+          "delegated_ops": 1187,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1187 out of 1187 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1087 out of 1087 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (decode).",
+            "results block: prefill=8.49 decode=6.8 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 124.0,
+            "init_s": 20.85413,
+            "prefill_tokens": 13.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 8.49,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1187,
+          "ttft_ms": 1680.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-17/ministral3-3b__pixel-8a.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 1.91,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 102.5 s, output head '43'",
+            "invocation 0: exit=0 wall_s=408.3 temp 51.0->54.9C throttled=0x0 prefill_tps=13.74 decode_tps=1.89 ttft_s=21.6413 init_s=56.9749 peak_rss_mb=3812",
+            "invocation 1: exit=0 wall_s=404.3 temp 49.9->54.3C throttled=0x0 prefill_tps=13.73 decode_tps=1.91 ttft_s=21.2617 init_s=55.1212 peak_rss_mb=3828",
+            "invocation 2: exit=0 wall_s=402.3 temp 49.4->56.5C throttled=0x0 prefill_tps=13.85 decode_tps=1.91 ttft_s=21.1142 init_s=55.255 peak_rss_mb=3796"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.91,
+            "decode_tps_min": 1.89,
+            "init_s": 55.255,
+            "init_s_max": 56.9749,
+            "init_s_min": 55.1212,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 13.85,
+            "prefill_tps_min": 13.73,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 21.6413,
+            "ttft_s_min": 21.1142
+          },
+          "output_match": null,
+          "peak_mem_mb": 3828.0,
+          "prefill_tokens_per_s": 13.74,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 21261.7
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/ministral3-3b__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "mistral",
+    "id": "ministral3-3b",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Ministral-3-3B-Instruct-2512",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Text-only conversion: the Ministral-3 text decoder, with the Pixtral vision tower dropped (HF card).",
+    "Embedding externalized so every section stays under 2 GiB, which is what lets it load on iOS (HF card).",
+    "The bundle carries a start_token (<s>), and here that is CORRECT rather than the Granite defect: upstream bos is <s> and eos is </s>, different tokens, so prepending BOS is the Mistral convention. The Granite trap needs bos == eos (or add_bos_token False) to bite (CATALOG_REGATE.md).",
+    "Two true statements that must not be collapsed: the Gallery only OFFERS GPU on ~12 GB+ devices, because its accelerator choice is fixed at import time from device RAM; the MODEL itself runs fully delegated on an 8 GB Pixel 8a GPU when litert_lm_main drives it directly — 1187/1187 prefill, 1087/1087 decode, zero rejections, correct output, measured 2026-08-17. The first is a property of the app, the second of the runtime (HF card + CATALOG_REGATE.md)."
+  ],
+  "schema_version": "1.2"
+}

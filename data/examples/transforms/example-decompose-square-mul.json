@@ -1,0 +1,38 @@
+{
+  "action": "decompose",
+  "evidence": {
+    "date": "2026-08-10",
+    "litert_version": "0.0.0-example",
+    "source_model": "example-synthetic"
+  },
+  "expected_effect": "the op delegates as MUL; coverage reaches 100%",
+  "fixture": {
+    "matrix": "../matrix_fix_example.json",
+    "model": "../model_fix_square_example.tflite"
+  },
+  "id": "example-decompose-square-mul",
+  "match": {
+    "dtypes": [
+      "float32"
+    ],
+    "op": "SQUARE"
+  },
+  "notes": "Exact for all inputs: SQUARE(x) == MUL(x, x) by definition. Example rule exercising the engine on a synthetic fixture.",
+  "params": {
+    "nodes": [
+      {
+        "inputs": [
+          "in:0",
+          "in:0"
+        ],
+        "op": "MUL",
+        "outputs": [
+          "out:0"
+        ]
+      }
+    ]
+  },
+  "provenance": "example",
+  "schema_version": "1.0",
+  "title": "Decompose SQUARE(x) into MUL(x, x) (example)"
+}

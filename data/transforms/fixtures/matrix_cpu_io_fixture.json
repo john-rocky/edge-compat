@@ -1,0 +1,39 @@
+{
+  "backend": "cpu_xnnpack",
+  "entries": [
+    {
+      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring the measured entry in data/matrix/cpu_xnnpack__2.1.6.json (CAST float32 delegated)",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "CAST",
+      "provenance": "example",
+      "status": "delegated"
+    },
+    {
+      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring the measured entry in data/matrix/cpu_xnnpack__2.1.6.json (CAST int64 delegated)",
+      "dtypes": [
+        "int64"
+      ],
+      "op": "CAST",
+      "provenance": "example",
+      "status": "delegated"
+    },
+    {
+      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring the measured entry in data/matrix/cpu_xnnpack__2.1.6.json (ABS float32 delegated)",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "ABS",
+      "provenance": "example",
+      "status": "delegated"
+    }
+  ],
+  "generated_at": "2026-08-12",
+  "litert_version": "0.0.0-fixture",
+  "schema_version": "1.2",
+  "target": {
+    "device": "Synthetic fixture (draft-rule validation harness)",
+    "soc": "Synthetic"
+  }
+}

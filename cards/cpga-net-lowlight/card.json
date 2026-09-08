@@ -1,0 +1,231 @@
+{
+  "artifacts": [
+    {
+      "file": "7a91bc54eabd5129905518642a363bb1be0f6e75d84d8a9ccac62f9f4e01003f.tflite",
+      "sha256": "8b125569618cbc342b3c0a095f712dfc899ac739e896208baf13cb1769c4c319",
+      "size_mb": 0.089
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 248.613,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 17.345,
+        "loads": true,
+        "max_rel_diff": 0.1318840579710145,
+        "output_match": true,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-11/cpga-net-lowlight.json"
+  },
+  "conversion": {
+    "command": "python lowlight/scripts/build_cpga.py",
+    "quantization": "fp16",
+    "tool": "litert-torch",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-08-25",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.52000004->0.52666664 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 14.94,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "latency_max_ms": 15.309,
+            "latency_min_ms": 14.749,
+            "load_ms": 885.9
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-25/cpga-net-lowlight__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-08-25",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT (Hexagon, JIT on-device)"
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.52000004->0.52000004 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 4.62,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "jit_first_load_ms": 2238.0,
+            "latency_max_ms": 4.711,
+            "latency_min_ms": 4.53,
+            "load_ms": 102.8,
+            "qnn_partition_lines": 57
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-25/cpga-net-lowlight__galaxy-s26.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert",
+            "runtime_version": "2.2.0.dev20260804",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+            "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "invocation 0: exit=0 wall_s=4.9 temp 51.0->60.9C throttled=0x0 xnnpack=True median_us=78688.0 runs=50 footprint_peak_mb=168.08",
+            "invocation 1: exit=0 wall_s=4.9 temp 51.0->60.4C throttled=0x0 xnnpack=True median_us=78994.0 runs=50 footprint_peak_mb=168.08",
+            "invocation 2: exit=0 wall_s=4.9 temp 49.4->59.3C throttled=0x0 xnnpack=True median_us=78796.0 runs=50 footprint_peak_mb=168.06"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 78.796,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_ms": 2.691,
+            "invocations": 3,
+            "iterations": 150,
+            "latency_max_ms": 80.521,
+            "latency_min_ms": 76.579,
+            "threads": 4,
+            "warmup_runs_per_invocation": 10
+          },
+          "output_match": null,
+          "peak_mem_mb": 168.08,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0.dev20260804/2026-08-31/cpga-net-lowlight__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "cpga-net",
+    "id": "cpga-net-lowlight",
+    "license": "mit",
+    "source_url": "https://huggingface.co/litert-community/CPGA-Net-LowLight-LiteRT",
+    "task": "image-to-image"
+  },
+  "pitfalls": [],
+  "schema_version": "1.2"
+}

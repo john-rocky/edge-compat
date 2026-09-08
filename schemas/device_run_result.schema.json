@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "device_run_result.schema.json",
+  "title": "Device-run result (one file per model x device)",
+  "description": "Measured on-device behavior of one model on one physical device, one record per accelerator (x prompt-length condition, see results) attempted — deliberately parallel to sweep_result.schema.json. Covers BOTH Phase 13 lanes: .tflite models on NPU accelerators (env.runtime = litert) and .litertlm bundles on LiteRT-LM (env.runtime = litert-lm). Model-level results only: op-level matrix entries are NEVER derived from these records (the trap rule, device edition) — op-level entries require a runtime log naming the specific op, captured as evidence, or an npu_adb probe result. Snapshot layout: data/device_runs/<runtime_version>/<YYYY-MM-DD>/<model_id>__<device>.json, append-only; every record in one snapshot directory must carry the same env.runtime and an env.runtime_version equal to the directory's version segment. Every record carries its full env block; a record without env is invalid — results are only ever presented with the environment that produced them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "model_id", "device", "artifact", "quantization", "results"],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "model_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "description": "Catalog id (the cards/ id where a card exists). Together with `device` it names this file: <model_id>__<device>.json."
+    },
+    "device": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.-]*$",
+      "description": "Device slug used in this file's name (lowercase, no underscores — the filename separator is '__'). The human-readable device name lives in env.device."
+    },
+    "artifact": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The exact artifact measured (e.g. gemma3-1b-it-int4.litertlm), as named by the measurement log. Artifacts are never committed to this repo."
+    },
+    "artifact_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "sha256 of the exact bytes measured, when a primary source states it (the ship's upload log, the curated manifest, or the hosting API read at ship time) — verbatim, never hand-computed from a file that might not be the measured one. Absent/null = not recorded; a Hub file replaced after the measurement date then cannot be told apart from the measured one by name alone (DECISIONS #167)."
+    },
+    "quantization": {
+      "type": ["string", "null"],
+      "description": "Quantization variant (e.g. int4, int8). Owner-supplied; adapters never infer it from file names — null when not stated by the source."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free-text notes."
+    },
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/accelerator_record" },
+      "description": "One record per (accelerator x prompt-length condition) attempted, sorted by accelerator id then metrics.prefill_tokens. Two records may share an accelerator when their metrics.prefill_tokens differ: throughput is conditional on prompt length, so those are different facts, not re-measurements."
+    }
+  },
+  "$defs": {
+    "accelerator_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "accelerator", "loads", "runs", "full_delegation", "output_match",
+        "max_abs_diff", "max_rel_diff", "latency_p50_ms",
+        "prefill_tokens_per_s", "decode_tokens_per_s", "ttft_ms",
+        "peak_mem_mb", "context_length", "evidence", "env", "date", "provenance"
+      ],
+      "properties": {
+        "accelerator": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "description": "The accelerator attempted: a registered backend id (npu_qnn, npu_neuropilot, gpu_mldrift, cpu_xnnpack, ...) or the runtime's own accelerator name (litert-lm: gpu, cpu, npu)."
+        },
+        "loads": {
+          "type": "boolean",
+          "description": "The model loaded / the engine was created for this accelerator. When false, failure_class and error say why."
+        },
+        "runs": {
+          "type": "boolean",
+          "description": "At least one inference (or generate call) completed AND produced output. A benchmark that prints a results block with zero throughput did NOT run — zero throughput is a failure marker, not a measurement."
+        },
+        "failure_class": {
+          "type": ["string", "null"],
+          "description": "Machine-usable failure class when loads or runs is false. Known classes: engine_create_failed (delegate/compiler rejected the graph at engine creation), zero_throughput (a results block was printed but every generate call failed), load_failed, run_error, timeout, device_error. Open set — consumers must tolerate unknown values."
+        },
+        "error": {
+          "type": ["string", "null"],
+          "description": "Verbatim primary diagnostic line of a load/run failure."
+        },
+        "full_delegation": {
+          "type": ["boolean", "null"],
+          "description": "Whether the whole graph ran on the accelerator. null when the source states nothing (a passing litert-lm benchmark log does not say); false when the log states a split, with delegated_ops/total_ops when the log gives counts."
+        },
+        "delegated_ops": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Operations the runtime log says ran on the accelerator (e.g. '536 operations will run on the GPU'). null when the log states no count."
+        },
+        "total_ops": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Total operations per the same log line (delegated + remaining). null when the log states no count."
+        },
+        "output_match": {
+          "type": ["boolean", "null"],
+          "description": "Numerical comparison against the CPU reference on the same inputs (shared tolerance policy). null when the source performed no such comparison — a loadability sanity check (compat_check's fixed-question answer) is evidence, not a numeric comparison."
+        },
+        "max_abs_diff": {
+          "type": ["number", "null"],
+          "description": "max |out - ref| across compared elements. null whenever output_match is null."
+        },
+        "max_rel_diff": {
+          "type": ["number", "null"],
+          "description": "max |out - ref| / max(|ref|, 1e-9) across compared elements. null whenever output_match is null."
+        },
+        "latency_p50_ms": {
+          "type": ["number", "null"],
+          "description": "Median single-inference latency in ms (CV lane). null for the LLM lane, whose cost model is prefill/decode throughput."
+        },
+        "prefill_tokens_per_s": {
+          "type": ["number", "null"],
+          "exclusiveMinimum": 0,
+          "description": "LLM lane: prefill throughput. null for the CV lane and for failed runs (a printed 0.00 is a failure marker, never a measurement)."
+        },
+        "decode_tokens_per_s": {
+          "type": ["number", "null"],
+          "exclusiveMinimum": 0,
+          "description": "LLM lane: decode throughput. null for the CV lane and for failed runs."
+        },
+        "ttft_ms": {
+          "type": ["number", "null"],
+          "exclusiveMinimum": 0,
+          "description": "LLM lane: time to first token in ms. null when the source does not measure it."
+        },
+        "peak_mem_mb": {
+          "type": ["number", "null"],
+          "exclusiveMinimum": 0,
+          "description": "DEVICE-MEASURED peak memory only. An estimated figure (devicemark mem_measured: false) must never land here — carry it as metrics.peak_mem_est_mb instead."
+        },
+        "context_length": {
+          "type": ["integer", "null"],
+          "exclusiveMinimum": 0,
+          "description": "LLM lane: context length tested, only when the source states one explicitly. The benchmark's prefill/decode/max-token counts are facts of their own and live in metrics."
+        },
+        "signature": {
+          "type": ["string", "null"],
+          "description": "CV lane: the signature (subgraph) this record measured, for multi-signature .tflite files where each signature is a different measurement (e.g. decode / prefill_128, encode / decode_1, transcribe_10s). Part of the record's identity (record_label). null/absent = the file's single or default signature."
+        },
+        "metrics": {
+          "type": "object",
+          "additionalProperties": { "type": "number" },
+          "description": "Open map of additional numeric facts stated by the source, e.g. init_s, prefill_tokens, decode_tokens, max_num_tokens, peak_mem_est_mb (explicitly-estimated memory), power_w."
+        },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Verbatim runtime-log excerpts backing this record: unsupported-op lines, partition counts, error traces, results blocks, source rows. May be empty only when the record claims nothing beyond loads/runs."
+        },
+        "env": { "$ref": "#/$defs/env" },
+        "date": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "description": "Measurement date. Sources that do not stamp one require the owner to supply it — never inferred from file mtimes by tooling."
+        },
+        "provenance": {
+          "enum": ["measured", "example"],
+          "description": "example = synthetic pipeline fixture; never mistake for a real device measurement. measured = a real model measured on the recorded env."
+        }
+      }
+    },
+    "env": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["device", "soc", "runtime", "runtime_version", "vendor_sdk", "os_build"],
+      "description": "Mandatory on every record: results are only ever presented with the environment that produced them. Fields a source does not carry are explicit nulls supplied knowingly — never silently invented values.",
+      "properties": {
+        "device": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable device name (e.g. 'Pixel 8a', 'M4 Max')."
+        },
+        "soc": {
+          "type": ["string", "null"],
+          "description": "SoC name; null when the source does not record it."
+        },
+        "runtime": {
+          "enum": ["litert", "litert-lm"],
+          "description": "Which runtime executed the model: litert (.tflite lane) or litert-lm (.litertlm lane). Selects the staleness axis in data/releases.json (litert vs litertlm)."
+        },
+        "runtime_version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Version of that runtime. Must equal the snapshot directory's version segment."
+        },
+        "vendor_sdk": {
+          "type": ["string", "null"],
+          "description": "Vendor SDK name + version for NPU runs (e.g. 'QNN SDK 2.x'); null where none applies (CPU/GPU) or the source does not record it."
+        },
+        "os_build": {
+          "type": ["string", "null"],
+          "description": "OS build (Android build id / macOS version); null when the source does not record it."
+        },
+        "machine_label": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Owner-chosen label for the measuring machine (results are his-hardware-his-label)."
+        }
+      }
+    }
+  }
+}

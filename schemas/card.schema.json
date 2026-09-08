@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "card.schema.json",
+  "title": "edge-card model card data",
+  "description": "card.json — the machine-readable source of truth for one converted model; CARD.md is rendered from it. Public, versioned API: stable names, no breaking renames after commit; schema 1.1 (Phase 6) added the additive `browser` block. This card is NOT a replacement for hand-written Hugging Face model cards — it is the structured superset their Performance tables are derivable from. The `delegation` block is filled directly from `edge-lint --json` output (lint_report.schema.json) and, per the version-axis rule, always carries the matrix snapshot's backend + litert_version. This phase formats and links measured data; it never produces measurements — all benchmark records carry `provenance`.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "model", "conversion", "artifacts",
+    "benchmarks", "delegation", "cross_runtime", "pitfalls"
+  ],
+  "dependentSchemas": {
+    "browser": {
+      "properties": { "schema_version": { "enum": ["1.1", "1.2"] } }
+    },
+    "device": {
+      "properties": { "schema_version": { "const": "1.2" } }
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "enum": ["1.0", "1.1", "1.2"],
+      "description": "1.1 (Phase 6, additive): the optional `browser` block. 1.2 (Phase 13, additive): the optional `device` block. A card carrying `device` must declare 1.2; a card carrying `browser` declares 1.1 (or 1.2 when it also carries `device`); older documents without these blocks remain valid."
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "family", "task", "source_url", "license"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "description": "Catalog id; also the card's directory name under cards/."
+        },
+        "family": { "type": "string", "minLength": 1 },
+        "task": { "type": "string", "minLength": 1 },
+        "source_url": { "type": "string", "minLength": 1 },
+        "license": { "type": "string", "minLength": 1 }
+      }
+    },
+    "conversion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool", "tool_version", "command", "quantization"],
+      "properties": {
+        "tool": { "type": "string", "minLength": 1 },
+        "tool_version": { "type": "string", "minLength": 1 },
+        "command": { "type": "string", "minLength": 1 },
+        "quantization": { "type": "string", "minLength": 1 }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["file", "sha256", "size_mb"],
+        "properties": {
+          "file": { "type": "string", "minLength": 1 },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "size_mb": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "benchmarks": {
+      "type": "array",
+      "items": { "$ref": "benchmark_result.schema.json#/$defs/benchmark_record" },
+      "description": "Owner-measured records, verbatim from the ingested benchmark results file."
+    },
+    "delegation": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "backend", "litert_version", "coverage_ops_pct", "partitions",
+            "blocking_ops", "matched_provenance_counts", "lint_report_version"
+          ],
+          "properties": {
+            "backend": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+            "litert_version": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The matrix snapshot's litert_version behind the lint verdicts — verdicts are only valid for this runtime version."
+            },
+            "coverage_ops_pct": { "type": "number", "minimum": 0, "maximum": 100 },
+            "partitions": { "type": "integer", "minimum": 0 },
+            "blocking_ops": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Blocking op names in the lint report's impact ranking order, deduplicated."
+            },
+            "matched_provenance_counts": {
+              "type": "object",
+              "additionalProperties": { "type": "integer", "minimum": 0 },
+              "propertyNames": {
+                "enum": ["measured", "vendor_doc", "inferred", "example", "unmatched"]
+              },
+              "description": "From the lint report summary: measured- vs inferred-backed verdicts stay distinguishable on the card."
+            },
+            "lint_report_version": { "type": "string", "minLength": 1 }
+          }
+        }
+      ],
+      "description": "Filled directly from `edge-lint --json` output; null when no lint report was supplied."
+    },
+    "cross_runtime": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          { "$ref": "benchmark_result.schema.json#/$defs/benchmark_record" },
+          {
+            "required": ["runtime"],
+            "properties": { "runtime": { "type": "string", "minLength": 1 } }
+          }
+        ]
+      },
+      "description": "Comparative numbers on other runtimes; the benchmark record shape with `runtime` required."
+    },
+    "pitfalls": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Free-text list authored by the owner in meta.yaml — never generated."
+    },
+    "browser": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backends", "demo_url", "sweep_source"],
+      "description": "Browser (LiteRT.js) behavior, merged from a sweep result file (sweep_result.schema.json) by `edge-card enrich` — schema 1.1, Phase 6. Model-level facts ONLY: op-level matrix entries are never derived from these records (the trap rule). Backend record fields map 1:1 from the sweep file's backend records; the full record (failure_class, error, delegation_evidence, sweep config) stays in the linked sweep_source file.",
+      "properties": {
+        "backends": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/browser_backend_record" },
+          "description": "One record per backend attempted, sorted by backend id (carried from the sweep file)."
+        },
+        "demo_url": {
+          "type": ["string", "null"],
+          "description": "URL of this model's demo-zoo page (Phase 7); null until one exists. Preserved across re-enrichment."
+        },
+        "sweep_source": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Repo-relative path of the sweep result JSON these records came from."
+        }
+      }
+    },
+    "device": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["records"],
+      "description": "On-device behavior (NPU and LiteRT-LM lanes), merged from device-run result files (device_run_result.schema.json) by `edge-card enrich --device-runs` — schema 1.2, Phase 13. Model-level facts ONLY: op-level matrix entries are never derived from these records (the trap rule, device edition). Each entry embeds the accelerator record verbatim (1:1, no reinterpretation) plus the snapshot file it came from.",
+      "properties": {
+        "records": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/device_run_entry" },
+          "description": "One entry per (device x accelerator), sorted by (device, accelerator)."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "device_run_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["device", "source", "run"],
+      "description": "One accelerator record from one device-run snapshot file, embedded verbatim.",
+      "properties": {
+        "device": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9.-]*$",
+          "description": "Device slug (the snapshot file's <device> segment); the human-readable name is in run.env.device."
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Repo-relative path of the device-run snapshot file this record came from."
+        },
+        "run": { "$ref": "device_run_result.schema.json#/$defs/accelerator_record" }
+      }
+    },
+    "browser_backend_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "backend", "loads", "runs", "full_delegation", "output_match",
+        "max_rel_diff", "latency_p50_ms", "env", "date", "provenance"
+      ],
+      "description": "One backend's sweep outcome; fields typed exactly as in sweep_result.schema.json (1:1 mapping, no reinterpretation).",
+      "properties": {
+        "backend": { "enum": ["wasm_xnnpack", "webgpu_mldrift", "webnn"] },
+        "loads": { "type": "boolean" },
+        "runs": { "type": "boolean" },
+        "full_delegation": { "type": ["boolean", "null"] },
+        "output_match": {
+          "type": ["boolean", "null"],
+          "description": "Numerical comparison against the wasm_xnnpack reference; null for the reference itself or when comparison was impossible (see the sweep_source record)."
+        },
+        "max_rel_diff": { "type": ["number", "null"] },
+        "latency_p50_ms": {
+          "type": ["number", "null"],
+          "description": "Only ever meaningful together with env — results are presented with the environment that produced them."
+        },
+        "env": { "$ref": "sweep_result.schema.json#/$defs/env" },
+        "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "provenance": {
+          "enum": ["measured", "example"],
+          "description": "Same enum as the sweep record: example fixtures never masquerade as real model behavior."
+        }
+      }
+    }
+  }
+}

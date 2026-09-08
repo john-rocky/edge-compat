@@ -1,0 +1,42 @@
+{
+  "artifact": "minicpm_wi4b32_wi8_afp32.litertlm",
+  "device": "mac-studio-m4-max",
+  "model_id": "minicpm5-1b",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-06",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.17.0/bin/litert-lm 0.17.0); fixed-question answer: '[thought] \\nWe are asked: \"What is 17 + 25? Answer briefly.\" So we need to compute the sum of 17 and 25. The sum is 42. We should answer briefly, so just \"42\" or maybe \"17+25=42\". But the instruction says \"Answer briefly.\" So we can simply say \"42\". I\\'ll answer: 42.\\n [/thought]\\n\\n\\n42'"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

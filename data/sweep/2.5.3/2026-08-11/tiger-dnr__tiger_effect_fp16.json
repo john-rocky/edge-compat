@@ -1,0 +1,97 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 5,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 1
+  },
+  "input_spec": "1x534016:float32",
+  "license": "apache-2.0",
+  "model_id": "tiger-dnr__tiger_effect_fp16",
+  "notes": "",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-08-11",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 27916.245,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-08-11",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "warning: Dispatch workgroup count Y (66752) exceeds max compute workgroups per dimension (65535).\n - While encoding [ComputePassEncoder (unlabeled)].DispatchWorkgroups(1, 66752, 1).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "warning: [Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "warning: Dispatch workgroup count Y (66752) exceeds max compute workgroups per dimension (65535).\n - While encoding [ComputePassEncoder (unlabeled)].DispatchWorkgroups(1, 66752, 1).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "warning: [Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "warning: Dispatch workgroup count Y (66752) exceeds max compute workgroups per dimension (65535).\n - While encoding [ComputePassEncoder (unlabeled)].DispatchWorkgroups(1, 66752, 1).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "warning: [Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "warning: Dispatch workgroup count Y (66752) exceeds max compute workgroups per dimension (65535).\n - While encoding [ComputePassEncoder (unlabeled)].DispatchWorkgroups(1, 66752, 1).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "warning: [Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "warning: Dispatch workgroup count Y (66752) exceeds max compute workgroups per dimension (65535).\n - While encoding [ComputePassEncoder (unlabeled)].DispatchWorkgroups(1, 66752, 1).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "warning: [Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "warning: Dispatch workgroup count Y (66752) exceeds max compute workgroups per dimension (65535).\n - While encoding [ComputePassEncoder (unlabeled)].DispatchWorkgroups(1, 66752, 1).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "warning: [Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 498.37,
+      "loads": true,
+      "max_abs_diff": 53.221091497689486,
+      "max_rel_diff": 374832.5819477435,
+      "output_match": false,
+      "provenance": "measured",
+      "runs": true
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/TIGER-DnR-LiteRT/resolve/main/tiger_effect_fp16.tflite"
+}

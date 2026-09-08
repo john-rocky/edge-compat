@@ -1,0 +1,68 @@
+{
+  "artifact": "North-Micro-Vision-Instruct_wi8.litertlm",
+  "device": "iphone-17-pro",
+  "model_id": "north-micro-vision-instruct-wi8",
+  "quantization": "int8 dynamic decoder (fp32_fp16 activations) + int8 vision",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-19",
+      "decode_tokens_per_s": 13.64,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 17 Pro",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "device.modelIdentifier=iPhone18,1",
+        "throughput taken from task 'quality' (39 generated tokens, 2026-08-19T16:48:26Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 3 task(s)",
+        "[quality 2026-08-19T16:48:26Z] prefill=243.92240126953922 decode=13.637124168288407 ttft_ms=685.0 peak_mb=2257.986885070801 stop=stop output='1. 13\\\\n2. Tokyo\\\\n3. Cold\\\\n4. 7\\\\n5. Merci\\\\n6. 56\\\\n7.  …[trace truncated]",
+        "[vision-has-text 2026-08-19T16:48:20Z] prefill=361.5979577943534 decode=9.31310240027566 ttft_ms=2256.0 peak_mb=3046.315559387207 stop=stop output='Yes'",
+        "[vision-no-text 2026-08-19T16:48:15Z] prefill=322.43369812147364 decode=5.872954055513365 ttft_ms=5022.0 peak_mb=2938.8329010009766 stop=stop output='No'"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "quality.decode_tokens_per_s": 13.637124,
+        "quality.generated_tokens": 39.0,
+        "quality.load_s": 0.523434,
+        "quality.peak_mem_mb": 2257.986885,
+        "quality.prefill_tokens_per_s": 243.922401,
+        "quality.prompt_tokens": 132.0,
+        "quality.ttft_ms": 685.0,
+        "vision_has_text.decode_tokens_per_s": 9.313102,
+        "vision_has_text.generated_tokens": 2.0,
+        "vision_has_text.load_s": 0.93697,
+        "vision_has_text.peak_mem_mb": 3046.315559,
+        "vision_has_text.prefill_tokens_per_s": 361.597958,
+        "vision_has_text.prompt_tokens": 302.0,
+        "vision_has_text.ttft_ms": 2256.0,
+        "vision_no_text.decode_tokens_per_s": 5.872954,
+        "vision_no_text.generated_tokens": 2.0,
+        "vision_no_text.load_s": 7.515937,
+        "vision_no_text.peak_mem_mb": 2938.832901,
+        "vision_no_text.prefill_tokens_per_s": 322.433698,
+        "vision_no_text.prompt_tokens": 302.0,
+        "vision_no_text.ttft_ms": 5022.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 3046.316,
+      "prefill_tokens_per_s": 243.92,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 685.0
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,61 @@
+{
+  "artifact": "model_qualcomm_SM8850.litertlm (cache_length=1024)",
+  "device": "galaxy-s26",
+  "model_id": "gemma-3-270m-it-npu-sm8850-c1024",
+  "notes": "Runs at full speed and miscomputes. The attention mask is applied to the wrong rows on the HTP: three of the four query heads receive the final, fully-open mask row for every query position, so they are not causal during prefill. Benchmark taken with the handset rested.",
+  "quantization": "a16w8 static-range (export dynamic_wi8_afp32 + Stage 3 SRQ), Stage 4 QNN AOT for SM8850",
+  "results": [
+    {
+      "accelerator": "npu",
+      "context_length": 1024,
+      "date": "2026-08-24",
+      "decode_tokens_per_s": 177.79,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-2978f98",
+        "soc": "SM8850 (hexagon v81)",
+        "vendor_sdk": "QAIRT 2.47.0"
+      },
+      "error": "attention mask applied to the wrong rows: 367/512 correct on the HTP vs 512/512 on the TFLite CPU interpreter",
+      "evidence": [
+        "VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+        "VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 1 (decode).",
+        "VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 2 (prefill_mask_128).",
+        "VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 3 (decode_mask).",
+        "INFO: [litert_dispatch_device_context.cc:248] Creating new QNN context for bytecode (size 282308608)",
+        "BenchmarkInfo: Init Total: 724.89 ms; Prefill Speed: 17396.84 tokens/sec; Decode Speed: 177.79 tokens/sec",
+        "Peak private footprint: 872.414MB",
+        "effective mask (op34 - op32, dequantized): 367/512 rows match the input mask row on the HTP, 512/512 on the CPU interpreter",
+        "45-prompt harness: 12/45 correct; the same statically-quantized graph on the CPU interpreter answers 25/45; fp32 answers 28/45",
+        "runtime: LiteRT-LM built from source at commit 2978f98 (2026-08-19); no release tag"
+      ],
+      "failure_class": "silent-miscompute",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "bench_runs": 5,
+        "benchmark_decode_tokens": 64,
+        "benchmark_prefill_tokens": 128,
+        "harness_correct_of_45": 12,
+        "harness_cpu_interpreter_correct_of_45": 25,
+        "harness_fp32_correct_of_45": 28,
+        "init_s": 0.72489,
+        "mask_rows_correct_of_512": 367
+      },
+      "output_match": false,
+      "peak_mem_mb": 872.41,
+      "prefill_tokens_per_s": 17396.84,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 10.0
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,402 @@
+{
+  "artifacts": [
+    {
+      "file": "Falcon-H1-Tiny-R-0.6B_int8.litertlm",
+      "sha256": "66b9e6a5fa630d453d59516cc362e44fff3943eb7c63d07b116cf9a525a1bb94",
+      "size_mb": 832.801
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "hf-to-litertlm falcon_h1_work/convert_falcon_tinyr.py (private lane: convert_tinyr.py -> repack_tinyr_ext.py = quantize decoder-only wi8f -> litert-lm-builder tflite_model --model_type prefill_decode --prefer_activation_type fp32 + tflite_model --model_type embedder -> add_executor_metadata -> add_thought_channel; FINDINGS 2026-09-01)",
+    "quantization": "post-hoc dynamic int8 on linears (FC only); embedding table externalized to its own CPU-side section and kept float; convs and the selective scan stay float; fp32 activations declared for GPU",
+    "tool": "litert-torch + falcon_h1 hybrid-cache patch (repro = hf-to-litertlm falcon_h1_work/convert_falcon_tinyr.py + falcon_h1_litert_torch.patch)",
+    "tool_version": "TODO (owner) — sources name only: litert-torch (no version) + the falcon_h1 patch regenerated against tree 115a136 + working-tree exts (FINDINGS); litert-lm 0.16.0 for the CLI gates, the Mac bench and the litert-lm-builder repack (FINDINGS 'lt0160run'); no litert-torch / litert-converter / ai-edge-quantizer / litert-lm-builder pins are stated in the card, FINDINGS or manifest"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 23.9,
+          "delegated_ops": 6724,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 5941 out of 6392 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 438 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 5941 out of 6392 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 438 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 5941 out of 6392 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 438 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 5897 out of 6348 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 438 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=123.96 decode=23.9 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 2313.0,
+            "init_s": 4.42364,
+            "prefill_tokens": 215.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 123.96,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 7088,
+          "ttft_ms": 1780.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/falcon-h1-tiny-r-0.6b-int8__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 16.13,
+          "delegated_ops": 6566,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 6392 out of 6392 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 6392 out of 6392 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 6392 out of 6392 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 6348 out of 6348 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=309.77 decode=16.13 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 1382.0,
+            "init_s": 48.27425,
+            "prefill_tokens": 215.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 309.77,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 6566,
+          "ttft_ms": 760.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/falcon-h1-tiny-r-0.6b-int8__galaxy-s26.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 29.38,
+          "delegated_ops": null,
+          "env": {
+            "device": "iPhone 17 Pro",
+            "machine_label": "iphone-17-pro-charging",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "A19-Pro",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "device.modelIdentifier=iPhone18,1",
+            "throughput taken from task 'quality' (262 generated tokens, 2026-09-01T04:25:43Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 1 task file(s)",
+            "[quality 2026-09-01T04:25:43Z] prefill=223.92684854544947 decode=29.37722730989379 ttft_ms=8767.0 peak_mb=819.9566650390625 stop=stop output='\\\\n42  \\\\nJapan  \\\\ncold  \\\\n7  \\\\nbonjour  \\\\n56  \\\\n0.9  …[trace truncated]"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "quality.decode_tokens_per_s": 29.377227,
+            "quality.generated_tokens": 262.0,
+            "quality.load_s": 4.032564,
+            "quality.peak_mem_mb": 819.956665,
+            "quality.prefill_tokens_per_s": 223.926849,
+            "quality.prompt_tokens": 148.0,
+            "quality.ttft_ms": 8767.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 819.957,
+          "prefill_tokens_per_s": 223.93,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 8767.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-01/falcon-h1-tiny-r-0.6b-int8__iphone-17-pro.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 22.84,
+          "delegated_ops": null,
+          "env": {
+            "device": "iPhone 17 Pro",
+            "machine_label": "iphone-17-pro-thermal-serious",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "A19-Pro",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "device.modelIdentifier=iPhone18,1",
+            "throughput taken from task 'quality' (303 generated tokens, 2026-09-01T04:47:33Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 1 task file(s)",
+            "[quality 2026-09-01T04:47:33Z] prefill=259.84278910811435 decode=22.837039299254442 ttft_ms=12883.0 peak_mb=3005.847930908203 stop=stop output='\\\\n42  \\\\nJapan  \\\\ncold  \\\\n7  \\\\nbonjour  \\\\n56  \\\\n0. …[trace truncated]"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "quality.decode_tokens_per_s": 22.837039,
+            "quality.generated_tokens": 303.0,
+            "quality.load_s": 32.453438,
+            "quality.peak_mem_mb": 3005.847931,
+            "quality.prefill_tokens_per_s": 259.842789,
+            "quality.prompt_tokens": 148.0,
+            "quality.ttft_ms": 12883.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 3005.848,
+          "prefill_tokens_per_s": 259.84,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 12883.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-01/falcon-h1-tiny-r-0.6b-int8__iphone-17-pro.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 47.75,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=381.32 decode=47.75 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 381.32,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 692.5
+        },
+        "source": "data/device_runs/0.16.0/2026-09-01/falcon-h1-tiny-r-0.6b-int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 97.76,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "m4max-quiet-300s-gpu-rest",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=2215.8 decode=97.76 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 2215.8,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 125.8
+        },
+        "source": "data/device_runs/0.16.0/2026-09-01/falcon-h1-tiny-r-0.6b-int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 14.02,
+          "delegated_ops": 6724,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 5941 out of 6392 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 438 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 5941 out of 6392 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 438 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 5941 out of 6392 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 438 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 5897 out of 6348 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 438 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=71.16 decode=14.02 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 2313.0,
+            "init_s": 7.0351,
+            "prefill_tokens": 215.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 71.16,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 7088,
+          "ttft_ms": 3090.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/falcon-h1-tiny-r-0.6b-int8__pixel-8a.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 9.98,
+          "delegated_ops": 6566,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 6392 out of 6392 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 6392 out of 6392 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 6392 out of 6392 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 6348 out of 6348 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=108.77 decode=9.98 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 1382.0,
+            "init_s": 59.08395,
+            "prefill_tokens": 215.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 108.77,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 6566,
+          "ttft_ms": 2080.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/falcon-h1-tiny-r-0.6b-int8__pixel-8a.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "falcon-h1",
+    "id": "falcon-h1-tiny-r-0.6b-int8",
+    "license": "other (falcon-llm-license)",
+    "source_url": "https://huggingface.co/litert-community/Falcon-H1-Tiny-R-0.6B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Requires litert-lm >= 0.16 (HF card header; manifest platform_notes).",
+    "Reasoning model that self-emits <think>…</think> with no think prefill in the upstream template: give the session an output budget >= 2048 or set --thinking-budget, because truncated mid-thought it produces no final answer (manifest session_defaults). The thought channel (<think>/</think>) is declared post-hoc in LlmMetadata.channels so the runtime separates reasoning from the answer and --thinking-budget works (verified: budget 16 cuts at exactly 16 tokens on Mac CPU/GPU and iPhone). Reasoning length is prompt-sensitive — on nonsense/filler prompts it can think past any budget without closing, reproduced at bf16 (HF card Correctness, Honest notes, Conversion notes; FINDINGS qa/add_thought_channel.py).",
+    "Embedding table externalized and kept float on purpose: an int8 table — even per-row — measurably destabilizes this checkpoint's reasoning (runaway thinking, a repetition loop to budget, greedy flips) that the FC-only recipe does not show, and a float lm_head does not recover it, so the input embedding is the confirmed cause (FINDINGS quant_ab_tinyr.py). The Mac GPU delegate accepts EMBEDDING_LOOKUP only as int8 (float table = hard CHECK crash, fp16 cast = DEQUANTIZE unsupported, partial delegation refused), so quality and GPU delegation are unsatisfiable in one graph; the embedder runs as its own CPU-side section and the decoder graph stays fully GPU-delegable (HF card; FINDINGS trap 3; manifest platform_notes).",
+    "No start_token in the metadata, on purpose: the template carries the literal <|begin_of_text|> so the bundle reproduces the upstream apply_chat_template token stream byte-for-byte from BOS on. The start_token variant drops the pre-BOS space token and that alone costs a correct answer at this size — bf16 A/B on the two streams 8/8 vs 7/8, 'capital of Japan' flips to Hiroshima (HF card Prompt-stream fidelity; FINDINGS).",
+    "Prefill-pad guard from position monotonicity: the externalized decoder graph carries no token ids, so the family's input_ids != 0 pad guard silently disabled and partially-filled prefill chunks corrupted the conv/SSM state on CPU (17+25 -> 19.5; float export identical, so not quantization; GPU unaffected because its pad values happen to be benign). Pad positions are now identified by non-increasing position ids and made exact identity steps for the SSM (HF card Conversion notes; FINDINGS trap 4, patch regenerated with the fallback).",
+    "Quality gates: GSM8K (100 questions, greedy, 2048-token budget, scored after </think>) int8 76/100 vs bf16 PyTorch 71/100 on the identical prompt stream — 64 both-correct, 7 bf16-only, 12 engine-only, i.e. flips in both directions = quantization noise, not degradation (HF card Correctness; manifest quality). 8-question sanity gate (litert-lm 0.16.0 CLI, 2048 budget): Mac CPU 6/8, Mac GPU 7/8, iPhone 17 Pro CPU 6/8, iPhone Metal 6/8, zero unclosed thinks — every reasoning/logic/math item passes on every backend; the misses are two fact-recall items ('capital of Japan', 'thank you in French') that the bf16 model also flips under one-token prompt perturbations (HF card Correctness; FINDINGS re-gate table). Gate through the released CLI: the litert-mac-verify Aug-13 framework build produces greedy runaway thinking on this bundle that the CLI does not (FINDINGS).",
+    "Multi-turn fact recall is weak at this size: the 3-turn gate's turn-3 'what did I tell you earlier' question fails, and the bf16 model fails it identically — treat it as a single-turn reasoner (HF card Honest notes; manifest session_defaults; FINDINGS multiturn row).",
+    "GPU runs with fp32 activations (declared in the bundle) — expect a corresponding memory multiple over CPU. On iPhone 17 Pro the CPU backend decodes faster than Metal at this size (GPU setup/dispatch overhead dominates a 0.6B model), so the manifest recommends CPU on iOS and GPU on macOS; the GPU row exists for completeness and for devices where the CPU is busy (HF card Honest notes; manifest recommended)."
+  ],
+  "schema_version": "1.2"
+}

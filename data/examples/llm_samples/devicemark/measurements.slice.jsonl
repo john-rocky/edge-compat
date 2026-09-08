@@ -1,0 +1,5 @@
+{"artifact_id": "qwen3.5-0.8b__int8hu__aimodel", "runtime": "coreai", "device": "M4 Max", "decode_tok_s": 210, "peak_mem_mb": 443, "mem_measured": true, "power_w": null}
+{"artifact_id": "lfm2.5-1.2b__int8hu__aimodel", "runtime": "coreai", "device": "M4 Max", "decode_tok_s": 277, "peak_mem_mb": 1600, "mem_measured": false, "power_w": null}
+{"artifact_id": "lfm2.5-1.2b__int8hu__aimodel", "runtime": "coreai", "device": "iPhone 17 Pro", "decode_tok_s": 45.5, "peak_mem_mb": 1600, "mem_measured": false, "power_w": null}
+{"artifact_id": "gemma-4-e2b__int4__litertlm", "runtime": "litertlm", "device": "M4 Max", "decode_tok_s": 106, "peak_mem_mb": 488, "mem_measured": true, "power_w": null}
+{"artifact_id": "gemma-4-e2b__int4__litertlm", "runtime": "litertlm", "device": "iPhone 17 Pro", "decode_tok_s": 57, "peak_mem_mb": 488, "mem_measured": true, "power_w": null}

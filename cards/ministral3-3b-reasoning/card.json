@@ -1,0 +1,139 @@
+{
+  "artifacts": [
+    {
+      "file": "model.litertlm",
+      "sha256": "f7170ef16d28dd4723385dfb1afca666b4f902e93dc89dc5c1a2a36f04e05fba",
+      "size_mb": 2232.098
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "python scripts/extract_text_backbone.py mistralai/Ministral-3-3B-Reasoning-2512 src_models/ministral-3-3b-reasoning-text && EXTERNALIZE_EMBEDDER=1 FORCE_SPM=1 CACHE=4096 python scripts/export_simple_template.py src_models/ministral-3-3b-reasoning-text out/ministral-3-3b-reasoning-ext templates/mistral_simple.jinja BOCTAV4",
+    "quantization": "int4 blockwise-32 symmetric + OCTAV clipping; tied embedding/lm_head int8 (BOCTAV4)",
+    "tool": "litert-torch (via litertlm-convert scripts/export_simple_template.py)",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-12",
+          "decode_tokens_per_s": 94.65,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=1234.34 decode=94.65 tokens/s, init=2.5757 s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 2.5757,
+            "max_num_tokens": 1024.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 1234.34,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 222.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-12/ministral3-3b-reasoning__mac-studio-m4-max.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 1.9,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 191.0 s, output head '[thought] Okay, the question is asking for the sum of 17 and 26. Let me break th'",
+            "invocation 0: exit=0 wall_s=404.3 temp 49.4->53.2C throttled=0x0 prefill_tps=14.04 decode_tps=1.9 ttft_s=21.27 init_s=56.8546 peak_rss_mb=3794",
+            "invocation 1: exit=0 wall_s=402.3 temp 50.5->52.1C throttled=0x0 prefill_tps=14.06 decode_tps=1.91 ttft_s=20.8273 init_s=55.2938 peak_rss_mb=3794",
+            "invocation 2: exit=0 wall_s=402.3 temp 51.0->53.8C throttled=0x0 prefill_tps=13.91 decode_tps=1.9 ttft_s=20.9882 init_s=55.1799 peak_rss_mb=3794"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.91,
+            "decode_tps_min": 1.9,
+            "init_s": 55.2938,
+            "init_s_max": 56.8546,
+            "init_s_min": 55.1799,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 14.06,
+            "prefill_tps_min": 13.91,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 21.27,
+            "ttft_s_min": 20.8273
+          },
+          "output_match": null,
+          "peak_mem_mb": 3794.0,
+          "prefill_tokens_per_s": 14.04,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 20988.2
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/ministral3-3b-reasoning__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "ministral",
+    "id": "ministral3-3b-reasoning",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/mistralai/Ministral-3-3B-Reasoning-2512",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "iOS: a single TFLite weight section over 2 GiB fails to mmap (engine creation error 'Failed to map section') — the tied embedding is externalized (externalize_embedder=True) so every section stays under 2 GiB and the model loads on iPhone.",
+    "Must be exported with the native Mistral [INST] template and real EOS </s>, not ChatML — Mistral's tokenizer has no <|im_end|> token, so a ChatML export never hits a registered stop and runs away after the answer.",
+    "Android GPU needs roughly 2x the model size in RAM (weights plus the ML Drift GPU weight cache); GPU is only offered on ~12 GB+ devices — on an 8 GB phone only CPU is selectable.",
+    "Reasoning model: give it a generous max-tokens budget (GSM8K was scored at max-tokens 2048; scoring at 512 falsely penalises it).",
+    "Text-only conversion: the Pixtral vision tower is dropped before export (strict missing=0 / unexpected=0 weight check)."
+  ],
+  "schema_version": "1.2"
+}

@@ -1,0 +1,7 @@
+gpu_mldrift @ litert 0.0.0-example — 100.0% of 3 ops delegated · 1 partition · 0 blocking ops
+model:  data/examples/model_clean_example.tflite (sha256 e763326d958d…, 1 subgraph(s))
+matrix: data/examples/matrix_example.json (generated 2026-08-10)
+
+Partition map (each sync is a host<->device transfer):
+  subgraph 0:
+    [device #0] nodes 0-2 (3 ops: CONV_2D, AVERAGE_POOL_2D, CONV_2D)

@@ -1,0 +1,226 @@
+{
+  "artifacts": [
+    {
+      "file": "LFM2.5-1.2B-Instruct_int8.litertlm",
+      "sha256": "e002a91545cec6328be2a86e9b8b4fccb2dd9dde7e6c8b29d730f915a0a697fe",
+      "size_mb": 1189.319
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "python convert_lfm25.py LiquidAI/LFM2.5-1.2B-Instruct out_lfm25_12b",
+    "quantization": "int8 dynamic, export-time recipe (linears + convs + embedding)",
+    "tool": "litert-torch",
+    "tool_version": "0.9.1"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 40.96,
+          "delegated_ops": 772,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 471 out of 579 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 109 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 471 out of 579 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 109 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 471 out of 579 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 109 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 471 out of 579 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 109 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=491.11 decode=40.96 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 105.0,
+            "init_s": 1.93164,
+            "prefill_tokens": 205.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 491.11,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 837,
+          "ttft_ms": 440.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/lfm2.5-1.2b-instruct-int8__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-06",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.17.0/bin/litert-lm 0.17.0); fixed-question answer: '17 + 25 = 42'"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.17.0/2026-09-06/lfm2.5-1.2b-instruct-int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 20.4,
+          "delegated_ops": 772,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 471 out of 579 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 109 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 471 out of 579 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 109 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 471 out of 579 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 109 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 471 out of 579 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 109 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=143.38 decode=20.4 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 105.0,
+            "init_s": 7.9068,
+            "prefill_tokens": 205.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 143.38,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 837,
+          "ttft_ms": 1480.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/lfm2.5-1.2b-instruct-int8__pixel-8a.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 7.02,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 15.1 s, output head '43'",
+            "invocation 0: exit=0 wall_s=112.1 temp 51.0->53.8C throttled=0x0 prefill_tps=74.45 decode_tps=7.02 ttft_s=3.581 init_s=30.5554 peak_rss_mb=1894",
+            "invocation 1: exit=0 wall_s=112.1 temp 49.4->53.8C throttled=0x0 prefill_tps=75.73 decode_tps=7.06 ttft_s=3.5221 init_s=30.6025 peak_rss_mb=1895",
+            "invocation 2: exit=0 wall_s=112.1 temp 51.0->54.9C throttled=0x0 prefill_tps=74.95 decode_tps=7.0 ttft_s=3.5582 init_s=30.6072 peak_rss_mb=1895"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 7.06,
+            "decode_tps_min": 7.0,
+            "init_s": 30.6025,
+            "init_s_max": 30.6072,
+            "init_s_min": 30.5554,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 75.73,
+            "prefill_tps_min": 74.45,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 3.581,
+            "ttft_s_min": 3.5221
+          },
+          "output_match": null,
+          "peak_mem_mb": 1895.0,
+          "prefill_tokens_per_s": 74.95,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 3558.2
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/lfm2.5-1.2b-instruct-int8__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "lfm2.5",
+    "id": "lfm2.5-1.2b-instruct-int8",
+    "license": "lfm-open-license-v1.0",
+    "source_url": "https://huggingface.co/litert-community/LFM2.5-1.2B-Instruct",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Export-time int8 is what makes this file work: it is the only path that safely quantizes the conv layers. Post-hoc ALL_SUPPORTED int8 through ai-edge-quantizer kills them outright (no output), so post-hoc recipes must stay on linears and the embedding (wi8fc, wi4b32_wi8) — REPRODUCE.md, LFM2.5 family.",
+    "Conv-int8 sensitivity is per-finetune, not a family property: export-time conv-int8 is free on this Instruct tune (+2 GSM8K) but costs the JP tune 9 points, which is why the published JP int8 file uses a linears-only recipe instead. A/B the two before reusing this command on a new finetune.",
+    "This artifact cannot use a GPU delegate. It is litert-torch 0.9.1 lineage, whose ShortConv patch emits GATHER_ND and INT64 ops that GPU delegates reject; the delegate takes 536 of 579 operations and engine creation then aborts. That count was measured on the int4 sibling (Pixel 8a and Galaxy S26, litert-lm v0.16.0) — the same export lineage, but this specific file has not been separately gated on GPU. The repo ships no int8 GPU variant; the GPU re-export exists only for int4.",
+    "The 0.9.1 exporter needs the ShortConv prefill-pad fix that convert_lfm25.py applies: the stock block saves its conv state from the padded columns of a prefill chunk, corrupting the first generated token of nearly every reply. Without it this int8 file scores 59 on GSM8K instead of 81 — that is the bug, not the quantization.",
+    "litert-lm >= 0.15 needs an ExecutorMetadata section for this hybrid: files exported before that run on 0.14 but fail at inference on 0.15 with 'missing some output TensorBuffers'. The published files were repaired in place on 2026-08-04.",
+    "Decode speed depends strongly on the KV budget: the HF card measures int8 decode at 101 tok/s with --max-num-tokens 1024 and 77 tok/s at 4096 on an M4 Max. Set the smallest budget the use case needs."
+  ],
+  "schema_version": "1.2"
+}

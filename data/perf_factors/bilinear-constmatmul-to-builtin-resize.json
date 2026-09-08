@@ -1,0 +1,31 @@
+{
+ "id": "bilinear-constmatmul-to-builtin-resize",
+ "category": "rewrite",
+ "title": "bilinear x2 as two constant matmuls -> builtin RESIZE_BILINEAR (align_corners=True)",
+ "rewrite": {
+  "from": "upsample as [2n,n] constant-matrix matmuls (the GPU-era rewrite)",
+  "to": "RESIZE_BILINEAR op, align_corners=True",
+  "equivalence": "bit-exact",
+  "equivalence_evidence": "probe outputs max_abs_diff 8.8e-08"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-24",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 2.864,
+  "after_ms": 2.027,
+  "probe": "probe_rbmm vs probe_rb (6-conv stack, 64ch, two 2x upsamples)",
+  "gpu_control": "INVERTED vs the Mali-era guide: on this Adreno/2.2.0 the builtin resize COMPILES AND RUNS (4.8 ms) while the const-matmul form REFUSES (constant-LHS BATCH_MATMUL). The matmul rewrite exists for GPUs that ban this resize \u2014 pin by runtime/device."
+ },
+ "factor": 1.41,
+ "scope": "synthetic probe. On S26/2.2.0 the builtin resize is the right form for BOTH accelerators; older Mali findings said the opposite \u2014 re-verify per runtime.",
+ "notes": "2026-08-28: align_corners=True RESIZE_BILINEAR also compiles and runs on Mali (Pixel 8a, LiteRT 2.2.0, 25.4 ms) - the ban is runtime-era, not vendor-permanent.",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

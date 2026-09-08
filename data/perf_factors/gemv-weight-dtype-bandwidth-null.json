@@ -1,0 +1,31 @@
+{
+ "id": "gemv-weight-dtype-bandwidth-null",
+ "category": "null-result",
+ "title": "decode-GEMV weight storage dtype (fp32/fp16/int8/int4+DEQ): null even bandwidth-bound",
+ "rewrite": {
+  "from": "fp32 weights (537 MB, 8x Linear(4096^2) at T=1)",
+  "to": "fp16 / int8 / int4 + DEQUANTIZE twins (268 / 134 / 67 MB)",
+  "equivalence": "approximation",
+  "equivalence_evidence": "host corr vs fp32: fp16 1.000000, int8 0.999990, int4 0.996698 (executability proof; accuracy incidental to the speed claim)"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-28",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 4.068,
+  "after_ms": 4.082,
+  "probe": "gemv_{fp32,fp16,int8,int4}: 4.068 / 4.058 / 4.068 / 4.082 ms - flat to 0.6% across an 8x file-size range",
+  "gpu_control": "GPU fp32 4.58 ms (same DDR floor); GPU REFUSES the int8/int4 DEQ forms (Failed to compile model)"
+ },
+ "factor": 1.0,
+ "scope": "T=1 weight-streaming regime, 0.27 GF vs 537 MB - the opposite regime from the exp-1 null. Weight-only DEQ quantization buys zero CompiledModel decode latency anywhere; quantize for file size. int4+DEQ does compile and run on the NPU",
+ "notes": "consistent with QNN materializing weights to one internal representation at compile (inference - the measured fact is the 0.6% equality)",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

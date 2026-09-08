@@ -1,0 +1,65 @@
+{
+  "backend": "gpu_metal_mac",
+  "litert_version": "2.1.6",
+  "generated_at": "2026-08-19",
+  "schema_version": "1.0",
+  "entries": [
+    {
+      "op": "ADD",
+      "dtypes": [
+        "float32"
+      ],
+      "status": "incorrect",
+      "provenance": "example",
+      "constraints": {
+        "rank": 2,
+        "operand_b": "constant"
+      },
+      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring the measured row in data/matrix/gpu_metal_mac__2.1.6.json: ADD of a rank-2 activation against a rank-2 constant is silently miscomputed on the Metal accelerator (rel-L2 1.25 vs CPU); the same add at rank 3 is bit-exact (North-Micro-Vision vision encoder, 2026-08-19)",
+      "rewrite_hints": [
+        {
+          "symptom": "vision-GPU answers are image-independent; backend_diff shows rel ~1 from the first block",
+          "rewrite": "keep every activation rank >= 3 with a leading batch dim: RESHAPE both operands to [1,N,C], ADD, RESHAPE back",
+          "expected_effect": "measured: encoder CPU-vs-Metal rel 9.3e-1 -> 1.9e-6",
+          "transform_id": "rank2-elementwise-const-to-rank3"
+        }
+      ],
+      "evidence": {
+        "source_model": "fixture mirror of gpu_metal_mac__2.1.6 ADD row",
+        "litert_version": "2.1.6",
+        "date": "2026-08-19"
+      }
+    },
+    {
+      "op": "ADD",
+      "dtypes": [
+        "float32"
+      ],
+      "status": "delegated",
+      "provenance": "example",
+      "constraints": {
+        "min_rank": 3
+      },
+      "conditions": "SYNTHETIC FIXTURE ENTRY: the rank>=3 form of the same ADD is bit-exact on the Metal accelerator (measured alongside the row above)",
+      "evidence": {
+        "source_model": "fixture mirror of gpu_metal_mac__2.1.6 ADD row",
+        "litert_version": "2.1.6",
+        "date": "2026-08-19"
+      }
+    },
+    {
+      "op": "RESHAPE",
+      "dtypes": [
+        "float32"
+      ],
+      "status": "delegated",
+      "provenance": "example",
+      "conditions": "SYNTHETIC FIXTURE ENTRY: RESHAPE with a constant rank-1 shape input delegates on the Metal accelerator (the rewritten North-Micro-Vision encoder carries 353 of them fully delegated, backend_diff fully_accelerated=1)",
+      "evidence": {
+        "source_model": "fixture mirror; North-Micro-Vision vision encoder after the rank>=3 rewrite",
+        "litert_version": "2.1.6",
+        "date": "2026-08-19"
+      }
+    }
+  ]
+}

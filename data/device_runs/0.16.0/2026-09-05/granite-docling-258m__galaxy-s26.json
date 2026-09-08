@@ -1,0 +1,88 @@
+{
+  "artifact": "granite-docling-258M.litertlm",
+  "artifact_sha256": "11a14f547dda752d35c222b2a781d277fa499d94d14a3b575f719bb16391e113",
+  "device": "galaxy-s26",
+  "model_id": "granite-docling-258m",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-05",
+      "decode_tokens_per_s": 33.49,
+      "delegated_ops": 1826,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cold-cache-cooled",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 1413 out of 1538 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 177 partitions for subgraph 0 (prefill_128).",
+        "VERBOSE: Replacing 1413 out of 1538 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 177 partitions for subgraph 1 (prefill_512).",
+        "VERBOSE: Replacing 1413 out of 1538 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 177 partitions for subgraph 2 (prefill_1024).",
+        "VERBOSE: Replacing 1297 out of 1423 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 182 partitions for subgraph 3 (decode).",
+        "results block: prefill=313.36 decode=33.49 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 3892.0,
+        "init_s": 1.8428,
+        "prefill_tokens": 204.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 313.36,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 1892,
+      "ttft_ms": 680.0
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-09-05",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 1538,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cold-cache-cooled",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "exit 2 during the gpu generation gate; log tail: local_attention_mask_policy: Not set | sliding_window_size: Not set | advanced_settings: Not set",
+      "evidence": [
+        "VERBOSE: Replacing 1538 out of 1538 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+        "community_accel_work/s7_manifest_backfill/logs/granite-docling-258M__granite-docling-258M.gate.log: generation gate verdict FAIL (journal rows.jsonl, fail_class=run_error, exit=2, generated=True, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+        "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
+        "gate process peak 706 MB (journal gate_peak_mb)"
+      ],
+      "failure_class": "run_error",
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": 1538,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

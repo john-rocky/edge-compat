@@ -1,0 +1,30 @@
+{
+ "id": "seq-1500-to-1536",
+ "category": "shape",
+ "title": "sequence 1500 -> 1536 (pad to 12*128)",
+ "rewrite": {
+  "from": "T=1500 (whisper encoder length)",
+  "to": "T=1536",
+  "equivalence": "not-equivalent",
+  "equivalence_evidence": "applying to a real encoder needs pos_embed extension + attention masking (or accepting unmasked zero-pad drift) \u2014 accuracy must be re-checked per model"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-24",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 36.302,
+  "after_ms": 14.292,
+  "probe": "probe_t1500 vs probe_t1536 (t1536 carries MORE compute and is still 2.5x faster; 2.84 GF/ms is the best rate in the whole probe grid)"
+ },
+ "factor": 2.54,
+ "scope": "synthetic probe. Real-whisper projection: 37.6 ms -> ~15-16 ms, which would flip its 0.71x loss into a ~1.7x win. Unbuilt; candidate.",
+ "notes": "2026-08-28: realized on the real whisper-tiny encoder, bit-exact: 35.8 -> 17.9 ms (see whisper-encoder-pad-1536).",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

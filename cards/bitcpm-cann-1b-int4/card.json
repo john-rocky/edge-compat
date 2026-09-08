@@ -1,0 +1,122 @@
+{
+  "artifacts": [
+    {
+      "file": "bitcpm-cann-1b_wi4b32_wi8.litertlm",
+      "sha256": "3d1d4a8c6f68a5dea91637b4400fb9cd90c6d992d2d6c60b64f36e3adfe7bf7e",
+      "size_mb": 1001.868
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "zsh bitcpm_work/convert_bitcpm.sh",
+    "quantization": "int4 blockwise-32 symmetric min-max linears + int8 channelwise embedding/lm_head (wi4b32_wi8, algo minmax)",
+    "tool": "litert-torch (via litertlm-convert bitcpm_work/convert_bitcpm.sh — export_static_longrope.py + quantize_minicpm5.py + litert-lm-builder)",
+    "tool_version": "0.9.1 (lane venv ~/venvs/minicpm5 per SESSION_STATE.md 2026-07-21)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-12",
+          "decode_tokens_per_s": 188.85,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=2946.29 decode=188.85 tokens/s, init=1.4622 s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 1.4622,
+            "max_num_tokens": 1024.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 2946.29,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 92.2
+        },
+        "source": "data/device_runs/0.16.0/2026-08-12/bitcpm-cann-1b-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-07-23",
+          "decode_tokens_per_s": 7.84,
+          "delegated_ops": null,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-gallery",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "gallery-1.0.15",
+            "soc": "Google Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "hand-recorded device phase: litertlm-convert reports/gpu_audit/MATRIX.md 実機フェーズ table (committed 0559ad3, 2026-07-23; Gallery 1.0.15 official Benchmark, ML Drift GPU, p256/d256 x3 runs; runtime version axis = the Gallery app version — the embedded litert-lm version is not recorded)",
+            "row: '✅ 合格 | 136.6 / 7.84 (TTFT 2.0s, 初回 init 48.8s)' — model-specific slowness on real ML Drift"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "benchmark_runs": 3.0,
+            "init_first_s": 48.8
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 136.6,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 2000.0
+        },
+        "source": "data/device_runs/gallery-1.0.15/2026-07-23/bitcpm-cann-1b-int4__pixel-8a.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "bitcpm",
+    "id": "bitcpm-cann-1b-int4",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/openbmb/BitCPM-CANN-1B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "int4-b32 min-max is a lossless container for BitCPM's ternary QAT weights: per 128-input-channel group the values are {-a, 0, +a} and map onto {-7, 0, +7} with zero rounding decisions (only fp16 per-block-scale rounding, <=4.04e-4 relative). OCTAV is unnecessary here and could deviate (REPORT.md core finding, verified on the checkpoint by verify_ternary.py).",
+    "Do not generalize this recipe: the same data-free wi4b32_wi8 minmax on the non-ternary MiniCPM5-1B (same family) loses 13 GSM8K points (48 vs 61) — the ternary structure is what makes data-free int4 lossless (REPORT.md results).",
+    "Tokenizer trap (MiniCPM4 family): the raw SentencePiece model lacks <|im_end|> (id 73440), so generation never hits a registered stop — the bundle must carry an SP model extended with the HF added tokens (fix_sp_added_tokens.py, +8 USER_DEFINED pieces -> 73448; convert_bitcpm.sh step 5).",
+    "The 1B HF repo ships no added_tokens.json (synthesized from tokenizer_config), and longrope must be made static for torch.export: long==short factors with factor 1, so stripping @dynamic_rope_update is exact (prep_bitcpm_as_llama.py + export_static_longrope.py docstring).",
+    "Mac GPU bench numbers for this file swing with thermal/system load (alternating runs 1015/59.9 -> 2016/105.5 tok/s): only matched back-to-back pairs or median-of-N are comparable; never compare against a bench recorded on another day (REPORT.md results)."
+  ],
+  "schema_version": "1.2"
+}

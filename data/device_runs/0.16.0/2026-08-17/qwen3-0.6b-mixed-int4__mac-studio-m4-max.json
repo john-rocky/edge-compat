@@ -1,0 +1,58 @@
+{
+  "artifact": "qwen3_0_6b_mixed_int4.litertlm",
+  "device": "mac-studio-m4-max",
+  "model_id": "qwen3-0.6b-mixed-int4",
+  "quantization": "INT4 (mixed, blockwise gs32)",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 672,
+      "date": "2026-08-17",
+      "decode_tokens_per_s": 309.88,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "os_build": "iOS Version 27.0 (Build 26A5406e)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "device.modelIdentifier=Mac16,9",
+        "throughput taken from task 'short-chat' (128 generated tokens, 2026-08-17T09:00:08Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 4 task file(s)",
+        "'short-chat': 4 runs of one task — throughput = median of 3 warm run(s); cold decode kept in metrics (1 cold run(s))",
+        "[short-chat 2026-08-17T09:00:03Z] prefill=146.13002111520353 decode=311.293126276529 ttft_ms=194.0 peak_mb=800.5953063964844 stop=length output=\"<think>\\\\nOkay, the user wants an explanation of on-dev …[trace truncated]",
+        "[short-chat 2026-08-17T09:00:05Z] prefill=566.9898508816692 decode=311.9349392452148 ttft_ms=59.0 peak_mb=801.2671813964844 stop=length output=\"<think>\\\\nOkay, the user wants an explanation of on-devi …[trace truncated]",
+        "[short-chat 2026-08-17T09:00:06Z] prefill=567.168069708132 decode=308.05299670786025 ttft_ms=59.0 peak_mb=795.3453063964844 stop=length output=\"<think>\\\\nOkay, the user wants an explanation of on-devi …[trace truncated]",
+        "[short-chat 2026-08-17T09:00:08Z] prefill=566.8258162405119 decode=309.87853361619676 ttft_ms=59.0 peak_mb=799.3765563964844 stop=length output=\"<think>\\\\nOkay, the user wants an explanation of on-dev …[trace truncated]"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "short_chat.cold_decode_tokens_per_s": 311.293126,
+        "short_chat.decode_spread_pct": 1.25,
+        "short_chat.decode_tokens_per_s": 309.878534,
+        "short_chat.generated_tokens": 128.0,
+        "short_chat.n_runs": 4.0,
+        "short_chat.peak_mem_mb": 801.267181,
+        "short_chat.prefill_tokens_per_s": 566.989851,
+        "short_chat.prompt_tokens": 20.0,
+        "short_chat.ttft_ms": 59.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 801.267,
+      "prefill_tokens_per_s": 566.99,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 59.0
+    }
+  ],
+  "schema_version": "1.0"
+}

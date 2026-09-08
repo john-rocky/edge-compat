@@ -1,0 +1,91 @@
+{
+  "artifact": "w2v2_head_fp16.tflite",
+  "device": "galaxy-s26",
+  "model_id": "wav2vec2-keyword-spotting__w2v2_head_fp16",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-08-26",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+        "mode=jit thermal=NONE->NONE headroom=0.62333333->0.62333333 attempt=0"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 9.197,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "iterations": 50,
+        "latency_max_ms": 9.269,
+        "latency_min_ms": 8.892,
+        "load_ms": 1265.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "npu_qnn",
+      "context_length": null,
+      "date": "2026-08-26",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": "QAIRT (Hexagon, JIT on-device)"
+      },
+      "error": null,
+      "evidence": [
+        "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+        "mode=jit thermal=NONE->NONE headroom=0.6066667->0.62333333 attempt=0"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 5.668,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "iterations": 50,
+        "jit_first_load_ms": 7462.6,
+        "latency_max_ms": 5.757,
+        "latency_min_ms": 5.61,
+        "load_ms": 179.2,
+        "qnn_partition_lines": 57
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

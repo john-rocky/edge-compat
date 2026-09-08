@@ -1,0 +1,69 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x32x1024:float32;32:int32;1x1x32x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32",
+  "license": "apache-2.0",
+  "model_id": "qwen3-tts-12hz-0.6b-base__talker_int4",
+  "notes": "multi-signature model (336 subgraphs); harness runs subgraph 0; browser sweep excluded: OOMs the sweep runner alone at a 12 GB Node heap despite being 0.26 GB (2026-08-13); same failure as the fp32 sibling — so it is the talker graph rather than the artifact size",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-08-31",
+      "delegation_evidence": [],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": false,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "6.17.0-1022-azure",
+        "webgpu_adapter": null
+      },
+      "error": "init timed out after 60000ms",
+      "failure_class": "timeout",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-08-31",
+      "delegation_evidence": [],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": false,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "6.17.0-1022-azure",
+        "webgpu_adapter": null
+      },
+      "error": "init timed out after 60000ms",
+      "failure_class": "timeout",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/Qwen3-TTS-12Hz-0.6B-Base/resolve/main/talker_int4.tflite"
+}

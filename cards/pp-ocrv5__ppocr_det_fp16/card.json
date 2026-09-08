@@ -1,0 +1,233 @@
+{
+  "artifacts": [
+    {
+      "file": "d4e2f90e59e429080970fdc515e2910f69888a6000a6f35e6c18cfa3677cb24f.tflite",
+      "sha256": "b635b1d7f0e171a19beda7e8f386a62d4f0a3a1c46ed42a09603a902f2059ccc",
+      "size_mb": 9.627
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 916.36,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 12.325,
+        "loads": true,
+        "max_rel_diff": 2.253396026253472e-05,
+        "output_match": true,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-11/pp-ocrv5__ppocr_det_fp16.json"
+  },
+  "conversion": {
+    "command": "python ppocr/scripts/build_det.py",
+    "quantization": "fp16",
+    "tool": "litert-torch (weights via the PaddleOCR2Pytorch port)",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-08-25",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.8066667->0.8066667 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 17.59,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "latency_max_ms": 17.922,
+            "latency_min_ms": 16.73,
+            "load_ms": 1277.5
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-25/pp-ocrv5__ppocr_det_fp16__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-08-25",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT (Hexagon, JIT on-device)"
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.81->0.8066667 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 8.634,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "jit_first_load_ms": 28006.4,
+            "latency_max_ms": 8.81,
+            "latency_min_ms": 8.528,
+            "load_ms": 139.0,
+            "qnn_partition_lines": 57
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-25/pp-ocrv5__ppocr_det_fp16__galaxy-s26.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert",
+            "runtime_version": "2.2.0.dev20260804",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+            "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "invocation 0: exit=0 wall_s=27.9 temp 51.6->59.3C throttled=0x0 xnnpack=True median_us=461114.0 runs=50 footprint_peak_mb=203.56",
+            "invocation 1: exit=0 wall_s=27.8 temp 49.4->60.4C throttled=0x0 xnnpack=True median_us=459665.0 runs=50 footprint_peak_mb=205.59",
+            "invocation 2: exit=0 wall_s=27.8 temp 49.4->58.7C throttled=0x0 xnnpack=True median_us=460168.0 runs=50 footprint_peak_mb=205.44"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 460.168,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_ms": 27.131,
+            "invocations": 3,
+            "iterations": 150,
+            "latency_max_ms": 492.365,
+            "latency_min_ms": 458.224,
+            "threads": 4,
+            "warmup_runs_per_invocation": 10
+          },
+          "output_match": null,
+          "peak_mem_mb": 205.59,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0.dev20260804/2026-08-31/pp-ocrv5__ppocr_det_fp16__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "pp-ocrv5",
+    "id": "pp-ocrv5__ppocr_det_fp16",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/PP-OCRv5-LiteRT",
+    "task": "text-detection"
+  },
+  "pitfalls": [
+    "DB box postprocess runs on CPU between detection and recognition (zoo README L1566)."
+  ],
+  "schema_version": "1.2"
+}

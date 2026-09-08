@@ -1,0 +1,40 @@
+{
+  "model_id": "example-tiny-clean",
+  "results": [
+    {
+      "backend": "gpu_mldrift",
+      "date": "2026-08-10",
+      "device": "Example Device",
+      "harness": "example-harness",
+      "harness_version": "0.0.0-example",
+      "latency_p50_ms": 1.2,
+      "metrics": {
+        "decode_ms": 0.7,
+        "encode_ms": 0.5,
+        "rtf": 0.01
+      },
+      "peak_mem_mb": 12.5,
+      "precision": "f32",
+      "provenance": "example",
+      "runs": 10,
+      "soc": "Example SoC",
+      "statistic": "median",
+      "tokens_per_s": null
+    },
+    {
+      "backend": "cpu_xnnpack",
+      "date": "2026-08-10",
+      "device": "Example Device",
+      "harness": "example-harness",
+      "harness_version": "0.0.0-example",
+      "latency_p50_ms": 4.8,
+      "peak_mem_mb": 9.0,
+      "precision": "f32",
+      "provenance": "example",
+      "runs": 10,
+      "soc": "Example SoC",
+      "statistic": "median"
+    }
+  ],
+  "schema_version": "1.0"
+}

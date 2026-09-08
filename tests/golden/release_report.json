@@ -1,0 +1,308 @@
+{
+  "backends": [
+    {
+      "backend": "gpu_mldrift",
+      "counts": {
+        "conflict": 1,
+        "created": 2,
+        "runner_error": 1,
+        "unknown_result": 1,
+        "unprobeable": 2,
+        "upgraded": 2
+      },
+      "diff": {
+        "backend": "gpu_mldrift",
+        "entries_added": [
+          {
+            "constraints": {
+              "dynamic_shape": false,
+              "rank": 2
+            },
+            "dtypes": [
+              "float32"
+            ],
+            "op": "RESHAPE",
+            "status": "delegated"
+          },
+          {
+            "constraints": {
+              "dynamic_shape": false,
+              "rank": 2
+            },
+            "dtypes": [
+              "float32"
+            ],
+            "op": "SOFTMAX",
+            "status": "incorrect"
+          }
+        ],
+        "entries_removed": [],
+        "has_changes": true,
+        "new": {
+          "generated_at": "2026-08-10",
+          "litert_version": "1.3.0"
+        },
+        "old": {
+          "generated_at": "2026-08-01",
+          "litert_version": "1.2.0"
+        },
+        "ops_added": [
+          "RESHAPE"
+        ],
+        "ops_removed": [],
+        "provenance_transitions": [
+          {
+            "constraints": {},
+            "dtypes": [
+              "float32"
+            ],
+            "from": "measured",
+            "op": "SQRT",
+            "to": "inferred"
+          }
+        ],
+        "status_transitions": [
+          {
+            "constraints": {},
+            "dtypes": [
+              "float16"
+            ],
+            "from": "delegated",
+            "op": "SOFTMAX",
+            "to": "incorrect"
+          }
+        ]
+      },
+      "new": {
+        "generated_at": "2026-08-10",
+        "litert_version": "1.3.0"
+      },
+      "old": {
+        "generated_at": "2026-08-01",
+        "litert_version": "1.2.0"
+      },
+      "probes": [
+        {
+          "constraints": {},
+          "disposition": "runner_error",
+          "dtypes": [
+            "float32"
+          ],
+          "fixture": "ABS__float32__c383a423",
+          "kind": "entry",
+          "max_abs_diff": null,
+          "note": "device fell off the desk",
+          "op": "ABS",
+          "shape_meta": {
+            "dynamic_shape": false,
+            "rank": 4
+          },
+          "status": null
+        },
+        {
+          "constraints": {},
+          "disposition": "unprobeable",
+          "dtypes": [
+            "float32"
+          ],
+          "fixture": null,
+          "kind": "entry",
+          "max_abs_diff": null,
+          "note": "no probe template for op LSTM",
+          "op": "LSTM",
+          "shape_meta": {
+            "dynamic_shape": false,
+            "rank": 4
+          },
+          "status": null
+        },
+        {
+          "constraints": {
+            "keep_dims": true
+          },
+          "disposition": "unprobeable",
+          "dtypes": [
+            "float32"
+          ],
+          "fixture": null,
+          "kind": "entry",
+          "max_abs_diff": null,
+          "note": "constraint 'keep_dims' cannot be realized by the probe generator",
+          "op": "MEAN",
+          "shape_meta": null,
+          "status": null
+        },
+        {
+          "constraints": {},
+          "disposition": "upgraded",
+          "dtypes": [
+            "float32"
+          ],
+          "fixture": "NEG__float32__c383a423",
+          "kind": "entry",
+          "max_abs_diff": 0.0,
+          "note": null,
+          "op": "NEG",
+          "shape_meta": {
+            "dynamic_shape": false,
+            "rank": 4
+          },
+          "status": "delegated"
+        },
+        {
+          "constraints": {
+            "dynamic_shape": false,
+            "rank": 2
+          },
+          "disposition": "created",
+          "dtypes": [
+            "float32"
+          ],
+          "fixture": "RESHAPE__float32__eb9e96e4",
+          "kind": "signature",
+          "max_abs_diff": 0.0,
+          "note": null,
+          "op": "RESHAPE",
+          "shape_meta": {
+            "dynamic_shape": false,
+            "rank": 2
+          },
+          "status": "delegated"
+        },
+        {
+          "constraints": {},
+          "disposition": "upgraded",
+          "dtypes": [
+            "float16"
+          ],
+          "fixture": "SOFTMAX__float16__c383a423",
+          "kind": "entry",
+          "max_abs_diff": 0.34,
+          "note": null,
+          "op": "SOFTMAX",
+          "shape_meta": {
+            "dynamic_shape": false,
+            "rank": 4
+          },
+          "status": "incorrect"
+        },
+        {
+          "constraints": {
+            "dynamic_shape": false,
+            "rank": 2
+          },
+          "disposition": "created",
+          "dtypes": [
+            "float32"
+          ],
+          "fixture": "SOFTMAX__float32__eb9e96e4",
+          "kind": "signature",
+          "max_abs_diff": 0.34,
+          "note": null,
+          "op": "SOFTMAX",
+          "shape_meta": {
+            "dynamic_shape": false,
+            "rank": 2
+          },
+          "status": "incorrect"
+        },
+        {
+          "constraints": {},
+          "disposition": "conflict",
+          "dtypes": [
+            "float32"
+          ],
+          "fixture": "SQRT__float32__c383a423",
+          "kind": "entry",
+          "max_abs_diff": 0.0,
+          "note": "probe measured 'delegated' but the entry's 'fallback' comes from a full-model measurement (example-model-x); kept inferred — re-measure at full-model scale to resolve",
+          "op": "SQRT",
+          "shape_meta": {
+            "dynamic_shape": false,
+            "rank": 4
+          },
+          "status": "delegated"
+        },
+        {
+          "constraints": {},
+          "disposition": "unknown_result",
+          "dtypes": [
+            "float32"
+          ],
+          "fixture": "TANH__float32__c383a423",
+          "kind": "entry",
+          "max_abs_diff": null,
+          "note": null,
+          "op": "TANH",
+          "shape_meta": {
+            "dynamic_shape": false,
+            "rank": 4
+          },
+          "status": "unknown"
+        }
+      ],
+      "remaining_inferred": 5,
+      "runner": "fake",
+      "runner_reason": null,
+      "snapshot": {
+        "new": "gpu_mldrift__1.3.0.json",
+        "old": "gpu_mldrift__1.2.0.json"
+      }
+    }
+  ],
+  "generated_at": "2026-08-10",
+  "has_changes": true,
+  "models": {
+    "affected": [
+      {
+        "backends": [
+          {
+            "backend": "gpu_mldrift",
+            "changed_ops": [
+              {
+                "from": "delegated",
+                "node_index": 3,
+                "op": "SOFTMAX",
+                "subgraph": 0,
+                "to": "incorrect"
+              }
+            ],
+            "new": {
+              "claimed_ops": 2,
+              "coverage_ops_pct": 40.0,
+              "partition_count": 1,
+              "total_ops": 5
+            },
+            "old": {
+              "claimed_ops": 2,
+              "coverage_ops_pct": 40.0,
+              "partition_count": 1,
+              "total_ops": 5
+            }
+          }
+        ],
+        "model": "model_mixed_example.tflite"
+      }
+    ],
+    "errors": [
+      {
+        "error": "FileNotFoundError: No such file or directory",
+        "model": "model_missing_example.tflite"
+      }
+    ],
+    "manifest": "cards_manifest_example.csv"
+  },
+  "needs_probe_unmatched_backends": [],
+  "runners": [
+    {
+      "available": true,
+      "name": "fake",
+      "reason": null
+    }
+  ],
+  "to_litert_version": "1.3.0",
+  "tolerance": {
+    "absolute": 1e-05,
+    "relative": 0.001
+  }
+}

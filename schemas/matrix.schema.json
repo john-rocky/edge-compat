@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "matrix.schema.json",
+  "title": "LiteRT delegate compatibility matrix snapshot",
+  "description": "One snapshot file per (backend x litert_version). Never merge backends or runtime versions into one file. Every verdict derived from this file must carry the file's backend and litert_version. Known native backend ID candidates (final registry pending owner confirmation): gpu_mldrift (Android ML Drift / OpenCL), webgpu_mac (Mac/desktop WebGPU), metal_mldrift (iOS Metal), cpu_xnnpack, gpu_v3dv (Pi 5). REGISTERED browser backend IDs (schema 1.1, Phase 6): wasm_xnnpack (LiteRT.js WASM CPU/XNNPACK), webgpu_mldrift (LiteRT.js WebGPU / ML Drift), webnn (LiteRT.js WebNN, experimental) — for browser backends the version axis carried in litert_version is the @litertjs/core version. Registration adds NO entries: op-level web entries are never derived from model-level sweep results (the trap rule); browser snapshots stay empty — and the linter honestly reports `unknown` — until a runtime log names a specific op, captured as evidence. Schema 1.2 (Phase 10, additive): rewrite_hints entries may carry a transform_id linking the prose hint to an executable edge-fix transform rule (transform_rule.schema.json). REGISTERED NPU backend IDs (schema 1.3, Phase 13 — candidates pending owner confirmation of the device fleet): npu_qnn (Qualcomm Hexagon via QNN), npu_neuropilot (MediaTek NeuroPilot). The same registration discipline as Phase 6: zero entries added — op-level NPU entries require a runtime log naming the specific op (captured as evidence) or an npu_adb probe result; the trap rule applies to device-run results in both lanes. NPU behavior varies per SoC and vendor SDK, so `target` (device, soc, driver — driver carries the vendor SDK version) is MANDATORY on NPU snapshots, enforced by semantic lint in `matrix validate`.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "litert_version", "backend", "generated_at", "entries"],
+  "properties": {
+    "schema_version": {
+      "enum": ["1.0", "1.1", "1.2", "1.3"],
+      "description": "1.1 (Phase 6, additive): browser backend IDs registered in the top-level description; no structural change. 1.2 (Phase 10, additive): optional rewrite_hints[].transform_id. 1.3 (Phase 13, additive): NPU backend IDs registered in the top-level description; mandatory `target` on NPU snapshots via semantic lint; no structural change. Older documents remain valid."
+    },
+    "litert_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The LiteRT runtime version this snapshot describes. Delegate op support changes across versions; snapshots are carried forward explicitly, never edited in place. For browser backends (wasm_xnnpack, webgpu_mldrift, webnn) this is the @litertjs/core version — the same version-axis rule, web edition."
+    },
+    "backend": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Delegate/backend ID this snapshot describes. Kept as a pattern-constrained string in schema 1.0; the ID registry is documented in this schema's top-level description until the owner confirms the final set."
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "device": { "type": "string" },
+        "soc": { "type": "string" },
+        "driver": { "type": "string" }
+      }
+    },
+    "generated_at": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["op", "status", "provenance"],
+      "properties": {
+        "op": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]*$",
+          "description": "Exact TFLite builtin operator name (e.g. FULLY_CONNECTED, GATHER_ND, TRANSPOSE_CONV). No aliases, no prettified names."
+        },
+        "dtypes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "float32", "float16", "bfloat16",
+              "int64", "int32", "int16", "int8", "int4",
+              "uint64", "uint32", "uint16", "uint8",
+              "bool", "string", "complex64"
+            ]
+          },
+          "description": "Tensor dtypes this entry covers. Absent or empty means the entry is op-generic (matches any dtype at lower lookup precedence)."
+        },
+        "constraints": {
+          "type": "object",
+          "additionalProperties": { "type": ["string", "number", "boolean"] },
+          "description": "Shape/attribute constraints under which this entry applies. Keys max_rank/min_rank compare numerically against shape_meta rank at lookup; other keys match by equality."
+        },
+        "status": {
+          "enum": ["delegated", "partial", "fallback", "incorrect", "crash", "unknown"],
+          "description": "incorrect = the delegate compiles and executes the op but produces numerics outside tolerance vs the CPU reference."
+        },
+        "conditions": {
+          "type": "string"
+        },
+        "rewrite_hints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["symptom", "rewrite"],
+            "properties": {
+              "symptom": { "type": "string" },
+              "rewrite": { "type": "string" },
+              "expected_effect": { "type": "string" },
+              "transform_id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9-]*$",
+                "description": "Optional (schema 1.2) link from this prose hint to the executable edge-fix transform rule with the same id (transform_rule.schema.json)."
+              }
+            }
+          }
+        },
+        "provenance": {
+          "enum": ["measured", "vendor_doc", "inferred", "example"],
+          "description": "measured entries additionally require evidence.source_model, evidence.litert_version, and evidence.date (enforced by semantic lint in `matrix validate`)."
+        },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "source_model": { "type": "string" },
+            "litert_version": { "type": "string" },
+            "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+            "derived_from": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["litert_version", "date"],
+              "description": "Present when this entry was carried forward from an earlier snapshot without re-measurement; pins the source snapshot's litert_version and generated_at.",
+              "properties": {
+                "litert_version": { "type": "string" },
+                "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+# Human-authored card fields for the example-web-b browser-sweep fixture.
+# The model is a synthetic web-runnable graph (ABS -> SQRT -> TANH) built by
+# `python -m litert_compat.parser.fixtures` — a pipeline fixture, not a real model.
+model:
+  id: example-web-b
+  family: example-family
+  task: example-elementwise
+  source_url: https://example.invalid/models/example-web-b
+  license: apache-2.0
+conversion:
+  tool: litert_compat.parser.fixtures
+  tool_version: 0.1.0
+  command: python -m litert_compat.parser.fixtures
+  quantization: none
+pitfalls:
+  - Example card for the browser-sweep pipeline — synthetic fixture, not a real model.

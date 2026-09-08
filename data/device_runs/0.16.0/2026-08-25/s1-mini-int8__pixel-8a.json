@@ -1,0 +1,93 @@
+{
+  "artifact": "S1-mini_int8.litertlm",
+  "device": "pixel-8a",
+  "model_id": "s1-mini-int8",
+  "quantization": "int8 dynamic_wi8_afp32",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-08-25",
+      "decode_tokens_per_s": 5.77,
+      "delegated_ops": 1897,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-kit016",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 1127 out of 1301 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 223 partitions for subgraph 0 (prefill_1024).",
+        "VERBOSE: Replacing 1127 out of 1301 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 223 partitions for subgraph 1 (prefill_512).",
+        "VERBOSE: Replacing 1127 out of 1301 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 223 partitions for subgraph 2 (prefill_256).",
+        "VERBOSE: Replacing 1127 out of 1301 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 223 partitions for subgraph 3 (prefill_128).",
+        "results block: prefill=40.4 decode=5.77 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 195.0,
+        "init_s": 1.36363,
+        "prefill_tokens": 254.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 40.4,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 1961,
+      "ttft_ms": 6460.0
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-25",
+      "decode_tokens_per_s": 12.28,
+      "delegated_ops": 1301,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-cl-kit016",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 1301 out of 1301 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+        "VERBOSE: Replacing 1301 out of 1301 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+        "VERBOSE: Replacing 1301 out of 1301 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+        "VERBOSE: Replacing 1301 out of 1301 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+        "results block: prefill=434.01 decode=12.28 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 195.0,
+        "init_s": 29.68943,
+        "prefill_tokens": 254.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 434.01,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 1301,
+      "ttft_ms": 670.0
+    }
+  ],
+  "schema_version": "1.0"
+}

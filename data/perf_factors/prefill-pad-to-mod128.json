@@ -1,0 +1,31 @@
+{
+ "id": "prefill-pad-to-mod128",
+ "category": "shape",
+ "title": "LLM prefill: pad T to a multiple of 128 (decoder-scale, 4-5x)",
+ "rewrite": {
+  "from": "prefill length T not on a 128 boundary (e.g. 1535, 1500, 1409)",
+  "to": "T padded up to the next multiple of 128 (with causal mask + pos handling)",
+  "equivalence": "not-equivalent",
+  "equivalence_evidence": "needs attention masking + positional handling per model; the whisper row shows a bit-exact construction"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-28",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 116.109,
+  "after_ms": 22.944,
+  "probe": "probe_pf1535 vs pf1536 (RMSNorm+GQA16/4+RoPE+causal+SwiGLU, d=1024, L=2). Full grid: 1151/52/53=55.5/13.7/73.3; 1279/80/81=75.6/16.1/86.7; 1407/08/09=98.3/19.3/102.5; 1500=121.4; 1535/36=116.1/22.9; 1664=23.9",
+  "gpu_control": "flat: 51.2 ms @1500 vs 59.4 @1536 (tracks compute) - accelerator winner flips by length alone"
+ },
+ "factor": 5.06,
+ "scope": "synthetic decoder block at d=1024; encoder-scale probes (exp 2) showed the same shape rule at +31%..2.5x - the penalty GROWS with model width",
+ "notes": "one token past a 128 boundary costs 4.0-5.3x; JIT compile time tracks the same rule 10-70x (10-40 s aligned vs 2-13 min awkward)",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

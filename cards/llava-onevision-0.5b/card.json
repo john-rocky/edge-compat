@@ -1,0 +1,127 @@
+{
+  "artifacts": [
+    {
+      "file": "LLaVA-OneVision-0.5B.litertlm",
+      "sha256": "7f7cd7ae3d2ae435a1f69651de02a9d51e916be60fdfef5cadc721725310971a",
+      "size_mb": 790.205
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "TODO (not recorded in the HF card)",
+    "quantization": "TODO — the HF card states no quantization recipe; decoder exported with the externalized (tied) embedder (HF card Conversion notes)",
+    "tool": "litert-torch (LiteRT-LM fast_vlm bundle: SigLIP VISION_ENCODER [1,384,384,3]->[1,729,1152] + VISION_ADAPTER [1,729,1152]->[1,730,896] (projector + the learned image_newline token) + single-token EMBEDDER + PREFILL_DECODE) (HF card Conversion notes)",
+    "tool_version": "TODO (the HF card names the converter but not its version; no export log in the sources)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 69.52,
+          "delegated_ops": 1337,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 961 out of 1063 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 141 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 961 out of 1063 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 141 partitions for subgraph 1 (prefill_1024).",
+            "VERBOSE: Replacing 869 out of 972 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 146 partitions for subgraph 2 (decode).",
+            "VERBOSE: Replacing 8 out of 8 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 3 (odml.rms_norm.impl).",
+            "results block: prefill=302.52 decode=69.52 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 69.0,
+            "init_s": 0.86042,
+            "prefill_tokens": 213.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 302.52,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1392,
+          "ttft_ms": 720.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/llava-onevision-0.5b__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 86.45,
+          "delegated_ops": 1063,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1063 out of 1063 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1063 out of 1063 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_1024).",
+            "VERBOSE: Replacing 972 out of 972 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (decode).",
+            "results block: prefill=1376.31 decode=86.45 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 81.0,
+            "init_s": 1.34944,
+            "prefill_tokens": 203.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 1376.31,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1063,
+          "ttft_ms": 160.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/llava-onevision-0.5b__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "llava-onevision",
+    "id": "llava-onevision-0.5b",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/LLaVA-OneVision-0.5B",
+    "task": "image-text-to-text"
+  },
+  "pitfalls": [
+    "Best for single-image VQA — one image per conversation: start a new conversation for a different image; single-image VQA produces coherent, image-grounded answers (CPU-verified) (HF card Quality + limitation).",
+    "The vision encoder bakes OpenAI-CLIP normalization + the NCHW transpose into the graph; the single base-resolution (no-anyres) path is used so the image always maps to a fixed 730 soft tokens (HF card Conversion notes).",
+    "License Apache-2.0 (LLaVA-OneVision + the Qwen2 language component) (HF card License).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/ (Pi 5 / S26 / Pixel 8a / Mac / iPhone as measured)."
+  ],
+  "schema_version": "1.2"
+}

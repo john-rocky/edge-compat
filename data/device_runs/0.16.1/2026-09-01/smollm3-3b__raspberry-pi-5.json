@@ -1,0 +1,64 @@
+{
+  "artifact": "SmolLM3-3B_q4_block32_ekv4096.litertlm",
+  "device": "raspberry-pi-5",
+  "model_id": "smollm3-3b",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-01",
+      "decode_tokens_per_s": 2.46,
+      "delegated_ops": null,
+      "env": {
+        "device": "Raspberry Pi 5 Model B Rev 1.1",
+        "machine_label": "raspberry-pi-5-cooled-52c",
+        "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.1",
+        "soc": "Broadcom BCM2712",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+        "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+        "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+        "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 193.1 s, output head \"[thought] Okay, let's see. The user is asking for the sum of 17 and 26. I need t\"",
+        "invocation 0: exit=0 wall_s=316.2 temp 51.6->52.7C throttled=0x0 prefill_tps=18.26 decode_tps=2.48 ttft_s=16.3785 init_s=49.1304 peak_rss_mb=3193",
+        "invocation 1: exit=0 wall_s=316.2 temp 48.8->54.9C throttled=0x0 prefill_tps=18.38 decode_tps=2.46 ttft_s=16.2956 init_s=48.9598 peak_rss_mb=3194",
+        "invocation 2: exit=0 wall_s=318.2 temp 51.0->52.7C throttled=0x0 prefill_tps=18.32 decode_tps=2.45 ttft_s=16.3289 init_s=49.0204 peak_rss_mb=3194"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "decode_tps_max": 2.48,
+        "decode_tps_min": 2.45,
+        "init_s": 49.0204,
+        "init_s_max": 49.1304,
+        "init_s_min": 48.9598,
+        "invocations": 3.0,
+        "prefill_tokens": 256.0,
+        "prefill_tps_max": 18.38,
+        "prefill_tps_min": 18.26,
+        "runs_per_invocation": 1.0,
+        "threads": 4.0,
+        "ttft_s_max": 16.3785,
+        "ttft_s_min": 16.2956
+      },
+      "output_match": null,
+      "peak_mem_mb": 3194.0,
+      "prefill_tokens_per_s": 18.32,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 16328.9
+    }
+  ],
+  "schema_version": "1.0"
+}

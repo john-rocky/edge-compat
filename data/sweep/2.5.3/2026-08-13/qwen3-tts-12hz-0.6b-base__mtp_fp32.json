@@ -1,0 +1,123 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x1x1024:float32;1:int32;1x1x1x17:float32;5x1x8x17x128:float32;5x1x8x17x128:float32",
+  "license": "apache-2.0",
+  "model_id": "qwen3-tts-12hz-0.6b-base__mtp_fp32",
+  "notes": "",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-08-13",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 23.222,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-08-13",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: ERROR: Following operations are not supported by GPU delegate:",
+        "error: BATCH_MATMUL: Not supported batched mat mul case: non-constant tensor",
+        "error: BROADCAST_TO: Operation is not supported.",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;100",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;102",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;103",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;149",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;152",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;155",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;156",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;158",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;159",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;203",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;206",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;209",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;210",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;212",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;213",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;257",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;260",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;263",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;264",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;266",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;267",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;311",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;314",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;317",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;318",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;320",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;321",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;90",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;96",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.MTPStep;99",
+        "error: RESHAPE: Tensor dimensions must be less than 5. output_1",
+        "error: RESHAPE: Tensor dimensions must be less than 5. output_2",
+        "error: SLICE: Slicing is unsupported for input with rank > 4",
+        "error: 77 operations will run on the GPU, and the remaining 382 operations will run on the CPU.",
+        "warning: %c[LiteRT]%c Model not fully compiled for webgpu. Partially delegating to WASM execution. background: #FFA000; color: black; font-weight: bold; padding: 2px 5px; border-radius: 3px; font-weight: bold;"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": 25.473,
+      "loads": true,
+      "max_abs_diff": 0.0000133514404296875,
+      "max_rel_diff": 0.0033686132312542925,
+      "output_match": true,
+      "provenance": "measured",
+      "runs": true
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/Qwen3-TTS-12Hz-0.6B-Base/resolve/main/mtp_fp32.tflite"
+}

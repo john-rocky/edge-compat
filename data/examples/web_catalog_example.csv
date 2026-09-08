@@ -1,0 +1,4 @@
+model_id,source,input_spec,license,notes
+example-web-a,model_web_a_example.tflite,1x64:float32,Apache-2.0,synthetic elementwise fixture (NEG+LOGISTIC); provenance example
+example-broken,model_broken_example.tflite,1x64:float32,Apache-2.0,deliberately invalid bytes; exercises the crash-isolation path
+example-web-b,model_web_b_example.tflite,1x8x8x3:float32,Apache-2.0,synthetic elementwise fixture (ABS+SQRT+TANH); provenance example

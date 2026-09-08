@@ -1,0 +1,79 @@
+{
+  "backend": "npu_qnn_htp_android",
+  "entries": [
+    {
+      "conditions": "accepted, fully dispatched, and silently miscomputed when one operand is a CONCATENATION output larger than ~1 MiB: the ADD pairs each output row with the wrong operand row. Bracketed with a two-op reproducer -- 1,048,576 B passes, 1,081,344 B fails -- and it tracks total bytes, not shape (256x2304 and 512x1152 are the same size and both fail; 512x864 and 384x1152 are the same size and both pass). Not the repeated operand (four distinct concat inputs fail identically), not the ADD at that size (a plain ADD of two same-shaped inputs is correct), not the optimization level (O1/O2/O3 all reproduce). No rejection is logged and the graph reports full dispatch",
+      "constraints": {
+        "concat_operand_max_bytes": 1048576
+      },
+      "dtypes": [
+        "int16"
+      ],
+      "evidence": {
+        "date": "2026-08-24",
+        "litert_version": "litert-lm selfbuilt-2978f98 / QAIRT 2.47.0",
+        "source_model": "gemma-3-270m-it a16w8 SRQ + Stage 4 QNN AOT (SM8850)"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: cache_length 1024 -> 896 puts the mask concat at 1,048,576 B, the effective mask goes 367/512 -> 512/512 correct rows, and the 45-prompt harness goes 12/45 -> 29/45 against fp32's 28/45, with no measurable decode-speed cost",
+          "rewrite": "split the ADD into one per concat input, slicing the other operand, so no ADD operand crosses the threshold; or shrink the tensor -- for an attention mask that means lowering cache_length, since the mask is heads x prefill x (cache_length + prefill) x 2 bytes",
+          "symptom": "attention mask applied to the wrong rows: on gemma3-270m three of four query heads receive the final fully-open mask row for every query position, so they are not causal during prefill; the model runs at full speed and answers 12/45 where the same quantized graph on the TFLite CPU interpreter answers 25/45"
+        }
+      ],
+      "status": "incorrect"
+    },
+    {
+      "conditions": "correct at every size tested, including the sizes at which its consumer is not: the concat output is byte-identical to the TFLite CPU interpreter in all nine shapes swept from 589,824 to 1,179,648 bytes. The defect on this backend is in the op that reads a large concat, never in the concat itself",
+      "dtypes": [
+        "int16"
+      ],
+      "evidence": {
+        "date": "2026-08-24",
+        "litert_version": "litert-lm selfbuilt-2978f98 / QAIRT 2.47.0",
+        "source_model": "two-op reproducer (concat x N + consumer)"
+      },
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "conditions": "no row error over a 1,179,648-byte CONCATENATION output: 0 of 512 rows carry a wrong operand row. Values differ from the TFLite CPU interpreter by a uniform requantization offset, which is a scale difference and not the indexing defect that hits ADD at the same size",
+      "dtypes": [
+        "int16"
+      ],
+      "evidence": {
+        "date": "2026-08-24",
+        "litert_version": "litert-lm selfbuilt-2978f98 / QAIRT 2.47.0",
+        "source_model": "two-op reproducer (concat x4 -> mul)"
+      },
+      "op": "MUL",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "conditions": "correct over a 1,179,648-byte CONCATENATION output: argmax matches the TFLite CPU interpreter on all 512 rows and the per-row attendable-column pattern is identical. The only difference is a 1-LSB flush-to-zero floor -- the CPU interpreter leaves a 1-LSB residue in heavily masked entries where the HTP returns exact zero -- and that is size-independent",
+      "dtypes": [
+        "int16"
+      ],
+      "evidence": {
+        "date": "2026-08-24",
+        "litert_version": "litert-lm selfbuilt-2978f98 / QAIRT 2.47.0",
+        "source_model": "two-op reproducer (concat x4 -> softmax)"
+      },
+      "op": "SOFTMAX",
+      "provenance": "measured",
+      "status": "delegated"
+    }
+  ],
+  "generated_at": "2026-08-24",
+  "litert_version": "selfbuilt-2978f98",
+  "schema_version": "1.0",
+  "target": {
+    "device": "Galaxy S26 (SM-S942Q)",
+    "driver": "QAIRT 2.47.0",
+    "soc": "SM8850 (hexagon v81)"
+  }
+}

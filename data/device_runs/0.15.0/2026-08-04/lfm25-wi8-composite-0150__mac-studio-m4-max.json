@@ -1,0 +1,44 @@
+{
+  "artifact": "out_wi8_composite",
+  "device": "mac-studio-m4-max",
+  "model_id": "lfm25-wi8-composite-0150",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-04",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 108,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.15.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": "E0000 00:00:1785800208.673560 58063593 engine.cc:1096] Failed to create engine: UNKNOWN: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor_factory.cc:230]",
+      "evidence": [
+        "STABLEHLO_COMPOSITE: odml.softmax",
+        "108 operations will run on the GPU, and the remaining 434 operations will run on the CPU.",
+        "E0000 00:00:1785800208.673560 58063593 engine.cc:1096] Failed to create engine: UNKNOWN: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor_factory.cc:230]"
+      ],
+      "failure_class": "engine_create_failed",
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": 542,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

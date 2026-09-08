@@ -1,0 +1,182 @@
+{
+  "artifacts": [
+    {
+      "file": "963d91958f9aa3ac4b2bbd9ab8b848559c757025f80eb525123dbca7c68a23ac.tflite",
+      "sha256": "d030d236b4f41c96bb62e3eca94a6252a74bf742a66b141124bab943a64b7c93",
+      "size_mb": 841.196
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": null,
+        "loads": false,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": false
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": null,
+        "loads": false,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": false
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-11/qwen3-reranker-0.6b.json"
+  },
+  "conversion": {
+    "command": "python text-reranking/conversion/build_qwen3rerank.py (embedding table via export_embeddings.py)",
+    "quantization": "fp16",
+    "tool": "litert-torch",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.77666664->0.78333336 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 78.494,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "latency_max_ms": 82.011,
+            "latency_min_ms": 77.545,
+            "load_ms": 4265.4
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-27/qwen3-reranker-0.6b__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT (Hexagon, AOT host-compiled, SM8850 target)"
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=aot thermal=NONE->NONE headroom=0.76666665->0.7733334 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 47.508,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "latency_max_ms": 48.435,
+            "latency_min_ms": 45.89,
+            "load_ms": 319.5,
+            "qnn_partition_lines": 57
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-27/qwen3-reranker-0.6b__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3",
+    "id": "qwen3-reranker-0.6b",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Qwen3-Reranker-0.6B-LiteRT",
+    "task": "text-ranking"
+  },
+  "pitfalls": [
+    "Token embedding lookup is host-side from the shipped embeddings_fp16.bin table; the graph consumes inputs_embeds [1,256,1024] and emits a baked 2-logit ('no'/'yes') head — host softmax gives P(yes) (zoo README L1852-1860)."
+  ],
+  "schema_version": "1.2"
+}

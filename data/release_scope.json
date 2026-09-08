@@ -1,0 +1,10 @@
+{
+  "cross_runtime": {
+    "allowed_model_families": [
+      "gemma-4"
+    ],
+    "allowed_model_ids": []
+  },
+  "note": "Approved PUBLIC cross-runtime benchmark scope (Phase 12) — owner-editable data, not a schema contract. Per the launch plan: public cross-runtime comparisons are limited to Gemma 4 on LiteRT-LM, and every public artifact states that scope. `edge-compat release-gate` fails when any card presents a non-example cross_runtime row for a model whose family or id is not listed here. Widening the scope after a team agreement is an edit to this file, not a code change. Example-provenance rows are pipeline fixtures governed by the example-banner rule, not public comparative claims.",
+  "schema_version": "1.0"
+}

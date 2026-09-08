@@ -1,0 +1,141 @@
+{
+  "backend": "gpu_mldrift",
+  "entries": [
+    {
+      "dtypes": [
+        "float32"
+      ],
+      "op": "AVERAGE_POOL_2D",
+      "provenance": "example",
+      "status": "delegated"
+    },
+    {
+      "dtypes": [
+        "float16"
+      ],
+      "evidence": {
+        "date": "2026-08-10",
+        "litert_version": "0.0.0-example",
+        "source_model": "example-mobilenet-v2"
+      },
+      "op": "CONV_2D",
+      "provenance": "example",
+      "status": "delegated"
+    },
+    {
+      "dtypes": [
+        "float32"
+      ],
+      "op": "CONV_2D",
+      "provenance": "example",
+      "status": "delegated"
+    },
+    {
+      "dtypes": [
+        "int32"
+      ],
+      "op": "CUMSUM",
+      "provenance": "example",
+      "status": "unknown"
+    },
+    {
+      "conditions": "falls back when per-channel int8 weights AND batch > 1",
+      "constraints": {
+        "dynamic_shape": false,
+        "max_rank": 4
+      },
+      "dtypes": [
+        "float32",
+        "int8"
+      ],
+      "op": "FULLY_CONNECTED",
+      "provenance": "example",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": true
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "op": "FULLY_CONNECTED",
+      "provenance": "example",
+      "rewrite_hints": [
+        {
+          "expected_effect": "single contiguous GPU partition",
+          "rewrite": "export with a fixed batch dimension",
+          "symptom": "partition split at FULLY_CONNECTED with dynamic batch"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "emitted by strided slicing with step > 1",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "GATHER_ND",
+      "provenance": "example",
+      "rewrite_hints": [
+        {
+          "expected_effect": "removes the CPU fallback island",
+          "rewrite": "rewrite step>1 slicing as gather over a precomputed index tensor",
+          "symptom": "graph splits at GATHER_ND"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "reduced-axis combinations other than spatial HW fall back",
+      "constraints": {
+        "keep_dims": true
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "op": "MEAN",
+      "provenance": "example",
+      "status": "partial"
+    },
+    {
+      "constraints": {
+        "half_pixel_centers": true
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "op": "RESIZE_BILINEAR",
+      "provenance": "example",
+      "status": "crash"
+    },
+    {
+      "conditions": "numerics exceed tolerance vs CPU reference for large logits",
+      "dtypes": [
+        "float16"
+      ],
+      "op": "SOFTMAX",
+      "provenance": "example",
+      "status": "incorrect"
+    },
+    {
+      "conditions": "rejected by some mobile GPU drivers regardless of rank",
+      "constraints": {
+        "max_rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "op": "TRANSPOSE_CONV",
+      "provenance": "example",
+      "status": "fallback"
+    }
+  ],
+  "generated_at": "2026-08-10",
+  "litert_version": "0.0.0-example",
+  "schema_version": "1.0",
+  "target": {
+    "device": "Example Device",
+    "soc": "Example SoC"
+  }
+}

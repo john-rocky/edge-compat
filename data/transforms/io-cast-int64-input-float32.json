@@ -1,0 +1,27 @@
+{
+  "action": "io_cast",
+  "evidence": {
+    "date": "2026-08-12",
+    "litert_version": "2.1.3",
+    "source_model": "~/Downloads/depthanything-android/docs/LITERT_CONVERSION_GUIDE.md, DeepPhonemizer section, 'FLOAT input, not int': feed ids as float32 [1,96] with ids = text.to(int64) inside the graph — 'Lets Kotlin use the proven CompiledModel.writeFloat/readFloat path (the int TensorBuffer path in litert 2.1.3 is fiddlier). Small ids are exact in fp32.'"
+  },
+  "expected_effect": "int64 graph inputs are re-exposed as float32 with a boundary CAST; the interior graph is unchanged and the interface-violation count drops without regressing lint metrics (the app can feed the model through the float tensor path)",
+  "fixture": {
+    "matrix": "fixtures/matrix_cpu_io_fixture.json",
+    "model": "fixtures/model_int64_input_fixture.tflite"
+  },
+  "id": "io-cast-int64-input-float32",
+  "match": {
+    "dtypes": [
+      "int64"
+    ]
+  },
+  "notes": "Promoted 2026-08-19 (owner approved the recommended disposition). Validated only on the synthetic staging fixture, not re-verified on a real backend. Exact only while input values are integers exactly representable in float32 (|v| < 2^24) — true for the guide's char-id use case; float->int64 CAST truncates toward zero exactly like the host-side cast it replaces. Scoped to inputs only: that is the documented case (the guide's G2P outputs are already float). int32 inputs may deserve the same treatment per the same guide sentence — owner call, see OPEN-QUESTIONS.md.",
+  "params": {
+    "io": "inputs",
+    "to": "float32"
+  },
+  "provenance": "inferred",
+  "schema_version": "1.0",
+  "title": "DRAFT: Re-expose int64 graph inputs as float32 (CompiledModel float I/O path)"
+}

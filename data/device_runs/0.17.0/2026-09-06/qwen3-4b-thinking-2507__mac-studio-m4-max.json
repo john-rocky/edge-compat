@@ -1,0 +1,42 @@
+{
+  "artifact": "model.litertlm",
+  "device": "mac-studio-m4-max",
+  "model_id": "qwen3-4b-thinking-2507",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-06",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.17.0/bin/litert-lm 0.17.0); fixed-question answer: '[thought] Okay, the user is asking for the sum of 17 and 25. That\\'s a straightforward arithmetic question. \\n\\nHmm, they specifically said \"answer briefly\" so I shouldn\\'t overthink this. Just need to give the quick calculation. \\n\\nLet me do the math mentally: 17 + 25. 10+20 is 30, 7+5 is 12, so 30+12=42. Wait no, better way: 17+25 is same as (10+7)+(20+5)=30+12=42. \\n\\nWait, actually 17+25: 17+20=37, plus 5 is 42. Yeah, definitely 42. \\n\\nUser seems to want just the number, no explanation. Maybe they\\'re testing if I\\'ll overcomplicate? Or could be a kid learning addition. \\n\\nBetter keep it super short as requested. Just \"42\". \\n\\n*checks again* Yep, 17+25=42. No tricks here. \\n\\nUser said \"briefly\" so I won\\'t even add \"The answer is\" - just the number. They seem like they want minimal response. \\n\\n*imagines user typing this on mobile* Probably in a hurry. Gotta respect the \"briefly\" request. \\n\\nFinal answer: 42 [/thought]\\n\\n\\n42'"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

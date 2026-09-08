@@ -1,0 +1,48 @@
+{
+  "artifact": "out_wi8",
+  "device": "mac-studio-m4-max",
+  "model_id": "lfm25-12b-wi8-gpu",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-12",
+      "decode_tokens_per_s": 272.0,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "results block: prefill=4836.61 decode=272.00 tokens/s, init=1.3414 s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 1.3414,
+        "max_num_tokens": 1024.0,
+        "prefill_tokens": 256.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 4836.61,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 56.6
+    }
+  ],
+  "schema_version": "1.0"
+}

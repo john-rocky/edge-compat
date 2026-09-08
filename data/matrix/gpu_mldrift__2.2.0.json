@@ -1,0 +1,138 @@
+{
+ "backend": "gpu_mldrift",
+ "entries": [
+  {
+   "conditions": "Whole-graph compile of a ~930 MB fp16 flatbuffer. A 930 MB fp16 vision graph compiles whole (3104/3104 nodes, 1 partition) and runs at 9.2 s per image on a Pixel 8a; first-launch shader compilation costs about 50 s. Resident set for the compiled graph is roughly 2.5x the flatbuffer size, which is what bounds how many such graphs can be live at once.",
+   "constraints": {
+    "flatbuffer_bytes": 930000000
+   },
+   "dtypes": [
+    "float16"
+   ],
+   "evidence": {
+    "date": "2026-08-20",
+    "litert_version": "2.2.0",
+    "source_model": "SAM 3.1 vision trunk (ViT-L/14 @1008)"
+   },
+   "op": "CONV_2D",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "A DETR-style decoder head that 2.1.5 mis-executes runs correctly on 2.2.0: the same .tflite, same device, same app, only the runtime version differing. On 2.1.5 all 200 query logits come back identical (std 0.0) while boxes and masks are fine; on 2.2.0 the kept set matches PyTorch (scores within 0.02, mask IoU 0.981-0.996).",
+   "dtypes": [
+    "float16"
+   ],
+   "evidence": {
+    "date": "2026-08-20",
+    "litert_version": "2.2.0",
+    "source_model": "SAM 3.1 detection head (200-query DETR decoder)"
+   },
+   "op": "FULLY_CONNECTED",
+   "provenance": "measured",
+   "rewrite_hints": [
+    {
+     "expected_effect": "decoder logits match the desktop reference",
+     "rewrite": "pin the runtime to 2.2.0 for this graph shape; the rank-4 authoring alone is not sufficient on 2.1.5",
+     "symptom": "identical logits across every query on 2.1.5; correct on 2.2.0"
+    }
+   ],
+   "status": "delegated"
+  },
+  {
+   "conditions": "XNNPACK CPU delegation of a 607 MB CLIP-L text encoder is complete on 2.2.0 (1627/1627 nodes, 0.5 s) where 2.1.5 delegates 1337/1627 and takes 1.9 s on the same device and file.",
+   "dtypes": [
+    "float16"
+   ],
+   "evidence": {
+    "date": "2026-08-20",
+    "litert_version": "2.2.0",
+    "source_model": "SAM 3.1 text encoder"
+   },
+   "op": "FULLY_CONNECTED",
+   "provenance": "measured",
+   "rewrite_hints": [
+    {
+     "expected_effect": "full delegation restored",
+     "rewrite": "pin the runtime to 2.2.0",
+     "symptom": "partial CPU delegation and ~4x slower execution on 2.1.5"
+    }
+   ],
+   "status": "delegated"
+  },
+  {
+   "conditions": "Constant LHS (baked interpolation matrix) x runtime RHS refuses whole-graph compile. Runtime-activation x runtime-activation BMMs delegate normally (attention probes).",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-08-24",
+    "litert_version": "2.2.0",
+    "source_model": "probe_rbmm (npubench/factors phase8.log m_rbmm_gpu)"
+   },
+   "op": "BATCH_MATMUL",
+   "provenance": "measured",
+   "rewrite_hints": [
+    {
+     "expected_effect": "compiles; also 1.41x faster on the NPU (perf_factors bilinear-constmatmul-to-builtin-resize)",
+     "rewrite": "use builtin RESIZE_BILINEAR (align_corners=true now supported) instead of the const-matmul lowering",
+     "symptom": "const-matmul bilinear form fails GPU compile"
+    }
+   ],
+   "status": "fallback"
+  },
+  {
+   "conditions": "Weight-only int8 DEQUANTIZE feeding FULLY_CONNECTED refuses whole-graph compile on the S26 Adreno (LiteRtException: Failed to compile model). The same graph with fp32 weights or fp16+DEQUANTIZE compiles and runs (4.58 ms).",
+   "dtypes": [
+    "float32",
+    "int8"
+   ],
+   "evidence": {
+    "date": "2026-08-28",
+    "litert_version": "2.2.0",
+    "source_model": "gemv probe: 8x Linear(4096x4096)+ReLU T=1 chain (npubench/factors phase9.log m_gemv_int8_gpu vs m_gemv_fp32_gpu)"
+   },
+   "op": "DEQUANTIZE",
+   "provenance": "measured",
+   "rewrite_hints": [
+    {
+     "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
+     "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+     "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
+    }
+   ],
+   "status": "fallback"
+  },
+  {
+   "conditions": "Builtin GELU op (approximate=false) compiles and runs at full speed on S26 Adreno (DINOv2-S erf build 55.2 ms vs tanh-chain build 54.2 ms) and on Pixel 8a Mali (198.8 ms, fp32 file) \u2014 the Mali-era GELU-rewrite requirement does not reproduce on this runtime.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-08-28",
+    "litert_version": "2.2.0",
+    "source_model": "dinov2_ab_erf_fp32 vs dinov2_ab_tanh_fp32 (npubench/factors phase5.log; Mali check 2026-08-28)"
+   },
+   "op": "GELU",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "align_corners=true compiles and runs (S26 Adreno 4.8 ms on the probe; Pixel 8a Mali 25.4 ms same file) \u2014 the Mali-era align_corners ban does not reproduce on this runtime.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-08-28",
+    "litert_version": "2.2.0",
+    "source_model": "probe_rb: conv stack + two align_corners=true bilinear x2 upsamples (npubench/factors phase8.log m_rb_gpu; Mali check 2026-08-28)"
+   },
+   "op": "RESIZE_BILINEAR",
+   "provenance": "measured",
+   "status": "delegated"
+  }
+ ],
+ "generated_at": "2026-08-28",
+ "litert_version": "2.2.0",
+ "schema_version": "1.0"
+}

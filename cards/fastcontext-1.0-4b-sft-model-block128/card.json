@@ -1,0 +1,139 @@
+{
+  "artifacts": [
+    {
+      "file": "model_block128.litertlm",
+      "sha256": "3842a564a1f8db2ed53992ec6e2d5e2579aff72131dfac664c19cf2ec90542ce",
+      "size_mb": 2359.731
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "from litert_torch.generative.export_hf.export import export; export(model='microsoft/FastContext-1.0-4B-SFT', output_dir='out', quantization_recipe='qwen3_int4_block32_octav.json' | 'qwen3_int4_block128_octav.json', cache_length=4096, externalize_embedder=True) (HF card Conversion snippet)",
+    "quantization": "int4 blockwise (block 128) + OCTAV, symmetric; INT8 embedding externalized; KV cache 4096 (HF card)",
+    "tool": "litert-torch export_hf (official converter; FastContext is a standard Qwen3ForCausalLM, existing Qwen3 path, no custom graph code) (HF card Conversion)",
+    "tool_version": "TODO (the HF card names the converter but not its version; no export log in the sources)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 7.49,
+          "delegated_ops": 1674,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1674 out of 1674 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1596 out of 1596 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (decode).",
+            "results block: prefill=86.28 decode=7.49 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 727.0,
+            "init_s": 12.40631,
+            "prefill_tokens": 202.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 86.28,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1674,
+          "ttft_ms": 2470.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/fastcontext-1.0-4b-sft-model-block128__galaxy-s26.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-02",
+          "decode_tokens_per_s": 1.49,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 101.4 s, output head '43'",
+            "invocation 0: exit=0 wall_s=506.4 temp 49.4->52.7C throttled=0x0 prefill_tps=10.32 decode_tps=1.49 ttft_s=26.2791 init_s=55.9504 peak_rss_mb=4009",
+            "invocation 1: exit=0 wall_s=500.3 temp 51.6->52.1C throttled=0x0 prefill_tps=10.47 decode_tps=1.48 ttft_s=25.7707 init_s=55.4192 peak_rss_mb=3951",
+            "invocation 2: exit=0 wall_s=494.3 temp 49.9->54.9C throttled=0x0 prefill_tps=10.33 decode_tps=1.5 ttft_s=26.0396 init_s=55.3038 peak_rss_mb=3968"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.5,
+            "decode_tps_min": 1.48,
+            "init_s": 55.4192,
+            "init_s_max": 55.9504,
+            "init_s_min": 55.3038,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 10.47,
+            "prefill_tps_min": 10.32,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 26.2791,
+            "ttft_s_min": 25.7707
+          },
+          "output_match": null,
+          "peak_mem_mb": 4009.0,
+          "prefill_tokens_per_s": 10.33,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 26039.6
+        },
+        "source": "data/device_runs/0.16.1/2026-09-02/fastcontext-1.0-4b-sft-model-block128__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3",
+    "id": "fastcontext-1.0-4b-sft-model-block128",
+    "license": "mit",
+    "source_url": "https://huggingface.co/litert-community/FastContext-1.0-4B-SFT",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Which file: block 32 (model.litertlm) is the quality pick — GSM8K 88.0% vs 81.0% for block 128 — while block 128 (model_block128.litertlm) decodes ~40% faster on the iPhone 17 Pro (14 vs 10 tok/s; Mac M-series GPU 66-68 vs 64-73 tok/s) (HF card 'Which file?').",
+    "Blockwise (not the tool's default channelwise) int4 is what preserves accuracy; embeddings kept at INT8 and externalized into their own section (dedups the tied matrix) (HF card Conversion).",
+    "License MIT, inherited from microsoft/FastContext-1.0-4B-SFT (itself built on Qwen3-4B-Instruct) (HF card License).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/ (Pi 5 / S26 / Pixel 8a / Mac / iPhone as measured)."
+  ],
+  "schema_version": "1.2"
+}

@@ -1,0 +1,209 @@
+{
+  "backend": "gpu_mldrift",
+  "blocking_ops": [
+    {
+      "impact_score": 1029.0,
+      "node_index": 1,
+      "op": "GATHER_ND",
+      "status": "fallback",
+      "subgraph": 0
+    },
+    {
+      "impact_score": 1029.0,
+      "node_index": 2,
+      "op": "RESHAPE",
+      "status": "unknown",
+      "subgraph": 0
+    },
+    {
+      "impact_score": 10.0,
+      "node_index": 4,
+      "op": "SOFTMAX",
+      "status": "unknown",
+      "subgraph": 0
+    }
+  ],
+  "custom_ops": [],
+  "findings": [
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 0,
+      "op": "CONV_2D",
+      "provenance": "example",
+      "reason": "matched entry specific to op and dtypes",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": false,
+      "conditions": "emitted by strided slicing with step > 1",
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 1,
+      "op": "GATHER_ND",
+      "provenance": "example",
+      "reason": "matched entry specific to op and dtypes",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "status": "fallback",
+      "subgraph": 0
+    },
+    {
+      "claimed": false,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 2,
+      "op": "RESHAPE",
+      "provenance": null,
+      "reason": "no entry for op RESHAPE",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "status": "unknown",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": "falls back when per-channel int8 weights AND batch > 1",
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 3,
+      "op": "FULLY_CONNECTED",
+      "provenance": "example",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": false,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 4,
+      "op": "SOFTMAX",
+      "provenance": null,
+      "reason": "entries exist for op SOFTMAX but none match dtypes=['float32'] shape_meta={'dynamic_shape': False, 'rank': 2}",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "status": "unknown",
+      "subgraph": 0
+    }
+  ],
+  "impact_note": "impact_score is a heuristic (output element count as a FLOPs proxy, adjacent-partition cost split across each CPU island) — a ranking aid, not a measurement",
+  "litert_version": "0.0.0-example",
+  "matrix": {
+    "file": "data/examples/matrix_example.json",
+    "generated_at": "2026-08-10",
+    "litert_version": "0.0.0-example"
+  },
+  "model": {
+    "path": "data/examples/model_split_example.tflite",
+    "sha256": "d6039cd535890604b0a4ae0552cfb970de15cf3fbfe33694442f3fad02424f6e",
+    "subgraph_count": 1
+  },
+  "needs_probe": [
+    {
+      "backend": "gpu_mldrift",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "RESHAPE",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      }
+    },
+    {
+      "backend": "gpu_mldrift",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "SOFTMAX",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      }
+    }
+  ],
+  "partitions": [
+    {
+      "first_node": 0,
+      "index": 0,
+      "last_node": 0,
+      "op_count": 1,
+      "ops": [
+        "CONV_2D"
+      ],
+      "subgraph": 0
+    },
+    {
+      "first_node": 3,
+      "index": 1,
+      "last_node": 3,
+      "op_count": 1,
+      "ops": [
+        "FULLY_CONNECTED"
+      ],
+      "subgraph": 0
+    }
+  ],
+  "rewrite_suggestions": [
+    {
+      "hints": [
+        {
+          "expected_effect": "removes the CPU fallback island",
+          "rewrite": "rewrite step>1 slicing as gather over a precomputed index tensor",
+          "symptom": "graph splits at GATHER_ND"
+        }
+      ],
+      "node_index": 1,
+      "op": "GATHER_ND",
+      "subgraph": 0
+    }
+  ],
+  "schema_version": "1.1",
+  "summary": {
+    "blocking_op_count": 3,
+    "claimed_ops": 2,
+    "coverage_ops_pct": 40.0,
+    "matched_provenance_counts": {
+      "example": 3,
+      "unmatched": 2
+    },
+    "partition_count": 2,
+    "status_counts": {
+      "delegated": 2,
+      "fallback": 1,
+      "unknown": 2
+    },
+    "sync_boundaries": 3,
+    "total_ops": 5
+  }
+}

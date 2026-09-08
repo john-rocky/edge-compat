@@ -1,0 +1,141 @@
+{
+  "artifacts": [
+    {
+      "file": "LFM2.5-1.2B-Thinking_int8_gpu.litertlm",
+      "sha256": "11faec13dca0699dae1a43da30f0b5d57c64627edf6c4a6fa16b45b716db1a92",
+      "size_mb": 1187.099
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "minicpm5_work/ship_lfm25_int8gpu_20260825/build_int8_gpu.sh",
+    "quantization": "int8 dynamic (linears + embedding via wi8fc; convs float) — GSM8K 77% vs 76% for export-time conv-int8 on this finetune (build_int8_gpu.sh primary pointers)",
+    "tool": "litert-torch 0.9.3 lineage export + post-hoc ai-edge-quantizer (wi8fc recipe), per build_int8_gpu.sh",
+    "tool_version": "same toolchain as ship_lfm25_gpu_variant_20260812/build_gpu_variants.sh (0.9.3-lineage GPU-safe ShortConv); quantizer recipe wi8fc"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-25",
+          "decode_tokens_per_s": 28.83,
+          "delegated_ops": 542,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=860.26 decode=28.83 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 3058.0,
+            "init_s": 7.34249,
+            "prefill_tokens": 205.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 860.26,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 542,
+          "ttft_ms": 270.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-25/lfm25-12b-thinking-int8-gpu__galaxy-s26.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 7.03,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 98.5 s, output head '[thought]  Okay, let me see. The question is asking \"What is 17 plus 26? Answer '",
+            "invocation 0: exit=0 wall_s=108.1 temp 50.5->54.9C throttled=0x0 prefill_tps=75.12 decode_tps=7.03 ttft_s=3.5504 init_s=30.9851 peak_rss_mb=1884",
+            "invocation 1: exit=0 wall_s=112.1 temp 51.6->54.3C throttled=0x0 prefill_tps=75.47 decode_tps=7.04 ttft_s=3.534 init_s=30.7704 peak_rss_mb=1893",
+            "invocation 2: exit=0 wall_s=112.1 temp 49.9->53.8C throttled=0x0 prefill_tps=74.91 decode_tps=6.99 ttft_s=3.5604 init_s=30.6476 peak_rss_mb=1885"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 7.04,
+            "decode_tps_min": 6.99,
+            "init_s": 30.7704,
+            "init_s_max": 30.9851,
+            "init_s_min": 30.6476,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 75.47,
+            "prefill_tps_min": 74.91,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 3.5604,
+            "ttft_s_min": 3.534
+          },
+          "output_match": null,
+          "peak_mem_mb": 1893.0,
+          "prefill_tokens_per_s": 75.12,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 3550.4
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/lfm25-12b-thinking-int8-gpu__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "lfm2.5",
+    "id": "lfm25-12b-thinking-int8-gpu",
+    "license": "lfm-open-license-v1.0",
+    "source_url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "The published _int4/_int8 (non-gpu) siblings stall GPU delegation at 536/579 ops on Adreno (0.9.1-era ShortConv INT64 block; s4_gpu_gate/RESULTS.md rows 5/12). This _int8_gpu delegates 542/542 on the Galaxy S26 (device_runs 2026-08-25).",
+    "Thinking bundle: the runtime needs the think opener prefilled and the bundle's declared thought channel to show reasoning; gate multi-turn behaviour at sizes where the thinking completes (family records; memory thinking-models-need-think-prefill).",
+    "add_executor_metadata is required after post-hoc quantization (0.9.3 emits no ExecutorMetadataProto; litert-lm >=0.15 needs it) (build_int8_gpu.sh).",
+    "One arm of the 08-25 Mac Metal sieve refused engine creation for a JP/Thinking variant while S26 OpenCL passed the same file — see ship_lfm25_int8gpu_20260825/RESULTS.md before quoting Mac Metal numbers for this family."
+  ],
+  "schema_version": "1.2"
+}

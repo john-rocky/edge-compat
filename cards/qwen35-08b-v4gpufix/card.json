@@ -1,0 +1,81 @@
+{
+  "artifacts": [
+    {
+      "file": "model_wi8fc_fp32act.litertlm",
+      "sha256": "07e1746c90234d60a90babe8ad2251f0b426025381e6feb747c077a2d06c03c0",
+      "size_mb": 765.92
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "python convert_qwen35_hybrid.py Qwen/Qwen3.5-0.8B out_v4_gpu  # wi8fc + fp32-activation declaration; export log qwen35_work/export_v4_gpu.log",
+    "quantization": "int8 dynamic on linears (wi8fc); recurrent/conv state paths float; fp32 activations declared (GPU requirement)",
+    "tool": "litert-torch, pinned base + Qwen3.5 hybrid patch; v4 revision re-expresses the gated-delta-rule chunk kernel in an all-rank-<=4, pad-free form (the 5 chunk-kernel rank-3 PADs replaced with concat-zeros)",
+    "tool_version": "editable checkout 115a136 + qwen35_hybrid_litert_torch.patch (convert_qwen35_hybrid.py docstring; python 3.12 homebrew per export_v4_gpu.log)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-13",
+          "decode_tokens_per_s": 7.45,
+          "delegated_ops": 17640,
+          "env": {
+            "device": "pixel-8a",
+            "machine_label": "pixel-8a-cl-pinned",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Google Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 17640 out of 17640 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 16866 out of 16866 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_32).",
+            "VERBOSE: Replacing 2124 out of 2124 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (decode).",
+            "results block: prefill=22.67 decode=7.45 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 310.0,
+            "init_s": 44.57598,
+            "prefill_tokens": 21.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 22.67,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 17640,
+          "ttft_ms": 1060.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-13/qwen35-08b-v4gpufix__pixel-8a.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3.5",
+    "id": "qwen35-08b-v4gpufix",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "The v4 rewrite exists because ML Drift mis-executes rank-3 PAD (bit-exact head+1 shift on [H,T,1], row scramble on [H,T,D]); only rank-3 non-innermost PAD corrupts — last-axis and rank-4 are exact. Reported upstream with a 1-op repro as LiteRT#9272; the kernel now avoids the shape entirely (commit 045714f; HF card update).",
+    "fp32 activations are mandatory on GPU for THIS checkpoint: fp16act scores 0/8 from a real-weight fp16 range overflow in layer-0 head 4 — a model property, not a converter defect (commit 045714f).",
+    "Gates on this lineage: FP parity corr 1.0000 (48 positions), 8Q 8/8 on CPU and GPU on litert-lm 0.15.0 AND 0.16.0, BANANA hermetic CPU 40/40 + GPU 20/20 (commit 8ff812f). Mac bench (0.16.0, cache no, p256/d256): GPU 2015.9/158.4 tok/s TTFT 0.13 s vs CPU 641.4/48.2 (commit df0f5eb).",
+    "GSM8K context for quality readers: bf16 12% vs int8 11% — the low absolute score is the model, not the conversion (commit 1b9c9ce)."
+  ],
+  "schema_version": "1.2"
+}

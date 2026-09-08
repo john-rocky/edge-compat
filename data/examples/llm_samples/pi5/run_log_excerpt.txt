@@ -1,0 +1,39 @@
+INFO: STARTING!
+INFO: Log parameter values verbosely: [0]
+INFO: Min num runs: [50]
+INFO: Num threads: [4]
+INFO: Min warmup runs: [10]
+INFO: Report the peak memory footprint: [1]
+INFO: The input model file size (MB): 1.38995
+INFO: Initialized session in 5.127ms.
+INFO: Running benchmark for at least 10 iterations and at least 0.5 seconds but terminate if exceeding 150 seconds.
+INFO: count=10 first=128498 curr=107841 min=106209 max=128498 avg=110711 std=8078 p5=106209 median=106609 p95=128498
+
+INFO: Running benchmark for at least 50 iterations and at least 1 seconds but terminate if exceeding 150 seconds.
+INFO: count=50 first=106930 curr=106618 min=106050 max=107745 avg=106654 std=343 p5=106224 median=106580 p95=107368
+
+INFO: [environment.cc:36] Creating LiteRT environment with options
+INFO: [accelerator_registry.cc:54] RegisterAccelerator: ptr=0x32177fe120f0, name=CpuAccelerator
+INFO: [cpu_registry.cc:75] XNNPACK CPU accelerator registered.
+INFO: [benchmark_litert_model.cc:271] Loading model from: /home/pi/pi5bench/models/M-LSD-tiny-LiteRT/mlsd_fp16.tflite
+INFO: [compiled_model.cc:815] Flatbuffer model initialized directly from incoming litert model.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: [benchmark_litert_model.h:89] 
+========== BENCHMARK RESULTS ==========
+INFO: [benchmark_litert_model.h:92] Signature name:       serving_default
+INFO: [benchmark_litert_model.h:94] Model initialization: 5.13 ms
+INFO: [benchmark_litert_model.h:96] Warmup (first):       128.50 ms
+INFO: [benchmark_litert_model.h:98] Warmup (avg):         110.71 ms (10 runs)
+INFO: [benchmark_litert_model.h:100] Inference (avg):      106.65 ms (50 runs)
+INFO: [benchmark_litert_model.h:104] Inference (min):      106.05 ms
+INFO: [benchmark_litert_model.h:106] Inference (max):      107.75 ms
+INFO: [benchmark_litert_model.h:108] Inference (std):      0.34
+INFO: [benchmark_litert_model.h:115] Throughput:           37.50 MB/s
+INFO: [benchmark_litert_model.h:124] 
+Memory Usage:
+INFO: [benchmark_litert_model.h:126] Init footprint:       0.00 MB
+INFO: [benchmark_litert_model.h:128] Overall footprint:    12.09 MB
+INFO: [benchmark_litert_model.h:132] Peak memory:          74.56 MB
+INFO: [benchmark_litert_model.h:138] ======================================
+
+INFO: [accelerator_registry.cc:43] DestroyAccelerator: ptr=0x32177fe120f0, name=CpuAccelerator

@@ -1,0 +1,30 @@
+{
+ "id": "seq-pad-zipformer-multirate",
+ "category": "null-result",
+ "title": "zipformer window pad, all rates to 2^k (rule does NOT transfer - per-FLOP null)",
+ "rewrite": {
+  "from": "zipformer-medium CR-CTC, fbank window 1600 (per-rate lengths 796/398/199/100)",
+  "to": "fbank window 2055 (per-rate lengths 1024/512/256/128), pad masked via the model's additive bias inputs",
+  "equivalence": "approximation",
+  "equivalence_evidence": "valid-region corr 0.9999997, per-frame argmax agreement 1.000, transcript identical vs same-builder control; not bit-exact (log(1e-10) fbank pad crosses the embed-conv boundary under the model's finite -1000 mask convention)"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-28",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 93.622,
+  "after_ms": 117.218,
+  "probe": "real zipformer-medium pair, same-day same-converter control, interleaved a/b replicates (ctrl 93.6/99.1, pad 117.2/124.5); est. 31.1 vs 40.2 G-ops, so per-FLOP the pad is +3% (null); GPU tracks compute exactly (36.0 -> 46.7 ms, per-FLOP 1.00)"
+ },
+ "factor": 0.8,
+ "scope": "NEGATIVE-TRANSFER row: the T-shape rule (seq-1025-to-1024, seq-1500-to-1536, prefill mod-128) is established on uniform-T transformer stacks and realized on whisper; it does NOT transfer to this multi-rate rel-pos architecture. JIT compile is also indifferent (24.2 vs 25.7 min). Suspected reason: rel-shift attention's internal [H,B,T,2T-1] tensor keeps an awkward inner dim (2047) regardless of T.",
+ "notes": "closes the sequence-shape hypothesis for zipformer's 0.38-0.42x (dtype and op granularity already null); deficit suspect moves to the rel-shift attention form. NPU_OP_FACTOR_REPORT.md experiment 14, rows in npubench/factors/phase11.log.",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

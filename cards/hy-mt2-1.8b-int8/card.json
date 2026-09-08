@@ -1,0 +1,315 @@
+{
+  "artifacts": [
+    {
+      "file": "Hy-MT2-1.8B_int8.litertlm",
+      "sha256": "7bbd0b65d7e69c8d92b8ab3033e353536ef40c77f4dc5f4c32f2931417c13eda",
+      "size_mb": 1731.513
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "python scripts/convert.py tencent/Hy-MT2-1.8B (hf-to-litertlm)",
+    "quantization": "export-time dynamic int8 on linears + embedding (HF card file table)",
+    "tool": "litert-torch via hf-to-litertlm (`python scripts/convert.py tencent/Hy-MT2-1.8B`, one command; export 120 s on an M4 Max) (HF card Conversion notes)",
+    "tool_version": "0.9.3 (stock litert-torch — HF card Conversion notes)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 12.27,
+          "delegated_ops": 2173,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1291 out of 1489 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 191 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1159 out of 1359 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 196 partitions for subgraph 1 (decode).",
+            "VERBOSE: Replacing 7 out of 7 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 2 (odml.rms_norm.impl).",
+            "VERBOSE: Replacing 7 out of 7 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 3 (odml.rms_norm.impl_0).",
+            "results block: prefill=126.34 decode=12.27 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 88.0,
+            "init_s": 5.97106,
+            "prefill_tokens": 197.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 126.34,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 2245,
+          "ttft_ms": 1640.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/hy-mt2-1.8b-int8__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 20.84,
+          "delegated_ops": 1489,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1489 out of 1489 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1359 out of 1359 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (decode).",
+            "results block: prefill=385.67 decode=20.84 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 93.0,
+            "init_s": 3.52488,
+            "prefill_tokens": 197.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 385.67,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1489,
+          "ttft_ms": 560.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/hy-mt2-1.8b-int8__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": 33.97,
+          "delegated_ops": null,
+          "env": {
+            "device": "mac-studio-m4-max",
+            "machine_label": "m4max-quiet-300s-gpu-rest",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=210.95 decode=33.97 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 210.95,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 1243.1
+        },
+        "source": "data/device_runs/0.16.0/2026-08-27/hy-mt2-1.8b-int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": 105.8,
+          "delegated_ops": null,
+          "env": {
+            "device": "mac-studio-m4-max",
+            "machine_label": "m4max-quiet-300s-gpu-rest",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=2008.37 decode=105.8 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 2008.37,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 136.9
+        },
+        "source": "data/device_runs/0.16.0/2026-08-27/hy-mt2-1.8b-int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 8.3,
+          "delegated_ops": 2173,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1291 out of 1489 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 191 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1159 out of 1359 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 196 partitions for subgraph 1 (decode).",
+            "VERBOSE: Replacing 7 out of 7 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 2 (odml.rms_norm.impl).",
+            "VERBOSE: Replacing 7 out of 7 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 3 (odml.rms_norm.impl_0).",
+            "results block: prefill=50.78 decode=8.3 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 88.0,
+            "init_s": 14.29039,
+            "prefill_tokens": 197.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 50.78,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 2245,
+          "ttft_ms": 4000.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/hy-mt2-1.8b-int8__pixel-8a.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-02",
+          "decode_tokens_per_s": 2.66,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 93.2 s, output head '43'",
+            "invocation 0: exit=0 wall_s=260.2 temp 45.5->55.4C throttled=0x0 prefill_tps=24.93 decode_tps=2.68 ttft_s=10.6434 init_s=47.787 peak_rss_mb=2949",
+            "invocation 1: exit=0 wall_s=262.2 temp 51.6->53.8C throttled=0x0 prefill_tps=25.01 decode_tps=2.65 ttft_s=10.6139 init_s=47.4377 peak_rss_mb=2949",
+            "invocation 2: exit=0 wall_s=260.2 temp 49.9->51.6C throttled=0x0 prefill_tps=25.77 decode_tps=2.66 ttft_s=10.31 init_s=47.4239 peak_rss_mb=2950"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 2.68,
+            "decode_tps_min": 2.65,
+            "init_s": 47.4377,
+            "init_s_max": 47.787,
+            "init_s_min": 47.4239,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 25.77,
+            "prefill_tps_min": 24.93,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 10.6434,
+            "ttft_s_min": 10.31
+          },
+          "output_match": null,
+          "peak_mem_mb": 2950.0,
+          "prefill_tokens_per_s": 25.01,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 10613.9
+        },
+        "source": "data/device_runs/0.16.1/2026-09-02/hy-mt2-1.8b-int8__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "hy-mt2",
+    "id": "hy-mt2-1.8b-int8",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Hy-MT2-1.8B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Translation model, not open chat: use the source card's default translation prompt verbatim; the 8-question sanity gate reads 6/8 on CPU and 6/8 on GPU with the same two misses on both backends ('Cool' for the opposite of hot, 'pink' for the rhyme) — a property of this translation-tuned 1.8B, not of a backend; arithmetic, factual and translation items are correct (HF card Correctness, litert-lm 0.16.0, M4 Max).",
+    "Chat template byte-equal to the source repo's chat_template.jinja (654/654 bytes); stop token <|hy_place_holder_no_2|> (id 120020) as the source declares (HF card Correctness).",
+    "No duplicate start token: the source template renders <|hy_begin_of_sentence|> itself and the engine also prepends the metadata start_token; measured inside the runtime, [start_token]+prompt and [template BOS]+prompt generate byte-identical greedy output (HF card Correctness + Conversion notes).",
+    "The 'dynamic'-with-'alpha' rope resolves statically: transformers computes base = rope_theta * alpha^(dim/(dim-2)) once at init and never rescales below max_position_embeddings; only the data-dependent cache-growth branch kills torch.export, and the converter bakes the resolved base (HF card Conversion notes).",
+    "Translation greedy A/B vs the HF bf16 reference: byte-identical on 1 of 3 probes, fluent alternates on the other two (the usual int8-vs-bf16 kind), no degeneration (HF card Correctness).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/ (Pi 5 / S26 / Pixel 8a / Mac / iPhone as measured)."
+  ],
+  "schema_version": "1.2"
+}

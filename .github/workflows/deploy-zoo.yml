@@ -1,0 +1,78 @@
+# Phase 7: build the demo zoo and deploy to GitHub Pages — only on green.
+#
+# Runs on every push to main and on dispatch. The build job — typecheck,
+# lint, unit tests, the Playwright demo-page smoke, the weights guard and the
+# release gate — runs everywhere; the deploy job runs only where the
+# repository variable PAGES_ENABLED is 'true' (the public mirror), so the
+# private lab repo gets the build as a CI check and never deploys.
+name: deploy-zoo
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          # 22+: the generator and test runner invoke node with --experimental-strip-types.
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run typecheck
+      - run: npm run lint
+      # Unit tests + the headless smoke on one example demo page (DoD gate).
+      - run: npm test
+      - run: npm run build
+      # Weights guard: the site output must never contain model binaries.
+      - name: assert no model weights in site output
+        run: |
+          if find dist -name '*.tflite' | grep -q .; then
+            echo 'model weights found in site output' >&2
+            exit 1
+          fi
+      # Release gate (Phase 12.3): benchmark-scope guard, disclosure line on
+      # every surface incl. each generated page, example-provenance banners.
+      # Runs on every dispatch so the flip runbook's CI path is always the
+      # already-rehearsed one.
+      - uses: astral-sh/setup-uv@v5
+      - name: release-gate
+        working-directory: .
+        run: |
+          uv sync --frozen
+          uv run edge-compat release-gate --site-dist site/dist
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    # Deploys only where the repository variable is set (the public mirror):
+    #   gh variable set PAGES_ENABLED --body true -R <owner>/<repo>
+    # In the private lab repo the variable is absent, so this job is skipped.
+    if: vars.PAGES_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

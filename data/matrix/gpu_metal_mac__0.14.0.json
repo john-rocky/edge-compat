@@ -1,0 +1,125 @@
+{
+  "backend": "gpu_metal_mac",
+  "entries": [
+    {
+      "conditions": "delegate error: Tensor type(INT64) is not supported. — observed in the LFM2.5 ShortConv conv path (prefill signature); the int64 tensors originate from a litert-torch local patch (valid_len = mask.sum()), converter-lowering context only",
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-07-22",
+        "litert_version": "0.14.0",
+        "source_model": "LFM2.5-1.2B-Instruct_int4"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "int64 delegate rejection removed",
+          "rewrite": "convert the int64 valid-length computation to int32/float32 before export",
+          "symptom": "GPU delegate rejects int64 ADD emitted by the ShortConv valid-length computation"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Tensor type(INT64) is not supported. — observed in the LFM2.5 ShortConv conv path (prefill signature); the int64 tensors originate from a litert-torch local patch (valid_len = mask.sum()), converter-lowering context only",
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-07-22",
+        "litert_version": "0.14.0",
+        "source_model": "LFM2.5-1.2B-Instruct_int4"
+      },
+      "op": "CAST",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "int64 delegate rejection removed",
+          "rewrite": "convert the int64 valid-length computation to int32/float32 before export",
+          "symptom": "GPU delegate rejects int64 CAST emitted by the ShortConv valid-length computation"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Operation is not supported. — GATHER_ND emitted by a litert-torch local patch index_select lowering (converter-lowering context, not a delegate constraint)",
+      "evidence": {
+        "date": "2026-07-22",
+        "litert_version": "0.14.0",
+        "source_model": "LFM2.5-1.2B-Instruct_int4"
+      },
+      "op": "GATHER_ND",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "GATHER_ND rejection disappears (per source note, remaining int64 ops would still block full delegation)",
+          "rewrite": "one-hot based index_select lowering (litert-torch acc9eef)",
+          "symptom": "GPU delegate rejects GATHER_ND emitted by the index_select lowering"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Can't parse inputs with const tensors.",
+      "evidence": {
+        "date": "2026-07-22",
+        "litert_version": "0.14.0",
+        "source_model": "LFM2.5-1.2B-Instruct_int4"
+      },
+      "op": "GREATER_EQUAL",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Can't parse inputs with const tensors.",
+      "evidence": {
+        "date": "2026-07-22",
+        "litert_version": "0.14.0",
+        "source_model": "LFM2.5-1.2B-Instruct_int4"
+      },
+      "op": "LESS_EQUAL",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate lists STABLEHLO_COMPOSITE: odml.softmax as not supported — only the odml.softmax composite is named by the error; no statement about other composite names",
+      "constraints": {
+        "composite_name": "odml.softmax"
+      },
+      "evidence": {
+        "date": "2026-07-29",
+        "litert_version": "0.14.0",
+        "source_model": "lfm25-12b-instruct-wi8-conv030-092"
+      },
+      "op": "STABLEHLO_COMPOSITE",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Tensor type(INT64) is not supported. — observed in the LFM2.5 ShortConv conv path (prefill signature); the int64 tensors originate from a litert-torch local patch (valid_len = mask.sum()), converter-lowering context only",
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-07-22",
+        "litert_version": "0.14.0",
+        "source_model": "LFM2.5-1.2B-Instruct_int4"
+      },
+      "op": "SUM",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "int64 delegate rejection removed",
+          "rewrite": "convert the int64 valid-length computation to int32/float32 before export",
+          "symptom": "GPU delegate rejects int64 SUM emitted by the ShortConv valid-length computation"
+        }
+      ],
+      "status": "fallback"
+    }
+  ],
+  "generated_at": "2026-08-11",
+  "litert_version": "0.14.0",
+  "schema_version": "1.0"
+}

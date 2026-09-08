@@ -1,0 +1,30 @@
+{
+ "id": "granularity-op-count-null",
+ "category": "null-result",
+ "title": "serial op count: ~0.4 us/op - granularity does not explain slow graphs",
+ "rewrite": {
+  "from": "one fat op (6.6 GF single CONV_2D)",
+  "to": "3000 serial Conv+ReLU pairs of equal total FLOPs",
+  "equivalence": "not-equivalent",
+  "equivalence_evidence": "matched-FLOPs, different graphs (a cost-model measurement, not a rewrite to apply)"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-28",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 2.692,
+  "after_ms": 1.689,
+  "probe": "probe_grmono vs probe_gr3000; curve: N=10/100/1000/3000 = 0.52/0.54/1.19/1.69 ms (0.5 ms invoke floor + ~0.4 us/op)"
+ },
+ "factor": 1.59,
+ "scope": "1x1 conv chains c=32; the split form BEATS the monolith 1.6x. Kills 'zipformer is slow because 3085 ops' (would account for ~1.5 ms of ~82)",
+ "notes": "GPU control: gr300 2.63 ms vs NPU 0.61 - the NPU is the better fine-granularity engine here",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

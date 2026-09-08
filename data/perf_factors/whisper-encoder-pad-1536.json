@@ -1,0 +1,31 @@
+{
+ "id": "whisper-encoder-pad-1536",
+ "category": "shape",
+ "title": "whisper-tiny encoder T=1500 -> 1536 pad: 2.00x NPU, bit-exact (real model)",
+ "rewrite": {
+  "from": "whisper-tiny encoder at native T=1500 (mel 3000)",
+  "to": "mel zero-padded to 3072, checkpoint pos table + formula tail rows, conv1 tail re-zero mask, key mask -1e4, output sliced to [1,1500,384]",
+  "equivalence": "identity",
+  "equivalence_evidence": "bit-exact vs same-builder T=1500 control on host (max_abs 0.0); end-to-end transcripts through the ONNX decoder identical on both test clips"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-28",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 35.82,
+  "after_ms": 17.921,
+  "probe": "probe_wh_ctrl vs probe_wh_pad1536 (build_whisper_pad.py)",
+  "gpu_control": "GPU 26.9 -> 31.6 ms (+17%) - the padded encoder flips from losing 0.75x to winning 1.5x vs GPU"
+ },
+ "factor": 2.0,
+ "scope": "third real-model flip (after DINOv2-S 2.05x and TIPSv2 2.30x). Drop-in for the decoder; app change = pad the mel to 3072 columns",
+ "notes": "realizes the seq-1500-to-1536 probe row's projection (predicted ~15-16 ms, landed 17.9)",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

@@ -1,0 +1,31 @@
+{
+ "id": "pixelshuffle-to-zerostuff-conv",
+ "category": "rewrite",
+ "title": "PixelShuffle (TRANSPOSE/RESHAPE lowering) -> zero-stuff + Conv2d",
+ "rewrite": {
+  "from": "litert-torch PixelShuffle lowering: TRANSPOSE x8 + RESHAPE chain",
+  "to": "nearest-upsample x mask + Conv2d with shuffle-permutation weights (EDSR recipe)",
+  "equivalence": "bit-exact",
+  "equivalence_evidence": "probe outputs max_abs_diff 0.0"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-24",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 16.166,
+  "after_ms": 5.447,
+  "probe": "probe_ps vs probe_zs (8-conv SR stack, 48ch@160px, two 2x shuffles)",
+  "gpu_control": "PixelShuffle form REFUSES to compile on ML Drift; zero-stuff runs 9.8 ms (NPU 1.81x faster)"
+ },
+ "factor": 2.97,
+ "scope": "synthetic SR probe. The zoo's EDSR/Real-ESRGAN already ship the zero-stuff form (adopted for GPU compat) \u2014 it is also the NPU-fast form.",
+ "notes": "The naive PixelShuffle path is both GPU-incompatible and 3x slower on the NPU.",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

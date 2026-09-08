@@ -1,0 +1,30 @@
+{
+ "id": "erf-spelling-to-builtin-gelu",
+ "category": "rewrite",
+ "title": "torch.erf spelling -> builtin GELU op (no ERF builtin exists)",
+ "rewrite": {
+  "from": "torch.erf in the exact-GELU formula - converter emits a 96-op clamp+rational approximation (MINIMUM/MAXIMUM/DIV + MUL/ADD chain)",
+  "to": "builtin GELU op (approximate=False)",
+  "equivalence": "approximation",
+  "equivalence_evidence": "erf = erf; the emitted approximation is itself the numerics change, the builtin op is closer to exact"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-28",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 89.828,
+  "after_ms": 23.702,
+  "probe": "probe_fx_erf (erf chain in the gelu slot) vs probe_fx_relu (empty-slot control) = 3.79x; real-model anchor: DINOv2-S erf-op build 41.9 ms vs tanh-chain 85.9 (exp 4)"
+ },
+ "factor": 3.79,
+ "scope": "the erf chain is WORSE than the tanh chain (54.0 ms) - torch.erf is the single worst GELU spelling on this NPU",
+ "notes": "full fusion-slot family (same chain, one op X): LOGISTIC 18.5 / EXP 20.6 / POW 22.3 / empty 23.7 / MAXIMUM 25.3 / ABS 26.4 / SQRT,RSQRT 31.6 / TANH 54.0 / erf-chain 89.8. LOGISTIC/EXP/POW beat the empty control - HTP pattern choice is non-monotonic, do not model as baseline+op-cost",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

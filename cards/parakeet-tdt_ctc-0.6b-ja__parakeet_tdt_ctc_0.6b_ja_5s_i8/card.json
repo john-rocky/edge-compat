@@ -1,0 +1,275 @@
+{
+  "artifacts": [
+    {
+      "file": "parakeet_tdt_ctc_0.6b_ja_5s_i8.tflite",
+      "sha256": "6ab11f31e97f21b8bc5454be6ed59c66413ce7329ba14f9fd2930398587229c8",
+      "size_mb": 579.747
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-13",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 1184.507,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-13",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": null,
+        "loads": false,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": false
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-13/parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8.json"
+  },
+  "conversion": {
+    "command": "python stageA_ja.py && python stageB_ja.py --quant=drq --output=parakeet_tdt_ctc_0.6b_ja_5s_i8.tflite  # two-process split of convert_to_tflite.py --model=nvidia/parakeet-tdt_ctc-0.6b-ja --quant=drq --input_sec=5",
+    "quantization": "int8 dynamic-range channelwise weights, fp32 activations (the pipeline's drq recipe)",
+    "tool": "litert-torch via the official litert-samples speech_recognition convert pipeline (ParakeetTDT path; ParakeetTDTCTCJa subclass, litert-samples#277)",
+    "tool_version": "0.10.0 (editable dev checkout 115a136)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": "LiteRtException: Failed to compile model",
+          "evidence": [
+            "LiteRtException: Failed to compile model"
+          ],
+          "failure_class": "compile_failed",
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": false,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-27/parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT (Hexagon, AOT host-compiled, SM8850 target)"
+          },
+          "error": "AOT compile failed on host (SM8850 target): O ]  vtcm_wrapper.cc:278:0x7ffffffc4c80 Acquired Cache, ctx = 0x0, ptr=0x7fffadfff800\n     0.0ms [ ERROR ]  tcm_migration.cc:2350::ERROR:Operator named q::* …[trace truncated]",
+          "evidence": [
+            "AOT compile failed on host (SM8850 target): O ]  vtcm_wrapper.cc:278:0x7ffffffc4c80 Acquired Cache, ctx = 0x0, ptr=0x7fffadfff800\n     0.0ms [ ERROR ]  tcm_migration.cc:2350::ERROR:Operator named q::* …[trace truncated]"
+          ],
+          "failure_class": "aot_compile_failed",
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": false,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-27/parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8__galaxy-s26.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert",
+            "runtime_version": "2.2.0.dev20260804",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+            "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "invocation 0: exit=0 wall_s=8.7 temp 47.2->56.0C throttled=0x0 xnnpack=True median_us=110356.0 runs=50 footprint_peak_mb=1539.05",
+            "invocation 1: exit=0 wall_s=8.8 temp 51.0->57.1C throttled=0x0 xnnpack=True median_us=110603.0 runs=50 footprint_peak_mb=1539.05",
+            "invocation 2: exit=0 wall_s=8.7 temp 49.4->57.1C throttled=0x0 xnnpack=True median_us=109624.0 runs=50 footprint_peak_mb=1539.55",
+            "--signature_to_run_for=decode (file signatures: decode, encode)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 110.356,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_ms": 2004.12,
+            "invocations": 3,
+            "iterations": 150,
+            "latency_max_ms": 112.155,
+            "latency_min_ms": 109.155,
+            "threads": 4,
+            "warmup_runs_per_invocation": 10
+          },
+          "output_match": null,
+          "peak_mem_mb": 1539.55,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "decode",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0.dev20260804/2026-08-31/parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8__raspberry-pi-5.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert",
+            "runtime_version": "2.2.0.dev20260804",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+            "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "invocation 0: exit=0 wall_s=18.6 temp 51.0->61.5C throttled=0x0 xnnpack=True median_us=276022.0 runs=50 footprint_peak_mb=1422.05",
+            "invocation 1: exit=0 wall_s=18.5 temp 51.0->63.7C throttled=0x0 xnnpack=True median_us=273816.0 runs=50 footprint_peak_mb=1422.05",
+            "invocation 2: exit=0 wall_s=18.6 temp 51.6->62.0C throttled=0x0 xnnpack=True median_us=275894.0 runs=50 footprint_peak_mb=1422.05",
+            "--signature_to_run_for=encode (file signatures: decode, encode)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 275.894,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_ms": 1990.45,
+            "invocations": 3,
+            "iterations": 150,
+            "latency_max_ms": 277.765,
+            "latency_min_ms": 272.45,
+            "threads": 4,
+            "warmup_runs_per_invocation": 10
+          },
+          "output_match": null,
+          "peak_mem_mb": 1422.05,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "encode",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0.dev20260804/2026-08-31/parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "parakeet",
+    "id": "parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8",
+    "license": "cc-by-4.0",
+    "source_url": "https://huggingface.co/litert-community/parakeet-tdt_ctc-0.6b-ja",
+    "task": "automatic-speech-recognition"
+  },
+  "pitfalls": [
+    "Two signatures: encode (log-mel [1,80,500] -> [1,1024,63]) + decode (stateless 64-token TDT loop; logits [1,63,64,3078] = 3072 tokens + blank 3072 + 5 durations). 80 mel bins (v3 uses 128); NeMo preprocessing: preemph 0.97, n_fft 512, win 25 ms, hop 10 ms, per-feature norm (measured; HF card).",
+    "This i8 variant FAILS GPU compile on Mali (Pixel 8a): ML Drift 'Unable to parse bc coord for BATCH axis', litert 2.1.3 and 2.1.5; the f32 sibling compiles and runs on the same GPU. On Mali devices run i8 on CPU (verified: encode 1157 ms, decode 380 ms/call) (measured 2026-08-13).",
+    "i8 fidelity vs the fp32/NeMo output: 14/28 five-second windows identical, joined CER 6.1% on a 137 s CC0 test read; the f32 variant is exact (28/28, CER 0.0) (measured).",
+    "NeMo trap for anyone re-deriving references: model.transcribe() leaves decoder/joint in training mode (dropout on) — compute reference tensors before transcribe(), or re-.eval() after (measured; caused a false parity failure).",
+    "tokenizer.json in the repo is converted from the NeMo SentencePiece model (nvidia repo ships only the .nemo); decode parity vs SentencePiece verified on 200 random id sequences + real text (measured)."
+  ],
+  "schema_version": "1.2"
+}

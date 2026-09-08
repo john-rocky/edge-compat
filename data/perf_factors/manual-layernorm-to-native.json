@@ -1,0 +1,30 @@
+{
+ "id": "manual-layernorm-to-native",
+ "category": "rewrite",
+ "title": "hand-decomposed LayerNorm (SUM/MUL chains) -> native LN lowering",
+ "rewrite": {
+  "to": "torch LayerNorm lowering (MEAN / SQUARED_DIFFERENCE / RSQRT)",
+  "equivalence": "bit-exact",
+  "equivalence_evidence": "algebraically identical variance; probe outputs match",
+  "from": "mean/var via SUM and MUL chains (manual LN)"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-24",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 11.409,
+  "after_ms": 9.359,
+  "probe": "probe_manln1024 vs probe_t1024"
+ },
+ "factor": 1.22,
+ "scope": "synthetic probe, d=384; SafeLayerNorm (pre-square scaled) variant measured separately (row pending)",
+ "notes": "The zoo's SafeLN exists for GPU fp16 overflow safety; on NPU it is a small tax.",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

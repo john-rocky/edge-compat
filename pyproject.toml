@@ -1,0 +1,70 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "edge-compat"
+version = "0.1.0"
+description = "Delegate compatibility matrix, static GPU-fallback linter, and measured perf cards for LiteRT (unofficial; not a Google product)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dependencies = [
+    "typer>=0.12",
+    "jsonschema>=4.21",
+    "flatbuffers>=2.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+# The Phase 14 MCP server (mcp/server.py). The core toolkit stays
+# dependency-minimal; without this extra the server refuses to start and the
+# MCP client-session tests skip.
+mcp = [
+    "mcp>=2,<3",
+]
+# Backend runners for the Phase 8 probe suite. The core toolkit stays
+# dependency-minimal; without this extra, runners report "unavailable" and
+# release-check keeps affected entries honestly `inferred`.
+runners = [
+    "ai-edge-litert>=2.0",
+    # compiled_model (the GPU path) imports ml_dtypes but ai-edge-litert 2.1.6
+    # does not declare it; without it only the CPU interpreter works.
+    "ml_dtypes>=0.5",
+    "numpy>=1.26",
+]
+
+[project.scripts]
+edge-compat = "litert_compat.cli:app"
+edge-lint = "litert_compat.lint.cli:app"
+edge-card = "litert_compat.cards.cli:app"
+edge-fix = "litert_compat.fix.cli:app"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "ruff>=0.5",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/litert_compat"]
+
+# The canonical schema files live at the repo root (`schemas/` is the public
+# contract); bundle them into built wheels so installed packages can validate.
+[tool.hatch.build.targets.wheel.force-include]
+"schemas" = "litert_compat/schemas"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "hardware: exercises a local GPU or attached device; skipped when unavailable",
+]

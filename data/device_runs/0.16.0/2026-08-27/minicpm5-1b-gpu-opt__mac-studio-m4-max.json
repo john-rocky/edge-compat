@@ -1,0 +1,58 @@
+{
+  "artifact": "minicpm_wi4b32_wi8_afp32_gpu_opt.litertlm",
+  "device": "mac-studio-m4-max",
+  "model_id": "minicpm5-1b-gpu-opt",
+  "quantization": "wi4b32_wi8_afp32 (gpu-opt)",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 672,
+      "date": "2026-08-27",
+      "decode_tokens_per_s": 123.19,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "os_build": "iOS Version 27.0 (Build 26A5416b)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "device.modelIdentifier=Mac16,9",
+        "throughput taken from task 'short-chat' (128 generated tokens, 2026-08-27T01:13:11Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 4 task file(s)",
+        "'short-chat': 4 runs of one task — throughput = median of 3 warm run(s); cold decode kept in metrics (1 cold run(s))",
+        "[short-chat 2026-08-27T01:13:03Z] prefill=100.13649856460587 decode=122.64495047333601 ttft_ms=856.0 peak_mb=478.12630462646484 stop=length output='\\\\n\\\\n**On-device AI** is a simple way to think abou …[trace truncated]",
+        "[short-chat 2026-08-27T01:13:06Z] prefill=873.785372797908 decode=122.30486703608429 ttft_ms=612.0 peak_mb=476.81380462646484 stop=length output='\\\\n\\\\n**On-device AI** is a simple way to think about  …[trace truncated]",
+        "[short-chat 2026-08-27T01:13:08Z] prefill=878.9438154063295 decode=123.18731980669855 ttft_ms=603.0 peak_mb=477.17317962646484 stop=length output='\\\\n\\\\n**On-device AI** is a simple way to think about …[trace truncated]",
+        "[short-chat 2026-08-27T01:13:11Z] prefill=878.1301553100509 decode=123.9224520570822 ttft_ms=601.0 peak_mb=477.40755462646484 stop=length output='\\\\n\\\\n**On-device AI** is a simple way to think about  …[trace truncated]"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "short_chat.cold_decode_tokens_per_s": 122.64495,
+        "short_chat.decode_spread_pct": 1.31,
+        "short_chat.decode_tokens_per_s": 123.18732,
+        "short_chat.generated_tokens": 128.0,
+        "short_chat.n_runs": 4.0,
+        "short_chat.peak_mem_mb": 478.126305,
+        "short_chat.prefill_tokens_per_s": 878.130155,
+        "short_chat.prompt_tokens": 20.0,
+        "short_chat.ttft_ms": 603.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 478.126,
+      "prefill_tokens_per_s": 878.13,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 603.0
+    }
+  ],
+  "schema_version": "1.0"
+}

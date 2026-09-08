@@ -1,0 +1,389 @@
+{
+  "artifacts": [
+    {
+      "file": "granite-4.0-h-350m_int8_gpu.litertlm",
+      "sha256": "f85136cfd308676e8da5182ca4f29a5d4d63d9bb3d230d9c6e837d5b39a05086",
+      "size_mb": 458.926
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "PATH=$REPO/.venv-092/bin:$PATH PYTHONPATH=$HOME/code/litert-torch $REPO/.venv-092/bin/python $PUB/granite_work/convert_granite4h.py ibm-granite/granite-4.0-h-350m $HERE/out_350m && $REPO/.venv-092/bin/python $PUB/granite_work/drop_start_token.py $HERE/out_350m/granite-4.0-h-350m_int8.litertlm $HERE/granite-4.0-h-350m_int8_nobos.litertlm && $REPO/.venv-092/bin/python $REPO/scripts/set_activation_type.py $HERE/granite-4.0-h-350m_int8_nobos.litertlm $HERE/granite-4.0-h-350m_int8_gpu.litertlm --type fp32  # granite_work/gpu_reexport_20260827/build_350m_gpu.sh:30,39,43 verbatim (step 1 guarded by an existence check); REPO=~/code/litertlm-convert, PUB=~/code/hf-to-litertlm, HERE=$REPO/granite_work/gpu_reexport_20260827",
+    "quantization": "int8 (same weights as the published _int8; re-export changes the scan graph, not the quant)",
+    "tool": "litert-torch (granite ext, folded-SSD rewrite)",
+    "tool_version": "litert-torch 0.10.0 (the checkout's in-tree next-version constant, not a release): ~/code/litert-torch at upstream 115a136, reached via PYTHONPATH (build_350m_gpu.sh:22), which shadows .venv-092's installed 0.9.2 — and the granite ext is uncommitted working-tree state there. Build venv .venv-092, py3.12.13: litert-lm / litert-lm-builder 0.15.0, ai-edge-quantizer 0.8.0, litert-converter 0.3.0. Re-export 2026-08-27."
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": 95.16,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=296.78 decode=95.16 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 122.0,
+            "init_s": 0.80326,
+            "prefill_tokens": 224.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 296.78,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 770.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-27/granite-4.0-h-350m-int8-gpu__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": 47.87,
+          "delegated_ops": 3512,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 3402 out of 3402 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 3402 out of 3402 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 3374 out of 3374 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 3512 out of 3512 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=484.0 decode=47.87 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 141.0,
+            "init_s": 9.59343,
+            "prefill_tokens": 224.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 484.0,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 3512,
+          "ttft_ms": 480.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-27/granite-4.0-h-350m-int8-gpu__galaxy-s26.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-28",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "iPhone 17 Pro",
+            "machine_label": "iphone-17-pro",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.15.0",
+            "soc": "A19-Pro",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "G41_START backend=cpu maxTokens=512",
+            "G41_MODEL model.litertlm bytes=481218880",
+            "G41_CTX bundle-default",
+            "G41_INIT 0.99 s",
+            "G41_SCORE 7/8",
+            "G41_DONE",
+            "The app terminated with the exit code 0.",
+            "INFO: Created TensorFlow Lite XNNPACK delegate for CPU. (no 'Initializing Metal-based API' line in this leg; 'GPU Metal' appears only as a registered accelerator, never used)",
+            "greedy output byte-identical between the GPU and CPU legs on this handset: both G41_ANSWER lines are 264 B with sha256 52ab67cbb030ae4d00f63c7e2e9730e9c9055d4319a7875e3d1b40be07277d7c (cmp exit 0), and the per-question verdicts match one for one (7 OK, 'G41_Q BAD rhyme=blue' on both). No numerical comparison was performed, so output_match stays null and this is carried as evidence.",
+            "the 7/8 miss is the rhyme question ('G41_Q BAD rhyme=blue') on both backends — model behaviour, not a backend difference.",
+            "staged as Documents/model.litertlm by iphone_gate.sh; copy.log reports 'File Size: 458.9 MB' on the device, which is 458.9 MiB = 481,218,880 B, matching the G41_MODEL byte count and the built artifact.",
+            "G41DeviceTest generation gate (eight fixed questions scored by regex), not litert_lm_main --benchmark: the log carries no throughput, no TTFT and no peak-memory figure, so those fields stay null rather than 0.",
+            "runtime_version 0.15.0, not the 0.16.0 every other iphone-17-pro row carries: this gate ran under G41DeviceTest, which links swift-litert-lm (Package.swift: liteRTLMVersion = \"v0.15.0\"), not the BenchmarkApp that produced those rows. The resolved CLiteRTLM.xcframework ios-arm64 slice and the CLiteRTLM.framework embedded in the installed G41DeviceTest.app share LC_UUID BD35C88F-B768-3842-B525-B3F54B900F01, and the bundle UUID that binary was installed under (F4ACA380-97ED-40B9-B0B0-956EA01C04BC) is the one this console log prints. The engine binary versions the run.",
+            "litertlm-convert/granite_work/gpu_reexport_20260827/iphone/console_cpu.log"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_s": 0.99,
+            "max_num_tokens": 512.0,
+            "sanity_8q_correct": 7.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.15.0/2026-08-28/granite-4.0-h-350m-int8-gpu__iphone-17-pro.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-28",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "iPhone 17 Pro",
+            "machine_label": "iphone-17-pro",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.15.0",
+            "soc": "A19-Pro",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "G41_START backend=gpu maxTokens=512",
+            "G41_MODEL model.litertlm bytes=481218880",
+            "G41_CTX bundle-default",
+            "G41_INIT 13.59 s",
+            "G41_SCORE 7/8",
+            "G41_DONE",
+            "The app terminated with the exit code 0.",
+            "engine init 13.59 s on Metal against 0.99 s on CPU is a real cost, and it is NOT TTFT — this gate measures no first-token latency (gpu_reexport_20260827/RESULTS.md).",
+            "12 Metal delegate kernels initialised ('Initializing Metal-based API from serialized data.' x12, 11 reporting 'Total 128 external tensors' and one 'Total 129'); the log carries no 'Replacing N out of M node(s) with delegate' line, so delegated_ops/total_ops/full_delegation are not measurable from it.",
+            "AGX: exceeded compiled variants footprint limit",
+            "W0000 sampler_factory.cc:565] Metal sampler not available, falling back to statically linked C API: UNAVAILABLE: Could not load shared library libLiteRtTopKMetalSampler.dylib — both legs therefore sampled through the same statically linked path.",
+            "INFO: [gpu_environment.cc:367] Failed to create OpenCL context. / INFO: [gpu_environment.cc:374] Created Metal device from provided device id",
+            "greedy output byte-identical between the GPU and CPU legs on this handset: both G41_ANSWER lines are 264 B with sha256 52ab67cbb030ae4d00f63c7e2e9730e9c9055d4319a7875e3d1b40be07277d7c (cmp exit 0), and the per-question verdicts match one for one (7 OK, 'G41_Q BAD rhyme=blue' on both). No numerical comparison was performed, so output_match stays null and this is carried as evidence.",
+            "the 7/8 miss is the rhyme question ('G41_Q BAD rhyme=blue') on both backends — model behaviour, not a backend difference.",
+            "staged as Documents/model.litertlm by iphone_gate.sh; copy.log reports 'File Size: 458.9 MB' on the device, which is 458.9 MiB = 481,218,880 B, matching the G41_MODEL byte count and the built artifact.",
+            "G41DeviceTest generation gate (eight fixed questions scored by regex), not litert_lm_main --benchmark: the log carries no throughput, no TTFT and no peak-memory figure, so those fields stay null rather than 0.",
+            "runtime_version 0.15.0, not the 0.16.0 every other iphone-17-pro row carries: this gate ran under G41DeviceTest, which links swift-litert-lm (Package.swift: liteRTLMVersion = \"v0.15.0\"), not the BenchmarkApp that produced those rows. The resolved CLiteRTLM.xcframework ios-arm64 slice and the CLiteRTLM.framework embedded in the installed G41DeviceTest.app share LC_UUID BD35C88F-B768-3842-B525-B3F54B900F01, and the bundle UUID that binary was installed under (F4ACA380-97ED-40B9-B0B0-956EA01C04BC) is the one this console log prints. The engine binary versions the run.",
+            "litertlm-convert/granite_work/gpu_reexport_20260827/iphone/console_gpu.log"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_s": 13.59,
+            "max_num_tokens": 512.0,
+            "sanity_8q_correct": 7.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.15.0/2026-08-28/granite-4.0-h-350m-int8-gpu__iphone-17-pro.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-07",
+          "decode_tokens_per_s": 40.7,
+          "delegated_ops": 3705,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 3154 out of 3402 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 3154 out of 3402 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 3126 out of 3374 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 3264 out of 3512 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=110.59 decode=40.7 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 122.0,
+            "init_s": 3.08778,
+            "prefill_tokens": 224.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 110.59,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 3890,
+          "ttft_ms": 2050.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-07/granite-4.0-h-350m-int8-gpu__pixel-8a.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-07",
+          "decode_tokens_per_s": 20.7,
+          "delegated_ops": 3512,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 3402 out of 3402 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 3402 out of 3402 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 3374 out of 3374 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 3512 out of 3512 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=180.07 decode=20.7 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 141.0,
+            "init_s": 37.2625,
+            "prefill_tokens": 224.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 180.07,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 3512,
+          "ttft_ms": 1290.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-07/granite-4.0-h-350m-int8-gpu__pixel-8a.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-02",
+          "decode_tokens_per_s": 14.04,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 11.4 s, output head '17'",
+            "invocation 0: exit=0 wall_s=56.0 temp 45.0->49.4C throttled=0x0 prefill_tps=88.23 decode_tps=14.04 ttft_s=2.9727 init_s=11.5988 peak_rss_mb=1173",
+            "invocation 1: exit=0 wall_s=54.0 temp 49.4->52.7C throttled=0x0 prefill_tps=88.49 decode_tps=14.23 ttft_s=2.9632 init_s=11.4515 peak_rss_mb=1174",
+            "invocation 2: exit=0 wall_s=56.0 temp 50.5->50.5C throttled=0x0 prefill_tps=88.4 decode_tps=14.02 ttft_s=2.9674 init_s=11.4196 peak_rss_mb=1173"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 14.23,
+            "decode_tps_min": 14.02,
+            "init_s": 11.4515,
+            "init_s_max": 11.5988,
+            "init_s_min": 11.4196,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 88.49,
+            "prefill_tps_min": 88.23,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 2.9727,
+            "ttft_s_min": 2.9632
+          },
+          "output_match": null,
+          "peak_mem_mb": 1174.0,
+          "prefill_tokens_per_s": 88.4,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 2967.4
+        },
+        "source": "data/device_runs/0.16.1/2026-09-02/granite-4.0-h-350m-int8-gpu__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "granite-4.0-h",
+    "id": "granite-4.0-h-350m-int8-gpu",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/ibm-granite/granite-4.0-h-350m",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "The plain _int8/_fp16 files FAIL GPU delegation on Adreno at 109/3673 ops (mamba layer rank-5/6 intermediates; 'bad input dims size: 6', invalid TRANSPOSE). This _int8_gpu re-export writes the Mamba2 selective scan as rank<=4 batched matmuls and declares fp32 activations; on the Galaxy S26 it delegates in full (3512/3512 x12 subgraphs, litert-lm 0.16.0) (gpu_reexport_20260827/RESULTS.md; device_runs 2026-08-27).",
+    "The 'official granite-4.0-350m PASSes so this is a graph-shape difference' framing is wrong and was retracted: that repo is an all-attention dense reinterpretation with zero mamba layers. The valid contrast is h-350m vs h-1b, same architecture — h-1b PASSes on the same folded scan (RESULTS.md, s5_candidates.md correction).",
+    "It is ~45 MB larger than _int8 because each short prefill signature is padded to a full 256-token chunk with a stored constant instead of a PAD op — the trade that lets the graph delegate (published HF card).",
+    "Engine-reuse band: reusing one Engine across conversations with a growing shared prefix can stop replies early; on _int8 this appears at chat-templated lengths 33-37, on _int8_gpu at 37-41 (the folded scan changes the graph, so the band moves). Fresh Engine per conversation is clean at every tested length (LiteRT-LM#3165; published HF card; 92139d3)."
+  ],
+  "schema_version": "1.2"
+}

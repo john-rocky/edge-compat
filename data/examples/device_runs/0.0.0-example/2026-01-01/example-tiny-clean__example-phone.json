@@ -1,0 +1,74 @@
+{
+  "artifact": "model_clean_example.tflite",
+  "device": "example-phone",
+  "model_id": "example-tiny-clean",
+  "notes": "Example fixture for the .tflite-on-NPU lane — pipeline data, not a real device measurement.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-01-01",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Example Phone",
+        "machine_label": "example-phone",
+        "os_build": "EXAMPLE.240001.001",
+        "runtime": "litert",
+        "runtime_version": "0.0.0-example",
+        "soc": "Example SoC",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 4.8,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": 9.0,
+      "prefill_tokens_per_s": null,
+      "provenance": "example",
+      "runs": true,
+      "ttft_ms": null,
+      "total_ops": null
+    },
+    {
+      "accelerator": "npu_qnn",
+      "context_length": null,
+      "date": "2026-01-01",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 2,
+      "env": {
+        "device": "Example Phone",
+        "machine_label": "example-phone",
+        "os_build": "EXAMPLE.240001.001",
+        "runtime": "litert",
+        "runtime_version": "0.0.0-example",
+        "soc": "Example SoC",
+        "vendor_sdk": "QNN SDK 0.0.0-example"
+      },
+      "error": null,
+      "evidence": [
+        "EXAMPLE: 2 operations will run on the NPU, and the remaining 1 operations will run on the CPU."
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": 1.2,
+      "loads": true,
+      "max_abs_diff": 2e-06,
+      "max_rel_diff": 1e-06,
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "example",
+      "runs": true,
+      "ttft_ms": null,
+      "total_ops": 3
+    }
+  ],
+  "schema_version": "1.0"
+}

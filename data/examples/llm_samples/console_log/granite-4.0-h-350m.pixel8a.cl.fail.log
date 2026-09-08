@@ -1,0 +1,16 @@
+ERROR: Following operations are not supported by GPU delegate:
+ADD: Tensor dimensions must be less than 5. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.granitemoehybrid.m
+BROADCAST_TO: Operation is not supported.
+CAST: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.granitemoehybrid.mo
+CONCATENATION: Tensor dimensions must be less than 5. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.granitem
+CUMSUM: Tensor dimensions must be less than 5. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.granitemoehybri
+EXP: Tensor dimensions must be less than 5. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.granitemoehybrid.m
+MUL: Tensor "litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.granitemoehybrid.modeling_granitemoehybrid.Granit
+RESHAPE: Tensor "litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.granitemoehybrid.modeling_granitemoehybrid.Gr
+SELECT_V2: Tensor dimensions must be less than 5. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.granitemoehy
+SLICE: Slicing is unsupported for input with rank > 4
+SUM: Tensor "litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.granitemoehybrid.modeling_granitemoehybrid.Granit
+TRANSPOSE: Permutation for transpose is invalid.
+109 operations will run on the GPU, and the remaining 3564 operations will run on the CPU.
+VERBOSE: Replacing 109 out of 3673 node(s) with delegate (LITERT_CL) node, yielding 3 partitions for subgraph 0 (prefill_1024).
+F0000 00:00:1786540275.143950    6954 litert_lm_main.cc:187] Check failed: MainHelper(argc, argv) is OK (UNKNOWN: ERROR: [runtime/executor/llm_litert_

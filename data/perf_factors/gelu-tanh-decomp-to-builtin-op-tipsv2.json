@@ -1,0 +1,31 @@
+{
+ "schema_version": "1.0",
+ "provenance": "measured",
+ "id": "gelu-tanh-decomp-to-builtin-op-tipsv2",
+ "category": "rewrite",
+ "title": "tanh-GELU decomposition -> builtin GELU op, second real model (TIPSv2-B14-DPT)",
+ "rewrite": {
+  "from": "tanh-GELU elementwise chain (24 TANH sites: ViT-B blocks + DPT readout)",
+  "to": "builtin GELU op",
+  "equivalence": "approximation",
+  "equivalence_evidence": "vs shipped file: depth corr 0.999984, normals 0.999999, seg 0.999993 (erf is the official activation)"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-24",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 326.904,
+  "after_ms": 141.963,
+  "probe": "real TIPSv2-B14-DPT rebuild from official weights (npubench/factors + build_tipsv2_erf.py)",
+  "gpu_control": "GPU 282.5 -> 273.3 ms (flat)"
+ },
+ "factor": 2.3,
+ "scope": "one real model, ViT-B/14 backbone + 3 DPT heads at 448px. Combined with the DINOv2-S flip (2.05x): two for two on the TANH-carrying loser class.",
+ "notes": "Flips 0.86x loss into 1.92x win. fp16 bundle tipsv2_erf_fp16.tflite (318 MB, corr 0.999997+)."
+}

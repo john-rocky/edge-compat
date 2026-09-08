@@ -1,0 +1,52 @@
+{
+  "artifact": "LFM2.5-1.2B-Thinking_int4_gpu.litertlm",
+  "device": "iphone-17-pro",
+  "model_id": "lfm25-12b-thinking-int4-gpu-093",
+  "quantization": "int4",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 1024,
+      "date": "2026-08-25",
+      "decode_tokens_per_s": 69.66,
+      "delegated_ops": null,
+      "env": {
+        "device": "iphone-17-pro",
+        "machine_label": "iphone-17-pro-charging",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "A19-Pro",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "maxNumTokens=1024; thinking model \u2014 TTFT includes the thinking phase (554 tokens generated total), final answer coherent; all Metal kernels initialize, zero half4/float4",
+        "device charging during run (functional gate)",
+        "litertlm-convert/minicpm5_work/ship_lfm25_gpu_0160/device_gate_20260825_maxtok/console_thinking_maxtok1024.log"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "short-chat.decode_tokens_per_s": 69.66,
+        "short-chat.generated_tokens": 554.0,
+        "short-chat.peak_mem_mb": 680.0,
+        "short-chat.prefill_tokens_per_s": 531.0,
+        "short-chat.prompt_tokens": 21.0,
+        "short-chat.ttft_ms": 6463.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 680.0,
+      "prefill_tokens_per_s": 531.0,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 6463.0
+    }
+  ],
+  "schema_version": "1.0"
+}

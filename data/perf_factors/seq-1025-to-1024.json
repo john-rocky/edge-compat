@@ -1,0 +1,30 @@
+{
+ "id": "seq-1025-to-1024",
+ "category": "shape",
+ "title": "sequence 1025 (2^k + CLS token) -> 1024",
+ "rewrite": {
+  "to": "T=1024",
+  "equivalence": "not-equivalent",
+  "equivalence_evidence": "shape change; applying it to a real ViT means dropping/merging a token or padding+mask",
+  "from": "T=1025 rank-3 activations through attention"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-24",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 12.287,
+  "after_ms": 9.359,
+  "probe": "probe_t1025 vs probe_t1024 (matched compute +0.1%)"
+ },
+ "factor": 1.31,
+ "scope": "synthetic probe; the +1 token is exactly what a CLS token does to a 32x32 patch grid",
+ "notes": "One extra token cost 31% on the NPU. JIT compile also 2x slower at 1025.",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

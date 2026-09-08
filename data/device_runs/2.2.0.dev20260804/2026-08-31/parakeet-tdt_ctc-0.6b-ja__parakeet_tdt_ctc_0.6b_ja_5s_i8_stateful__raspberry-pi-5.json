@@ -1,0 +1,153 @@
+{
+  "artifact": "parakeet_tdt_ctc_0.6b_ja_5s_i8_stateful.tflite",
+  "device": "raspberry-pi-5",
+  "model_id": "parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8_stateful",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-08-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Raspberry Pi 5 Model B Rev 1.1",
+        "machine_label": "raspberry-pi-5",
+        "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+        "runtime": "litert",
+        "runtime_version": "2.2.0.dev20260804",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+        "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+        "invocation 0: exit=0 wall_s=3.0 temp 51.0->54.9C throttled=0x0 xnnpack=True median_us=6894.0 runs=144 footprint_peak_mb=1216.55",
+        "invocation 1: exit=0 wall_s=3.2 temp 49.4->56.0C throttled=0x0 xnnpack=True median_us=6981.0 runs=142 footprint_peak_mb=1217.05",
+        "invocation 2: exit=0 wall_s=10.3 temp 49.9->54.3C throttled=0x0 xnnpack=True median_us=6805.0 runs=147 footprint_peak_mb=1217.05",
+        "--signature_to_run_for=decode (file signatures: decode, decode_1, encode)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 6.894,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "init_ms": 1684.72,
+        "invocations": 3,
+        "iterations": 433,
+        "latency_max_ms": 12.056,
+        "latency_min_ms": 6.697,
+        "threads": 4,
+        "warmup_runs_per_invocation": 10
+      },
+      "output_match": null,
+      "peak_mem_mb": 1217.05,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "decode",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-08-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Raspberry Pi 5 Model B Rev 1.1",
+        "machine_label": "raspberry-pi-5",
+        "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+        "runtime": "litert",
+        "runtime_version": "2.2.0.dev20260804",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+        "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+        "invocation 0: exit=0 wall_s=3.1 temp 49.9->55.4C throttled=0x0 xnnpack=True median_us=2060.0 runs=485 footprint_peak_mb=1210.03",
+        "invocation 1: exit=0 wall_s=3.1 temp 47.7->54.3C throttled=0x0 xnnpack=True median_us=1973.0 runs=506 footprint_peak_mb=1209.55",
+        "invocation 2: exit=0 wall_s=3.0 temp 49.4->56.0C throttled=0x0 xnnpack=True median_us=2033.0 runs=491 footprint_peak_mb=1210.03",
+        "--signature_to_run_for=decode_1 (file signatures: decode, decode_1, encode)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 2.033,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "init_ms": 1518.91,
+        "invocations": 3,
+        "iterations": 1482,
+        "latency_max_ms": 3.021,
+        "latency_min_ms": 1.917,
+        "threads": 4,
+        "warmup_runs_per_invocation": 10
+      },
+      "output_match": null,
+      "peak_mem_mb": 1210.03,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "decode_1",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-08-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Raspberry Pi 5 Model B Rev 1.1",
+        "machine_label": "raspberry-pi-5",
+        "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+        "runtime": "litert",
+        "runtime_version": "2.2.0.dev20260804",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+        "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+        "invocation 0: exit=0 wall_s=18.0 temp 48.8->60.4C throttled=0x0 xnnpack=True median_us=273074.0 runs=50 footprint_peak_mb=1233.03",
+        "invocation 1: exit=0 wall_s=18.0 temp 51.0->61.5C throttled=0x0 xnnpack=True median_us=273607.0 runs=50 footprint_peak_mb=1233.03",
+        "invocation 2: exit=0 wall_s=18.2 temp 48.8->61.5C throttled=0x0 xnnpack=True median_us=276782.0 runs=50 footprint_peak_mb=1233.55",
+        "--signature_to_run_for=encode (file signatures: decode, decode_1, encode)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 273.607,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "init_ms": 1522.8,
+        "invocations": 3,
+        "iterations": 150,
+        "latency_max_ms": 281.131,
+        "latency_min_ms": 272.13,
+        "threads": 4,
+        "warmup_runs_per_invocation": 10
+      },
+      "output_match": null,
+      "peak_mem_mb": 1233.55,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "encode",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

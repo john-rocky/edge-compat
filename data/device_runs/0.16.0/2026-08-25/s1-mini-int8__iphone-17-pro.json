@@ -1,0 +1,97 @@
+{
+  "artifact": "S1-mini_int8.litertlm",
+  "device": "iphone-17-pro",
+  "model_id": "s1-mini-int8",
+  "quantization": "int8 dynamic_wi8_afp32",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-08-25",
+      "decode_tokens_per_s": 15.53,
+      "delegated_ops": null,
+      "env": {
+        "device": "iphone-17-pro",
+        "machine_label": "iphone-17-pro-thermal-serious",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "A19-Pro",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "device.modelIdentifier=iPhone18,1",
+        "throughput taken from task 'quality' (101 generated tokens, 2026-08-25T01:20:34Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 1 task(s)",
+        "[quality 2026-08-25T01:20:34Z] prefill=280.73342155370705 decode=15.528255394319746 ttft_ms=739.0 peak_mb=1427.1289291381836 stop=stop output='1. what is 17 + 25?\\\\n2. what is the capital of japan?\\\\n …[trace truncated]"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "quality.decode_tokens_per_s": 15.528255,
+        "quality.generated_tokens": 101.0,
+        "quality.load_s": 0.726771,
+        "quality.peak_mem_mb": 1427.128929,
+        "quality.prefill_tokens_per_s": 280.733422,
+        "quality.prompt_tokens": 180.0,
+        "quality.ttft_ms": 739.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 1427.129,
+      "prefill_tokens_per_s": 280.73,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 739.0
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-25",
+      "decode_tokens_per_s": 32.02,
+      "delegated_ops": null,
+      "env": {
+        "device": "iphone-17-pro",
+        "machine_label": "iphone-17-pro-thermal-serious",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "A19-Pro",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "device.modelIdentifier=iPhone18,1",
+        "throughput taken from task 'quality' (125 generated tokens, 2026-08-25T01:27:29Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 1 task(s)",
+        "[quality 2026-08-25T01:27:29Z] prefill=767.821865327244 decode=32.015861770536354 ttft_ms=322.0 peak_mb=1697.0495910644531 stop=stop output='1. what is 17 + 25? 42\\\\n2. what is the capital of japan? 1 …[trace truncated]"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "quality.decode_tokens_per_s": 32.015862,
+        "quality.generated_tokens": 125.0,
+        "quality.load_s": 2.009133,
+        "quality.peak_mem_mb": 1697.049591,
+        "quality.prefill_tokens_per_s": 767.821865,
+        "quality.prompt_tokens": 180.0,
+        "quality.ttft_ms": 322.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 1697.05,
+      "prefill_tokens_per_s": 767.82,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 322.0
+    }
+  ],
+  "schema_version": "1.0"
+}

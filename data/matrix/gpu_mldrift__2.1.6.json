@@ -1,0 +1,95 @@
+{
+  "backend": "gpu_mldrift",
+  "entries": [
+    {
+      "conditions": "ADD of a large baked-constant positional embedding ([1,677,384]) onto patch tokens miscomputes with BUILD-DEPENDENT severity: backbone corr 0.55-0.99 across otherwise-identical builds of the same model. Same baked-constant execution fault as the FULLY_CONNECTED row.",
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-20",
+        "litert_version": "2.1.6",
+        "source_model": "RF-DETR-Seg-Nano per-layer device taps across builds"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "backbone corr >=0.9995 vs patched torch, stable across builds",
+          "rewrite": "host-feed the embedding as a runtime input (cls token + pos pre-added on the host, patch pos-embed as a second input)",
+          "symptom": "ViT backbone accuracy varies per build (corr 0.55-0.99) with no error and no code change"
+        }
+      ],
+      "status": "incorrect"
+    },
+    {
+      "conditions": "Rank-3 batched matmuls silently miscompute in transformer attention context (stock nn.MultiheadAttention lowers to them; the tent-matmul grid-sample BMM hits the same fault at rank 3); rank-4 equivalents of the same math are exact. Re-confirmed in the RF-DETR-Seg-Nano hunt (earlier witnesses on 2.1.3/2.1.5).",
+      "constraints": {
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-20",
+        "litert_version": "2.1.6",
+        "source_model": "RF-DETR-Seg-Nano rank-3/rank-4 probe pair"
+      },
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "attention exact; source model fully delegated (1293/1293 + 884/884 nodes, 1 partition each)",
+          "rewrite": "keep every batched matmul rank-4 (manual head-split attention; reshape rank-3 BMMs to [B,1,M,N])",
+          "symptom": "attention outputs silently wrong on device, desktop exact"
+        }
+      ],
+      "status": "incorrect"
+    },
+    {
+      "conditions": "A compute chain consuming a LARGE BAKED-CONSTANT tensor executes incorrectly while the identical ops with the tensor fed as a runtime input are exact. Minimal pair: tgt + FFN(tgt) with tgt a baked [1,100,256] weight -> device corr 0.966; same graph with tgt as an input -> 0.99999. fp32 and fp16 flatbuffers return IDENTICAL wrong numbers (not precision), and severity is compilation-context dependent (a subgraph can probe clean in isolation and break in the full build). Unchanged with the 2.2.0 GPU .so pair on the same harness.",
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-20",
+        "litert_version": "2.1.6",
+        "source_model": "RF-DETR-Seg-Nano minimal-pair probe (f_const vs f_input)"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "chain exact (corr 0.99999 on the minimal pair); source model ships 100% GPU, real-image box IoU >=0.99 / mask IoU >=0.995 vs PyTorch",
+          "rewrite": "feed the constant as a runtime graph input (host-supplied .bin) or fold it into adjacent layer weights (exact)",
+          "symptom": "silently wrong outputs downstream of a large baked constant (decoder hidden states corr 0.97 on the source model, no error)"
+        }
+      ],
+      "status": "incorrect"
+    },
+    {
+      "conditions": "Broadcast-constant MUL feeding a residual ADD (LayerScale h + lambda*f(h), lambda a baked [384] per-channel constant) miscomputes: device corr 0.62, vs 0.9999 for the identical block computed as h + f(h). Same baked-constant execution fault as the FULLY_CONNECTED row.",
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-20",
+        "litert_version": "2.1.6",
+        "source_model": "RF-DETR-Seg-Nano DINOv2 LayerScale ablation probe"
+      },
+      "op": "MUL",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "block corr 0.9999; backbone ships exact",
+          "rewrite": "fold the per-channel constant into the preceding Linear's weight rows and bias (exact) and drop the MUL",
+          "symptom": "ViT blocks with LayerScale silently wrong on device (corr 0.62), desktop exact"
+        }
+      ],
+      "status": "incorrect"
+    }
+  ],
+  "generated_at": "2026-08-21",
+  "litert_version": "2.1.6",
+  "schema_version": "1.0"
+}

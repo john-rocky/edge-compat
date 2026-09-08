@@ -1,0 +1,23 @@
+{
+ "wi8fc_10s_cpu": {
+  "status": "RAN",
+  "accel": "CPU",
+  "median_ms": 220.226,
+  "min_ms": 219.363,
+  "max_ms": 222.326,
+  "load_ms": 2634.7,
+  "runs": 20,
+  "thermal": "NONE->NONE",
+  "headroom": "0.5966667->0.60999995",
+  "ids_match_mac_tflite": 1.0,
+  "ids_match_eager": 1.0,
+  "logit_maxdiff_mac": 0.0,
+  "transcript": "mister quilter is the apostle of the middle classes and we are glad to welcome his gospel",
+  "transcript_match_eager": true,
+  "PASS": true
+ },
+ "wi8fc_10s_gpu": {
+  "status": "FAILED",
+  "error": "LiteRtException: Failed to compile model"
+ }
+}

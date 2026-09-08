@@ -1,0 +1,91 @@
+{
+  "artifact": "sam2_tiny_mask_decoder_fp16.tflite",
+  "device": "pixel-8a",
+  "model_id": "sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_fp16",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-08-28",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 376,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+        "mode=jit thermal=NONE->NONE headroom=0.58795166->0.5979951 attempt=0",
+        "logcat: Replacing 376 out of 378 node(s) with delegate (TfLiteXNNPackDelegate) (largest subgraph captured by the driver)"
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": 218.668,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "iterations": 50,
+        "latency_max_ms": 224.368,
+        "latency_min_ms": 214.021,
+        "load_ms": 46.9
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 378,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-08-28",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 378,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+        "mode=jit thermal=NONE->NONE headroom=0.57877505->0.58045006 attempt=0",
+        "logcat: Replacing 378 out of 378 node(s) with delegate (LITERT_CL) (largest subgraph captured by the driver)"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 30.055,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "iterations": 50,
+        "latency_max_ms": 32.138,
+        "latency_min_ms": 29.337,
+        "load_ms": 2557.5
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 378,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

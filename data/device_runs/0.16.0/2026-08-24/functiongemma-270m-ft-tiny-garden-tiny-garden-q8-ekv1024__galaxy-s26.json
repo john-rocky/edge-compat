@@ -1,0 +1,53 @@
+{
+  "artifact": "tiny_garden_q8_ekv1024.litertlm",
+  "device": "galaxy-s26",
+  "model_id": "functiongemma-270m-ft-tiny-garden-tiny-garden-q8-ekv1024",
+  "notes": "Runs at full speed and emits only padding. The GPU run's entire output is a wall of <pad>; the same bundle, same binary and same prompt on the CPU backend of the same handset answers correctly. The throughput figures below are real and describe a path that produces no text.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-24",
+      "decode_tokens_per_s": 97.83,
+      "delegated_ops": 1669,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cl-pinned",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "GPU output is a wall of <pad>; the CPU backend of the same handset answers correctly on the same prompt (control run 2026-08-27)",
+      "evidence": [
+        "VERBOSE: Replacing 1539 out of 1539 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (decode).",
+        "VERBOSE: Replacing 1669 out of 1669 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_272).",
+        "VERBOSE: Replacing 1669 out of 1669 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_32).",
+        "results block: prefill=4900.9 decode=97.83 tokens/s",
+        "gate output_tail: '<pad>' repeated for the whole 80-token tail (S4 GPU sweep, 2026-08-24)",
+        "CPU control 2026-08-27, same handset/binary/prompt, --backend=cpu: exit 0, peak 604 MB, output \"I am FunctionGemma, a model optimized for function calls. I can only assist with requests that require a function call.\""
+      ],
+      "failure_class": "silent-miscompute",
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 824.0,
+        "init_s": 0.714,
+        "prefill_tokens": 200.0
+      },
+      "output_match": false,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 4900.9,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 1669,
+      "ttft_ms": 50.0
+    }
+  ],
+  "schema_version": "1.0"
+}

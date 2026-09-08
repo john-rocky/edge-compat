@@ -1,0 +1,91 @@
+{
+  "artifact": "OvisOCR2_int8.litertlm",
+  "artifact_sha256": "6482ff193826b70093a9b86f559669b1c12c13ab170f6dfc0f4eb6037a88887d",
+  "device": "galaxy-s26",
+  "model_id": "ovisocr2-int8",
+  "quantization": "int8",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-05",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 24542,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cold-cache-cooled",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "generation gate FAIL: exit 0 but no answer text (journal generated=false); output tail …'France? The capital of France? The capital of France? The capital of France? The capital of France? The capital of France? The capital of France? The capital of'",
+      "evidence": [
+        "VERBOSE: Replacing 24542 out of 25703 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2245 partitions for subgraph 0 (prefill_1024).",
+        "VERBOSE: Replacing 17648 out of 18791 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2209 partitions for subgraph 1 (prefill_256).",
+        "VERBOSE: Replacing 15632 out of 16775 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2209 partitions for subgraph 2 (prefill_64).",
+        "VERBOSE: Replacing 15722 out of 16865 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2209 partitions for subgraph 3 (prefill_16).",
+        "community_accel_work/s7_manifest_backfill/logs/OvisOCR2-LiteRT__OvisOCR2_int8.gatecpu.log: generation gate verdict FAIL (journal rows.jsonl, fail_class=None, exit=0, generated=False, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+        "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
+        "gate process peak 1784 MB (journal gate_peak_mb)"
+      ],
+      "failure_class": "degenerate_output",
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": 25703,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-09-05",
+      "decode_tokens_per_s": 35.18,
+      "delegated_ops": 25703,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cold-cache-cooled",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 25703 out of 25703 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+        "VERBOSE: Replacing 18791 out of 18791 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256).",
+        "VERBOSE: Replacing 16775 out of 16775 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_64).",
+        "VERBOSE: Replacing 16865 out of 16865 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_16).",
+        "results block: prefill=537.1 decode=35.18 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 195.0,
+        "init_s": 81.31138,
+        "prefill_tokens": 207.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 537.1,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 25703,
+      "ttft_ms": 410.0
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,42 @@
+{
+  "artifact": "tiger_effect_fp16.tflite",
+  "device": "galaxy-s26",
+  "model_id": "tiger-dnr__tiger_effect_fp16",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "npu_qnn",
+      "context_length": null,
+      "date": "2026-08-26",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": "QAIRT (Hexagon, JIT on-device)"
+      },
+      "error": "process_crashed (likely OOM)",
+      "evidence": [
+        "process_crashed (likely OOM)"
+      ],
+      "failure_class": "process_crashed",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

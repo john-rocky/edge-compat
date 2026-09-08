@@ -1,0 +1,302 @@
+{
+  "artifacts": [
+    {
+      "file": "LFM2.5-230M_int4.litertlm",
+      "sha256": "a4683cdafbf7b0ae526ba688fa905fd3db8546fc58221d10082443d4d0a6315c",
+      "size_mb": 168.568
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "convert_230m.py OUTDIR --fp -> fix_230m_template.py raw.litertlm fixed.litertlm -> quantize_litertlm.py apply fp_fixed.litertlm Y.litertlm --recipe wi4b32_wi8 --algo octav -> fix_zero_block_scales.py (measured 0 patches, family no-op) -> add_executor_metadata.py ... --litert-lm ~/venvs/lt0160run/bin/litert-lm (FINDINGS pipeline; mirror entry point hf-to-litertlm lfm_work/convert_lfm25_230m.py)",
+    "quantization": "post-hoc OCTAV int4 blockwise-32 on linears + int8 embedding (recipe wi4b32_wi8 --algo octav) over the --fp export; zero-block-scale fix measured as a no-op",
+    "tool": "litert-torch (released wheels only; repro = hf-to-litertlm lfm_work/convert_lfm25_230m.py + fix_230m_template.py)",
+    "tool_version": "0.9.3 (transformers 5.14.1 pinned — 5.15 breaks lfm2 export; ai-edge-quantizer named but unversioned in the sources; ExecutorMetadata retrofit via litert-lm 0.16.0 — FINDINGS.md ~/venvs/ltconv040dev + ~/venvs/lt0160run)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 50.68,
+          "delegated_ops": 696,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 423 out of 492 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 80 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 423 out of 492 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 80 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 423 out of 492 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 80 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 423 out of 492 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 80 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=262.9 decode=50.68 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 152.0,
+            "init_s": 0.92049,
+            "prefill_tokens": 205.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 262.9,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 726,
+          "ttft_ms": 800.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-01/lfm2.5-230m-int4__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 41.62,
+          "delegated_ops": 492,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 492 out of 492 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 492 out of 492 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 492 out of 492 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 492 out of 492 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=1101.08 decode=41.62 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 77.0,
+            "init_s": 1.93147,
+            "prefill_tokens": 205.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 1101.08,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 492,
+          "ttft_ms": 210.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-01/lfm2.5-230m-int4__galaxy-s26.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 93.9,
+          "delegated_ops": null,
+          "env": {
+            "device": "iPhone 17 Pro",
+            "machine_label": "iphone-17-pro-cold-unplugged",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "A19-Pro",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "device.modelIdentifier=iPhone18,1",
+            "throughput taken from task 'quality' (113 generated tokens, 2026-09-01T14:09:34Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 1 task file(s)",
+            "[quality 2026-09-01T14:09:34Z] prefill=808.4591353119002 decode=93.90381423997327 ttft_ms=206.0 peak_mb=368.14295196533203 stop=stop output='1. 17 + 25 = 42  \\\\n2. The capital of Japan is Tokyo.  \\\\n3 …[trace truncated]"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "quality.decode_tokens_per_s": 93.903814,
+            "quality.generated_tokens": 113.0,
+            "quality.load_s": 0.416493,
+            "quality.peak_mem_mb": 368.142952,
+            "quality.prefill_tokens_per_s": 808.459135,
+            "quality.prompt_tokens": 128.0,
+            "quality.ttft_ms": 206.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 368.143,
+          "prefill_tokens_per_s": 808.46,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 206.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-01/lfm2.5-230m-int4__iphone-17-pro.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 161.7,
+          "delegated_ops": null,
+          "env": {
+            "device": "iPhone 17 Pro",
+            "machine_label": "iphone-17-pro-cold-unplugged",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "A19-Pro",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "device.modelIdentifier=iPhone18,1",
+            "throughput taken from task 'quality' (108 generated tokens, 2026-09-01T14:09:29Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 1 task file(s)",
+            "[quality 2026-09-01T14:09:29Z] prefill=3036.125145283332 decode=161.70464654393982 ttft_ms=71.0 peak_mb=625.205451965332 stop=stop output='1. 17 + 25 = 42  \\\\n2. The capital of Japan is Tokyo.  \\\\n3.  …[trace truncated]"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "quality.decode_tokens_per_s": 161.704647,
+            "quality.generated_tokens": 108.0,
+            "quality.load_s": 2.422329,
+            "quality.peak_mem_mb": 625.205452,
+            "quality.prefill_tokens_per_s": 3036.125145,
+            "quality.prompt_tokens": 128.0,
+            "quality.ttft_ms": 71.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 625.205,
+          "prefill_tokens_per_s": 3036.13,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 71.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-01/lfm2.5-230m-int4__iphone-17-pro.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 149.35,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=1612.88 decode=149.35 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 1612.88,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 165.5
+        },
+        "source": "data/device_runs/0.16.0/2026-09-01/lfm2.5-230m-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 555.27,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "m4max-quiet-300s-gpu-rest",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=12862.27 decode=555.27 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 12862.27,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 21.7
+        },
+        "source": "data/device_runs/0.16.0/2026-09-01/lfm2.5-230m-int4__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "lfm2.5",
+    "id": "lfm2.5-230m-int4",
+    "license": "other (lfm1.0)",
+    "source_url": "https://huggingface.co/litert-community/LFM2.5-230M",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Requires litert-lm >= 0.15 — the hybrid conv/KV state binds through the ExecutorMetadata section; tested on litert-lm 0.16.x. Same template and shape notes as the int8 file (HF card header; manifest platform_notes).",
+    "The upstream chat template does not run on the runtime's Jinja engine: {% generation %}/{% endgeneration %} is a minijinja parse error and message.get('content') a render error (map has no .get method), so a naive bundle dies on its first message. The embedded template strips the two markers and rewrites the two .get sites to plain indexing; rendering is byte-identical to the original across six conversation shapes through HF apply_chat_template (HF card Conversion notes; FINDINGS make_metadata_230m.py / fix_230m_template.py).",
+    "KV budget 4096, not the family's 4099: with the 1024-token prefill signature present a 4099 KV cache fails GPU engine creation at shader compile (CreateShaderModule validation error, macOS WebGPU); isolated to the pair prefill_1024 x cache 4099. Shipped shape = 11 prefill signatures (1-1024) + 4096; on Galaxy S26 it delegates fully to OpenCL (492/492 nodes on every prefill signature, zero rejected ops) and passes Metal and CPU on iPhone 17 Pro (HF card Correctness + Conversion notes; FINDINGS GPU flip table).",
+    "ExecutorMetadata and the second stop token are added post-export: the released 0.9.3 exporter omits ExecutorMetadata for this state-carrying architecture and litert-lm >= 0.15 needs it to bind the 8 conv states and 12 KV buffers; the exporter derives only stop 7 (<|im_end|>) plus its punctuation string-stops, so stop id 2 (<|endoftext|>) is added to match the family [7, 2] scheme. Weights are byte-identical through both edits (HF card Conversion notes; FINDINGS).",
+    "Quality cost of int4 at this size: IFEval-style strict (n=120, prompt-level strict, greedy; comparable only within that table) 53.3% vs bf16 60.0% and int8 58.3% — about 7 points of instruction following, the price of the 89 MB saving; GSM8K n=100 22% vs bf16 23% (near floor, rules out collapse only). 8-question sanity gate (Apple M4 Max, litert-lm 0.16.0): 6/8 CPU (misses the rhyme-completion line plus one translation question) and 8/8 GPU, no degeneration on any leg; the cost is visible in the iPhone yardstick sample ('There are 5 days in a week'), which int8 answers correctly (HF card Accuracy + Correctness; FINDINGS ship-artifact rows; manifest quantization row).",
+    "Not the fast file everywhere: at 230M the int4-vs-int8 speed ordering is per-device — int4 out-decodes int8 only on iPhone 17 Pro Metal; on Galaxy S26 Adreno OpenCL int4 decodes markedly slower than int8 on both GPU and CPU (the blockwise dequant overhead dominates at this size — the opposite of the larger LFM2.5 files), and on Mac the two are a wash. Pick int4 for size or iPhone-only deployments, not for Android speed; int8 is the recommended file (HF card; manifest platform_notes; FINDINGS device gates).",
+    "Measurement caveat: the int4 GPU prefill on Galaxy S26 shows cold shader-compile variance between run 1 and run 2 — quote the pair, never one number (FINDINGS S26 table; manifest evidence note).",
+    "Reproduction pins and traps: transformers 5.14.1 (5.15 breaks lfm2 export); quantize_litertlm.py shells out to litert-lm-builder and pyenv shims eat it (exit 127) unless the venv bin is first on PATH; the CLI's --no-template does not reproduce the internal-template stream, so prove template fidelity at the render level, not through CLI A/B (FINDINGS)."
+  ],
+  "schema_version": "1.2"
+}

@@ -1,0 +1,133 @@
+{
+  "artifact": "LFM2.5-1.2B-Instruct_int4_gpu.litertlm",
+  "device": "iphone-17-pro",
+  "model_id": "lfm25-12b-int4-gpu-093",
+  "quantization": "int4",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-25",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "iphone-17-pro",
+        "machine_label": "iphone-17-pro-charging",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "A19-Pro",
+        "vendor_sdk": null
+      },
+      "error": "delegate_metal.mm:126 newLibraryWithSource: implicit conversions between vector types ('half4' and 'float4') are not permitted -> engine.cc:777 Failed to create engine",
+      "evidence": [
+        "control cell: app task-derived maxNumTokens (~650), same file/runtime/device as the passing cells — reproduces the 2026-08-12 LiteRT-LM#3129 signature line for line",
+        "root cause established 2026-08-25: maxNumTokens below the exported prefill plan (1024) -> DUS shape rejection -> partial delegation (104/542) -> Metal shader compile failure; NOT a codegen bug",
+        "litertlm-convert/minicpm5_work/ship_lfm25_gpu_0160/device_gate_20260825_maxtok/console_control.log"
+      ],
+      "failure_class": "engine_create_failed",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {},
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": 1024,
+      "date": "2026-08-25",
+      "decode_tokens_per_s": 67.71,
+      "delegated_ops": null,
+      "env": {
+        "device": "iphone-17-pro",
+        "machine_label": "iphone-17-pro-charging",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "A19-Pro",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "maxNumTokens=1024 (largest exported prefill signature) via BenchmarkApp --litert-max-tokens; all 13 Metal kernels initialize, zero DelegateKernel failures, coherent output ('On-device AI means using artificial intelligence...')",
+        "device charging during run (functional gate; treat throughput as indicative)",
+        "litertlm-convert/minicpm5_work/ship_lfm25_gpu_0160/device_gate_20260825_maxtok/console_maxtok1024.log"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "prefill_tokens": 21.0,
+        "short-chat.decode_tokens_per_s": 67.71,
+        "short-chat.generated_tokens": 122.0,
+        "short-chat.peak_mem_mb": 414.0,
+        "short-chat.prefill_tokens_per_s": 472.3,
+        "short-chat.prompt_tokens": 21.0,
+        "short-chat.ttft_ms": 109.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 414.0,
+      "prefill_tokens_per_s": 472.3,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 109.0
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": 1024,
+      "date": "2026-08-25",
+      "decode_tokens_per_s": 67.21,
+      "delegated_ops": null,
+      "env": {
+        "device": "iphone-17-pro",
+        "machine_label": "iphone-17-pro-charging",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "A19-Pro",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "8-question sanity gate on Metal GPU: 7/8 (missed only the rhyme line 'violets are blue' -> 'red'; same level as the 2026-08-05 iPhone CPU 6/8)",
+        "litertlm-convert/minicpm5_work/ship_lfm25_gpu_0160/device_gate_20260825_maxtok/console_quality_maxtok1024.log"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "prefill_tokens": 128.0,
+        "quality.decode_tokens_per_s": 67.21,
+        "quality.generated_tokens": 47.0,
+        "quality.peak_mem_mb": 472.0,
+        "quality.prefill_tokens_per_s": 1981.7,
+        "quality.prompt_tokens": 128.0,
+        "quality.sanity_8q_correct": 7.0,
+        "quality.ttft_ms": 108.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 472.0,
+      "prefill_tokens_per_s": 1981.7,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 108.0
+    }
+  ],
+  "schema_version": "1.0"
+}

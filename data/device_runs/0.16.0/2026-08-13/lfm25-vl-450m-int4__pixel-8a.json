@@ -1,0 +1,89 @@
+{
+  "artifact": "LFM2.5-VL-450M_int4.litertlm",
+  "device": "pixel-8a",
+  "model_id": "lfm25-vl-450m-int4",
+  "quantization": "int4",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-08-13",
+      "decode_tokens_per_s": 22.62,
+      "delegated_ops": null,
+      "env": {
+        "device": "pixel-8a",
+        "machine_label": "pixel-8a-cl-pinned",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "results block: prefill=92.12 decode=22.62 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 3800.0,
+        "init_s": 5.1952,
+        "prefill_tokens": 296.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 92.12,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 3260.0
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-13",
+      "decode_tokens_per_s": 33.05,
+      "delegated_ops": 543,
+      "env": {
+        "device": "pixel-8a",
+        "machine_label": "pixel-8a-cl-pinned",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 543 out of 543 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+        "VERBOSE: Replacing 543 out of 543 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+        "VERBOSE: Replacing 543 out of 543 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+        "VERBOSE: Replacing 543 out of 543 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+        "results block: prefill=528.07 decode=33.05 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 3800.0,
+        "init_s": 8.20607,
+        "prefill_tokens": 296.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 528.07,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 543,
+      "ttft_ms": 590.0
+    }
+  ],
+  "schema_version": "1.0"
+}

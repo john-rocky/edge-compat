@@ -1,0 +1,117 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x128x640:float32;1x512x128:float32;1x128x512:float32;1x256:float32;1x512:float32",
+  "license": "apache-2.0",
+  "model_id": "kokoro-82m__kokoro_prosody",
+  "notes": "",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-08-28",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: ERROR: failed to create XNNPACK runtime",
+        "error: ERROR: Node number 25435 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 25435 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 25435 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 25435 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 25435 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 25435 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 25435 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 25435 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 25435 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 25435 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 25435 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 25435 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 25435 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "6.17.0-1022-azure",
+        "webgpu_adapter": {
+          "architecture": "swiftshader",
+          "description": "",
+          "device": "",
+          "vendor": "google"
+        }
+      },
+      "error": "backend reported a fatal error during run: error: ERROR: failed to create XNNPACK runtime",
+      "failure_class": "backend_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-08-28",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: ERROR: Following operations are not supported by GPU delegate:",
+        "error: GATHER_ND: Operation is not supported.",
+        "error: STABLEHLO_PAD: Operation is not supported.",
+        "error: 25249 operations will run on the GPU, and the remaining 186 operations will run on the CPU.",
+        "error: Aborted()"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "6.17.0-1022-azure",
+        "webgpu_adapter": {
+          "architecture": "swiftshader",
+          "description": "",
+          "device": "",
+          "vendor": "google"
+        }
+      },
+      "error": "RuntimeError: Aborted(). Build with -sASSERTIONS for more info.",
+      "failure_class": "compile_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/Kokoro-82M/resolve/main/kokoro_prosody.tflite"
+}

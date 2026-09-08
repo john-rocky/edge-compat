@@ -1,0 +1,49 @@
+{
+ "artifact": "model_wi8fc_meta.litertlm",
+ "device": "mac-studio-m4-max",
+ "model_id": "qwen35-08b-wi8fc-gpucompat-v3",
+ "quantization": null,
+ "results": [
+  {
+   "accelerator": "gpu",
+   "context_length": null,
+   "date": "2026-08-12",
+   "decode_tokens_per_s": 140.46,
+   "delegated_ops": null,
+   "env": {
+    "device": "mac-studio-m4-max",
+    "machine_label": "mac-studio-m4-max",
+    "os_build": null,
+    "runtime": "litert-lm",
+    "runtime_version": "0.15.0",
+    "soc": null,
+    "vendor_sdk": null
+   },
+   "error": null,
+   "evidence": [
+    "results block: prefill=723.02 decode=140.46 tokens/s, init=20.6611 s",
+    "same-session quality gate: 8Q 0/8 on GPU backend (fp16 act: token-0 spam; fp32 act via prefer_activation_type: prompt-independent derailment) \u2014 litertlm-convert qwen35_work/gate8q_gpu_dev.json + gate8q_gpu_fp32act.json; CPU same bundle 8/8 (gate8q_cpu_v3.json)"
+   ],
+   "failure_class": null,
+   "full_delegation": null,
+   "latency_p50_ms": null,
+   "loads": true,
+   "max_abs_diff": null,
+   "max_rel_diff": null,
+   "metrics": {
+    "decode_tokens": 32.0,
+    "init_s": 20.6611,
+    "max_num_tokens": 4096.0,
+    "prefill_tokens": 64.0
+   },
+   "output_match": false,
+   "peak_mem_mb": null,
+   "prefill_tokens_per_s": 723.02,
+   "provenance": "measured",
+   "runs": true,
+   "total_ops": null,
+   "ttft_ms": 95.6
+  }
+ ],
+ "schema_version": "1.0"
+}

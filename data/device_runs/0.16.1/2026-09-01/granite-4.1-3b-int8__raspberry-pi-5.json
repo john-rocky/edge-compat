@@ -1,0 +1,64 @@
+{
+  "artifact": "granite-4.1-3b_int8.litertlm",
+  "device": "raspberry-pi-5",
+  "model_id": "granite-4.1-3b-int8",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-01",
+      "decode_tokens_per_s": 1.73,
+      "delegated_ops": null,
+      "env": {
+        "device": "Raspberry Pi 5 Model B Rev 1.1",
+        "machine_label": "raspberry-pi-5-cooled-52c",
+        "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.1",
+        "soc": "Broadcom BCM2712",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+        "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+        "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+        "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 140.0 s, output head '43'",
+        "invocation 0: exit=0 wall_s=514.3 temp 42.8->53.2C throttled=0x0 prefill_tps=12.04 decode_tps=1.7 ttft_s=21.9243 init_s=90.569 peak_rss_mb=4983",
+        "invocation 1: exit=0 wall_s=468.3 temp 51.6->52.1C throttled=0x0 prefill_tps=12.64 decode_tps=1.73 ttft_s=20.9089 init_s=89.9779 peak_rss_mb=4981",
+        "invocation 2: exit=0 wall_s=466.3 temp 48.8->54.3C throttled=0x0 prefill_tps=12.83 decode_tps=1.74 ttft_s=20.6681 init_s=90.2437 peak_rss_mb=4984"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "decode_tps_max": 1.74,
+        "decode_tps_min": 1.7,
+        "init_s": 90.2437,
+        "init_s_max": 90.569,
+        "init_s_min": 89.9779,
+        "invocations": 3.0,
+        "prefill_tokens": 256.0,
+        "prefill_tps_max": 12.83,
+        "prefill_tps_min": 12.04,
+        "runs_per_invocation": 1.0,
+        "threads": 4.0,
+        "ttft_s_max": 21.9243,
+        "ttft_s_min": 20.6681
+      },
+      "output_match": null,
+      "peak_mem_mb": 4984.0,
+      "prefill_tokens_per_s": 12.64,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 20908.9
+    }
+  ],
+  "schema_version": "1.0"
+}

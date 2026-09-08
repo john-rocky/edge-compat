@@ -1,0 +1,46 @@
+{
+  "artifact": "model_meta.litertlm",
+  "device": "mac-studio-m4-max",
+  "model_id": "qwen35-08b-wi8fc-ship-v1",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-12",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 259,
+      "env": {
+        "device": "mac-studio-m4-max",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.15.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": "E0000 00:00:1786531759.437460 92640790 engine.cc:1096] Failed to create engine: UNKNOWN: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor_factory.cc:230]",
+      "evidence": [
+        "BROADCAST_TO: Operation is not supported.",
+        "SELECT_V2: Cond must be float or bool type, if, else tensors must be either be same the shape as output or constant, scalar.",
+        "STABLEHLO_PAD: Operation is not supported.",
+        "259 operations will run on the GPU, and the remaining 18592 operations will run on the CPU.",
+        "E0000 00:00:1786531759.437460 92640790 engine.cc:1096] Failed to create engine: UNKNOWN: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor_factory.cc:230]"
+      ],
+      "failure_class": "engine_create_failed",
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": 18851,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

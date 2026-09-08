@@ -1,0 +1,104 @@
+{
+  "backend": "gpu_mldrift",
+  "blocking_ops": [],
+  "custom_ops": [],
+  "findings": [
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 0,
+      "op": "CONV_2D",
+      "provenance": "example",
+      "reason": "matched entry specific to op and dtypes",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 1,
+      "op": "AVERAGE_POOL_2D",
+      "provenance": "example",
+      "reason": "matched entry specific to op and dtypes",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 2,
+      "op": "CONV_2D",
+      "provenance": "example",
+      "reason": "matched entry specific to op and dtypes",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    }
+  ],
+  "impact_note": "impact_score is a heuristic (output element count as a FLOPs proxy, adjacent-partition cost split across each CPU island) — a ranking aid, not a measurement",
+  "litert_version": "0.0.0-example",
+  "matrix": {
+    "file": "data/examples/matrix_example.json",
+    "generated_at": "2026-08-10",
+    "litert_version": "0.0.0-example"
+  },
+  "model": {
+    "path": "data/examples/model_clean_example.tflite",
+    "sha256": "e763326d958dca53e16643c11ce300fbac480c475cfd751b6d8336650089670f",
+    "subgraph_count": 1
+  },
+  "needs_probe": [],
+  "partitions": [
+    {
+      "first_node": 0,
+      "index": 0,
+      "last_node": 2,
+      "op_count": 3,
+      "ops": [
+        "CONV_2D",
+        "AVERAGE_POOL_2D",
+        "CONV_2D"
+      ],
+      "subgraph": 0
+    }
+  ],
+  "rewrite_suggestions": [],
+  "schema_version": "1.1",
+  "summary": {
+    "blocking_op_count": 0,
+    "claimed_ops": 3,
+    "coverage_ops_pct": 100.0,
+    "matched_provenance_counts": {
+      "example": 3
+    },
+    "partition_count": 1,
+    "status_counts": {
+      "delegated": 3
+    },
+    "sync_boundaries": 0,
+    "total_ops": 3
+  }
+}

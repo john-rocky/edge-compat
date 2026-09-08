@@ -1,0 +1,273 @@
+{
+  "artifacts": [
+    {
+      "file": "Qwen2.5-Coder-1.5B-Instruct_int4.litertlm",
+      "sha256": "273ecc7771ba2dd5fe1bb6d4d4726ad0353102f04ad094082ccf59bca9f21213",
+      "size_mb": 1065.622
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "CACHE=4096 PREFILL=1024,256,64,16,4,1 EXTERNALIZE_EMBEDDER=1 python scripts/export_simple_template.py src_models/qwen25-coder-1.5b out_qwen25_coder qwen25coder_work/qwen25_coder_simple.jinja BOCTAV4",
+    "quantization": "int4 weights, blockwise-32 + OCTAV, symmetric (BOCTAV4) on linears; int8 embedding, externalised (tied lm_head)",
+    "tool": "litert-torch (hf-to-litertlm `qwen25coder_work/convert_qwen25_coder.sh`; export_simple_template.py)",
+    "tool_version": "litert-torch 0.9.3 (litert-converter 0.3.1, ai-edge-quantizer 0.8.0, litert-lm-builder 0.16.0) — stated on the published HF card"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 29.73,
+          "delegated_ops": 1510,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1125 out of 1243 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 165 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 1125 out of 1243 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 165 partitions for subgraph 1 (prefill_256).",
+            "VERBOSE: Replacing 1125 out of 1243 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 165 partitions for subgraph 2 (prefill_64).",
+            "VERBOSE: Replacing 1125 out of 1243 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 165 partitions for subgraph 3 (prefill_16).",
+            "results block: prefill=106.0 decode=29.73 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 409.0,
+            "init_s": 2.73147,
+            "prefill_tokens": 223.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 106.0,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1573,
+          "ttft_ms": 2140.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/qwen25-coder-1.5b-int4__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 10.07,
+          "delegated_ops": 1243,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1243 out of 1243 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 1243 out of 1243 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256).",
+            "VERBOSE: Replacing 1243 out of 1243 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_64).",
+            "VERBOSE: Replacing 1243 out of 1243 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_16).",
+            "results block: prefill=205.89 decode=10.07 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 360.0,
+            "init_s": 6.9454,
+            "prefill_tokens": 223.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 205.89,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1243,
+          "ttft_ms": 1180.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/qwen25-coder-1.5b-int4__galaxy-s26.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-19",
+          "decode_tokens_per_s": 12.57,
+          "delegated_ops": null,
+          "env": {
+            "device": "Pixel 8a",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=16.09 decode=12.57 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 32.0,
+            "init_s": 4.94288,
+            "prefill_tokens": 38.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 16.09,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 2440.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-19/qwen25-coder-1.5b-int4__pixel-8a.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-19",
+          "decode_tokens_per_s": 12.0,
+          "delegated_ops": 1243,
+          "env": {
+            "device": "Pixel 8a",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1243 out of 1243 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 1243 out of 1243 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256).",
+            "VERBOSE: Replacing 1243 out of 1243 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_64).",
+            "VERBOSE: Replacing 1243 out of 1243 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_16).",
+            "results block: prefill=83.7 decode=12.0 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 32.0,
+            "init_s": 15.11825,
+            "prefill_tokens": 38.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 83.7,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1243,
+          "ttft_ms": 540.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-19/qwen25-coder-1.5b-int4__pixel-8a.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 5.61,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 31.0 s, output head '43'",
+            "invocation 0: exit=0 wall_s=162.1 temp 46.6->54.3C throttled=0x0 prefill_tps=40.64 decode_tps=5.5 ttft_s=7.3265 init_s=33.504 peak_rss_mb=1842",
+            "invocation 1: exit=0 wall_s=152.1 temp 49.4->53.2C throttled=0x0 prefill_tps=41.91 decode_tps=5.61 ttft_s=7.1984 init_s=33.6273 peak_rss_mb=1840",
+            "invocation 2: exit=0 wall_s=152.1 temp 49.9->51.6C throttled=0x0 prefill_tps=41.69 decode_tps=5.67 ttft_s=7.2692 init_s=33.6107 peak_rss_mb=1835"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 5.67,
+            "decode_tps_min": 5.5,
+            "init_s": 33.6107,
+            "init_s_max": 33.6273,
+            "init_s_min": 33.504,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 41.91,
+            "prefill_tps_min": 40.64,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 7.3265,
+            "ttft_s_min": 7.1984
+          },
+          "output_match": null,
+          "peak_mem_mb": 1842.0,
+          "prefill_tokens_per_s": 41.69,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 7269.2
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/qwen25-coder-1.5b-int4__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen2.5-coder",
+    "id": "qwen25-coder-1.5b-int4",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Qwen2.5-Coder-1.5B-Instruct",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "EXTERNALIZE_EMBEDDER=1 is required, not cosmetic: the model ties embedding and lm_head, and BOCTAV4 (int4 linears + int8 embedding) describes one tensor two ways — the quantizer resolves it by copying the 151936x1536 table once per prefill signature (7 copies, 1.63 GB, 65% of the file, no error). Externalising removes the conflict (HF card / REPRODUCE.md).",
+    "The upstream chat template injects a default system prompt ('You are Qwen, created by Alibaba Cloud…') when none is supplied; a generic ChatML template omits it and runs the model outside its tuned state — the bundle carries a template that reproduces the default (FINDINGS.md / REPRODUCE.md).",
+    "Requires litert-lm >= 0.16 (HF card).",
+    "Pixel 8a 2026-08-19: fully delegated on Mali OpenCL (1243/1243 per prefill signature, 1132/1132 decode, zero rejections); GPU buys prefill/TTFT (0.54 s vs 2.44 s on CPU), not decode (12.0 vs 12.6 tok/s — same LPDDR) (FINDINGS.md)."
+  ],
+  "schema_version": "1.2"
+}

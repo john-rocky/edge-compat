@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "id": "rank2-elementwise-const-to-rank3",
+  "title": "Lift a rank-2 ADD against a constant to rank 3 (RESHAPE -> ADD -> RESHAPE) for the Metal accelerator",
+  "action": "decompose",
+  "provenance": "measured",
+  "match": {
+    "op": "ADD",
+    "dtypes": [
+      "float32"
+    ],
+    "constraints": {
+      "rank": 2,
+      "operand_b": "constant"
+    }
+  },
+  "params": {
+    "intermediates": [
+      {
+        "name": "a3",
+        "dtype": "like:in:0",
+        "shape": "unsqueeze0:in:0"
+      },
+      {
+        "name": "b3",
+        "dtype": "like:in:1",
+        "shape": "unsqueeze0:in:1"
+      },
+      {
+        "name": "y3",
+        "dtype": "like:out:0",
+        "shape": "unsqueeze0:out:0"
+      }
+    ],
+    "nodes": [
+      {
+        "op": "RESHAPE",
+        "inputs": [
+          "in:0"
+        ],
+        "outputs": [
+          "tmp:a3"
+        ]
+      },
+      {
+        "op": "RESHAPE",
+        "inputs": [
+          "in:1"
+        ],
+        "outputs": [
+          "tmp:b3"
+        ]
+      },
+      {
+        "op": "ADD",
+        "inputs": [
+          "tmp:a3",
+          "tmp:b3"
+        ],
+        "outputs": [
+          "tmp:y3"
+        ]
+      },
+      {
+        "op": "RESHAPE",
+        "inputs": [
+          "tmp:y3"
+        ],
+        "outputs": [
+          "out:0"
+        ]
+      }
+    ]
+  },
+  "fixture": {
+    "model": "fixtures/model_rank2_add_const_fixture.tflite",
+    "matrix": "fixtures/matrix_gpu_rank2_add_fixture.json"
+  },
+  "expected_effect": "the rank-2 ADD against a constant becomes RESHAPE -> ADD(rank 3, [1,N,C]) -> RESHAPE; the Metal accelerator computes the rank-3 form bit-exact where it silently miscomputed the rank-2 form (measured rel 1.25 -> 1.9e-6 on a 27-block ViT encoder), so the `incorrect` finding is removed and the three replacement nodes delegate",
+  "evidence": {
+    "source_model": "North-Micro-Vision-Instruct vision encoder (Qwen3-VL-structure ViT) + 4 synthetic micro-graphs via tools/backend_diff, BACKEND_DIFF_FLOAT_FILL=1; data/matrix/gpu_metal_mac__2.1.6.json ADD row",
+    "litert_version": "ai-edge-litert 2.1.6 CompiledModel Metal (precision 2 and 1 both reproduce)",
+    "date": "2026-08-19"
+  },
+  "notes": "Promoted 2026-08-19 on the owner's blanket delegation for this lane (\"全部お任せします\") — the first rule that uses the v1.1 engine additions (derived `unsqueeze0:` intermediate shapes, engine-synthesized RESHAPE shape constants, `operand_b=constant` match via classify.operand_meta). Semantics: RESHAPE is a pure view; ADD broadcasting is unchanged because both operands gain the same leading unit axis; the fixture verification is bit-exact (max_abs_diff 0.0). Scope: ADD only, operand_b constant, static shapes; the measured defect was observed for ADD with a rank-2 constant — the same-shape MUL/SUB forms were not measured and are deliberately NOT matched. Why rank 3 and not 4: rank 3 is the smallest form measured correct, and keeps the fix a view. Counterpart facts: the rank-2 form is fine on CPU/XNNPACK (this is a Metal-accelerator defect, backend row carries it); applying the rule on a backend without the row is harmless (views) but pointless."
+}

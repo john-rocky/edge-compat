@@ -1,0 +1,178 @@
+{
+  "artifacts": [
+    {
+      "file": "Qwen3.5-2B_int8.litertlm",
+      "sha256": "86c97baba6d3fb4109588562f0b9411e502c883be7fc2479f93ce3a6ea3efb6b",
+      "size_mb": 2018.54
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "python convert_qwen35_hybrid.py Qwen/Qwen3.5-2B out_ship_2b  # full default prefill ladder; then scripts/set_activation_type.py --type fp32; export log qwen35_work/convert_ship_2b.log",
+    "quantization": "int8 dynamic on linears + embedding (wi8fc); convs and the delta rule float; fp32 activations declared (GPU requirement)",
+    "tool": "litert-torch, pinned base + Qwen3.5 hybrid patch (same v4 rank-<=4 chunk kernel as the 0.8B/4B); no model-specific additions — the 2B trips neither 4B wall",
+    "tool_version": "editable checkout 115a136 + qwen35_hybrid_litert_torch.patch (unchanged from the 4B regeneration of 2026-08-14)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-14",
+          "decode_tokens_per_s": 37.6,
+          "delegated_ops": null,
+          "env": {
+            "device": "mac-m4-max",
+            "machine_label": "mac-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=592.1 decode=37.6 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 592.1,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 461.7
+        },
+        "source": "data/device_runs/0.16.0/2026-08-14/qwen35-2b__mac-m4-max.json"
+      },
+      {
+        "device": "mac-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-14",
+          "decode_tokens_per_s": 114.34,
+          "delegated_ops": null,
+          "env": {
+            "device": "mac-m4-max",
+            "machine_label": "mac-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=1485.71 decode=114.34 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 1485.71,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 181.1
+        },
+        "source": "data/device_runs/0.16.0/2026-08-14/qwen35-2b__mac-m4-max.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 4.25,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 117.9 s, output head '43'",
+            "invocation 0: exit=0 wall_s=302.1 temp 46.1->53.2C throttled=0x0 prefill_tps=55.1 decode_tps=4.26 ttft_s=4.8812 init_s=169.5703 peak_rss_mb=3863",
+            "invocation 1: exit=0 wall_s=302.1 temp 51.0->53.2C throttled=0x0 prefill_tps=55.27 decode_tps=4.25 ttft_s=4.8675 init_s=169.6744 peak_rss_mb=3863",
+            "invocation 2: exit=0 wall_s=302.1 temp 51.0->54.9C throttled=0x0 prefill_tps=55.01 decode_tps=4.21 ttft_s=4.8917 init_s=169.6178 peak_rss_mb=3863"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 4.26,
+            "decode_tps_min": 4.21,
+            "init_s": 169.6178,
+            "init_s_max": 169.6744,
+            "init_s_min": 169.5703,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 55.27,
+            "prefill_tps_min": 55.01,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 4.8917,
+            "ttft_s_min": 4.8675
+          },
+          "output_match": null,
+          "peak_mem_mb": 3863.0,
+          "prefill_tokens_per_s": 55.1,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 4881.2
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/qwen35-2b__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3_5",
+    "id": "qwen35-2b",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/Qwen/Qwen3.5-2B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "The 2B is the zero-extra-work sibling: linear-attention heads are ungrouped (16 k / 16 v, ratio 1), so the 4B's repeat_interleave rank-5 wall never traces, and the full 11+1-signature prefill ladder fits a 12 GB iPhone (GPU peak 5.33 GB during engine creation vs the 4B's jetsam at Metal program-init 9/12 — the 248k-vocab per-signature cost is weight-size-dependent).",
+    "fp32 activations mandatory on GPU (family requirement, declared in the bundle TOML).",
+    "Gates on the shipped file: FP parity 48 positions top-1/top-5 100% / Pearson 1.0000 / KL ~0 (split harness scripts/parity_logits_bigmodel.py over a decode+p32,16 dev export); 8Q 8/8 on CPU and GPU on litert-lm 0.15.0 AND 0.16.0; BANANA hermetic CPU 40/40 + GPU 20/20; iPhone 17 Pro Metal composite 8-question probe word-for-word identical to HF fp32 through answer 7 — including the model's own arithmetic slip on Q1 — then int8 diverges by one end-of-turn token and adds a correct 8th answer (24.33 tok/s decode / 237.7 prefill / TTFT 0.73 s / peak 5330 MB; CPU 16.17 / 206.5 / TTFT 0.77 s / peak 1522 MB). Mac bench (0.16.0, cache no, p256/d256, quiet): GPU 1485.71/114.34 TTFT 0.18 s vs CPU 592.1/37.6 TTFT 0.46 s.",
+    "Honest quality note (HF card): on the composite 8-question probe the CPU int8 path degrades hard at 2B scale — 3 of 8 answers, deterministically identical on Mac and iPhone (backend property, not device flakiness); single-question gates are 8/8 on every backend and both runtime versions. GPU is the fidelity path for this file.",
+    "Pixel 8a (8 GB Android): GPU delegation is clean (zero rejections, 16865/16865 nodes on every compiled signature) but engine creation OOMs the phone — it rebooted mid-init; the fp32-expanded weight buffers exceed device RAM. CPU is separately blocked on this 97%-full phone: the XNNPACK weight cache needs ~another file-size of free disk and aborts with ENOSPC; --disable_weight_cache, --disable_cache=true and --cache_dir=:memory all fail to prevent the cache write on the pinned v0.16.0 litert_lm_main binary (new trap, 2026-08-14). Apple-hardware-first release."
+  ],
+  "schema_version": "1.2"
+}

@@ -1,0 +1,322 @@
+{
+  "artifacts": [
+    {
+      "file": "Spark-X2.5-4B_int8.litertlm",
+      "sha256": "20179c7be4f2aa1a04e77c3b2cc64794a429417d83b89c7a91f7125b8ca5fea6",
+      "size_mb": 4041.75
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "patch_modeling.py -> convert_spark.py <export_dir> <out> templates/spark25_think.jinja <recipe> (NO_START_TOKEN=1, USE_JINJA=1, CACHE 4096, PREFILL 1024,256,64,16,4,1 = 6 signatures — the granite-4.2 iPhone lesson; int4: EXTERNALIZE_EMBEDDER=1 BOCTAV4_128) -> scripts/set_activation_type.py --type fp32 on BOTH ship files (metadata-only repack, weights byte-identical) (FINDINGS bundles table + fp32 repack)",
+    "quantization": "export-time dynamic int8 on linears + embedding (dynamic_wi8_afp32), one TFLite section (4.24 GB); prefer_activation_type fp32 declared in-bundle (with the runtime's default fp16 GPU activations the same weights scored GSM8K 84 vs 94)",
+    "tool": "litert-torch export_hf path over the vendor modeling code patched for the registered attention interface (released wheels only; repro = hf-to-litertlm spark_work/patch_modeling.py + spark_work/convert_spark.py wrapping scripts/export_simple_template.py on the jinja path)",
+    "tool_version": "0.9.3 (transformers 5.14.1; ai-edge-quantizer named but unversioned in the sources — HF card Conversion notes; FINDINGS env ~/venvs/ltconv040dev; gates and GSM8K on litert-lm 0.17.0)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-07",
+          "decode_tokens_per_s": 4.55,
+          "delegated_ops": 2150,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 2150 out of 2236 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 73 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 2150 out of 2236 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 73 partitions for subgraph 1 (prefill_256).",
+            "VERBOSE: Replacing 2150 out of 2236 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 73 partitions for subgraph 2 (prefill_64).",
+            "VERBOSE: Replacing 2150 out of 2236 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 73 partitions for subgraph 3 (prefill_16).",
+            "results block: prefill=65.14 decode=4.55 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 3883.0,
+            "init_s": 0.74965,
+            "prefill_tokens": 213.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 65.14,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 2236,
+          "ttft_ms": 3490.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-07/spark-x2.5-4b-int8__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-07",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 2236,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 2236 out of 2236 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 2236 out of 2236 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256).",
+            "VERBOSE: Replacing 2236 out of 2236 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_64).",
+            "VERBOSE: Replacing 2236 out of 2236 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_16).",
+            "7 LITERT_CL 'Replacing' lines, every subgraph fully delegated (largest 2236/2236); zero TfLiteXNNPackDelegate lines",
+            "spark_work/s26/spark_s4b_int8_gate_gpu.log (absl epoch 1788775064 = 2026-09-07 09:57 UTC); gate prompt 'What is 17 + 25? Answer briefly.' through the bundle's jinja, answered 42 through the thought channel (spark_work/FINDINGS.md S26 section; spark_work/s26/rows.json gate_ok=true)",
+            "peak_mem_mb 1674 = VmHWM of the gate process polled by s26_gate.py (rows.json spark_s4b_int8_gate_gpu peak_vmhwm_mb); this is the gate run, not a --benchmark run",
+            "no throughput cell: both --benchmark turns (spark_s4b_int8_bench_gpu1.log / _gpu2.log) exceeded the driver's 1200 s leg cap mid-decode - a ~3,900-token thinking response at ~5 tok/s - so prefill/decode/TTFT stay null; a harness wall-clock cap measures the harness, not the model (DECISIONS #164(e)); the same file's CPU cell and the int4 sibling's GPU cell are measured in this snapshot"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": 1674.0,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 2236,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.16.0/2026-09-07/spark-x2.5-4b-int8__galaxy-s26.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-07",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "iPhone 17 Pro",
+            "machine_label": "iphone-17-pro",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.15.0",
+            "soc": "A19-Pro",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "G41_START backend=cpu maxTokens=3072",
+            "G41_INIT 13.19 s",
+            "G41_SCORE 8/8",
+            "G41_DONE",
+            "The app terminated with the exit code 0.",
+            "INFO: Created TensorFlow Lite XNNPACK delegate for CPU.",
+            "G41_MEM afterInit avail=4516MB (lowest tick 4268MB)",
+            "litertlm-convert/spark_work/iphone/iphone_4b_int8_fp32_cpu.log (absl epoch 1788743578 = 2026-09-07 01:12 UTC / 10:12 JST)",
+            "G41_MODEL model.litertlm bytes=4238081840",
+            "G41_CTX bundle-default",
+            "G41_MEM start avail=6135MB phys=11722MB",
+            "model bytes 4,238,081,840 match the published Spark-X2.5-4B_int8.litertlm (HF API size 4,238,081,840, LFS sha256 20179c7be4f2aa1a04e77c3b2cc64794a429417d83b89c7a91f7125b8ca5fea6)",
+            "G41DeviceTest generation gate (eight fixed questions in one composite prompt, scored by regex), not litert_lm_main --benchmark: no throughput, no TTFT, no peak-memory figure - those fields stay null rather than 0. G41_MEM lines are free-memory ticks of the handset, not a process peak.",
+            "runtime_version 0.15.0: this gate ran under G41DeviceTest, which links ~/code/swift-litert-lm (Package.swift: liteRTLMVersion = \"v0.15.0\"; the lane's FINDINGS records the harness built against checkout 0.2.0-1-g8e5f1da with the Increased Memory Limit entitlement on the App ID). The built .app could not be located on disk on 2026-09-08 for a dwarfdump re-walk of the embedded CLiteRTLM UUID, so the version rests on the package pin plus the lane's own attestation, not on the binary (#164(a) chain walked to the pin only).",
+            "os_build iOS 27.0 (24A5418b) per spark_work/FINDINGS.md 'Conditions of this measurement'; the G41 log prints no OS version.",
+            "fp32-activation repack (the shipped bytes)."
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_s": 13.19,
+            "max_num_tokens": 3072.0,
+            "sanity_8q_correct": 8.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.15.0/2026-09-07/spark-x2.5-4b-int8__iphone-17-pro.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-07",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "iPhone 17 Pro",
+            "machine_label": "iphone-17-pro",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.15.0",
+            "soc": "A19-Pro",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "G41_START backend=gpu maxTokens=3072",
+            "G41_INIT 2.91 s",
+            "G41_SCORE 8/8",
+            "G41_DONE",
+            "The app terminated with the exit code 0.",
+            "G41_MEM afterInit avail=3368MB (lowest tick 2608MB)",
+            "litertlm-convert/spark_work/iphone/iphone_4b_int8_fp32_gpu.log (absl epoch 1788743806 = 2026-09-07 01:16 UTC / 10:16 JST)",
+            "G41_MODEL model.litertlm bytes=4238081840",
+            "G41_CTX bundle-default",
+            "G41_MEM start avail=6134MB phys=11722MB",
+            "model bytes 4,238,081,840 match the published Spark-X2.5-4B_int8.litertlm (HF API size 4,238,081,840, LFS sha256 20179c7be4f2aa1a04e77c3b2cc64794a429417d83b89c7a91f7125b8ca5fea6)",
+            "G41DeviceTest generation gate (eight fixed questions in one composite prompt, scored by regex), not litert_lm_main --benchmark: no throughput, no TTFT, no peak-memory figure - those fields stay null rather than 0. G41_MEM lines are free-memory ticks of the handset, not a process peak.",
+            "runtime_version 0.15.0: this gate ran under G41DeviceTest, which links ~/code/swift-litert-lm (Package.swift: liteRTLMVersion = \"v0.15.0\"; the lane's FINDINGS records the harness built against checkout 0.2.0-1-g8e5f1da with the Increased Memory Limit entitlement on the App ID). The built .app could not be located on disk on 2026-09-08 for a dwarfdump re-walk of the embedded CLiteRTLM UUID, so the version rests on the package pin plus the lane's own attestation, not on the binary (#164(a) chain walked to the pin only).",
+            "os_build iOS 27.0 (24A5418b) per spark_work/FINDINGS.md 'Conditions of this measurement'; the G41 log prints no OS version.",
+            "fp32-activation repack (the shipped bytes); G41_INIT 2.91 s is a warm-shader-cache init - the pre-ship fp16-default build of the same weights (iphone_4b_int8_gpu.log, unpublished bytes, not a record) initialised cold in 17.68 s (spark_work/FINDINGS.md iPhone table)."
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_s": 2.91,
+            "max_num_tokens": 3072.0,
+            "sanity_8q_correct": 8.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.15.0/2026-09-07/spark-x2.5-4b-int8__iphone-17-pro.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-07",
+          "decode_tokens_per_s": 19.5,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=345.4 decode=19.5 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 345.4,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 792.5
+        },
+        "source": "data/device_runs/0.17.0/2026-09-07/spark-x2.5-4b-int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-07",
+          "decode_tokens_per_s": 49.38,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "m4max-quiet-300s-gpu-rest",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=783.88 decode=49.38 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 783.88,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 346.9
+        },
+        "source": "data/device_runs/0.17.0/2026-09-07/spark-x2.5-4b-int8__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "spark-x2.5",
+    "id": "spark-x2.5-4b-int8",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Spark-X2.5-4B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "int8 (4.24 GB) is the CPU-prefill file (345 vs 118 tok/s on the Mac CPU); int4 block-128 is the recommended file at the same accuracy (HF card).",
+    "iPhone int8 legs 8/8 on both backends; Galaxy S26 CPU decode 4.5-4.7 tok/s at 5553 MB peak RSS (HF card Performance).",
+    "GPU activations are declared fp32 in the bundle (prefer_activation_type = fp32, a metadata-only repack; weights byte-identical): the runtime runs the text decoder with fp16 activations on the GPU by default, and on this 36-layer decoder that silently costs reasoning accuracy — the same int8 weights scored GSM8K 84 under fp16 GPU activations and 94 under fp32, established by re-running the 11 GPU losses on the CPU fp32 path (10 came back right; the 5 controls stayed wrong). The 8-question gate did not see it (8/8 either way); only a long-generation accuracy row does. Expect a larger GPU memory footprint than an fp16-activation file of the same size (HF card Conversion notes; FINDINGS 4B GSM8K).",
+    "Both files are at bf16 parity on GSM8K (94 = 94 = 94; n=100, greedy, 0-shot CoT, 3584 output tokens, own harness) once fp32 activations are declared; the 1.7B stays on the fp16 default because it measured exact parity there (HF card; FINDINGS).",
+    "On the Galaxy S26 this 4B is a ~5 tok/s model on every measured path: the fp32-activation OpenCL path does not beat the CPU (int4: GPU 4.9 vs CPU 5.5-5.6 tok/s decode) but halves peak memory (2.0 vs 3.5 GB) — pick by memory, not speed; the int8 GPU --benchmark cell is unmeasured because a ~3,900-token thinking response at ~5 tok/s exceeded the 20-minute leg cap twice, although the file loads with full OpenCL delegation (2236/2236) and answers the gate on the GPU (HF card Performance; FINDINGS S26; DECISIONS #164(e)).",
+    "iPhone 17 Pro (G41DeviceTest, --max-tokens 3072, Increased Memory Limit entitlement, iOS 27.0): the int8 file — ONE 4.24 GB weights section, no externalized embedder — loads and scores 8/8 on Metal and CPU (available-memory floor ~2.6 GB on the Metal leg, ~4.5 GB on CPU), so the ~2 GiB single-section mmap ceiling recorded in the Llama-3.2 era did not bite on this runtime lineage with this entitlement; the 4B int4 b128's 1.994 GiB main section was sized to it unnecessarily (harmless). Keep externalizing for int4 (the tied-vocab duplication reason stands), but do not cite the 2 GiB ceiling as a hard rule until re-measured on the runtime it came from (FINDINGS 'The iOS ~2 GiB single-section mmap ceiling did NOT bite').",
+    "GPU init times on the iPhone are with a warm shader cache (a cold first launch of the int8 file initialised in 18.8 s); the int4 file's first Metal leg after a fresh 2.5 GB copy initialised in 13 s and then produced nothing for 25 min until the host timeout — one-off, cause not established, the re-run scored normally; the card carries the completed legs (HF card; FINDINGS).",
+    "Reasoning model: give it a generous output budget (>= 2048 tokens, 3584 for math) — truncated mid-thought it produces no final answer at all; the bundle pre-fills the vendor think opener (<|Bot|><think>) and declares the thought channel (<think>…</think>) so the runtime separates reasoning from the answer and honours a thinking budget; without the channel the runtime streams raw reasoning into the answer and ignores any budget (HF card Usage + Conversion notes).",
+    "The vendor modeling code is patched for export, not re-implemented: it computes attention through its own eager function and ignores config._attn_implementation, so the export copy dispatches through the registered attention interface (litert-torch's transposed KV cache), threads the per-call kwargs, declares the attention-backend flags and applies the per-head sigmoid output gate in the interface's layout; eager output is bit-identical to the vendor file (max |dlogit| 0.0 on 24 random tokens); two further edits make the vendor file load under transformers 5 at all (HF card Conversion notes; FINDINGS parity).",
+    "No start token in the metadata: the tokenizer declares <|start_of_sentence|> as BOS but never prepends it (add_bos_token false); the template carries its own, so the exporter's unconditional start_token write was suppressed (measured harmless in bf16 on the 8Q gate, but it is not the vendor prompt) (HF card Conversion notes).",
+    "Prompt format carried as a Jinja template verbatim: a default system block ('you are a helpful assistant.', a user system prompt appended after it), every message wrapped in <|start_of_sentence|> … <|end_of_sentence|>, stop <|end_of_sentence|>; tool-call formatting is not carried; KV budget 4096 (the original's 1M context does not apply on-device); the vendor's recommended sampling is temperature 1.0 / top-p 0.95 while every number on the card is greedy (HF card Usage).",
+    "Tokenizer parity: the bundle's HF tokenizer.json section encodes 234/234 probe rows to the same ids as the tokenizers reading of the upstream file; multi-turn (3 turns, fact recall) passes with and without the runtime's channel filtering (HF card Correctness).",
+    "iPhone 17 Pro rows come from the G41DeviceTest harness (composite 8-question prompt, --max-tokens 3072, byte count verified on-device): a generation gate, not a benchmark; the harness links swift-litert-lm's v0.15.0 pin and ran with the Increased Memory Limit entitlement — see the device rows' evidence (FINDINGS iPhone section; DECISIONS #164)."
+  ],
+  "schema_version": "1.2"
+}

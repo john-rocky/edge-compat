@@ -1,0 +1,55 @@
+{
+  "artifact": "plantnet.tflite",
+  "device": "raspberry-pi-5",
+  "model_id": "plantnet-300k-resnet18",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-08-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Raspberry Pi 5 Model B Rev 1.1",
+        "machine_label": "raspberry-pi-5",
+        "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+        "runtime": "litert",
+        "runtime_version": "2.2.0.dev20260804",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+        "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+        "invocation 0: exit=0 wall_s=2.4 temp 51.0->60.9C throttled=0x0 xnnpack=True median_us=34088.0 runs=50 footprint_peak_mb=137.5",
+        "invocation 1: exit=0 wall_s=2.4 temp 49.9->60.9C throttled=0x0 xnnpack=True median_us=34147.0 runs=50 footprint_peak_mb=137.5",
+        "invocation 2: exit=0 wall_s=2.4 temp 50.5->61.5C throttled=0x0 xnnpack=True median_us=34191.0 runs=50 footprint_peak_mb=137.5"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 34.147,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "init_ms": 118.445,
+        "invocations": 3,
+        "iterations": 150,
+        "latency_max_ms": 34.986,
+        "latency_min_ms": 33.903,
+        "threads": 4,
+        "warmup_runs_per_invocation": 10
+      },
+      "output_match": null,
+      "peak_mem_mb": 137.5,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

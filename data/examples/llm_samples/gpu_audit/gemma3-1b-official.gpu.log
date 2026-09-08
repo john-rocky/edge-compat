@@ -1,0 +1,12 @@
+Benchmarking model: gemma3-1b-it-int4.litertlm (~/.cache/huggingface/hub/models--litert-community--Gemma3-1B-IT/snapshots/6d54daa71cfbffba6b2843c08eeb1a27e7430bf0/gemma3-1b-it-int4.litertlm)
+Backend                    : gpu
+Number of tokens in prefill: 256
+Number of tokens in decode : 256
+Max number of tokens       : 1024
+Cache                      : no
+Speculative decoding       : auto
+----- Results -----
+Prefill speed:        4343.84 tokens/s
+Decode speed:         185.75 tokens/s
+Init time:            1.8673 s
+Time to first token:  0.0643 s

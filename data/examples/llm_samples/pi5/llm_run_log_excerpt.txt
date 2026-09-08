@@ -1,0 +1,14 @@
+Benchmarking model: granite-4.0-h-350m_int8.litertlm (/home/pi/pi5bench/llm/models/granite-4.0-h-350m/granite-4.0-h-350m_int8.litertlm)
+Backend                    : cpu
+Number of tokens in prefill: 256
+Number of tokens in decode : 256
+Max number of tokens       : 4096
+Cache                      : memory
+Speculative decoding       : auto
+Running warmup..
+Running iteration 1 of 1..
+----- Results -----
+Prefill speed:        8.85 tokens/s
+Decode speed:         5.57 tokens/s
+Init time:            12.0097 s
+Time to first token:  29.1217 s

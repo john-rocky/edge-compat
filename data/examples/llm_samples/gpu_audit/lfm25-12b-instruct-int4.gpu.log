@@ -1,0 +1,41 @@
+Benchmarking model: LFM2.5-1.2B-Instruct_int4.litertlm (~/code/litertlm-convert/minicpm5_work/ship_lfm25/LFM2.5-1.2B-Instruct_int4.litertlm)
+Backend                    : gpu
+Number of tokens in prefill: 256
+Number of tokens in decode : 256
+Max number of tokens       : 1024
+Cache                      : no
+Speculative decoding       : auto
+E0000 00:00:1784700816.633457 23966061 model_builder.cc:2484] {
+  type: INT64
+  data: {...}
+  dims: []
+} isn't scalar-convertible.
+E0000 00:00:1784700816.633505 23966061 model_builder.cc:2484] {
+  type: INT64
+  data: {...}
+  dims: []
+} isn't scalar-convertible.
+ERROR: Following operations are not supported by GPU delegate:
+ADD: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM_model/transformers.models.lfm2.modeling_lfm2.Lfm2Model_model/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_0/litert_torch.generative.export_hf.model_ext.lfm2.short_conv.Lfm2ShortConv_conv;17
+CAST: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM_model/transformers.models.lfm2.modeling_lfm2.Lfm2Model_model/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_0/litert_torch.generative.export_hf.model_ext.lfm2.short_conv.Lfm2ShortConv_conv;20
+CAST: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM_model/transformers.models.lfm2.modeling_lfm2.Lfm2Model_model/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_0/litert_torch.generative.export_hf.model_ext.lfm2.short_conv.Lfm2ShortConv_conv;26
+CAST: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM_model/transformers.models.lfm2.modeling_lfm2.Lfm2Model_model/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_0/litert_torch.generative.export_hf.model_ext.lfm2.short_conv.Lfm2ShortConv_conv;;litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM_model/transformers.models.lfm2.modeling_lfm2.Lfm2Model_model/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_0/litert_torch.generative.export_hf.model_ext.lfm2.short_conv.Lfm2ShortConv_conv;
+GATHER_ND: Operation is not supported.
+GREATER_EQUAL: Can't parse inputs with const tensors.
+LESS_EQUAL: Can't parse inputs with const tensors.
+SUM: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM_model/transformers.models.lfm2.modeling_lfm2.Lfm2Model_model/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_0/litert_torch.generative.export_hf.model_ext.lfm2.short_conv.Lfm2ShortConv_conv;;litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM_model/transformers.models.lfm2.modeling_lfm2.Lfm2Model_model/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_0/litert_torch.generative.export_hf.model_ext.lfm2.short_conv.Lfm2ShortConv_conv;
+536 operations will run on the GPU, and the remaining 43 operations will run on the CPU.
+ERROR: Hint fully delegated to single delegate is set, but the graph is not fully delegated.
+E0000 00:00:1784700818.954375 23966061 engine.cc:807] Failed to create engine: INTERNAL: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor.cc:1978]
+└ ERROR: [./third_party/odml/litert/litert/cc/litert_compiled_model.h:1487]
+=== Source Location Trace: === 
+./third_party/odml/litert/litert/cc/litert_macros.h:551
+third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor_factory.cc:144
+third_party/odml/litert_lm/runtime/core/engine_advanced_impl.cc:317
+An error occurred during benchmarking
+Traceback (most recent call last):
+  File "~/venvs/minicpm5/lib/python3.10/site-packages/litert_lm_cli/commands/benchmark.py", line 111, in run_benchmark
+    result = benchmark_obj.run()
+  File "~/venvs/minicpm5/lib/python3.10/site-packages/litert_lm/benchmark.py", line 76, in run
+    raise RuntimeError(
+RuntimeError: Failed to create engine for benchmark (model_path=~/code/litertlm-convert/minicpm5_work/ship_lfm25/LFM2.5-1.2B-Instruct_int4.litertlm, backend=gpu)

@@ -1,0 +1,186 @@
+{
+  "artifacts": [
+    {
+      "file": "siglip2_base_224_fp16.tflite",
+      "sha256": "a30ebb7b3ee15eaa68a18f9ab6a2ed740c15c343d25d898dc482317473320854",
+      "size_mb": 176.847
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-13",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 2124.707,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-13",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 19.635,
+        "loads": true,
+        "max_rel_diff": 0.0008081583214905942,
+        "output_match": true,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-13/siglip2-base-patch16-224.json"
+  },
+  "conversion": {
+    "command": "python scripts/convert_siglip2.py",
+    "quantization": "fp16 (float_casting weight quantization; single-graph 185 MB file)",
+    "tool": "litert-torch (litertlm-convert scripts/convert_siglip2.py; timm image tower)",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-08-26",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.6066667->0.6066667 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 13.704,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "latency_max_ms": 18.062,
+            "latency_min_ms": 13.427,
+            "load_ms": 1872.4
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-26/siglip2-base-patch16-224__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-08-26",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT (Hexagon, JIT on-device)"
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.59000003->0.59000003 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 6.943,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "jit_first_load_ms": 6454.4,
+            "latency_max_ms": 7.14,
+            "latency_min_ms": 6.88,
+            "load_ms": 183.9,
+            "qnn_partition_lines": 57
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-26/siglip2-base-patch16-224__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "siglip",
+    "id": "siglip2-base-patch16-224",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/SigLIP2-base-patch16-224",
+    "task": "image-feature-extraction"
+  },
+  "pitfalls": [
+    "Input is NCHW [1,3,224,224] normalized to [-1,1] ((x/255-0.5)/0.5) BY THE CALLER; output [1,768] is already L2-normalized (HF card).",
+    "Re-authoring (script docstring): fused qkv 5-D head-split decomposed to separate q/k/v with 4-D SDPA; the attention-pool's const-latent batch-matmul expressed as broadcast-multiply + reduce-sum (const@non-const BMM is rejected/mis-computed); overflow-safe LayerNorm because the delegate reduces variance in fp16 even for an fp32 graph (deep-ViT activations overflow 65504).",
+    "Full GPU residency on Pixel 8a: 809/809 nodes LITERT_CL, no Flex ops, GPU output corr ~1.0 vs PyTorch (HF card).",
+    "Zero-shot classification needs the TEXT tower host-side: open_clip ViT-B-16-SigLIP2 embeddings (prompt 'This is a photo of {label}.'), dot product on device (HF card)."
+  ],
+  "schema_version": "1.2"
+}

@@ -1,0 +1,183 @@
+{
+  "artifacts": [
+    {
+      "file": "model.litertlm",
+      "sha256": "356b2d7778d27d55fbb0d2e0c5e8801e9de136db59849c41c882bd97333840d5",
+      "size_mb": 2359.731
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "from litert_torch.generative.export_hf.export import export; export(model='Qwen/Qwen3-4B-Thinking-2507', output_dir='out', quantization_recipe='qwen3_int4_block128_octav.json', cache_length=4096, externalize_embedder=True) (HF card Conversion snippet)",
+    "quantization": "int4 blockwise-128 + OCTAV, symmetric; embeddings INT8 (externalized); KV cache 4096 (HF card Conversion)",
+    "tool": "litert-torch export_hf (official converter; standard Qwen3ForCausalLM on the existing Qwen3 path, no custom graph code) (HF card Conversion)",
+    "tool_version": "TODO (the HF card names the converter but not its version; no export log in the sources)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 5.99,
+          "delegated_ops": 2448,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1454 out of 1674 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 285 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1374 out of 1596 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 290 partitions for subgraph 1 (decode).",
+            "VERBOSE: Replacing 7 out of 7 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 2 (odml.rms_norm.impl).",
+            "VERBOSE: Replacing 7 out of 7 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 3 (odml.rms_norm.impl_0).",
+            "results block: prefill=63.02 decode=5.99 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 1694.0,
+            "init_s": 3.40004,
+            "prefill_tokens": 204.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 63.02,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 2526,
+          "ttft_ms": 3400.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/qwen3-4b-thinking__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-07-23",
+          "decode_tokens_per_s": 68.29,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.14.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=970.01 decode=68.29 tokens/s, init=2.0336 s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 2.0336,
+            "max_num_tokens": 1024.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 970.01,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 278.6
+        },
+        "source": "data/device_runs/0.14.0/2026-07-23/qwen3-4b-thinking__mac-studio-m4-max.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 1.49,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 214.5 s, output head '[thought] Okay, the user is asking \"What is 17 plus 26? Answer with the number o'",
+            "invocation 0: exit=0 wall_s=498.3 temp 51.0->54.9C throttled=0x0 prefill_tps=10.71 decode_tps=1.49 ttft_s=25.2334 init_s=55.9693 peak_rss_mb=3957",
+            "invocation 1: exit=0 wall_s=498.4 temp 49.9->53.2C throttled=0x0 prefill_tps=10.49 decode_tps=1.49 ttft_s=25.6541 init_s=55.8938 peak_rss_mb=3942",
+            "invocation 2: exit=0 wall_s=496.3 temp 51.0->54.3C throttled=0x0 prefill_tps=10.61 decode_tps=1.5 ttft_s=25.4863 init_s=55.4874 peak_rss_mb=3974"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.5,
+            "decode_tps_min": 1.49,
+            "init_s": 55.8938,
+            "init_s_max": 55.9693,
+            "init_s_min": 55.4874,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 10.71,
+            "prefill_tps_min": 10.49,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 25.6541,
+            "ttft_s_min": 25.2334
+          },
+          "output_match": null,
+          "peak_mem_mb": 3974.0,
+          "prefill_tokens_per_s": 10.61,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 25486.3
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/qwen3-4b-thinking__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3",
+    "id": "qwen3-4b-thinking",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Qwen3-4B-Thinking-2507",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Reasoning model (thinking on by default in the 2507 release); this repo's rows are the Mac compat/gpu_audit runs, the S26 CPU S7 row and the Pi 5 CPU row (device runs).",
+    "License Apache-2.0, inherited from Qwen/Qwen3-4B-Thinking-2507 (HF card License).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/ (Pi 5 / S26 / Pixel 8a / Mac / iPhone as measured)."
+  ],
+  "schema_version": "1.2"
+}

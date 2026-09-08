@@ -1,0 +1,75 @@
+{
+  "artifact": "parakeet_ctc_0.6b_5s_i8.tflite",
+  "device": "galaxy-s26",
+  "model_id": "parakeet-ctc-0.6b__parakeet_ctc_0.6b_5s_i8",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-08-27",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "LiteRtException: Failed to compile model",
+      "evidence": [
+        "LiteRtException: Failed to compile model"
+      ],
+      "failure_class": "compile_failed",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "npu_qnn",
+      "context_length": null,
+      "date": "2026-08-27",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": "QAIRT (Hexagon, AOT host-compiled, SM8850 target)"
+      },
+      "error": "AOT compile failed on host (SM8850 target): O ]  vtcm_wrapper.cc:278:0x7ffffffc4d20 Acquired Cache, ctx = 0x0, ptr=0x7fffadfff800\n     0.0ms [ ERROR ]  tcm_migration.cc:2350::ERROR:Operator named q::* …[trace truncated]",
+      "evidence": [
+        "AOT compile failed on host (SM8850 target): O ]  vtcm_wrapper.cc:278:0x7ffffffc4d20 Acquired Cache, ctx = 0x0, ptr=0x7fffadfff800\n     0.0ms [ ERROR ]  tcm_migration.cc:2350::ERROR:Operator named q::* …[trace truncated]"
+      ],
+      "failure_class": "aot_compile_failed",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

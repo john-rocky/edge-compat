@@ -1,0 +1,41 @@
+{
+  "artifact": "gemma-4-e2b__int4__litertlm",
+  "device": "iphone-17-pro",
+  "model_id": "gemma-4-e2b",
+  "quantization": "int4",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-07-18",
+      "decode_tokens_per_s": 57.0,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 17 Pro",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.13.1",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "devicemark leaderboard row (PipelinedBench: warm-state S=1 pipelined decode, 128-token prompt / 256-token decode, two trials, settled device, numerics-gated; per the devicemark dataset card): {\n  \"artifact_id\": \"gemma-4-e2b__int4__litertlm\",\n  \"decode_tok_s\": 57,\n  \"device\": \"iPhone 17 Pro\",\n  \"mem_measured\": true,\n  \"peak_mem_mb\": 488,\n  \"power_w\": null,\n  \"runtime\": \"litertlm\"\n}"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": 488.0,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

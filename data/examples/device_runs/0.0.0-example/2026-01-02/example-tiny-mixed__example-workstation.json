@@ -1,0 +1,49 @@
+{
+  "artifact": "model_mixed_example.litertlm",
+  "device": "example-workstation",
+  "model_id": "example-tiny-mixed",
+  "notes": "Example fixture for the .litertlm-on-litert-lm lane — pipeline data, not a real device measurement.",
+  "quantization": "int4",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-01-02",
+      "decode_tokens_per_s": 45.6,
+      "delegated_ops": null,
+      "env": {
+        "device": "Example Workstation",
+        "machine_label": "example-workstation",
+        "os_build": "macOS 0.0-example",
+        "runtime": "litert-lm",
+        "runtime_version": "0.0.0-example",
+        "soc": "Example Desktop SoC",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "EXAMPLE results block — pipeline fixture, not a measurement."
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256,
+        "init_s": 1.5,
+        "max_num_tokens": 1024,
+        "prefill_tokens": 256
+      },
+      "output_match": null,
+      "peak_mem_mb": 512.0,
+      "prefill_tokens_per_s": 123.4,
+      "provenance": "example",
+      "runs": true,
+      "ttft_ms": 78.9,
+      "total_ops": null
+    }
+  ],
+  "schema_version": "1.0"
+}

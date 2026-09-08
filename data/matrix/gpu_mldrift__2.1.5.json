@@ -1,0 +1,47 @@
+{
+  "backend": "gpu_mldrift",
+  "entries": [
+    {
+      "conditions": "DRQ int8 channelwise weights + fp32 activations: an FC on a rank-3 [1,T,C] input whose OUTPUT feeds an ADD (residual or two-input) aborts delegate kernel creation — ml_drift delegate_opencl 'Unable to parse bc coord for BATCH axis. Layout is bhwc' — and the whole CompiledModel GPU compile fails (no CPU fallback). Isolated rank-3 DRQ FC compiles; rank-2 FC+ADD compiles; the identical graph in f32 compiles. Kills every DRQ transformer/conformer block with residual FCs. Minimal repro: 1.0 MB x+Linear(x) tflite (parakeet-ja-work/drq_probes/bisect_resadd1_i8.tflite).",
+      "dtypes": [
+        "float32",
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-13",
+        "litert_version": "2.1.5",
+        "source_model": "parakeet-tdt_ctc-0.6b-ja i8 DRQ + minimal probe bisect_resadd1_i8"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "whole-model GPU compile succeeds (f32: parakeet-ja 1862/1862+2083/2083 delegated)",
+          "rewrite": "run the i8 file on CPU or ship f32 weights for GPU (both verified)",
+          "symptom": "GPU compile fails instantly on any DRQ transformer block (residual FC)"
+        }
+      ],
+      "status": "crash"
+    },
+    {
+      "conditions": "A dim-1 broadcast multiply computes the FIRST source's values for all broadcast lanes on device: per-source correlation drops to ~0.85 while a same-shape non-broadcast control stays 1.0; the graph is fully delegated (12/12 nodes). Repro filename indicates Mali; device presumed Pixel 8a.",
+      "constraints": {
+        "broadcast": "dim1"
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-07-02",
+        "litert_version": "2.1.5",
+        "source_model": "TIGER-DnR dim-1 broadcast device repro"
+      },
+      "op": "MUL",
+      "provenance": "measured",
+      "status": "incorrect"
+    }
+  ],
+  "generated_at": "2026-08-26",
+  "litert_version": "2.1.5",
+  "schema_version": "1.0"
+}

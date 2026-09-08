@@ -1,0 +1,235 @@
+{
+  "backend": "gpu_metal_mac",
+  "entries": [
+    {
+      "conditions": "delegate error: Tensor dimensions must be less than 5. — observed on Mamba-layer tensors in a granitemoehybrid prefill graph",
+      "constraints": {
+        "min_rank": 5
+      },
+      "evidence": {
+        "date": "2026-08-04",
+        "litert_version": "0.15.0",
+        "source_model": "granite-4.0-h-350m_int8"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Operation is not supported. — observed on qwen3_5 gated-delta prefill tensors (mrope expand and kernel index_put lowerings)",
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "0.15.0",
+        "source_model": "Qwen3.5-0.8B_wi8fc"
+      },
+      "op": "BROADCAST_TO",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "BROADCAST_TO rejection removed (verified: v3 re-export delegates)",
+          "rewrite": "replace expand with PACK/stack and index_put with stack+concat rebuild",
+          "symptom": "GPU delegate rejects BROADCAST_TO from expand()/index_put lowerings"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Tensor dimensions must be less than 5. — observed on Mamba-layer tensors in a granitemoehybrid prefill graph",
+      "constraints": {
+        "min_rank": 5
+      },
+      "evidence": {
+        "date": "2026-08-04",
+        "litert_version": "0.15.0",
+        "source_model": "granite-4.0-h-350m_int8"
+      },
+      "op": "CUMSUM",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "check-failure (SIGABRT): EMBEDDING_LOOKUP: Unsupported external weights type: 1 in ml_drift BuildModel — process aborts rather than falling back",
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "0.15.0",
+        "source_model": "Qwen3.5-0.8B_fp"
+      },
+      "op": "EMBEDDING_LOOKUP",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "engine creation proceeds (verified: wi8fc delegates)",
+          "rewrite": "quantize the embedding (int8) before GPU targeting",
+          "symptom": "GPU delegate check-fails on fp32 external embedding weights"
+        }
+      ],
+      "status": "crash"
+    },
+    {
+      "conditions": "delegate error: Tensor dimensions must be less than 5. — observed on Mamba-layer tensors in a granitemoehybrid prefill graph",
+      "constraints": {
+        "min_rank": 5
+      },
+      "evidence": {
+        "date": "2026-08-04",
+        "litert_version": "0.15.0",
+        "source_model": "granite-4.0-h-350m_int8"
+      },
+      "op": "EXP",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Tensor dimensions must be less than 5. — observed on Mamba-layer tensors in a granitemoehybrid prefill graph",
+      "constraints": {
+        "min_rank": 5
+      },
+      "evidence": {
+        "date": "2026-08-04",
+        "litert_version": "0.15.0",
+        "source_model": "granite-4.0-h-350m_int8"
+      },
+      "op": "MUL",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Invalid paddings tensor shape: expected 4x2 or 3x2 got 2x2 — rank-2 F.pad in the gated-delta chunk kernel",
+      "constraints": {
+        "min_rank": 3
+      },
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "0.15.0",
+        "source_model": "Qwen3.5-0.8B_wi8fc"
+      },
+      "op": "PAD",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "rank-2 PAD rejection removed (verified: v3 re-export delegates)",
+          "rewrite": "route rank-2 pads through an unsqueeze/rank-3 pad/squeeze",
+          "symptom": "GPU delegate rejects rank-2 PAD"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Tensor dimensions must be less than 5. — observed on Mamba-layer tensors in a granitemoehybrid prefill graph",
+      "constraints": {
+        "min_rank": 5
+      },
+      "evidence": {
+        "date": "2026-08-04",
+        "litert_version": "0.15.0",
+        "source_model": "granite-4.0-h-350m_int8"
+      },
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Tensor dimensions must be less than 5. — observed on Mamba-layer tensors in a granitemoehybrid prefill graph",
+      "constraints": {
+        "min_rank": 5
+      },
+      "evidence": {
+        "date": "2026-08-04",
+        "litert_version": "0.15.0",
+        "source_model": "granite-4.0-h-350m_int8"
+      },
+      "op": "SELECT_V2",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "SELECT_V2 eliminated from the graph (rule fixture-validated on a synthetic model; not re-measured on Metal)",
+          "rewrite": "replace SELECT_V2 with arithmetic: out = else + (then - else) * cast(cond) — eliminates the op regardless of the rejection reason",
+          "symptom": "SELECT_V2 rejected by the Metal delegate (rank>=5 Mamba-layer tensors)",
+          "transform_id": "select-v2-to-arithmetic"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Cond must be float or bool type; if/else tensors must be same shape as output or constant scalar — observed on tril/masked_fill lowerings in the qwen3_5 gated-delta kernel",
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "0.15.0",
+        "source_model": "Qwen3.5-0.8B_wi8fc"
+      },
+      "op": "SELECT_V2",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "SELECT_V2 rejection removed (verified: v3 re-export delegates)",
+          "rewrite": "express triangular masks as constant float-mask multiplies",
+          "symptom": "GPU delegate rejects SELECT_V2 with broadcast condition from tril()/masked_fill()"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate lists STABLEHLO_COMPOSITE: odml.softmax as not supported — only the odml.softmax composite is named by the error; no statement about other composite names",
+      "constraints": {
+        "composite_name": "odml.softmax"
+      },
+      "evidence": {
+        "date": "2026-08-04",
+        "litert_version": "0.15.0",
+        "source_model": "lfm25-wi8-composite-0150"
+      },
+      "op": "STABLEHLO_COMPOSITE",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Operation is not supported. — emitted by the stock qwen3_5 M-RoPE interleaved slice-assignment lowering",
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "0.15.0",
+        "source_model": "Qwen3.5-0.8B_fp"
+      },
+      "op": "STABLEHLO_PAD",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "STABLEHLO_PAD rejection removed (verified: v3 re-export delegates)",
+          "rewrite": "text-only models: compute plain 1D RoPE (mathematically identical for text)",
+          "symptom": "GPU delegate rejects STABLEHLO_PAD from mrope strided slice-assignment"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: tensor has bad input dims size: 6. — stated only for rank-6 inputs (Mamba-layer reductions); no statement about rank 5",
+      "constraints": {
+        "rank": 6
+      },
+      "evidence": {
+        "date": "2026-08-04",
+        "litert_version": "0.15.0",
+        "source_model": "granite-4.0-h-350m_int8"
+      },
+      "op": "SUM",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Permutation for transpose is invalid. — the rejecting permutation is not stated in the log",
+      "evidence": {
+        "date": "2026-08-04",
+        "litert_version": "0.15.0",
+        "source_model": "granite-4.0-h-350m_int8"
+      },
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "status": "fallback"
+    }
+  ],
+  "generated_at": "2026-08-19",
+  "litert_version": "0.15.0",
+  "schema_version": "1.0"
+}

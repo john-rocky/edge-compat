@@ -1,0 +1,48 @@
+{
+  "artifact": "granite-4.1-3b_int8_nobos.litertlm",
+  "device": "mac-m4-max",
+  "model_id": "granite-4.1-3b-int8",
+  "quantization": "int8",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-17",
+      "decode_tokens_per_s": 32.74,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio M4 Max",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "results block: prefill=743.30 decode=32.74 tokens/s, init=5.9184 s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 5.9184,
+        "max_num_tokens": 1024.0,
+        "prefill_tokens": 256.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 743.3,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 398.9
+    }
+  ],
+  "schema_version": "1.0"
+}

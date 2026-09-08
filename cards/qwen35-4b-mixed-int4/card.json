@@ -1,0 +1,323 @@
+{
+  "artifacts": [
+    {
+      "file": "Qwen3.5-4B_mixed_int4.litertlm",
+      "sha256": "176b5a2b6c20bde7739fba98e653a04f5d5b4a753a4b9dd0ff529aba7c35be99",
+      "size_mb": 2626.768
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "QWEN35_PREFILL_LADDER=1024,256,64,16,4,1 python convert_qwen35_hybrid.py Qwen/Qwen3.5-4B out_int4_4b  # float export; then: python make_int4_4b.py out_int4_4b/model.litertlm out_int4_4b b32",
+    "quantization": "Mixed INT4: int4 BLOCKWISE-32 min-max on every FULLY_CONNECTED, int8 channelwise on lm_head + embedding (one shared 248320x2560 vocab buffer, verified single); convs and the delta rule float; fp32 activations declared",
+    "tool": "litert-torch, pinned base + Qwen3.5 hybrid patch (identical float export rail to qwen35-4b int8), then post-hoc ai-edge-quantizer via qwen35_work/make_int4_4b.py",
+    "tool_version": "editable checkout 115a136 + qwen35_hybrid_litert_torch.patch; ai-edge-quantizer from the ltconv040dev venv"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": 8.87,
+          "delegated_ops": null,
+          "env": {
+            "device": "iphone-17-pro",
+            "machine_label": "iphone-17-pro-cold-unplugged",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "A19-Pro",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "device.modelIdentifier=iPhone18,1",
+            "throughput taken from task 'quality' (22 generated tokens, 2026-08-27T00:12:58Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 1 task(s)",
+            "[quality 2026-08-27T00:12:58Z] prefill=46.682888970583946 decode=8.871308314323382 ttft_ms=3124.0 peak_mb=1678.756950378418 stop=stop output='42\\\\nTokyo\\\\nCold\\\\n7\\\\nMerci\\\\n56\\\\n0.9\\\\nblue'"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "quality.decode_tokens_per_s": 8.871308,
+            "quality.generated_tokens": 22.0,
+            "quality.load_s": 23.691,
+            "quality.peak_mem_mb": 1678.75695,
+            "quality.prefill_tokens_per_s": 46.682889,
+            "quality.prompt_tokens": 138.0,
+            "quality.ttft_ms": 3124.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 1678.757,
+          "prefill_tokens_per_s": 46.68,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 3124.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__iphone-17-pro.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": 11.38,
+          "delegated_ops": null,
+          "env": {
+            "device": "iphone-17-pro",
+            "machine_label": "iphone-17-pro-cold-unplugged",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "A19-Pro",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "device.modelIdentifier=iPhone18,1",
+            "throughput taken from task 'quality' (22 generated tokens, 2026-08-27T00:12:06Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 1 task(s)",
+            "[quality 2026-08-27T00:12:06Z] prefill=88.68827150578085 decode=11.379450131562582 ttft_ms=1894.0 peak_mb=5735.632865905762 stop=stop output='42\\\\nTokyo\\\\nCold\\\\n7\\\\nMerci\\\\n56\\\\n0.9\\\\nblue'"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "quality.decode_tokens_per_s": 11.37945,
+            "quality.generated_tokens": 22.0,
+            "quality.load_s": 64.560737,
+            "quality.peak_mem_mb": 5735.632866,
+            "quality.prefill_tokens_per_s": 88.688272,
+            "quality.prompt_tokens": 138.0,
+            "quality.ttft_ms": 1894.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 5735.633,
+          "prefill_tokens_per_s": 88.69,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 1894.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__iphone-17-pro.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": 20.07,
+          "delegated_ops": null,
+          "env": {
+            "device": "mac-studio-m4-max",
+            "machine_label": "m4max-quiet-300s-gpu-rest",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=100.08 decode=20.07 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 100.08,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 2607.8
+        },
+        "source": "data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": 68.45,
+          "delegated_ops": null,
+          "env": {
+            "device": "mac-studio-m4-max",
+            "machine_label": "m4max-quiet-300s-gpu-rest",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=669.33 decode=68.45 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 669.33,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 397.1
+        },
+        "source": "data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": 6.3,
+          "delegated_ops": 32830,
+          "env": {
+            "device": "pixel-8a",
+            "machine_label": "pixel-8a-warm-weight-cache",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 32830 out of 34373 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2993 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 23638 out of 25157 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 1 (prefill_256).",
+            "VERBOSE: Replacing 20950 out of 22469 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 2 (prefill_64).",
+            "VERBOSE: Replacing 21070 out of 22589 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 3 (prefill_16).",
+            "results block: prefill=22.13 decode=6.3 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 204.0,
+            "init_s": 48.23634,
+            "prefill_tokens": 260.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 22.13,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 34373,
+          "ttft_ms": 11910.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__pixel-8a.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 2.37,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 168.4 s, output head '43'",
+            "invocation 0: exit=0 wall_s=506.2 temp 47.7->56.0C throttled=0x0 prefill_tps=17.2 decode_tps=2.37 ttft_s=15.3098 init_s=261.9272 peak_rss_mb=4968",
+            "invocation 1: exit=0 wall_s=504.2 temp 51.6->53.8C throttled=0x0 prefill_tps=17.08 decode_tps=2.33 ttft_s=15.4164 init_s=256.058 peak_rss_mb=4968",
+            "invocation 2: exit=0 wall_s=500.2 temp 50.5->55.4C throttled=0x0 prefill_tps=16.97 decode_tps=2.37 ttft_s=15.507 init_s=253.9986 peak_rss_mb=4969"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 2.37,
+            "decode_tps_min": 2.33,
+            "init_s": 256.058,
+            "init_s_max": 261.9272,
+            "init_s_min": 253.9986,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 17.2,
+            "prefill_tps_min": 16.97,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 15.507,
+            "ttft_s_min": 15.3098
+          },
+          "output_match": null,
+          "peak_mem_mb": 4969.0,
+          "prefill_tokens_per_s": 17.08,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 15416.4
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/qwen35-4b-mixed-int4__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3.5",
+    "id": "qwen35-4b-mixed-int4",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Block size chosen by measurement, not family habit: b32/b128 x min-max/OCTAV all built from the SAME float export and scored on GSM8K n=100 (greedy, 2048-token budget, litert-mac-verify GPU): int8 control 97, b32 min-max 93 (ships), b32 OCTAV 92, b128 min-max 90, b128 OCTAV 90. OCTAV is a no-op on this model; blockwise-128 (the dense-4B habit) costs 3 points on this hybrid.",
+    "GSM8K at a 512-token budget is a false-fail generator on this family even with thinking disabled: the verbose CoT truncates before '#### N' and the extractor grabs stray numbers — it reads as quantization collapse and is actually truncation (measured; the same questions come back correct at 2048).",
+    "The iPhone b32-vs-b128 decode gap is GONE on this runtime (CLiteRTLM v0.16.0: 11.38 vs 11.85 tok/s Metal — parity); the historical ~2x b128 edge from dense ships is a dated kernel observation, not a law.",
+    "The 8Q and prompt-length gates cannot see the int4 cost at all (every cell 8/8 / clean on both variants); only GSM8K n=100 separates the recipes.",
+    "Gates on the shipped file: 8Q 8/8 on CPU and GPU on litert-lm 0.15.0 AND 0.16.0; BANANA hermetic CPU 40/40 + GPU 20/20; iPhone 17 Pro composite 8-question probe 8/8 on BOTH Metal and CPU (the int8 sibling's CPU path answers 6/8) — Metal 11.38 tok/s decode / 88.7 prefill / TTFT 1.89 s / peak 5736 MB, CPU 8.87 / 46.7 / 3.12 s / 1679 MB, cold, unplugged. Mac bench (0.16.0, cache no, p256/d256, quiet, 300 s GPU rest): GPU 669.33/68.45 TTFT 0.40 s vs CPU 100.08/20.07 TTFT 2.61 s.",
+    "Mac CPU prefill is ~2.4x SLOWER than the int8 sibling (100 vs 243 tok/s; TTFT 2.61 vs 1.11 s) — int4 unpack cost in XNNPACK prefill; decode is equal or faster everywhere. iPhone CPU is the exception (prefill 46.7 vs int8's 24.0 — faster).",
+    "Pixel 8a (8 GB) CPU: FITS and generates coherently — VmHWM 4.43 GB, prefill 22.1 / decode 6.30 tok/s (260-token prompt / 204 decoded), TTFT 11.9 s, engine init 32-48 s, XNNPACK delegates 32830/34373 nodes (litert_lm_main android_arm64 v0.16.0, warm weight cache). GPU on 8 GB devices NOT attempted — engine creation is the known device-killer (2B lesson).",
+    "First Android CPU run writes a 2.66 GB XNNPACK weight cache next to the model. The cache key embeds the model file mtime: two runs that see mtimes 1 s apart build TWO 2.66 GB caches — check `ls *.xnnpack_cache | wc -l` after first runs."
+  ],
+  "schema_version": "1.2"
+}

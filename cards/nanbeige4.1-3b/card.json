@@ -1,0 +1,184 @@
+{
+  "artifacts": [
+    {
+      "file": "model.litertlm",
+      "sha256": "1a2b741bd39edb9de665d42e11cf137a586eb517e7f4e10eb1e802e80a68369e",
+      "size_mb": 2297.713
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "TODO (the HF card states the recipe; export_simple_template.py with FORCE_SPM per the polaris-4b meta's header-control check, not stated on the card)",
+    "quantization": "int4 blockwise (block 32) + OCTAV, symmetric; embedding INT8, externalized (required for iPhone); KV cache 4096 (HF card Conversion)",
+    "tool": "litert-torch (standard dense LlamaForCausalLM on the existing converter, no custom graph code; ChatML prompt template) (HF card Conversion)",
+    "tool_version": "TODO (the HF card names the converter but not its version; no export log in the sources)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 10.58,
+          "delegated_ops": 1731,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1290 out of 1423 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 189 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1158 out of 1292 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 194 partitions for subgraph 1 (decode).",
+            "VERBOSE: Replacing 7 out of 7 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 2 (odml.rms_norm.impl).",
+            "VERBOSE: Replacing 7 out of 7 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 3 (odml.rms_norm.impl_0).",
+            "results block: prefill=39.32 decode=10.58 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 3873.0,
+            "init_s": 5.49297,
+            "prefill_tokens": 223.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 39.32,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1801,
+          "ttft_ms": 5770.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/nanbeige4.1-3b__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-07-22",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.14.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "speed figures withheld: this measurement batch was retracted as contaminated (parallel GPU load; owner correction in gpu_audit MATRIX.md, 2026-07-23) — the PASS/FAIL verdict is load-independent and stands"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "max_num_tokens": 1024.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.14.0/2026-07-22/nanbeige4.1-3b__mac-studio-m4-max.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-02",
+          "decode_tokens_per_s": 2.49,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 104.2 s, output head '[thought] We are asked: \"What is 17 plus 26? Answer with the number only.\" So we'",
+            "invocation 0: exit=0 wall_s=328.2 temp 49.4->55.4C throttled=0x0 prefill_tps=16.39 decode_tps=2.48 ttft_s=18.1396 init_s=54.9304 peak_rss_mb=3168",
+            "invocation 1: exit=0 wall_s=324.2 temp 49.9->54.9C throttled=0x0 prefill_tps=16.5 decode_tps=2.52 ttft_s=18.0078 init_s=54.7284 peak_rss_mb=3184",
+            "invocation 2: exit=0 wall_s=330.2 temp 50.5->52.1C throttled=0x0 prefill_tps=16.51 decode_tps=2.49 ttft_s=18.446 init_s=56.2339 peak_rss_mb=3176"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 2.52,
+            "decode_tps_min": 2.48,
+            "init_s": 54.9304,
+            "init_s_max": 56.2339,
+            "init_s_min": 54.7284,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 16.51,
+            "prefill_tps_min": 16.39,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 18.446,
+            "ttft_s_min": 18.0078
+          },
+          "output_match": null,
+          "peak_mem_mb": 3184.0,
+          "prefill_tokens_per_s": 16.5,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 18139.6
+        },
+        "source": "data/device_runs/0.16.1/2026-09-02/nanbeige4.1-3b__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "nanbeige",
+    "id": "nanbeige4.1-3b",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Nanbeige4.1-3B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "externalize_embedder=True is required for iPhone: the 166k-token vocab makes the weights a >2 GiB single TFLite section, over the ~2 GiB single-section mmap limit on iOS; externalizing drops the main section under 2 GiB so the model loads on iPhone (Metal GPU) as well as Android/desktop; same weights, GSM8K unchanged (HF card Conversion).",
+    "Added-tokens tokenizer fix: Nanbeige's 10 special tokens (<|im_start|>, <|im_end|>, <think>, </think>, <tool_call>, …) live at ids 166100-166109 above the base SentencePiece vocab; the base SP conversion drops them and the runtime would crash with 'Token id out of range' — the converted tokenizer appends them as USER_DEFINED pieces at their exact ids (HF card Conversion).",
+    "GSM8K (n=50, greedy, 0-shot CoT, max-tokens 2048): 84% — non-degenerate; passes the local 8-question gate 8/8 with a clean stop at <|im_end|> (HF card Quality).",
+    "License Apache-2.0, inherited from Nanbeige/Nanbeige4.1-3B (HF card License).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/ (Pi 5 / S26 / Pixel 8a / Mac / iPhone as measured)."
+  ],
+  "schema_version": "1.2"
+}

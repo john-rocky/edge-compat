@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "benchmark_result.schema.json",
+  "title": "Benchmark results file",
+  "description": "Measured benchmark results for one model artifact, ingested by `edge-card build --bench`. Public, versioned API: stable names, no breaking renames after commit. This toolkit never executes benchmarks — every record is owner-measured data, and every record carries `provenance`. The record shape is designed as a field superset of the frozen litert-community perf-table columns (Device / Variant / stage latencies / derived metrics / harness footnote), and existing exports (devicemark leaderboard JSONL, bench-harness exports, gpu_audit outputs) map onto it via adapters in `src/litert_compat/cards/adapters/` — first-class fields for the common columns, the open `metrics` map for harness-specific ones.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "model_id", "results"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "model_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Must match the card's model.id; `edge-card build` refuses a mismatch."
+    },
+    "results": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/benchmark_record" }
+    }
+  },
+  "$defs": {
+    "benchmark_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["device", "backend", "harness", "date", "provenance"],
+      "properties": {
+        "device": { "type": "string", "minLength": 1 },
+        "soc": { "type": ["string", "null"] },
+        "backend": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "runtime": {
+          "type": ["string", "null"],
+          "description": "Runtime identity for comparative rows (e.g. a card's cross_runtime list, which requires it). Absent/null means the native LiteRT runtime."
+        },
+        "precision": {
+          "type": ["string", "null"],
+          "description": "Numeric variant as published, e.g. 'f32', 'i8', 'int4-block32'."
+        },
+        "latency_p50_ms": { "type": ["number", "null"], "minimum": 0 },
+        "tokens_per_s": { "type": ["number", "null"], "minimum": 0 },
+        "peak_mem_mb": { "type": ["number", "null"], "minimum": 0 },
+        "metrics": {
+          "type": "object",
+          "additionalProperties": { "type": ["number", "string", "boolean", "null"] },
+          "description": "Harness-specific metrics beyond the first-class fields, e.g. stage latencies (encode_ms, decode_ms, window_total_ms), derived ratios (rtf), LLM metrics (prefill_tok_s, ttft_s), power_w. Keys are snake_case with the unit suffixed where applicable."
+        },
+        "harness": { "type": "string", "minLength": 1 },
+        "harness_version": { "type": ["string", "null"] },
+        "runs": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "description": "Number of measured runs behind `statistic` (warmup excluded)."
+        },
+        "statistic": {
+          "type": ["string", "null"],
+          "description": "How multiple runs were aggregated, e.g. 'median', 'mean', 'p50'."
+        },
+        "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "provenance": { "enum": ["measured", "vendor_doc", "inferred", "example"] },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

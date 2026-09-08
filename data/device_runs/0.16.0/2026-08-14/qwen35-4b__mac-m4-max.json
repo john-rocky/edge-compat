@@ -1,0 +1,81 @@
+{
+  "artifact": "Qwen3.5-4B_int8_fp32act.litertlm",
+  "device": "mac-m4-max",
+  "model_id": "qwen35-4b",
+  "quantization": "int8 wi8fc fp32act",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-08-14",
+      "decode_tokens_per_s": 19.9,
+      "delegated_ops": null,
+      "env": {
+        "device": "mac-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "results block: prefill=242.61 decode=19.9 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "prefill_tokens": 256.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 242.61,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 1105.5
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-14",
+      "decode_tokens_per_s": 61.98,
+      "delegated_ops": null,
+      "env": {
+        "device": "mac-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "results block: prefill=672.16 decode=61.98 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "prefill_tokens": 256.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 672.16,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 397.0
+    }
+  ],
+  "schema_version": "1.0"
+}

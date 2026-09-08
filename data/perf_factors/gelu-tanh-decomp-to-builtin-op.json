@@ -1,0 +1,31 @@
+{
+ "id": "gelu-tanh-decomp-to-builtin-op",
+ "category": "rewrite",
+ "title": "tanh-GELU decomposition -> builtin GELU op (exact erf)",
+ "rewrite": {
+  "to": "single GELU builtin op (exact erf)",
+  "equivalence": "approximation",
+  "equivalence_evidence": "DINOv2-S features: erf build vs tanh build corr 0.999992, max_abs 0.055; erf is the official model's own activation, so the builtin op is MORE faithful than the tanh chain it replaces",
+  "from": "0.5x(1+TANH(0.79788(x+0.044715x^3))) elementwise chain (MUL/ADD/TANH)"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-24",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 85.886,
+  "after_ms": 41.9,
+  "probe": "real DINOv2-S/14 448px rebuilds (npubench/factors/build_dinov2_ab.py)",
+  "gpu_control": "same swap on the S26 Adreno: 54.2 -> 55.2 ms (no effect; ML Drift ran the builtin GELU op \u2014 Mali unverified)"
+ },
+ "factor": 2.05,
+ "scope": "one real model (DINOv2-S, T=1025, d=384, 12 blocks) plus the matched synthetic probe family; MLP tensors [1,T,1536]",
+ "notes": "This swap alone flipped DINOv2-S from losing 0.63x to winning 1.32x vs the GPU. 2026-08-28: builtin GELU op also compiles and runs on Mali (Pixel 8a, LiteRT 2.2.0, 198.8 ms GPU) - the Mali-era 'GELU must be rewritten' ban is gone at this runtime. GELU(approximate=True) build: 38.5 ms NPU (c0_ab_tanhop.log).",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

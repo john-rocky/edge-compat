@@ -1,0 +1,320 @@
+/* edge-compat demo zoo — shared stylesheet (no external fonts, no CDN). */
+
+:root {
+  --bg: #ffffff;
+  --fg: #1a1d21;
+  --muted: #5c6570;
+  --border: #d8dde3;
+  --surface: #f5f7f9;
+  --accent: #0b57d0;
+  --pass: #0a7a33;
+  --fail: #b3261e;
+  --warn: #9a6a00;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161a;
+    --fg: #e6e9ec;
+    --muted: #9aa4ae;
+    --border: #33383f;
+    --surface: #1d2126;
+    --accent: #8ab4f8;
+    --pass: #6dd58c;
+    --fail: #f2938c;
+    --warn: #e8c26e;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  max-width: 72rem;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin: 0 0 0.25rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+  margin: 2rem 0 0.5rem;
+}
+
+a {
+  color: var(--accent);
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: var(--surface);
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+}
+
+.subtitle,
+.note {
+  color: var(--muted);
+  margin: 0.25rem 0 1rem;
+}
+
+.banner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--warn);
+  border-radius: 6px;
+  padding: 0.6rem 0.9rem;
+  margin: 1rem 0;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+}
+
+th,
+td {
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--surface);
+  white-space: nowrap;
+}
+
+table.sortable thead th {
+  cursor: pointer;
+  user-select: none;
+}
+
+table.sortable thead th::after {
+  content: " ↕";
+  color: var(--muted);
+  font-size: 0.8em;
+}
+
+table.sortable thead th[aria-sort="ascending"]::after {
+  content: " ↑";
+  color: var(--fg);
+}
+
+table.sortable thead th[aria-sort="descending"]::after {
+  content: " ↓";
+  color: var(--fg);
+}
+
+.env {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.status-pass {
+  color: var(--pass);
+  font-weight: 600;
+}
+
+.status-fallback,
+.status-output_mismatch {
+  color: var(--warn);
+  font-weight: 600;
+}
+
+.status-load_failed,
+.status-run_failed {
+  color: var(--fail);
+  font-weight: 600;
+}
+
+.status-not_measured {
+  color: var(--muted);
+}
+
+.provenance-example {
+  border: 1px solid var(--warn);
+  border-radius: 4px;
+  padding: 0 0.3em;
+  font-size: 0.8em;
+  color: var(--warn);
+  white-space: nowrap;
+}
+
+/* Phase 11 staleness surfacing: the measurement is unchanged, just older
+   than the latest known release. Decay is shown, never hidden. */
+.stale-flag {
+  border: 1px dashed var(--warn);
+  border-radius: 4px;
+  padding: 0 0.3em;
+  font-size: 0.8em;
+  color: var(--warn);
+  white-space: nowrap;
+}
+
+th .stale-flag {
+  display: block;
+  width: fit-content;
+  font-weight: 400;
+}
+
+.live-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.75rem 0;
+}
+
+.live-panel .metrics {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.live-panel .metric b {
+  display: block;
+  font-size: 1.3rem;
+}
+
+.live-panel .metric span {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+button {
+  font: inherit;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 6px;
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background: var(--surface);
+  color: var(--fg);
+  border: 1px solid var(--border);
+}
+
+#live-status {
+  margin-top: 0.6rem;
+  color: var(--muted);
+  min-height: 1.5em;
+}
+
+body[data-demo-state="error"] #live-status {
+  color: var(--fail);
+}
+
+.cta {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.75rem 0;
+}
+
+.cta pre {
+  background: var(--surface);
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Playground ("Check your model", Phase 9) */
+
+.check-cta a {
+  display: inline-block;
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 0.5rem 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.privacy-banner {
+  border-left-color: var(--pass);
+}
+
+.drop-zone {
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.drop-zone.drag-active {
+  border-color: var(--accent);
+  background: var(--surface);
+}
+
+/* Matrix status vocabulary (delegated | partial | fallback | incorrect |
+   crash | unknown) — distinct from the sweep status words above. */
+.status-delegated {
+  color: var(--pass);
+  font-weight: 600;
+}
+
+.status-partial {
+  color: var(--warn);
+  font-weight: 600;
+}
+
+.status-incorrect,
+.status-crash {
+  color: var(--fail);
+  font-weight: 600;
+}
+
+.status-unknown {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.xref-entry + .xref-entry {
+  margin-top: 0.4rem;
+  border-top: 1px dotted var(--border);
+  padding-top: 0.4rem;
+}
+
+.xref-hint {
+  font-style: italic;
+}
+
+body[data-playground-state="error"] #pg-status {
+  color: var(--fail);
+}

@@ -1,0 +1,38 @@
+gpu_mldrift @ litert 0.0.0-example — 40.0% of 5 ops delegated · 2 partitions · 3 blocking ops
+model:  data/examples/model_split_example.tflite (sha256 d6039cd53589…, 1 subgraph(s))
+matrix: data/examples/matrix_example.json (generated 2026-08-10)
+
+Non-delegated ops:
+  s0/n1  GATHER_ND  dtypes=float32  fallback  provenance=example
+      reason: matched entry specific to op and dtypes
+      condition: emitted by strided slicing with step > 1
+  s0/n2  RESHAPE  dtypes=float32  unknown  provenance=-
+      reason: no entry for op RESHAPE
+  s0/n4  SOFTMAX  dtypes=float32  unknown  provenance=-
+      reason: entries exist for op SOFTMAX but none match dtypes=['float32'] shape_meta={'dynamic_shape': False, 'rank': 2}
+
+Partition map (each sync is a host<->device transfer):
+  subgraph 0:
+    [device #0] nodes 0-0 (1 op: CONV_2D)
+    ----- host<->device sync -----
+    (host)      node 1 GATHER_ND (fallback)
+    (host)      node 2 RESHAPE (unknown)
+    ----- host<->device sync -----
+    [device #1] nodes 3-3 (1 op: FULLY_CONNECTED)
+    ----- host<->device sync -----
+    (host)      node 4 SOFTMAX (unknown)
+
+Blocking ops, ranked (impact_score is a heuristic (output element count as a FLOPs proxy, adjacent-partition cost split across each CPU island) — a ranking aid, not a measurement):
+  1. s0/n1 GATHER_ND (fallback) — impact 1029.0
+  2. s0/n2 RESHAPE (unknown) — impact 1029.0
+  3. s0/n4 SOFTMAX (unknown) — impact 10.0
+
+Rewrite suggestions (verbatim from the matrix, never generated):
+  s0/n1 GATHER_ND:
+    symptom: graph splits at GATHER_ND
+    rewrite: rewrite step>1 slicing as gather over a precomputed index tensor
+    expected effect: removes the CPU fallback island
+
+Needs probe (complete lookup signatures; no measured entry matched):
+  RESHAPE dtypes=float32 shape_meta={"dynamic_shape":false,"rank":2} backend=gpu_mldrift
+  SOFTMAX dtypes=float32 shape_meta={"dynamic_shape":false,"rank":2} backend=gpu_mldrift

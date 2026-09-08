@@ -1,0 +1,86 @@
+{
+  "artifact": "Falcon-H1-3B-Instruct_int8_fp32act.litertlm",
+  "device": "mac-m4-max",
+  "model_id": "falconh1-3b",
+  "quantization": "int8 wi8fc fp32act",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-08-14",
+      "decode_tokens_per_s": 20.88,
+      "delegated_ops": null,
+      "env": {
+        "device": "mac-m4-max",
+        "machine_label": "mac-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "results block: prefill=120.70 decode=20.88 tokens/s (falcon_h1_work/bench_3b.log, quiet window, --cache no, runs 3)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 37.2407,
+        "prefill_tokens": 256.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 120.7,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 2168.9
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-14",
+      "decode_tokens_per_s": 65.32,
+      "delegated_ops": null,
+      "env": {
+        "device": "mac-m4-max",
+        "machine_label": "mac-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "results block: prefill=979.31 decode=65.32 tokens/s (falcon_h1_work/bench_3b.log, quiet window, --cache no, runs 3)",
+        "E0000 gpu_model_builder.cc:4039] TopK requires src tensor C dimension to be divisible by 4. (vocab 65537; family-normal — shipped 1.5B logs the identical line; generation and 8Q unaffected)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 15.9531,
+        "prefill_tokens": 256.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 979.31,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 276.7
+    }
+  ],
+  "schema_version": "1.0"
+}

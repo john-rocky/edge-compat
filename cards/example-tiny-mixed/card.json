@@ -1,0 +1,89 @@
+{
+  "artifacts": [
+    {
+      "file": "model_mixed_example.tflite",
+      "sha256": "9af4f555f71881924bded9d75b7e5c3febaa6c2672fbff6739cc9cf57f96f806",
+      "size_mb": 0.001
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "example-converter --input model.onnx --output model_mixed_example.tflite",
+    "quantization": "int8-dynamic",
+    "tool": "example-converter",
+    "tool_version": "0.0.0-example"
+  },
+  "cross_runtime": [],
+  "delegation": {
+    "backend": "gpu_mldrift",
+    "blocking_ops": [
+      "TRANSPOSE_CONV",
+      "FULLY_CONNECTED",
+      "CUSTOM"
+    ],
+    "coverage_ops_pct": 40.0,
+    "lint_report_version": "1.1",
+    "litert_version": "0.0.0-example",
+    "matched_provenance_counts": {
+      "example": 4,
+      "unmatched": 1
+    },
+    "partitions": 1
+  },
+  "device": {
+    "records": [
+      {
+        "device": "example-workstation",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-01-02",
+          "decode_tokens_per_s": 45.6,
+          "delegated_ops": null,
+          "env": {
+            "device": "Example Workstation",
+            "machine_label": "example-workstation",
+            "os_build": "macOS 0.0-example",
+            "runtime": "litert-lm",
+            "runtime_version": "0.0.0-example",
+            "soc": "Example Desktop SoC",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "EXAMPLE results block — pipeline fixture, not a measurement."
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256,
+            "init_s": 1.5,
+            "max_num_tokens": 1024,
+            "prefill_tokens": 256
+          },
+          "output_match": null,
+          "peak_mem_mb": 512.0,
+          "prefill_tokens_per_s": 123.4,
+          "provenance": "example",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 78.9
+        },
+        "source": "data/examples/device_runs/0.0.0-example/2026-01-02/example-tiny-mixed__example-workstation.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "example-family",
+    "id": "example-tiny-mixed",
+    "license": "apache-2.0",
+    "source_url": "https://example.invalid/models/example-tiny-mixed",
+    "task": "image-segmentation"
+  },
+  "pitfalls": [],
+  "schema_version": "1.2"
+}

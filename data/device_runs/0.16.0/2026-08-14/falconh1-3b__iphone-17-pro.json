@@ -1,0 +1,87 @@
+{
+  "artifact": "Falcon-H1-3B-Instruct_int8_fp32act.litertlm",
+  "device": "iphone-17-pro",
+  "model_id": "falconh1-3b",
+  "quantization": "int8 wi8fc fp32act",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-08-14",
+      "decode_tokens_per_s": 7.85,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 17 Pro",
+        "machine_label": "iphone-17-pro",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "quality autorun JSON: promptTokensPerSecond=48.71 decodeTokensPerSecond=7.85 firstTokenLatencyMS=3141 memoryPeakDuringDecodeMB=1455.5 (litert-lm_litert-local_falconh1-3b-int8_quality_2026-08-14T03-59-18Z.json)",
+        "composite 8-question probe 8/8, answers identical to the GPU run"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 41.0,
+        "init_s": 11.799,
+        "prefill_tokens": 146.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 1455.5,
+      "prefill_tokens_per_s": 48.71,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 3141.0
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-14",
+      "decode_tokens_per_s": 14.04,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 17 Pro",
+        "machine_label": "iphone-17-pro",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "quality autorun JSON: promptTokensPerSecond=111.48 decodeTokensPerSecond=14.04 firstTokenLatencyMS=1494 memoryPeakDuringDecodeMB=3033.8 loadTimeSeconds=27.55 (litert-lm_litert-local_falconh1-3b-int8_quality_2026-08-14T03-58-56Z.json)",
+        "composite 8-question probe 8/8; full 12-signature prefill ladder loads on the 12 GB phone with no memory pressure (falcon vocab 65537 keeps the per-signature RAM tax light)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 41.0,
+        "init_s": 27.549,
+        "prefill_tokens": 146.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 3033.8,
+      "prefill_tokens_per_s": 111.48,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 1494.0
+    }
+  ],
+  "schema_version": "1.0"
+}

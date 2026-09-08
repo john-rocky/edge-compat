@@ -1,0 +1,45 @@
+{
+  "artifact": "medgemma-1.5-4b-it_q4_block32_ekv2048.litertlm",
+  "device": "galaxy-s26",
+  "model_id": "medgemma-1.5-4b-it-q4-block32-ekv2048",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-24",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 57,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cl-pinned",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "runtime/core/engine_advanced_impl.cc:308",
+      "evidence": [
+        "VERBOSE: Replacing 57 out of 1626 node(s) with delegate (LITERT_CL) node, yielding 2 partitions for subgraph 0 (prefill_32).",
+        "STABLEHLO_COMPOSITE: odml.softmax",
+        "57 operations will run on the GPU, and the remaining 1569 operations will run on the CPU.",
+        "runtime/core/engine_advanced_impl.cc:308"
+      ],
+      "failure_class": "engine_create_failed",
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": 1626,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

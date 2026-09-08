@@ -1,0 +1,185 @@
+{
+  "artifacts": [
+    {
+      "file": "model_block32.litertlm",
+      "sha256": "74712688d25de50a1b3ad5ed95e96be05d2445cbca8e684fb6490a4e446b7d40",
+      "size_mb": 2539.528
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "EXTERNALIZE_EMBEDDER=1 CACHE=4096 python scripts/export_simple_template.py Menlo/Jan-nano out/jan-nano templates/qwen3_think.jinja BOCTAV4 (block 32 recipe; the block-128 line is the model.litertlm build) ; python qa/add_thought_channel.py … (2026-08-25 staged meta)",
+    "quantization": "int4 (symmetric) + OCTAV, blockwise block 32; embeddings INT8 (externalized section) (HF card Conversion)",
+    "tool": "litert-torch via litertlm-convert scripts/export_simple_template.py (reproduce_llm.sh key jan-nano), then the 2026-08-22 metadata-only thought-channel re-ship (qa/add_thought_channel.py through the litert-lm 0.16.0 CLI; every tflite section byte-identical)",
+    "tool_version": "TODO (owner to fill — searched 2026-08-25 four ways: no convert log, reproduce_llm.sh pins no version, the bundle header carries no converter version, the tflite sections carry only 'MLIR Converted.'; the RE-SHIP step is pinned to the litert-lm 0.16.0 CLI)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 5.94,
+          "delegated_ops": 2448,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1454 out of 1674 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 285 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1374 out of 1596 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 290 partitions for subgraph 1 (decode).",
+            "VERBOSE: Replacing 7 out of 7 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 2 (odml.rms_norm.impl).",
+            "VERBOSE: Replacing 7 out of 7 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 3 (odml.rms_norm.impl_0).",
+            "results block: prefill=28.97 decode=5.94 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 3894.0,
+            "init_s": 5.92141,
+            "prefill_tokens": 202.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 28.97,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 2526,
+          "ttft_ms": 7140.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/jan-nano-model-block32__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 9.3,
+          "delegated_ops": 1674,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1674 out of 1674 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1596 out of 1596 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (decode).",
+            "results block: prefill=102.41 decode=9.3 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 1984.0,
+            "init_s": 27.10897,
+            "prefill_tokens": 202.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 102.41,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1674,
+          "ttft_ms": 2080.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/jan-nano-model-block32__galaxy-s26.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 1.45,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 215.2 s, output head '[thought] Okay, the user is asking for 17 plus 26. Let me think. I need to add t'",
+            "invocation 0: exit=0 wall_s=528.4 temp 51.0->53.8C throttled=0x0 prefill_tps=10.38 decode_tps=1.44 ttft_s=28.3709 init_s=66.3797 peak_rss_mb=4443",
+            "invocation 1: exit=0 wall_s=524.4 temp 48.3->51.6C throttled=0x0 prefill_tps=10.36 decode_tps=1.45 ttft_s=27.8425 init_s=64.2482 peak_rss_mb=4443",
+            "invocation 2: exit=0 wall_s=522.3 temp 51.0->53.2C throttled=0x0 prefill_tps=10.39 decode_tps=1.45 ttft_s=28.0001 init_s=63.8436 peak_rss_mb=4441"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.45,
+            "decode_tps_min": 1.44,
+            "init_s": 64.2482,
+            "init_s_max": 66.3797,
+            "init_s_min": 63.8436,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 10.39,
+            "prefill_tps_min": 10.36,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 28.3709,
+            "ttft_s_min": 27.8425
+          },
+          "output_match": null,
+          "peak_mem_mb": 4443.0,
+          "prefill_tokens_per_s": 10.38,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 28000.1
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/jan-nano-model-block32__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3",
+    "id": "jan-nano-model-block32",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Jan-nano",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Which file: block 128 (model.litertlm) is the recommended on-device build — GSM8K 88.0% (max_tokens 2048), loads on the iPhone 17 Pro at ~14 tok/s; block 32 (model_block32.litertlm) 85.0%, its 2.11 GiB section sits at the iOS memory ceiling and may fail to load — desktop/Android (HF card 'Which file?').",
+    "Standard Qwen3ForCausalLM on the existing Qwen3 path, no custom graph code; embeddings INT8 externalized; KV cache 4096 (HF card Conversion).",
+    "License Apache-2.0, inherited from Menlo/Jan-nano (itself fine-tuned from Qwen/Qwen3-4B) (HF card License).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/ (Pi 5 / S26 / Pixel 8a / Mac / iPhone as measured)."
+  ],
+  "schema_version": "1.2"
+}

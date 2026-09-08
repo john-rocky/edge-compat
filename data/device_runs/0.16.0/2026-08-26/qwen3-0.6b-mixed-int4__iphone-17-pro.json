@@ -1,0 +1,62 @@
+{
+  "artifact": "qwen3_0_6b_mixed_int4.litertlm",
+  "device": "iphone-17-pro",
+  "model_id": "qwen3-0.6b-mixed-int4",
+  "quantization": "INT4 (mixed, blockwise gs32)",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 672,
+      "date": "2026-08-26",
+      "decode_tokens_per_s": 121.63,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 17 Pro",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "A19-Pro",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "device.modelIdentifier=iPhone18,1",
+        "throughput taken from task 'short-chat' (128 generated tokens, 2026-08-26T02:59:07Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 8 task file(s)",
+        "'short-chat': 8 runs of one task — throughput = median of 6 warm run(s); cold decode kept in metrics (2 cold run(s))",
+        "[short-chat 2026-08-26T02:54:38Z] prefill=202.94026759663097 decode=124.79696138151142 ttft_ms=150.0 peak_mb=629.7683410644531 stop=length output=\"<think>\\\\nOkay, the user wants a simple explanation o …[trace truncated]",
+        "[short-chat 2026-08-26T02:54:42Z] prefill=187.23560226559573 decode=122.95963595196504 ttft_ms=143.0 peak_mb=516.7058410644531 stop=length output=\"<think>\\\\nOkay, the user wants a simple explanation o …[trace truncated]",
+        "[short-chat 2026-08-26T02:54:45Z] prefill=187.5460073799354 decode=122.97594360346137 ttft_ms=149.0 peak_mb=479.50264739990234 stop=length output=\"<think>\\\\nOkay, the user wants a simple explanation o …[trace truncated]",
+        "[short-chat 2026-08-26T02:54:49Z] prefill=196.2804039081705 decode=121.50253343905312 ttft_ms=147.0 peak_mb=480.23702239990234 stop=length output=\"<think>\\\\nOkay, the user wants a simple explanation o …[trace truncated]",
+        "[short-chat 2026-08-26T02:58:56Z] prefill=164.42517472743958 decode=120.59169547880181 ttft_ms=182.0 peak_mb=614.2838745117188 stop=length output=\"<think>\\\\nOkay, the user wants a simple explanation o …[trace truncated]",
+        "[short-chat 2026-08-26T02:58:59Z] prefill=178.53031559018123 decode=121.74891899176274 ttft_ms=154.0 peak_mb=472.04949951171875 stop=length output=\"<think>\\\\nOkay, the user wants a simple explanation  …[trace truncated]",
+        "[short-chat 2026-08-26T02:59:03Z] prefill=179.6678839165802 decode=119.55287873833147 ttft_ms=153.0 peak_mb=472.64324951171875 stop=length output=\"<think>\\\\nOkay, the user wants a simple explanation o …[trace truncated]",
+        "[short-chat 2026-08-26T02:59:07Z] prefill=180.52510184842632 decode=119.6553569623678 ttft_ms=153.0 peak_mb=473.42449951171875 stop=length output=\"<think>\\\\nOkay, the user wants a simple explanation o …[trace truncated]"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "short_chat.cold_decode_tokens_per_s": 122.694328,
+        "short_chat.decode_spread_pct": 2.81,
+        "short_chat.decode_tokens_per_s": 121.625726,
+        "short_chat.generated_tokens": 128.0,
+        "short_chat.n_runs": 8.0,
+        "short_chat.peak_mem_mb": 629.768341,
+        "short_chat.prefill_tokens_per_s": 183.880352,
+        "short_chat.prompt_tokens": 20.0,
+        "short_chat.ttft_ms": 151.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 629.768,
+      "prefill_tokens_per_s": 183.88,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 151.0
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,106 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x96:float32",
+  "license": "mit",
+  "model_id": "kokoro-g2p-en-us",
+  "notes": "",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-08-13",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 38.74,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-08-13",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: E0813 06:04:13.792999  755312 model_builder.cc:2484] {\n  type: INT64\n  data: {...}\n  dims: []\n} isn't scalar-convertible.",
+        "error: ERROR: Following operations are not supported by GPU delegate:",
+        "error: CAST: Tensor type(INT64) is not supported. __main__.Wrap;2",
+        "error: CAST: Tensor type(INT64) is not supported. __main__.Wrap;4",
+        "error: EQUAL: Can't parse inputs with const tensors.",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/torch.nn.modules.transformer.TransformerEncoder_encoder/torch.nn.modules.transformer.TransformerEncoderLayer_0/torch.nn.modules.activation.MultiheadAttention_self_attn;7",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/torch.nn.modules.transformer.TransformerEncoder_encoder/torch.nn.modules.transformer.TransformerEncoderLayer_0/torch.nn.modules.activation.MultiheadAttention_self_attn;8",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/torch.nn.modules.transformer.TransformerEncoder_encoder/torch.nn.modules.transformer.TransformerEncoderLayer_1/torch.nn.modules.activation.MultiheadAttention_self_attn;3",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/torch.nn.modules.transformer.TransformerEncoder_encoder/torch.nn.modules.transformer.TransformerEncoderLayer_1/torch.nn.modules.activation.MultiheadAttention_self_attn;4",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/torch.nn.modules.transformer.TransformerEncoder_encoder/torch.nn.modules.transformer.TransformerEncoderLayer_2/torch.nn.modules.activation.MultiheadAttention_self_attn;3",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/torch.nn.modules.transformer.TransformerEncoder_encoder/torch.nn.modules.transformer.TransformerEncoderLayer_2/torch.nn.modules.activation.MultiheadAttention_self_attn;4",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/torch.nn.modules.transformer.TransformerEncoder_encoder/torch.nn.modules.transformer.TransformerEncoderLayer_3/torch.nn.modules.activation.MultiheadAttention_self_attn;3",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/torch.nn.modules.transformer.TransformerEncoder_encoder/torch.nn.modules.transformer.TransformerEncoderLayer_3/torch.nn.modules.activation.MultiheadAttention_self_attn;4",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/torch.nn.modules.transformer.TransformerEncoder_encoder/torch.nn.modules.transformer.TransformerEncoderLayer_4/torch.nn.modules.activation.MultiheadAttention_self_attn;3",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/torch.nn.modules.transformer.TransformerEncoder_encoder/torch.nn.modules.transformer.TransformerEncoderLayer_4/torch.nn.modules.activation.MultiheadAttention_self_attn;4",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/torch.nn.modules.transformer.TransformerEncoder_encoder/torch.nn.modules.transformer.TransformerEncoderLayer_5/torch.nn.modules.activation.MultiheadAttention_self_attn;3",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/torch.nn.modules.transformer.TransformerEncoder_encoder/torch.nn.modules.transformer.TransformerEncoderLayer_5/torch.nn.modules.activation.MultiheadAttention_self_attn;4",
+        "error: RESHAPE: Tensor type(INT64) is not supported. __main__.Wrap;2",
+        "error: TRANSPOSE: Permutation for transpose is invalid.",
+        "error: 72 operations will run on the GPU, and the remaining 335 operations will run on the CPU.",
+        "warning: %c[LiteRT]%c Model not fully compiled for webgpu. Partially delegating to WASM execution. background: #FFA000; color: black; font-weight: bold; padding: 2px 5px; border-radius: 3px; font-weight: bold;"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "non-finite value in output[0][0] (out=NaN, ref=NaN)",
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": 36.23,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/Kokoro-G2P-en-US/resolve/main/dp_g2p_litert.tflite"
+}

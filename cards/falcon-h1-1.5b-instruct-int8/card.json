@@ -1,0 +1,187 @@
+{
+  "artifacts": [
+    {
+      "file": "Falcon-H1-1.5B-Instruct_int8.litertlm",
+      "sha256": "f499623a4d6fb6df8c2cf6ce388a0d460bcb81f416fd5c69e4281906f48fb931",
+      "size_mb": 1645.517
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "TODO",
+    "quantization": "post-hoc dynamic int8 over linears + embedding only; convs and the selective scan stay float; fp32 activations declared for GPU",
+    "tool": "litert-torch + hybrid-cache patch (repro: john-rocky/hf-to-litertlm falcon_h1_work/)",
+    "tool_version": "TODO"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 20.71,
+          "delegated_ops": 3852,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 3429 out of 3679 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 240 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 3429 out of 3679 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 240 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 3429 out of 3679 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 240 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 3405 out of 3655 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 240 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=202.67 decode=20.71 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 149.0,
+            "init_s": 2.91898,
+            "prefill_tokens": 212.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 202.67,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 4055,
+          "ttft_ms": 1090.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/falcon-h1-1.5b-instruct-int8__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 20.6,
+          "delegated_ops": 3773,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 3679 out of 3679 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 3679 out of 3679 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 3679 out of 3679 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 3655 out of 3655 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=206.82 decode=20.6 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 108.0,
+            "init_s": 16.23934,
+            "prefill_tokens": 212.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 206.82,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 3773,
+          "ttft_ms": 1070.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/falcon-h1-1.5b-instruct-int8__galaxy-s26.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-02",
+          "decode_tokens_per_s": 3.38,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 56.2 s, output head '43'",
+            "invocation 0: exit=0 wall_s=216.1 temp 46.1->54.9C throttled=0x0 prefill_tps=39.23 decode_tps=3.4 ttft_s=6.8188 init_s=39.7803 peak_rss_mb=2557",
+            "invocation 1: exit=0 wall_s=206.1 temp 51.0->53.8C throttled=0x0 prefill_tps=39.44 decode_tps=3.38 ttft_s=6.7875 init_s=39.5538 peak_rss_mb=2558",
+            "invocation 2: exit=0 wall_s=210.1 temp 48.8->53.8C throttled=0x0 prefill_tps=39.53 decode_tps=3.27 ttft_s=6.7814 init_s=39.4781 peak_rss_mb=2558"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 3.4,
+            "decode_tps_min": 3.27,
+            "init_s": 39.5538,
+            "init_s_max": 39.7803,
+            "init_s_min": 39.4781,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 39.53,
+            "prefill_tps_min": 39.23,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 6.8188,
+            "ttft_s_min": 6.7814
+          },
+          "output_match": null,
+          "peak_mem_mb": 2558.0,
+          "prefill_tokens_per_s": 39.44,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 6787.5
+        },
+        "source": "data/device_runs/0.16.1/2026-09-02/falcon-h1-1.5b-instruct-int8__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "falcon-h1",
+    "id": "falcon-h1-1.5b-instruct-int8",
+    "license": "other (falcon-llm-license)",
+    "source_url": "https://huggingface.co/tiiuae/Falcon-H1-1.5B-Instruct",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "GPU execution is verified on macOS (Metal), iPhone 17 Pro (Metal), and Pixel 8a (Arm Mali, OpenCL) only — not on Qualcomm Adreno; on a Snapdragon phone use the CPU backend unless you have confirmed the GPU path yourself (card Honest notes).",
+    "On low-end Android the GPU buys prefill and time-to-first-token, not decode (decode is memory-bandwidth-bound; the CPU path reads int8 weights while the fp32-activation GPU path reads expanded ones) — long prompts favour the GPU, long answers favour the CPU; on Apple hardware the GPU wins across the board (card Honest notes).",
+    "GPU runs with fp32 activations declared in the bundle — expect a corresponding memory multiple over CPU (iPhone 17 Pro: 2.54 GB GPU vs 1.02 GB CPU, card device table).",
+    "Arithmetic at this scale is fragile in the base model itself (the shared 8Q miss '17+25 -> 32' is answered the same by the HF bf16 reference); int8 adds borderline greedy flips on exactly those items (card Correctness / Honest notes)."
+  ],
+  "schema_version": "1.2"
+}

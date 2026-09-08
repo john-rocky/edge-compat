@@ -1,0 +1,54 @@
+{
+  "artifact": "gemma3-270m-it-q8.litertlm",
+  "device": "galaxy-s26",
+  "model_id": "gemma3-270m-it-q8",
+  "notes": "Runs at full speed and emits only padding. The GPU run's entire output is a wall of <pad>; the same bundle, same binary and same prompt on the CPU backend of the same handset answers correctly. The throughput figures below are real and describe a path that produces no text.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-24",
+      "decode_tokens_per_s": 58.43,
+      "delegated_ops": 1667,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cl-pinned",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "GPU output is a wall of <pad>; the CPU backend of the same handset answers correctly on the same prompt (control run 2026-08-27)",
+      "evidence": [
+        "VERBOSE: Replacing 1537 out of 1537 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (decode).",
+        "VERBOSE: Replacing 1667 out of 1667 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_1024).",
+        "VERBOSE: Replacing 1667 out of 1667 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_128).",
+        "VERBOSE: Replacing 1667 out of 1667 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_272).",
+        "results block: prefill=1386.84 decode=58.43 tokens/s",
+        "gate output_tail: '<pad>' repeated for the whole 80-token tail (S4 GPU sweep, 2026-08-24)",
+        "CPU control 2026-08-27, same handset/binary/prompt, --backend=cpu: exit 0, peak 568 MB, output \"The capital of France is Paris.\""
+      ],
+      "failure_class": "silent-miscompute",
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 3896.0,
+        "init_s": 1.81647,
+        "prefill_tokens": 200.0
+      },
+      "output_match": false,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 1386.84,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 1667,
+      "ttft_ms": 160.0
+    }
+  ],
+  "schema_version": "1.0"
+}

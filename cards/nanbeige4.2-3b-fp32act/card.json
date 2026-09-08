@@ -1,0 +1,316 @@
+{
+  "artifacts": [
+    {
+      "file": "model_fp32act.litertlm",
+      "sha256": "c384366d9c75c5d61ebd7befd7b4d60ca7f0cf9f84b60204981d48ad508b132b",
+      "size_mb": 2459.791
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "nanbeige_work/gpu_quest/ repack — prefer_activation_type=fp32 (FINDINGS.md)",
+    "quantization": "unchanged from the shipped bundle (repack does not touch weights)",
+    "tool": "same export as the shipped model.litertlm (looped-arch unroll, num_loops=2) with one model.toml repack",
+    "tool_version": "same lineage as the shipped Nanbeige4.2-3B model.litertlm (built 2026-08-20, gated 2026-08-27)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": 3.45,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=29.64 decode=3.45 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 3891.0,
+            "init_s": 3.45353,
+            "prefill_tokens": 205.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 29.64,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 7210.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-27/nanbeige4.2-3b-fp32act__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": 3.31,
+          "delegated_ops": 2492,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 2492 out of 2492 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 2224 out of 2224 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (decode).",
+            "results block: prefill=27.0 decode=3.31 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 3891.0,
+            "init_s": 29.23759,
+            "prefill_tokens": 205.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 27.0,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 2492,
+          "ttft_ms": 7890.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-27/nanbeige4.2-3b-fp32act__galaxy-s26.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-28",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "iPhone 17 Pro",
+            "machine_label": "iphone-17-pro-scene-entitled",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.15.0",
+            "soc": "A19-Pro",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "G41_START backend=cpu maxTokens=512",
+            "G41_CTX bundle-default",
+            "G41_MEM start avail=6134MB phys=11722MB",
+            "G41_INIT 2.53 s",
+            "G41_MEM afterInit avail=4598MB",
+            "G41_MEMTICK avail=4598MB / 4351MB / 4349MB / 4410MB / 4400MB / 4419MB, then G41_MEM afterSend avail=4419MB",
+            "G41_SCORE 8/8",
+            "G41_DONE",
+            "The app terminated with the exit code 0.",
+            "This is a thinking model and G41_ANSWER carries its chain of thought; both legs reason through all eight and land on the right answers. The GPU and CPU answers are NOT byte-identical here (sha256 c0e3f87e... vs fd005dd4...) — the CPU leg's reasoning wanders to 'lovable' on the rhyme before correcting to 'blue'. Both score 8/8. No numerical comparison was performed, so output_match stays null (DECISIONS #164(c)).",
+            "Supersedes a withdrawn failure record for this exact (model, device). Every earlier G41DeviceTest run of this bundle died to a harness defect, not to anything about the model: the app was an @main struct whose main() called RunLoop.main.run() and never created a UIWindow, so FrontBoard never saw the launch complete and the process-launch watchdog fired at a fixed 20 s. Six crash reports (jetsam_probe/*.ips) all read FRONTBOARD 0x8badf00d, 'process-launch watchdog transgression: app<com.g41.devicetest> exhausted real (wall clock) time', with process lifetimes of 20.09-21.12 s. On the console this prints only as 'App terminated due to signal 9', which is indistinguishable from a jetsam kill. Fixed with a scene delegate that creates a window and returns (plus a UIApplicationSceneManifest — iOS 27 SIGTRAPs a plain UIApplicationDelegate that makes its own window). After the fix no crash report is generated and both legs complete.",
+            "The memory explanation this lane previously published is retracted at the source: the kill was wall clock, never the allowance. The rising MEMTICK headroom that made the memory story untenable was the process being healthy and simply out of launch time.",
+            "Why granite-4.0-h-350m passed this gate while this 3B model could not, under the old harness: granite fits inside 20 s (GPU init 8.49 s, CPU 1.30 s in the same-day control), and a 3B thinking model answering eight questions cannot — at any cache size, with any entitlement. The pre-fix ctx ladder was flat for the same reason.",
+            "Entitled build (com.apple.developer.kernel.increased-memory-limit, litertlm-convert eb6c19a): allowance 6134 MB of 11722 MB physical. Retained because it is the configuration measured, not because memory was ever the constraint.",
+            "G41_MODEL model.litertlm bytes=2579277808 is the staged copy of model_fp32act.litertlm (iphone_gate_E_ctxdefault_scene.log:1 — 'local: nanbeige_work/gpu_quest/model_fp32act.litertlm (2579277808 bytes)'). Both bundles are exactly 2579277808 B, so the byte count does not discriminate them; the device-side mtime in copy.log does — 2026/08/20 0:40 is fp32act.",
+            "runtime_version 0.15.0, not the 0.16.0 the BenchmarkApp iphone-17-pro rows carry: G41DeviceTest links ~/code/swift-litert-lm (Package.swift pins liteRTLMVersion v0.15.0). The scene-fixed rebuild resolved the same package, and the bundle UUID its install log records (8489611F-0A97-4C64-B947-4AD00E3113C8) is the one this console log prints. DECISIONS #164(a).",
+            "the gate measures no throughput: prefill/decode/TTFT/peak-mem stay null rather than 0, and init_s is engine init, not TTFT (DECISIONS #164(b)).",
+            "artifact identity pinned: the gated local file hashes sha256 c384366d9c75c5d61ebd7befd7b4d60ca7f0cf9f84b60204981d48ad508b132b, which equals the published litertlm_manifest.json variant record for model_fp32act.litertlm — this row measured the file that is published, not a local rebuild.",
+            "the bundle declares NO sampler parameters — parsing this file's LlmMetadata gives only start_token, stop_tokens, the prompt templates and max_num_tokens — and G41DeviceTest supplies none, so both legs ran the runtime default. That default is deterministic on this runtime: the granite-4.0-h-350m gate's GPU and CPU legs are byte-identical. So the divergence between these two legs is backend numerics changing an argmax over a long reasoning trace, not sampling nondeterminism.",
+            "CAVEAT on how to read this 8/8: the model's published recipe is temperature 0.6 / top_k 20 / top_p 0.95, and its own manifest states it 'collapses under greedy decoding (do not run at temperature 0)'. This gate ran the runtime default with no sampler configuration, i.e. not that recipe. The score is what was measured; a run under the recommended sampling could differ in either direction.",
+            "KNOWN METADATA DEFECT in this artifact, independent of the score: start_token is '<|im_start|>' while the prompt templates themselves render '<|im_start|>user\\n' / '<|im_start|>assistant\\n<think>\\n', and the system prefix is a bare 'system\\n' — so the engine's prepended start token duplicates the one the template already writes. Verified by parsing this file's own LlmMetadata. The sibling model.litertlm in the same repo has been corrected. When this file is fixed its sha256 changes and THIS ROW WILL DESCRIBE A SUPERSEDED ARTIFACT — re-gate before trusting it past that point.",
+            "litertlm-convert/nanbeige_work/ship_gpu_20260827/iphone_ctxdefault_scene/console_cpu.log",
+            "litertlm-convert/nanbeige_work/ship_gpu_20260827/jetsam_probe/ (the six watchdog crash reports)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_s": 2.53,
+            "max_num_tokens": 512.0,
+            "mem_avail_after_init_mb": 4598.0,
+            "mem_avail_min_during_generation_mb": 4349.0,
+            "mem_avail_start_mb": 6134.0,
+            "phys_mem_mb": 11722.0,
+            "sanity_8q_correct": 8.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.15.0/2026-08-28/nanbeige4.2-3b-fp32act__iphone-17-pro.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-28",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "iPhone 17 Pro",
+            "machine_label": "iphone-17-pro-scene-entitled",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.15.0",
+            "soc": "A19-Pro",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "G41_START backend=gpu maxTokens=512",
+            "G41_CTX bundle-default",
+            "G41_MEM start avail=6134MB phys=11722MB",
+            "G41_INIT 6.77 s",
+            "G41_MEM afterInit avail=2037MB",
+            "G41_MEMTICK avail=2037MB / 1794MB / 1916MB / 1909MB / 1908MB / 2030MB, then G41_MEM afterSend avail=2030MB",
+            "G41_SCORE 8/8",
+            "G41_DONE",
+            "The app terminated with the exit code 0.",
+            "This is a thinking model and G41_ANSWER carries its chain of thought; both legs reason through all eight and land on the right answers. The GPU and CPU answers are NOT byte-identical here (sha256 c0e3f87e... vs fd005dd4...) — the CPU leg's reasoning wanders to 'lovable' on the rhyme before correcting to 'blue'. Both score 8/8. No numerical comparison was performed, so output_match stays null (DECISIONS #164(c)).",
+            "Supersedes a withdrawn failure record for this exact (model, device). Every earlier G41DeviceTest run of this bundle died to a harness defect, not to anything about the model: the app was an @main struct whose main() called RunLoop.main.run() and never created a UIWindow, so FrontBoard never saw the launch complete and the process-launch watchdog fired at a fixed 20 s. Six crash reports (jetsam_probe/*.ips) all read FRONTBOARD 0x8badf00d, 'process-launch watchdog transgression: app<com.g41.devicetest> exhausted real (wall clock) time', with process lifetimes of 20.09-21.12 s. On the console this prints only as 'App terminated due to signal 9', which is indistinguishable from a jetsam kill. Fixed with a scene delegate that creates a window and returns (plus a UIApplicationSceneManifest — iOS 27 SIGTRAPs a plain UIApplicationDelegate that makes its own window). After the fix no crash report is generated and both legs complete.",
+            "The memory explanation this lane previously published is retracted at the source: the kill was wall clock, never the allowance. The rising MEMTICK headroom that made the memory story untenable was the process being healthy and simply out of launch time.",
+            "Why granite-4.0-h-350m passed this gate while this 3B model could not, under the old harness: granite fits inside 20 s (GPU init 8.49 s, CPU 1.30 s in the same-day control), and a 3B thinking model answering eight questions cannot — at any cache size, with any entitlement. The pre-fix ctx ladder was flat for the same reason.",
+            "Entitled build (com.apple.developer.kernel.increased-memory-limit, litertlm-convert eb6c19a): allowance 6134 MB of 11722 MB physical. Retained because it is the configuration measured, not because memory was ever the constraint.",
+            "G41_MODEL model.litertlm bytes=2579277808 is the staged copy of model_fp32act.litertlm (iphone_gate_E_ctxdefault_scene.log:1 — 'local: nanbeige_work/gpu_quest/model_fp32act.litertlm (2579277808 bytes)'). Both bundles are exactly 2579277808 B, so the byte count does not discriminate them; the device-side mtime in copy.log does — 2026/08/20 0:40 is fp32act.",
+            "runtime_version 0.15.0, not the 0.16.0 the BenchmarkApp iphone-17-pro rows carry: G41DeviceTest links ~/code/swift-litert-lm (Package.swift pins liteRTLMVersion v0.15.0). The scene-fixed rebuild resolved the same package, and the bundle UUID its install log records (8489611F-0A97-4C64-B947-4AD00E3113C8) is the one this console log prints. DECISIONS #164(a).",
+            "the gate measures no throughput: prefill/decode/TTFT/peak-mem stay null rather than 0, and init_s is engine init, not TTFT (DECISIONS #164(b)).",
+            "artifact identity pinned: the gated local file hashes sha256 c384366d9c75c5d61ebd7befd7b4d60ca7f0cf9f84b60204981d48ad508b132b, which equals the published litertlm_manifest.json variant record for model_fp32act.litertlm — this row measured the file that is published, not a local rebuild.",
+            "the bundle declares NO sampler parameters — parsing this file's LlmMetadata gives only start_token, stop_tokens, the prompt templates and max_num_tokens — and G41DeviceTest supplies none, so both legs ran the runtime default. That default is deterministic on this runtime: the granite-4.0-h-350m gate's GPU and CPU legs are byte-identical. So the divergence between these two legs is backend numerics changing an argmax over a long reasoning trace, not sampling nondeterminism.",
+            "CAVEAT on how to read this 8/8: the model's published recipe is temperature 0.6 / top_k 20 / top_p 0.95, and its own manifest states it 'collapses under greedy decoding (do not run at temperature 0)'. This gate ran the runtime default with no sampler configuration, i.e. not that recipe. The score is what was measured; a run under the recommended sampling could differ in either direction.",
+            "KNOWN METADATA DEFECT in this artifact, independent of the score: start_token is '<|im_start|>' while the prompt templates themselves render '<|im_start|>user\\n' / '<|im_start|>assistant\\n<think>\\n', and the system prefix is a bare 'system\\n' — so the engine's prepended start token duplicates the one the template already writes. Verified by parsing this file's own LlmMetadata. The sibling model.litertlm in the same repo has been corrected. When this file is fixed its sha256 changes and THIS ROW WILL DESCRIBE A SUPERSEDED ARTIFACT — re-gate before trusting it past that point.",
+            "litertlm-convert/nanbeige_work/ship_gpu_20260827/iphone_ctxdefault_scene/console_gpu.log",
+            "litertlm-convert/nanbeige_work/ship_gpu_20260827/jetsam_probe/ (the six watchdog crash reports)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_s": 6.77,
+            "max_num_tokens": 512.0,
+            "mem_avail_after_init_mb": 2037.0,
+            "mem_avail_min_during_generation_mb": 1794.0,
+            "mem_avail_start_mb": 6134.0,
+            "phys_mem_mb": 11722.0,
+            "sanity_8q_correct": 8.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.15.0/2026-08-28/nanbeige4.2-3b-fp32act__iphone-17-pro.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 1.07,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 180.0 s, output head '[thought] We are asked: \"What is 17 plus 26? Answer with the number only.\" So we'",
+            "invocation 0: exit=0 wall_s=726.5 temp 51.6->52.1C throttled=0x0 prefill_tps=5.73 decode_tps=1.06 ttft_s=45.8801 init_s=66.3358 peak_rss_mb=4311",
+            "invocation 1: exit=0 wall_s=728.5 temp 50.5->56.0C throttled=0x0 prefill_tps=5.6 decode_tps=1.07 ttft_s=46.7749 init_s=66.513 peak_rss_mb=4311",
+            "invocation 2: exit=0 wall_s=724.5 temp 51.6->52.7C throttled=0x0 prefill_tps=5.83 decode_tps=1.07 ttft_s=44.8131 init_s=66.4669 peak_rss_mb=4263"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.07,
+            "decode_tps_min": 1.06,
+            "init_s": 66.4669,
+            "init_s_max": 66.513,
+            "init_s_min": 66.3358,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 5.83,
+            "prefill_tps_min": 5.6,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 46.7749,
+            "ttft_s_min": 44.8131
+          },
+          "output_match": null,
+          "peak_mem_mb": 4311.0,
+          "prefill_tokens_per_s": 5.73,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 45880.1
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/nanbeige4.2-3b-fp32act__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "nanbeige",
+    "id": "nanbeige4.2-3b-fp32act",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/Nanbeige/Nanbeige4.2-3B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "The shipped model.litertlm FAILs on GPU while fully delegated: <unk> flood on Adreno (S4 idx 031) and on Mac Metal, with CPU correct on the same prompt — fp16 activations mis-read the loop boundary of the unrolled num_loops=2 graph. The fix is prefer_activation_type=fp32; the controlled A/B (same day, machine, runtime, prompt; weights byte-identical) flips Metal GPU from <unk> flood to a correct answer (ship_gpu_20260827/RESULTS.md).",
+    "The fix crosses GPU backends: verified on S26 Adreno (2492/2492, real generation; device_runs 2026-08-27) and Mac Metal, plus an Adreno 840 leg (1689685). An earlier Apple-silicon-specific claim was wrong and retracted.",
+    "iPhone 17 Pro: NEITHER bundle starts — both fail identically at engine init on memory, so fp32 activations are not the cause and the card carries the wall rather than an iOS row (882e48a; ship record). The output-head corruption investigated separately is family-wide and not caused by this repack (34f9bb1: four causes ruled out)."
+  ],
+  "schema_version": "1.2"
+}

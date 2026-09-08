@@ -1,0 +1,50 @@
+{
+  "artifact": "LLaVA-OneVision-0.5B.litertlm",
+  "device": "galaxy-s26",
+  "model_id": "llava-onevision-0.5b",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-24",
+      "decode_tokens_per_s": 86.45,
+      "delegated_ops": 1063,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cl-pinned",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 1063 out of 1063 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+        "VERBOSE: Replacing 1063 out of 1063 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_1024).",
+        "VERBOSE: Replacing 972 out of 972 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (decode).",
+        "results block: prefill=1376.31 decode=86.45 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 81.0,
+        "init_s": 1.34944,
+        "prefill_tokens": 203.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 1376.31,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 1063,
+      "ttft_ms": 160.0
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,64 @@
+{
+ "device": {
+  "batteryLevel": 0.5,
+  "batteryState": "charging",
+  "buildConfiguration": "Release",
+  "initialThermalState": "nominal",
+  "isLowPowerModeEnabled": false,
+  "modelIdentifier": "iPhone18,1",
+  "physicalMemoryMB": 11722,
+  "processorCount": 6,
+  "systemName": "iOS",
+  "systemVersion": "27.0"
+ },
+ "id": "8F766FDE-4BA1-427B-93DE-7385A0BBCB71",
+ "metrics": {
+  "batteryDeltaPercent": 0,
+  "coldRun": true,
+  "decodeRateRollingWindow": [],
+  "decodeTokensPerSecond": 5.872954055513365,
+  "decodeTokensPerSecondWallClock": 26.30989670318986,
+  "finalThermalState": "nominal",
+  "firstTokenLatencyMS": 5022,
+  "generatedTokenCount": 2,
+  "harnessStamp": "2026-07-26-comparability",
+  "initialThermalState": "nominal",
+  "loadTimeSeconds": 7.515936970710754,
+  "memoryAfterGenerationMB": 2939.9422760009766,
+  "memoryAfterLoadMB": 1714.519760131836,
+  "memoryBaselineMB": 15.345481872558594,
+  "memoryFinalResidentMB": 862.578125,
+  "memoryMedianMB": 1787.816795349121,
+  "memoryMedianResidentMB": 1441.6875,
+  "memoryPeakDuringDecodeMB": 2938.8329010009766,
+  "memoryPeakResidentMB": 1700.875,
+  "peakThermalState": "nominal",
+  "promptTokenCount": 302,
+  "promptTokensPerSecond": 322.43369812147364,
+  "promptTokensPerSecondWallClock": 60.13722482342035,
+  "stopReason": "stop",
+  "streamedChunkCount": 1,
+  "totalGenerationTimeSeconds": 5.300187945365906
+ },
+ "model": {
+  "displayName": "North-Micro-Vision-Instruct (.litertlm, wi8 + fp16 vision)",
+  "hfFilePatterns": [
+   "*.litertlm"
+  ],
+  "hfRepoId": "litert-local/North-Micro-Vision-Instruct-wi8",
+  "id": "litert-local/northmv-wi8",
+  "onDiskSizeMB": 3480,
+  "parameterCountB": 2.48,
+  "primaryFile": "model.litertlm",
+  "quantization": "INT8 decoder (dynamic wi8) + fp16 vision encoder / int8 adapter, static 512, ekv4096"
+ },
+ "outputSample": "No",
+ "parameters": {
+  "maxTokens": 4,
+  "temperature": 0,
+  "topP": 1
+ },
+ "runtime": "litert-lm",
+ "task": "vision-no-text",
+ "timestamp": "2026-08-19T16:48:15Z"
+}

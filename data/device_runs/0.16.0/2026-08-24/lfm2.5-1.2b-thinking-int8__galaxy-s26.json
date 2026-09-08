@@ -1,0 +1,52 @@
+{
+  "artifact": "LFM2.5-1.2B-Thinking_int8.litertlm",
+  "device": "galaxy-s26",
+  "model_id": "lfm2.5-1.2b-thinking-int8",
+  "quantization": "int8",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-24",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 536,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cl-pinned",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "runtime/core/engine_advanced_impl.cc:308",
+      "evidence": [
+        "VERBOSE: Replacing 536 out of 579 node(s) with delegate (LITERT_CL) node, yielding 2 partitions for subgraph 0 (prefill_1024).",
+        "ADD: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM_ …[trace truncated]",
+        "CAST: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM …[trace truncated]",
+        "CAST: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM …[trace truncated]",
+        "CAST: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM …[trace truncated]",
+        "GATHER_ND: Operation is not supported.",
+        "GREATER_EQUAL: Can't parse inputs with const tensors.",
+        "LESS_EQUAL: Can't parse inputs with const tensors.",
+        "SUM: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM_ …[trace truncated]",
+        "536 operations will run on the GPU, and the remaining 43 operations will run on the CPU.",
+        "runtime/core/engine_advanced_impl.cc:308"
+      ],
+      "failure_class": "engine_create_failed",
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": 579,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

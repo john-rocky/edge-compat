@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "perf_factor.schema.json",
+  "title": "Measured performance factor of a mathematically-equivalent graph choice",
+  "description": "One measured latency factor between two graph forms on one accelerator. `factor` = before_ms / after_ms for the stated direction (>1 means `to` is faster). factor/before_ms/after_ms are null only for feasibility-boundary rows where one form does not run at all (the conditions text carries the evidence).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "category",
+    "rewrite",
+    "measurement",
+    "factor",
+    "scope",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category": {
+      "enum": [
+        "rewrite",
+        "shape",
+        "null-result"
+      ]
+    },
+    "rewrite": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from",
+        "to",
+        "equivalence"
+      ],
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "op pattern being replaced (prose + op names)"
+        },
+        "to": {
+          "type": "string"
+        },
+        "equivalence": {
+          "enum": [
+            "identity",
+            "bit-exact",
+            "approximation",
+            "not-equivalent"
+          ]
+        },
+        "equivalence_evidence": {
+          "type": "string",
+          "description": "the measured number backing the equivalence class (max_abs_diff, corr on a named model, ...)"
+        }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "device",
+        "soc",
+        "accelerator",
+        "runtime",
+        "date",
+        "n",
+        "statistic",
+        "thermal",
+        "before_ms",
+        "after_ms"
+      ],
+      "properties": {
+        "device": {
+          "type": "string"
+        },
+        "soc": {
+          "type": "string"
+        },
+        "accelerator": {
+          "type": "string"
+        },
+        "runtime": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string",
+          "description": "jit | aot"
+        },
+        "date": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "n": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "statistic": {
+          "type": "string"
+        },
+        "thermal": {
+          "type": "string"
+        },
+        "before_ms": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "after_ms": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "probe": {
+          "type": "string",
+          "description": "probe or model file the pair was measured on"
+        },
+        "gpu_control": {
+          "type": "string",
+          "description": "what the same swap did on the GPU, when measured"
+        }
+      }
+    },
+    "factor": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "scope": {
+      "type": "string",
+      "description": "extent actually measured \u2014 architecture, tensor sizes, contexts. The factor is claimed for this scope only."
+    },
+    "provenance": {
+      "const": "measured"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

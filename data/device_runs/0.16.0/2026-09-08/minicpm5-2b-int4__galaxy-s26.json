@@ -1,0 +1,94 @@
+{
+  "artifact": "MiniCPM5-2B_int4.litertlm",
+  "artifact_sha256": "9858563beafbc6d5e0d25fcee3827541515296a9302ed3d088b16a58d4fbe7b8",
+  "device": "galaxy-s26",
+  "model_id": "minicpm5-2b-int4",
+  "quantization": "int4",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-08",
+      "decode_tokens_per_s": 15.56,
+      "delegated_ops": 2280,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cl-pinned",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 1699 out of 1873 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 249 partitions for subgraph 0 (prefill_1024).",
+        "VERBOSE: Replacing 1699 out of 1873 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 249 partitions for subgraph 1 (prefill_256).",
+        "VERBOSE: Replacing 1699 out of 1873 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 249 partitions for subgraph 2 (prefill_64).",
+        "VERBOSE: Replacing 1699 out of 1873 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 249 partitions for subgraph 3 (prefill_16).",
+        "results block: prefill=38.99 decode=15.56 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 1065.0,
+        "init_s": 5.71261,
+        "prefill_tokens": 203.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 38.99,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 2371,
+      "ttft_ms": 5270.0
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-09-08",
+      "decode_tokens_per_s": 18.56,
+      "delegated_ops": 1873,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cl-pinned",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 1873 out of 1873 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+        "VERBOSE: Replacing 1873 out of 1873 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256).",
+        "VERBOSE: Replacing 1873 out of 1873 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_64).",
+        "VERBOSE: Replacing 1873 out of 1873 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_16).",
+        "results block: prefill=400.74 decode=18.56 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 1021.0,
+        "init_s": 11.1824,
+        "prefill_tokens": 203.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 400.74,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 1873,
+      "ttft_ms": 560.0
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,89 @@
+{
+  "artifacts": [
+    {
+      "file": "b3ea0ffc92e6b3154ac228c7e98e0ba58368e3b41ee648d21ac9ecaa0426be97.tflite",
+      "sha256": "583fc0bad83fb8252925c305eecdbdeff1bc02ebbd7cc071c0393f9182486728",
+      "size_mb": 268.966
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 22.328,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 15.07,
+        "loads": true,
+        "max_rel_diff": 0.008479067302596715,
+        "output_match": true,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-11/rwkv-7-world-0.1b.json"
+  },
+  "conversion": {
+    "command": "python rwkv7/scripts/build_rwkv7_step.py",
+    "quantization": "fp16",
+    "tool": "litert-torch",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "model": {
+    "family": "rwkv7",
+    "id": "rwkv-7-world-0.1b",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/RWKV-7-World-0.1B-LiteRT",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Host side per step: token-embedding row lookup from the ~100 MB fp16 table (GATHER is GPU-banned), argmax over the 65536 logits, and recycling the three recurrent states into the next step (zoo README L1097)."
+  ],
+  "schema_version": "1.1"
+}

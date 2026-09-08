@@ -1,0 +1,50 @@
+{
+  "backend": "gpu_metal_mac",
+  "entries": [
+    {
+      "conditions": "input tensor of rank 0 (a scalar statistic such as a mean/RMS reduced without keepdim): the delegate rejects the op with 'has bad input dims size: 0' and it runs on the CPU; with the fully-delegated hint set the LiteRT-LM audio executor then refuses to create the conversation (INTERNAL, audio_litert_compiled_model_executor.cc:383)",
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-09-03",
+        "litert_version": "litert-lm 0.16.1 (Mac WebGPU/Metal delegate)",
+        "source_model": "VibeVoice-ASR-BitNet audio encoder v1 (rank-0 statistics build; vibevoice_asr_work/mac_gate_cpu_gpu30.log)"
+      },
+      "op": "DIV",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: VibeVoice audio encoder v2 (keepdim=True everywhere) runs with 0 CPU fallbacks on the same delegate; CPU numerics unchanged (cos 0.99978 vs eager)",
+          "rewrite": "keep every reduction rank-preserving: `keepdim=True` on the mean / sum that feeds the DIV, so the scalar becomes a [1,1,1] tensor",
+          "symptom": "22 ops fall back (1834 of 1856 on the GPU) and the audio conversation fails to create under the fully-delegated hint"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "input tensor of rank 0 (same scalar-statistic pattern): 'MUL: Tensor ... has bad input dims size: 0.'",
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-09-03",
+        "litert_version": "litert-lm 0.16.1 (Mac WebGPU/Metal delegate)",
+        "source_model": "VibeVoice-ASR-BitNet audio encoder v1 (vibevoice_asr_work/mac_gate_cpu_gpu30.log)"
+      },
+      "op": "MUL",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: encoder v2 fully delegated, 0 fallbacks",
+          "rewrite": "keep every reduction rank-preserving (`keepdim=True`) so no operand of the MUL is a rank-0 tensor",
+          "symptom": "same 22-op fallback block as DIV"
+        }
+      ],
+      "status": "fallback"
+    }
+  ],
+  "generated_at": "2026-09-08",
+  "litert_version": "0.16.1",
+  "schema_version": "1.0"
+}

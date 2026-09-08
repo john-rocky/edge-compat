@@ -1,0 +1,23 @@
+# Phase 11 (spec 11.4): standard dependency bumps via Dependabot.
+# The @litertjs/core RELEASE axis is handled by autobump.yml (it also updates
+# data/releases.json and triggers the full re-sweep); Dependabot's npm bumps
+# of it are redundant but harmless — the autobump PR supersedes them.
+# Native LiteRT release detection stays with the owner's watcher (Phase 8).
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /web/sweep
+    schedule:
+      interval: weekly
+  - package-ecosystem: npm
+    directory: /site
+    schedule:
+      interval: weekly
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

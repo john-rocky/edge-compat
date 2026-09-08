@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fix_report.schema.json",
+  "title": "edge-fix report",
+  "description": "Output of `edge-fix --json`. A report is ALWAYS emitted, whatever the outcome. Safety contract: dry-run is the default, the input file is never modified in place, every applied change traces to a rule id with its evidence, and unmatched issues are reported — never guessed at. The re-lint improvement gate and the numerical verification result are both recorded; a rolled-back attempt keeps its after/improvement/verification blocks for transparency with output.written=false. The `summary` blocks are edge-lint summaries (lint_report.schema.json#/properties/summary).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "backend", "litert_version", "model", "matrix",
+    "rules_dir", "rules_loaded", "mode", "outcome", "plan", "conflicts",
+    "refused", "unmatched_findings", "io_changes", "before", "after",
+    "improvement", "verification", "unverified", "output"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "backend": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "litert_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The matrix snapshot's litert_version — lint verdicts driving this fix are only valid for this runtime version."
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "matrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "litert_version", "generated_at"],
+      "properties": {
+        "file": { "type": "string" },
+        "litert_version": { "type": "string" },
+        "generated_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
+      }
+    },
+    "rules_dir": { "type": "string" },
+    "rules_loaded": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Rule ids loaded from rules_dir, sorted."
+    },
+    "mode": { "enum": ["dry_run", "apply"] },
+    "outcome": {
+      "enum": [
+        "fixed", "no_improvement", "verification_failed",
+        "no_rules_matched", "nothing_to_fix"
+      ],
+      "description": "fixed: plan applied and the improvement gate passed (bytes written only in apply mode). no_improvement: automatic rollback — the re-lint metric did not improve. verification_failed: automatic rollback — numerics outside tolerance (never overridable by --allow-unverified). no_rules_matched: fixable findings exist but no rule matched. nothing_to_fix: no non-delegated findings and no io_cast match."
+    },
+    "plan": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/plan_item" },
+      "description": "Applied (or attempted) changes in deterministic order. Every item traces to a rule id and carries the rule's evidence and provenance."
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rule_ids", "reason"],
+        "properties": {
+          "subgraph": { "type": "integer", "minimum": 0 },
+          "node_index": { "type": "integer", "minimum": 0 },
+          "op": { "type": "string" },
+          "tensor_index": { "type": "integer", "minimum": 0 },
+          "rule_ids": {
+            "type": "array",
+            "minItems": 2,
+            "items": { "type": "string" }
+          },
+          "reason": { "type": "string" }
+        }
+      },
+      "description": "Targets claimed by more than one rule. Conflicted targets are left untouched — never resolved by a coin flip."
+    },
+    "refused": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rule_id", "reason"],
+        "properties": {
+          "rule_id": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      },
+      "description": "Rules (or rule×node applications) the v1 engine cannot execute, with precise reasons (e.g. op_sequence matching, ops outside the options registry, recipe refs out of range)."
+    },
+    "unmatched_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["subgraph", "node_index", "op", "status", "dtypes"],
+        "properties": {
+          "subgraph": { "type": "integer", "minimum": 0 },
+          "node_index": { "type": "integer", "minimum": 0 },
+          "op": { "type": "string" },
+          "status": {
+            "enum": ["partial", "fallback", "incorrect", "crash", "unknown"]
+          },
+          "dtypes": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "description": "Non-delegated findings no rule matched — reported, never guessed at."
+    },
+    "io_changes": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["before", "after"],
+      "properties": {
+        "before": { "$ref": "#/$defs/io_dtypes" },
+        "after": { "$ref": "#/$defs/io_dtypes" }
+      },
+      "description": "Graph interface dtypes before/after when the plan contains io_cast; null otherwise."
+    },
+    "before": { "$ref": "#/$defs/lint_block" },
+    "after": {
+      "anyOf": [{ "$ref": "#/$defs/lint_block" }, { "type": "null" }],
+      "description": "Re-lint of the rewritten graph; null when nothing was applied."
+    },
+    "improvement": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["improved", "reason"],
+      "properties": {
+        "improved": { "type": "boolean" },
+        "reason": { "type": "string" }
+      },
+      "description": "The re-lint gate verdict: delegated coverage first, then incorrect+crash count, then partition count; io_cast plans may instead improve the interface-violation count without regressing the lint metrics. null when nothing was applied."
+    },
+    "verification": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["status", "reason", "max_abs_diff", "max_rel_diff", "tolerance"],
+      "properties": {
+        "status": {
+          "enum": ["passed", "failed", "skipped", "error"],
+          "description": "passed/failed: measured on the LiteRT CPU interpreter (runners extra). skipped: the runners extra is unavailable. error: the interpreter could not execute one of the models."
+        },
+        "reason": { "type": ["string", "null"] },
+        "max_abs_diff": { "type": ["number", "null"] },
+        "max_rel_diff": { "type": ["number", "null"] },
+        "tolerance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["absolute", "relative"],
+          "properties": {
+            "absolute": { "type": "number" },
+            "relative": { "type": "number" }
+          },
+          "description": "Pass bound per element: |out - ref| <= max(absolute, relative * |ref|) — the shared tolerance policy of the sweep and probe runners."
+        }
+      },
+      "description": "Original vs fixed on seeded deterministic inputs via the LiteRT CPU interpreter. null when nothing was applied."
+    },
+    "unverified": {
+      "type": "boolean",
+      "description": "True when a fixed outcome was produced without a passed numerical verification (--allow-unverified with the runners extra unavailable). A failed verification is never marked unverified — it rolls back."
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "written"],
+      "properties": {
+        "path": { "type": ["string", "null"] },
+        "sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "sha256 of the fixed model bytes; present whenever a fixed graph was produced, even in dry-run."
+        },
+        "written": { "type": "boolean" }
+      }
+    }
+  },
+  "$defs": {
+    "lint_block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary"],
+      "properties": {
+        "summary": { "$ref": "lint_report.schema.json#/properties/summary" }
+      }
+    },
+    "io_dtypes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["inputs", "outputs"],
+      "properties": {
+        "inputs": { "type": "array", "items": { "type": "string" } },
+        "outputs": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "plan_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule_id", "action", "provenance", "detail"],
+      "properties": {
+        "rule_id": { "type": "string" },
+        "action": { "enum": ["replace_op", "decompose", "insert_cast", "io_cast"] },
+        "subgraph": { "type": "integer", "minimum": 0 },
+        "node_index": {
+          "type": ["integer", "null"],
+          "description": "Original-graph node index for node actions; null for io_cast."
+        },
+        "op": { "type": ["string", "null"] },
+        "io_targets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["direction", "tensor_index", "name", "dtype"],
+            "properties": {
+              "direction": { "enum": ["input", "output"] },
+              "tensor_index": { "type": "integer", "minimum": 0 },
+              "name": { "type": ["string", "null"] },
+              "dtype": { "type": "string" }
+            }
+          },
+          "description": "Graph I/O tensors wrapped by an io_cast item; empty for node actions."
+        },
+        "detail": { "type": "string" },
+        "provenance": { "enum": ["measured", "vendor_doc", "inferred", "example"] },
+        "evidence": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "source_model": { "type": "string" },
+            "litert_version": { "type": "string" },
+            "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
+          }
+        },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

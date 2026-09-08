@@ -1,0 +1,82 @@
+{
+  "backend": "gpu_mldrift",
+  "entries": [
+    {
+      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring an owner-authored fact: SELECT is a CompiledModel GPU blocker per the upstream gpu-clean-conversion skill (litert-samples skills/gpu-clean-conversion/SKILL.md, symptom table row 'SELECT / SELECT_V2') and LITERT_CONVERSION_GUIDE.md (BiRefNet 'Replaced SELECT/NOT_EQUAL'; Mimi: nn.ELU was a 'SELECT x13 blocker')",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "SELECT",
+      "provenance": "example",
+      "rewrite_hints": [
+        {
+          "expected_effect": "the masking arithmetic delegates; the partition break at SELECT is removed",
+          "rewrite": "replace with arithmetic: out = else + (then - else) * cast(cond) (SKILL.md: 'Replace with arithmetic: x*(1-m) + v*m')",
+          "symptom": "SELECT named in the GPU compile error / partition split at SELECT",
+          "transform_id": "select-to-arithmetic"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring the same SKILL.md symptom-table row (it names both SELECT and SELECT_V2); wav2vec2 and DeepPhonemizer sections of LITERT_CONVERSION_GUIDE.md name SELECT_V2 as the GPU-banned lowering of masking",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "SELECT_V2",
+      "provenance": "example",
+      "rewrite_hints": [
+        {
+          "expected_effect": "the masking arithmetic delegates; the partition break at SELECT_V2 is removed",
+          "rewrite": "replace with arithmetic: out = else + (then - else) * cast(cond) (SKILL.md: 'Replace with arithmetic: x*(1-m) + v*m')",
+          "symptom": "SELECT_V2 named in the GPU compile error / partition split at SELECT_V2",
+          "transform_id": "select-v2-to-arithmetic"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "SYNTHETIC FIXTURE ENTRY: bool->float32 boundary CAST is undocumented for this backend; LITERT_CONVERSION_GUIDE.md bans 'CAST (float<->int)' on CompiledModel GPU, so the fixture leaves it unknown rather than assuming it delegates",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "CAST",
+      "provenance": "example",
+      "status": "unknown"
+    },
+    {
+      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring owner-authored facts: elementwise arithmetic is GPU-clean (SKILL.md prescribes the arithmetic replacement; LITERT_CONVERSION_GUIDE.md Roboflow Soccer lists ADD/MUL in the GPU-clean op set)",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "SUB",
+      "provenance": "example",
+      "status": "delegated"
+    },
+    {
+      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring owner-authored facts: MUL listed in the GPU-clean op set (LITERT_CONVERSION_GUIDE.md Roboflow Soccer section)",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "MUL",
+      "provenance": "example",
+      "status": "delegated"
+    },
+    {
+      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring owner-authored facts: ADD listed in the GPU-clean op set (LITERT_CONVERSION_GUIDE.md Roboflow Soccer section)",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "ADD",
+      "provenance": "example",
+      "status": "delegated"
+    }
+  ],
+  "generated_at": "2026-08-12",
+  "litert_version": "0.0.0-fixture",
+  "schema_version": "1.2",
+  "target": {
+    "device": "Synthetic fixture (draft-rule validation harness)",
+    "soc": "Synthetic"
+  }
+}

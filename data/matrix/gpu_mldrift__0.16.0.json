@@ -1,0 +1,105 @@
+{
+  "backend": "gpu_mldrift",
+  "entries": [
+    {
+      "conditions": "delegate error: Tensor type(INT64) is not supported. — int64 ADD from the litert-torch local patch valid_len=mask.sum() in the LFM ShortConv prefill path (same wall as gpu_metal_mac 0.14.0, reproduced on Android CL)",
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-08-23",
+        "litert_version": "0.16.0",
+        "source_model": "LFM2.5-1.2B-Instruct_int4"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Tensor type(INT64) is not supported.",
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-08-23",
+        "litert_version": "0.16.0",
+        "source_model": "LFM2.5-1.2B-Instruct_int4"
+      },
+      "op": "CAST",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Updated_slice shape must be less or equal to the array to update — triggered by a benchmark token config exceeding the KV bounds (updated_slice 18102464 vs array 1825664); the correctly-sized sibling run on the same day did not report this op, so this is the constraint's violation face, not a blanket unsupport",
+      "evidence": {
+        "date": "2026-08-23",
+        "litert_version": "0.16.0",
+        "source_model": "LFM2.5-1.2B-Instruct_int4"
+      },
+      "op": "DYNAMIC_UPDATE_SLICE",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Operation is not supported. — GATHER_ND emitted by a litert-torch local patch index_select lowering (converter-lowering context, not a delegate constraint)",
+      "evidence": {
+        "date": "2026-08-23",
+        "litert_version": "0.16.0",
+        "source_model": "LFM2.5-1.2B-Instruct_int4"
+      },
+      "op": "GATHER_ND",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "GATHER_ND rejection disappears (remaining int64 ops would still block full delegation)",
+          "rewrite": "one-hot based index_select lowering (litert-torch acc9eef)",
+          "symptom": "GPU delegate rejects GATHER_ND emitted by the index_select lowering"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Can't parse inputs with const tensors.",
+      "evidence": {
+        "date": "2026-08-23",
+        "litert_version": "0.16.0",
+        "source_model": "LFM2.5-1.2B-Instruct_int4"
+      },
+      "op": "GREATER_EQUAL",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Can't parse inputs with const tensors.",
+      "evidence": {
+        "date": "2026-08-23",
+        "litert_version": "0.16.0",
+        "source_model": "LFM2.5-1.2B-Instruct_int4"
+      },
+      "op": "LESS_EQUAL",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: Tensor type(INT64) is not supported.",
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-08-23",
+        "litert_version": "0.16.0",
+        "source_model": "LFM2.5-1.2B-Instruct_int4"
+      },
+      "op": "SUM",
+      "provenance": "measured",
+      "status": "fallback"
+    }
+  ],
+  "generated_at": "2026-08-27",
+  "litert_version": "0.16.0",
+  "schema_version": "1.0",
+  "target": {
+    "device": "Galaxy S26 (SM-S942Q)",
+    "soc": "Qualcomm SM8850"
+  }
+}

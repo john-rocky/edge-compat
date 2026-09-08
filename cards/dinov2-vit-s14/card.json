@@ -1,0 +1,87 @@
+{
+  "artifacts": [
+    {
+      "file": "854a975b2cba85ab2e276ecb59cdb3c13f5f6058206c4612b218cc6bc7a1476f.tflite",
+      "sha256": "c0697093316b777de2c79ed895f74c864136840309ecb2aab6f51cbe0c228e7f",
+      "size_mb": 42.814
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 2977.405,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 29.86,
+        "loads": true,
+        "max_rel_diff": 2.1121107354221573,
+        "output_match": false,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-11/dinov2-vit-s14.json"
+  },
+  "conversion": {
+    "command": "python dinov2/scripts/build_dinov2.py",
+    "quantization": "fp16",
+    "tool": "litert-torch",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "model": {
+    "family": "dinov2",
+    "id": "dinov2-vit-s14",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/DINOv2-ViT-S14-LiteRT",
+    "task": "image-feature-extraction"
+  },
+  "pitfalls": [],
+  "schema_version": "1.1"
+}

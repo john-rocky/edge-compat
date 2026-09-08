@@ -1,0 +1,141 @@
+{
+  "artifacts": [
+    {
+      "file": "da15e3a25d203b6483ce41704b4f1395ccc57a44f01fba66d9d712f098ca69a0.tflite",
+      "sha256": "1f8b8b6ae40a0e7988c12f1feb291b90bdf6c6ecfeba4025dd11a2f8cac6b94d",
+      "size_mb": 95.301
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 349.405,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 13.072,
+        "loads": true,
+        "max_rel_diff": 1.2335333397772934,
+        "output_match": false,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-11/sinet-v2-camouflage.json"
+  },
+  "conversion": {
+    "command": "python sinet/scripts/build_sinet.py",
+    "quantization": "none — fp32 (artifact tensors: 792 float32, no float16/int8)",
+    "tool": "litert-torch",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert",
+            "runtime_version": "2.2.0.dev20260804",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+            "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "invocation 0: exit=0 wall_s=16.7 temp 49.4->61.5C throttled=0x0 xnnpack=True median_us=274308.0 runs=50 footprint_peak_mb=252.55",
+            "invocation 1: exit=0 wall_s=16.9 temp 51.0->64.2C throttled=0x0 xnnpack=True median_us=275564.0 runs=50 footprint_peak_mb=253.11",
+            "invocation 2: exit=0 wall_s=16.7 temp 49.9->64.8C throttled=0x0 xnnpack=True median_us=274669.0 runs=50 footprint_peak_mb=252.55"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 274.669,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_ms": 113.575,
+            "invocations": 3,
+            "iterations": 150,
+            "latency_max_ms": 322.802,
+            "latency_min_ms": 272.263,
+            "threads": 4,
+            "warmup_runs_per_invocation": 10
+          },
+          "output_match": null,
+          "peak_mem_mb": 253.11,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0.dev20260804/2026-08-31/sinet-v2-camouflage__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "sinet-v2",
+    "id": "sinet-v2-camouflage",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/SINet-V2-Camouflage-LiteRT",
+    "task": "image-segmentation"
+  },
+  "pitfalls": [],
+  "schema_version": "1.2"
+}

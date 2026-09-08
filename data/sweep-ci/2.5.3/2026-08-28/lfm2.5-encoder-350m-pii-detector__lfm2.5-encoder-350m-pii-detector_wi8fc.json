@@ -1,0 +1,89 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x512:int32;1x512:int32",
+  "license": "other",
+  "model_id": "lfm2.5-encoder-350m-pii-detector__lfm2.5-encoder-350m-pii-detector_wi8fc",
+  "notes": "multi-signature model (2 subgraphs); harness runs subgraph 0",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-08-28",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "6.17.0-1022-azure",
+        "webgpu_adapter": {
+          "architecture": "swiftshader",
+          "description": "",
+          "device": "",
+          "vendor": "google"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 2846.395,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-08-28",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "warning: W0828 18:12:27.836999  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {512, 1, 1, 1, 161}} vs reference shape: {bhwdc, {1, 1, 512, 1, 161}}",
+        "error: E0828 18:12:28.011000  755312 delegate_webgpu.cc:373] Failed to create litert::ml_drift::DelegateKernelLiteRt: INVALID_ARGUMENT: Unable to parse bc coord for BATCH axis. Layout is bhwc, args are res, DST_X + 0, DST_Y + 0, DST_S + 0.; selector object=dst_tensor, selector=Write, args=[res, DST_X + 0, DST_Y + 0, DST_S + 0], template_args=[], descriptor=float32, TensorStorageType::TEXTURE_2D, layout: bhwc, shape: {bhwc, {512, 1, 1, 161}}\n=== Source Location Trace: ===\nthird_party/ml_drift/common/task/gpu_operation.cc:945\nthird_party/ml_drift/common/task/gpu_operation.cc:1439\nthird_party/ml_drift/common/merge_nodes.cc:633\nthird_party/ml_drift/common/gpu_model_builder.cc:3871\nthird_party/odml/litert/ml_drift/delegate/delegate_kernel.cc:830\nthird_party/odml/litert/ml_drift/delegate/delegate_kernel.cc:859\nthird_party/odml/litert/ml_drift/delegate/delegate_kernel.cc:317\nthird_party/odml/litert/ml_drift/delegate/delegate_kernel_litert.cc:169",
+        "error: ERROR: Failed to initialize kernel.",
+        "error: ERROR: Restored original execution plan after delegate application failure."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "6.17.0-1022-azure",
+        "webgpu_adapter": {
+          "architecture": "swiftshader",
+          "description": "",
+          "device": "",
+          "vendor": "google"
+        }
+      },
+      "error": "Error: ERROR: [third_party/odml/litert/litert/js/packages/core/src/cpp/litert_web.cc:245]\n└ ERROR: [./third_party/odml/litert/litert/cc/internal/litert_compiled_model_next.h:70]",
+      "failure_class": "compile_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/LFM2.5-Encoder-350M-PII-Detector/resolve/main/LFM2.5-Encoder-350M-PII-Detector_wi8fc.tflite"
+}

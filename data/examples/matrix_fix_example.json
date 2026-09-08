@@ -1,0 +1,98 @@
+{
+  "backend": "gpu_mldrift",
+  "entries": [
+    {
+      "conditions": "dtype conversion delegates for all example dtypes",
+      "op": "CAST",
+      "provenance": "example",
+      "status": "delegated"
+    },
+    {
+      "conditions": "integer division is not implemented by the example delegate",
+      "dtypes": [
+        "int32"
+      ],
+      "op": "DIV",
+      "provenance": "example",
+      "rewrite_hints": [
+        {
+          "expected_effect": "op delegates; single contiguous partition",
+          "rewrite": "replace with FLOOR_DIV where both operands are known non-negative",
+          "symptom": "graph splits at integer DIV",
+          "transform_id": "example-replace-div-floor-div"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "dtypes": [
+        "float32"
+      ],
+      "op": "EXP",
+      "provenance": "example",
+      "status": "delegated"
+    },
+    {
+      "dtypes": [
+        "int32"
+      ],
+      "op": "FLOOR_DIV",
+      "provenance": "example",
+      "status": "delegated"
+    },
+    {
+      "dtypes": [
+        "float32"
+      ],
+      "op": "MUL",
+      "provenance": "example",
+      "status": "delegated"
+    },
+    {
+      "conditions": "integer MUL falls back on the example delegate (float-only ALU)",
+      "dtypes": [
+        "int32"
+      ],
+      "op": "MUL",
+      "provenance": "example",
+      "rewrite_hints": [
+        {
+          "expected_effect": "op delegates in float32",
+          "rewrite": "compute in float32: cast the inputs, multiply, cast the result back",
+          "symptom": "partition split at integer MUL",
+          "transform_id": "example-insert-cast-mul-int32"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "op": "NEG",
+      "provenance": "example",
+      "status": "delegated"
+    },
+    {
+      "conditions": "SQUARE is not implemented by the example delegate",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "SQUARE",
+      "provenance": "example",
+      "rewrite_hints": [
+        {
+          "expected_effect": "op delegates as MUL",
+          "rewrite": "decompose SQUARE(x) into MUL(x, x)",
+          "symptom": "graph splits at SQUARE",
+          "transform_id": "example-decompose-square-mul"
+        }
+      ],
+      "status": "fallback"
+    }
+  ],
+  "generated_at": "2026-08-10",
+  "litert_version": "0.0.0-example",
+  "schema_version": "1.2",
+  "target": {
+    "device": "Example Device",
+    "soc": "Example SoC"
+  }
+}

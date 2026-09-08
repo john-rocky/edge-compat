@@ -1,0 +1,21 @@
+{
+  "model_id": "example-tiny-clean",
+  "results": [
+    {
+      "backend": "cpu_xnnpack",
+      "date": "2026-08-10",
+      "device": "Example Device",
+      "harness": "example-harness",
+      "harness_version": "0.0.0-example",
+      "latency_p50_ms": 5.1,
+      "peak_mem_mb": 11.0,
+      "precision": "f32",
+      "provenance": "example",
+      "runs": 10,
+      "runtime": "example-other-runtime",
+      "soc": "Example SoC",
+      "statistic": "median"
+    }
+  ],
+  "schema_version": "1.0"
+}

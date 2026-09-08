@@ -1,0 +1,325 @@
+{
+  "artifacts": [
+    {
+      "file": "sam2_tiny_mask_decoder_fp16.tflite",
+      "sha256": "8fc29cfa6e41741e03d8dbc53c18c945d5f98c8eb4a07376390022cc91d91ad5",
+      "size_mb": 16.172
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-13",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 396.69,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-13",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 8.33,
+        "loads": true,
+        "max_rel_diff": 10099.350182687609,
+        "output_match": false,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-13/sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_fp16.json"
+  },
+  "conversion": {
+    "command": "python conversion/convert_sam2_decoder.py",
+    "quantization": "fp16 (float_casting weight quantization)",
+    "tool": "litert-torch (litert-samples interactive_segmentation conversion pipeline, pre-fix build)",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-08-26",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.78666663->0.78666663 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 10.077,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "latency_max_ms": 10.377,
+            "latency_min_ms": 9.234,
+            "load_ms": 1258.5
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-26/sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_fp16__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-08-26",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT (Hexagon, JIT on-device)"
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.78666663->0.78666663 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 8.08,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "jit_first_load_ms": 4436.5,
+            "latency_max_ms": 8.319,
+            "latency_min_ms": 7.959,
+            "load_ms": 110.9,
+            "qnn_partition_lines": 57
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-26/sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_fp16__galaxy-s26.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-08-28",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 376,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.58795166->0.5979951 attempt=0",
+            "logcat: Replacing 376 out of 378 node(s) with delegate (TfLiteXNNPackDelegate) (largest subgraph captured by the driver)"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": 218.668,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "latency_max_ms": 224.368,
+            "latency_min_ms": 214.021,
+            "load_ms": 46.9
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 378,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-28/sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_fp16__pixel-8a.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-08-28",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 378,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.57877505->0.58045006 attempt=0",
+            "logcat: Replacing 378 out of 378 node(s) with delegate (LITERT_CL) (largest subgraph captured by the driver)"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 30.055,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "latency_max_ms": 32.138,
+            "latency_min_ms": 29.337,
+            "load_ms": 2557.5
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 378,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-28/sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_fp16__pixel-8a.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert",
+            "runtime_version": "2.2.0.dev20260804",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+            "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "invocation 0: exit=0 wall_s=9.5 temp 51.6->61.5C throttled=0x0 xnnpack=True median_us=156218.0 runs=50 footprint_peak_mb=135.48",
+            "invocation 1: exit=0 wall_s=9.5 temp 51.6->61.5C throttled=0x0 xnnpack=True median_us=156032.0 runs=50 footprint_peak_mb=135.48",
+            "invocation 2: exit=0 wall_s=9.6 temp 50.5->59.8C throttled=0x0 xnnpack=True median_us=156931.0 runs=50 footprint_peak_mb=135.48"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 156.218,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_ms": 18.636,
+            "invocations": 3,
+            "iterations": 150,
+            "latency_max_ms": 158.733,
+            "latency_min_ms": 154.332,
+            "threads": 4,
+            "warmup_runs_per_invocation": 10
+          },
+          "output_match": null,
+          "peak_mem_mb": 135.48,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0.dev20260804/2026-08-31/sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_fp16__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "sam2",
+    "id": "sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_fp16",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/SAM2.1-Hiera-Tiny-Mask-Decoder",
+    "task": "mask-generation"
+  },
+  "pitfalls": [
+    "SUPERSEDED — use sam2_tiny_mask_decoder_v2_fp16.tflite. This build is the documented specimen of 'fully delegated yet silently wrong': 358/358 LITERT_CL nodes, banned ops NONE, desktop parity corr 1.0, but Pixel 8a GPU masks at corr 0.265 vs CPU (fp32 GPU compute still 0.473); on Mac Metal 2.1.6 rel 8.1e-02; browser sweep max_abs 4.81 (HF card; rewrite-reach-survey addendum).",
+    "Root cause: attention exported with the batch dim collapsed (q/k/v [heads,N,d], rank 3); the delegate mis-computes the batchless layout at the fusion/partition level (isolation probes cleared every op family individually). Keep an explicit batch dim through attention blocks (survey addendum).",
+    "Kept on the HF repo for reference/reproduction of the miscompute; CPU execution is correct (HF card)."
+  ],
+  "schema_version": "1.2"
+}

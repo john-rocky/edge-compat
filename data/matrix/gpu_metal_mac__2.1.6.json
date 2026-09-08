@@ -1,0 +1,83 @@
+{
+  "backend": "gpu_metal_mac",
+  "entries": [
+    {
+      "conditions": "transformers' GQA repeat_kv spelling — `x[:,:,None,:,:].expand(b,h,n_rep,s,d).reshape(...)` — emits a rank-5 BROADCAST_TO + rank-5 RESHAPE that the Metal accelerator refuses; the whole LFM2.5 encoder family (8 models) ran partially delegated (fully_accelerated=0) because of this one idiom. Anything exported straight from HF modeling with attn_implementation=sdpa carries it (ai-edge-torch reauthors attention, direct litert_torch traces do not)",
+      "constraints": {
+        "min_rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-13",
+        "litert_version": "ai-edge-litert 2.1.6",
+        "source_model": "LFM2.5-Encoder-230M wi8fc (whole LFM2.5 encoder family)"
+      },
+      "op": "BROADCAST_TO",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: 230M encoder went from fully_accelerated=0 to full Metal delegation (fp32 rel 2.5e-05); the whole 8-model family then fully delegates on Metal, Android LITERT_CL (852/852 nodes) and webgpu single-signature (55x wasm)",
+          "rewrite": "respell repeat_kv as an outer product against a ones row through a matmul: reshape (b,h,s,d)->(b*h,s*d,1), matmul with ones(1,n_rep), transpose, reshape to (b,h*n_rep,s,d) — bitwise-identical (x*1.0 is exact), all tensors rank<=4",
+          "symptom": "partial delegation on an otherwise clean encoder graph; on the classic Android delegate the same family ran 3/24 nodes on GPU and slower than CPU"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "kernel-init refusal: CompiledModel creation fails with status 3 (\"Failed to initialize kernel\" / \"Restored original execution plan after delegate application failure\") when the graph carries a dynamic-range int8 FULLY_CONNECTED with these head shapes (161-label token-classification head; 128802-row tied-vocabulary head). Both GPU precisions (fp16 and fp32) fail identically; the same two models' float-weight variants compile and run correctly (partially delegated, head on CPU). Also reproduced on the CLiteRTLM-mac runtime generation and Android LITERT_CL 0.16.0 — a cross-backend ml_drift kernel limit, not a graph-authoring issue",
+      "constraints": {
+        "out_channels": "161|128802",
+        "weight_dtype": "int8_drq"
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-13",
+        "litert_version": "ai-edge-litert 2.1.6",
+        "source_model": "LFM2.5-Encoder-350M-PII-Detector / -Spellchecker wi8fc"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "n/a — no respelling removes the failure; the rank-4 repeat_kv respelling that fixed the rest of the family leaves these two models still refused",
+          "rewrite": "none known model-side (runtime kernel limit): ship the int8 file as CPU-only, or use float weights for the head (fp16 variant runs with the head falling back to CPU, cosine 1.000000 vs fp32 reference)",
+          "symptom": "engine creation aborts on an otherwise GPU-clean encoder graph; no per-op rejection is logged, the whole compile fails"
+        }
+      ],
+      "status": "crash"
+    },
+    {
+      "conditions": "silently miscomputed: `ADD([N,C] activation, [N,C] constant)` (a learned position embedding added to patch tokens) returns rel-L2 1.25 vs CPU on the Metal accelerator at fp32 precision; the identical add expressed with a leading batch dim (`[1,N,C] + [1,N,C]`, or kept 4-D `[1,H,W,C]`) is bit-exact (rel 7e-7). The micro-graph CONV_2D->RESHAPE->ADD->RESHAPE reproduces it; CONV_2D alone, RESHAPE alone and the rank-3 variant do not. Symptom at the model level: a VLM's vision executor on `--vision-backend gpu` returns embeddings of the wrong image and the decoder answers \"this image is a blank canvas\" — easy to misattribute to fp16 overflow.",
+      "constraints": {
+        "operand_b": "constant",
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-19",
+        "litert_version": "ai-edge-litert 2.1.6 CompiledModel Metal (precision=2 fp32 and 1 fp16 both reproduce)",
+        "source_model": "North-Micro-Vision-Instruct vision encoder (Qwen3-VL-structure ViT) + 4 synthetic micro-graphs (tools/backend_diff, BACKEND_DIFF_FLOAT_FILL=1)"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: North-Micro-Vision 27-block encoder goes from rel 9.3e-1 to rel 1.9e-6 CPU-vs-Metal at fp32 (2.3e-2 at fp16) with no other change; runtime vision-GPU answers become correct",
+          "rewrite": "keep every activation in the vision graph rank >= 3 with a leading batch dim (flatten conv output as `permute(0,2,3,1).reshape(1,N,C)`, never `flatten(2).squeeze(0).transpose(0,1)`)",
+          "symptom": "vision GPU answers are image-independent; backend_diff on the encoder shows rel ~0.9 from the very first block",
+          "transform_id": "rank2-elementwise-const-to-rank3"
+        }
+      ],
+      "status": "incorrect"
+    }
+  ],
+  "generated_at": "2026-08-19",
+  "litert_version": "2.1.6",
+  "schema_version": "1.0"
+}

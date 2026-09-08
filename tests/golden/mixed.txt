@@ -1,0 +1,38 @@
+gpu_mldrift @ litert 0.0.0-example — 40.0% of 5 ops delegated · 1 partition · 3 blocking ops
+model:  data/examples/model_mixed_example.tflite (sha256 9af4f555f718…, 1 subgraph(s))
+matrix: data/examples/matrix_example.json (generated 2026-08-10)
+
+Non-delegated ops:
+  s0/n0  FULLY_CONNECTED  dtypes=int8  fallback  provenance=example
+      reason: matched entry specific to op, dtypes, and constraints
+  s0/n1  CUSTOM  dtypes=float32  unknown  provenance=-
+      reason: custom op 'ExampleCustomOp' — not a builtin, outside the matrix vocabulary
+  s0/n4  TRANSPOSE_CONV  dtypes=float32  fallback  provenance=example
+      reason: matched entry specific to op, dtypes, and constraints
+      condition: rejected by some mobile GPU drivers regardless of rank
+
+Correctness warnings (delegated but numerics outside tolerance):
+  s0/n3  SOFTMAX  dtypes=float16 — numerics exceed tolerance vs CPU reference for large logits
+
+Partition map (each sync is a host<->device transfer):
+  subgraph 0:
+    (host)      node 0 FULLY_CONNECTED (fallback)
+    (host)      node 1 CUSTOM (unknown)
+    ----- host<->device sync -----
+    [device #0] nodes 2-3 (2 ops: CONV_2D, SOFTMAX)
+    ----- host<->device sync -----
+    (host)      node 4 TRANSPOSE_CONV (fallback)
+
+Blocking ops, ranked (impact_score is a heuristic (output element count as a FLOPs proxy, adjacent-partition cost split across each CPU island) — a ranking aid, not a measurement):
+  1. s0/n4 TRANSPOSE_CONV (fallback) — impact 128.0
+  2. s0/n0 FULLY_CONNECTED (fallback) — impact 64.0
+  3. s0/n1 CUSTOM (unknown) — impact 64.0
+
+Rewrite suggestions (verbatim from the matrix, never generated):
+  s0/n0 FULLY_CONNECTED:
+    symptom: partition split at FULLY_CONNECTED with dynamic batch
+    rewrite: export with a fixed batch dimension
+    expected effect: single contiguous GPU partition
+
+Custom ops (outside the matrix vocabulary; not probeable):
+  s0/n1 CUSTOM 'ExampleCustomOp'

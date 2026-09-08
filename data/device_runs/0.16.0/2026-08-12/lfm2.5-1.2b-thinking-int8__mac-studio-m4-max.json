@@ -1,0 +1,42 @@
+{
+  "artifact": "LFM2.5-1.2B-Thinking_int8.litertlm",
+  "device": "mac-studio-m4-max",
+  "model_id": "lfm2.5-1.2b-thinking-int8",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-08-12",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.16.0/bin/litert-lm 0.16.0); fixed-question answer: '[thought]  Okay, let\\'s see. The user asked \"What is 17 + 25? Answer briefly.\" Hmm, I need to make sure I answer correctly but keep it short. First, 17 plus 25. Well, 17 plus 20 is 37, then plus 5 more is 42. Wait, no, wait: 17 +25. 17 + 25 is 42? Wait, 17+25: 10+20=30, 7+5=12, so 30+12=42. Yeah, that\\'s right. But the user wants it brief. So maybe just say 42? Or maybe they expect a calculation step? But the instruction says answer briefly. So just the answer. Since they said \"answer briefly,\" probably just 42. Let me confirm: 17 +25 equals 42. Yep. So I should just put 42. I don\\'t need any extra explanation. Alright, I\\'ll go with 42.\\n [/thought]\\n\\n\\n42  \\n**Answer:** \\\\boxed{42}'"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

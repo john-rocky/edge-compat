@@ -1,0 +1,29 @@
+{
+  "name": "edge-compat-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Demo-zoo static site generator for edge-compat (Phase 7)",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node --experimental-strip-types src/generator/cli.ts --out dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src tests",
+    "test": "node --test --experimental-strip-types 'tests/*.test.ts'"
+  },
+  "dependencies": {
+    "@litertjs/core": "^2.5.3",
+    "esbuild": "^0.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@webgpu/types": "^0.1.71",
+    "eslint": "^9.30.0",
+    "playwright": "^1.54.0",
+    "typescript": "^5.8.0",
+    "typescript-eslint": "^8.35.0"
+  }
+}

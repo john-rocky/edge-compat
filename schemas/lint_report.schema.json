@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lint_report.schema.json",
+  "title": "edge-lint report",
+  "description": "Output of `edge-lint --json`. Public, versioned API: stable names, no breaking renames after commit. Every report carries the matrix snapshot's backend + litert_version, the model hash, and the matrix file identity, so no output can present one backend's result as another's. Statuses are static verdicts from the matrix — the linter never executes a model. Schema 1.1 (Phase 10, additive): rewrite-suggestion hints may carry the matrix entry's transform_id verbatim (matrix schema 1.2); 1.0 reports remain valid.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "backend", "litert_version", "model", "matrix",
+    "summary", "findings", "partitions", "blocking_ops", "impact_note",
+    "rewrite_suggestions", "needs_probe", "custom_ops"
+  ],
+  "properties": {
+    "schema_version": { "enum": ["1.0", "1.1"] },
+    "backend": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "litert_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The matrix snapshot's litert_version — verdicts are only valid for this runtime version."
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "subgraph_count"],
+      "properties": {
+        "path": { "type": "string" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "subgraph_count": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "matrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "litert_version", "generated_at"],
+      "properties": {
+        "file": { "type": "string" },
+        "litert_version": { "type": "string" },
+        "generated_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total_ops", "claimed_ops", "coverage_ops_pct", "partition_count",
+        "sync_boundaries", "blocking_op_count", "status_counts",
+        "matched_provenance_counts"
+      ],
+      "properties": {
+        "total_ops": { "type": "integer", "minimum": 0 },
+        "claimed_ops": { "type": "integer", "minimum": 0 },
+        "coverage_ops_pct": { "type": "number", "minimum": 0, "maximum": 100 },
+        "partition_count": { "type": "integer", "minimum": 0 },
+        "sync_boundaries": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Transitions between claimed and unclaimed regions; each implies a host<->device sync."
+        },
+        "blocking_op_count": { "type": "integer", "minimum": 0 },
+        "status_counts": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 },
+          "propertyNames": {
+            "enum": ["delegated", "partial", "fallback", "incorrect", "crash", "unknown"]
+          }
+        },
+        "matched_provenance_counts": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 },
+          "propertyNames": {
+            "enum": ["measured", "vendor_doc", "inferred", "example", "unmatched"]
+          },
+          "description": "Provenance of the matched matrix entries behind the verdicts; 'unmatched' counts nodes with no matching entry. measured- vs inferred-backed verdicts are distinguishable here and per finding."
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/finding" },
+      "description": "One finding per graph node, in execution order (all nodes, not only problems)."
+    },
+    "partitions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/partition" }
+    },
+    "blocking_ops": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/blocking_op" },
+      "description": "Unclaimed nodes ranked by heuristic impact, descending."
+    },
+    "impact_note": {
+      "type": "string",
+      "description": "Always states that impact_score is a heuristic, not a measurement."
+    },
+    "rewrite_suggestions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/rewrite_suggestion" },
+      "description": "rewrite_hints of matched matrix entries, verbatim — never generated."
+    },
+    "needs_probe": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/probe_signature" },
+      "description": "Deduplicated unknown-verdict signatures: complete lookup signatures (op, dtypes, shape_meta, backend), sufficient to construct a probe without reopening the model. Consumed by the Phase 8 probe generator. Custom and unnamed ops are excluded (not probeable) and listed in custom_ops / findings instead."
+    },
+    "custom_ops": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["subgraph", "node_index", "custom_code"],
+        "properties": {
+          "subgraph": { "type": "integer", "minimum": 0 },
+          "node_index": { "type": "integer", "minimum": 0 },
+          "custom_code": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "status": {
+      "enum": ["delegated", "partial", "fallback", "incorrect", "crash", "unknown"]
+    },
+    "shape_meta": {
+      "type": "object",
+      "required": ["dynamic_shape"],
+      "properties": {
+        "dynamic_shape": { "type": "boolean" },
+        "rank": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": { "type": ["string", "number", "boolean"] },
+      "description": "Static shape metadata extracted from the model, matching matrix constraint keys. Additional keys may be added additively in later schema versions."
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subgraph", "node_index", "op", "custom_code", "dtypes", "shape_meta",
+        "status", "claimed", "reason", "provenance", "conditions"
+      ],
+      "properties": {
+        "subgraph": { "type": "integer", "minimum": 0 },
+        "node_index": { "type": "integer", "minimum": 0 },
+        "op": { "type": "string" },
+        "custom_code": { "type": ["string", "null"] },
+        "dtypes": { "type": "array", "items": { "type": "string" } },
+        "shape_meta": { "$ref": "#/$defs/shape_meta" },
+        "status": { "$ref": "#/$defs/status" },
+        "claimed": {
+          "type": "boolean",
+          "description": "Whether the delegate would claim this node (status delegated, partial, or incorrect). unknown never claims."
+        },
+        "reason": { "type": "string" },
+        "provenance": {
+          "enum": ["measured", "vendor_doc", "inferred", "example", null],
+          "description": "Provenance of the matched matrix entry; null when no entry matched."
+        },
+        "conditions": { "type": ["string", "null"] }
+      }
+    },
+    "partition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subgraph", "index", "first_node", "last_node", "op_count", "ops"],
+      "properties": {
+        "subgraph": { "type": "integer", "minimum": 0 },
+        "index": { "type": "integer", "minimum": 0 },
+        "first_node": { "type": "integer", "minimum": 0 },
+        "last_node": { "type": "integer", "minimum": 0 },
+        "op_count": { "type": "integer", "minimum": 1 },
+        "ops": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      }
+    },
+    "blocking_op": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subgraph", "node_index", "op", "status", "impact_score"],
+      "properties": {
+        "subgraph": { "type": "integer", "minimum": 0 },
+        "node_index": { "type": "integer", "minimum": 0 },
+        "op": { "type": "string" },
+        "status": { "$ref": "#/$defs/status" },
+        "impact_score": { "type": "number", "minimum": 0 }
+      }
+    },
+    "rewrite_suggestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subgraph", "node_index", "op", "hints"],
+      "properties": {
+        "subgraph": { "type": "integer", "minimum": 0 },
+        "node_index": { "type": "integer", "minimum": 0 },
+        "op": { "type": "string" },
+        "hints": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["symptom", "rewrite"],
+            "properties": {
+              "symptom": { "type": "string" },
+              "rewrite": { "type": "string" },
+              "expected_effect": { "type": "string" },
+              "transform_id": {
+                "type": "string",
+                "description": "Passed through verbatim from the matrix entry's rewrite hint (matrix schema 1.2): the edge-fix transform rule that executes this rewrite."
+              }
+            }
+          }
+        }
+      }
+    },
+    "probe_signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backend", "op", "dtypes", "shape_meta"],
+      "properties": {
+        "backend": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "op": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]*$",
+          "description": "Exact TFLite builtin operator name."
+        },
+        "dtypes": { "type": "array", "items": { "type": "string" } },
+        "shape_meta": { "$ref": "#/$defs/shape_meta" }
+      }
+    }
+  }
+}

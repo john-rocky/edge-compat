@@ -1,0 +1,12 @@
+op,dtypes,constraints,status,conditions,rewrite_symptom,rewrite,rewrite_expected_effect,provenance,evidence_source_model,evidence_litert_version,evidence_date
+FULLY_CONNECTED,float32;int8,dynamic_shape=false;max_rank=4,delegated,"falls back when per-channel int8 weights AND batch > 1",,,,example,,,
+FULLY_CONNECTED,int8,dynamic_shape=true,fallback,,"partition split at FULLY_CONNECTED with dynamic batch","export with a fixed batch dimension","single contiguous GPU partition",example,,,
+CONV_2D,float32,,delegated,,,,,example,,,
+CONV_2D,float16,,delegated,,,,,example,example-mobilenet-v2,0.0.0-example,2026-08-10
+AVERAGE_POOL_2D,float32,,delegated,,,,,example,,,
+GATHER_ND,float32,,fallback,"emitted by strided slicing with step > 1","graph splits at GATHER_ND","rewrite step>1 slicing as gather over a precomputed index tensor","removes the CPU fallback island",example,,,
+TRANSPOSE_CONV,float32,max_rank=4,fallback,"rejected by some mobile GPU drivers regardless of rank",,,,example,,,
+SOFTMAX,float16,,incorrect,"numerics exceed tolerance vs CPU reference for large logits",,,,example,,,
+RESIZE_BILINEAR,float32,half_pixel_centers=true,crash,,,,,example,,,
+CUMSUM,int32,,unknown,,,,,example,,,
+MEAN,float32,keep_dims=true,partial,"reduced-axis combinations other than spatial HW fall back",,,,example,,,

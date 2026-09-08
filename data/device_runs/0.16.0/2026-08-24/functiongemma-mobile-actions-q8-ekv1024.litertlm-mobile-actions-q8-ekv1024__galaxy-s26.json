@@ -1,0 +1,49 @@
+{
+  "artifact": "mobile-actions_q8_ekv1024.litertlm",
+  "device": "galaxy-s26",
+  "model_id": "functiongemma-mobile-actions-q8-ekv1024.litertlm-mobile-actions-q8-ekv1024",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-24",
+      "decode_tokens_per_s": 108.12,
+      "delegated_ops": 949,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cl-pinned",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 930 out of 930 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (decode).",
+        "VERBOSE: Replacing 949 out of 949 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256).",
+        "results block: prefill=5990.58 decode=108.12 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 33.0,
+        "init_s": 0.43486,
+        "prefill_tokens": 200.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 5990.58,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 949,
+      "ttft_ms": 40.0
+    }
+  ],
+  "schema_version": "1.0"
+}

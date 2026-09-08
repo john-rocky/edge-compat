@@ -1,0 +1,128 @@
+{
+  "artifacts": [
+    {
+      "file": "InternVL3-1B.litertlm",
+      "sha256": "7cf87c35cf364d04bd2e6f957e3a0366830ad0b46eca3dd81e0000891fd1284a",
+      "size_mb": 703.158
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "TODO (the HF card states the bundle layout and rewrites, not the invocation)",
+    "quantization": "TODO — the HF card states no quantization recipe for this bundle; sections: VISION_ENCODER [1,448,448,3]->[1,256,4096], VISION_ADAPTER [1,256,4096]->[1,256,896], externalized embedder, PREFILL_DECODE (HF card Conversion notes)",
+    "tool": "litert-torch (LiteRT-LM fast_vlm bundle: VISION_ENCODER + VISION_ADAPTER + single-token EMBEDDER + PREFILL_DECODE with embeddings input) (HF card Conversion notes)",
+    "tool_version": "TODO (the HF card names the converter but not its version; no export log in the sources)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 81.7,
+          "delegated_ops": 1337,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 961 out of 1063 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 141 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 961 out of 1063 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 141 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 869 out of 972 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 146 partitions for subgraph 2 (decode).",
+            "VERBOSE: Replacing 8 out of 8 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 3 (odml.rms_norm.impl).",
+            "results block: prefill=358.66 decode=81.7 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 205.0,
+            "init_s": 0.95637,
+            "prefill_tokens": 239.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 358.66,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1392,
+          "ttft_ms": 680.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/internvl3-1b__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 85.42,
+          "delegated_ops": 1063,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1063 out of 1063 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1063 out of 1063 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 972 out of 972 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (decode).",
+            "results block: prefill=1455.95 decode=85.42 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 115.0,
+            "init_s": 1.38797,
+            "prefill_tokens": 203.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 1455.95,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1063,
+          "ttft_ms": 150.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/internvl3-1b__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "internvl3",
+    "id": "internvl3-1b",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/InternVL3-1B",
+    "task": "image-text-to-text"
+  },
+  "pitfalls": [
+    "Known limitation — one image per conversation on the GPU backend: on the GPU (Metal) backend a second image in the same conversation truncates the answer; on the CPU backend multi-image works (verified); the truncation reproduces with other fast_vlm models, so it is the runtime's GPU fast_vlm path, not this bundle. For reliable multi-image, run on the CPU backend (HF card Known limitation).",
+    "The vision encoder bakes ImageNet normalization + the NCHW transpose into the graph (the runtime feeds a [0,1] NHWC image), and the InternViT attention is rewritten 4D-clean (qkv split before the head reshape — no GPU-rejected 5D reshape), numerically identical (corr ≈ 1.0) (HF card Conversion notes).",
+    "Decoder exported with an externalized embedder; InternVL's dynamic-NTK rope_scaling is stripped to base RoPE, valid since the export cache <= the base context window (HF card Conversion notes).",
+    "License: MIT (the InternVL model) + Apache-2.0 (the Qwen2.5 language component); converted artifacts released under the same terms (HF card License).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/ (Pi 5 / S26 / Pixel 8a / Mac / iPhone as measured)."
+  ],
+  "schema_version": "1.2"
+}

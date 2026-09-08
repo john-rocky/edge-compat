@@ -1,0 +1,137 @@
+{
+  "artifacts": [
+    {
+      "file": "model.litertlm",
+      "sha256": "e1edad5042c8354bec1d6187c22cad9e460a38428da517fc7ef22b3aa828eb3b",
+      "size_mb": 2359.731
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "FORCE_SPM=1 EXTERNALIZE_EMBEDDER=1 CACHE=4096 python scripts/export_simple_template.py POLARIS-Project/Polaris-4B-Preview out/polaris-4b templates/qwen3_think.jinja BOCTAV4_128 ; python qa/add_thought_channel.py in.litertlm out.litertlm --start '<think>' --end '</think>' (2026-08-25 staged meta; FORCE_SPM because the published bundle carries an SP_Tokenizer section)",
+    "quantization": "int4 blockwise (block 128) + OCTAV, symmetric; embedding INT8 (externalized section); KV cache 4096; ChatML template (HF card Conversion)",
+    "tool": "litert-torch via litertlm-convert scripts/export_simple_template.py (reproduce_llm.sh key polaris-4b), then the 2026-08-22 metadata-only thought-channel re-ship (qa/add_thought_channel.py through the litert-lm 0.16.0 CLI; every tflite section byte-identical)",
+    "tool_version": "TODO (owner to fill — searched 2026-08-25 four ways: no convert log, reproduce_llm.sh pins no version, the bundle header carries no converter version, the tflite sections carry only 'MLIR Converted.'; the RE-SHIP step is pinned to the litert-lm 0.16.0 CLI)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-07-23",
+          "decode_tokens_per_s": 68.87,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.14.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=971.19 decode=68.87 tokens/s, init=1.9649 s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 1.9649,
+            "max_num_tokens": 1024.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 971.19,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 278.1
+        },
+        "source": "data/device_runs/0.14.0/2026-07-23/polaris-4b__mac-studio-m4-max.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-02",
+          "decode_tokens_per_s": 1.49,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 536.3 s, output head '[thought] Okay, so I need to figure out what 17 plus 26 is. Let me start by brea'",
+            "invocation 0: exit=0 wall_s=500.4 temp 51.0->54.3C throttled=0x0 prefill_tps=10.54 decode_tps=1.49 ttft_s=25.7184 init_s=56.6486 peak_rss_mb=3959",
+            "invocation 1: exit=0 wall_s=496.4 temp 51.6->53.2C throttled=0x0 prefill_tps=10.77 decode_tps=1.49 ttft_s=25.1082 init_s=55.4097 peak_rss_mb=3927",
+            "invocation 2: exit=0 wall_s=496.3 temp 49.4->52.1C throttled=0x0 prefill_tps=10.54 decode_tps=1.5 ttft_s=25.6566 init_s=55.3922 peak_rss_mb=3958"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.5,
+            "decode_tps_min": 1.49,
+            "init_s": 55.4097,
+            "init_s_max": 56.6486,
+            "init_s_min": 55.3922,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 10.77,
+            "prefill_tps_min": 10.54,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 25.7184,
+            "ttft_s_min": 25.1082
+          },
+          "output_match": null,
+          "peak_mem_mb": 3959.0,
+          "prefill_tokens_per_s": 10.54,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 25656.6
+        },
+        "source": "data/device_runs/0.16.1/2026-09-02/polaris-4b__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3",
+    "id": "polaris-4b",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Polaris-4B-Preview",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Standard dense Qwen3ForCausalLM with rope_scaling: yarn, exported with a cache within original_max_position_embeddings so base RoPE is exact; externalize_embedder keeps every section under the iOS ~2 GiB single-section mmap limit so it loads on iPhone (HF card Conversion).",
+    "License Apache-2.0, inherited from POLARIS-Project/Polaris-4B-Preview (HF card License).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/ (Pi 5 / S26 / Pixel 8a / Mac / iPhone as measured)."
+  ],
+  "schema_version": "1.2"
+}

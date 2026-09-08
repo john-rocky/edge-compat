@@ -1,0 +1,218 @@
+{
+  "artifacts": [
+    {
+      "file": "LFM2.5-VL-450M_int4.litertlm",
+      "sha256": "45a0224180c89a25299078524e5a8dfcce131686fd0f941cdcf3507095db4797",
+      "size_mb": 387.974
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "python convert_lfm25_vl3b.py ../src_models/lfm25-vl-450m out_vl450m_fp2 --fp && python quantize_vl.py out_vl450m_fp2/model.litertlm LFM2.5-VL-450M_int4.litertlm",
+    "quantization": "text int4 blockwise-32 OCTAV linears + int8 embedding/lm_head; vision tower int8 dynamic (wi4b32_wi8 + embedder wi8 pass; embedder 268 -> 68 MB)",
+    "tool": "litert-torch export_hf --task image_text_to_text (via litertlm-convert lfm25vl_work/convert_lfm25_vl3b.py + quantize_vl.py; public mirror hf-to-litertlm lfm_work/convert_lfm25_vl.py + quantize_lfm25_vl.py)",
+    "tool_version": "0.9.3 (.venv-vl093: transformers 5.14.1, torch 2.12.1, torchvision 0.27.1)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 99.25,
+          "delegated_ops": 769,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 468 out of 543 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 86 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 468 out of 543 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 86 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 468 out of 543 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 86 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 468 out of 543 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 86 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=403.63 decode=99.25 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 192.0,
+            "init_s": 0.99613,
+            "prefill_tokens": 205.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 403.63,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 801,
+          "ttft_ms": 520.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/lfm25-vl-450m-int4__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 103.02,
+          "delegated_ops": 543,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 543 out of 543 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 543 out of 543 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 543 out of 543 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 543 out of 543 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=2699.59 decode=103.02 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 117.0,
+            "init_s": 3.79212,
+            "prefill_tokens": 205.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 2699.59,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 543,
+          "ttft_ms": 90.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/lfm25-vl-450m-int4__galaxy-s26.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-13",
+          "decode_tokens_per_s": 22.62,
+          "delegated_ops": null,
+          "env": {
+            "device": "pixel-8a",
+            "machine_label": "pixel-8a-cl-pinned",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Google Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=92.12 decode=22.62 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 3800.0,
+            "init_s": 5.1952,
+            "prefill_tokens": 296.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 92.12,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 3260.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-13/lfm25-vl-450m-int4__pixel-8a.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-13",
+          "decode_tokens_per_s": 33.05,
+          "delegated_ops": 543,
+          "env": {
+            "device": "pixel-8a",
+            "machine_label": "pixel-8a-cl-pinned",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Google Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 543 out of 543 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 543 out of 543 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 543 out of 543 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 543 out of 543 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=528.07 decode=33.05 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 3800.0,
+            "init_s": 8.20607,
+            "prefill_tokens": 296.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 528.07,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 543,
+          "ttft_ms": 590.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-13/lfm25-vl-450m-int4__pixel-8a.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "lfm2_vl",
+    "id": "lfm25-vl-450m-int4",
+    "license": "lfm-open-license-v1.0",
+    "source_url": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M",
+    "task": "image-text-to-text"
+  },
+  "pitfalls": [
+    "int4 is the better variant of this model on our gates — 8/8 text and 4/5 image vs the int8's 6/8 and 3/5; on Pixel 8a CPU int4 prefills slower than int8 (blockwise repacking) but decodes ~40% faster — pick by whether prompts or outputs dominate (HF card, measured).",
+    "64k vocab (stop ids 7/2, same as the 1.2B text family) — the 3B's 128k pbtext does not transfer; verify generation_config before reusing metadata across sizes (REPRODUCE.md).",
+    "Fine-grained shape questions can miss on-device at this scale across all quant levels including an unquantized probe, while the torch reference answers them; conversion exonerated by experiment (vision tflite cosine 1.0000, token-identical streams, geometry probes correct). Treat as a fast small VLM for coarse visual tasks and large-text OCR; the 3B answers all fixtures (RESULTS.md; HF card wording).",
+    "Same VLM-bundle mechanics as the siblings: transformers==5.14.1 pin; llm_model_type { lfm2 {} } with bare <image> template; externalized-embedder int8 pass; pack/unpack post-processing (single-tflite tools drop vision sections) (REPRODUCE.md).",
+    "Zero-scale fix is a no-op on this checkpoint (0 all-zero blocks, like the 1.2B family); harmless to keep in the pipeline (RESULTS.md).",
+    "iPhone GPU blocked (LiteRT-LM#3129) — iOS runs CPU; Android OpenCL delegates fully (543/543)."
+  ],
+  "schema_version": "1.2"
+}

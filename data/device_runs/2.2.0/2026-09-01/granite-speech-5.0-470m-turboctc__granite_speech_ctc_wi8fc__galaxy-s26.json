@@ -1,0 +1,178 @@
+{
+  "artifact": "granite_speech_ctc_wi8fc.tflite",
+  "device": "galaxy-s26",
+  "model_id": "granite-speech-5.0-470m-turboctc__granite_speech_ctc_wi8fc",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-01",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "npubench parity gate row: N=20 median in one process per accelerator, real audio input, output tensors dumped and diffed against the Mac tflite run and the fp32 eager transcript; verdict per leg = transcript == eager AND thermal NONE->NONE",
+        "report key wi8fc_10s_cpu: accel=CPU thermal=NONE->NONE headroom=0.5966667->0.60999995 PASS=True transcript_match_eager=True",
+        "transcript: mister quilter is the apostle of the middle classes and we are glad to welcome his gospel"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 220.226,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "ids_match_eager": 1.0,
+        "ids_match_mac_tflite": 1.0,
+        "iterations": 20,
+        "latency_max_ms": 222.326,
+        "latency_min_ms": 219.363,
+        "load_ms": 2634.7,
+        "logit_maxdiff_mac": 0.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "transcribe_10s",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-01",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "npubench parity gate row: N=20 median in one process per accelerator, real audio input, output tensors dumped and diffed against the Mac tflite run and the fp32 eager transcript; verdict per leg = transcript == eager AND thermal NONE->NONE",
+        "report key wi8fc_30s_cpu: accel=CPU thermal=NONE->NONE headroom=0.6066667->0.6533333 PASS=True transcript_match_eager=True",
+        "transcript: linnell is pictures are a sort of up guards and a paintings and mason is exquisite idylls are as national as a jingo poem mister birkket foster is landscapes smile at one much in the same way that mis …[trace truncated]"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 666.38,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "ids_match_eager": 0.9946666666666667,
+        "ids_match_mac_tflite": 1.0,
+        "iterations": 20,
+        "latency_max_ms": 673.481,
+        "latency_min_ms": 661.844,
+        "load_ms": 2579.9,
+        "logit_maxdiff_mac": 0.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "transcribe_30s",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-01",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "npubench parity gate row: N=20 median in one process per accelerator, real audio input, output tensors dumped and diffed against the Mac tflite run and the fp32 eager transcript; verdict per leg = transcript == eager AND thermal NONE->NONE",
+        "report key wi8fc_5s_cpu: accel=CPU thermal=NONE->NONE headroom=0.5833333->0.59000003 PASS=True transcript_match_eager=True",
+        "transcript: by harry quilter m a"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 106.399,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "ids_match_eager": 1.0,
+        "ids_match_mac_tflite": 1.0,
+        "iterations": 20,
+        "latency_max_ms": 107.308,
+        "latency_min_ms": 106.139,
+        "load_ms": 2589.0,
+        "logit_maxdiff_mac": 0.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "transcribe_5s",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-09-01",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "LiteRtException: Failed to compile model",
+      "evidence": [
+        "report key wi8fc_10s_gpu: status=FAILED error=LiteRtException: Failed to compile model"
+      ],
+      "failure_class": "compile_failed",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "signature": "transcribe_10s",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,27 @@
+{
+  "action": "replace_op",
+  "evidence": {
+    "date": "2026-08-10",
+    "litert_version": "0.0.0-example",
+    "source_model": "example-synthetic"
+  },
+  "expected_effect": "integer division delegates as FLOOR_DIV; single contiguous partition",
+  "fixture": {
+    "matrix": "../matrix_fix_example.json",
+    "model": "../model_fix_div_example.tflite"
+  },
+  "id": "example-replace-div-floor-div",
+  "match": {
+    "dtypes": [
+      "int32"
+    ],
+    "op": "DIV"
+  },
+  "notes": "Semantics-preserving only where both operands are non-negative (truncating and flooring division agree). Example rule exercising the engine on a synthetic fixture — not delegate advice.",
+  "params": {
+    "new_op": "FLOOR_DIV"
+  },
+  "provenance": "example",
+  "schema_version": "1.0",
+  "title": "Replace integer DIV with FLOOR_DIV (example)"
+}

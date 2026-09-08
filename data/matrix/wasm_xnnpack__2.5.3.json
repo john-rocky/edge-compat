@@ -1,0 +1,2174 @@
+{
+  "backend": "wasm_xnnpack",
+  "entries": [
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:ABS__float32__eb9e96e4"
+      },
+      "op": "ABS",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:ABS__float32__2f80e252"
+      },
+      "op": "ABS",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:ABS__int32__c7a37486"
+      },
+      "op": "ABS",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:ADD__float32__c7a37486"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:ADD__float32__eb9e96e4"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:ADD__float32__2f80e252"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:ADD__float32__c383a423"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:ADD__int32__c7a37486"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:AVERAGE_POOL_2D__float32__c383a423"
+      },
+      "op": "AVERAGE_POOL_2D",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:BATCH_MATMUL__float32__eb9e96e4"
+      },
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:BATCH_MATMUL__float32__2f80e252"
+      },
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:BATCH_MATMUL__float32__c383a423"
+      },
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "bool"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:CAST__bool__eb9e96e4"
+      },
+      "op": "CAST",
+      "provenance": "measured",
+      "status": "crash"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:CAST__float32__c7a37486"
+      },
+      "op": "CAST",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:CAST__float32__eb9e96e4"
+      },
+      "op": "CAST",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:CAST__float32__2f80e252"
+      },
+      "op": "CAST",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:CAST__int32__c7a37486"
+      },
+      "op": "CAST",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:CAST__int32__eb9e96e4"
+      },
+      "op": "CAST",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:CAST__int64__eb9e96e4"
+      },
+      "op": "CAST",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "int64 CAST removed from the graph (advisory guidance; no executable rule)",
+          "rewrite": "avoid int64 in the exported graph: compute valid-lengths/positions in int32 or float32 before export, or host-side; interior CAST[int64] cannot be removed by io_cast and chain retype is outside the v1 rule vocabulary",
+          "symptom": "int64 CAST in the exported graph (typically a valid-length or position computation)"
+        }
+      ],
+      "status": "crash"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:CONCATENATION__float32__c7a37486"
+      },
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:CONCATENATION__float32__eb9e96e4"
+      },
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:CONCATENATION__float32__2f80e252"
+      },
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:CONCATENATION__float32__c383a423"
+      },
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:CONV_2D__float32__c383a423"
+      },
+      "op": "CONV_2D",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:COS__float32__eb9e96e4"
+      },
+      "op": "COS",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:COS__float32__2f80e252"
+      },
+      "op": "COS",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:DEPTHWISE_CONV_2D__float32__c383a423"
+      },
+      "op": "DEPTHWISE_CONV_2D",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:DIV__float32__eb9e96e4"
+      },
+      "op": "DIV",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:DIV__float32__2f80e252"
+      },
+      "op": "DIV",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:DIV__float32__c383a423"
+      },
+      "op": "DIV",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:EMBEDDING_LOOKUP__float32__eb9e96e4"
+      },
+      "op": "EMBEDDING_LOOKUP",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "bool"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:EQUAL__bool__c7a37486"
+      },
+      "op": "EQUAL",
+      "provenance": "measured",
+      "status": "crash"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "bool"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:EQUAL__bool__eb9e96e4"
+      },
+      "op": "EQUAL",
+      "provenance": "measured",
+      "status": "crash"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "bool"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:EQUAL__bool__2f80e252"
+      },
+      "op": "EQUAL",
+      "provenance": "measured",
+      "status": "crash"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:EXP__float32__eb9e96e4"
+      },
+      "op": "EXP",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:EXP__float32__2f80e252"
+      },
+      "op": "EXP",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:EXP__float32__c383a423"
+      },
+      "op": "EXP",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:FLOOR_MOD__float32__2f80e252"
+      },
+      "op": "FLOOR_MOD",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:FULLY_CONNECTED__float32__eb9e96e4"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:FULLY_CONNECTED__float32__2f80e252"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:FULLY_CONNECTED__float32__c383a423"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "bool"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:GREATER__bool__2f80e252"
+      },
+      "op": "GREATER",
+      "provenance": "measured",
+      "status": "crash"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "bool"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:GREATER__bool__c383a423"
+      },
+      "op": "GREATER",
+      "provenance": "measured",
+      "status": "crash"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:HARD_SWISH__float32__eb9e96e4"
+      },
+      "op": "HARD_SWISH",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:HARD_SWISH__float32__c383a423"
+      },
+      "op": "HARD_SWISH",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:LEAKY_RELU__float32__2f80e252"
+      },
+      "op": "LEAKY_RELU",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:LEAKY_RELU__float32__c383a423"
+      },
+      "op": "LEAKY_RELU",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:LOG__float32__eb9e96e4"
+      },
+      "op": "LOG",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:LOG__float32__2f80e252"
+      },
+      "op": "LOG",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:LOG__float32__c383a423"
+      },
+      "op": "LOG",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:LOGISTIC__float32__eb9e96e4"
+      },
+      "op": "LOGISTIC",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:LOGISTIC__float32__2f80e252"
+      },
+      "op": "LOGISTIC",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:LOGISTIC__float32__c383a423"
+      },
+      "op": "LOGISTIC",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MAXIMUM__float32__eb9e96e4"
+      },
+      "op": "MAXIMUM",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MAXIMUM__float32__2f80e252"
+      },
+      "op": "MAXIMUM",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MAXIMUM__float32__c383a423"
+      },
+      "op": "MAXIMUM",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MAX_POOL_2D__float32__c383a423"
+      },
+      "op": "MAX_POOL_2D",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MEAN__float32__c7a37486"
+      },
+      "op": "MEAN",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MEAN__float32__eb9e96e4"
+      },
+      "op": "MEAN",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MEAN__float32__2f80e252"
+      },
+      "op": "MEAN",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MINIMUM__float32__eb9e96e4"
+      },
+      "op": "MINIMUM",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MINIMUM__float32__2f80e252"
+      },
+      "op": "MINIMUM",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MINIMUM__float32__c383a423"
+      },
+      "op": "MINIMUM",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 0
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MUL__float32__b741efeb"
+      },
+      "op": "MUL",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MUL__float32__c7a37486"
+      },
+      "op": "MUL",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MUL__float32__eb9e96e4"
+      },
+      "op": "MUL",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MUL__float32__2f80e252"
+      },
+      "op": "MUL",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:MUL__float32__c383a423"
+      },
+      "op": "MUL",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:PAD__float32__2f80e252"
+      },
+      "op": "PAD",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:PAD__float32__c383a423"
+      },
+      "op": "PAD",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:REDUCE_MAX__float32__eb9e96e4"
+      },
+      "op": "REDUCE_MAX",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:REDUCE_MAX__float32__2f80e252"
+      },
+      "op": "REDUCE_MAX",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:REDUCE_MAX__float32__c383a423"
+      },
+      "op": "REDUCE_MAX",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:REDUCE_MIN__float32__2f80e252"
+      },
+      "op": "REDUCE_MIN",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:REDUCE_MIN__float32__c383a423"
+      },
+      "op": "REDUCE_MIN",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RELU__float32__2f80e252"
+      },
+      "op": "RELU",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RELU__float32__c383a423"
+      },
+      "op": "RELU",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RELU_0_TO_1__float32__c7a37486"
+      },
+      "op": "RELU_0_TO_1",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RELU_0_TO_1__float32__c383a423"
+      },
+      "op": "RELU_0_TO_1",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RELU_N1_TO_1__float32__c383a423"
+      },
+      "op": "RELU_N1_TO_1",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RESHAPE__float32__c7a37486"
+      },
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RESHAPE__float32__eb9e96e4"
+      },
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RESHAPE__float32__2f80e252"
+      },
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RESHAPE__float32__c383a423"
+      },
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RESHAPE__float32__bcc4ed3a"
+      },
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 0
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RESHAPE__int32__b741efeb"
+      },
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RESHAPE__int32__c7a37486"
+      },
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RESHAPE__int32__eb9e96e4"
+      },
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RESHAPE__int32__2f80e252"
+      },
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RESIZE_BILINEAR__float32__c383a423"
+      },
+      "op": "RESIZE_BILINEAR",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RESIZE_NEAREST_NEIGHBOR__float32__c383a423"
+      },
+      "op": "RESIZE_NEAREST_NEIGHBOR",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:ROUND__float32__eb9e96e4"
+      },
+      "op": "ROUND",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RSQRT__float32__c7a37486"
+      },
+      "op": "RSQRT",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RSQRT__float32__eb9e96e4"
+      },
+      "op": "RSQRT",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RSQRT__float32__2f80e252"
+      },
+      "op": "RSQRT",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:RSQRT__float32__c383a423"
+      },
+      "op": "RSQRT",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SIN__float32__eb9e96e4"
+      },
+      "op": "SIN",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SIN__float32__2f80e252"
+      },
+      "op": "SIN",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SLICE__float32__eb9e96e4"
+      },
+      "op": "SLICE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SLICE__float32__2f80e252"
+      },
+      "op": "SLICE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SLICE__float32__c383a423"
+      },
+      "op": "SLICE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SLICE__float32__bcc4ed3a"
+      },
+      "op": "SLICE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SOFTMAX__float32__eb9e96e4"
+      },
+      "op": "SOFTMAX",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SOFTMAX__float32__2f80e252"
+      },
+      "op": "SOFTMAX",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SOFTMAX__float32__c383a423"
+      },
+      "op": "SOFTMAX",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": true,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SOFTMAX__float32__9871754d"
+      },
+      "op": "SOFTMAX",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SQRT__float32__c7a37486"
+      },
+      "op": "SQRT",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SQRT__float32__eb9e96e4"
+      },
+      "op": "SQRT",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SQRT__float32__2f80e252"
+      },
+      "op": "SQRT",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SQRT__float32__c383a423"
+      },
+      "op": "SQRT",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SQUARED_DIFFERENCE__float32__2f80e252"
+      },
+      "op": "SQUARED_DIFFERENCE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SUB__float32__c7a37486"
+      },
+      "op": "SUB",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SUB__float32__eb9e96e4"
+      },
+      "op": "SUB",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SUB__float32__2f80e252"
+      },
+      "op": "SUB",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SUB__float32__c383a423"
+      },
+      "op": "SUB",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SUB__int32__c7a37486"
+      },
+      "op": "SUB",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SUM__float32__c7a37486"
+      },
+      "op": "SUM",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SUM__float32__eb9e96e4"
+      },
+      "op": "SUM",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SUM__float32__2f80e252"
+      },
+      "op": "SUM",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:SUM__float32__c383a423"
+      },
+      "op": "SUM",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:TANH__float32__eb9e96e4"
+      },
+      "op": "TANH",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:TANH__float32__2f80e252"
+      },
+      "op": "TANH",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:TANH__float32__c383a423"
+      },
+      "op": "TANH",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:TRANSPOSE__float32__2f80e252"
+      },
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:TRANSPOSE__float32__c383a423"
+      },
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:TRANSPOSE__float32__bcc4ed3a"
+      },
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "2.5.3",
+        "source_model": "probe:TRANSPOSE_CONV__float32__c383a423"
+      },
+      "op": "TRANSPOSE_CONV",
+      "provenance": "measured",
+      "status": "delegated"
+    }
+  ],
+  "generated_at": "2026-08-12",
+  "litert_version": "2.5.3",
+  "schema_version": "1.3"
+}

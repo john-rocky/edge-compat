@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "transform_rule.schema.json",
+  "title": "edge-fix transform rule",
+  "description": "One executable graph rewrite. The agent builds the engine; the owner authors the rules — the engine never invents transforms beyond clearly-marked example-provenance rules exercised only on synthetic fixtures. `action` is a CLOSED vocabulary (v1: replace_op, decompose, insert_cast, io_cast); anything not expressible in it is not a rule — the vocabulary is extended by spec amendment, not by freeform actions. A matrix rewrite_hints entry links to a rule via its `transform_id` (matrix schema 1.2). Rule files are named `<id>.json`. Schema 1.1 (Phase 11, additive): optional `stale` block, written by `edge-fix rules reverify` when the rule's declared fixture stops passing against a new runtime version — stale rules are flagged in place and listed in DELTA_LOG.md, never auto-deleted; a later passing reverify removes the block.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "id", "title", "match", "action", "params",
+    "expected_effect", "provenance", "fixture"
+  ],
+  "dependentSchemas": {
+    "stale": {
+      "properties": { "schema_version": { "const": "1.1" } }
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "enum": ["1.0", "1.1"],
+      "description": "1.1 (Phase 11, additive): optional `stale` re-verification flag. A rule carrying `stale` must declare 1.1; 1.0 documents without it remain valid."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Rule identity: referenced by fix reports and by matrix rewrite_hints[].transform_id. The rule file must be named <id>.json."
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "match": { "$ref": "#/$defs/match" },
+    "action": { "enum": ["replace_op", "decompose", "insert_cast", "io_cast"] },
+    "params": {
+      "type": "object",
+      "description": "Action-specific parameters; shape constrained per action by the allOf clauses below."
+    },
+    "expected_effect": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What the fix should achieve, verified by the re-lint improvement gate (e.g. 'op delegates; single contiguous partition')."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Validity caveats: the conditions under which the rewrite preserves semantics (e.g. 'exact only for non-negative operands'). Surfaced verbatim in fix reports."
+    },
+    "provenance": { "enum": ["measured", "vendor_doc", "inferred", "example"] },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_model": { "type": "string" },
+        "litert_version": { "type": "string" },
+        "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
+      },
+      "description": "Where this rewrite was observed to work. Required fields for measured rules are enforced by semantic lint in `edge-fix rules validate`."
+    },
+    "fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "matrix"],
+      "properties": {
+        "model": { "type": "string", "minLength": 1 },
+        "matrix": { "type": "string", "minLength": 1 }
+      },
+      "description": "The rule's own demonstration fixture, paths relative to the rule file. `edge-fix rules validate` dry-runs the rule against it and requires the fix to succeed end-to-end."
+    },
+    "stale": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["date", "runtime", "runtime_version", "reason"],
+      "properties": {
+        "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "runtime": { "type": "string", "minLength": 1 },
+        "runtime_version": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string", "minLength": 1 }
+      },
+      "description": "Written by `edge-fix rules reverify` (schema 1.1) when the declared fixture stops passing against `runtime` at `runtime_version` — a measured re-verification failure, never a guess. The rule stays in place (never auto-deleted); a passing reverify removes this block. Listed in the DELTA_LOG.md entry (spec 11.4)."
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "action": { "const": "replace_op" } } },
+      "then": {
+        "properties": {
+          "match": { "$ref": "#/$defs/node_match" },
+          "params": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["new_op"],
+            "properties": {
+              "new_op": { "$ref": "#/$defs/op_name" },
+              "op_version": { "type": "integer", "minimum": 1 }
+            },
+            "description": "Swap the matched node's operator in place; inputs and outputs are kept verbatim. The engine attaches the registered default builtin options for new_op and refuses ops outside its options registry."
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "action": { "const": "decompose" } } },
+      "then": {
+        "properties": {
+          "match": { "$ref": "#/$defs/node_match" },
+          "params": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["nodes"],
+            "properties": {
+              "nodes": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["op", "inputs", "outputs"],
+                  "properties": {
+                    "op": { "$ref": "#/$defs/op_name" },
+                    "inputs": {
+                      "type": "array",
+                      "items": { "$ref": "#/$defs/tensor_ref" }
+                    },
+                    "outputs": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": { "$ref": "#/$defs/tensor_ref" }
+                    }
+                  }
+                },
+                "description": "Fixed recipe of replacement nodes, in execution order. Tensor refs: in:K / out:K are the matched node's K-th input/output tensor; tmp:NAME is a declared intermediate. A RESHAPE node names exactly one (data) input — the engine synthesizes its constant int32 shape input from the node's declared output tensor, whose shape must be static."
+              },
+              "intermediates": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["name", "dtype", "shape"],
+                  "properties": {
+                    "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+                    "dtype": {
+                      "anyOf": [
+                        { "$ref": "#/$defs/dtype" },
+                        { "$ref": "#/$defs/like_ref" }
+                      ]
+                    },
+                    "shape": { "$ref": "#/$defs/shape_ref" }
+                  }
+                },
+                "description": "New intermediate tensors. Shapes are always derived from a matched tensor — like:in:K / like:out:K borrow it as-is, unsqueeze0:in:K / unsqueeze0:out:K borrow it with a leading unit axis prepended (rank+1; the source shape must be static). No freeform shapes, so recipes stay statically checkable."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "action": { "const": "insert_cast" } } },
+      "then": {
+        "properties": {
+          "match": { "$ref": "#/$defs/node_match" },
+          "params": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["to"],
+            "properties": {
+              "to": { "$ref": "#/$defs/dtype" }
+            },
+            "description": "Compute the matched node in dtype `to`: CAST is inserted on every input edge whose dtype differs, the node's own tensors move to `to`, and outputs are CAST back to their original dtypes."
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "action": { "const": "io_cast" } } },
+      "then": {
+        "properties": {
+          "match": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["dtypes"],
+            "properties": {
+              "dtypes": { "$ref": "#/$defs/dtypes" },
+              "constraints": { "$ref": "#/$defs/constraints" }
+            },
+            "description": "io_cast matches graph I/O tensors by dtype, not nodes: match.dtypes lists the offending interface dtypes; op / op_sequence are not allowed."
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["to"],
+            "properties": {
+              "to": { "$ref": "#/$defs/dtype" },
+              "io": {
+                "enum": ["inputs", "outputs", "both"],
+                "default": "both"
+              }
+            },
+            "description": "Wrap graph I/O to satisfy interface constraints (e.g. LiteRT.js float32/int32 tensor I/O): matched graph inputs/outputs are re-exposed in dtype `to` with a CAST at the boundary; the interior graph is unchanged."
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "match": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "op": { "$ref": "#/$defs/op_name" },
+        "op_sequence": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/op_name" }
+        },
+        "dtypes": { "$ref": "#/$defs/dtypes" },
+        "constraints": { "$ref": "#/$defs/constraints" }
+      },
+      "description": "Base match shape; each action's allOf clause tightens it (node actions require exactly one of op/op_sequence, io_cast requires dtypes and forbids op)."
+    },
+    "op_name": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]*$",
+      "description": "Exact TFLite builtin operator name. No aliases, no prettified names."
+    },
+    "dtype": {
+      "enum": [
+        "float32", "float16", "bfloat16",
+        "int64", "int32", "int16", "int8", "int4",
+        "uint64", "uint32", "uint16", "uint8",
+        "bool", "string", "complex64"
+      ]
+    },
+    "dtypes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/dtype" }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "number", "boolean"] },
+      "description": "Same semantics as matrix entry constraints: matched against the node's shape_meta (max_rank/min_rank compare numerically, other keys by equality)."
+    },
+    "node_match": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "op": { "$ref": "#/$defs/op_name" },
+        "op_sequence": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/op_name" },
+          "description": "A chain of consecutive ops in execution order. Accepted by the schema as part of the public rule API; the v1 engine does not execute op_sequence rules and reports them as refused (Deferred)."
+        },
+        "dtypes": { "$ref": "#/$defs/dtypes" },
+        "constraints": { "$ref": "#/$defs/constraints" }
+      },
+      "oneOf": [
+        { "required": ["op"], "not": { "required": ["op_sequence"] } },
+        { "required": ["op_sequence"], "not": { "required": ["op"] } }
+      ],
+      "description": "Which lint findings this rule addresses: nodes with this op (or op chain) whose verdict is not `delegated`, narrowed by dtypes (node signature dtypes must be a subset) and constraints (matched against shape_meta)."
+    },
+    "tensor_ref": {
+      "type": "string",
+      "pattern": "^(in:[0-9]+|out:[0-9]+|tmp:[a-z][a-z0-9_]*)$"
+    },
+    "like_ref": {
+      "type": "string",
+      "pattern": "^like:(in|out):[0-9]+$"
+    },
+    "shape_ref": {
+      "type": "string",
+      "pattern": "^(like|unsqueeze0):(in|out):[0-9]+$"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "artifact": "Nemotron-H-4B-Instruct-128K_int8.litertlm",
+  "device": "galaxy-s26",
+  "model_id": "nemotron-h-4b-instruct-128k-int8",
+  "quantization": "int8",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-24",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 3246,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cl-pinned",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 3246 out of 3246 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024)."
+      ],
+      "failure_class": "engine_create_failed",
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": 3246,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

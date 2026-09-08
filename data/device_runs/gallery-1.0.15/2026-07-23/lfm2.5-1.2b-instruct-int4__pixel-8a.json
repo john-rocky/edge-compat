@@ -1,0 +1,44 @@
+{
+  "artifact": "unknown (Gallery import; bundle file name not recorded in MATRIX.md)",
+  "device": "pixel-8a",
+  "model_id": "lfm2.5-1.2b-instruct-int4",
+  "quantization": "int4",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-07-23",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-gallery",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "gallery-1.0.15",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": "process death ~8 s into engine creation ('died: prcp CRE') — a crash, not a graceful unsupported error",
+      "evidence": [
+        "hand-recorded device phase: litertlm-convert reports/gpu_audit/MATRIX.md 実機フェーズ table (committed 0559ad3, 2026-07-23; Gallery 1.0.15 official Benchmark, ML Drift GPU, p256/d256 x3 runs; runtime version axis = the Gallery app version — the embedded litert-lm version is not recorded)",
+        "row: '❌ エンジン作成 ~8秒でプロセス死 (died: prcp CRE)' — GPU selectable after re-import with GPU accelerator"
+      ],
+      "failure_class": "engine_creation_crash",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {},
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

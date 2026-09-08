@@ -1,0 +1,273 @@
+{
+  "artifacts": [
+    {
+      "file": "granite-4.2-3b_int8.litertlm",
+      "sha256": "3e5a0dd0c4eff06a50997e9966db9fee7d20e1c34cd04c7b5755c755339402a6",
+      "size_mb": 3587.363
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "granite42_work/convert_granite42_3b.sh (RECIPES=int8 → dynamic_wi8_afp32), then qa/add_thought_channel.py <out> --start '<think>' --end '</think>' (mirror: tools/add_thought_channel.py)",
+    "quantization": "int8 dynamic per-channel on linears + embedding",
+    "tool": "litert-torch (pristine released stack, no patched checkout; repro = hf-to-litertlm granite42_work/)",
+    "tool_version": "0.9.3 (litert-converter 0.4.0, ai-edge-quantizer 0.9.0, litert-lm-builder 0.16.1, transformers 5.14.1 — FINDINGS.md ~/venvs/lt093ctl)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": 7.03,
+          "delegated_ops": 2171,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1618 out of 1783 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 237 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 1618 out of 1783 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 237 partitions for subgraph 1 (prefill_256).",
+            "VERBOSE: Replacing 1618 out of 1783 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 237 partitions for subgraph 2 (prefill_64).",
+            "VERBOSE: Replacing 1618 out of 1783 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 237 partitions for subgraph 3 (prefill_16).",
+            "results block: prefill=50.81 decode=7.03 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 1693.0,
+            "init_s": 0.64313,
+            "prefill_tokens": 206.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 50.81,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 2257,
+          "ttft_ms": 4200.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-31/granite-4.2-3b-int8__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": 9.22,
+          "delegated_ops": 1783,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1783 out of 1783 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 1783 out of 1783 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256).",
+            "VERBOSE: Replacing 1783 out of 1783 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_64).",
+            "VERBOSE: Replacing 1783 out of 1783 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_16).",
+            "results block: prefill=240.92 decode=9.22 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 1234.0,
+            "init_s": 5.78758,
+            "prefill_tokens": 206.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 240.92,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1783,
+          "ttft_ms": 960.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-31/granite-4.2-3b-int8__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": 21.12,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=264.49 decode=21.12 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 264.49,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 2611.6
+        },
+        "source": "data/device_runs/0.16.0/2026-08-31/granite-4.2-3b-int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": 70.65,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "m4max-quiet-300s-gpu-rest",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=1207.62 decode=70.65 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 1207.62,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 244.4
+        },
+        "source": "data/device_runs/0.16.0/2026-08-31/granite-4.2-3b-int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-02",
+          "decode_tokens_per_s": 1.73,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 180.5 s, output head '[thought] Okay, the user asked: \"What is 17 plus 26? Answer with the number only'",
+            "invocation 0: exit=0 wall_s=524.4 temp 48.8->53.8C throttled=0x0 prefill_tps=12.75 decode_tps=1.71 ttft_s=20.6118 init_s=90.0623 peak_rss_mb=4833",
+            "invocation 1: exit=0 wall_s=466.3 temp 50.5->53.8C throttled=0x0 prefill_tps=12.96 decode_tps=1.73 ttft_s=20.3666 init_s=90.2762 peak_rss_mb=4843",
+            "invocation 2: exit=0 wall_s=466.3 temp 48.8->53.8C throttled=0x0 prefill_tps=12.83 decode_tps=1.73 ttft_s=20.5994 init_s=90.0182 peak_rss_mb=4834"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.73,
+            "decode_tps_min": 1.71,
+            "init_s": 90.0623,
+            "init_s_max": 90.2762,
+            "init_s_min": 90.0182,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 12.96,
+            "prefill_tps_min": 12.75,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 20.6118,
+            "ttft_s_min": 20.3666
+          },
+          "output_match": null,
+          "peak_mem_mb": 4843.0,
+          "prefill_tokens_per_s": 12.83,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 20599.4
+        },
+        "source": "data/device_runs/0.16.1/2026-09-02/granite-4.2-3b-int8__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "granite",
+    "id": "granite-4.2-3b-int8",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/granite-4.2-3b",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Requires litert-lm >= 0.16 (HF card header; curated manifest min_runtime_version 0.16.0).",
+    "Reasoning model: it works problems inside <think>…</think> before answering, so give it an output budget of >= 2048 tokens — truncated mid-thought it produces no final answer at all. A thought channel (<think> / </think>) is declared in the bundle metadata so the runtime separates reasoning from the answer and honors a thinking budget; without that declaration the runtime streams raw reasoning into the answer and silently ignores any thinking budget. The exporter does not emit the channel on this path — it was added post-export (qa/add_thought_channel.py) with the tflite sections verified byte-identical, size unchanged (HF card usage notes + conversion notes; FINDINGS.md int8 build).",
+    "The think opener is pre-filled by the bundle's assistant prefix (<|im_start|>assistant\\n<think>\\n, as IBM's own chat template does). Structured-template trap: the converter derives model.prefix from an assistant HISTORY message rendered with add_generation_prompt=False, so a jinja that opens <think> only in its generation branch silently ships a bare <|im_start|>assistant\\n prefix — the FIRST int8 export of this model came out exactly that way and was re-exported with templates/granite42_think.jinja (opener in the history branch too, chatml_think shape); the shipped bundle's model.prefix carries the prefill. Read prompt_templates.model.prefix out of the bundle before trusting it (HF card conversion notes; FINDINGS.md structured-template section).",
+    "No start_token in the metadata, on purpose: the tokenizer declares <s> as BOS but never prepends it (post-processor adds nothing; bos <s>=100283 != eos/pad <|im_end|>=100257), so the converter's unconditional start_token write was suppressed with NO_START_TOKEN=1. Different mechanism from 4.1's BOS==EOS echo bug, same knob (HF card conversion notes; FINDINGS.md premises table).",
+    "Memory shape: 4096-token KV budget with a six-signature prefill ladder (1024/256/64/16/4/1), not eleven — every exported signature is charged engine memory whether or not it is called, and the eleven-signature build of the same-shape granite-4.1-3b was killed by iOS during Metal engine init. Input-embedding table (100352x2560) externalised into its own section (259 MB) to stay clear of the ~2 GiB single-section mmap ceiling on iOS; embeddings are untied, so the lm_head stays in the main graph — main TFLite section 3.50 GB (HF card usage notes + conversion notes; FINDINGS.md int8 build).",
+    "Bundle template is a simple ChatML think template, not IBM's verbatim: it drops the empty system block IBM's template always emits (bf16 oracle 8/8 on both templates, so the gate shape shows no cost), and it renders assistant history VERBATIM instead of applying upstream's truncate_history_thinking, because truncation violates the runtime's render-prefix contract (FINDINGS.md premises table + bf16 oracle section).",
+    "GSM8K parity (n=100, greedy, 0-shot CoT, max_tokens 2048, identical prompt/extraction; engine rows litert-lm-api 0.16.1 CPU backend, scored after </think>; harness = minicpm5_work/eval_gsm8k_api.py protocol, bf16 via granite42_work/gsm8k_bf16.py on MPS): bf16 91.0 / int8 90.0 / int4 block-32 80.0 — int8 is at parity (-1, same as 4.1); the card steers quality-sensitive deployments to this 3.76 GB file (HF card Accuracy; FINDINGS.md GSM8K section).",
+    "Device coverage: the iPhone 17 Pro gate was run on the int4 file only — no iPhone result for int8 is recorded in the card, FINDINGS, or manifest. int8 did pass the Galaxy S26 (SM8850, Adreno) GPU and CPU gates with full OpenCL delegation (1783/1783, zero rejected ops) and the thought channel separating on-device, peak process RSS 4.3 GB on the CPU leg, no OOM on the 12 GB device; the curated manifest still labels int8 the desktop / quality-reference build (HF card Correctness + Performance; FINDINGS.md S26 table; curated manifest int8 platform_notes)."
+  ],
+  "schema_version": "1.2"
+}

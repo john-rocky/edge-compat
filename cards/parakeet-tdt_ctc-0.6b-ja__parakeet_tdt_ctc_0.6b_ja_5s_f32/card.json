@@ -1,0 +1,186 @@
+{
+  "artifacts": [
+    {
+      "file": "parakeet_tdt_ctc_0.6b_ja_5s_f32.tflite",
+      "sha256": "db103d352034fba5dfb43a8cbba9dba72afecc730ec5f9999200c6ea41a27a9b",
+      "size_mb": 2280.836
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-13",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": null,
+        "loads": false,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": false
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-13",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": null,
+        "loads": false,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": false
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-13/parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_f32.json"
+  },
+  "conversion": {
+    "command": "python stageA_ja.py && python stageB_ja.py --quant=none --output=parakeet_tdt_ctc_0.6b_ja_5s_f32.tflite  # two-process split of convert_to_tflite.py --model=nvidia/parakeet-tdt_ctc-0.6b-ja --quant=none --input_sec=5",
+    "quantization": "none (float32 weights)",
+    "tool": "litert-torch via the official litert-samples speech_recognition convert pipeline (ParakeetTDT path; ParakeetTDTCTCJa subclass, litert-samples#277)",
+    "tool_version": "0.10.0 (editable dev checkout 115a136)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=jit thermal=NONE->NONE headroom=0.71333337->0.72333336 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 63.606,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "latency_max_ms": 67.819,
+            "latency_min_ms": 62.363,
+            "load_ms": 5984.2
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-27/parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_f32__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-npubench",
+            "os_build": "Android 16",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT (Hexagon, AOT host-compiled, SM8850 target)"
+          },
+          "error": null,
+          "evidence": [
+            "npubench sweep row: N=50 median, 1 backend = 1 process, accepted only with thermal NONE->NONE; NPU rows additionally required qnn_partition delegate evidence in logcat (a stock model asked for on the NPU can silently land on XNNPACK and report a CPU number)",
+            "mode=aot thermal=NONE->NONE headroom=0.70333326->0.71 attempt=0"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 30.326,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "iterations": 50,
+            "latency_max_ms": 30.786,
+            "latency_min_ms": 29.873,
+            "load_ms": 419.7,
+            "qnn_partition_lines": 61
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-08-27/parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_f32__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "parakeet",
+    "id": "parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_f32",
+    "license": "cc-by-4.0",
+    "source_url": "https://huggingface.co/litert-community/parakeet-tdt_ctc-0.6b-ja",
+    "task": "automatic-speech-recognition"
+  },
+  "pitfalls": [
+    "Two signatures: encode (log-mel [1,80,500] -> [1,1024,63]) + decode (stateless 64-token TDT loop; logits [1,63,64,3078] = 3072 tokens + blank 3072 + 5 durations). 80 mel bins (v3 uses 128); NeMo preprocessing: preemph 0.97, n_fft 512, win 25 ms, hop 10 ms, per-feature norm (measured; HF card).",
+    "Exact conversion: 28/28 five-second windows reproduce NeMo transcribe() (joined CER 0.0) on a 137 s CC0 test read; Pixel 8a GPU fully delegates both signatures (1862/1862 + 2083/2083 LITERT_CL) with identical greedy ids — encode 239 ms, decode 95 ms/call, ~20 calls per 5 s window (measured 2026-08-13).",
+    "2.4 GB float32 file — GPU compile on the Pixel 8a takes 25-37 s; the i8 sibling is 608 MB but fails Mali GPU compile (see the i8 meta) (measured).",
+    "NeMo trap for anyone re-deriving references: model.transcribe() leaves decoder/joint in training mode (dropout on) — compute reference tensors before transcribe(), or re-.eval() after (measured; caused a false parity failure).",
+    "Mali fp16 quirk: decode logits at token positions >= ~43 go NaN when the token suffix is zero-padded garbage (probe fixture artifact); real-prefix cells are clean and greedy decoding is unaffected (measured)."
+  ],
+  "schema_version": "1.2"
+}

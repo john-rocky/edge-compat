@@ -1,0 +1,171 @@
+{
+  "artifacts": [
+    {
+      "file": "PaddleOCR-VL-1.6.litertlm",
+      "sha256": "4dd0a268b1849a95e949f546de201c9957bf5acc98494c150bd02165c171cc76",
+      "size_mb": 1325.899
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "TODO (not recorded in the HF card)",
+    "quantization": "decoder shipped fp16 (int4 and integer-compute int8 measurably corrupt transcription on this 0.36B decoder, ~460 MB spent on exactness); vision tower/adapter recipe not stated (HF card Quality + Conversion notes)",
+    "tool": "litert-torch (LiteRT-LM fast_vlm bundle: static-NaViT VISION_ENCODER [1,560,560,3]->[1,1600,1152] + VISION_ADAPTER [1,1600,1152]->[1,400,1024] + single-token EMBEDDER + PREFILL_DECODE; the ERNIE-4.5-0.3B decoder re-hosted as a standalone LlamaForCausalLM, cache 4096) (HF card Conversion notes)",
+    "tool_version": "TODO (the HF card names the converter but not its version; no export log in the sources)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1081,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": "generation gate FAIL: exit 0 but no answer text (journal generated=false); output tail …'𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦'",
+          "evidence": [
+            "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 2 (prefill_1024).",
+            "VERBOSE: Replacing 780 out of 859 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 110 partitions for subgraph 3 (decode).",
+            "community_accel_work/s7_manifest_backfill/logs/PaddleOCR-VL-1.6__PaddleOCR-VL-1.6.gatecpu.log: generation gate verdict FAIL (journal rows.jsonl, fail_class=None, exit=0, generated=False, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+            "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
+            "gate process peak 3435 MB (journal gate_peak_mb)"
+          ],
+          "failure_class": "degenerate_output",
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "total_ops": 1124,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/paddleocr-vl-1.6__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 35.59,
+          "delegated_ops": 914,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 914 out of 914 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 914 out of 914 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 914 out of 914 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_1024).",
+            "VERBOSE: Replacing 859 out of 859 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (decode).",
+            "results block: prefill=1238.83 decode=35.59 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 1.0,
+            "init_s": 4.2126,
+            "prefill_tokens": 204.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 1238.83,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 914,
+          "ttft_ms": 190.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/paddleocr-vl-1.6__galaxy-s26.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1081,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": "generation gate FAIL: exit 0 but no answer text (journal generated=false); output tail …'𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦'",
+          "evidence": [
+            "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 2 (prefill_1024).",
+            "VERBOSE: Replacing 780 out of 859 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 110 partitions for subgraph 3 (decode).",
+            "community_accel_work/s7_manifest_backfill/logs_p8a/PaddleOCR-VL-1.6__PaddleOCR-VL-1.6.gatecpu.log: generation gate verdict FAIL (journal rows_p8a.jsonl, fail_class=None, exit=0, generated=False, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+            "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
+            "gate process peak 3386 MB (journal gate_peak_mb)"
+          ],
+          "failure_class": "degenerate_output",
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "total_ops": 1124,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/paddleocr-vl-1.6__pixel-8a.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "paddleocr-vl",
+    "id": "paddleocr-vl-1.6",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/PaddleOCR-VL-1.6",
+    "task": "image-text-to-text"
+  },
+  "pitfalls": [
+    "Task-prompted model: you select what it does with the text prompt (OCR:, Table Recognition:, …); page OCR on a synthetic report page transcribed perfectly in 22 s, table recognition 17 s (HF card Quality).",
+    "Static NaViT rewrite: the encoder is dynamic-resolution (packed patches, interpolated position embeddings, 2-D rotary over h/w ids) and does not torch.export; the LM calls it with full attention (window_size=-1), so a static whole-image graph is used; the projector's 2x2 spatial merge is done GPU-safe with 4 strided slices + concat (all tensors <= 4D) instead of the literal 6-D rearrange (HF card Conversion notes).",
+    "Decoder: bit-exact fp32 logits vs the original as a standalone Llama-layout model; shipped fp16 weights are teacher-forced-parity corr 1.0000, top-1 10/10 (HF card Quality).",
+    "M-RoPE note: the base decoder uses Qwen2-VL-style 3-D M-RoPE while the fast_vlm contract supplies plain sequential positions — identical for text tokens, and an A/B eager test (true M-RoPE vs 1-D) showed no quality loss on OCR/table tasks (HF card).",
+    "Tokenizer: the base SP model lacks the 1,019 added tokens (<|IMAGE_START|>, <|LOC_0|>…<|LOC_1000|>, <fcel>/<nl> table tokens) — appended as USER_DEFINED pieces at their exact ids (vocab padded to 103,424) so table/spotting output detokenizes on device; prompt template baked in: <|begin_of_sentence|>User: <image>PROMPT\\nAssistant:\\n, stop </s> (HF card Conversion notes).",
+    "On the Galaxy S26 and Pixel 8a CPU generation gates (S7 backfill, 2026-09-05) the text-only gate prompt produced a repeated-character flood (degenerate_output rows in data/device_runs/) — an OCR-prompt model asked a plain question; not a card-quality claim either way (device runs).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/ (Pi 5 / S26 / Pixel 8a / Mac / iPhone as measured)."
+  ],
+  "schema_version": "1.2"
+}

@@ -1,0 +1,88 @@
+{
+  "artifact": "Nemotron-3-Nano-4B_int8.litertlm",
+  "artifact_sha256": "ba73d2ad1d878bc2b796eb3a1d993eb1b3bd5105743cd85bd6fa9d86e58a013d",
+  "device": "galaxy-s26",
+  "model_id": "nemotron-3-nano-4b-int8",
+  "quantization": "int8",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-05",
+      "decode_tokens_per_s": 12.87,
+      "delegated_ops": 3012,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cold-cache-cooled",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 2643 out of 2827 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 218 partitions for subgraph 0 (prefill_1024).",
+        "VERBOSE: Replacing 2622 out of 2806 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 218 partitions for subgraph 1 (prefill_256).",
+        "VERBOSE: Replacing 2725 out of 2909 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 218 partitions for subgraph 2 (prefill_64).",
+        "VERBOSE: Replacing 2725 out of 2909 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 218 partitions for subgraph 3 (prefill_16).",
+        "results block: prefill=52.94 decode=12.87 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 706.0,
+        "init_s": 8.98674,
+        "prefill_tokens": 211.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 52.94,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 3155,
+      "ttft_ms": 4060.0
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-09-05",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 2827,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cold-cache-cooled",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "exit 139 during the gpu generation gate; log tail: local_attention_mask_policy: Not set | sliding_window_size: Not set | advanced_settings: Not set",
+      "evidence": [
+        "VERBOSE: Replacing 2827 out of 2827 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+        "community_accel_work/s7_manifest_backfill/logs/Nemotron-3-Nano-4B__Nemotron-3-Nano-4B_int8.gate.log: generation gate verdict FAIL (journal rows.jsonl, fail_class=run_error, exit=139, generated=True, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+        "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
+        "gate process peak 1280 MB (journal gate_peak_mb)"
+      ],
+      "failure_class": "run_error",
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": 2827,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

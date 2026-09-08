@@ -1,0 +1,98 @@
+{
+  "artifact": "Falcon-H1-Tiny-R-0.6B_int8.litertlm",
+  "artifact_sha256": "66b9e6a5fa630d453d59516cc362e44fff3943eb7c63d07b116cf9a525a1bb94",
+  "device": "iphone-17-pro",
+  "model_id": "falcon-h1-tiny-r-0.6b-int8",
+  "quantization": "int8",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-01",
+      "decode_tokens_per_s": 29.38,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 17 Pro",
+        "machine_label": "iphone-17-pro-charging",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "A19-Pro",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "device.modelIdentifier=iPhone18,1",
+        "throughput taken from task 'quality' (262 generated tokens, 2026-09-01T04:25:43Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 1 task file(s)",
+        "[quality 2026-09-01T04:25:43Z] prefill=223.92684854544947 decode=29.37722730989379 ttft_ms=8767.0 peak_mb=819.9566650390625 stop=stop output='\\\\n42  \\\\nJapan  \\\\ncold  \\\\n7  \\\\nbonjour  \\\\n56  \\\\n0.9  …[trace truncated]"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "quality.decode_tokens_per_s": 29.377227,
+        "quality.generated_tokens": 262.0,
+        "quality.load_s": 4.032564,
+        "quality.peak_mem_mb": 819.956665,
+        "quality.prefill_tokens_per_s": 223.926849,
+        "quality.prompt_tokens": 148.0,
+        "quality.ttft_ms": 8767.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 819.957,
+      "prefill_tokens_per_s": 223.93,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 8767.0
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-09-01",
+      "decode_tokens_per_s": 22.84,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 17 Pro",
+        "machine_label": "iphone-17-pro-thermal-serious",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "A19-Pro",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "device.modelIdentifier=iPhone18,1",
+        "throughput taken from task 'quality' (303 generated tokens, 2026-09-01T04:47:33Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 1 task file(s)",
+        "[quality 2026-09-01T04:47:33Z] prefill=259.84278910811435 decode=22.837039299254442 ttft_ms=12883.0 peak_mb=3005.847930908203 stop=stop output='\\\\n42  \\\\nJapan  \\\\ncold  \\\\n7  \\\\nbonjour  \\\\n56  \\\\n0. …[trace truncated]"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "quality.decode_tokens_per_s": 22.837039,
+        "quality.generated_tokens": 303.0,
+        "quality.load_s": 32.453438,
+        "quality.peak_mem_mb": 3005.847931,
+        "quality.prefill_tokens_per_s": 259.842789,
+        "quality.prompt_tokens": 148.0,
+        "quality.ttft_ms": 12883.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 3005.848,
+      "prefill_tokens_per_s": 259.84,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 12883.0
+    }
+  ],
+  "schema_version": "1.0"
+}

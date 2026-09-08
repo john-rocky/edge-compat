@@ -1,0 +1,141 @@
+{
+  "artifacts": [
+    {
+      "file": "f5a806696ecbdb715b4ec22c27eaab348874efa00bc1df2af6a3db52963aa408.tflite",
+      "sha256": "23923022a8f4149fe1f5df5426a18f3a202dd605454539ed33c5d76f3035e907",
+      "size_mb": 50.201
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 442.142,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 79.592,
+        "loads": true,
+        "max_rel_diff": 0.6973950795947902,
+        "output_match": true,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-08-11/bisenet-face-parsing.json"
+  },
+  "conversion": {
+    "command": "python faceparsing/scripts/build_faceparsing.py",
+    "quantization": "none — fp32 (artifact tensors: 142 float32, no float16/int8)",
+    "tool": "litert-torch",
+    "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-08-31",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert",
+            "runtime_version": "2.2.0.dev20260804",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 sweep row: LiteRT benchmark_model, CPU/XNNPACK at --num_threads=4, 3 invocations per file of 10 warm-up + 50 timed runs (the tool caps a phase at 150 s, so very slow graphs run fewer); latency = median of the three per-invocation medians over the timed phase; a row counts as measured only when every invocation exited 0 with XNNPACK engaged and vcgencmd get_throttled 0x0 before and after",
+            "versions: ai-edge-litert-nightly=2.2.0.dev20260804, benchmark_model_sha256=babc9275addd8612caf0842294cb5b3f301c3cce46e6c5979cd2803f215f6bee, cpu=Raspberry Pi 5 Model B Rev 1.1, litert-cli-nightly=0.2.0.dev20260805, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "invocation 0: exit=0 wall_s=15.1 temp 51.0->68.6C throttled=0x0 xnnpack=True median_us=249054.0 runs=50 footprint_peak_mb=218.56",
+            "invocation 1: exit=0 wall_s=15.2 temp 51.6->67.5C throttled=0x0 xnnpack=True median_us=249962.0 runs=50 footprint_peak_mb=218.06",
+            "invocation 2: exit=0 wall_s=15.2 temp 51.6->68.1C throttled=0x0 xnnpack=True median_us=249388.0 runs=50 footprint_peak_mb=218.56"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 249.388,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "init_ms": 131.44,
+            "invocations": 3,
+            "iterations": 150,
+            "latency_max_ms": 253.396,
+            "latency_min_ms": 247.958,
+            "threads": 4,
+            "warmup_runs_per_invocation": 10
+          },
+          "output_match": null,
+          "peak_mem_mb": 218.56,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0.dev20260804/2026-08-31/bisenet-face-parsing__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "bisenet",
+    "id": "bisenet-face-parsing",
+    "license": "mit",
+    "source_url": "https://huggingface.co/litert-community/BiSeNet-Face-Parsing-LiteRT",
+    "task": "image-segmentation"
+  },
+  "pitfalls": [],
+  "schema_version": "1.2"
+}

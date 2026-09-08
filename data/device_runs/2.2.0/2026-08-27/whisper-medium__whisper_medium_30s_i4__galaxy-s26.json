@@ -1,0 +1,75 @@
+{
+  "artifact": "whisper_medium_30s_i4.tflite",
+  "device": "galaxy-s26",
+  "model_id": "whisper-medium__whisper_medium_30s_i4",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-08-27",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "process_crashed (likely OOM)",
+      "evidence": [
+        "process_crashed (likely OOM)"
+      ],
+      "failure_class": "process_crashed",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "npu_qnn",
+      "context_length": null,
+      "date": "2026-08-27",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": "QAIRT (Hexagon, AOT host-compiled, SM8850 target)"
+      },
+      "error": "AOT compile failed on host (SM8850 target): NING]   <W> Initializing HtpProvider\n     0.0ms [  INFO ]   <I> QnnLog_create exit.\n     0.0ms [  INFO ]   <I> QnnBackend_create started. backend = 0xfffc57 …[trace truncated]",
+      "evidence": [
+        "AOT compile failed on host (SM8850 target): NING]   <W> Initializing HtpProvider\n     0.0ms [  INFO ]   <I> QnnLog_create exit.\n     0.0ms [  INFO ]   <I> QnnBackend_create started. backend = 0xfffc57 …[trace truncated]"
+      ],
+      "failure_class": "aot_compile_failed",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

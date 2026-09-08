@@ -1,0 +1,30 @@
+{
+ "id": "seq-awkward-1500-to-2048",
+ "category": "shape",
+ "title": "sequence 1500 -> 2048 (awkward length to power of two)",
+ "rewrite": {
+  "to": "T=2048",
+  "equivalence": "not-equivalent",
+  "equivalence_evidence": "2.6x the attention FLOPs, yet faster in wall-clock",
+  "from": "T=1500 (whisper encoder length)"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-24",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 36.302,
+  "after_ms": 23.629,
+  "probe": "probe_t1500 vs probe_t2048"
+ },
+ "factor": 1.54,
+ "scope": "synthetic probe. T=1500 runs 0.97 GF/ms vs 2.24 at 1024 and 2.32 at 2048 \u2014 non-monotonic; the whisper-encoder real model measures 0.98 GF/ms, matching the probe. 1500->1536 pad row pending (throttled single: ~2x).",
+ "notes": "More compute can be faster; pick friendly lengths. JIT compile 63.6s at 1500 vs 18.8s at 2048.",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

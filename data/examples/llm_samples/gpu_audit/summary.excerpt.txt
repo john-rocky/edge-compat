@@ -1,0 +1,6 @@
+RESULT FAIL gemma3-1b-official rc=0
+RESULT FAIL lfm25-12b-instruct-int4 rc=0
+RESULT PASS bitcpm-cann-1b-int4 prefill=1520.50 decode=55.93 init=6.7156
+RESULT PASS gemma3-1b-official prefill=4343.84 decode=185.75 init=1.8673
+RESULT PASS bitcpm-cann-1b-int4-clean prefill=2964.88 decode=167.71 init=3.8640
+RESULT PASS lfm25_wi8_composite_conv040dev_0150 prefill=0.00 decode=0.00 init=1.3646

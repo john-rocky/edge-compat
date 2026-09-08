@@ -1,0 +1,280 @@
+{
+  "artifacts": [
+    {
+      "file": "LFM2.5-1.2B-Thinking_int4_gpu.litertlm",
+      "sha256": "75408d4047f15f054403e3d29826b2324c4b8709648c99221daab571f70a6bfd",
+      "size_mb": 702.115
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "python convert_lfm25.py LiquidAI/LFM2.5-1.2B-Thinking out_thinking_fp --fp && python quantize_litertlm.py apply out_thinking_fp/model.litertlm LFM2.5-1.2B-Thinking_int4_gpu.litertlm --recipe wi4b32_wi8 --algo octav && python scripts/add_executor_metadata.py  # RESULTS.md pipeline; upstream ShortConv fix, composite lowered by converter 0.3.1",
+    "quantization": "int4 blockwise-32 + OCTAV linears, int8 embedding, convs float (same recipe as the CPU int4 file, re-exported so it runs on the GPU — HF card)",
+    "tool": "litert-torch (via litertlm-convert minicpm5_work convert_lfm25.py + quantize_litertlm.py + add_executor_metadata.py)",
+    "tool_version": "0.9.3 (~/venvs/ltconv040dev: litert-converter 0.3.1, ai-edge-quantizer 0.8.0, litert-lm 0.15.0 builder; ship_lfm25_gpu_variant_20260812/RESULTS.md)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 38.23,
+          "delegated_ops": 770,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 469 out of 542 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 88 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 469 out of 542 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 88 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 469 out of 542 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 88 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 469 out of 542 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 88 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=77.99 decode=38.23 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 1620.0,
+            "init_s": 4.6748,
+            "prefill_tokens": 205.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 77.99,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 800,
+          "ttft_ms": 2650.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/lfm25-12b-thinking-int4-gpu-093__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 48.14,
+          "delegated_ops": 542,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=1020.36 decode=48.14 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 1827.0,
+            "init_s": 10.71905,
+            "prefill_tokens": 205.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 1020.36,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 542,
+          "ttft_ms": 220.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/lfm25-12b-thinking-int4-gpu-093__galaxy-s26.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": 1024,
+          "date": "2026-08-25",
+          "decode_tokens_per_s": 69.66,
+          "delegated_ops": null,
+          "env": {
+            "device": "iphone-17-pro",
+            "machine_label": "iphone-17-pro-charging",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "A19-Pro",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "maxNumTokens=1024; thinking model — TTFT includes the thinking phase (554 tokens generated total), final answer coherent; all Metal kernels initialize, zero half4/float4",
+            "device charging during run (functional gate)",
+            "litertlm-convert/minicpm5_work/ship_lfm25_gpu_0160/device_gate_20260825_maxtok/console_thinking_maxtok1024.log"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "short-chat.decode_tokens_per_s": 69.66,
+            "short-chat.generated_tokens": 554.0,
+            "short-chat.peak_mem_mb": 680.0,
+            "short-chat.prefill_tokens_per_s": 531.0,
+            "short-chat.prompt_tokens": 21.0,
+            "short-chat.ttft_ms": 6463.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 680.0,
+          "prefill_tokens_per_s": 531.0,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 6463.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-25/lfm25-12b-thinking-int4-gpu-093__iphone-17-pro.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-12",
+          "decode_tokens_per_s": 21.48,
+          "delegated_ops": 542,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-cl-pinned",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Google Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=67.28 decode=21.48 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 838.0,
+            "init_s": 9.84093,
+            "prefill_tokens": 19.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 67.28,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 542,
+          "ttft_ms": 330.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-12/lfm25-12b-thinking-int4-gpu-093__pixel-8a.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 9.29,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 84.7 s, output head '[thought]  Okay, let\\'s see. The question is \"What is 17 plus 26? Answer with the'",
+            "invocation 0: exit=0 wall_s=96.0 temp 51.0->56.0C throttled=0x0 prefill_tps=55.16 decode_tps=9.27 ttft_s=4.7488 init_s=34.0656 peak_rss_mb=1450",
+            "invocation 1: exit=0 wall_s=100.0 temp 51.6->53.2C throttled=0x0 prefill_tps=54.15 decode_tps=9.34 ttft_s=4.8345 init_s=33.471 peak_rss_mb=1453",
+            "invocation 2: exit=0 wall_s=100.0 temp 50.5->53.8C throttled=0x0 prefill_tps=55.38 decode_tps=9.29 ttft_s=4.7299 init_s=33.5819 peak_rss_mb=1453"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 9.34,
+            "decode_tps_min": 9.27,
+            "init_s": 33.5819,
+            "init_s_max": 34.0656,
+            "init_s_min": 33.471,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 55.38,
+            "prefill_tps_min": 54.15,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 4.8345,
+            "ttft_s_min": 4.7299
+          },
+          "output_match": null,
+          "peak_mem_mb": 1453.0,
+          "prefill_tokens_per_s": 55.16,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 4748.8
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/lfm25-12b-thinking-int4-gpu-093__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "lfm2.5",
+    "id": "lfm25-12b-thinking-int4-gpu-093",
+    "license": "lfm-open-license-v1.0",
+    "source_url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "GPU needs litert-lm >= 0.16.0 (Android OpenCL and macOS, verified by generation); iOS Metal fails at engine creation for this family (LiteRT-LM#3129) — use CPU on iOS (HF card).",
+    "A thinking model needs the token budget: GSM8K measured at max-tokens 2048 (int4 72% vs bf16 81%); the reasoning stream arrives on the `thought` channel and the final answer follows after </think> (HF card).",
+    "On phone-class hardware the GPU's win is prefill and TTFT (3-6x); decode is bandwidth-bound and roughly a wash — a thinking model's long outputs gain less than its long prompts (HF card, measured).",
+    "0.9.3 does not write ExecutorMetadata itself — add_executor_metadata.py is a mandatory post-step or litert-lm >= 0.15 fails at inference (RESULTS.md)."
+  ],
+  "schema_version": "1.2"
+}

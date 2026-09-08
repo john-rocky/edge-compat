@@ -1,0 +1,94 @@
+{
+  "artifacts": [
+    {
+      "file": "Nemotron-H-4B-Instruct-128K_int8.litertlm",
+      "sha256": "29eee089a631069e5e1b1d1165cbab37570d6cff58efdb488827de2905e54f9c",
+      "size_mb": 4584.1
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "git -C litert-torch-nemotron checkout 115a136 && git apply nemotron_h_litert_torch.patch && PYTHONPATH=litert-torch-nemotron python convert_nemotron_h.py nvidia/Nemotron-H-4B-Instruct-128K out_nemotron_4b; then scripts/set_activation_type.py ... --type fp32",
+    "quantization": "int8 dynamic on linears + embedding; convs and the selective scan stay float; fp32 activations declared in-bundle for GPU",
+    "tool": "litert-torch pinned base + nemotron_h hybrid patch (hf-to-litertlm nemotron_h_work/convert_nemotron_h.py; folded rank<=4 Mamba2 scan ported to NemotronH's SSD spelling, state-continuation tracing, prefill-pad guard)",
+    "tool_version": "editable checkout 115a136 + nemotron_h_litert_torch.patch"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 1.97,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 157.1 s, output head '43'",
+            "invocation 0: exit=0 wall_s=428.3 temp 48.3->53.8C throttled=0x0 prefill_tps=19.45 decode_tps=1.91 ttft_s=13.6834 init_s=109.2127 peak_rss_mb=5831",
+            "invocation 1: exit=0 wall_s=394.2 temp 49.4->53.2C throttled=0x0 prefill_tps=20.87 decode_tps=1.97 ttft_s=12.7718 init_s=109.0306 peak_rss_mb=5826",
+            "invocation 2: exit=0 wall_s=394.2 temp 49.4->52.7C throttled=0x0 prefill_tps=20.86 decode_tps=1.97 ttft_s=12.7808 init_s=109.0638 peak_rss_mb=5841"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.97,
+            "decode_tps_min": 1.91,
+            "init_s": 109.0638,
+            "init_s_max": 109.2127,
+            "init_s_min": 109.0306,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 20.87,
+            "prefill_tps_min": 19.45,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 13.6834,
+            "ttft_s_min": 12.7718
+          },
+          "output_match": null,
+          "peak_mem_mb": 5841.0,
+          "prefill_tokens_per_s": 20.86,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 12780.8
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/nemotron-h-4b__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "nemotron-h",
+    "id": "nemotron-h-4b",
+    "license": "other (nvidia-open-model-license)",
+    "source_url": "https://huggingface.co/nvidia/Nemotron-H-4B-Instruct-128K",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Requires litert-lm >= 0.15 (conv/SSM recurrent state binds through the ExecutorMetadata section).",
+    "Three-kind hybrid (24 Mamba2 + 24 MLP + 4 attention layers): only the 4 attention layers keep KV, so memory stays nearly flat with context length.",
+    "On the composite 8-question probe one arithmetic near-miss appears identically on CPU and GPU — a quantization-level composite-prompt effect, not a backend bug (individual questions are 8/8 on both)."
+  ],
+  "schema_version": "1.2"
+}

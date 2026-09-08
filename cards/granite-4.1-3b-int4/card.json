@@ -1,0 +1,231 @@
+{
+  "artifacts": [
+    {
+      "file": "granite-4.1-3b_int4.litertlm",
+      "sha256": "ba60c191fd33b1ac9d1ab245d4a24fe81e1a520a0dd9720a435a9cc4773d80a9",
+      "size_mb": 2089.926
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "hf-to-litertlm granite41_work/ reproduction script (pip-only stack, no PYTHONPATH patches)",
+    "quantization": "int4 blockwise-32 + OCTAV on linears, int8 embedding",
+    "tool": "litert-torch (pristine released stack; repro = hf-to-litertlm granite41_work/)",
+    "tool_version": "0.9.3 (litert-converter 0.3.1, ai-edge-quantizer 0.8.0, litert-lm-builder 0.16.0 — FINDINGS.md .venv-vl093)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 15.28,
+          "delegated_ops": 1784,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1784 out of 1784 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 1784 out of 1784 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256).",
+            "VERBOSE: Replacing 1784 out of 1784 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_64).",
+            "VERBOSE: Replacing 1784 out of 1784 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_16).",
+            "results block: prefill=243.48 decode=15.28 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 244.0,
+            "init_s": 16.19992,
+            "prefill_tokens": 202.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 243.48,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1784,
+          "ttft_ms": 900.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/granite-4.1-3b-int4__galaxy-s26.json"
+      },
+      {
+        "device": "mac-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-17",
+          "decode_tokens_per_s": 38.06,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio M4 Max",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=715.06 decode=38.06 tokens/s, init=6.8617 s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 6.8617,
+            "max_num_tokens": 1024.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 715.06,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 405.2
+        },
+        "source": "data/device_runs/0.16.0/2026-08-17/granite-4.1-3b-int4__mac-m4-max.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-17",
+          "decode_tokens_per_s": 7.07,
+          "delegated_ops": 1784,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1784 out of 1784 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 1784 out of 1784 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 1784 out of 1784 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 1784 out of 1784 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=20.03 decode=7.07 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 79.0,
+            "init_s": 32.54096,
+            "prefill_tokens": 17.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 20.03,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1784,
+          "ttft_ms": 990.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-17/granite-4.1-3b-int4__pixel-8a.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 2.16,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 92.1 s, output head '43'",
+            "invocation 0: exit=0 wall_s=406.3 temp 46.1->53.2C throttled=0x0 prefill_tps=11.48 decode_tps=2.16 ttft_s=24.9825 init_s=75.642 peak_rss_mb=3436",
+            "invocation 1: exit=0 wall_s=414.2 temp 50.5->54.3C throttled=0x0 prefill_tps=11.66 decode_tps=2.15 ttft_s=25.1067 init_s=81.3394 peak_rss_mb=3437",
+            "invocation 2: exit=0 wall_s=406.2 temp 51.6->52.7C throttled=0x0 prefill_tps=11.63 decode_tps=2.17 ttft_s=24.7534 init_s=75.6224 peak_rss_mb=3438"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 2.17,
+            "decode_tps_min": 2.15,
+            "init_s": 75.642,
+            "init_s_max": 81.3394,
+            "init_s_min": 75.6224,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 11.66,
+            "prefill_tps_min": 11.48,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 25.1067,
+            "ttft_s_min": 24.7534
+          },
+          "output_match": null,
+          "peak_mem_mb": 3438.0,
+          "prefill_tokens_per_s": 11.63,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 24982.5
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/granite-4.1-3b-int4__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "granite",
+    "id": "granite-4.1-3b-int4",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/granite-4.1-3b",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Requires litert-lm >= 0.16 (HF card header).",
+    "No start_token in the metadata, on purpose: Granite sets add_bos_token False and its BOS is its EOS (<|end_of_text|>); with the converter-written start_token the runtime prepends end-of-text and the model echoes the question back — 5/8 vs 8/8 on the sanity gate. Reproduces on bf16 PyTorch with the token prepended by hand (HF card conversion notes).",
+    "Prefill ladder trimmed to six signatures (1024/256/64/16/4/1): every exported signature is charged engine memory whether or not called; the eleven-signature build was killed by iOS during Metal init unless context was capped at 1024 (HF card conversion notes).",
+    "Embedder externalised so the tied 100352x2560 vocab table sits in its own section, clear of the ~2 GiB single-section mmap ceiling on iOS (HF card).",
+    "GSM8K 0-shot CoT n=100: bf16 88.0 / int8 87.0 / int4 84.0 — int4 costs 4 points for 1.7x smaller bytes (HF card quality table)."
+  ],
+  "schema_version": "1.2"
+}

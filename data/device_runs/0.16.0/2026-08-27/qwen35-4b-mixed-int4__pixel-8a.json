@@ -1,0 +1,51 @@
+{
+  "artifact": "Qwen3.5-4B_mixed_int4.litertlm",
+  "device": "pixel-8a",
+  "model_id": "qwen35-4b-mixed-int4",
+  "quantization": "mixed int4 blockwise-32 linears, int8 embed/lm_head, fp32act",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-08-27",
+      "decode_tokens_per_s": 6.3,
+      "delegated_ops": 32830,
+      "env": {
+        "device": "pixel-8a",
+        "machine_label": "pixel-8a-warm-weight-cache",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 32830 out of 34373 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2993 partitions for subgraph 0 (prefill_1024).",
+        "VERBOSE: Replacing 23638 out of 25157 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 1 (prefill_256).",
+        "VERBOSE: Replacing 20950 out of 22469 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 2 (prefill_64).",
+        "VERBOSE: Replacing 21070 out of 22589 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 3 (prefill_16).",
+        "results block: prefill=22.13 decode=6.3 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 204.0,
+        "init_s": 48.23634,
+        "prefill_tokens": 260.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 22.13,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 34373,
+      "ttft_ms": 11910.0
+    }
+  ],
+  "schema_version": "1.0"
+}

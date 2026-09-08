@@ -1,0 +1,113 @@
+{
+  "artifact": "Qwen3.5-2B-VL_l6_final.litertlm",
+  "device": "iphone-17-pro",
+  "model_id": "qwen35vl-2b-wi8",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-08-25",
+      "decode_tokens_per_s": 14.14,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 17 Pro",
+        "machine_label": "iphone-17-pro",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "device.modelIdentifier=iPhone18,1",
+        "throughput taken from task 'quality' (30 generated tokens, 2026-08-25T13:30:34Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 1 task(s)",
+        "[quality 2026-08-25T13:30:34Z] prefill=50.47610920651949 decode=14.140538094609626 ttft_ms=5077.0 peak_mb=1202.724853515625 stop=stop output='3. Cold\\\\n4. 7\\\\n5. Bonjour\\\\n6. 56\\\\n7. 0.9\\\\n8. Violet'"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "quality.decode_tokens_per_s": 14.140538,
+        "quality.generated_tokens": 30.0,
+        "quality.load_s": 12.958303,
+        "quality.peak_mem_mb": 1202.724854,
+        "quality.prefill_tokens_per_s": 50.476109,
+        "quality.prompt_tokens": 138.0,
+        "quality.ttft_ms": 5077.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 1202.725,
+      "prefill_tokens_per_s": 50.48,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 5077.0
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-25",
+      "decode_tokens_per_s": 23.16,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 17 Pro",
+        "machine_label": "iphone-17-pro",
+        "os_build": "iOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "device.modelIdentifier=iPhone18,1",
+        "throughput taken from task 'quality' (40 generated tokens, 2026-08-25T13:28:55Z); peak_mem_mb = max memoryPeakDuringDecodeMB over 3 task(s)",
+        "[quality 2026-08-25T13:28:55Z] prefill=139.00011738157013 decode=23.158760341827403 ttft_ms=6032.0 peak_mb=4447.163612365723 stop=stop output='1. 37\\\\n2. Tokyo\\\\n3. Cold\\\\n4. 1680\\\\n5. Thank you\\\\n6.  …[trace truncated]",
+        "[vision-has-text 2026-08-25T13:29:33Z] prefill=0.0 decode=33.871913444717336 ttft_ms=4898.0 peak_mb=4641.474670410156 stop=length output='Yes, the image'",
+        "[vision-no-text 2026-08-25T13:30:12Z] prefill=0.0 decode=32.313839089669415 ttft_ms=5522.0 peak_mb=4654.6308517456055 stop=length output='No, the image'"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "quality.decode_tokens_per_s": 23.15876,
+        "quality.generated_tokens": 40.0,
+        "quality.load_s": 34.67692,
+        "quality.peak_mem_mb": 4447.163612,
+        "quality.prefill_tokens_per_s": 139.000117,
+        "quality.prompt_tokens": 138.0,
+        "quality.ttft_ms": 6032.0,
+        "vision_has_text.decode_tokens_per_s": 33.871913,
+        "vision_has_text.generated_tokens": 4.0,
+        "vision_has_text.load_s": 30.715177,
+        "vision_has_text.peak_mem_mb": 4641.47467,
+        "vision_has_text.prefill_tokens_per_s": 0.0,
+        "vision_has_text.prompt_tokens": 0.0,
+        "vision_has_text.ttft_ms": 4898.0,
+        "vision_no_text.decode_tokens_per_s": 32.313839,
+        "vision_no_text.generated_tokens": 4.0,
+        "vision_no_text.load_s": 31.765559,
+        "vision_no_text.peak_mem_mb": 4654.630852,
+        "vision_no_text.prefill_tokens_per_s": 0.0,
+        "vision_no_text.prompt_tokens": 0.0,
+        "vision_no_text.ttft_ms": 5522.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 4654.631,
+      "prefill_tokens_per_s": 139.0,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 6032.0
+    }
+  ],
+  "schema_version": "1.0"
+}

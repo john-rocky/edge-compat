@@ -1,0 +1,277 @@
+{
+  "artifacts": [
+    {
+      "file": "granite-docling-258M.litertlm",
+      "sha256": "11a14f547dda752d35c222b2a781d277fa499d94d14a3b575f719bb16391e113",
+      "size_mb": 322.291
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "docling_work/ship_granite_docling.sh (see hf-to-litertlm REPRODUCE.md VLM table row granite-docling-258m)",
+    "quantization": "decoder int8 weights with FLOAT compute (integer-compute int8/int4 corrupt DocTags structure — measured, int4 rejected); vision tower int8 (corr 0.98 vs fp32, structurally identical output); cache 4096",
+    "tool": "litert-torch fast_vlm rail (SmolVLM2 vision scripts, docling_work/); LiteRT-LM bundle: SigLIP-base p16 512x512 vision encoder int8 (64 image tokens after pixel-shuffle x4) + granite Llama-architecture 576-dim/30-layer decoder",
+    "tool_version": "hf-to-litertlm docling_work @ d18f276 (SmolVLM2 rail, 512-BILINEAR contract)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1413,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "I0000 00:00:1787554465.704842   18858 litert_lm_lib.cc:499] Choose backend: cpu",
+            "I0000 00:00:1787554465.705230   18858 litert_lm_lib.cc:504] Provided vision backend: cpu",
+            "VERBOSE: Replacing 1413 out of 1538 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 177 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1413 out of 1538 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 177 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 1413 out of 1538 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 177 partitions for subgraph 2 (prefill_1024).",
+            "VERBOSE: Replacing 1297 out of 1423 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 182 partitions for subgraph 3 (decode).",
+            "INFO: [cpu_registry.cc:75] XNNPACK CPU accelerator registered.",
+            "WARNING: [gpu_registry.cc:131] GPU accelerator could not be loaded and registered. (CPU-only process: the GPU .so was not staged for this leg)",
+            "output opens '<doctag><section_header_level_1><loc_35><loc_17><loc_152><loc_26>Quarterly Sales Report 2025</section_header_level_1>' and closes '</doctag>' - docling_work/FINDINGS.md: table page exact (title + 5x6 grid + 25/25 cells, clean stop)",
+            "real\t35.412 / user\t103.760887 / sys\t4.319056 (adb shell time trailer; wall seconds for one 512-px page incl. engine init)",
+            "second run (device_gate_s942q_cpu_run2.log) produced bit-identical output at real 66.397 s - FINDINGS calls it thermal throttle; the first run is the cell, the repeat is spread evidence.",
+            "delegated/total follow the bench adapter's convention (largest subgraph): prefill graphs 1413/1538 partially on XNNPACK, decode 1297/1423.",
+            "documented invocation (docling_work/FINDINGS.md): LD_LIBRARY_PATH=. ./litert_lm_advanced_main --backend=cpu --vision_backend=cpu --model_path=granite-docling-258M_wi8f.litertlm --max_num_tokens=4096 --input_prompt='[image:.../table_page_512.png] Convert this page to docling.' - a generation gate, not --benchmark.",
+            "model_assets: model_path: granite-docling-258M_wi8f.litertlm - the gate ran the local wi8f bundle; keyed here to the published file name because docling_work/FINDINGS.md (2026-08-25 close) states 'local bundles/tflites/src deleted - shipped wi8f is on HF sha-verified' and names wi8f 338 MB as the canonical bundle (the card's published artifact is 322.291 MiB = 338 MB). No sha256 for the local file survives, so the identity rests on that FINDINGS attestation.",
+            "runtime_version 0.16.1: the binary is litert_lm_advanced_main android_arm64 built from the v0.16.1 tag by litertlm-android-builder (GH run 32220585182, sha256 ea5bf071..., docling_work/FINDINGS.md), staged as docling_work/android_bin/litert_lm_advanced_main-android_arm64-v0.16.1/. The log itself prints no version.",
+            "litertlm-convert/docling_work/device_gate_s942q_cpu.log (absl epoch 1787554465 = 2026-08-24 06:54 UTC / 15:54 JST)"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "max_num_tokens": 4096.0,
+            "wall_s": 35.412
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1538,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.16.1/2026-08-24/granite-docling-258m__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 33.49,
+          "delegated_ops": 1826,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1413 out of 1538 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 177 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1413 out of 1538 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 177 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 1413 out of 1538 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 177 partitions for subgraph 2 (prefill_1024).",
+            "VERBOSE: Replacing 1297 out of 1423 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 182 partitions for subgraph 3 (decode).",
+            "results block: prefill=313.36 decode=33.49 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 3892.0,
+            "init_s": 1.8428,
+            "prefill_tokens": 204.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 313.36,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1892,
+          "ttft_ms": 680.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/granite-docling-258m__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": "delegate_opencl.cc:340] Failed to create litert::ml_drift::DelegateKernelLiteRt: INVALID_ARGUMENT: Shape mismatch: {bhwc, {576, 1, 1, 576}} vs {bhwc, {1, 1, 576, 576}}",
+          "evidence": [
+            "I0000 00:00:1787554718.116546   21908 litert_lm_lib.cc:499] Choose backend: gpu",
+            "I0000 00:00:1787554718.117261   21908 litert_lm_lib.cc:504] Provided vision backend: cpu",
+            "VERBOSE: Replacing 1538 out of 1538 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "E0000 00:00:1787554720.078055   21908 delegate_opencl.cc:340] Failed to create litert::ml_drift::DelegateKernelLiteRt: INVALID_ARGUMENT: Shape mismatch: {bhwc, {576, 1, 1, 576}} vs {bhwc, {1, 1, 576, 576}}",
+            "ERROR: Failed to initialize kernel.",
+            "ERROR: Restored original execution plan after delegate application failure.",
+            "E0000 00:00:1787554720.161187   21908 litert_lm_advanced_main.cc:377] Failed to run litert_lm: UNKNOWN: ERROR: [runtime/executor/llm_litert_compiled_model_executor_factory...",
+            "real\t2.219 (the process exits 2.2 s in; the 1538/1538 LITERT_CL claim precedes the kernel-init failure and is not a residency figure - delegated_ops stays null)",
+            "same S26 later ran the wf16 sibling (granite-docling-258M_wf16.litertlm, unpublished) on GPU with full delegation - FINDINGS reads the wi8f failure as a delegate shape-handling wall on the int8 graph, not a device wall.",
+            "documented invocation (docling_work/FINDINGS.md): LD_LIBRARY_PATH=. ./litert_lm_advanced_main --backend=gpu --vision_backend=cpu --model_path=granite-docling-258M_wi8f.litertlm --max_num_tokens=4096 --input_prompt='[image:.../table_page_512.png] Convert this page to docling.' - a generation gate, not --benchmark.",
+            "model_assets: model_path: granite-docling-258M_wi8f.litertlm - the gate ran the local wi8f bundle; keyed here to the published file name because docling_work/FINDINGS.md (2026-08-25 close) states 'local bundles/tflites/src deleted - shipped wi8f is on HF sha-verified' and names wi8f 338 MB as the canonical bundle (the card's published artifact is 322.291 MiB = 338 MB). No sha256 for the local file survives, so the identity rests on that FINDINGS attestation.",
+            "runtime_version 0.16.1: the binary is litert_lm_advanced_main android_arm64 built from the v0.16.1 tag by litertlm-android-builder (GH run 32220585182, sha256 ea5bf071..., docling_work/FINDINGS.md), staged as docling_work/android_bin/litert_lm_advanced_main-android_arm64-v0.16.1/. The log itself prints no version.",
+            "litertlm-convert/docling_work/device_gate_s942q_gpu.log (absl epoch 1787554718 = 2026-08-24 06:58 UTC / 15:58 JST)"
+          ],
+          "failure_class": "engine_create_failed",
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": false,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "max_num_tokens": 4096.0,
+            "wall_s": 2.219
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.16.1/2026-08-24/granite-docling-258m__galaxy-s26.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 23.25,
+          "delegated_ops": 1826,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1413 out of 1538 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 177 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1413 out of 1538 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 177 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 1413 out of 1538 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 177 partitions for subgraph 2 (prefill_1024).",
+            "VERBOSE: Replacing 1297 out of 1423 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 182 partitions for subgraph 3 (decode).",
+            "results block: prefill=88.72 decode=23.25 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 3892.0,
+            "init_s": 3.95347,
+            "prefill_tokens": 204.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 88.72,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1892,
+          "ttft_ms": 2340.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/granite-docling-258m__pixel-8a.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1538,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": "exit 2 during the gpu generation gate; log tail: local_attention_mask_policy: Not set | sliding_window_size: Not set | advanced_settings: Not set",
+          "evidence": [
+            "VERBOSE: Replacing 1538 out of 1538 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "community_accel_work/s7_manifest_backfill/logs_p8a/granite-docling-258M__granite-docling-258M.gate.log: generation gate verdict FAIL (journal rows_p8a.jsonl, fail_class=run_error, exit=2, generated=True, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+            "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
+            "gate process peak 677 MB (journal gate_peak_mb)"
+          ],
+          "failure_class": "run_error",
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "total_ops": 1538,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/granite-docling-258m__pixel-8a.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "granite-docling",
+    "id": "granite-docling-258m",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/ibm-granite/granite-docling-258M",
+    "task": "image-text-to-text"
+  },
+  "pitfalls": [
+    "Input contract: pre-resize the page to exactly 512x512 with BILINEAR resampling in the app before sending. The runtime's internal resampler uses a different filter and the model then hallucinates a page (base-model trait: single-global-512 path is resampling-filter-sensitive).",
+    "CPU-only ship: GPU delegation is possible but ~4x slower than CPU on this 258M decoder (dispatch-bound), and the shipped wi8-float form's DEQUANTIZE->FULLY_CONNECTED pattern is rejected by GPU delegates.",
+    "The newline after <|end_of_text|> is part of the chat format — dropping that single token turns output into a hallucinated blank page. If you re-template, protect the \\n.",
+    "Dense multi-column pages and small formulas degrade in single-512 mode (also in the original model run this way) — tile the page app-side and send crops for those."
+  ],
+  "schema_version": "1.2"
+}

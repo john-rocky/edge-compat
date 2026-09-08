@@ -1,0 +1,48 @@
+{
+  "backend": "webgpu_mldrift",
+  "entries": [
+    {
+      "conditions": "example-provenance playground test fixture — NOT a measured browser verdict; real web op entries require a runtime log naming the op (trap rule)",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "LOGISTIC",
+      "provenance": "example",
+      "rewrite_hints": [
+        {
+          "expected_effect": "example expected effect",
+          "rewrite": "example rewrite hint for LOGISTIC",
+          "symptom": "example symptom"
+        }
+      ],
+      "status": "delegated"
+    },
+    {
+      "conditions": "example-provenance playground test fixture — NOT a measured browser verdict",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "SQRT",
+      "provenance": "example",
+      "status": "partial"
+    },
+    {
+      "conditions": "example-provenance playground test fixture — NOT a measured browser verdict",
+      "dtypes": [
+        "float32"
+      ],
+      "op": "TANH",
+      "provenance": "example",
+      "rewrite_hints": [
+        {
+          "rewrite": "example rewrite hint for TANH",
+          "symptom": "example symptom"
+        }
+      ],
+      "status": "fallback"
+    }
+  ],
+  "generated_at": "2026-08-10",
+  "litert_version": "2.5.3",
+  "schema_version": "1.1"
+}

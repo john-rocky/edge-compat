@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sweep_result.schema.json",
+  "title": "LiteRT.js browser sweep result (one file per model)",
+  "description": "Measured browser behavior of one .tflite model across LiteRT.js backends, produced by web/sweep. Browser backend IDs: wasm_xnnpack (WASM CPU/XNNPACK), webgpu_mldrift (WebGPU / ML Drift), webnn (experimental, behind --experimental). Model-level results only: op-level matrix entries are NEVER derived from these records (Phase 6 trap rule) — a fully delegated model does not license per-op verdicts, and a fallback attributes nothing to any specific op. Every record carries its full env block; a record without env is invalid (headless desktop Chromium is not a user's phone — results are only ever presented with their environment).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "model_id", "source", "license", "input_spec", "config", "results"],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "model_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "description": "Catalog id; also this file's basename under the sweep output directory."
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Where the model artifact came from, as given in the catalog manifest: a URL or a path relative to the manifest. Model artifacts are never committed to this repo."
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1,
+      "description": "License of the model artifact (required in the catalog manifest)."
+    },
+    "input_spec": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The catalog input_spec used to build fixture inputs: either dimension-x-dtype specs like '1x64:float32' (multiple inputs ';'-separated, dims 'x'-joined, ':dtype' suffix) or the path of an input-fixture JSON file."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free-text notes column from the catalog manifest."
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["warmup_runs", "timed_runs", "tolerance_abs", "tolerance_rel", "input_seed"],
+      "description": "Sweep configuration echoed into the output (spec 5.1: warmup and N are config, echoed).",
+      "properties": {
+        "warmup_runs": { "type": "integer", "minimum": 0 },
+        "timed_runs": { "type": "integer", "minimum": 1 },
+        "tolerance_abs": { "type": "number", "minimum": 0 },
+        "tolerance_rel": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Output-match passes when every element satisfies |out - ref| <= max(tolerance_abs, tolerance_rel * |ref|). Default policy pending owner sign-off (Phase 6 ask); the values used are always echoed here."
+        },
+        "input_seed": {
+          "type": "integer",
+          "description": "Seed of the deterministic PRNG that generated fixture inputs (unused when input_spec is a fixture file)."
+        }
+      }
+    },
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/backend_record" },
+      "description": "One record per backend attempted, sorted by backend id."
+    }
+  },
+  "$defs": {
+    "backend_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backend", "loads", "runs", "full_delegation", "output_match", "max_abs_diff", "max_rel_diff", "latency_p50_ms", "delegation_evidence", "env", "date", "provenance"],
+      "properties": {
+        "backend": {
+          "enum": ["wasm_xnnpack", "webgpu_mldrift", "webnn"]
+        },
+        "loads": {
+          "type": "boolean",
+          "description": "The model loaded and compiled for this backend. When false, failure_class and error say why."
+        },
+        "runs": {
+          "type": "boolean",
+          "description": "One inference completed on the fixture input."
+        },
+        "failure_class": {
+          "type": ["string", "null"],
+          "description": "Machine-usable failure class when loads or runs is false. Known classes: init_failed (the LiteRT.js runtime itself failed to load), fetch_failed, parse_error, compile_error, wasm_memory_ceiling, run_error, backend_unavailable, page_crash, timeout. Open set — new classes may appear; consumers must tolerate unknown values."
+        },
+        "error": {
+          "type": ["string", "null"],
+          "description": "Verbatim diagnostic evidence: the error message of a load/run failure, or the reason an output comparison was structurally impossible (tensor count/length mismatch, non-finite values)."
+        },
+        "full_delegation": {
+          "type": ["boolean", "null"],
+          "description": "Whether the whole graph ran on the accelerator (CompiledModel.isFullyAccelerated). null when not applicable: the wasm_xnnpack reference backend, or the model never compiled."
+        },
+        "output_match": {
+          "type": ["boolean", "null"],
+          "description": "Numerical comparison against the wasm_xnnpack reference outputs on the same fixture input. null for the reference backend itself, when either side did not run, or when outputs contained non-finite values (then failure_class/error explain)."
+        },
+        "max_abs_diff": {
+          "type": ["number", "null"],
+          "description": "max |out - ref| across all output elements. null whenever output_match is null."
+        },
+        "max_rel_diff": {
+          "type": ["number", "null"],
+          "description": "max |out - ref| / max(|ref|, 1e-9) across all output elements. null whenever output_match is null."
+        },
+        "latency_p50_ms": {
+          "type": ["number", "null"],
+          "description": "Median of config.timed_runs single-inference wall times (model.run plus output readback to CPU — the end-to-end cost a web app pays) after config.warmup_runs warmups, in milliseconds. null when the model did not run. The ONLY fields exempt from run-to-run determinism are latency values."
+        },
+        "delegation_evidence": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Runtime console warnings/errors captured verbatim during load and run for this backend — the evidence for full_delegation and failure records. May be empty."
+        },
+        "env": {
+          "$ref": "#/$defs/env"
+        },
+        "date": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "provenance": {
+          "enum": ["measured", "example"],
+          "description": "example = sweep of the synthetic example fixtures; never mistake for a real model's browser behavior. measured = a real model measured on the recorded env."
+        }
+      }
+    },
+    "env": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["browser", "browser_version", "headless", "os", "litertjs_core_version", "machine_label"],
+      "description": "Mandatory on every record: results are only ever presented with the environment that produced them.",
+      "properties": {
+        "browser": { "type": "string", "minLength": 1 },
+        "browser_version": { "type": "string", "minLength": 1 },
+        "headless": { "type": "boolean" },
+        "os": { "type": "string", "minLength": 1 },
+        "os_version": { "type": "string" },
+        "jspi": {
+          "type": "boolean",
+          "description": "Whether the JSPI WASM variant was active (per-op WASM fallback needs JSPI; without it fallback is whole-model)."
+        },
+        "webgpu_adapter": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "description": "navigator.gpu adapter info; null when WebGPU was unavailable or not queried.",
+          "properties": {
+            "vendor": { "type": "string" },
+            "architecture": { "type": "string" },
+            "device": { "type": "string" },
+            "description": { "type": "string" }
+          }
+        },
+        "litertjs_core_version": { "type": "string", "minLength": 1 },
+        "machine_label": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Owner-chosen label for the measuring machine (results are his-hardware-his-label)."
+        }
+      }
+    }
+  }
+}

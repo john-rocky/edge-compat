@@ -1,0 +1,28 @@
+Benchmarking model: out_wi8_composite_conv040dev (~/code/litertlm-convert/minicpm5_work/regate_softmax_20260808/out_wi8_composite_conv040dev/model.litertlm)
+Backend                    : gpu
+Number of tokens in prefill: 256
+Number of tokens in decode : 256
+Max number of tokens       : 1024
+Cache                      : no
+Speculative decoding       : auto
+Running warmup..
+E0000 00:00:1786186454.183609 74047316 engine.cc:1234] Failed to generate content: NOT_FOUND: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor.cc:708]
+└ The given map is missing some output TensorBuffers
+=== Source Location Trace: === 
+./third_party/odml/litert/litert/cc/litert_macros.h:557
+third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor.cc:1850
+third_party/odml/litert_lm/runtime/core/tasks.cc:484
+third_party/odml/litert_lm/runtime/core/session_advanced.cc:363
+Running iteration 1 of 1..
+E0000 00:00:1786186454.871245 74047316 engine.cc:1234] Failed to generate content: NOT_FOUND: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor.cc:708]
+└ The given map is missing some output TensorBuffers
+=== Source Location Trace: === 
+./third_party/odml/litert/litert/cc/litert_macros.h:557
+third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor.cc:1850
+third_party/odml/litert_lm/runtime/core/tasks.cc:484
+third_party/odml/litert_lm/runtime/core/session_advanced.cc:363
+----- Results -----
+Prefill speed:        0.00 tokens/s
+Decode speed:         0.00 tokens/s
+Init time:            1.3646 s
+Time to first token:  0.0000 s

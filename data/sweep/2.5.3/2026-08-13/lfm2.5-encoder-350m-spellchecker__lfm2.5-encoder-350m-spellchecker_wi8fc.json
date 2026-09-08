@@ -1,0 +1,113 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x128:int32;1x128:int32",
+  "license": "other",
+  "model_id": "lfm2.5-encoder-350m-spellchecker__lfm2.5-encoder-350m-spellchecker_wi8fc",
+  "notes": "",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-08-13",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 2012.475,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-08-13",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: ERROR: Following operations are not supported by GPU delegate:",
+        "error: BROADCAST_TO: Operation is not supported.",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_10/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;11",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_10/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;12",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_10/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;14",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_10/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;15",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_12/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;11",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_12/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;12",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_12/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;14",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_12/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;15",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_14/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;11",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_14/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;12",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_14/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;14",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_14/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;15",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_2/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;13",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_2/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;14",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_2/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;16",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_2/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;17",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_5/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;11",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_5/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;12",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_5/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;14",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_5/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;15",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_8/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;11",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_8/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;12",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_8/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;14",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.GecWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Spellchecker.4e2f724c10985e9ec90f34189c22be5d5f2e41e0.modeling_gectagger.GecTaggerForGEC_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M.b886781f7c6f10ca9b7096e21b83e30a073c2f39.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_encoder/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_8/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;15",
+        "error: 155 operations will run on the GPU, and the remaining 761 operations will run on the CPU.",
+        "warning: %c[LiteRT]%c Model not fully compiled for webgpu. Partially delegating to WASM execution. background: #FFA000; color: black; font-weight: bold; padding: 2px 5px; border-radius: 3px; font-weight: bold;"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": 1798.175,
+      "loads": true,
+      "max_abs_diff": 289.20245361328125,
+      "max_rel_diff": 118112.42857142857,
+      "output_match": false,
+      "provenance": "measured",
+      "runs": true
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/LFM2.5-Encoder-350M-Spellchecker/resolve/main/LFM2.5-Encoder-350M-Spellchecker_wi8fc.tflite"
+}

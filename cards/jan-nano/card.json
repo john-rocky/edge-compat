@@ -1,0 +1,138 @@
+{
+  "artifacts": [
+    {
+      "file": "model.litertlm",
+      "sha256": "67cfe76fd79acb0db652a767c22b5abcc7409cc064484de80faf516ccedf790a",
+      "size_mb": 2359.731
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "EXTERNALIZE_EMBEDDER=1 CACHE=4096 python scripts/export_simple_template.py Menlo/Jan-nano out/jan-nano templates/qwen3_think.jinja BOCTAV4_128 ; python qa/add_thought_channel.py in.litertlm out.litertlm --start '<think>' --end '</think>' (2026-08-25 staged meta, from the conversion record)",
+    "quantization": "int4 (symmetric) + OCTAV, blockwise block 128; embeddings INT8 (externalized section) (HF card Conversion)",
+    "tool": "litert-torch via litertlm-convert scripts/export_simple_template.py (reproduce_llm.sh key jan-nano), then the 2026-08-22 metadata-only thought-channel re-ship (qa/add_thought_channel.py through the litert-lm 0.16.0 CLI; every tflite section byte-identical)",
+    "tool_version": "TODO (owner to fill — searched 2026-08-25 four ways: no convert log, reproduce_llm.sh pins no version, the bundle header carries no converter version, the tflite sections carry only 'MLIR Converted.'; the RE-SHIP step is pinned to the litert-lm 0.16.0 CLI)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-07-23",
+          "decode_tokens_per_s": 68.98,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.14.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=969.89 decode=68.98 tokens/s, init=1.9402 s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 1.9402,
+            "max_num_tokens": 1024.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 969.89,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 278.4
+        },
+        "source": "data/device_runs/0.14.0/2026-07-23/jan-nano__mac-studio-m4-max.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 1.5,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 213.0 s, output head '[thought] Okay, so the user is asking for the sum of 17 and 26. Let me think. I '",
+            "invocation 0: exit=0 wall_s=498.3 temp 51.0->55.4C throttled=0x0 prefill_tps=10.72 decode_tps=1.5 ttft_s=25.4062 init_s=56.5215 peak_rss_mb=4013",
+            "invocation 1: exit=0 wall_s=496.4 temp 51.6->56.5C throttled=0x0 prefill_tps=10.39 decode_tps=1.5 ttft_s=26.4138 init_s=55.392 peak_rss_mb=4014",
+            "invocation 2: exit=0 wall_s=498.4 temp 51.6->54.9C throttled=0x0 prefill_tps=10.6 decode_tps=1.49 ttft_s=25.5081 init_s=55.3288 peak_rss_mb=4030"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.5,
+            "decode_tps_min": 1.49,
+            "init_s": 55.392,
+            "init_s_max": 56.5215,
+            "init_s_min": 55.3288,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 10.72,
+            "prefill_tps_min": 10.39,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 26.4138,
+            "ttft_s_min": 25.4062
+          },
+          "output_match": null,
+          "peak_mem_mb": 4030.0,
+          "prefill_tokens_per_s": 10.6,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 25508.1
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/jan-nano__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3",
+    "id": "jan-nano",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Jan-nano",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Which file: block 128 (model.litertlm) is the recommended on-device build — GSM8K 88.0% (max_tokens 2048), loads on the iPhone 17 Pro at ~14 tok/s; block 32 (model_block32.litertlm) 85.0%, its 2.11 GiB section sits at the iOS memory ceiling and may fail to load — desktop/Android (HF card 'Which file?').",
+    "Standard Qwen3ForCausalLM on the existing Qwen3 path, no custom graph code; embeddings INT8 externalized; KV cache 4096 (HF card Conversion).",
+    "License Apache-2.0, inherited from Menlo/Jan-nano (itself fine-tuned from Qwen/Qwen3-4B) (HF card License).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/ (Pi 5 / S26 / Pixel 8a / Mac / iPhone as measured)."
+  ],
+  "schema_version": "1.2"
+}

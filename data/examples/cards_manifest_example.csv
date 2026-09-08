@@ -1,0 +1,4 @@
+model,meta,bench,lint,cross
+model_clean_example.tflite,meta_clean_example.yaml,bench_clean_example.json,lint_clean_example.json,cross_runtime_clean_example.json
+model_mixed_example.tflite,meta_mixed_example.yaml,,lint_mixed_example.json,
+model_missing_example.tflite,meta_clean_example.yaml,,,

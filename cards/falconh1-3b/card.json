@@ -1,0 +1,313 @@
+{
+  "artifacts": [
+    {
+      "file": "Falcon-H1-3B-Instruct_int8.litertlm",
+      "sha256": "add075d24b309a68ba7312bb89410345c06ff1a6628e42785f45f57045795d2b",
+      "size_mb": 3228.476
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "hf-to-litertlm falcon_h1_work/ reproduction script + patch",
+    "quantization": "post-hoc dynamic int8 over linears + embedding only; convs and the scan stay float; fp32 activations declared for GPU",
+    "tool": "litert-torch + hybrid-cache patch (repro = hf-to-litertlm falcon_h1_work/)",
+    "tool_version": "TODO(owner): patched-checkout version not pinned in the HF card"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 11.49,
+          "delegated_ops": 5045,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 4919 out of 4919 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 4919 out of 4919 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 4919 out of 4919 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 4887 out of 4887 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=109.22 decode=11.49 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 185.0,
+            "init_s": 22.84925,
+            "prefill_tokens": 212.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 109.22,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 5045,
+          "ttft_ms": 2030.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/falconh1-3b__galaxy-s26.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-14",
+          "decode_tokens_per_s": 7.85,
+          "delegated_ops": null,
+          "env": {
+            "device": "iPhone 17 Pro",
+            "machine_label": "iphone-17-pro",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "quality autorun JSON: promptTokensPerSecond=48.71 decodeTokensPerSecond=7.85 firstTokenLatencyMS=3141 memoryPeakDuringDecodeMB=1455.5 (litert-lm_litert-local_falconh1-3b-int8_quality_2026-08-14T03-59-18Z.json)",
+            "composite 8-question probe 8/8, answers identical to the GPU run"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 41.0,
+            "init_s": 11.799,
+            "prefill_tokens": 146.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 1455.5,
+          "prefill_tokens_per_s": 48.71,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 3141.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-14/falconh1-3b__iphone-17-pro.json"
+      },
+      {
+        "device": "iphone-17-pro",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-14",
+          "decode_tokens_per_s": 14.04,
+          "delegated_ops": null,
+          "env": {
+            "device": "iPhone 17 Pro",
+            "machine_label": "iphone-17-pro",
+            "os_build": "iOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "quality autorun JSON: promptTokensPerSecond=111.48 decodeTokensPerSecond=14.04 firstTokenLatencyMS=1494 memoryPeakDuringDecodeMB=3033.8 loadTimeSeconds=27.55 (litert-lm_litert-local_falconh1-3b-int8_quality_2026-08-14T03-58-56Z.json)",
+            "composite 8-question probe 8/8; full 12-signature prefill ladder loads on the 12 GB phone with no memory pressure (falcon vocab 65537 keeps the per-signature RAM tax light)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 41.0,
+            "init_s": 27.549,
+            "prefill_tokens": 146.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 3033.8,
+          "prefill_tokens_per_s": 111.48,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 1494.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-14/falconh1-3b__iphone-17-pro.json"
+      },
+      {
+        "device": "mac-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-14",
+          "decode_tokens_per_s": 20.88,
+          "delegated_ops": null,
+          "env": {
+            "device": "mac-m4-max",
+            "machine_label": "mac-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=120.70 decode=20.88 tokens/s (falcon_h1_work/bench_3b.log, quiet window, --cache no, runs 3)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 37.2407,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 120.7,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 2168.9
+        },
+        "source": "data/device_runs/0.16.0/2026-08-14/falconh1-3b__mac-m4-max.json"
+      },
+      {
+        "device": "mac-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-14",
+          "decode_tokens_per_s": 65.32,
+          "delegated_ops": null,
+          "env": {
+            "device": "mac-m4-max",
+            "machine_label": "mac-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=979.31 decode=65.32 tokens/s (falcon_h1_work/bench_3b.log, quiet window, --cache no, runs 3)",
+            "E0000 gpu_model_builder.cc:4039] TopK requires src tensor C dimension to be divisible by 4. (vocab 65537; family-normal — shipped 1.5B logs the identical line; generation and 8Q unaffected)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 15.9531,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 979.31,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 276.7
+        },
+        "source": "data/device_runs/0.16.0/2026-08-14/falconh1-3b__mac-m4-max.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-02",
+          "decode_tokens_per_s": 1.9,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 118.1 s, output head '**33**'",
+            "invocation 0: exit=0 wall_s=382.2 temp 46.1->53.2C throttled=0x0 prefill_tps=23.39 decode_tps=1.9 ttft_s=11.4719 init_s=82.8757 peak_rss_mb=4413",
+            "invocation 1: exit=0 wall_s=376.2 temp 50.5->53.8C throttled=0x0 prefill_tps=23.32 decode_tps=1.88 ttft_s=11.5092 init_s=82.1094 peak_rss_mb=4413",
+            "invocation 2: exit=0 wall_s=378.2 temp 51.0->54.9C throttled=0x0 prefill_tps=22.65 decode_tps=1.91 ttft_s=11.8269 init_s=82.2843 peak_rss_mb=4411"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.91,
+            "decode_tps_min": 1.88,
+            "init_s": 82.2843,
+            "init_s_max": 82.8757,
+            "init_s_min": 82.1094,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 23.39,
+            "prefill_tps_min": 22.65,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 11.8269,
+            "ttft_s_min": 11.4719
+          },
+          "output_match": null,
+          "peak_mem_mb": 4413.0,
+          "prefill_tokens_per_s": 23.32,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 11509.2
+        },
+        "source": "data/device_runs/0.16.1/2026-09-02/falconh1-3b__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "falcon-h1",
+    "id": "falconh1-3b",
+    "license": "falcon-llm-license",
+    "source_url": "https://huggingface.co/litert-community/Falcon-H1-3B-Instruct",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Requires litert-lm >= 0.15 (HF card header).",
+    "Composite hybrid cache layer: each layer holds KV + conv + recurrent state at one layer index — full-attention and Mamba2 in the same cache class; the runtime binds states by tensor name (HF card conversion notes).",
+    "Folded selective scan: the Mamba2 scan is re-expressed as batched matmuls with chunk/head axes folded into batch (rank <= 4, no BROADCAST_TO, no int64 index math) — this is what makes the graph fully GPU-delegable (HF card conversion notes).",
+    "Prefill-pad guard: partially-filled prefill chunks are made exact identity steps for the SSM; the stored conv window is gathered at the last valid column (HF card conversion notes).",
+    "Falcon-specific wiring preserved: mup_vector and ssm_in_multiplier in the traced scan; exporter timestamp-index kwargs re-injected at the attention layer (HF card conversion notes)."
+  ],
+  "schema_version": "1.2"
+}

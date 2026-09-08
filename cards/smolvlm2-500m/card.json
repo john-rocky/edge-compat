@@ -1,0 +1,131 @@
+{
+  "artifacts": [
+    {
+      "file": "SmolVLM2-500M.litertlm",
+      "sha256": "0dfb6fb881eb16e5ef2b2be04de5476caf939b7d9ae601fdee308bbc5462fd55",
+      "size_mb": 344.326
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "TODO (owner) — not recorded in the source card",
+    "quantization": "vision: SigLIP encoder + pixel-shuffle x4 + Linear connector int8 -> 64 image tokens; decoder SmolLM2-360M int4 weights (blockwise-32 + OCTAV); tied embedding INT8 (externalized); integer compute; KV cache 2048. File SmolVLM2-500M.litertlm, ~361 MB",
+    "tool": "TODO (owner) — the card describes the fast_vlm bundle layout and graph edits but does not name the converter tool",
+    "tool_version": "TODO (owner) — not recorded in the source card"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 76.72,
+          "delegated_ops": 1794,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1290 out of 1423 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 189 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1290 out of 1423 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 189 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 1158 out of 1292 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 194 partitions for subgraph 2 (decode).",
+            "VERBOSE: Replacing 8 out of 8 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 3 (odml.rms_norm.impl).",
+            "results block: prefill=417.03 decode=76.72 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 212.0,
+            "init_s": 0.61011,
+            "prefill_tokens": 203.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 417.03,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1864,
+          "ttft_ms": 500.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/smolvlm2-500m__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 76.73,
+          "delegated_ops": 1423,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1423 out of 1423 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1423 out of 1423 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 1292 out of 1292 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (decode).",
+            "results block: prefill=1371.43 decode=76.73 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 282.0,
+            "init_s": 1.26452,
+            "prefill_tokens": 204.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 1371.43,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1423,
+          "ttft_ms": 160.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/smolvlm2-500m__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "smolvlm",
+    "id": "smolvlm2-500m",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+    "task": "image-text-to-text"
+  },
+  "pitfalls": [
+    "One image per conversation on GPU: a second image in the same conversation may degrade — a GPU-delegate trait shared across fast_vlm models. CPU handles multi-image; start a new conversation for a different image.",
+    "Gallery import: in the Import Model dialog you must check \"Support image\" or image input will not work; Gallery v1.0.16+ can also import directly from Hugging Face inside the app.",
+    "Vision-only bundle, no audio tower — on the Swift runtime load with the vision tower enabled (Modality.textImage / [.vision]).",
+    "Very small (500M) model: keep a sensible max_tokens and use sampling (e.g. top-p); at pure greedy it can be repetitive/verbose.",
+    "Image input is resized to 512x512, with the (x-0.5)/0.5 normalization and NCHW transpose baked into the vision-encoder graph.",
+    "The vision encoder uses the static arange(1024) position-embedding path — the model's dynamic bucketize position logic is bypassed, numerically identical only for a full 512x512 frame. Single-image, no high-res splitting: a fixed 64 soft tokens.",
+    "The SigLIP vision tower converts bit-faithfully (float CPU-parity corr ~ 1.0); single-image VQA is CPU-verified as coherent and image-grounded.",
+    "This is the image path of SmolVLM2-500M-Video-Instruct — the package is image+text; video is not the converted path."
+  ],
+  "schema_version": "1.2"
+}

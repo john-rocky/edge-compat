@@ -1,0 +1,104 @@
+{
+  "backend": "gpu_metal_ios",
+  "entries": [
+    {
+      "conditions": "GPU-compiled graphs accept only the buffer type their requirements list. A host-memory tensor buffer is accepted at creation for a GPU-compiled graph and the model compiles, but RunCompiledModel then fails with kLiteRtStatusErrorRuntimeFailure (3). The requirements list exactly one supported type (MetalBufferPacked, id 34) whose BufferSize equals the float32 linear size; creating that type and writing plain float32 through Lock/Unlock is correct. Android CompiledModel accepts host I/O for GPU graphs, so code that works there fails here at run time only.",
+      "constraints": {
+        "buffer_type": "metal_buffer_packed"
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-21",
+        "litert_version": "0.15.0",
+        "source_model": "SAM 3.1 vision / head / tracker graphs"
+      },
+      "op": "GRAPH_IO",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "every graph runs; Lock/Unlock performs the layout conversion",
+          "rewrite": "query LiteRtGetCompiledModelInput/OutputBufferRequirements and create the listed type at the required size; write float32 through the lock as usual",
+          "symptom": "compile and buffer creation succeed; the run fails with status 3 and no further detail"
+        }
+      ],
+      "status": "incorrect"
+    },
+    {
+      "conditions": "A managed host-memory tensor buffer larger than ~112 MiB fails to create: an input of 117455616 B returns kLiteRtStatusErrorRuntimeFailure (3), while a 111509632 B input on the same model and process creates fine. Requesting the required device buffer type at any size other than the requirements' own BufferSize returns kLiteRtStatusErrorUnknown (9).",
+      "constraints": {
+        "max_buffer_bytes": 117440512
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-21",
+        "litert_version": "0.15.0",
+        "source_model": "SAM 3.1 memory-attention graph (117.4 MB flat input)"
+      },
+      "op": "GRAPH_IO",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "buffers create and the graph runs; the split graph is bit-identical to the single-input graph (max|diff| 0.0 through the same runner on CPU)",
+          "rewrite": "split the flat graph input into two tensors at export so no single buffer exceeds the cap; concatenate them back inside the graph",
+          "symptom": "the graph compiles, then buffer creation fails before the first run"
+        }
+      ],
+      "status": "crash"
+    },
+    {
+      "conditions": "Creation starts failing around 504 MB of cumulative live managed buffers regardless of buffer type. Which buffer fails depends on creation order, so the symptom looks nondeterministic across runs of the same pipeline (7 graphs whose persistent I/O set totals ~640 MB).",
+      "constraints": {
+        "max_live_buffer_bytes": 536870912
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-21",
+        "litert_version": "0.15.0",
+        "source_model": "SAM 3.1 tracker pipeline (7 graphs)"
+      },
+      "op": "GRAPH_IO",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "all 7 graphs of the pipeline load and run",
+          "rewrite": "create and destroy I/O buffers per run so only one graph's buffer set is live at a time; keep persistent buffers only for graphs that run every step",
+          "symptom": "buffer creation fails partway through loading a multi-graph pipeline, at a different graph each run"
+        }
+      ],
+      "status": "crash"
+    },
+    {
+      "conditions": "Applies to attention score tensors whose size is set by the export's query chunking. Not a numerical fault: ML Drift's intermediate tensors are wired kernel memory that is not attributed to the process, so a large attention score tensor can exhaust device memory while the app's own footprint looks modest (jetsam named the app largestProcess at 2.57 GB on a 12 GB device). The kernel.increased-memory-limit entitlement does not cover it.",
+      "constraints": {
+        "query_chunks": 9
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-21",
+        "litert_version": "0.15.0",
+        "source_model": "SAM 3.1 memory attention (5184 queries x 36k keys)"
+      },
+      "op": "SOFTMAX",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "pipeline completes 48/48 frames; per-graph numerics unchanged (CPU parity corr 1.0000000)",
+          "rewrite": "raise the query-chunk count in the exported attention (9 -> 36 on the source model) so the score intermediates shrink proportionally; the rewrite is exact",
+          "symptom": "the process is killed with no crash report and no error from the API"
+        }
+      ],
+      "status": "incorrect"
+    }
+  ],
+  "generated_at": "2026-08-21",
+  "litert_version": "0.15.0",
+  "schema_version": "1.0"
+}

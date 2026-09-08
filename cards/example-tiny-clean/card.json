@@ -1,0 +1,166 @@
+{
+  "artifacts": [
+    {
+      "file": "model_clean_example.tflite",
+      "sha256": "e763326d958dca53e16643c11ce300fbac480c475cfd751b6d8336650089670f",
+      "size_mb": 0.001
+    }
+  ],
+  "benchmarks": [
+    {
+      "backend": "gpu_mldrift",
+      "date": "2026-08-10",
+      "device": "Example Device",
+      "harness": "example-harness",
+      "harness_version": "0.0.0-example",
+      "latency_p50_ms": 1.2,
+      "metrics": {
+        "decode_ms": 0.7,
+        "encode_ms": 0.5,
+        "rtf": 0.01
+      },
+      "peak_mem_mb": 12.5,
+      "precision": "f32",
+      "provenance": "example",
+      "runs": 10,
+      "soc": "Example SoC",
+      "statistic": "median",
+      "tokens_per_s": null
+    },
+    {
+      "backend": "cpu_xnnpack",
+      "date": "2026-08-10",
+      "device": "Example Device",
+      "harness": "example-harness",
+      "harness_version": "0.0.0-example",
+      "latency_p50_ms": 4.8,
+      "peak_mem_mb": 9.0,
+      "precision": "f32",
+      "provenance": "example",
+      "runs": 10,
+      "soc": "Example SoC",
+      "statistic": "median"
+    }
+  ],
+  "conversion": {
+    "command": "example-converter --input model.onnx --output model_clean_example.tflite",
+    "quantization": "none",
+    "tool": "example-converter",
+    "tool_version": "0.0.0-example"
+  },
+  "cross_runtime": [
+    {
+      "backend": "cpu_xnnpack",
+      "date": "2026-08-10",
+      "device": "Example Device",
+      "harness": "example-harness",
+      "harness_version": "0.0.0-example",
+      "latency_p50_ms": 5.1,
+      "peak_mem_mb": 11.0,
+      "precision": "f32",
+      "provenance": "example",
+      "runs": 10,
+      "runtime": "example-other-runtime",
+      "soc": "Example SoC",
+      "statistic": "median"
+    }
+  ],
+  "delegation": {
+    "backend": "gpu_mldrift",
+    "blocking_ops": [],
+    "coverage_ops_pct": 100.0,
+    "lint_report_version": "1.1",
+    "litert_version": "0.0.0-example",
+    "matched_provenance_counts": {
+      "example": 3
+    },
+    "partitions": 1
+  },
+  "device": {
+    "records": [
+      {
+        "device": "example-phone",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-01-01",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Example Phone",
+            "machine_label": "example-phone",
+            "os_build": "EXAMPLE.240001.001",
+            "runtime": "litert",
+            "runtime_version": "0.0.0-example",
+            "soc": "Example SoC",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 4.8,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": 9.0,
+          "prefill_tokens_per_s": null,
+          "provenance": "example",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/examples/device_runs/0.0.0-example/2026-01-01/example-tiny-clean__example-phone.json"
+      },
+      {
+        "device": "example-phone",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-01-01",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 2,
+          "env": {
+            "device": "Example Phone",
+            "machine_label": "example-phone",
+            "os_build": "EXAMPLE.240001.001",
+            "runtime": "litert",
+            "runtime_version": "0.0.0-example",
+            "soc": "Example SoC",
+            "vendor_sdk": "QNN SDK 0.0.0-example"
+          },
+          "error": null,
+          "evidence": [
+            "EXAMPLE: 2 operations will run on the NPU, and the remaining 1 operations will run on the CPU."
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": 1.2,
+          "loads": true,
+          "max_abs_diff": 2e-06,
+          "max_rel_diff": 1e-06,
+          "output_match": true,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "example",
+          "runs": true,
+          "total_ops": 3,
+          "ttft_ms": null
+        },
+        "source": "data/examples/device_runs/0.0.0-example/2026-01-01/example-tiny-clean__example-phone.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "example-family",
+    "id": "example-tiny-clean",
+    "license": "apache-2.0",
+    "source_url": "https://example.invalid/models/example-tiny-clean",
+    "task": "image-classification"
+  },
+  "pitfalls": [
+    "Example pitfall — this entire card is a pipeline fixture, not a real model."
+  ],
+  "schema_version": "1.2"
+}

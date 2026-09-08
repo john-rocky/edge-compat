@@ -1,0 +1,30 @@
+{
+ "id": "gelu-tanh-decomp-to-sigmoid",
+ "category": "rewrite",
+ "title": "tanh-GELU decomposition -> sigmoid-GELU x*sigmoid(1.702x)",
+ "rewrite": {
+  "to": "x*LOGISTIC(1.702x) (2 ops)",
+  "equivalence": "approximation",
+  "equivalence_evidence": "ACCURACY RISK: on DINOv2-S the swap drifts features to corr 0.950 (huge activations amplify the sigmoid approx error). Fine on many models, not on DINOv2-class.",
+  "from": "tanh-GELU elementwise chain"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-24",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 53.81,
+  "after_ms": 9.359,
+  "probe": "matched 4-block transformer probe, T=1024 d=384 (probe_tanh1024 vs probe_t1024)"
+ },
+ "factor": 5.75,
+ "scope": "synthetic probe only; real-model factor for the same family measured 1.74x (DINOv2 85.9 -> 49.3 ms)",
+ "notes": "Half the probe factor is the shorter elementwise chain, half is TANH-in-chain (see tanh-to-sigmoid-identity-in-gelu-chain).",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

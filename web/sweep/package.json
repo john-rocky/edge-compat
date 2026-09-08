@@ -1,0 +1,32 @@
+{
+  "name": "edge-compat-sweep",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Batch browser sweep harness for LiteRT.js model compatibility (edge-compat Phase 5)",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "esbuild src/page/harness.ts --bundle --format=iife --outfile=dist/page/harness.js --log-level=warning",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src tests",
+    "test": "npm run build && node --test --experimental-strip-types 'tests/*.test.ts'",
+    "sweep": "npm run build && node --experimental-strip-types src/node/cli.ts",
+    "sweep:batches": "npm run build && node --experimental-strip-types src/node/batches.ts"
+  },
+  "dependencies": {
+    "@litertjs/core": "^2.5.3",
+    "ajv": "^8.17.1",
+    "playwright": "^1.54.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@webgpu/types": "^0.1.71",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.30.0",
+    "typescript": "^5.8.0",
+    "typescript-eslint": "^8.35.0"
+  }
+}

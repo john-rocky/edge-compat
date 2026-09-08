@@ -1,0 +1,222 @@
+model_id,source,input_spec,license,notes
+3ddfa-v2,https://huggingface.co/litert-community/3DDFA-V2-LiteRT/resolve/main/tddfa_mb1_fp16.tflite,1x3x120x120:float32,mit,
+6drepnet-headpose,https://huggingface.co/litert-community/6DRepNet-HeadPose-LiteRT/resolve/main/6drepnet.tflite,1x3x224x224:float32,mit,
+basic-pitch,https://huggingface.co/litert-community/Basic-Pitch-LiteRT/resolve/main/basicpitch.tflite,1x43844:float32,apache-2.0,
+bisenet-face-parsing,https://huggingface.co/litert-community/BiSeNet-Face-Parsing-LiteRT/resolve/main/faceparsing.tflite,1x3x512x512:float32,mit,
+clipseg-rd64__clipseg_decoder,https://huggingface.co/litert-community/CLIPSeg-rd64-LiteRT/resolve/main/clipseg_decoder.tflite,1x485x768:float32;1x485x768:float32;1x485x768:float32;1x512:float32,apache-2.0,
+clipseg-rd64__clipseg_text_fp16,https://huggingface.co/litert-community/CLIPSeg-rd64-LiteRT/resolve/main/clipseg_text_fp16.tflite,1x77x512:float32,apache-2.0,
+clipseg-rd64__clipseg_vision_fp16,https://huggingface.co/litert-community/CLIPSeg-rd64-LiteRT/resolve/main/clipseg_vision_fp16.tflite,1x3x352x352:float32,apache-2.0,
+cloth-segmentation-u2net,https://huggingface.co/litert-community/Cloth-Segmentation-U2Net-LiteRT/resolve/main/clothseg.tflite,1x3x768x768:float32,mit,
+cmgan,https://huggingface.co/litert-community/CMGAN-LiteRT/resolve/main/cmgan_fp16.tflite,1x32400:float32,mit,
+cpga-net-lowlight,https://huggingface.co/litert-community/CPGA-Net-LowLight-LiteRT/resolve/main/cpga_fp16.tflite,1x3x256x256:float32,mit,
+crepe-pitch,https://huggingface.co/litert-community/CREPE-pitch-LiteRT/resolve/main/crepe_full_fp16.tflite,1x1024:float32,mit,
+d-fine-s__dfine_grapha_fp16,https://huggingface.co/litert-community/D-FINE-S-LiteRT/resolve/main/dfine_graphA_fp16.tflite,1x3x640x640:float32,apache-2.0,
+d-fine-s__dfine_graphb_fp16,https://huggingface.co/litert-community/D-FINE-S-LiteRT/resolve/main/dfine_graphB_fp16.tflite,1x8400x256:float32;1x300x256:float32;1x300x4:float32,apache-2.0,
+dehazeformer-mct,https://huggingface.co/litert-community/DehazeFormer-MCT-LiteRT/resolve/main/dehazeformer_base.tflite,1x3x256x256:float32,mit,
+dewarpnet,https://huggingface.co/litert-community/DewarpNet-LiteRT/resolve/main/dewarp.tflite,1x3x256x256:float32,mit,
+dinov2-vit-s14,https://huggingface.co/litert-community/DINOv2-ViT-S14-LiteRT/resolve/main/dinov2_s_fp16.tflite,1x3x448x448:float32,apache-2.0,
+dis-isnet,https://huggingface.co/litert-community/DIS-ISNet-LiteRT/resolve/main/dis.tflite,1x3x1024x1024:float32,apache-2.0,
+dm-count-crowd,https://huggingface.co/litert-community/DM-Count-Crowd-LiteRT/resolve/main/dmcount.tflite,1x3x512x512:float32,mit,
+edsr-x4,https://huggingface.co/litert-community/EDSR-x4-LiteRT/resolve/main/edsr.tflite,1x3x128x128:float32,apache-2.0,
+fast-neural-style__style_candy_fp16,https://huggingface.co/litert-community/Fast-Neural-Style-LiteRT/resolve/main/style_candy_fp16.tflite,1x3x256x256:float32,bsd-3-clause,
+fast-neural-style__style_mosaic_fp16,https://huggingface.co/litert-community/Fast-Neural-Style-LiteRT/resolve/main/style_mosaic_fp16.tflite,1x3x256x256:float32,bsd-3-clause,
+fast-neural-style__style_rain_princess_fp16,https://huggingface.co/litert-community/Fast-Neural-Style-LiteRT/resolve/main/style_rain_princess_fp16.tflite,1x3x256x256:float32,bsd-3-clause,
+fast-neural-style__style_udnie_fp16,https://huggingface.co/litert-community/Fast-Neural-Style-LiteRT/resolve/main/style_udnie_fp16.tflite,1x3x256x256:float32,bsd-3-clause,
+gfpgan-v1.4__gfpgan_fp16,https://huggingface.co/litert-community/GFPGAN-v1.4-LiteRT/resolve/main/gfpgan_fp16.tflite,1x3x512x512:float32,apache-2.0,
+gfpgan-v1.4__yunet_fp16,https://huggingface.co/litert-community/GFPGAN-v1.4-LiteRT/resolve/main/yunet_fp16.tflite,1x3x640x640:float32,apache-2.0,
+hsemotion-b0,https://huggingface.co/litert-community/HSEmotion-B0-LiteRT/resolve/main/hsemotion_b0_fp16.tflite,1x3x224x224:float32,apache-2.0,
+l2cs-gaze360,https://huggingface.co/litert-community/L2CS-Gaze360-LiteRT/resolve/main/gaze_fp16.tflite,1x3x448x448:float32,mit,
+m-lsd-tiny,https://huggingface.co/litert-community/M-LSD-tiny-LiteRT/resolve/main/mlsd_fp16.tflite,1x4x512x512:float32,apache-2.0,
+matcha-tts__dp_g2p_matcha_fp16,https://huggingface.co/litert-community/Matcha-TTS/resolve/main/dp_g2p_matcha_fp16.tflite,1x96:float32,mit,
+matcha-tts__matcha_decoder_fp16,https://huggingface.co/litert-community/Matcha-TTS/resolve/main/matcha_decoder_fp16.tflite,1x80x512:float32;1x80x512:float32;1x160:float32;1x1x512:float32,mit,
+matcha-tts__matcha_textenc_fp16,https://huggingface.co/litert-community/Matcha-TTS/resolve/main/matcha_textenc_fp16.tflite,1x256x192:float32;1x1x256:float32,mit,
+matcha-tts__matcha_vocoder_fp16,https://huggingface.co/litert-community/Matcha-TTS/resolve/main/matcha_vocoder_fp16.tflite,1x80x512:float32,mit,
+mi-gan-512-places2,https://huggingface.co/litert-community/MI-GAN-512-Places2-LiteRT/resolve/main/migan_fp16.tflite,1x4x512x512:float32,mit,
+mimi__mimi_dec_tx_fp16,https://huggingface.co/litert-community/Mimi/resolve/main/mimi_dec_tx_fp16.tflite,1x512x25:float32,cc-by-4.0,
+mimi__mimi_deconly_fp16,https://huggingface.co/litert-community/Mimi/resolve/main/mimi_deconly_fp16.tflite,1x512x50:float32,cc-by-4.0,
+mimi__mimi_enc_conv_fp16,https://huggingface.co/litert-community/Mimi/resolve/main/mimi_enc_conv_fp16.tflite,1x1x48000:float32,cc-by-4.0,
+mimi__mimi_enc_tx_fp16,https://huggingface.co/litert-community/Mimi/resolve/main/mimi_enc_tx_fp16.tflite,1x50x512:float32,cc-by-4.0,
+modnet,https://huggingface.co/litert-community/MODNet-LiteRT/resolve/main/modnet.tflite,1x3x512x512:float32,apache-2.0,
+movinet-a0-stream,https://huggingface.co/litert-community/MoViNet-A0-Stream-LiteRT/resolve/main/movinet_a0_stream.tflite,1x3x172x172:float32;1x80x22x22:float32;1x80x22x22:float32;1x80x22x22:float32;1x80x22x22:float32;1x80x22x22:float32;1x80x22x22:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x112x11x11:float32;1x112x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x384x6x6:float32;1x384x6x6:float32;1x384x6x6:float32;1x384x6x6:float32;1x24x1x1:float32;1x80x1x1:float32;1x80x1x1:float32;1x80x1x1:float32;1x184x1x1:float32;1x112x1x1:float32;1x184x1x1:float32;1x184x1x1:float32;1x184x1x1:float32;1x184x1x1:float32;1x184x1x1:float32;1x384x1x1:float32;1x280x1x1:float32;1x280x1x1:float32;1x344x1x1:float32;1x480x1x1:float32;1x1x1x1:float32;1x1x1x1:float32,apache-2.0,
+nafnet-gopro-width32,https://huggingface.co/litert-community/NAFNet-GoPro-width32-LiteRT/resolve/main/nafnet_fp16.tflite,1x3x256x256:float32,mit,
+nafnet-sidd-width32,https://huggingface.co/litert-community/NAFNet-SIDD-width32-LiteRT/resolve/main/nafnet_sidd_width32_fp16.tflite,1x3x256x256:float32,mit,
+ormbg,https://huggingface.co/litert-community/ormbg-LiteRT/resolve/main/ormbg.tflite,1x3x1024x1024:float32,apache-2.0,
+panns-cnn14-audioset,https://huggingface.co/litert-community/PANNs-CNN14-AudioSet-LiteRT/resolve/main/cnn14_audioset_fp16.tflite,1x1x1001x64:float32,cc-by-4.0,
+pidnet-s-cityscapes,https://huggingface.co/litert-community/PIDNet-S-Cityscapes-LiteRT/resolve/main/pidnet_s.tflite,1x3x1024x1024:float32,mit,
+places365-resnet18,https://huggingface.co/litert-community/Places365-ResNet18-LiteRT/resolve/main/places_fp16.tflite,1x3x224x224:float32,mit,
+plantnet-300k-resnet18,https://huggingface.co/litert-community/PlantNet-300K-ResNet18-LiteRT/resolve/main/plantnet.tflite,1x3x224x224:float32,apache-2.0,
+pp-ocrv5__ppocr_det_fp16,https://huggingface.co/litert-community/PP-OCRv5-LiteRT/resolve/main/ppocr_det_fp16.tflite,1x3x640x640:float32,apache-2.0,
+pp-ocrv5__ppocr_rec_fp16,https://huggingface.co/litert-community/PP-OCRv5-LiteRT/resolve/main/ppocr_rec_fp16.tflite,1x3x48x320:float32,apache-2.0,
+qwen3-embedding-0.6b,https://huggingface.co/litert-community/Qwen3-Embedding-0.6B-LiteRT/resolve/main/qwen3emb_gpu_fp16.tflite,1x128x1024:float32,apache-2.0,
+qwen3-reranker-0.6b,https://huggingface.co/litert-community/Qwen3-Reranker-0.6B-LiteRT/resolve/main/qwen3rerank_gpu_fp16.tflite,1x256x1024:float32,apache-2.0,
+ram-plus__ram_reweight_fp16,https://huggingface.co/litert-community/RAM-Plus-LiteRT/resolve/main/ram_reweight_fp16.tflite,1x512:float32,apache-2.0,
+ram-plus__ram_stage3_tail_fp16,https://huggingface.co/litert-community/RAM-Plus-LiteRT/resolve/main/ram_stage3_tail_fp16.tflite,1x144x1536:float32,apache-2.0,
+ram-plus__ram_swin_s012_fp16,https://huggingface.co/litert-community/RAM-Plus-LiteRT/resolve/main/ram_swin_s012_fp16.tflite,1x3x384x384:float32,apache-2.0,
+ram-plus__ram_taghead_fp16,https://huggingface.co/litert-community/RAM-Plus-LiteRT/resolve/main/ram_taghead_fp16.tflite,1x4585x768:float32;1x145x512:float32,apache-2.0,
+rf-detr-nano__rfdetr_grapha_fp16,https://huggingface.co/litert-community/RF-DETR-Nano-LiteRT/resolve/main/rfdetr_graphA_fp16.tflite,1x3x384x384:float32,apache-2.0,
+rf-detr-nano__rfdetr_graphb_fp16,https://huggingface.co/litert-community/RF-DETR-Nano-LiteRT/resolve/main/rfdetr_graphB_fp16.tflite,1x576x256:float32;1x300x4:float32,apache-2.0,
+rt-detrv2-s__rtdetr_grapha_fp16,https://huggingface.co/litert-community/RT-DETRv2-S-LiteRT/resolve/main/rtdetr_graphA_fp16.tflite,1x3x640x640:float32,apache-2.0,
+rt-detrv2-s__rtdetr_graphb_fp16,https://huggingface.co/litert-community/RT-DETRv2-S-LiteRT/resolve/main/rtdetr_graphB_fp16.tflite,1x8400x256:float32;1x300x256:float32;1x300x4:float32,apache-2.0,
+rtmpose-animal-ap10k,https://huggingface.co/litert-community/RTMPose-Animal-AP10K-LiteRT/resolve/main/rtm_animal_fp16.tflite,1x3x256x256:float32,apache-2.0,
+rtmpose-face-wflw,https://huggingface.co/litert-community/RTMPose-Face-WFLW-LiteRT/resolve/main/rtm_face_fp16.tflite,1x3x256x256:float32,apache-2.0,
+rtmpose-hand,https://huggingface.co/litert-community/RTMPose-Hand-LiteRT/resolve/main/rtmhand_fp16.tflite,1x3x256x256:float32,apache-2.0,
+rtmpose-s,https://huggingface.co/litert-community/RTMPose-s-LiteRT/resolve/main/rtmpose_s_fp16.tflite,1x3x256x192:float32,apache-2.0,
+rtmw-m-wholebody,https://huggingface.co/litert-community/RTMW-m-WholeBody-LiteRT/resolve/main/rtmw_fp16.tflite,1x3x256x192:float32,apache-2.0,
+rwkv-7-world-0.1b,https://huggingface.co/litert-community/RWKV-7-World-0.1B-LiteRT/resolve/main/rwkv7_step_fp16.tflite,1x768:float32;12x768:float32;12x768:float32;144x64x64:float32,apache-2.0,
+silent-face-anti-spoofing,https://huggingface.co/litert-community/Silent-Face-Anti-Spoofing-LiteRT/resolve/main/silentface.tflite,1x3x80x80:float32,apache-2.0,
+sinet-v2-camouflage,https://huggingface.co/litert-community/SINet-V2-Camouflage-LiteRT/resolve/main/sinet.tflite,1x3x352x352:float32,apache-2.0,
+speaker-diarization,https://huggingface.co/litert-community/Speaker-Diarization-LiteRT/resolve/main/wespeaker_emb_fp16.tflite,1x500x80:float32,mit,
+tiger-dnr__tiger_dialog_fp16,https://huggingface.co/litert-community/TIGER-DnR-LiteRT/resolve/main/tiger_dialog_fp16.tflite,1x534016:float32,apache-2.0,
+tiger-dnr__tiger_effect_fp16,https://huggingface.co/litert-community/TIGER-DnR-LiteRT/resolve/main/tiger_effect_fp16.tflite,1x534016:float32,apache-2.0,
+tiger-dnr__tiger_music_fp16,https://huggingface.co/litert-community/TIGER-DnR-LiteRT/resolve/main/tiger_music_fp16.tflite,1x534016:float32,apache-2.0,
+twinlitenet,https://huggingface.co/litert-community/TwinLiteNet-LiteRT/resolve/main/twinlite.tflite,1x3x360x640:float32,mit,
+u2net-portrait-sketch,https://huggingface.co/litert-community/U2Net-Portrait-Sketch-LiteRT/resolve/main/portrait.tflite,1x3x512x512:float32,apache-2.0,
+ultra-fast-lane-detection,https://huggingface.co/litert-community/Ultra-Fast-Lane-Detection-LiteRT/resolve/main/ufld.tflite,1x3x288x800:float32,mit,
+unisal-saliency,https://huggingface.co/litert-community/UniSal-Saliency-LiteRT/resolve/main/unisal_fp16.tflite,1x3x256x256:float32,apache-2.0,
+vision-rwkv-s,https://huggingface.co/litert-community/Vision-RWKV-S-LiteRT/resolve/main/vrwkv_s_fp16.tflite,1x3x224x224:float32;1x1x196x196:float32,apache-2.0,
+wav2vec2-keyword-spotting__w2v2_frontend_fp16,https://huggingface.co/litert-community/wav2vec2-keyword-spotting/resolve/main/w2v2_frontend_fp16.tflite,1x16000:float32,apache-2.0,
+wav2vec2-keyword-spotting__w2v2_head_fp16,https://huggingface.co/litert-community/wav2vec2-keyword-spotting/resolve/main/w2v2_head_fp16.tflite,1x49x768:float32,apache-2.0,
+xfeat__xfeat,https://huggingface.co/litert-community/xfeat-litert/resolve/main/xfeat.tflite,1x480x640x1:float32,apache-2.0,
+xfeat__xfeat_fp16,https://huggingface.co/litert-community/xfeat-litert/resolve/main/xfeat_fp16.tflite,1x1x480x640:float32,apache-2.0,
+yolact-resnet50,https://huggingface.co/litert-community/YOLACT-ResNet50-LiteRT/resolve/main/yolact.tflite,1x3x550x550:float32,mit,
+yunet-face,https://huggingface.co/litert-community/YuNet-Face-LiteRT/resolve/main/yunet_fp16.tflite,1x3x640x640:float32,bsd-3-clause,
+depth-anything-3-small,https://huggingface.co/litert-community/Depth-Anything-3-Small/resolve/main/da3_small_gpu_fp16.tflite,1x3x896x504:float32,apache-2.0,
+granite-embedding-311m-multilingual-r2__granite-embedding-311m-r2_fp16,https://huggingface.co/litert-community/granite-embedding-311m-multilingual-r2/resolve/main/granite-embedding-311m-r2_fp16.tflite,1x512:int32;1x512:int32,apache-2.0,multi-signature model (4 subgraphs); harness runs subgraph 0
+granite-embedding-311m-multilingual-r2__granite-embedding-311m-r2_wi8fc,https://huggingface.co/litert-community/granite-embedding-311m-multilingual-r2/resolve/main/granite-embedding-311m-r2_wi8fc.tflite,1x512:int32;1x512:int32,apache-2.0,multi-signature model (4 subgraphs); harness runs subgraph 0
+kokoro-82m__kokoro_prosody,https://huggingface.co/litert-community/Kokoro-82M/resolve/main/kokoro_prosody.tflite,1x128x640:float32;1x512x128:float32;1x128x512:float32;1x256:float32;1x512:float32,apache-2.0,
+kokoro-82m__kokoro_vocoder,https://huggingface.co/litert-community/Kokoro-82M/resolve/main/kokoro_vocoder.tflite,1x512x512:float32;1x1024:float32;1x1024:float32;1x22x61441:float32;1x256:float32;1x512:float32,apache-2.0,
+kokoro-g2p-en-us,https://huggingface.co/litert-community/Kokoro-G2P-en-US/resolve/main/dp_g2p_litert.tflite,1x96:float32,mit,
+lfm2.5-embedding-350m__lfm2.5-embedding-350m_fp16,https://huggingface.co/litert-community/LFM2.5-Embedding-350M/resolve/main/LFM2.5-Embedding-350M_fp16.tflite,1x512:int32;1x512:int32,other,multi-signature model (4 subgraphs); harness runs subgraph 0
+lfm2.5-embedding-350m__lfm2.5-embedding-350m_wi8fc,https://huggingface.co/litert-community/LFM2.5-Embedding-350M/resolve/main/LFM2.5-Embedding-350M_wi8fc.tflite,1x512:int32;1x512:int32,other,multi-signature model (4 subgraphs); harness runs subgraph 0
+lfm2.5-encoder-230m__lfm2.5-encoder-230m_fp16,https://huggingface.co/litert-community/LFM2.5-Encoder-230M/resolve/main/LFM2.5-Encoder-230M_fp16.tflite,1x512:int32;1x512:int32,other,multi-signature model (5 subgraphs); harness runs subgraph 0
+lfm2.5-encoder-230m__lfm2.5-encoder-230m_wi8fc,https://huggingface.co/litert-community/LFM2.5-Encoder-230M/resolve/main/LFM2.5-Encoder-230M_wi8fc.tflite,1x512:int32;1x512:int32,other,multi-signature model (5 subgraphs); harness runs subgraph 0
+lfm2.5-encoder-350m-pii-detector__lfm2.5-encoder-350m-pii-detector_fp16,https://huggingface.co/litert-community/LFM2.5-Encoder-350M-PII-Detector/resolve/main/LFM2.5-Encoder-350M-PII-Detector_fp16.tflite,1x512:int32;1x512:int32,other,multi-signature model (2 subgraphs); harness runs subgraph 0
+lfm2.5-encoder-350m-pii-detector__lfm2.5-encoder-350m-pii-detector_wi8fc,https://huggingface.co/litert-community/LFM2.5-Encoder-350M-PII-Detector/resolve/main/LFM2.5-Encoder-350M-PII-Detector_wi8fc.tflite,1x512:int32;1x512:int32,other,multi-signature model (2 subgraphs); harness runs subgraph 0
+lfm2.5-encoder-350m-policy-linter__lfm2.5-encoder-350m-policy-linter_fp16,https://huggingface.co/litert-community/LFM2.5-Encoder-350M-Policy-Linter/resolve/main/LFM2.5-Encoder-350M-Policy-Linter_fp16.tflite,1x512:int32;1x512:int32;1x8x512:float32,other,multi-signature model (2 subgraphs); harness runs subgraph 0
+lfm2.5-encoder-350m-policy-linter__lfm2.5-encoder-350m-policy-linter_wi8fc,https://huggingface.co/litert-community/LFM2.5-Encoder-350M-Policy-Linter/resolve/main/LFM2.5-Encoder-350M-Policy-Linter_wi8fc.tflite,1x512:int32;1x512:int32;1x8x512:float32,other,multi-signature model (2 subgraphs); harness runs subgraph 0
+lfm2.5-encoder-350m-prompt-router__lfm2.5-encoder-350m-prompt-router_fp16,https://huggingface.co/litert-community/LFM2.5-Encoder-350M-Prompt-Router/resolve/main/LFM2.5-Encoder-350M-Prompt-Router_fp16.tflite,1x512:int32;1x512:int32;1x1x512:float32;1x8x512:float32,other,multi-signature model (2 subgraphs); harness runs subgraph 0
+lfm2.5-encoder-350m-prompt-router__lfm2.5-encoder-350m-prompt-router_wi8fc,https://huggingface.co/litert-community/LFM2.5-Encoder-350M-Prompt-Router/resolve/main/LFM2.5-Encoder-350M-Prompt-Router_wi8fc.tflite,1x512:int32;1x512:int32;1x1x512:float32;1x8x512:float32,other,multi-signature model (2 subgraphs); harness runs subgraph 0
+lfm2.5-encoder-350m-spellchecker__lfm2.5-encoder-350m-spellchecker_fp16,https://huggingface.co/litert-community/LFM2.5-Encoder-350M-Spellchecker/resolve/main/LFM2.5-Encoder-350M-Spellchecker_fp16.tflite,1x128:int32;1x128:int32,other,
+lfm2.5-encoder-350m-spellchecker__lfm2.5-encoder-350m-spellchecker_wi8fc,https://huggingface.co/litert-community/LFM2.5-Encoder-350M-Spellchecker/resolve/main/LFM2.5-Encoder-350M-Spellchecker_wi8fc.tflite,1x128:int32;1x128:int32,other,
+lfm2.5-encoder-350m__lfm2.5-encoder-350m_fp16,https://huggingface.co/litert-community/LFM2.5-Encoder-350M/resolve/main/LFM2.5-Encoder-350M_fp16.tflite,1x512:int32;1x512:int32,other,multi-signature model (5 subgraphs); harness runs subgraph 0
+lfm2.5-encoder-350m__lfm2.5-encoder-350m_wi8fc,https://huggingface.co/litert-community/LFM2.5-Encoder-350M/resolve/main/LFM2.5-Encoder-350M_wi8fc.tflite,1x512:int32;1x512:int32,other,multi-signature model (5 subgraphs); harness runs subgraph 0
+lfm2.5-encoder-350m__lfm2.5-encoder-350m_wi8fc_single-sig,https://huggingface.co/litert-community/LFM2.5-Encoder-350M/resolve/main/LFM2.5-Encoder-350M_wi8fc_single-sig.tflite,1x512:int32;1x512:int32,other,single-signature (encode_512 only) phone-GPU variant added 2026-08-13; rank-4 repeat_kv re-export
+moge-2,https://huggingface.co/litert-community/MoGe-2-LiteRT/resolve/main/moge.tflite,1x3x448x448:float32,mit,
+pe-core-base-patch16-224,https://huggingface.co/litert-community/PE-Core-base-patch16-224/resolve/main/pe_core_base_224_fp16.tflite,1x3x224x224:float32,apache-2.0,
+qwen3-tts-12hz-0.6b-base__codec_decoder_fp32,https://huggingface.co/litert-community/Qwen3-TTS-12Hz-0.6B-Base/resolve/main/codec_decoder_fp32.tflite,1x16x64:int32,apache-2.0,
+qwen3-tts-12hz-0.6b-base__codec_parta,https://huggingface.co/litert-community/Qwen3-TTS-12Hz-0.6B-Base/resolve/main/codec_partA.tflite,1x16x64:int32,apache-2.0,
+qwen3-tts-12hz-0.6b-base__codec_partb,https://huggingface.co/litert-community/Qwen3-TTS-12Hz-0.6B-Base/resolve/main/codec_partB.tflite,1x1024x64:float32,apache-2.0,
+qwen3-tts-12hz-0.6b-base__mtp_folded_int8,https://huggingface.co/litert-community/Qwen3-TTS-12Hz-0.6B-Base/resolve/main/mtp_folded_int8.tflite,1x1x1024:float32;1x1x1024:float32;15x2048:float32,apache-2.0,
+qwen3-tts-12hz-0.6b-base__mtp_fp32,https://huggingface.co/litert-community/Qwen3-TTS-12Hz-0.6B-Base/resolve/main/mtp_fp32.tflite,1x1x1024:float32;1:int32;1x1x1x17:float32;5x1x8x17x128:float32;5x1x8x17x128:float32,apache-2.0,
+qwen3-tts-12hz-0.6b-base__talker_fp32,https://huggingface.co/litert-community/Qwen3-TTS-12Hz-0.6B-Base/resolve/main/talker_fp32.tflite,1x32x1024:float32;32:int32;1x1x32x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32,apache-2.0,multi-signature model (336 subgraphs); harness runs subgraph 0; browser sweep excluded: OOMs the sweep runner even alone at a 12 GB Node heap (2026-08-13); NOT a size limit - the 0.26 GB int4 sibling fails identically — so it is this graph
+qwen3-tts-12hz-0.6b-base__talker_int4,https://huggingface.co/litert-community/Qwen3-TTS-12Hz-0.6B-Base/resolve/main/talker_int4.tflite,1x32x1024:float32;32:int32;1x1x32x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32;1x8x1024x128:float32;1x8x128x1024:float32,apache-2.0,multi-signature model (336 subgraphs); harness runs subgraph 0; browser sweep excluded: OOMs the sweep runner alone at a 12 GB Node heap despite being 0.26 GB (2026-08-13); same failure as the fp32 sibling — so it is the talker graph rather than the artifact size
+sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_fp16,https://huggingface.co/litert-community/SAM2.1-Hiera-Tiny-Mask-Decoder/resolve/main/sam2_tiny_mask_decoder_fp16.tflite,1x256x64x64:float32;1x2x256:float32;1x64x128x128:float32;1x32x256x256:float32,apache-2.0,
+sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_v2_fp16,https://huggingface.co/litert-community/SAM2.1-Hiera-Tiny-Mask-Decoder/resolve/main/sam2_tiny_mask_decoder_v2_fp16.tflite,1x256x64x64:float32;1x2x256:float32;1x64x128x128:float32;1x32x256x256:float32,apache-2.0,
+siglip2-base-patch16-224,https://huggingface.co/litert-community/SigLIP2-base-patch16-224/resolve/main/siglip2_base_224_fp16.tflite,1x3x224x224:float32,apache-2.0,
+lfm2.5-colbert-350m__lfm2.5-colbert-350m_fp16,https://huggingface.co/litert-community/LFM2.5-ColBERT-350M/resolve/main/LFM2.5-ColBERT-350M_fp16.tflite,1x512:int32;1x512:int32,other,multi-signature model (4 subgraphs); harness runs subgraph 0
+lfm2.5-colbert-350m__lfm2.5-colbert-350m_wi8fc,https://huggingface.co/litert-community/LFM2.5-ColBERT-350M/resolve/main/LFM2.5-ColBERT-350M_wi8fc.tflite,1x512:int32;1x512:int32,other,multi-signature model (4 subgraphs); harness runs subgraph 0
+parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8,https://huggingface.co/litert-community/parakeet-tdt_ctc-0.6b-ja/resolve/main/parakeet_tdt_ctc_0.6b_ja_5s_i8.tflite,1x80x500:float32,cc-by-4.0,multi-signature model (122 subgraphs); harness runs subgraph 0 (encode)
+parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_f32,https://huggingface.co/litert-community/parakeet-tdt_ctc-0.6b-ja/resolve/main/parakeet_tdt_ctc_0.6b_ja_5s_f32.tflite,1x80x500:float32,cc-by-4.0,multi-signature model (122 subgraphs); harness runs subgraph 0 (encode); largest catalog artifact (2.4 GB); 2.39 GB artifact: the cache path falls back to a direct fetch — so sweep it alone (2026-08-13 it swept fine as a single-model run)
+parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8_stateful,https://huggingface.co/litert-community/parakeet-tdt_ctc-0.6b-ja/resolve/main/parakeet_tdt_ctc_0.6b_ja_5s_i8_stateful.tflite,1x80x500:float32,cc-by-4.0,multi-signature model (123 subgraphs); harness runs subgraph 0 (encode)
+parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_f32_stateful,https://huggingface.co/litert-community/parakeet-tdt_ctc-0.6b-ja/resolve/main/parakeet_tdt_ctc_0.6b_ja_5s_f32_stateful.tflite,1x80x500:float32,cc-by-4.0,multi-signature model (123 subgraphs); harness runs subgraph 0 (encode); 2.4 GB
+zipformer-medium-cr-ctc__zipformer_ctc_fp16,https://huggingface.co/litert-community/Zipformer-medium-CR-CTC-LiteRT/resolve/main/zipformer_ctc_fp16.tflite,1x1600x80:float32;1x796:float32;1x398:float32;1x199:float32;1x100:float32,apache-2.0,
+zipformer-medium-cr-ctc__zipformer_ctc_small_fp16,https://huggingface.co/litert-community/Zipformer-medium-CR-CTC-LiteRT/resolve/main/zipformer_ctc_small_fp16.tflite,1x1600x80:float32;1x796:float32;1x398:float32;1x199:float32;1x100:float32,apache-2.0,
+zipformer-medium-cr-ctc__zipformer_ctc_large_fp16,https://huggingface.co/litert-community/Zipformer-medium-CR-CTC-LiteRT/resolve/main/zipformer_ctc_large_fp16.tflite,1x1600x80:float32;1x796:float32;1x398:float32;1x199:float32;1x100:float32,apache-2.0,
+japanese-zipformer-base,https://huggingface.co/litert-community/japanese-zipformer-base-LiteRT/resolve/main/ja_zipformer_ctc_fp16.tflite,1x256000:float32;1x799:float32;1x400:float32;1x200:float32;1x100:float32,apache-2.0,
+wav2vec2-base-960h__w2v2_asr_frontend_fp16,https://huggingface.co/litert-community/wav2vec2-base-960h-LiteRT/resolve/main/w2v2_asr_frontend_fp16.tflite,1x256000:float32,apache-2.0,
+wav2vec2-base-960h__w2v2_asr_head_fp16,https://huggingface.co/litert-community/wav2vec2-base-960h-LiteRT/resolve/main/w2v2_asr_head_fp16.tflite,1x799x768:float32,apache-2.0,
+tipsv2-b14-dpt,https://huggingface.co/litert-community/TIPSv2-B14-DPT-LiteRT/resolve/main/tipsv2_b14_dpt_fp16.tflite,1x3x448x448:float32,apache-2.0,
+rf-detr-seg-nano__rfdetrseg_grapha_fp16,https://huggingface.co/litert-community/RF-DETR-Seg-Nano-LiteRT/resolve/main/rfdetrseg_graphA_fp16.tflite,1x3x312x312:float32;1x1x384:float32;1x676x384:float32,apache-2.0,
+rf-detr-seg-nano__rfdetrseg_graphb_fp16,https://huggingface.co/litert-community/RF-DETR-Seg-Nano-LiteRT/resolve/main/rfdetrseg_graphB_fp16.tflite,1x676x256:float32;1x100x4:float32;1x100x256:float32,apache-2.0,
+sam2.1-hiera-tiny-image-encoder__sam2_tiny_image_encoder_fp16,https://huggingface.co/litert-community/SAM2.1-Hiera-Tiny-Image-Encoder/resolve/main/sam2_tiny_image_encoder_fp16.tflite,1x3x1024x1024:float32,apache-2.0,
+sam2.1-hiera-tiny-image-encoder__sam2_tiny_image_encoder_v2_fp16,https://huggingface.co/litert-community/SAM2.1-Hiera-Tiny-Image-Encoder/resolve/main/sam2_tiny_image_encoder_v2_fp16.tflite,1x3x1024x1024:float32,apache-2.0,
+kitten-tts-nano-0.8__kitten_vocoder_static80,https://huggingface.co/litert-community/kitten-tts-nano-0.8/resolve/main/kitten_vocoder_static80.tflite,1x80x128:float32;1x160:float32;1x160:float32;1x9601x22:float32;1x256:float32,apache-2.0,
+inflect-nano-v2__inflect_decoder_static228,https://huggingface.co/litert-community/Inflect-Nano-v2/resolve/main/inflect_decoder_static228.tflite,1x228x128:float32,apache-2.0,
+yolox-nano,https://huggingface.co/litert-community/yolox-nano-litert/resolve/main/yolox_nano.tflite,1x416x416x3:float32,apache-2.0,
+yolox-m,https://huggingface.co/litert-community/yolox-m-litert/resolve/main/yolox_m.tflite,1x640x640x3:float32,apache-2.0,
+midas-small,https://huggingface.co/litert-community/MiDaS-small/resolve/main/midas_small_256_fp16.tflite,1x256x256x3:float32,mit,
+real-esrgan-x4v3,https://huggingface.co/litert-community/real-esrgan-x4v3-litert/resolve/main/realesr_general_x4v3.tflite,1x128x128x3:float32,bsd-3-clause,
+u-2-net,https://huggingface.co/litert-community/U-2-Net/resolve/main/u2net_fp16.tflite,1x3x320x320:float32,apache-2.0,
+yolox-tiny,https://huggingface.co/litert-community/yolox-tiny-litert/resolve/main/yolox_tiny.tflite,1x416x416x3:float32,apache-2.0,
+lightweight-openpose__pose_256,https://huggingface.co/litert-community/lightweight-openpose/resolve/main/pose_256.tflite,1x256x256x3:float32,apache-2.0,
+lightweight-openpose__pose_256_fp16,https://huggingface.co/litert-community/lightweight-openpose/resolve/main/pose_256_fp16.tflite,1x256x256x3:float32,apache-2.0,
+yolox-s,https://huggingface.co/litert-community/yolox-s-litert/resolve/main/yolox_s.tflite,1x640x640x3:float32,apache-2.0,
+z-image-turbo__z_embx,https://huggingface.co/litert-community/Z-Image-Turbo-LiteRT/resolve/main/z_embx.tflite,1x256x64:float32,apache-2.0,
+z-image-turbo__zc_final,https://huggingface.co/litert-community/Z-Image-Turbo-LiteRT/resolve/main/zc_final.tflite,1x288x3840:float32;1x256:float32,apache-2.0,
+z-image-turbo__z_embc,https://huggingface.co/litert-community/Z-Image-Turbo-LiteRT/resolve/main/z_embc.tflite,1x32x2560:float32,apache-2.0,
+z-image-turbo__zvae,https://huggingface.co/litert-community/Z-Image-Turbo-LiteRT/resolve/main/zvae.tflite,1x16x32x32:float32,apache-2.0,
+z-image-turbo__z_refc,https://huggingface.co/litert-community/Z-Image-Turbo-LiteRT/resolve/main/z_refc.tflite,1x32x3840:float32;1x1x32x64:float32;1x1x32x64:float32,apache-2.0,
+z-image-turbo__z_refx,https://huggingface.co/litert-community/Z-Image-Turbo-LiteRT/resolve/main/z_refx.tflite,1x256x3840:float32;1x1x256x64:float32;1x1x256x64:float32;1x256:float32,apache-2.0,
+flux.2-klein-4b__kc_final,https://huggingface.co/litert-community/FLUX.2-klein-4B-LiteRT/resolve/main/kc_final.tflite,1x768x3072:float32;1x3072:float32,apache-2.0,
+flux.2-klein-4b__kce_final,https://huggingface.co/litert-community/FLUX.2-klein-4B-LiteRT/resolve/main/kce_final.tflite,1x1024x3072:float32;1x3072:float32,apache-2.0,
+flux.2-klein-4b__kv_vae_enc,https://huggingface.co/litert-community/FLUX.2-klein-4B-LiteRT/resolve/main/kv_vae_enc.tflite,1x3x256x256:float32,apache-2.0,
+flux.2-klein-4b__kv_vae,https://huggingface.co/litert-community/FLUX.2-klein-4B-LiteRT/resolve/main/kv_vae.tflite,1x32x32x32:float32,apache-2.0,
+flux.2-klein-4b__kc_prep,https://huggingface.co/litert-community/FLUX.2-klein-4B-LiteRT/resolve/main/kc_prep.tflite,1x256x128:float32;1x512x7680:float32;1x3072:float32,apache-2.0,
+flux.2-klein-4b__kce_prep,https://huggingface.co/litert-community/FLUX.2-klein-4B-LiteRT/resolve/main/kce_prep.tflite,1x512x128:float32;1x512x7680:float32;1x3072:float32,apache-2.0,
+flux.2-klein-4b__kc_double1,https://huggingface.co/litert-community/FLUX.2-klein-4B-LiteRT/resolve/main/kc_double1.tflite,1x256x3072:float32;1x512x3072:float32;1x768x1x64:float32;1x768x1x64:float32;1x1x18432:float32;1x1x18432:float32,apache-2.0,
+flux.2-klein-4b__kce_double1,https://huggingface.co/litert-community/FLUX.2-klein-4B-LiteRT/resolve/main/kce_double1.tflite,1x512x3072:float32;1x512x3072:float32;1x1024x1x64:float32;1x1024x1x64:float32;1x1x18432:float32;1x1x18432:float32,apache-2.0,
+bonsai-image-ternary-4b__vae_dec_fp32,https://huggingface.co/litert-community/Bonsai-Image-ternary-4B/resolve/main/vae_dec_fp32.tflite,1x32x64x64:float32,apache-2.0,
+
+nemotron-3-embed-1b__wi8fc,https://huggingface.co/litert-community/Nemotron-3-Embed-1B/resolve/main/Nemotron-3-Embed-1B_wi8fc.tflite,1x512:int32;1x512:int32,openmdw-1.1,multi-signature (embed_64/128/256/512); spec is the default signature embed_512
+nemotron-3-embed-1b__wi8fc-128-512,https://huggingface.co/litert-community/Nemotron-3-Embed-1B/resolve/main/Nemotron-3-Embed-1B_wi8fc_128_512.tflite,1x512:int32;1x512:int32,openmdw-1.1,multi-signature (embed_128/512); spec is the default signature embed_512
+granite-speech-5.0-470m-turboctc__granite_speech_ctc_fp16,https://huggingface.co/litert-community/granite-speech-5.0-470m-turboctc/resolve/main/granite_speech_ctc_fp16.tflite,1x250x320:float32,apache-2.0,multi-signature model (3 subgraphs); harness runs subgraph 0
+granite-speech-5.0-470m-turboctc__granite_speech_ctc_wi8fc,https://huggingface.co/litert-community/granite-speech-5.0-470m-turboctc/resolve/main/granite_speech_ctc_wi8fc.tflite,1x250x320:float32,apache-2.0,multi-signature model (3 subgraphs); harness runs subgraph 0
+mxbai-edge-colbert-v0-32m__mxbai-edge-colbert-v0-32m_fp16,https://huggingface.co/litert-community/mxbai-edge-colbert-v0-32m/resolve/main/mxbai-edge-colbert-v0-32m_fp16.tflite,1x512:int32;1x512:int32,apache-2.0,multi-signature model (4 subgraphs); harness runs subgraph 0
+mxbai-edge-colbert-v0-32m__mxbai-edge-colbert-v0-32m_wi8fc,https://huggingface.co/litert-community/mxbai-edge-colbert-v0-32m/resolve/main/mxbai-edge-colbert-v0-32m_wi8fc.tflite,1x512:int32;1x512:int32,apache-2.0,multi-signature model (4 subgraphs); harness runs subgraph 0
+ettin-reranker-400m-v1__ettin-reranker-400m-v1_fp16,https://huggingface.co/litert-community/ettin-reranker-400m-v1/resolve/main/ettin-reranker-400m-v1_fp16.tflite,1x512:int32;1x512:int32,apache-2.0,multi-signature model (3 subgraphs); harness runs subgraph 0
+ettin-reranker-400m-v1__ettin-reranker-400m-v1_wi8fc,https://huggingface.co/litert-community/ettin-reranker-400m-v1/resolve/main/ettin-reranker-400m-v1_wi8fc.tflite,1x512:int32;1x512:int32,apache-2.0,multi-signature model (3 subgraphs); harness runs subgraph 0
+moge-2__moge_fp16,https://huggingface.co/litert-community/MoGe-2-LiteRT/resolve/main/moge_fp16.tflite,1x3x448x448:float32,mit,
+tipsv2-b14-dpt__tipsv2_b14_dpt_erf_fp16,https://huggingface.co/litert-community/TIPSv2-B14-DPT-LiteRT/resolve/main/tipsv2_b14_dpt_erf_fp16.tflite,1x3x448x448:float32,apache-2.0,
+pp-ocrv5__ppocr_rec_fp32,https://huggingface.co/litert-community/PP-OCRv5-LiteRT/resolve/main/ppocr_rec_fp32.tflite,1x3x48x320:float32,apache-2.0,
+dinov2-vit-s14__dinov2_s_erf_fp16,https://huggingface.co/litert-community/DINOv2-ViT-S14-LiteRT/resolve/main/dinov2_s_erf_fp16.tflite,1x3x448x448:float32,apache-2.0,
+mlateon__mlateon_fp16,https://huggingface.co/litert-community/mLateOn/resolve/main/mLateOn_fp16.tflite,1x512:int32;1x512:int32,apache-2.0,multi-signature model (4 subgraphs); harness runs subgraph 0
+mlateon__mlateon_wi8fc,https://huggingface.co/litert-community/mLateOn/resolve/main/mLateOn_wi8fc.tflite,1x512:int32;1x512:int32,apache-2.0,multi-signature model (4 subgraphs); harness runs subgraph 0
+voyage-4-nano__voyage-4-nano_fp16,https://huggingface.co/litert-community/voyage-4-nano/resolve/main/voyage-4-nano_fp16.tflite,1x512:int32;1x512:int32,apache-2.0,multi-signature model (4 subgraphs); harness runs subgraph 0
+voyage-4-nano__voyage-4-nano_wi8fc,https://huggingface.co/litert-community/voyage-4-nano/resolve/main/voyage-4-nano_wi8fc.tflite,1x512:int32;1x512:int32,apache-2.0,multi-signature model (4 subgraphs); harness runs subgraph 0
+harrier-oss-v1-0.6b__harrier-oss-v1-0.6b_fp16,https://huggingface.co/litert-community/harrier-oss-v1-0.6b/resolve/main/harrier-oss-v1-0.6b_fp16.tflite,1x512:int32;1x512:int32,mit,multi-signature model (4 subgraphs); harness runs subgraph 0
+harrier-oss-v1-0.6b__harrier-oss-v1-0.6b_wi8fc,https://huggingface.co/litert-community/harrier-oss-v1-0.6b/resolve/main/harrier-oss-v1-0.6b_wi8fc.tflite,1x512:int32;1x512:int32,mit,multi-signature model (4 subgraphs); harness runs subgraph 0
+# Excluded, dynamic input dim (LiteRT.js needs a static signature): NIMA-LiteRT
+# (nima_aesthetic_fp16 / nima_technical_fp16). Both load on wasm_xnnpack and
+# webgpu_mldrift, then fail the run with 'TensorBuffer ranked tensor type
+# Float32[1, 224, 224, 3] does not match expected ranked tensor type
+# Float32[-1, 224, 224, 3]' — the published graphs carry a dynamic batch axis
+# (measured 2026-08-24). Re-export with a fixed batch to make them sweepable.
+
+# Catalog scope: OUR OWN conversions inside litert-community. The org also holds ~140
+# .tflite models uploaded by others (the torchvision/timm classification zoo, Whisper
+# variants, LLM .tflite splits); they are deliberately out of scope, not missed.
+
+# litertlm (LLM lane - cards/matrix only, not browser-sweepable): LiteRT.js cannot run
+# .litertlm bundles, so these 80 org models never enter the sweep. Their data arrives
+# through the cards lane (devicemark / bench tokens_per_s) and the matrix lane (gpu_audit).
+# DeepSeek-R1-Distill-Qwen-7B, Falcon-H1-0.5B-Instruct, Falcon-H1-1.5B-Deep-Instruct, Falcon-H1-1.5B-Instruct, Falcon-H1-3B-Instruct, FastContext-1.0-4B-SFT
+# FastVLM-0.5B, Gemma3-1B-IT, InternVL3-1B, InternVL3-2B, InternVL3_5-1B, InternVL3_5-2B
+# InternVL3_5-4B, Jan-nano, LFM2.5-1.2B-Instruct, LFM2.5-1.2B-JP, LFM2.5-1.2B-Thinking, LFM2.5-2.6B
+# LFM2.5-VL-1.6B, LFM2.5-VL-3B, LFM2.5-VL-450M, LLaVA-OneVision-0.5B, Llama-3.2-1B, Llama-3.2-3B
+# Mage-VL, MedGemma-1.5-4B-IT, MiniCPM-V-4, MiniCPM5-1B, Ministral-3-3B-Instruct-2512, Ministral-3-3B-Reasoning-2512
+# Nanbeige4.1-3B, Nanbeige4.2-3B, Nemotron-H-4B-Instruct-128K, North-Micro-Vision-Instruct, OLMo-2-1B-Instruct, Ovis2.5-2B
+# PaddleOCR-VL-1.6, Phi-4-mini-reasoning, Polaris-4B-Preview, Qwen2-0.5B-Instruct, Qwen2-1.5B-Instruct, Qwen2-VL-2B
+# Qwen2.5-Coder-1.5B-Instruct, Qwen2.5-Coder-3B-Instruct, Qwen3-0.6B, Qwen3-0.6B-int4, Qwen3-1.7B, Qwen3-14B
+# Qwen3-4B, Qwen3-4B-Instruct-2507, Qwen3-4B-Thinking-2507, Qwen3-8B, Qwen3.5-0.8B, Qwen3.5-2B
+# Qwen3.5-4B, Shieldstral-1.0-3B, SmolLM2-135M-Instruct, SmolLM2-360M-Instruct, SmolLM3-3B, SmolVLM2-2.2B
+# SmolVLM2-500M, TinySwallow-1.5B-Instruct, VibeThinker-1.5B, VibeThinker-3B, Zamba2-1.2B-instruct, Zamba2-2.7B-instruct
+# codegemma-7b-it-int4-litertlm, functiongemma-270m-ft-mobile-actions, functiongemma-270m-ft-tiny-garden, functiongemma-mobile-actions_q8_ekv1024.litertlm, gemma-3-270m-it, gemma-4-12B-it-litert-lm
+# gemma-4-26B-A4B-it-litert-lm, gemma-4-31B-it-litert-lm, gemma-4-E2B-it-litert-lm, gemma-4-E4B-it-litert-lm, granite-4.0-350m-litert-lm, granite-4.0-h-1b
+# granite-4.0-h-350m, granite-4.1-3b, granite-docling-258M
+# excluded 2026-08-28: nemotron-3-embed-1b__fp16 (2.29 GB) — in-page fetch of a >2 GiB artifact fails in Chromium (TypeError: Failed to fetch; sweep 2.5.3/2026-08-28 after the node-side cache was fixed to stream). Not browser-sweepable at this size; the wi8fc siblings carry the family.
+
+# Added 2026-09-02 (own conversions shipped 2026-08-31..09-02; input_spec parsed with litert_compat.parser.reader from the
+# sha-verified download): granite-speech-5.0-470m-turboctc (CTC speech encoder, 1x250x320 fbank window), mxbai-edge-colbert-v0-32m,
+# ettin-reranker-400m-v1, plus new siblings moge_fp16, tipsv2_b14_dpt_erf_fp16, ppocr_rec_fp32, dinov2_s_erf_fp16.
+# voyage-4-nano + mLateOn rows added the same day once their sha-verified downloads landed; harrier-oss-v1-0.6b (fp16 + wi8fc) added 2026-09-08 (sha-verified download, MIT).
+# Excluded, dynamic input dim (LiteRT.js needs a static signature), measured 2026-09-02 with the repo parser:
+#   kitten-tts-nano-0.8: kitten_predictor(_fp16) input_ids (1,-1); kitten_prosody(_fp16) en (1,-1,256); kitten_vocoder(_fp16) asr/f0/n/har (1,-1,*)
+#     — only kitten_vocoder_static80 is static, and it is already a row above.
+#   Inflect-Nano-v2: inflect_decoder(_fp16) z_p (1,-1,128); inflect_text_encoder(_fp16) tokens (1,-1) — the static228 decoder is the row above.
+# Excluded, non-float32/int32 input (LiteRT.js tensor I/O): Kokoro-82M/kokoro_predictor.tflite (args_0 1x128 int64) and
+#   Kokoro-82M/kokoro_82m_fixedlen_fp32.tflite (args_0 1x57 int64) — both parsed 2026-09-02 from sha-verified downloads.
+# Deferred (2026-09-02, owner: 推奨で): multi-GB image-generation graph chunks stay out of the browser sweep for now — the
+#   in-page fetch of a >2 GiB artifact already fails in Chromium (nemotron fp16 precedent above) and the sub-GB chunks are
+#   pieces of a pipeline whose real inputs are latents; revisit if a browser demo of these pipelines lands:
+#   Z-Image-Turbo-LiteRT qwen_enc (3.5 GB), zc_main0..5 (0.9 GB each); FLUX.2-klein-4B-LiteRT kc_double0, kc_single0..3, kce_double0,
+#   kce_single0..3, ke_enc0..2 (0.6-0.9 GB each); Bonsai-Image-ternary-4B dit_gpu_int4b32, dit_int4b32, textenc_int4, textenc_int8_weightonly (1.8-3.1 GB).

@@ -1,0 +1,31 @@
+{
+ "id": "weight-fp16-dequantize-fold",
+ "category": "null-result",
+ "title": "fp16 weights + DEQUANTIZE -> fp32 folded weights: no effect",
+ "rewrite": {
+  "to": "fp32 stored weights, DEQUANTIZE removed",
+  "equivalence": "bit-exact",
+  "equivalence_evidence": "fold is exact (fp16->fp32 conversion); host outputs corr ~1.0 (fp16-weight XNNPACK fast path accounts for residual 1e-4)",
+  "from": "fp16 stored weights with per-weight DEQUANTIZE ops"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-24",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 86.2,
+  "after_ms": 86.3,
+  "probe": "dinov2 85.9/86.6 -> 83.3/89.2 ms (replicated); zipformer 81.6/84.7 -> 84.5/85.0; synthetic twin 9.36 vs 9.35 ms",
+  "gpu_control": "also no effect (54.7 vs 55.3; 36.5 vs 36.7)"
+ },
+ "factor": 1.0,
+ "scope": "two real models (ViT-S class, zipformer) + one synthetic pair, both accelerators",
+ "notes": "QNN folds DEQUANTIZE at compile. The strong static correlation (all DEQ>0 zoo models slow on NPU) was recipe-era confounding, not dtype. Ship fp16 files for size.",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

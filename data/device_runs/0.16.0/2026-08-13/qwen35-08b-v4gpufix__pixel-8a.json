@@ -1,0 +1,50 @@
+{
+  "artifact": "model_wi8fc_fp32act.litertlm",
+  "device": "pixel-8a",
+  "model_id": "qwen35-08b-v4gpufix",
+  "quantization": "int8",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-13",
+      "decode_tokens_per_s": 7.45,
+      "delegated_ops": 17640,
+      "env": {
+        "device": "pixel-8a",
+        "machine_label": "pixel-8a-cl-pinned",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 17640 out of 17640 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+        "VERBOSE: Replacing 16866 out of 16866 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_32).",
+        "VERBOSE: Replacing 2124 out of 2124 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (decode).",
+        "results block: prefill=22.67 decode=7.45 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 310.0,
+        "init_s": 44.57598,
+        "prefill_tokens": 21.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 22.67,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 17640,
+      "ttft_ms": 1060.0
+    }
+  ],
+  "schema_version": "1.0"
+}

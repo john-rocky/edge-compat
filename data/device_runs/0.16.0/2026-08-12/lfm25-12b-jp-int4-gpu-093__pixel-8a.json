@@ -1,0 +1,51 @@
+{
+  "artifact": "LFM2.5-1.2B-JP_int4_gpu.litertlm",
+  "device": "pixel-8a",
+  "model_id": "lfm25-12b-jp-int4-gpu-093",
+  "quantization": "int4",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-08-12",
+      "decode_tokens_per_s": 20.48,
+      "delegated_ops": 542,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-cl-pinned",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+        "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+        "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+        "VERBOSE: Replacing 542 out of 542 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+        "results block: prefill=68.05 decode=20.48 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 86.0,
+        "init_s": 9.83055,
+        "prefill_tokens": 19.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 68.05,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 542,
+      "ttft_ms": 330.0
+    }
+  ],
+  "schema_version": "1.0"
+}

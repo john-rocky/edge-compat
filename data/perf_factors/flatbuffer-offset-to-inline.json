@@ -1,0 +1,30 @@
+{
+ "id": "flatbuffer-offset-to-inline",
+ "category": "null-result",
+ "title": "offset-buffer flatbuffer -> inline buffers: no effect",
+ "rewrite": {
+  "to": "inline buffer layout",
+  "equivalence": "bit-exact",
+  "equivalence_evidence": "byte-identical tensors, repack only",
+  "from": "tflite offset-buffer weight layout"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-24",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 85.9,
+  "after_ms": 86.8,
+  "probe": "dinov2_repack control arm"
+ },
+ "factor": 1.0,
+ "scope": "one model, NPU JIT",
+ "notes": "",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}

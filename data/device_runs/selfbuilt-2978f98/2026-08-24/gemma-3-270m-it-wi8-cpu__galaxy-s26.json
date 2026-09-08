@@ -1,0 +1,56 @@
+{
+  "artifact": "model.litertlm (non-split-cache export, dynamic_wi8_afp32)",
+  "device": "galaxy-s26",
+  "model_id": "gemma-3-270m-it-wi8-cpu",
+  "notes": "CPU control for the NPU bundles above. A separate export is required: the split-cache NPU export cannot run on the CPU backend at all (Input positions not found, llm_litert_compiled_model_executor_factory.cc:200), so this is not a one-variable backend A/B -- backend, quantization and cache layout all differ.",
+  "quantization": "int8 weights / fp32 activations (dynamic_wi8_afp32), no static-range quantization",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": 1024,
+      "date": "2026-08-24",
+      "decode_tokens_per_s": 99.18,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-2978f98",
+        "soc": "SM8850 (hexagon v81)",
+        "vendor_sdk": "QAIRT 2.47.0"
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 1417 out of 1468 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 37 partitions for subgraph 0 (prefill_128).",
+        "VERBOSE: Replacing 1316 out of 1365 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 38 partitions for subgraph 1 (decode).",
+        "BenchmarkInfo: Init Total: 1259.47 ms; Prefill Speed: 1747.90 tokens/sec; Decode Speed: 99.18 tokens/sec",
+        "Peak private footprint: 831.98MB",
+        "45-prompt harness: 26/45 correct, 28/45 byte-identical text with fp32",
+        "runtime: LiteRT-LM built from source at commit 2978f98 (2026-08-19); no release tag"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "bench_runs": 5,
+        "benchmark_decode_tokens": 64,
+        "benchmark_prefill_tokens": 128,
+        "harness_correct_of_45": 26,
+        "harness_fp32_correct_of_45": 28,
+        "harness_text_identical_to_fp32_of_45": 28,
+        "init_s": 1.25947
+      },
+      "output_match": null,
+      "peak_mem_mb": 831.98,
+      "prefill_tokens_per_s": 1747.9,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 80.0
+    }
+  ],
+  "schema_version": "1.0"
+}

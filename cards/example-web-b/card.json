@@ -1,0 +1,89 @@
+{
+  "artifacts": [
+    {
+      "file": "model_web_b_example.tflite",
+      "sha256": "5836dace323eb386f01224c8aeaa3b218dfd499d067e61437c250e198aaf489d",
+      "size_mb": 0.001
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-08-10",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "example-dev-mac-arm64",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 0.043,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "example",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-08-10",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "example-dev-mac-arm64",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 0.635,
+        "loads": true,
+        "max_rel_diff": 6.83038714341598e-07,
+        "output_match": true,
+        "provenance": "example",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/examples/sweep/example-web-b.json"
+  },
+  "conversion": {
+    "command": "python -m litert_compat.parser.fixtures",
+    "quantization": "none",
+    "tool": "litert_compat.parser.fixtures",
+    "tool_version": "0.1.0"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "model": {
+    "family": "example-family",
+    "id": "example-web-b",
+    "license": "apache-2.0",
+    "source_url": "https://example.invalid/models/example-web-b",
+    "task": "example-elementwise"
+  },
+  "pitfalls": [
+    "Example card for the browser-sweep pipeline — synthetic fixture, not a real model."
+  ],
+  "schema_version": "1.1"
+}

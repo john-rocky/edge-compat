@@ -1,0 +1,115 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x512:int32;1x512:int32;1x8x512:float32",
+  "license": "other",
+  "model_id": "lfm2.5-encoder-350m-policy-linter__lfm2.5-encoder-350m-policy-linter_fp16",
+  "notes": "multi-signature model (2 subgraphs); harness runs subgraph 0",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-08-13",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: ERROR: failed to create XNNPACK runtime"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "RuntimeError: memory access out of bounds",
+      "failure_class": "wasm_memory_ceiling",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-08-13",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: ERROR: Following operations are not supported by GPU delegate:",
+        "error: BROADCAST_TO: Operation is not supported.",
+        "error: DEQUANTIZE: ",
+        "error: EMBEDDING_LOOKUP: EMBEDDING_LOOKUP: Empty quantization params.",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_10/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;11",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_10/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;12",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_10/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;14",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_10/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;15",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_12/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;11",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_12/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;12",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_12/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;14",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_12/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;15",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_14/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;11",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_14/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;12",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_14/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;14",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_14/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;15",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_2/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;13",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_2/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;14",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_2/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;16",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_2/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;17",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_5/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;11",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_5/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;12",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_5/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;14",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_5/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;15",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_8/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;11",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_8/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;12",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_8/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;14",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.LinterWrap/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_bizlint_rule_matching.Lfm2BidirForRuleMatching_m/transformers_modules.LiquidAI.LFM2_dot_5_hyphen_Encoder_hyphen_350M_hyphen_Policy_hyphen_Linter.2a56cb94a7083a90263ea5270523ccc10e7ce8af.modeling_lfm2_bidirectional.Lfm2BidirectionalModel_lfm2/transformers.models.lfm2.modeling_lfm2.Lfm2DecoderLayer_8/transformers.models.lfm2.modeling_lfm2.Lfm2Attention_self_attn;15",
+        "error: 155 operations will run on the GPU, and the remaining 865 operations will run on the CPU."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "Error: ERROR: [third_party/odml/litert/litert/js/packages/core/src/cpp/litert_web.cc:245]\n└ ERROR: [./third_party/odml/litert/litert/cc/internal/litert_compiled_model_next.h:70]",
+      "failure_class": "compile_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/LFM2.5-Encoder-350M-Policy-Linter/resolve/main/LFM2.5-Encoder-350M-Policy-Linter_fp16.tflite"
+}

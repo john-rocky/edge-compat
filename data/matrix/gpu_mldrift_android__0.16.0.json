@@ -1,0 +1,441 @@
+{
+  "backend": "gpu_mldrift_android",
+  "entries": [
+    {
+      "conditions": "accepted and silently miscomputed: a RANK-0 tensor entering broadcast arithmetic. Measured with a CPU-vs-GPU tensor diff on identical inputs — a bare `arange` matches CPU exactly and `100.0 + arange` matches exactly, but `rank0_scalar + arange` does not (CPU [12,13,14,15], GPU max 12). Any selector built from that index comes back all-zero, so the mamba pad guard stored an all-zero conv state in every layer and generation collapsed. No rejection is logged — the graph reports full delegation",
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-13",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "granite-4.0-h-1b int8 (Mamba2)"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: index, selector and gather all match CPU exactly afterwards; granite-4.0-h-1b then answers correctly on device (8Q 8/8 on Mac GPU)",
+          "rewrite": "keep the batch dimension when reducing: `sum(-1, keepdim=True)` -> (B,1), then broadcast at rank >= 1",
+          "symptom": "full delegation, coherent-looking graph, but every stored conv state is exactly 0.0 and the model emits token 0 forever"
+        }
+      ],
+      "status": "incorrect"
+    },
+    {
+      "conditions": "delegate error: \"Tensor type(INT64) is not supported\". Seen both in the LFM2.5 short-conv valid-length sum and in the Mamba2 scan Also reproduced on Adreno (Galaxy S26 / SM8850, litert-lm 0.16.0, 2026-08-23): the same op is named in that run's delegate rejection list, so the reject is not Mali-specific.",
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "LFM2.5-1.2B-Instruct int4 (published 0.9.1-lineage); granite-4.0-h-350m int8 [Mali 2026-08-12; Adreno SM8850 2026-08-23]"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured on the LFM2.5 re-export: no INT64 ops remain and the graph delegates fully",
+          "rewrite": "keep index/length arithmetic in int32, or derive it without a mask sum",
+          "symptom": "int64 ADD rejected"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "rank-5 output from the repeat_kv GQA expand; pre-fix evidence is from the CLASSIC benchmark_model delegate (3/24 nodes delegated), not CompiledModel LITERT_CL — hence inferred; post-fix full delegation IS measured on LITERT_CL",
+      "constraints": {
+        "min_rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-13",
+        "litert_version": "0.16.0",
+        "source_model": "lfm25-encoder-230m_wi8fc (cardbench pre-fix 2026-08-11; gpu_repeatkv_fix re-export)"
+      },
+      "op": "BROADCAST_TO",
+      "provenance": "inferred",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured on the LFM2.5-Encoder-230M rank-4 re-export: 852/852 nodes delegated on LITERT_CL",
+          "rewrite": "rewrite repeat_kv as an outer product with a ones row via matmul (rank<=4; bitwise-identical by construction)",
+          "symptom": "BROADCAST_TO from transformers' sdpa repeat_kv (x[:,:,None].expand(...).reshape) leaves the graph mostly on CPU"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: \"Operation is not supported\" — refused unconditionally, at any rank. Reached from torch `expand` (inside segment_sum) and from `repeat_interleave` (the group-to-head replication of B and C)",
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "granite-4.0-h-350m int8 (Mamba2)"
+      },
+      "op": "BROADCAST_TO",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: 50/90 -> 98/98 delegated once BROADCAST_TO and the rank-2 PAD were both removed",
+          "rewrite": "both uses are outer products with a ones vector: write them as a matmul against a ones row and the op disappears from the graph",
+          "symptom": "graph stalls at 50/90 delegated even after every tensor is rank<=4"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: \"Tensor type(INT64) is not supported\" — the casts around the int64 length arithmetic above Also reproduced on Adreno (Galaxy S26 / SM8850, litert-lm 0.16.0, 2026-08-23): the same op is named in that run's delegate rejection list, so the reject is not Mali-specific.",
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "LFM2.5-1.2B-Instruct int4 (published 0.9.1-lineage); granite-4.0-h-350m int8 [Mali 2026-08-12; Adreno SM8850 2026-08-23]"
+      },
+      "op": "CAST",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured on the LFM2.5 re-export: zero rejected ops",
+          "rewrite": "avoid the int64 intermediate entirely (see ADD)",
+          "symptom": "int64 CAST rejected"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "same rank-4 cap; 28 CONCATENATION ops rejected where the inter-chunk recurrence prepends the previous chunk state",
+      "constraints": {
+        "min_rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "granite-4.0-h-350m int8 (Mamba2)"
+      },
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: delegated after folding (part of the 98/98 layer)",
+          "rewrite": "carry the states as (batch*head, chunks, state*head_dim) so the concat is rank 3",
+          "symptom": "rank-5 CONCATENATION on the chunk axis"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "same rank-4 cap; 27 CUMSUM ops rejected (the segment_sum cumulative sum over chunk positions)",
+      "constraints": {
+        "min_rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "granite-4.0-h-350m int8 (Mamba2)"
+      },
+      "op": "CUMSUM",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: delegated after folding (part of the 98/98 layer)",
+          "rewrite": "fold head and chunk into the batch axis before the cumulative sum",
+          "symptom": "rank-5 CUMSUM inside segment_sum"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "same rank-4 cap; 27 EXP ops rejected in the SSD scan (the segment_sum decay terms). Qwen3.5-0.8B gated-delta shows the identical signature (18 EXP), so the two SSM families fail on one shared limit",
+      "constraints": {
+        "min_rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "granite-4.0-h-350m int8 (Mamba2)"
+      },
+      "op": "EXP",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: no rank>=5 tensors remain in the rewritten layer",
+          "rewrite": "run segment_sum on a folded (batch*head*chunk, chunk_len) tensor so the result is rank 3",
+          "symptom": "rank-5 EXP inside segment_sum / decay"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "kernel-init refusal on LITERT_CL: `ml_drift/delegate/delegate_kernel_litert.cc` logs \"Failed to initialize kernel\" / \"Restored original execution plan after delegate application failure\" and the process ABORTS during CompiledModel creation (FP32=1, GPU|CPU accelerator set — the CPU fallback does not rescue it). Same two models, same failure on Mac Metal 2.1.6 and the CLiteRTLM-mac runtime — a cross-backend ml_drift kernel limit on odd int8 head shapes (161-label classification head; 128802-row tied-vocab head)",
+      "constraints": {
+        "out_channels": "161|128802",
+        "weight_dtype": "int8_drq"
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-13",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "LFM2.5-Encoder-350M-PII-Detector / -Spellchecker wi8fc"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "n/a — the rank-4 repeat_kv respelling that unblocked the rest of the family leaves these two models still refused",
+          "rewrite": "none known model-side (runtime kernel limit): ship the int8 file as CPU-only, or use float weights for the head (the fp16-weight variant runs with the head falling back to CPU, cosine 1.000000 vs fp32 reference on desktop)",
+          "symptom": "engine creation aborts on an otherwise GPU-clean encoder graph after all subgraphs report full replacement; no per-op rejection line"
+        }
+      ],
+      "status": "crash"
+    },
+    {
+      "conditions": "delegate error: \"Operation is not supported\". Emitted by an index_select used to pick the last valid prefill column in a hybrid short-conv block Also reproduced on Adreno (Galaxy S26 / SM8850, litert-lm 0.16.0, 2026-08-23): the same op is named in that run's delegate rejection list, so the reject is not Mali-specific.",
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "LFM2.5-1.2B-Instruct int4 (published 0.9.1-lineage) [Mali 2026-08-12; Adreno SM8850 2026-08-23]"
+      },
+      "op": "GATHER_ND",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: 536/579 -> 501/501 and 519/519, zero rejected ops, on the re-exported file",
+          "rewrite": "re-export from a lineage that derives the valid length with masking and a one-hot matmul state select instead of index_select (litert-torch >= 0.9.2 does this upstream)",
+          "symptom": "whole model reaches 536/579 delegated and engine creation then aborts with \"graph is not fully delegated\""
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: \"Can't parse inputs with const tensors\" — the comparison against a constant bound in the short-conv valid-length mask Also reproduced on Adreno (Galaxy S26 / SM8850, litert-lm 0.16.0, 2026-08-23): the same op is named in that run's delegate rejection list, so the reject is not Mali-specific.",
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "LFM2.5-1.2B-Instruct int4 (published 0.9.1-lineage) [Mali 2026-08-12; Adreno SM8850 2026-08-23]"
+      },
+      "op": "GREATER_EQUAL",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured on the LFM2.5 re-export: the op is absent and delegation is complete",
+          "rewrite": "fold the constant comparison into the exported mask instead of comparing against a graph constant at runtime",
+          "symptom": "const-input compare rejected"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: \"Can't parse inputs with const tensors\" — the paired upper-bound comparison Also reproduced on Adreno (Galaxy S26 / SM8850, litert-lm 0.16.0, 2026-08-23): the same op is named in that run's delegate rejection list, so the reject is not Mali-specific.",
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "LFM2.5-1.2B-Instruct int4 (published 0.9.1-lineage) [Mali 2026-08-12; Adreno SM8850 2026-08-23]"
+      },
+      "op": "LESS_EQUAL",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured on the LFM2.5 re-export: the op is absent and delegation is complete",
+          "rewrite": "same as GREATER_EQUAL",
+          "symptom": "const-input compare rejected"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: \"Tensor dimensions must be less than 5\" — the OpenCL delegate caps tensors at rank 4. 87 MUL ops rejected in the Mamba2 SSD chunked scan; the rank comes from transformers writing each contraction as an explicit broadcast/multiply/reduce (its own comment: \"ssd naive implementation without einsums\"), not from the algorithm",
+      "constraints": {
+        "min_rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "granite-4.0-h-350m int8 (Mamba2)"
+      },
+      "op": "MUL",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: SSD core 0/13 -> 4/4 delegated; whole Mamba2 layer 27/105 -> 98/98 in one partition, 118.4 ms -> 0.82 ms on Pixel 8a",
+          "rewrite": "fold the chunk and head axes into the batch axis and express each contraction as a batched matmul on rank<=3 operands (numerically identical: 1e-14 in fp64 for the five contractions, 1.4e-6 in fp32 for a whole layer)",
+          "symptom": "rank-5/6 MUL in the SSD scan; whole model falls to 109/3673 delegated ops and engine creation aborts"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: \"Invalid paddings tensor shape: expected 4x2 or 3x2, got 2x2\" — PAD is accepted only for rank-3 and rank-4 inputs. Hit by F.pad on the rank-2 chunk-decay vector before segment_sum",
+      "constraints": {
+        "min_rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "granite-4.0-h-350m int8 (Mamba2)"
+      },
+      "op": "PAD",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: PAD rejection gone, delegation rose from 48/90 to 50/90 before the BROADCAST_TO fix took it to 98/98",
+          "rewrite": "replace F.pad(x, (1, 0)) with a cat against an explicit zero column",
+          "symptom": "rank-2 PAD rejected; its partition breaks"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "two distinct rejections in one graph, both verbatim: 'Tensor dimensions must be less than 5.' (248 ops) and 'Tensor <name> has bad input dims size: 6.' (274 ops) -- the mamba scan reshape chain reaches rank 5 and rank 6. Whole-graph result 109/3673 delegated. The official granite-4.0-350m bundle delegates fully on the same runtime (1244/1244 + 1134/1134), so the wall is this export's graph shape, not the architecture",
+      "constraints": {
+        "min_rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-24",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "granite-4.0-h-350m int8 (109/3673) and fp16 (109/3807), Galaxy S26 -- official granite-4.0-350m q8 PASSes as control"
+      },
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "expected full delegation; the control is the official granite-4.0-350m export, whose graph carries no rank>=5 tensor -- the rewrite itself is not yet measured on the -h export",
+          "rewrite": "stage the scan through <=4-D tensors: fold head and chunk into the batch axis before reshaping, so no reshape input exceeds rank 4",
+          "symptom": "rank-5/rank-6 RESHAPE inside the Mamba2 chunked scan (PatchedGraniteMoeHybridMambaLayer); the delegate keeps only the embedding-side nodes"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "verbatim: 'Tensor dimensions must be less than 5.' -- 54 ops rejected in the same granite-4.0-h-350m mamba scan. Same rank-4 cap as the CUMSUM/EXP/CONCATENATION rows; official granite-4.0-350m control passes",
+      "constraints": {
+        "min_rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-24",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "granite-4.0-h-350m int8 and fp16, Galaxy S26"
+      },
+      "op": "SELECT_V2",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "verbatim: 'Slicing is unsupported for input with rank > 4' -- a single op, but it sits in the same granite-4.0-h-350m mamba scan and states the rank-4 cap in its own words. Official granite-4.0-350m control passes",
+      "constraints": {
+        "min_rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-24",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "granite-4.0-h-350m int8 and fp16, Galaxy S26"
+      },
+      "op": "SLICE",
+      "provenance": "measured",
+      "status": "fallback"
+    },
+    {
+      "conditions": "runtime log line, verbatim: 'STABLEHLO_COMPOSITE: odml.softmax'. The composite is left un-lowered by the export and the delegate refuses it, collapsing the whole decoder to CPU: 52/1187 nodes delegated (Shieldstral-1.0-3B-vision int4) and 57/1626 (MedGemma-1.5-4B-IT q4). For Shieldstral the text-only export of the same weights delegates 1187/1187 -- an in-family control that isolates the vision-bundled export path. MedGemma is NOT the same story: its text file fails identically to its vision file (57/1626 both), so 'text-only' is not a general escape from this composite",
+      "constraints": {
+        "composite": "odml.softmax"
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-24",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "Shieldstral-1.0-3B-vision int4 + MedGemma-1.5-4B-IT q4 (text and vision files), Galaxy S26 (SM-S942Q, Adreno)"
+      },
+      "op": "STABLEHLO_COMPOSITE",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "expected full delegation; the in-family control is the Shieldstral text-only export at 1187/1187 on the same runtime -- the rewrite itself is not yet measured",
+          "rewrite": "lower/decompose stablehlo composites at export time so odml.softmax becomes primitive ops",
+          "symptom": "delegate reports 'STABLEHLO_COMPOSITE: odml.softmax' unsupported and claims only a few dozen of the graph's nodes"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "delegate error: \"Tensor type(INT64) is not supported\" — the short-conv valid-length sum itself (the mask sum in Lfm2ShortConv), the source of the int64 ADD/CAST rows above. Confirmed on Adreno (Galaxy S26 / SM8850) as well as the Mali run that staged the other rows, so the rejection is not vendor-specific",
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-08-23",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "LFM2.5-1.2B-Instruct int4 (published 0.9.1-lineage)"
+      },
+      "op": "SUM",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "not separately re-measured: the 0.9.3 re-export that cleared the int64 ADD/CAST reports zero rejected ops, so SUM is expected to clear with them",
+          "rewrite": "sum in float32 and cast the result to int32 (what litert_torch .../model_ext/lfm2/short_conv.py does today), or derive the length without a mask sum",
+          "symptom": "int64 SUM rejected in the LFM2.5 short-conv"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "verbatim: 'Permutation for transpose is invalid.' -- the log does not name a rank or a permutation, so no machine-readable constraint is recorded. One op, in the same granite-4.0-h-350m mamba scan; official granite-4.0-350m control passes",
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-24",
+        "litert_version": "litert-lm 0.16.0",
+        "source_model": "granite-4.0-h-350m int8 and fp16, Galaxy S26"
+      },
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "status": "fallback"
+    }
+  ],
+  "generated_at": "2026-08-25",
+  "litert_version": "0.16.0",
+  "schema_version": "1.0"
+}

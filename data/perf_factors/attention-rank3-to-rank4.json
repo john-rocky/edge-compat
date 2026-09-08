@@ -1,0 +1,31 @@
+{
+ "id": "attention-rank3-to-rank4",
+ "category": "rewrite",
+ "title": "rank-3 [H,T,d] attention -> rank-4 [1,H,T,d] (separate q/k/v, no rank-5 reshape)",
+ "rewrite": {
+  "from": "rank-3 batched attention with fused qkv (rank-5 intermediate reshape)",
+  "to": "rank-4 attention, separate q/k/v projections",
+  "equivalence": "bit-exact",
+  "equivalence_evidence": "same matmuls, layout only"
+ },
+ "measurement": {
+  "device": "Galaxy S26",
+  "soc": "SM8850 (Hexagon v81)",
+  "accelerator": "npu_qnn_htp",
+  "runtime": "LiteRT 2.2.0",
+  "path": "jit",
+  "date": "2026-08-24",
+  "n": 50,
+  "statistic": "median",
+  "thermal": "NONE",
+  "before_ms": 9.359,
+  "after_ms": 9.86,
+  "probe": "probe_t1024 vs probe_rank4_1024",
+  "gpu_control": "rank-3 form REFUSES to compile on ML Drift (rank-5 tensor); rank-4 compiles and runs 16.5 ms"
+ },
+ "factor": 0.95,
+ "scope": "synthetic probe. The 5% NPU cost buys GPU compilability \u2014 the cross-accelerator-safe layout.",
+ "notes": "On this probe the NPU (9.9 ms) beats the GPU (16.5 ms) 1.68x at equal graphs.",
+ "schema_version": "1.0",
+ "provenance": "measured"
+}
