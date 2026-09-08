@@ -1,0 +1,74 @@
+{
+  "artifacts": [
+    {
+      "file": "minicpm_wi4b32_wi8_afp32.litertlm",
+      "sha256": "43f41a837c58408192d703a7cf7bb27a3f8b4f8cc1d34c7f79e54f058f966ccc",
+      "size_mb": 755.906
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "n/a (official artifact)",
+    "quantization": "mixed INT4-block32 (linear) / INT8 (embed and lm_head) quantization (wi4b32_wi8) with FP32 activations (afp32) (README Available Models)",
+    "tool": "official LiteRT-LM release of MiniCPM5-1B (README 'Available Models'); not converted in this lane",
+    "tool_version": "n/a (official artifact)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-06",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.17.0/bin/litert-lm 0.17.0); fixed-question answer: '[thought] \\nWe are asked: \"What is 17 + 25? Answer briefly.\" So we need to compute the sum of 17 and 25. The sum is 42. We should answer briefly, so just \"42\" or maybe \"17+25=42\". But the instruction says \"Answer briefly.\" So we can simply say \"42\". I\\'ll answer: 42.\\n [/thought]\\n\\n\\n42'"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.17.0/2026-09-06/minicpm5-1b__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "minicpm5",
+    "id": "minicpm5-1b",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/MiniCPM5-1B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "The repo also ships minicpm_wi4b32_wi8_afp32_gpu_opt.litertlm (same recipe, optimized for GPU execution) and MiniCPM5-1B_dynamic_wi8_afp32.litertlm (dynamic weight-only INT8, static prefill memory allocation) — separate artifacts, not this card (README Available Models).",
+    "Quantization benchmark in the README compares the FP (bf16) baseline and the W4 model with thinking mode turned off to reduce context usage (README Quantization Benchmark).",
+    "The owner's MiniCPM5-2B conversion (cards minicpm5-2b-int4/-int8) follows this artifact's packaging (verbatim chat_template.jinja on the jinja path) — see minicpm52b_work/FINDINGS.md premises.",
+    "License Apache-2.0, consistent with upstream openbmb/MiniCPM5-1B (README License).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/."
+  ],
+  "schema_version": "1.2"
+}

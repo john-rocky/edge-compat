@@ -1,6 +1,6 @@
 # Public export
 
-Exported on 2026-09-08 from the private lab repository at commit `c8df59e9032c481a519c8889c0e1489958b42c6c`
+Exported on 2026-09-08 from the private lab repository at commit `72a4a05bc6372f1655b8b1b337e449884783d031`
 by `tools/export_public.sh` (one squashed commit per export; the lab's
 history is not published).
 

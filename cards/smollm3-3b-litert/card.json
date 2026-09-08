@@ -1,0 +1,73 @@
+{
+  "artifacts": [
+    {
+      "file": "model.litertlm",
+      "sha256": "8eaf512bc608151ad0e4ccdf968443cb842a41d087ec7741dab8a95faff32b1c",
+      "size_mb": 1909.502
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "TODO (not stated in the README)",
+    "quantization": "int4 blockwise (block 32) + OCTAV optimal-clipping, embedding INT8 externalized into its own section so the main weights section stays under the iOS ~2 GiB single-mmap limit; KV cache 4096 (README Conversion)",
+    "tool": "litert-torch export_hf (generic path; SmolLM3ForCausalLM on the existing converter, the NoPE attention schedule — rotary disabled on every 4th layer — lowers to generic ops with no custom kernel) (README Conversion)",
+    "tool_version": "TODO (the README names the converter but not its version)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-06",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.17.0/bin/litert-lm 0.17.0); fixed-question answer: \"[thought] Okay, let's see. I need to calculate 17 plus 25. Hmm, adding two numbers. Let me start by adding the units place first. 7 plus 5 is 12, right? So I write down 2 and carry over 1. Now, moving to the tens place. 1 (from 17) plus 2 (from 25) is 3, but I have to add the carried-over 1, so 3 + 1 equals 4. So putting it all together, it should be 42. Wait, let me check again. 17 is 10 + 7, and 25 is 20 + 5. Adding 10 + 20 gives 30, and 7 + 5 is 12. So 30 + 12 is 42. Yeah, that's correct. I think 42 is the right answer here. [/thought]\\n\\n\\n42\""
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.17.0/2026-09-06/smollm3-3b-litert__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "smollm3",
+    "id": "smollm3-3b-litert",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/mlboydaisuke/SmolLM3-3B-LiteRT",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "GSM8K (n=100, greedy, 0-shot CoT asking for '#### <n>', identical prompt and extraction): bf16 81.0% / LiteRT int4 (BOCTAV4) 81.0% — fully at parity; visible step-by-step chain-of-thought, clean stop at <|im_end|> (README Quality).",
+    "Blockwise (not channelwise) int4 plus OCTAV is what holds reasoning accuracy at parity (README Conversion).",
+    "License Apache-2.0, inherited from HuggingFaceTB/SmolLM3-3B (README License).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/."
+  ],
+  "schema_version": "1.2"
+}

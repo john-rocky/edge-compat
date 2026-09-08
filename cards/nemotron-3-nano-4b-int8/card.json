@@ -1,0 +1,266 @@
+{
+  "artifacts": [
+    {
+      "file": "Nemotron-3-Nano-4B_int8.litertlm",
+      "sha256": "ba73d2ad1d878bc2b796eb3a1d993eb1b3bd5105743cd85bd6fa9d86e58a013d",
+      "size_mb": 3935.525
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "python scripts/convert.py nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16 (hf-to-litertlm)",
+    "quantization": "int8 dynamic on linears + embedding (convs and the selective scan stay float, which keeps the hybrid state numerically sane); fp32 activations declared (README file table + Honest notes)",
+    "tool": "litert-torch plus a hybrid-cache patch, one command via hf-to-litertlm (python scripts/convert.py nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16; 1645 s on an M4 Max) (README Conversion notes)",
+    "tool_version": "TODO (the README names the converter but not its version)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 12.87,
+          "delegated_ops": 3012,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 2643 out of 2827 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 218 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 2622 out of 2806 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 218 partitions for subgraph 1 (prefill_256).",
+            "VERBOSE: Replacing 2725 out of 2909 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 218 partitions for subgraph 2 (prefill_64).",
+            "VERBOSE: Replacing 2725 out of 2909 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 218 partitions for subgraph 3 (prefill_16).",
+            "results block: prefill=52.94 decode=12.87 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 706.0,
+            "init_s": 8.98674,
+            "prefill_tokens": 211.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 52.94,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 3155,
+          "ttft_ms": 4060.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/nemotron-3-nano-4b-int8__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 2827,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": "exit 139 during the gpu generation gate; log tail: local_attention_mask_policy: Not set | sliding_window_size: Not set | advanced_settings: Not set",
+          "evidence": [
+            "VERBOSE: Replacing 2827 out of 2827 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "community_accel_work/s7_manifest_backfill/logs/Nemotron-3-Nano-4B__Nemotron-3-Nano-4B_int8.gate.log: generation gate verdict FAIL (journal rows.jsonl, fail_class=run_error, exit=139, generated=True, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+            "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
+            "gate process peak 1280 MB (journal gate_peak_mb)"
+          ],
+          "failure_class": "run_error",
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "total_ops": 2827,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/nemotron-3-nano-4b-int8__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": 22.73,
+          "delegated_ops": null,
+          "env": {
+            "device": "mac-studio-m4-max",
+            "machine_label": "m4max-loaded-internvl-export",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=99.57 decode=22.73 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 99.57,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 2643.2
+        },
+        "source": "data/device_runs/0.16.0/2026-08-27/nemotron-3-nano-4b-int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-27",
+          "decode_tokens_per_s": 83.3,
+          "delegated_ops": null,
+          "env": {
+            "device": "mac-studio-m4-max",
+            "machine_label": "m4max-loaded-internvl-export",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=803.37 decode=83.3 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 803.37,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 330.7
+        },
+        "source": "data/device_runs/0.16.0/2026-08-27/nemotron-3-nano-4b-int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-02",
+          "decode_tokens_per_s": 2.2,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 144.5 s, output head '[thought] The user asks: \"What is 17 plus 26? Answer with the number only.\" So a'",
+            "invocation 0: exit=0 wall_s=356.2 temp 48.3->51.6C throttled=0x0 prefill_tps=22.75 decode_tps=2.2 ttft_s=11.7051 init_s=94.7673 peak_rss_mb=5150",
+            "invocation 1: exit=0 wall_s=350.2 temp 49.4->55.4C throttled=0x0 prefill_tps=22.59 decode_tps=2.2 ttft_s=11.7869 init_s=94.7575 peak_rss_mb=5150",
+            "invocation 2: exit=0 wall_s=354.2 temp 48.3->52.1C throttled=0x0 prefill_tps=22.72 decode_tps=2.2 ttft_s=11.7215 init_s=94.6848 peak_rss_mb=5167"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 2.2,
+            "decode_tps_min": 2.2,
+            "init_s": 94.7575,
+            "init_s_max": 94.7673,
+            "init_s_min": 94.6848,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 22.75,
+            "prefill_tps_min": 22.59,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 11.7869,
+            "ttft_s_min": 11.7051
+          },
+          "output_match": null,
+          "peak_mem_mb": 5167.0,
+          "prefill_tokens_per_s": 22.72,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 11721.5
+        },
+        "source": "data/device_runs/0.16.1/2026-09-02/nemotron-3-nano-4b-int8__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "nemotron-3-nano",
+    "id": "nemotron-3-nano-4b-int8",
+    "license": "other (nvidia-nemotron-open-model-license)",
+    "source_url": "https://huggingface.co/litert-community/Nemotron-3-Nano-4B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Requires litert-lm >= 0.15 (README intro).",
+    "GPU requires --cache no on this bundle: with the compiled-graph cache enabled, litert-lm run --backend gpu fails with WebGPU 'Invalid BindGroup' validation errors and the 8-question sweep returns token soup (0/8); the same file with --cache no answers 8/8 (README Honest notes).",
+    "8-question gate 7/8 on CPU, 8/8 on GPU (litert-lm 0.16.0, M4 Max); the single CPU miss is the rhyme item ('violets are purple'); chat template byte-equal to the source (10,504/10,504 bytes — the source tokenizer_config.json carries a different 10,497-byte copy); stops <|im_end|> (id 11) + id 2; no spurious start token (README Correctness).",
+    "Reasoning model — answers arrive after a <think> block, so give it a token budget that fits the thought (the gate used 3200); >=3B exports use a reduced 7-signature prefill ladder because every signature costs engine RAM (README Honest + Conversion notes).",
+    "Not measured on a phone by the README (Mac-only there; a 4B hybrid did not fit an 8 GB Android phone when Nemotron-H-4B was measured); this repo's Galaxy S26 rows come from the S7 backfill: CPU pass, GPU run_error exit 139 after full delegation (device runs).",
+    "auto_map in the config is not proof of remote code: transformers registers nemotron_h natively, so the library implementation loads without trust_remote_code (README Conversion notes).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/."
+  ],
+  "schema_version": "1.2"
+}

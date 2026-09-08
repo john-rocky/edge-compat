@@ -1,0 +1,191 @@
+{
+  "artifacts": [
+    {
+      "file": "Zamba2-1.2B-instruct_int8.litertlm",
+      "sha256": "af51316bd21f96c3766e81deba1ccc935ec0b1e7dedcfee2d23acc7686e49b0d",
+      "size_mb": 1364.136
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "TODO (hf-to-litertlm zamba2_work/; invocation not stated in the README)",
+    "quantization": "post-hoc dynamic int8 over linears + embedding only; convs and the scan stay float; fp32 activations declared for GPU (README file table + Conversion notes)",
+    "tool": "litert-torch plus a hybrid-cache patch (reproduction script + patch: hf-to-litertlm zamba2_work/) (README Conversion notes)",
+    "tool_version": "TODO (the README names the converter but not its version)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 12.21,
+          "delegated_ops": 4739,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 4589 out of 4840 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 242 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 4589 out of 4840 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 242 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 4551 out of 4802 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 242 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 4739 out of 4990 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 242 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=87.79 decode=12.21 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 267.0,
+            "init_s": 2.65241,
+            "prefill_tokens": 213.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 87.79,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 4990,
+          "ttft_ms": 2510.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/zamba2-1.2b-instruct-int8__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 11.68,
+          "delegated_ops": 4990,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 4840 out of 4840 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 4840 out of 4840 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 4802 out of 4802 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 4990 out of 4990 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=115.54 decode=11.68 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 203.0,
+            "init_s": 29.6511,
+            "prefill_tokens": 214.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 115.54,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 4990,
+          "ttft_ms": 1940.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/zamba2-1.2b-instruct-int8__galaxy-s26.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-02",
+          "decode_tokens_per_s": 1.81,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 50.6 s, output head '33'",
+            "invocation 0: exit=0 wall_s=348.2 temp 47.7->52.7C throttled=0x0 prefill_tps=24.26 decode_tps=1.81 ttft_s=11.1032 init_s=36.5198 peak_rss_mb=2992",
+            "invocation 1: exit=0 wall_s=342.2 temp 49.9->55.4C throttled=0x0 prefill_tps=24.28 decode_tps=1.81 ttft_s=11.097 init_s=36.4884 peak_rss_mb=2993",
+            "invocation 2: exit=0 wall_s=342.2 temp 51.0->53.2C throttled=0x0 prefill_tps=24.2 decode_tps=1.81 ttft_s=11.1297 init_s=36.4751 peak_rss_mb=2993"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.81,
+            "decode_tps_min": 1.81,
+            "init_s": 36.4884,
+            "init_s_max": 36.5198,
+            "init_s_min": 36.4751,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 24.28,
+            "prefill_tps_min": 24.2,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 11.1297,
+            "ttft_s_min": 11.097
+          },
+          "output_match": null,
+          "peak_mem_mb": 2993.0,
+          "prefill_tokens_per_s": 24.26,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 11103.2
+        },
+        "source": "data/device_runs/0.16.1/2026-09-02/zamba2-1.2b-instruct-int8__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "zamba2",
+    "id": "zamba2-1.2b-instruct-int8",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Zamba2-1.2B-instruct",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "iPhone 17 Pro (Metal): the 8-item composite probe answers 8/8 on CPU; on GPU 6/8, where both misses (8x7 and the rhyme) are questions the HF fp32 reference itself answers incorrectly on this composite — the GPU path tracks the reference model's own behavior (README Correctness).",
+    "Galaxy S26 GPU per the README: runs, 54510/54510 ops across 12 subgraphs on LiteRT GPU (3620 MB); this repo's S26 CPU row is from the S7 backfill, the Pi 5 row from wave 2 (device runs).",
+    "Requires litert-lm >= 0.15 (README intro).",
+    "Correctness (README): float export matches the HF model teacher-forced across 48 decode positions (top-1/top-5 identical, corr 1.0000, KL ≈ 0); 8-question gate 8/8 on every lane (GPU and CPU, litert-lm 0.15.0 and 0.16.0), no degeneration, no greedy flips; hermetic prefill-chunk sweep clean (CPU fills 12-51, GPU 12-31).",
+    "Hybrid packaging: folded selective scan (batched matmuls, all tensors rank <= 4 — what makes the graph fully delegable on GPU), min-only dt clamp handling (padded prefill positions forced to exact identity steps AFTER the clamp), shared block + adapters traced once per position with tied weights stored once, composite hybrid cache layer, prefill-pad guard (README Conversion notes).",
+    "Streaming detokenization: the tokenizer's Strip decoder is removed from the bundle — Zamba2's metaspace (SP-BPE) tokenizer otherwise loses every interior space under the runtime's per-token streaming decode; the only behavior change is a sequence-initial space, which the runtime trims (README Conversion notes).",
+    "License Apache-2.0, inherited from the Zyphra base (README front matter).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/."
+  ],
+  "schema_version": "1.2"
+}

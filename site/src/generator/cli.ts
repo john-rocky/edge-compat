@@ -289,6 +289,14 @@ async function main(): Promise<void> {
     path.join(SITE_ROOT, 'static', 'site.css'),
     path.join(outDir, 'assets', 'site.css'),
   );
+  // Discovery entry points for agents at the site root (RELEASE.md step 7):
+  // the committed llms.txt and the card index, verbatim.
+  fs.copyFileSync(path.join(REPO_ROOT, 'llms.txt'), path.join(outDir, 'llms.txt'));
+  fs.mkdirSync(path.join(outDir, 'cards'), { recursive: true });
+  fs.copyFileSync(
+    path.join(REPO_ROOT, 'cards', 'index.json'),
+    path.join(outDir, 'cards', 'index.json'),
+  );
 
   let demoPages = 0;
   const skipped: string[] = [];

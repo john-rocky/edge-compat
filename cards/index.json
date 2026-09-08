@@ -1059,6 +1059,55 @@
     {
       "benchmark_count": 0,
       "browser": null,
+      "card_json": "cards/falcon-h1-1.5b-deep-instruct-int8/card.json",
+      "card_md": "cards/falcon-h1-1.5b-deep-instruct-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-05",
+            "device": "galaxy-s26",
+            "label": "cpu@212tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-08-24",
+            "device": "galaxy-s26",
+            "label": "gpu@212tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-02",
+            "device": "raspberry-pi-5",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.0/2026-08-24/falcon-h1-1.5b-deep-instruct-int8__galaxy-s26.json",
+          "data/device_runs/0.16.0/2026-09-05/falcon-h1-1.5b-deep-instruct-int8__galaxy-s26.json",
+          "data/device_runs/0.16.1/2026-09-02/falcon-h1-1.5b-deep-instruct-int8__raspberry-pi-5.json"
+        ]
+      },
+      "family": "falcon-h1",
+      "id": "falcon-h1-1.5b-deep-instruct-int8",
+      "license": "other (falcon-llm-license)",
+      "pitfall_count": 6,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
       "card_json": "cards/falcon-h1-1.5b-instruct-int8/card.json",
       "card_md": "cards/falcon-h1-1.5b-instruct-int8/CARD.md",
       "cross_runtime_count": 0,
@@ -1740,6 +1789,134 @@
       "id": "granite-4.0-h-1b",
       "license": "apache-2.0",
       "pitfall_count": 5,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/granite-4.0-h-350m-fp16/card.json",
+      "card_md": "cards/granite-4.0-h-350m-fp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-05",
+            "device": "galaxy-s26",
+            "label": "cpu@224tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-08-24",
+            "device": "galaxy-s26",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "load_failed"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-08-12",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-02",
+            "device": "raspberry-pi-5",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.0/2026-08-12/granite-4.0-h-350m-fp16__mac-studio-m4-max.json",
+          "data/device_runs/0.16.0/2026-08-24/granite-4.0-h-350m-fp16__galaxy-s26.json",
+          "data/device_runs/0.16.0/2026-09-05/granite-4.0-h-350m-fp16__galaxy-s26.json",
+          "data/device_runs/0.16.1/2026-09-02/granite-4.0-h-350m-fp16__raspberry-pi-5.json"
+        ]
+      },
+      "family": "granite",
+      "id": "granite-4.0-h-350m-fp16",
+      "license": "apache-2.0",
+      "pitfall_count": 6,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/granite-4.0-h-350m-int8/card.json",
+      "card_md": "cards/granite-4.0-h-350m-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-05",
+            "device": "galaxy-s26",
+            "label": "cpu@224tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-08-24",
+            "device": "galaxy-s26",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "load_failed"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-06",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-05",
+            "device": "pixel-8a",
+            "label": "cpu@224tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-02",
+            "device": "raspberry-pi-5",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.0/2026-08-24/granite-4.0-h-350m-int8__galaxy-s26.json",
+          "data/device_runs/0.16.0/2026-09-05/granite-4.0-h-350m-int8__galaxy-s26.json",
+          "data/device_runs/0.16.0/2026-09-05/granite-4.0-h-350m-int8__pixel-8a.json",
+          "data/device_runs/0.16.1/2026-09-02/granite-4.0-h-350m-int8__raspberry-pi-5.json",
+          "data/device_runs/0.17.0/2026-09-06/granite-4.0-h-350m-int8__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "granite",
+      "id": "granite-4.0-h-350m-int8",
+      "license": "apache-2.0",
+      "pitfall_count": 6,
       "task": "text-generation"
     },
     {
@@ -4452,6 +4629,35 @@
     {
       "benchmark_count": 0,
       "browser": null,
+      "card_json": "cards/minicpm5-1b/card.json",
+      "card_md": "cards/minicpm5-1b/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-06",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.0/2026-09-06/minicpm5-1b__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "minicpm5",
+      "id": "minicpm5-1b",
+      "license": "apache-2.0",
+      "pitfall_count": 5,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
       "card_json": "cards/minicpm5-2b-int4/card.json",
       "card_md": "cards/minicpm5-2b-int4/CARD.md",
       "cross_runtime_count": 0,
@@ -4724,6 +4930,63 @@
       "license": "apache-2.0",
       "pitfall_count": 0,
       "task": "image-segmentation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/mordant-3b-think-int8/card.json",
+      "card_md": "cards/mordant-3b-think-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-05",
+            "device": "galaxy-s26",
+            "label": "cpu@206tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-05",
+            "device": "galaxy-s26",
+            "label": "gpu@206tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-08-25",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-08-25",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.0/2026-08-25/mordant-3b-think-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.16.0/2026-09-05/mordant-3b-think-int8__galaxy-s26.json"
+        ]
+      },
+      "family": "granite",
+      "id": "mordant-3b-think-int8",
+      "license": "apache-2.0",
+      "pitfall_count": 5,
+      "task": "text-generation"
     },
     {
       "benchmark_count": 0,
@@ -5041,6 +5304,73 @@
       "id": "nanbeige4.2-3b-fp32act",
       "license": "apache-2.0",
       "pitfall_count": 3,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/nemotron-3-nano-4b-int8/card.json",
+      "card_md": "cards/nemotron-3-nano-4b-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-05",
+            "device": "galaxy-s26",
+            "label": "cpu@211tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-05",
+            "device": "galaxy-s26",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "run_failed"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-08-27",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-08-27",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-02",
+            "device": "raspberry-pi-5",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.0/2026-08-27/nemotron-3-nano-4b-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.16.0/2026-09-05/nemotron-3-nano-4b-int8__galaxy-s26.json",
+          "data/device_runs/0.16.1/2026-09-02/nemotron-3-nano-4b-int8__raspberry-pi-5.json"
+        ]
+      },
+      "family": "nemotron-3-nano",
+      "id": "nemotron-3-nano-4b-int8",
+      "license": "other (nvidia-nemotron-open-model-license)",
+      "pitfall_count": 7,
       "task": "text-generation"
     },
     {
@@ -6059,6 +6389,45 @@
       "id": "qwen3-4b-thinking",
       "license": "apache-2.0",
       "pitfall_count": 3,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/qwen3-4b-thinking-dynamic-wi4b32-afp32/card.json",
+      "card_md": "cards/qwen3-4b-thinking-dynamic-wi4b32-afp32/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu",
+            "date": "2026-08-24",
+            "device": "galaxy-s26",
+            "label": "gpu@202tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-01",
+            "device": "raspberry-pi-5",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.0/2026-08-24/qwen3-4b-thinking-dynamic-wi4b32-afp32__galaxy-s26.json",
+          "data/device_runs/0.16.1/2026-09-01/qwen3-4b-thinking-dynamic-wi4b32-afp32__raspberry-pi-5.json"
+        ]
+      },
+      "family": "qwen3",
+      "id": "qwen3-4b-thinking-dynamic-wi4b32-afp32",
+      "license": "apache-2.0",
+      "pitfall_count": 6,
       "task": "text-generation"
     },
     {
@@ -8161,6 +8530,74 @@
     {
       "benchmark_count": 0,
       "browser": null,
+      "card_json": "cards/smollm3-3b-int8/card.json",
+      "card_md": "cards/smollm3-3b-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu",
+            "date": "2026-08-24",
+            "device": "galaxy-s26",
+            "label": "gpu@211tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-01",
+            "device": "raspberry-pi-5",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.0/2026-08-24/smollm3-3b-int8__galaxy-s26.json",
+          "data/device_runs/0.16.1/2026-09-01/smollm3-3b-int8__raspberry-pi-5.json"
+        ]
+      },
+      "family": "smollm3",
+      "id": "smollm3-3b-int8",
+      "license": "apache-2.0",
+      "pitfall_count": 4,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/smollm3-3b-litert/card.json",
+      "card_md": "cards/smollm3-3b-litert/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-06",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.0/2026-09-06/smollm3-3b-litert__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "smollm3",
+      "id": "smollm3-3b-litert",
+      "license": "apache-2.0",
+      "pitfall_count": 4,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
       "card_json": "cards/smolvlm2-500m/card.json",
       "card_md": "cards/smolvlm2-500m/CARD.md",
       "cross_runtime_count": 0,
@@ -8554,6 +8991,122 @@
       "license": "mit",
       "pitfall_count": 1,
       "task": "automatic-speech-recognition# HF card front matter pipeline_tag"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/tashkeel-350m-v2-fp16/card.json",
+      "card_md": "cards/tashkeel-350m-v2-fp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-05",
+            "device": "galaxy-s26",
+            "label": "cpu@224tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-08-25",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-05",
+            "device": "pixel-8a",
+            "label": "cpu@224tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "fallback"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.0/2026-08-25/tashkeel-350m-v2-fp16__mac-studio-m4-max.json",
+          "data/device_runs/0.16.0/2026-09-05/tashkeel-350m-v2-fp16__galaxy-s26.json",
+          "data/device_runs/0.16.0/2026-09-05/tashkeel-350m-v2-fp16__pixel-8a.json"
+        ]
+      },
+      "family": "granite",
+      "id": "tashkeel-350m-v2-fp16",
+      "license": "apache-2.0",
+      "pitfall_count": 5,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/tashkeel-350m-v2-int8/card.json",
+      "card_md": "cards/tashkeel-350m-v2-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-05",
+            "device": "galaxy-s26",
+            "label": "cpu@224tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-05",
+            "device": "galaxy-s26",
+            "label": "gpu@224tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-08-25",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-05",
+            "device": "pixel-8a",
+            "label": "cpu@224tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-05",
+            "device": "pixel-8a",
+            "label": "gpu@224tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.0/2026-08-25/tashkeel-350m-v2-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.16.0/2026-09-05/tashkeel-350m-v2-int8__galaxy-s26.json",
+          "data/device_runs/0.16.0/2026-09-05/tashkeel-350m-v2-int8__pixel-8a.json"
+        ]
+      },
+      "family": "granite",
+      "id": "tashkeel-350m-v2-int8",
+      "license": "apache-2.0",
+      "pitfall_count": 5,
+      "task": "text-generation"
     },
     {
       "benchmark_count": 0,
@@ -9413,6 +9966,84 @@
       "license": "bsd-3-clause",
       "pitfall_count": 1,
       "task": "object-detection"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/zamba2-1.2b-instruct-int8/card.json",
+      "card_md": "cards/zamba2-1.2b-instruct-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-05",
+            "device": "galaxy-s26",
+            "label": "cpu@213tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-08-24",
+            "device": "galaxy-s26",
+            "label": "gpu@214tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-02",
+            "device": "raspberry-pi-5",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.0/2026-08-24/zamba2-1.2b-instruct-int8__galaxy-s26.json",
+          "data/device_runs/0.16.0/2026-09-05/zamba2-1.2b-instruct-int8__galaxy-s26.json",
+          "data/device_runs/0.16.1/2026-09-02/zamba2-1.2b-instruct-int8__raspberry-pi-5.json"
+        ]
+      },
+      "family": "zamba2",
+      "id": "zamba2-1.2b-instruct-int8",
+      "license": "apache-2.0",
+      "pitfall_count": 8,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/zamba2-2.7b-instruct/card.json",
+      "card_md": "cards/zamba2-2.7b-instruct/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-02",
+            "device": "raspberry-pi-5",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.1/2026-09-02/zamba2-2.7b-instruct__raspberry-pi-5.json"
+        ]
+      },
+      "family": "zamba2",
+      "id": "zamba2-2.7b-instruct",
+      "license": "apache-2.0",
+      "pitfall_count": 9,
+      "task": "text-generation"
     },
     {
       "benchmark_count": 0,

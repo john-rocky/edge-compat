@@ -1,0 +1,100 @@
+{
+  "artifacts": [
+    {
+      "file": "Zamba2-2.7B-instruct_int8.litertlm",
+      "sha256": "601e96057ddeb6fc1a7451f193e475419c7b121408d841c08cef391f051835f1",
+      "size_mb": 2673.251
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "TODO (hf-to-litertlm zamba2_work/; invocation not stated in the README)",
+    "quantization": "post-hoc dynamic int8 over linears + embedding only; convs and the scan stay float; fp32 activations declared for GPU (README file table + Conversion notes)",
+    "tool": "litert-torch plus a hybrid-cache patch (reproduction script + patch: hf-to-litertlm zamba2_work/) (README Conversion notes)",
+    "tool_version": "TODO (the README names the converter but not its version)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-02",
+          "decode_tokens_per_s": 1.03,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 112.1 s, output head '43'",
+            "invocation 0: exit=0 wall_s=610.4 temp 49.9->56.0C throttled=0x0 prefill_tps=14.68 decode_tps=1.03 ttft_s=18.4151 init_s=74.3887 peak_rss_mb=4995",
+            "invocation 1: exit=0 wall_s=608.4 temp 51.0->51.6C throttled=0x0 prefill_tps=14.64 decode_tps=1.03 ttft_s=18.4577 init_s=74.3202 peak_rss_mb=4996",
+            "invocation 2: exit=0 wall_s=610.4 temp 51.6->52.1C throttled=0x0 prefill_tps=14.56 decode_tps=1.03 ttft_s=18.5508 init_s=74.2435 peak_rss_mb=4995"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.03,
+            "decode_tps_min": 1.03,
+            "init_s": 74.3202,
+            "init_s_max": 74.3887,
+            "init_s_min": 74.2435,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 14.68,
+            "prefill_tps_min": 14.56,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 18.5508,
+            "ttft_s_min": 18.4151
+          },
+          "output_match": null,
+          "peak_mem_mb": 4996.0,
+          "prefill_tokens_per_s": 14.64,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 18457.7
+        },
+        "source": "data/device_runs/0.16.1/2026-09-02/zamba2-2.7b-instruct__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "zamba2",
+    "id": "zamba2-2.7b-instruct",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Zamba2-2.7B-instruct",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "iPhone 17 Pro: the 8-item composite probe answers 8/8 on the CPU backend; the Metal backend does not run this size on a 12 GB phone (README Correctness + honest note).",
+    "Galaxy S26 GPU per the README: does not run — engine creation rebooted the phone (README S26 table); this repo carries the Pi 5 CPU row (device runs).",
+    "Conversion-side note: current transformers (5.14.x and main as of 2026-08-14) cannot load ANY two-block Zamba2 checkpoint (2.7B/7B) — Zamba2Model.get_layers assigns block_id by global layer index while the checkpoint layout and its weight-tie cycle follow hybrid occurrence order; the conversion assigns block_id by hybrid occurrence order (README Correctness + Conversion notes).",
+    "Requires litert-lm >= 0.15 (README intro).",
+    "Correctness (README): float export matches the HF model teacher-forced across 48 decode positions (top-1/top-5 identical, corr 1.0000, KL ≈ 0); 8-question gate 8/8 on every lane (GPU and CPU, litert-lm 0.15.0 and 0.16.0), no degeneration, no greedy flips; hermetic prefill-chunk sweep clean (CPU fills 12-51, GPU 12-31).",
+    "Hybrid packaging: folded selective scan (batched matmuls, all tensors rank <= 4 — what makes the graph fully delegable on GPU), min-only dt clamp handling (padded prefill positions forced to exact identity steps AFTER the clamp), shared block + adapters traced once per position with tied weights stored once, composite hybrid cache layer, prefill-pad guard (README Conversion notes).",
+    "Streaming detokenization: the tokenizer's Strip decoder is removed from the bundle — Zamba2's metaspace (SP-BPE) tokenizer otherwise loses every interior space under the runtime's per-token streaming decode; the only behavior change is a sequence-initial space, which the runtime trims (README Conversion notes).",
+    "License Apache-2.0, inherited from the Zyphra base (README front matter).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/."
+  ],
+  "schema_version": "1.2"
+}

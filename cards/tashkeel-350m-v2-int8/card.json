@@ -1,0 +1,263 @@
+{
+  "artifacts": [
+    {
+      "file": "Tashkeel-350M-v2_int8.litertlm",
+      "sha256": "e962e6287a3b1e109498d1bca09d20fe55131bb1cd7431165bf255cfd2de1cd7",
+      "size_mb": 458.921
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "granite_work/convert_granite4h.py (hf-to-litertlm, 2026-08-25; invocation not stated in the README)",
+    "quantization": "dynamic int8 on linears + embedding (README file table)",
+    "tool": "hf-to-litertlm, family recipe granite_work/convert_granite4h.py (2026-08-25) (README Conversion & verification)",
+    "tool_version": "TODO (the README names the converter but not its version)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 68.96,
+          "delegated_ops": 3705,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 3154 out of 3402 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 3154 out of 3402 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 3126 out of 3374 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 3264 out of 3512 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=212.13 decode=68.96 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 294.0,
+            "init_s": 1.67486,
+            "prefill_tokens": 224.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 212.13,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 3890,
+          "ttft_ms": 1070.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/tashkeel-350m-v2-int8__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 46.26,
+          "delegated_ops": 3512,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 3402 out of 3402 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 3402 out of 3402 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 3374 out of 3374 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 3512 out of 3512 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=754.69 decode=46.26 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 195.0,
+            "init_s": 22.77085,
+            "prefill_tokens": 224.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 754.69,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 3512,
+          "ttft_ms": 320.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/tashkeel-350m-v2-int8__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-25",
+          "decode_tokens_per_s": 97.21,
+          "delegated_ops": null,
+          "env": {
+            "device": "mac-studio-m4-max",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=761.25 decode=97.21 tokens/s",
+            "token counts supplied by the caller from recorded evidence (this log states none): prefill=256 decode=256"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 761.25,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 346.7
+        },
+        "source": "data/device_runs/0.16.0/2026-08-25/tashkeel-350m-v2-int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 49.06,
+          "delegated_ops": 3705,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 3154 out of 3402 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 3154 out of 3402 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 3126 out of 3374 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 3264 out of 3512 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 304 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=111.8 decode=49.06 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 294.0,
+            "init_s": 2.15629,
+            "prefill_tokens": 224.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 111.8,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 3890,
+          "ttft_ms": 2020.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/tashkeel-350m-v2-int8__pixel-8a.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 18.37,
+          "delegated_ops": 3512,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 3402 out of 3402 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 3402 out of 3402 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_512).",
+            "VERBOSE: Replacing 3374 out of 3374 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_256).",
+            "VERBOSE: Replacing 3512 out of 3512 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_128).",
+            "results block: prefill=250.92 decode=18.37 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 195.0,
+            "init_s": 25.46553,
+            "prefill_tokens": 224.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 250.92,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 3512,
+          "ttft_ms": 950.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/tashkeel-350m-v2-int8__pixel-8a.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "granite",
+    "id": "tashkeel-350m-v2-int8",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/mlboydaisuke/Tashkeel-350M-v2-LiteRT",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Arabic diacritization (tashkeel) fine-tune of ibm-granite/granite-4.0-h-350m trained on Misraj/Sadeed_Tashkeela; the checkpoint's chat template (byte-equal to the granite base's, 6418/6418) is embedded and applied at runtime (README intro + Conversion).",
+    "The metadata start token is dropped — granite's template has no leading BOS, and at 350M scale a prepended <|end_of_text|> flips correct diacritization into garbage (measured on this checkpoint) (README Conversion).",
+    "Task gate: the model card's worked example plus nine undiacritized MSA probes, bundle vs HF fp32 greedy on identical rendered strings (granite_work/gate_tashkeel.py): fp16 10/10 byte-identical, int8 8/10 (the README carries a note on the two int8 misses) (README file table).",
+    "License Apache-2.0, inherited from the source model and its granite base (README License).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/."
+  ],
+  "schema_version": "1.2"
+}

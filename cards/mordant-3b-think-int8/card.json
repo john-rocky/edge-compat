@@ -1,0 +1,213 @@
+{
+  "artifacts": [
+    {
+      "file": "Mordant-3B-Think_int8.litertlm",
+      "sha256": "85205709015e412915ca86ca1e790177f204d438fbee288317b2c7cc2deb484e",
+      "size_mb": 3587.91
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "python scripts/convert.py Kezmark/Mordant-3B-Think (hf-to-litertlm, 2026-08-25)",
+    "quantization": "dynamic int8 on linears + embedding (README file table)",
+    "tool": "hf-to-litertlm, one command (python scripts/convert.py Kezmark/Mordant-3B-Think, 2026-08-25) (README Conversion & verification)",
+    "tool_version": "TODO (the README names the converter but not its version)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 7.7,
+          "delegated_ops": 2172,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1619 out of 1784 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 238 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 1619 out of 1784 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 238 partitions for subgraph 1 (prefill_256).",
+            "VERBOSE: Replacing 1619 out of 1784 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 238 partitions for subgraph 2 (prefill_64).",
+            "VERBOSE: Replacing 1619 out of 1784 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 238 partitions for subgraph 3 (prefill_16).",
+            "results block: prefill=62.91 decode=7.7 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 503.0,
+            "init_s": 5.80061,
+            "prefill_tokens": 206.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 62.91,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 2258,
+          "ttft_ms": 3400.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/mordant-3b-think-int8__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-05",
+          "decode_tokens_per_s": 9.59,
+          "delegated_ops": 1784,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cold-cache-cooled",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1784 out of 1784 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 1784 out of 1784 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256).",
+            "VERBOSE: Replacing 1784 out of 1784 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_64).",
+            "VERBOSE: Replacing 1784 out of 1784 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_16).",
+            "results block: prefill=232.68 decode=9.59 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 487.0,
+            "init_s": 14.14932,
+            "prefill_tokens": 206.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 232.68,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1784,
+          "ttft_ms": 990.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-05/mordant-3b-think-int8__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-08-25",
+          "decode_tokens_per_s": 20.18,
+          "delegated_ops": null,
+          "env": {
+            "device": "mac-studio-m4-max",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=97.25 decode=20.18 tokens/s",
+            "token counts supplied by the caller from recorded evidence (this log states none): prefill=256 decode=256"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 97.25,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 2682.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-25/mordant-3b-think-int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-25",
+          "decode_tokens_per_s": 71.85,
+          "delegated_ops": null,
+          "env": {
+            "device": "mac-studio-m4-max",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=1128.98 decode=71.85 tokens/s",
+            "token counts supplied by the caller from recorded evidence (this log states none): prefill=256 decode=256"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 1128.98,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 240.7
+        },
+        "source": "data/device_runs/0.16.0/2026-08-25/mordant-3b-think-int8__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "granite",
+    "id": "mordant-3b-think-int8",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/mlboydaisuke/Mordant-3B-Think-LiteRT",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "A full fine-tune of ibm-granite/granite-4.1-3b for AI image-generation prompt composition with chain-of-thought reasoning; the finetune's thinking-form chat template (opens the assistant turn with <think>) is embedded verbatim (byte-equal 1474/1474) (README intro + Conversion).",
+    "The spurious metadata start token is dropped: this family declares bos == eos == <|end_of_text|> and its template never renders a leading BOS, so an engine-prepended start token reads as 'this document already ended' — measured on this checkpoint it flips HF bf16 greedy output into a code-fence loop (README Conversion).",
+    "Reduced 7-signature prefill ladder + externalized embedder (the >=3B ship shape; the full 11-signature ladder is killed by iOS at Metal init on this family); quality gate 8/8 (think-aware budget), non-degenerate (README Conversion).",
+    "License Apache-2.0, inherited from the source model and its granite-4.1 base (README License).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/."
+  ],
+  "schema_version": "1.2"
+}

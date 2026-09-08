@@ -1,0 +1,139 @@
+{
+  "artifacts": [
+    {
+      "file": "SmolLM3-3B.litertlm",
+      "sha256": "f9aa844c27f5ccfae9cb701c7ca63f2faba501ed187aacc85044b6200df15a37",
+      "size_mb": 2965.286
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "TODO (not stated in the README)",
+    "quantization": "TODO — the README describes this ~3.1 GB file only as 'the repo also carries SmolLM3-3B.litertlm, gated on the Galaxy S26 GPU'; the id suffix -int8 is the device-run lane's, not a README statement",
+    "tool": "litert-torch export_hf (README Conversion, written for the repo's q4 file; SmolLM3ForCausalLM on the existing converter, NoPE attention lowers to generic ops)",
+    "tool_version": "TODO (the README names the converter but not its version)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 14.41,
+          "delegated_ops": 1548,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1382 out of 1382 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (decode).",
+            "VERBOSE: Replacing 1548 out of 1548 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256).",
+            "results block: prefill=312.27 decode=14.41 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 295.0,
+            "init_s": 4.91261,
+            "prefill_tokens": 211.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 312.27,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1548,
+          "ttft_ms": 750.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/smollm3-3b-int8__galaxy-s26.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 1.97,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 209.8 s, output head \"[thought] Okay, let's see. I need to add 17 and 26 together. Hmm, where do I sta\"",
+            "invocation 0: exit=0 wall_s=398.2 temp 51.0->52.7C throttled=0x0 prefill_tps=18.39 decode_tps=1.96 ttft_s=14.5402 init_s=81.9599 peak_rss_mb=4247",
+            "invocation 1: exit=0 wall_s=400.3 temp 50.5->52.1C throttled=0x0 prefill_tps=19.1 decode_tps=1.97 ttft_s=14.0367 init_s=81.5099 peak_rss_mb=4241",
+            "invocation 2: exit=0 wall_s=392.2 temp 51.0->55.4C throttled=0x0 prefill_tps=20.38 decode_tps=1.97 ttft_s=13.1383 init_s=81.0837 peak_rss_mb=4232"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.97,
+            "decode_tps_min": 1.96,
+            "init_s": 81.5099,
+            "init_s_max": 81.9599,
+            "init_s_min": 81.0837,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 20.38,
+            "prefill_tps_min": 18.39,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 14.5402,
+            "ttft_s_min": 13.1383
+          },
+          "output_match": null,
+          "peak_mem_mb": 4247.0,
+          "prefill_tokens_per_s": 19.1,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 14036.7
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/smollm3-3b-int8__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "smollm3",
+    "id": "smollm3-3b-int8",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/SmolLM3-3B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Galaxy S26 GPU per the README: runs, 2930/2930 ops across 2 subgraphs on LiteRT GPU (704 MB); Raspberry Pi 5 CPU 19.1 tok/s prefill / 2.0 decode (README tables); this repo's Pi 5 row is the wave-2 journal (device runs).",
+    "The tokenizer in SmolLM3-3B.litertlm was a SentencePiece conversion of the model's BPE tokenizer that lost byte-level semantics for standalone accented letters/symbols, and both bundles later received a metadata-only repair declaring the reasoning channel (thought, <think>…</think>) and a default-system-turn change (every section except LlmMetadata byte-identical, sha256 per section) — read the README's 'Metadata-only change' notes for the exact state of the file you download (README).",
+    "License Apache-2.0, inherited from HuggingFaceTB/SmolLM3-3B (README License).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/."
+  ],
+  "schema_version": "1.2"
+}

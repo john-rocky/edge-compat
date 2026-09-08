@@ -1,0 +1,142 @@
+{
+  "artifacts": [
+    {
+      "file": "Qwen3_4b_thinking_dynamic_wi4b32_afp32.litertlm",
+      "sha256": "a412d77da3a15047232ce525d126a8cdb803691d29df791f13a9ef4cffab309a",
+      "size_mb": 2168.84
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "TODO (not stated in the README)",
+    "quantization": "dynamic INT4 block-32 weights, FP32 activations (dynamic_wi4b32_afp32), KV 4096 (README Artifact (Block 32) table)",
+    "tool": "LiteRT Torch (litert-torch) path, quantized with AI Edge Quantizer; the artifact incorporates LiteRT-LM GPU graph optimizations (composite ops for RoPE, fused QKV, …) (README Conversion Notes)",
+    "tool_version": "TODO (the README names the converter but not its version)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-08-24",
+          "decode_tokens_per_s": 11.2,
+          "delegated_ops": 1282,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cl-pinned",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1282 out of 1282 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "VERBOSE: Replacing 1282 out of 1282 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_1024).",
+            "VERBOSE: Replacing 1200 out of 1200 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (decode).",
+            "results block: prefill=129.44 decode=11.2 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 3894.0,
+            "init_s": 30.16432,
+            "prefill_tokens": 202.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 129.44,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1282,
+          "ttft_ms": 1650.0
+        },
+        "source": "data/device_runs/0.16.0/2026-08-24/qwen3-4b-thinking-dynamic-wi4b32-afp32__galaxy-s26.json"
+      },
+      {
+        "device": "raspberry-pi-5",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-01",
+          "decode_tokens_per_s": 1.43,
+          "delegated_ops": null,
+          "env": {
+            "device": "Raspberry Pi 5 Model B Rev 1.1",
+            "machine_label": "raspberry-pi-5-cooled-52c",
+            "os_build": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Broadcom BCM2712",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
+            "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
+            "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 609.1 s, output head '[thought] First, the user asked: \"What is 17 plus 26? Answer with the number onl'",
+            "invocation 0: exit=0 wall_s=486.3 temp 49.9->52.1C throttled=0x0 prefill_tps=8.79 decode_tps=1.43 ttft_s=29.8271 init_s=69.1031 peak_rss_mb=4507",
+            "invocation 1: exit=0 wall_s=486.3 temp 49.9->52.7C throttled=0x0 prefill_tps=9.01 decode_tps=1.43 ttft_s=29.1172 init_s=68.9614 peak_rss_mb=4491",
+            "invocation 2: exit=0 wall_s=484.3 temp 49.4->53.8C throttled=0x0 prefill_tps=8.92 decode_tps=1.43 ttft_s=29.4036 init_s=69.0636 peak_rss_mb=4507"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "decode_tps_max": 1.43,
+            "decode_tps_min": 1.43,
+            "init_s": 69.0636,
+            "init_s_max": 69.1031,
+            "init_s_min": 68.9614,
+            "invocations": 3.0,
+            "prefill_tokens": 256.0,
+            "prefill_tps_max": 9.01,
+            "prefill_tps_min": 8.79,
+            "runs_per_invocation": 1.0,
+            "threads": 4.0,
+            "ttft_s_max": 29.8271,
+            "ttft_s_min": 29.1172
+          },
+          "output_match": null,
+          "peak_mem_mb": 4507.0,
+          "prefill_tokens_per_s": 8.92,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 29403.6
+        },
+        "source": "data/device_runs/0.16.1/2026-09-01/qwen3-4b-thinking-dynamic-wi4b32-afp32__raspberry-pi-5.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3",
+    "id": "qwen3-4b-thinking-dynamic-wi4b32-afp32",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Qwen3-4B-Thinking-2507",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "The block-32 build is the CPU file: it degraded more on GSM8K (−9 pt vs bf16 90.0%, against −4 pt for the block-128 build) and produced corrupted output under the iPhone GPU delegate; the corruption is not iPhone-specific — on macOS Metal it degenerates too (question-echo loops, truncated reasoning, measured 2026-08-31 before and after the metadata repair). Use the block-32 file on CPU; block 128 is the recommended build on every backend (README Accuracy note).",
+    "Both bundles run fully delegated on the Galaxy S26 GPU per the README (3764/3764 ops across 3 subgraphs on LiteRT GPU, 1627 MB); this repo carries the Pi 5 CPU row (device runs).",
+    "2026-08-31 metadata-only repairs (weights byte-identical, verified section by section): the thought channel (<think>\\n / \\n</think>) declared in the bundle metadata and the think pre-fill repaired — without the channel the runtime streams raw reasoning into the answer (README Conversion Notes update).",
+    "Evaluating a reasoning model at a short token budget understates int4 — benchmark with max_tokens >= 2048 (README Accuracy note).",
+    "License Apache-2.0, inherited from Qwen/Qwen3-4B-Thinking-2507 (README License).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/."
+  ],
+  "schema_version": "1.2"
+}
