@@ -19,7 +19,7 @@
   "dependencies": {
     "@litertjs/core": "^2.5.3",
     "ajv": "^8.17.1",
-    "playwright": "^1.54.0"
+    "playwright": "^1.63.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
