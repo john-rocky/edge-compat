@@ -1,0 +1,98 @@
+{
+  "artifact": "decider-2b-vision_dyn8.litertlm",
+  "artifact_sha256": "5fb2e19aa2066d2e3955431366bc572edb7abbc6037db53d4eaf4a4a4d0e7bd9",
+  "device": "mac-studio-m4-max",
+  "model_id": "decider-2b-vision-int8",
+  "notes": "Published as decider-2b-vision_int8.litertlm (the lane's name decider-2b-vision_dyn8.litertlm; content unchanged) in litert-community/decider-2b-vision-LiteRT (Hub commit 6c024e94, 2026-09-29): the Hub LFS sha256 equals the measured file's (5fb2e19a..., 3,171,081,088 B). Digest from the lane's bundle record (results/bundle_r4_dyn8.json) of the file the harness loaded. First-token gate only (the int8 file was not timed on the Mac): litertlm-convert decider2bv_work round 4, scripts/runtime_r4.py -> runtime_row_r3.py, LiteRT-LM 0.17.1 (PyPI) Engine(bundle, backend, vision_backend = the same, max_num_tokens=4096, max_num_images=1, cache_dir = one folder per bundle, enable_benchmark=True), CPU = Backend.CPU(thread_count=8), GPU = Backend.GPU() (the statically linked WebGPU delegate over Metal); SamplerConfig(top_k=1), max_output_tokens=3; one process per row, 12 single-question published image rows (the 256x256 PNG resized with PIL). Pass line: prefill = the upstream input length and first streamed token = upstream fp32's vocabulary top-1. The first token is not a probability: this file's CPU probabilities move by up to 0.43 against upstream on the published rows (Hub card). No throughput is recorded: round 4's per-row walls come from a shared machine and the lane marks them informational (REPRODUCE.md), and the round-6 bench did not time this file. 2026-09-29 00:34-01:27 JST.",
+  "quantization": "dynamic int8 fully connected weights, int8 token embedding (channelwise); vision encoder and adapter fp16; fp32 activation preference declared on the decoder section",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-29",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "litertlm-convert/decider2bv_work/results/runtime_r4.json variants.dyn8.legs.cpu.summary: {\"engine_created\": 12, \"engine_errors\": [], \"n_attempted\": 12, \"n_done\": 12, \"n_first_equals_oracle_top1\": 12, \"n_first_equals_variant_graph_top1\": 11, \"n_pass_i\": 12, \"n_rows\": 12, \"partial_delegation_lines\": 0, \"shape_mismatch_lines\": 0, \"unsupported_op_lines\": 0, \"validation_error_lines\": 0, \"webgpu_delegate_init_lines\": 0}",
+        "rows (first streamed token / oracle top-1, prefill / upstream count): game_pong_atari_up 'A'/'A' 150/150; game_pong_atari_level 'C'/'C' 150/150; game_breakout_atari_noball 'D'/'D' 146/146; game_breakout_atari_center 'B'/'B' 146/146; color_red 'A'/'A' 105/105; v2_color_purple 'A'/'A' 105/105; v2_color_split_red_blue 'A'/'A' 105/105; synth_unanswerable 'B'/'B' 116/116; synth_teal 'B'/'B' 102/102; synth_center_circle 'B'/'B' 110/110; synth_count_dots 'B'/'B' 119/119; synth_half_half 'A'/'A' 105/105",
+        "11/12 rows equal this file's own CPU graph top-1 (litertlm-convert/decider2bv_work/results/readout_r4_dyn8.json)",
+        "files: litertlm-convert/decider2bv_work/results/runtime_r4_rows/dyn8/cpu/*.json, litertlm-convert/decider2bv_work/logs/runtime_r4/dyn8/cpu_*.log"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "gate_rows_passed": 12,
+        "gate_rows_run": 12,
+        "max_num_tokens": 4096,
+        "max_output_tokens": 3,
+        "threads": 8
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-09-29",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "litertlm-convert/decider2bv_work/results/runtime_r4.json variants.dyn8.legs.gpu.summary: {\"engine_created\": 12, \"engine_errors\": [], \"n_attempted\": 12, \"n_done\": 12, \"n_first_equals_oracle_top1\": 12, \"n_first_equals_variant_graph_top1\": 11, \"n_pass_i\": 12, \"n_rows\": 12, \"partial_delegation_lines\": 0, \"shape_mismatch_lines\": 0, \"unsupported_op_lines\": 0, \"validation_error_lines\": 0, \"webgpu_delegate_init_lines\": 96}",
+        "rows (first streamed token / oracle top-1, prefill / upstream count): game_pong_atari_up 'A'/'A' 150/150; game_pong_atari_level 'C'/'C' 150/150; game_breakout_atari_noball 'D'/'D' 146/146; game_breakout_atari_center 'B'/'B' 146/146; color_red 'A'/'A' 105/105; v2_color_purple 'A'/'A' 105/105; v2_color_split_red_blue 'A'/'A' 105/105; synth_unanswerable 'B'/'B' 116/116; synth_teal 'B'/'B' 102/102; synth_center_circle 'B'/'B' 110/110; synth_count_dots 'B'/'B' 119/119; synth_half_half 'A'/'A' 105/105",
+        "I0000 00:00:1790611633.785552 83523725 environment.cc:526] Selected adapter: Apple M4 Max, arch=metal-3, vendor=apple, backend=Metal, adapterType=Integrated GPU (litertlm-convert/decider2bv_work/logs/runtime_r4/dyn8/gpu_game_pong_atari_up.log:19)",
+        "litertlm-convert/decider2bv_work/logs/runtime_r4/dyn8/gpu_game_pong_atari_up.log: 8 'Initializing WebGPU-based API' delegate kernels (7 decoder signatures + the vision encoder), no 'not supported by GPU delegate' block",
+        "11/12 rows equal this file's own CPU graph top-1 (litertlm-convert/decider2bv_work/results/readout_r4_dyn8.json)",
+        "files: litertlm-convert/decider2bv_work/results/runtime_r4_rows/dyn8/gpu/*.json, litertlm-convert/decider2bv_work/logs/runtime_r4/dyn8/gpu_*.log"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "gate_rows_passed": 12,
+        "gate_rows_run": 12,
+        "max_num_tokens": 4096,
+        "max_output_tokens": 3
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

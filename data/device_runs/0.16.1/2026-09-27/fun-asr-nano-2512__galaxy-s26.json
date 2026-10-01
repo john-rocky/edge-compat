@@ -1,0 +1,100 @@
+{
+  "artifact": "Fun-ASR-Nano-2512.litertlm",
+  "artifact_sha256": "508c3c7e2ea0df9a756d4b42f9751d5aa08db3d60f959ade6bb2c2a2dafebcd4",
+  "device": "galaxy-s26",
+  "model_id": "fun-asr-nano-2512",
+  "notes": "litert_lm_advanced_main built from the LiteRT-LM v0.16.1 tag (the lane's gate binary), --benchmark --benchmark_prefill_tokens=256 --benchmark_decode_tokens=256 with a 255-token text prompt file, one reading per backend, audio_backend cpu in both, SKIN 37.9 C and every cpufreq policy uncapped before each leg (bench/s26_{cpu,gpu}_ready.txt). Correctness from the 25-clip transcription runs of the same file on 2026-09-27 (s26_gate_s26_r3_{cpu,gpu}_cpu.json): CPU 21/25 transcripts identical to the funasr fp32 reference, English WER 20/448; LM on OpenCL 24/25, 20/448 (reference 20/448); no empty or looping output. The audio encoder runs on the CPU in every row (rank-4 fp16-weight graph; not tried on the phone's GPU). Per-clip latency with a loaded engine is in the 0.17.1 record of this device (Kotlin app).",
+  "quantization": "LM int8 dynamic (int8 embedding table), fp32 activations declared on the prefill/decode section; audio encoder fp16 weights, fp32 compute (30.24 s window)",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-27",
+      "decode_tokens_per_s": 31.55,
+      "delegated_ops": 1126,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-funasrnano-cli",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.1",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 221 partitions for subgraph 0 (prefill_512).",
+        "VERBOSE: Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 221 partitions for subgraph 1 (prefill_128).",
+        "VERBOSE: Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 221 partitions for subgraph 2 (prefill_32).",
+        "VERBOSE: Replacing 1070 out of 1244 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 226 partitions for subgraph 3 (decode).",
+        "results block: prefill=331.43 decode=31.55 tokens/s",
+        "VERBOSE: Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 221 partitions for subgraph 0 (prefill_512). [LM graph; the 4965/4975 line above is the audio encoder graph (subgraph 0 (main) of tf_lite_audio_encoder_hw)]",
+        "VERBOSE: Replacing 1070 out of 1244 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 226 partitions for subgraph 3 (decode).",
+        "peak from the 25-clip gate run of the same file (s26_gate_s26_r3_cpu_cpu_first_stderr.log:644): I0000 … litert_lm_lib.cc:471] Peak private footprint: 2411.11MB."
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 1.8817,
+        "prefill_tokens": 256.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 2411.11,
+      "prefill_tokens_per_s": 331.43,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 1298,
+      "ttft_ms": 800.0
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-09-27",
+      "decode_tokens_per_s": 26.26,
+      "delegated_ops": 1298,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-funasrnano-cli",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.1",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_512).",
+        "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_128).",
+        "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_32).",
+        "VERBOSE: Replacing 1244 out of 1244 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (decode).",
+        "results block: prefill=386.45 decode=26.26 tokens/s",
+        "VERBOSE: Replacing 1244 out of 1244 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (decode).",
+        "peak from the 25-clip gate run of the same file, LM on OpenCL, audio encoder on CPU (s26_gate_s26_r3_gpu_cpu_first_stderr.log:120): I0000 … litert_lm_lib.cc:471] Peak private footprint: 2233.34MB."
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 3.76829,
+        "prefill_tokens": 256.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 2233.34,
+      "prefill_tokens_per_s": 386.45,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 1298,
+      "ttft_ms": 700.0
+    }
+  ],
+  "schema_version": "1.0"
+}

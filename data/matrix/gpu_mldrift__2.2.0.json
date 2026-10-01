@@ -61,7 +61,7 @@
    "status": "delegated"
   },
   {
-   "conditions": "Constant LHS (baked interpolation matrix) x runtime RHS refuses whole-graph compile. Runtime-activation x runtime-activation BMMs delegate normally (attention probes).",
+   "conditions": "Constant LHS (baked interpolation matrix) x runtime RHS refuses whole-graph compile. Runtime-activation x runtime-activation BMMs delegate normally (attention probes). Constraint added 2026-09-25 (owner: \u63a8\u5968\u3067): operand_a=constant \u2014 the constant-LHS case; runtime x runtime BMMs are the separate delegated row.",
    "dtypes": [
     "float32"
    ],
@@ -79,10 +79,13 @@
      "symptom": "const-matmul bilinear form fails GPU compile"
     }
    ],
-   "status": "fallback"
+   "status": "fallback",
+   "constraints": {
+    "operand_a": "constant"
+   }
   },
   {
-   "conditions": "Weight-only int8 DEQUANTIZE feeding FULLY_CONNECTED refuses whole-graph compile on the S26 Adreno (LiteRtException: Failed to compile model). The same graph with fp32 weights or fp16+DEQUANTIZE compiles and runs (4.58 ms).",
+   "conditions": "Weight-only int8 DEQUANTIZE feeding FULLY_CONNECTED refuses whole-graph compile on the S26 Adreno (LiteRtException: Failed to compile model). The same graph with fp32 weights or fp16+DEQUANTIZE compiles and runs (4.58 ms). Upstream answer on the same graph form, weight-only int8 through an explicit DEQUANTIZE into FULLY_CONNECTED (LiteRT #9523: `Shape mismatch: {bhwc, {576, 1, 1, 576}} vs {bhwc, {1, 1, 576, 576}}` on Metal, Android OpenCL and macOS WebGPU; 2026-10-01T03:50:36Z, https://github.com/google-ai-edge/LiteRT/issues/9523#issuecomment-5924360785): the mismatch \"is caused by inconsistent 2D-to-4D `BHWC` auto-expansion conventions across the dequantize and FC paths. Currently, aligning shapes explicitly via `RESHAPE` prior to delegate ingestion is the only workaround\". This entry's log has no error text beyond `Failed to compile model`, so the link is by graph form only. Closed as a duplicate of the tracking issue LiteRT #10445 (opened 2026-10-01: standard shape broadcasting, or automatic 4D RESHAPE insertion for lower- and mixed-rank inputs, in the MLDrift GPU delegate).",
    "dtypes": [
     "float32",
     "int8"
@@ -130,9 +133,320 @@
    "op": "RESIZE_BILINEAR",
    "provenance": "measured",
    "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "ABS",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "ADD",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x. 62 runtime x runtime rank-4 BMMs: Q x K^T [1,8,541,64]x[1,8,64,541] and softmax x V; distinct from the constant-LHS row (operand_a=constant).",
+   "constraints": {
+    "operand_a": "activation"
+   },
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "BATCH_MATMUL",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "CONCATENATION",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x. One Conv1d k=3 (192 -> 1536 channels, sub-pixel upsampler) lowered as CONV_2D over [1,1,T,192] (rank 4) with fp16 weights via DEQUANTIZE; kernel 1x3.",
+   "constraints": {
+    "rank": 4
+   },
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "CONV_2D",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "DIV",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x. 189 FULLY_CONNECTED with fp16 weight tensors read through DEQUANTIZE (ai-edge-quantizer FLOAT_CASTING); activations float32.",
+   "dtypes": [
+    "float16",
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "FULLY_CONNECTED",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x. 31 builtin GELU (approximate=false, erf) delegated; parity 5.3e-5 at FP32 precision.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "GELU",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "MAXIMUM",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: the plain-LayerNorm export (128 MEAN + 64 SQUARED_DIFFERENCE, 2339/2339 nodes, 1 partition) compiles and runs; its LayerNorm outputs are wrong at default precision, see the SQUARED_DIFFERENCE row.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, plain nn.LayerNorm export, results/device_logcat_plain_fp16_default.txt; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "MEAN",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "MUL",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "REDUCE_MAX",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: offline graph (T=684, 2919/2919 nodes, 1 partition) \u2014 the in-graph row mask relu(y) - relu(y-1) from a 3-level attention bias delegates; used to avoid RELU_0_TO_1.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, offline variant, fixed T=684 (results/device_logcat_closed_loop_fp32_*.txt, gate_device_offline.json), fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "RELU",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "RESHAPE",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "RSQRT",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "SLICE",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "SOFTMAX",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: the LayerNorm decomposition MEAN -> SQUARED_DIFFERENCE -> MEAN -> RSQRT compiles whole-graph (2339/2339) and runs with no error and no NaN, but at default precision (fp16 compute) rows with |x| ~ 800-960 push (x-mu)^2 past 65504: encoder logits max|dlogit| 38.2, correlation 0.0006, 87.8% speaker-activity agreement vs the reference (7 test steps). The same graph at GpuOptions(precision=FP32) and on the CPU is correct.",
+   "constraints": {
+    "row_abs_max_gt": 256
+   },
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, plain nn.LayerNorm export vs SafeLayerNorm export, gate_device.json runs plain_fp16_default vs safe_fp16_default / safe_fp16_fp32; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "SQUARED_DIFFERENCE",
+   "provenance": "measured",
+   "rewrite_hints": [
+    {
+     "expected_effect": "all 64 LayerNorms fp16-safe: same graph 2915/2915 nodes, max|dlogit| 0.34 / activity agreement 100% on the chunk output rows at default precision, 5.3e-5 at FP32; the fp32 export stays within 7.1e-5 of nn.LayerNorm (adding eps unscaled moved it by 3.0e-3)",
+     "rewrite": "compute every LayerNorm in a scaled domain: S = max(max|x|/8, 1) per row, xs = x/S, var = mean((xs-mean(xs))^2), y = (xs-mean) * rsqrt(var + eps/S^2) * gamma + beta (never multiply var back by S^2; divide eps by S^2)",
+     "symptom": "a LayerNorm-heavy transformer is fully delegated and returns plausible-looking but wrong outputs on the GPU at default precision while CPU / FP32 precision are correct"
+    }
+   ],
+   "status": "incorrect"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "SUB",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "SUM",
+   "provenance": "measured",
+   "status": "delegated"
+  },
+  {
+   "conditions": "Galaxy S26 (SM-S942Q, SM8850 Adreno), Android 16, CompiledModel GPU: 2915/2915 nodes replaced by LITERT_CL, 1 partition; at default precision the GPU computes in fp16 (max|dlogit| 0.34 vs the fp32 reference per step), GpuOptions(precision=FP32) gives 5.3e-5 at 1.7x the step time, FP16_WITH_FP32_ACCUM 0.09 at 1.3x.",
+   "dtypes": [
+    "float32"
+   ],
+   "evidence": {
+    "date": "2026-09-24",
+    "litert_version": "2.2.0",
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+   },
+   "op": "TRANSPOSE",
+   "provenance": "measured",
+   "status": "delegated"
   }
  ],
- "generated_at": "2026-08-28",
+ "generated_at": "2026-09-25",
  "litert_version": "2.2.0",
  "schema_version": "1.0"
 }

@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "id": "mixed-rank-elementwise-const-to-rank3",
+  "title": "Lift the runtime operand of a rank-2 x rank-3-constant ADD to rank 3 (RESHAPE -> ADD) for the MLDrift GPU backends",
+  "action": "decompose",
+  "provenance": "measured",
+  "match": {
+    "op": "ADD",
+    "dtypes": [
+      "float32"
+    ],
+    "constraints": {
+      "rank": 3,
+      "operand_a": "activation",
+      "operand_a_rank": 2,
+      "operand_b": "constant",
+      "operand_b_rank": 3
+    }
+  },
+  "params": {
+    "intermediates": [
+      {
+        "name": "a3",
+        "dtype": "like:in:0",
+        "shape": "unsqueeze0:in:0"
+      }
+    ],
+    "nodes": [
+      {
+        "op": "RESHAPE",
+        "inputs": [
+          "in:0"
+        ],
+        "outputs": [
+          "tmp:a3"
+        ]
+      },
+      {
+        "op": "ADD",
+        "inputs": [
+          "tmp:a3",
+          "in:1"
+        ],
+        "outputs": [
+          "out:0"
+        ]
+      }
+    ]
+  },
+  "fixture": {
+    "model": "fixtures/model_mixed_rank_add_const_fixture.tflite",
+    "matrix": "fixtures/matrix_gpu_mixed_rank_add_fixture.json"
+  },
+  "expected_effect": "the ADD(runtime [N,C], constant [1,N,C]) becomes RESHAPE([N,C] -> [1,N,C]) -> ADD(rank 3); the output tensor is already rank 3 so nothing is reshaped back. The Metal accelerator computes the rank-3 form correctly where it silently miscomputed the mixed-rank form (measured on ai-edge-litert 2.1.6 and 2.2.0: max abs diff 2.0 -> 0.0016 at [85,16] and 3.81 -> 0.022 at [1024,768], the remainder being fp16 rounding; cosine 0.742 -> 1.000000), so the `incorrect` finding is removed and both replacement nodes delegate",
+  "evidence": {
+    "source_model": "LiteRT #10231 repro graphs add_rank2_input_const_rank3.tflite ([85,16] + [1,85,16]) and fc_add_const_rank3.tflite (FULLY_CONNECTED then [1024,768] + [1,1024,768]) with their RESHAPE-fronted and rank-3-input controls (edge-llm-bench releases add-rank-repro-shapes-2026-09-29, metal-add-repro-2026-09-24); data/matrix/gpu_metal_mac__2.2.0.json and gpu_metal_mac__2.1.6.json ADD rows of 2026-10-01; litertlm-convert tools/rank3_prelint_measure_metal_add_20261001.log",
+    "litert_version": "ai-edge-litert 2.2.0 and 2.1.6 CompiledModel Metal (macOS 27.0, Apple M4 Max), is_fully_accelerated() true for every graph",
+    "date": "2026-10-01"
+  },
+  "notes": "Semantics: RESHAPE is a pure view and the ADD's broadcast is unchanged — the runtime operand gains exactly the leading unit axis the constant already has, so the result is bit-identical on CPU (the fixture verification is max_abs_diff 0.0). Scope: ADD only, operand_a a rank-2 activation, operand_b a rank-3 constant, static shapes; the measured defect is this form (LiteRT #10231; the upstream answer of 2026-10-01 says constants bypass the delegate's automatic 4D broadcast reshape and names an explicit RESHAPE / EXPAND_DIMS in front of the op as the workaround, tracked in LiteRT #10445). The same-shape MUL form (gpu_metal_mac__2.2.0 MUL row: rank-2 activation x [1,1,C] constant) is not matched: its row is not yet machine-matchable and the rule was not measured on it. Why rank 3 and not 4: rank 3 is the rank of the constant and the measured-correct form on the Metal accelerator on both versions; the rank-4 form named upstream is not measured here. On the Android OpenCL backend the same graphs show the same defect and the same fix (LiteRT #10231 comments of 2026-09-26 and 2026-09-29, Galaxy S26), whose rows are staged for the owner in data/matrix_staging; applying the rule on a backend without the row is harmless (a view) but pointless. The companion static pre-flight lint in litertlm-convert (tools/rank3_prelint.py) lists this and the other #10445-class forms before a device run."
+}

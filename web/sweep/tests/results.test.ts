@@ -1,7 +1,7 @@
 import * as assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { canonicalStringify, compareOutputs, p50 } from '../src/node/results.ts';
+import { canonicalStringify, compareOutputs, isFatalRunLine, p50 } from '../src/node/results.ts';
 import { validateSweepResult } from '../src/node/validate.ts';
 
 void test('canonicalStringify sorts keys recursively, 2-space indent, trailing newline', () => {
@@ -98,4 +98,15 @@ void test('validateSweepResult rejects unknown backends and bad provenance', () 
   assert.ok(validateSweepResult(badBackend).length > 0);
   const badProvenance = { ...VALID_RESULT, results: [{ ...VALID_RECORD, provenance: 'inferred' }] };
   assert.ok(validateSweepResult(badProvenance).length > 0);
+});
+
+void test('isFatalRunLine: console-only fatal run errors, including tensor allocation failure', () => {
+  assert.equal(isFatalRunLine('error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors'), true);
+  assert.equal(isFatalRunLine('Node number 3 (FULLY_CONNECTED) failed to prepare.'), true);
+  assert.equal(isFatalRunLine('error: failed to create XNNPACK runtime'), true);
+  assert.equal(isFatalRunLine('INFO: [accelerator_registry.cc:43] DestroyAccelerator: name=CpuAccelerator'), false);
+  assert.equal(
+    isFatalRunLine('WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.'),
+    false,
+  );
 });

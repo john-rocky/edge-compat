@@ -15,8 +15,8 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from conftest import REPO_ROOT
 
+from conftest import REPO_ROOT
 from litert_compat.fix.engine import run_fix
 from litert_compat.fix.rules import load_rule_file
 from litert_compat.lint.classify import classify_model, operand_meta
@@ -56,7 +56,11 @@ def test_reader_marks_constant_tensors() -> None:
     kinds = [t.is_constant for t in parsed.subgraphs[0].tensors]
     assert kinds == [False, True, False]
     sg = parsed.subgraphs[0]
-    assert operand_meta(sg, sg.nodes[0]) == {"operand_a": "activation", "operand_b": "constant"}
+    meta = operand_meta(sg, sg.nodes[0])
+    assert {k: meta[k] for k in ("operand_a", "operand_b")} == {
+        "operand_a": "activation", "operand_b": "constant"
+    }
+    assert (meta["operand_a_rank"], meta["operand_b_rank"]) == (2, 2)
 
 
 def test_operand_constraint_matches_only_the_constant_form() -> None:

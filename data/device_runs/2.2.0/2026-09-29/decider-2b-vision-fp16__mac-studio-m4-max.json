@@ -1,0 +1,58 @@
+{
+  "artifact": "decider-2b-vision_fp16.litertlm",
+  "artifact_sha256": "75b226796c43405b900399551487903dbe4f87d1a2c40aea422b2a9c33c8f62a",
+  "device": "mac-studio-m4-max",
+  "model_id": "decider-2b-vision-fp16",
+  "notes": "Published as decider-2b-vision_fp16.litertlm (same name) in litert-community/decider-2b-vision-LiteRT (Hub commit 6c024e94, 2026-09-29): the Hub LFS sha256 equals the measured file's (75b22679..., 5,509,356,416 B). The reference readout that ships in the model repo (reference/decider_litert.py) reads the bundle's TFLite sections itself (no litert-lm) and runs them with ai-edge-litert 2.2.0 CompiledModel on the CPU (8 threads), vision encoder + adapter, then the decoder prefilled with exact-fit signatures up to each answer slot and one decode, softmax over the option letters at T = 1: this is the path that returns option probabilities. One process per run under /usr/bin/time -l on the published row game_pong_atari_up (150 prompt tokens, one question), its section folder and XNNPACK weight cache already on disk; three uncontended processes (litertlm-convert decider2bv_work round 6, scripts/r6_ref_bench_row.py, 2026-09-29 02:15-02:43 JST).",
+  "quantization": "fp16 casting of every fully connected and embedding weight, float compute; vision encoder and adapter fp16; fp32 activation preference declared on the decoder section",
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-09-29",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "litertlm-convert/decider2bv_work/results/r6/bench/ref_fp16_0.json (2026-09-29 02:43:04 JST): constructor 20.545 s, first decide() 11.6918 s, second decide() 0.9078 s, 'move paddle up' p = 0.9998612032189805; /usr/bin/time -l (litertlm-convert/decider2bv_work/logs/r6/bench/ref_fp16_0.log): 22101245952 maximum resident set size, 8920466256 peak memory footprint",
+        "litertlm-convert/decider2bv_work/results/r6/bench/ref_fp16_1.json (2026-09-29 02:21:45 JST): constructor 12.780 s, first decide() 1.2812 s, second decide() 0.9008 s, 'move paddle up' p = 0.9998612032189805; /usr/bin/time -l (litertlm-convert/decider2bv_work/logs/r6/bench/ref_fp16_1.log): 22083747840 maximum resident set size, 8917107560 peak memory footprint",
+        "litertlm-convert/decider2bv_work/results/r6/bench/ref_fp16_2.json (2026-09-29 02:26:41 JST): constructor 12.797 s, first decide() 1.2826 s, second decide() 0.8855 s, 'move paddle up' p = 0.9998612032189805; /usr/bin/time -l (litertlm-convert/decider2bv_work/logs/r6/bench/ref_fp16_2.log): 22119612416 maximum resident set size, 8954446696 peak memory footprint",
+        "the first decide() in a process includes the first use of each graph; the second, identical decide() in the same process is the steady cost (latency_p50_ms is left null: a decision is a vision + decoder pipeline, not one inference)",
+        "agreement of the same reference (exact-fit prefill) with upstream fp32 on the same 256x256 inputs, 42 published requests (litertlm-convert/decider2bv_work/results/r6/check_fp16_cpu.json summary.*.g256_mrope): image slots argmax 53/53 non-tie, max |dp| 4.06e-05, p95 3.04e-05; text-only slots 9/9, max |dp| 2.41e-06 (a probability comparison against the upstream PyTorch model, not a same-runtime CPU reference, so output_match stays null)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "constructor_s_median": 12.7972,
+        "first_decision_s_median": 1.2826,
+        "peak_footprint_mb_median": 8920.47,
+        "prompt_tokens": 150,
+        "runs": 3,
+        "second_decision_s_median": 0.9008,
+        "threads": 8
+      },
+      "output_match": null,
+      "peak_mem_mb": 22101.25,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "reference readout decide() (decider_litert.py; CompiledModel CPU, 8 threads; warm caches)",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

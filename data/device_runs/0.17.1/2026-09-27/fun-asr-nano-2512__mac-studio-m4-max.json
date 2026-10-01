@@ -1,0 +1,159 @@
+{
+  "artifact": "Fun-ASR-Nano-2512.litertlm",
+  "artifact_sha256": "508c3c7e2ea0df9a756d4b42f9751d5aa08db3d60f959ade6bb2c2a2dafebcd4",
+  "device": "mac-studio-m4-max",
+  "model_id": "fun-asr-nano-2512",
+  "notes": "litert-lm 0.17.1 (PyPI) `litert-lm benchmark -p <P> -d 256 --runs 3 --cache no`, text prompt (LM only); prefill signatures 512/128/32, so p=256 is one padded 512 call on the GPU and two 128 calls on the CPU. Contended machine: 1-minute load average 5.8-16.0 at cell start (background dasd/mediaanalysisd); GPU cells rested >= 300 s. End to end (mac_gate_r12_mac_e2e_{cpu,gpu}.json; engine loaded once, one conversation per clip, 25 clips = 217.5 s of audio, audio encoder on CPU): median 0.68 s per clip with the LM on the CPU (RTF 0.091), 0.37 s on the GPU (RTF 0.046); the fp16 audio encoder alone 163.9 ms per 30.24 s window (ai_edge_litert 2.2.0, 8 threads, bench/mac_encoder.json). Correctness on the same file (mac_gate_r10_main_{cpu,gpu}_cpu.json): CPU 21/25 = funasr fp32 reference, English WER 19/448; LM on GPU (WebGPU over Metal) 24/25, 20/448 (reference 20/448). The audio encoder cannot start on this GPU (DEQUANTIZE / PAD / SELECT_V2 not delegated, conversation creation fails: mac_gate_r4_main_cpu_gpuaudio.log).",
+  "quantization": "LM int8 dynamic (int8 embedding table), fp32 activations declared on the prefill/decode section; audio encoder fp16 weights, fp32 compute (30.24 s window)",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-27",
+      "decode_tokens_per_s": 48.94,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "results block: prefill=1027.03 decode=48.94 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "prefill_tokens": 256.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 1027.03,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 480.3
+    },
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-27",
+      "decode_tokens_per_s": 50.21,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "results block: prefill=1349.72 decode=50.21 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "prefill_tokens": 512.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 1349.72,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 620.9
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-09-27",
+      "decode_tokens_per_s": 143.03,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "results block: prefill=3090.74 decode=143.03 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "prefill_tokens": 256.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 3090.74,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 96.7
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-09-27",
+      "decode_tokens_per_s": 137.18,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "results block: prefill=6169.85 decode=137.18 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "prefill_tokens": 512.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 6169.85,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 97.4
+    }
+  ],
+  "schema_version": "1.0"
+}

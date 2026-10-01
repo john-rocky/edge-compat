@@ -180,3 +180,85 @@ into ~/.cache/litert-models under sha256(url).tflite, the harness's cache key.
 mlboydaisuke, .litertlm only) added to the litertlm comment block — LLM lane,
 not browser-sweepable. No new own-upload .tflite repos since the 08-24 refresh
 (TIPSv2/DINOv2 were already catalogued).
+
+2026-09-25 refresh (own uploads since 2026-08-26, HF API + commit authors = mlboydaisuke only): 9 rows added —
+Nemotron-3-Diarization-LiteRT (frontend 2 MB, encoder low_latency 199 MB, encoder offline 199 MB; graph B's
+attn_bias / rope_cos / rope_sin are host-computed tables, so the sweep's random inputs measure the graph, not a
+diarization), DAC-16kHz-LiteRT (encoder 43 MB, deconly_zs 105 MB), PP-OCRv6-Small-LiteRT (det 640 + rec 320/640/960,
+12-21 MB). Not added: Depth-Anything-3-Small-LiteRT (its da3_small_gpu_fp16.tflite is byte-identical to the
+catalogued depth-anything-3-small row — same LFS sha256 e170369a…, a renamed repo); the kitten-tts-nano-0.8 and
+Inflect-Nano-v2 non-static siblings (dynamic input dims, same exclusion as 2026-08-2x); oversized own uploads over
+the ~500 MB ceiling: Bonsai-Image-ternary-4B (1.8-3.1 GB each), Nemotron-3-Embed-1B fp16 (2.3 GB; its wi8fc
+variants were already catalogued/excluded earlier), FLUX.2-klein kc_double0 / kc_single0..1 (0.6-0.74 GB) and
+Z-Image qwen_enc (3.5 GB) stay in the comment block above. Downloads via `hf download` (huggingface_hub); the
+first `hf download` of a 105 MB file died with IncompleteRead and succeeded on retry.
+
+2026-09-25 (later the same run): the catalog diff above had missed six own repos on a parsing slip (long
+artifact lists); added the sweepable ones — GLiNER2.5-Small-LiteRT (s128/s256/s512 x fp32/wfp16, 54-128 MB),
+Laya-Multilingual-LiteRT (act head + s256/s512 embeds wfp16, 250 MB each), Laya-English-LiteRT and laya-LiteRT
+act heads (1 MB). Over the ceiling, not added: the Laya encoder fp32/wfp16 graphs (0.6-1.7 GB) and all four
+parakeet-tdt_ctc-0.6b-ja files (0.6-2.4 GB). sopro-v2-turbo: all 45 graphs (2-223 MB each, 3.4 GB) downloaded on retry (7 of 45 needed a second `hf download`)
+and catalogued (all static; int32 inputs are token ids / position tables, so the random sweep inputs measure the graph,
+not speech).
+sopro sweep note (2026-09-25): the single-process run lost its browser after the fourth model and mislabeled the rest
+as compile_error — those files were discarded and the 45 graphs re-run through `npm run sweep:batches --batch 2`
+(fresh browser per two models). Four graphs crash the page even alone on both backends and are kept as crash
+results (the harness contract): acoustic_condition_t4096_r6 fp32 / wfp16 (a 1x1024x4375 input + a 4096x1024 table)
+and ar_step fp32 / wfp16 (two 1x96x1024x64 KV-cache inputs) — input volume, same class as the wasm memory ceiling.
+Two more report a LiteRT.js compile error on WebGPU (recorded verbatim). 27 of the 39 WebGPU runs report
+output_match=false: random int32 token / position inputs and the r6 variants' large tables make the wasm reference
+comparison meaningless for these graphs, so treat the sopro rows as load/run/latency evidence only.
+
+2026-09-26: GLiNER2.5-Decide-LiteRT (own upload, all three Hub commits by mlboydaisuke; license apache-2.0 from the HF API
+tag) — the three default wfp16 graphs added as rows (s128 660 MB, s256 711 MB, s512 811 MB; input_spec parsed with
+litert_compat.parser.reader from sha256-verified downloads, static shapes, float32 only; resolve URLs verified by HEAD,
+LFS sha256 = x-linked-etag). They sit above the ~500 MB catalogue rule on purpose: s128 is the first datapoint inside the
+431-712 MB band where the wasm memory ceiling was unmeasured, and the row notes say where each file stands against the
+712 MB datapoint. The fp32/ reference graphs (1.27-1.42 GB) are not catalogued (over the 2 GiB-class in-page fetch
+limit's neighbourhood and duplicates of the wfp16 graphs' arithmetic). Downloads via huggingface_hub.hf_hub_download
+(XET off; 91-100 s per file this time) hardlinked into ~/.cache/litert-models under sha256(url).tflite.
+Sweep 2.5.3/2026-09-26 of those three rows (mac-studio-m4-max, default flags, one harness process per model): s128 and
+s256 load on wasm_xnnpack but their 3 + 10 runs do not finish inside the default 60 s step budget (`timeout`, i.e. at
+least 4.6 s per run on average; deliberately not re-run with a larger timeout — the record cannot state a non-default
+timeout and the weekly CI would flip it back, DECISIONS #173); s512 loads and every run logs `Failed to allocate
+tensors` (`backend_error` — after the harness fix that stops counting such 0.35 ms non-runs as passes, README "Traps");
+webgpu_mldrift aborts at load (`RuntimeError: Aborted()`) for all three, a generic error naming no op, so no matrix
+evidence. With the older 431 MB (runs) and 712 MB (wasm_memory_ceiling) datapoints the wasm picture is: 660-711 MB
+loads and computes but slower than the default budget; 811 MB fails tensor allocation.
+
+2026-09-26 (later the same day): GLiFormer-Large-NER-LiteRT (own upload, Hub revision dee6ced; license apache-2.0 from the HF API
+tag) — the five default wfp16 graphs added as rows (s128 full 707 MB, s256 encoder 707 MB, s256 head 53 MB, s512 encoder 807 MB,
+s512 head 56 MB; input_spec parsed with litert_compat.parser.reader from the byte-identical local copy of the published tree,
+sha256 = manifest.json = the resolve URLs' x-linked-etag (HEAD-verified), static shapes, float32 only, subgraph buffer order which
+is not the flatbuffer signature-map order). The two encoders and the full graph sit above the ~500 MB catalogue rule on purpose
+(same reasoning as the GLiNER2.5-Decide rows: they bracket the wasm ceiling). The fp32/ reference graphs (1.31-1.41 GB full/encoder,
+104-107 MB heads) are not catalogued (over the in-page fetch limit's neighbourhood, or duplicates of the wfp16 graphs' arithmetic).
+The local files were hardlinked into ~/.cache/litert-models under sha256(url).tflite, so nothing was downloaded.
+Sweep 2.5.3/2026-09-26 of those five rows (mac-studio-m4-max, default flags, one harness process per model via `--only`, four
+minutes in all): the 707 MB s128 full graph and s256 encoder load on wasm_xnnpack but their 3 + 10 runs do not finish inside the
+default 60 s step budget (`timeout`, i.e. at least 4.6 s per run on average — the GLiNER2.5-Decide s128/s256 outcome again, deliberately
+not re-run with a larger timeout, DECISIONS #173); the 807 MB s512 encoder loads and every run logs `Failed to allocate tensors`
+(`backend_error`, as the 811 MB GLiNER2.5-Decide s512 did); the 53 MB s256 head (12,568 operators, an unrolled T=256 BiLSTM) runs on
+wasm at 2,425 ms p50 (output_match null: wasm is the reference backend); the 56 MB s512 head (25,112 operators) loads but its runs do
+not finish inside the 60 s budget (`timeout`) — the first sub-100 MB timeout in this catalog, operator count rather than bytes.
+webgpu_mldrift aborts at load (`RuntimeError: Aborted()`) for all five, including the two small heads, a generic error naming no
+op, so no matrix evidence; the WebGPU failure is therefore not a size effect for this family.
+
+2026-09-28: Audio8-TTS-Preview-0.6b (own upload, both Hub commits by mlboydaisuke, rev e8620a9b; license apache-2.0 from the HF API tag; 7 classic .tflite
+graphs of a DualAR TTS + a Python host loop) — five graphs added as rows (fast_ar_int8 68 MB, codec_decoder_fp16_T128 / T192 262 MB, codec_decoder_int8_T128
+132 MB, codec_encoder_fp16_10s 419 MB; input_spec parsed with litert_compat.parser.reader from the local out/ship copies whose sha256 equals the HF LFS sha256
+(API ?blobs=true and the resolve URLs' x-linked-etag, HEAD 200), static shapes, float32/int32 only, subgraph input order). The int32 inputs are codebook indices
+(0..15 from the dimension spec are valid codes; every gather is clamped in-graph) or token/position ids, so the random inputs measure the graphs, not speech.
+Excluded, recorded in the catalog comment: slow_ar_int8 (552 MB) and slow_ar_int4 (386 MB) carry two signatures (prefill_256, decode; 51 inputs each incl. 48
+KV-cache tensors [1,2,2048,64]) and the harness has no signature selection, so a run would measure an unstated signature; slow_ar_int8 is also over the ~500 MB
+rule. The local files were hardlinked into ~/.cache/litert-models under sha256(url).tflite (no download).
+Sweep 2.5.3/2026-09-28 of the five rows (mac-studio-m4-max, default flags, one harness process per model via `--only`, load avg 3.2-4.3, 1 min 11 s in all):
+fast_ar_int8 runs on both backends (wasm 2.48 ms p50; WebGPU 3.42 ms partially delegated, 58 of 283 ops — ADD / RESHAPE rank 5, GATHER_ND, SLICE rank > 4
+refused — with output_match false, max_abs_diff 0.889: a DRQ-int8 graph against the float GPU path, README caveat 2, not a numerics verdict). The three codec
+decoders and the encoder produce no latency: codec_decoder_fp16_T128 / T192 and the encoder log `Failed to allocate tensors` (T128/T192) or `XNNPack delegate
+failed to reshape runtime` + `Node number 1600 (TfLiteXNNPackDelegate) failed to prepare` (encoder) on wasm_xnnpack (backend_error; 262-419 MB fp16 files whose
+weights unpack to fp32 — below the 431 MB "runs" datapoint by file size, so bytes alone do not explain it); codec_decoder_int8_T128 loads on wasm but its 3 + 10
+runs exceed the 60 s budget (timeout, >= 4.6 s per run; not re-run with a larger timeout, DECISIONS #173). WebGPU: the fp16 T128 decoder fails compile after the
+DEQUANTIZE / EMBEDDING_LOOKUP refusals (compile_error, litert_compiled_model_next.h:70), the int8 decoder fails ML Drift kernel init ("Unable to parse bc coord
+for BATCH axis" on convolution1x1, compile_error), T192 and the encoder abort with `RuntimeError: memory access out of bounds` (wasm_memory_ceiling). The op-naming
+lines are staged in data/matrix_staging/webgpu_mldrift__2.5.3-audio8-additions.csv; the rest stays model-level in the sweep records.

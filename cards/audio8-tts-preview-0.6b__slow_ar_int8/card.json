@@ -1,0 +1,202 @@
+{
+  "artifacts": [
+    {
+      "file": "slow_ar_int8.tflite",
+      "sha256": "810ac71d9dd9b203786b4c4fbc57a2a828fb2cc3d19fc7bd38635285ad886a17",
+      "size_mb": 526.324
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "PREFILL=256 SUFFIX=_p256 python export_slow.py (slow AR: signatures prefill_256 + decode, KV cache 2048 as graph I/O, fp32, 2.15 GB) -> python quantize_ar.py out/slow/slow_fp32_c2048_p256.tflite drq8 -> python verify_tflite_slow.py out/slow/slow_drq8_c2048_p256.tflite 3 -> python assemble_ship.py out/ship (copied as slow_ar_int8.tflite; build_manifest built_from slow/slow_drq8_c2048_p256.tflite) (REPRODUCE entry; FINDINGS §3)",
+    "quantization": "dynamic int8 per-channel FULLY_CONNECTED (every projection including the 4,097-row lm_head slice) + int8 EMBEDDING_LOOKUP tables, activations fp32; attention BATCH_MATMULs (activation x activation) left fp32 (quantize_ar.py; card File table 'Dynamic int8 (per-channel) projections, int8 embedding tables'); teacher-forced vs oracle: slow logits max|d| 2.2, argmax 88% (FINDINGS §4)",
+    "tool": "litert-torch (fp32 export of the self-contained torch port arktts_port.py — weights read from model.safetensors, no from_pretrained) + ai-edge-quantizer post-hoc dynamic int8 (quantize_ar.py drq8); repro = hf-to-litertlm audio8_tts_work/ (REPRODUCE entry)",
+    "tool_version": "litert-torch 0.9.4 (~/venvs/lt094dev, the interpreter named in every export/quantize script's usage line: torch 2.13.0, transformers 5.14.1, ai-edge-quantizer 0.9.0, ai-edge-litert 2.2.0 — pip show 2026-09-28; REPRODUCE entry: 'env with litert-torch 0.9.4, ai-edge-litert 2.2.0, ai-edge-quantizer'); PyTorch oracle transformers 4.57.6 / torch 2.12.1 CPU fp32 in ~/parakeet-env (FINDINGS §1)"
+  },
+  "cross_runtime": [],
+  "delegation": {
+    "backend": "gpu_mldrift",
+    "blocking_ops": [
+      "LOGISTIC",
+      "DYNAMIC_UPDATE_SLICE",
+      "PACK",
+      "GREATER_EQUAL",
+      "LESS_EQUAL",
+      "LOGICAL_AND",
+      "RESHAPE",
+      "SELECT_V2",
+      "SLICE",
+      "MAXIMUM",
+      "MINIMUM",
+      "ADD",
+      "EMBEDDING_LOOKUP",
+      "LESS",
+      "SELECT",
+      "GATHER_ND"
+    ],
+    "coverage_ops_pct": 93.5,
+    "lint_report_version": "1.1",
+    "litert_version": "2.2.0",
+    "matched_provenance_counts": {
+      "measured": 2883,
+      "unmatched": 199
+    },
+    "partitions": 104
+  },
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-09-28",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "~/code/litertlm-convert/audio8_tts_work/evidence/gates/quiet_int8__summary.json — 14 cases (6 en + 6 ja with a cloned reference voice, 1 en + 1 ja without): per case frames, t_pre, t_slow, t_fast, t_codec, t_loop, audio_s, rtf; every metric here is the median over the 14 cases (RTF = (t_pre + t_loop + t_codec) / audio_s per hostloop_e2e.py; slow/fast ms per frame = t_slow / frames, t_fast / frames; codec = seconds per T128 call, one call per case). Graphs: slow_ar_int8.tflite, fast_ar_int8.tflite, codec_decoder_fp16_T128.tflite from out/ship (= the published bytes, build_manifest.json sha256).",
+            "~/code/litertlm-convert/audio8_tts_work/evidence/logs/quiet_rtf.log lines 1-15 — the quiet run 07:30-07:33 JST: load averages 3.48/4.70/4.87 before, 4.77/4.86/4.92, 4.87/4.87/4.92, 4.47/4.76/4.87 during; no peer process above 18% CPU (WindowServer 18.0 / 14.4); 'INFO: Created TensorFlow Lite XNNPACK delegate for CPU.' printed once per run (the Interpreter's CPU path).",
+            "~/code/litertlm-convert/audio8_tts_work/evidence/gates/ship_int8__summary.json — the earlier run of the same graphs (07:2x JST, contended host, NOTES 'Ship smoke'): identical frame sequences on all 14 cases (seeded torch.Generator, deterministic int8 kernels), so the quality gate below, measured on that run's wavs, holds for this run's outputs; its RTF median is in metrics as rtf_median_contended_earlier_run.",
+            "~/code/litertlm-convert/audio8_tts_work/evidence/gates/ship_int8__asr.json ('model': 'turbo' = whisper large-v3-turbo; per case hyp/ref/err/n) and ship_int8__spk.json ('nvidia/speakerverification_en_titanet_large'; cos_ref = cosine vs the reference clip, null for the two no-reference cases; cos_oracle = cosine vs the PyTorch oracle's wav) — en WER = sum(err)/sum(n) over the 7 en cases, ja CER over the 7 ja cases, speaker cosine = mean over the 6 reference cases per language (the card's 'speaker cosine en / ja').",
+            "~/code/litertlm-convert/audio8_tts_work/evidence/gates/oracle__asr.json / oracle__spk.json — PyTorch fp32 reference on the same 14 cases: en WER 1/94 = 1.1%, ja CER 0/162, speaker cosine en 0.6573 / ja 0.7436; the single English error (en_ref_2: 'Speech synthesis' -> 'Synthesis') is shared by every variant and the oracle.",
+            "Host loop = hostloop_e2e.py (same code path as the published audio8_tts_litert.py): ai-edge-litert Interpreter, num_threads 4, chunked right-padded prefill + decode of the last prompt token, the vendor's sampler (T 0.7 / top-p 0.9 / top-k 50, repetition-aware re-draw), 10 fast-AR calls per frame, codec decode in one T128 call per case (codec ctx 32 unused below 128 frames). Interpreter = ~/venvs/lt094dev (ai-edge-litert 2.2.0 per pip show 2026-09-28), the interpreter named in hostloop_e2e.py's usage line and FINDINGS §6 ('ai-edge-litert 2.2.0 Interpreter').",
+            "No output_match: a sampled model has no CPU reference to compare element-wise; the gate is the transcript and the voice (card 'Accuracy'). peak_mem_mb: not measured by the host loop."
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "audio_s_total": 56.7,
+            "cases": 14,
+            "codec_call_s_median": 1.434,
+            "codec_ctx_frames": 32,
+            "en_wer": 0.0106,
+            "en_word_errors": 1,
+            "en_words": 94,
+            "fast_ms_per_frame_median": 9.23,
+            "frames_total": 1221,
+            "ja_cer": 0.0,
+            "ja_char_errors": 0,
+            "ja_chars": 162,
+            "prefill_s_median": 0.127,
+            "rtf_max": 0.979,
+            "rtf_median": 0.815,
+            "rtf_median_contended_earlier_run": 0.869,
+            "rtf_min": 0.732,
+            "slow_ms_per_frame_median": 8.97,
+            "spk_cos_en_mean": 0.6777,
+            "spk_cos_ja_mean": 0.7551,
+            "threads": 4
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "pipeline slow_ar_int8 + fast_ar_int8 + codec_decoder_fp16_T128 (host loop, CPU 4 threads)",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-09-28/audio8-tts-preview-0.6b__slow_ar_int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-09-28",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "~/code/litertlm-convert/audio8_tts_work/evidence/gates/quiet_int8_c8__summary.json — 14 cases (6 en + 6 ja with a cloned reference voice, 1 en + 1 ja without): per case frames, t_pre, t_slow, t_fast, t_codec, t_loop, audio_s, rtf; every metric here is the median over the 14 cases (RTF = (t_pre + t_loop + t_codec) / audio_s per hostloop_e2e.py; slow/fast ms per frame = t_slow / frames, t_fast / frames; codec = seconds per T128 call, one call per case). Graphs: slow_ar_int8.tflite, fast_ar_int8.tflite, codec_decoder_int8_T128.tflite from out/ship (= the published bytes, build_manifest.json sha256).",
+            "~/code/litertlm-convert/audio8_tts_work/evidence/logs/quiet_rtf.log lines 1-15 — the quiet run 07:30-07:33 JST: load averages 3.48/4.70/4.87 before, 4.77/4.86/4.92, 4.87/4.87/4.92, 4.47/4.76/4.87 during; no peer process above 18% CPU (WindowServer 18.0 / 14.4); 'INFO: Created TensorFlow Lite XNNPACK delegate for CPU.' printed once per run (the Interpreter's CPU path).",
+            "~/code/litertlm-convert/audio8_tts_work/evidence/gates/ship_int8_c8__summary.json — the earlier run of the same graphs (07:2x JST, contended host, NOTES 'Ship smoke'): identical frame sequences on all 14 cases (seeded torch.Generator, deterministic int8 kernels), so the quality gate below, measured on that run's wavs, holds for this run's outputs; its RTF median is in metrics as rtf_median_contended_earlier_run.",
+            "~/code/litertlm-convert/audio8_tts_work/evidence/gates/ship_int8_c8__asr.json ('model': 'turbo' = whisper large-v3-turbo; per case hyp/ref/err/n) and ship_int8_c8__spk.json ('nvidia/speakerverification_en_titanet_large'; cos_ref = cosine vs the reference clip, null for the two no-reference cases; cos_oracle = cosine vs the PyTorch oracle's wav) — en WER = sum(err)/sum(n) over the 7 en cases, ja CER over the 7 ja cases, speaker cosine = mean over the 6 reference cases per language (the card's 'speaker cosine en / ja').",
+            "~/code/litertlm-convert/audio8_tts_work/evidence/gates/oracle__asr.json / oracle__spk.json — PyTorch fp32 reference on the same 14 cases: en WER 1/94 = 1.1%, ja CER 0/162, speaker cosine en 0.6573 / ja 0.7436; the single English error (en_ref_2: 'Speech synthesis' -> 'Synthesis') is shared by every variant and the oracle.",
+            "Host loop = hostloop_e2e.py (same code path as the published audio8_tts_litert.py): ai-edge-litert Interpreter, num_threads 4, chunked right-padded prefill + decode of the last prompt token, the vendor's sampler (T 0.7 / top-p 0.9 / top-k 50, repetition-aware re-draw), 10 fast-AR calls per frame, codec decode in one T128 call per case (codec ctx 32 unused below 128 frames). Interpreter = ~/venvs/lt094dev (ai-edge-litert 2.2.0 per pip show 2026-09-28), the interpreter named in hostloop_e2e.py's usage line and FINDINGS §6 ('ai-edge-litert 2.2.0 Interpreter').",
+            "No output_match: a sampled model has no CPU reference to compare element-wise; the gate is the transcript and the voice (card 'Accuracy'). peak_mem_mb: not measured by the host loop."
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "audio_s_total": 56.7,
+            "cases": 14,
+            "codec_call_s_median": 0.96,
+            "codec_ctx_frames": 32,
+            "en_wer": 0.0106,
+            "en_word_errors": 1,
+            "en_words": 94,
+            "fast_ms_per_frame_median": 9.43,
+            "frames_total": 1221,
+            "ja_cer": 0.0,
+            "ja_char_errors": 0,
+            "ja_chars": 162,
+            "prefill_s_median": 0.164,
+            "rtf_max": 0.823,
+            "rtf_median": 0.705,
+            "rtf_median_contended_earlier_run": 0.709,
+            "rtf_min": 0.64,
+            "slow_ms_per_frame_median": 8.87,
+            "spk_cos_en_mean": 0.691,
+            "spk_cos_ja_mean": 0.7225,
+            "threads": 4
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "pipeline slow_ar_int8 + fast_ar_int8 + codec_decoder_int8_T128 (host loop, CPU 4 threads)",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-09-28/audio8-tts-preview-0.6b__slow_ar_int8__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "audio8-tts",
+    "id": "audio8-tts-preview-0.6b__slow_ar_int8",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Audio8-TTS-Preview-0.6b",
+    "task": "text-to-speech"
+  },
+  "pitfalls": [
+    "Slow AR contract: inputs codes int32 [1,11,T], input_pos int32 [T], mask fp32 [1,1,T,2048] additive (0 = attend), k_i/v_i fp32 [1,2,2048,64] x24; outputs logits fp32 [1,4097] (4,096 semantic tokens + end-of-speech = the ids the vendor's semantic logits processor lets the sampler pick), hidden fp32 [1,1,896] (normalized, conditions the fast AR), updated caches. Signatures prefill_256 and decode; the host loop right-pads prefill chunks of prompt[:-1] and always sends the last prompt token through decode, so a padded prefill slot never has to produce logits (FINDINGS §3; card File table).",
+    "The multi-signature file packs its FULLY_CONNECTED weights once per signature at init: on the Galaxy S26 the 552 MB two-signature file has a 1,077 MB init footprint (the earlier three-signature build: 1,441 MB) (card Performance note; NOTES S26 tables).",
+    "Sampled model: quantized graphs sample a different but valid trajectory, so per-frame agreement with the reference is not a meaningful metric; the gate is the transcript (whisper large-v3-turbo WER/CER vs the input text) and the voice (TitaNet-L speaker cosine vs the reference clip) on 14 seeded sentences (6 en + 6 ja with a cloned voice, one of each without). PyTorch reference en WER 1.1% / ja CER 0.0% / cosine 0.66 / 0.74; int8 slow + int8 fast + fp16 codec 1.1% / 0.0% / 0.68 / 0.76; int4 slow 1.1% / 0.0% / 0.63 / 0.77; int8 codec on the reference codes 1.1% / 0.0% / 0.67 / 0.73. The one English error is shared with the reference (the model drops the first word of one sentence). The fp32 graphs reproduce the reference code sequence frame for frame on all 14 sentences (card Accuracy; FINDINGS §2, §5).",
+    "The graphs are driven by a host loop (audio8_tts_litert.py, Python, ai-edge-litert Interpreter, CPU): prompt construction, chunked prefill, the vendor's sampler (temperature 0.7 / top-p 0.9 / top-k 50, repetition-aware re-draw), 10 fast-AR calls per frame, windowed codec decode, voice registration; on a phone the same graphs run from Kotlin/C++ through the CompiledModel API — no on-device functional run exists yet, the Galaxy S26 rows are per-graph benchmark_model latency + delegate coverage, functional parity is Mac-only on the same files (card Files + Performance; FINDINGS §8).",
+    "Prompt length + generated frames must stay under 2,048 positions (the model's max_seq_len = the KV cache); the default cap is 512 frames (about 24 s) per call (card Limitations).",
+    "GQA on the KV cache must not be expressed as repeat_interleave: it lowers to BROADCAST_TO (48 per step) and made decode 615 ms/step on the Mac (thread-count independent); folding the 7 query heads that share a kv head into the matmul row dimension removed it (16 ms/step fp32). RoPE: the vendor applies interleaved-pair rotation with a bf16-rounded table; the port permutes the q/k rows of wqkv to the rotate-half layout with the same bf16-rounded cos/sin as fp32 constants, bit-identical to the vendor buffers (FINDINGS §2).",
+    "fp16 weights give the AR graphs no speed or RAM gain on the CPU (XNNPACK unpacks them to fp32 at init), so the AR graphs ship int8/int4 and only the codec ships fp16 (FINDINGS §4).",
+    "Preview checkpoint: the vendor documents limited dialect coverage and sensitivity to noisy or mis-transcribed references. Generated speech can be misused for impersonation; obtain consent before cloning a voice and disclose synthetic audio (card Limitations)."
+  ],
+  "schema_version": "1.2"
+}

@@ -1,0 +1,105 @@
+{
+  "artifact": "LFM2.5-VL-450M_int4_fixB.litertlm",
+  "artifact_sha256": "6854cd9677a34e680070b60076793e49aeb3224de7cb4101076b261cb9bf6033",
+  "device": "mac-studio-m4-max",
+  "model_id": "lfm2.5-vl-450m-int4-fixb",
+  "notes": "LiteRT-LM `main@1dadd00c` (2026-09-17) `//runtime/engine:litert_lm_advanced_main`, self-built (bazel 7.6.1; Mac: Xcode 27.0; Android: NDK 28.2.13676358 --config=android_arm64), task vl-describe-catcouch-gen64: one 1024x682 CC0 photo + 'Describe this image in one sentence.', --max_output_tokens 64, --benchmark, --vision_backend = --backend, sampler = CLI defaults, one fresh process per launch, 3 launches per cell. Response seconds = engine request marker -> last reply byte (vision encoder + prefill + decode). Definition: https://github.com/john-rocky/edge-llm-bench/blob/main/docs/vl-response-v1.md. Records and findings: https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-24-vl-response-v1-m4max-mac/NOTES.md ; identities: https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-24-vl-response-v1-m4max-mac/PROVENANCE.md . The GPU arm on this Mac ran on the WebGPU accelerator (Dawn on Metal), not on libLiteRtMetalAccelerator — see the PROVENANCE erratum; the Python-API numerics in the LiteRT#10231 issue are the Metal path.",
+  "quantization": "int4 (file name); manifest: text int4 blockwise-32 OCTAV linears, int8 embedding + lm_head; vision tower int8 [the base variant's manifest line; fixB = vision graphs re-exported with the pooling inside the encoder, weights unchanged (card)]",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-24",
+      "decode_tokens_per_s": 104.84,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max-vl-response-v1",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-1dadd00c",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-24-vl-response-v1-m4max-mac/NOTES.md — the table row for LFM2.5-VL-450M litert-lm-cpu (median of 3 launches, range in brackets)",
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-24-vl-response-v1-m4max-mac/litert-lm_litert-community_LFM2_5-VL-450M_vl-describe-catcouch-gen64_cpu.jsonl — 3 launch records; medians here are computed over the 3 passing launches",
+        "session anchor: mlx-swift Qwen3-0.6B-4bit short-chat warm 559.6 tok/s, 2 % above the 527–550 band of the previous five Mac sessions (not throttled)",
+        "the host was shared (Xcode builds, Chrome and Storage bursts); every launch samples foreign processes >= 20 % CPU into provenance.hostBefore/After; the Gemma 4 pair was re-taken in a quieter window (NOTES.md 'Spread')",
+        "peak_mem_mb = VmHWM (Android) / ps rss (Mac) of the CLI process, host memory only — a GPU arm's device heap is outside it",
+        "reply (identical across the 3 launches, text check pass): 'A kitten is laying on a couch with its eyes wide open.'"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 15,
+        "invalid_decode_lines": 0,
+        "launches": 3,
+        "load_s_median": 0.335,
+        "passing_launches": 3,
+        "prefill_tokens": 276,
+        "response_s_max": 0.673,
+        "response_s_median": 0.599,
+        "response_s_min": 0.586,
+        "ttft_s_median": 0.33
+      },
+      "output_match": null,
+      "peak_mem_mb": 962.3,
+      "prefill_tokens_per_s": 870.18,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 330.0
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-09-24",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max-vl-response-v1",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-1dadd00c",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": "RESIZE_BILINEAR: Expected 1 runtime input tensor(s), but node has 0 runtime input(s).",
+      "evidence": [
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-24-vl-response-v1-m4max-mac/NOTES.md — the table row for LFM2.5-VL-450M litert-lm-gpu (median of 3 launches, range in brackets)",
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-24-vl-response-v1-m4max-mac/litert-lm_litert-community_LFM2_5-VL-450M_vl-describe-catcouch-gen64_gpu.jsonl — 3 launch records; medians here are computed over no passing launch",
+        "session anchor: mlx-swift Qwen3-0.6B-4bit short-chat warm 559.6 tok/s, 2 % above the 527–550 band of the previous five Mac sessions (not throttled)",
+        "the host was shared (Xcode builds, Chrome and Storage bursts); every launch samples foreign processes >= 20 % CPU into provenance.hostBefore/After; the Gemma 4 pair was re-taken in a quieter window (NOTES.md 'Spread')",
+        "litert-lm_litert-community_LFM2_5-VL-450M_vl-describe-catcouch-gen64_gpu_run1.stderr.log: Dynamically loaded GPU accelerator(libLiteRtWebGpuAccelerator.dylib) registered. — accelerator that computed: GPU WebGPU (libLiteRtWebGpuAccelerator.dylib, Dawn with the Metal backend; NOT libLiteRtMetalAccelerator — PROVENANCE.md erratum 2026-09-26)",
+        "RESIZE_BILINEAR: Expected 1 runtime input tensor(s), but node has 0 runtime input(s).",
+        "└ Some ops are not accelerated. Add kLiteRtHwAcceleratorCpu to the compilation accelerator set to allow using the CPU to run those.",
+        "exit 13 on all 3 launches (FAILURES.txt); the vision executor compiles with kGpu only, so the engine is never created"
+      ],
+      "failure_class": "engine_create_failed",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "launches": 3,
+        "passing_launches": 0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

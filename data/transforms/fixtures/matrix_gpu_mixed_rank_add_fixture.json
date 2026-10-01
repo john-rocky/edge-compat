@@ -1,0 +1,75 @@
+{
+  "backend": "gpu_metal_mac",
+  "litert_version": "2.2.0",
+  "generated_at": "2026-10-01",
+  "schema_version": "1.2",
+  "entries": [
+    {
+      "op": "ADD",
+      "dtypes": [
+        "float32"
+      ],
+      "status": "incorrect",
+      "provenance": "example",
+      "constraints": {
+        "rank": 3,
+        "operand_a": "activation",
+        "operand_a_rank": 2,
+        "operand_b": "constant",
+        "operand_b_rank": 3
+      },
+      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring the measured row in data/matrix/gpu_metal_mac__2.2.0.json: ADD of a rank-2 runtime tensor and a rank-3 constant is silently miscomputed on the Metal accelerator (LiteRT #10231: max abs diff 2.0 vs CPU at [85,16], cosine 0.742); the same add with the runtime operand reshaped to rank 3 in front is fp16-rounding exact (2026-10-01)",
+      "rewrite_hints": [
+        {
+          "symptom": "a [N,C] activation plus a [1,N,C] constant table is wrong from that add on; the graph reports full residency",
+          "rewrite": "RESHAPE the runtime operand to the constant's rank ([N,C] -> [1,N,C]) in front of the ADD",
+          "expected_effect": "measured: max abs diff 2.0 -> 0.0016 at [85,16] (fp16 rounding)",
+          "transform_id": "mixed-rank-elementwise-const-to-rank3"
+        }
+      ],
+      "evidence": {
+        "source_model": "fixture mirror of gpu_metal_mac__2.2.0 ADD mixed-rank row",
+        "litert_version": "2.2.0",
+        "date": "2026-10-01"
+      }
+    },
+    {
+      "op": "ADD",
+      "dtypes": [
+        "float32"
+      ],
+      "status": "delegated",
+      "provenance": "example",
+      "constraints": {
+        "rank": 3,
+        "operand_a": "activation",
+        "operand_a_rank": 3,
+        "operand_b": "constant",
+        "operand_b_rank": 3
+      },
+      "conditions": "SYNTHETIC FIXTURE ENTRY: the rank-3 x rank-3-constant form of the same ADD is fp16-rounding exact on the Metal accelerator (measured alongside the row above)",
+      "evidence": {
+        "source_model": "fixture mirror of gpu_metal_mac__2.2.0 ADD rank-3 row",
+        "litert_version": "2.2.0",
+        "date": "2026-10-01"
+      }
+    },
+    {
+      "op": "RESHAPE",
+      "dtypes": [
+        "float32"
+      ],
+      "status": "delegated",
+      "provenance": "example",
+      "constraints": {
+        "operand_b": "constant"
+      },
+      "conditions": "SYNTHETIC FIXTURE ENTRY: RESHAPE with a constant shape input in front of the ADD delegates on the Metal accelerator (the two-op repro graph reports is_fully_accelerated() true, measured alongside the rows above)",
+      "evidence": {
+        "source_model": "fixture mirror of gpu_metal_mac__2.2.0 RESHAPE row",
+        "litert_version": "2.2.0",
+        "date": "2026-10-01"
+      }
+    }
+  ]
+}

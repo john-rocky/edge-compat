@@ -18,6 +18,7 @@ from flatbuffers.table import Table
 from litert_compat.parser.opcodes import builtin_name, tensor_type_name
 
 FILE_IDENTIFIER = b"TFL3"
+SMALL_CONSTANT_BYTES = 4096
 
 # vtable offsets: field slot n lives at 4 + 2n.
 _MODEL_OPERATOR_CODES = 6
@@ -61,6 +62,9 @@ class TensorInfo:
     # offset/size pair) — i.e. a weight/constant rather than an activation.
     # Default False keeps older constructors valid.
     is_constant: bool = False
+    # The constant's bytes when the payload is small (<= SMALL_CONSTANT_BYTES):
+    # enough for shape/paddings/axis vectors, never weights. None otherwise.
+    const_data: bytes | None = None
 
     @property
     def rank(self) -> int | None:
@@ -153,23 +157,42 @@ def _read_opcode(tab: Table) -> tuple[str, str | None, int]:
     return builtin_name(code), custom_code, version
 
 
-def _read_buffer_has_data(tab: Table) -> bool:
-    """A model buffer counts as data-bearing when its inline `data` vector is
-    non-empty or it points at appended bytes (offset/size, newer converters).
-    Buffer 0 is the empty sentinel by convention; an empty buffer at any other
-    index still means 'no data' — constness is decided by content, not index."""
+def _read_buffer(tab: Table) -> tuple[bool, bytes | None]:
+    """-> (has_data, small_payload). A model buffer counts as data-bearing when
+    its inline `data` vector is non-empty or it points at appended bytes
+    (offset/size, newer converters). Buffer 0 is the empty sentinel by
+    convention; an empty buffer at any other index still means 'no data' —
+    constness is decided by content, not index. The payload is returned only
+    when it is at most SMALL_CONSTANT_BYTES (shape / paddings / axis vectors);
+    weights are never copied."""
     o = tab.Offset(_BUFFER_DATA)
     if o != 0 and tab.VectorLen(o) > 0:
-        return True
+        length = tab.VectorLen(o)
+        if length <= SMALL_CONSTANT_BYTES:
+            start = tab.Vector(o)
+            return True, bytes(tab.Bytes[start:start + length])
+        return True, None
     size = _scalar(tab, _BUFFER_SIZE, N.Uint64Flags, 0)
     offset = _scalar(tab, _BUFFER_OFFSET, N.Uint64Flags, 0)
-    return size > 0 and offset > 1  # offset 1 is the schema's "unset" placeholder
+    if size > 0 and offset > 1:  # offset 1 is the schema's "unset" placeholder
+        if size <= SMALL_CONSTANT_BYTES and offset + size <= len(tab.Bytes):
+            return True, bytes(tab.Bytes[offset:offset + size])
+        return True, None
+    return False, None
 
 
-def _read_tensor(tab: Table, index: int, buffer_has_data: tuple[bool, ...]) -> TensorInfo:
+def _read_buffer_has_data(tab: Table) -> bool:
+    return _read_buffer(tab)[0]
+
+
+def _read_tensor(
+    tab: Table, index: int, buffer_has_data: tuple[bool, ...],
+    buffer_payload: tuple[bytes | None, ...] = (),
+) -> TensorInfo:
     dtype_code = _scalar(tab, _TENSOR_TYPE, N.Int8Flags, 0)
     buffer_index = _scalar(tab, _TENSOR_BUFFER, N.Uint32Flags, 0)
     is_constant = 0 <= buffer_index < len(buffer_has_data) and buffer_has_data[buffer_index]
+    const_data = buffer_payload[buffer_index] if buffer_index < len(buffer_payload) else None
     return TensorInfo(
         index=index,
         name=_string(tab, _TENSOR_NAME),
@@ -177,15 +200,17 @@ def _read_tensor(tab: Table, index: int, buffer_has_data: tuple[bool, ...]) -> T
         shape=_int32_vector(tab, _TENSOR_SHAPE),
         shape_signature=_int32_vector(tab, _TENSOR_SHAPE_SIGNATURE),
         is_constant=is_constant,
+        const_data=const_data if is_constant else None,
     )
 
 
 def _read_subgraph(
     tab: Table, index: int, opcodes: list[tuple[str, str | None, int]],
     buffer_has_data: tuple[bool, ...] = (),
+    buffer_payload: tuple[bytes | None, ...] = (),
 ) -> SubgraphGraph:
     tensors = tuple(
-        _read_tensor(t, i, buffer_has_data)
+        _read_tensor(t, i, buffer_has_data, buffer_payload)
         for i, t in enumerate(_table_vector(tab, _SUBGRAPH_TENSORS))
     )
     nodes = []
@@ -237,11 +262,11 @@ def parse_tflite(data: bytes) -> ParsedModel:
         root = flatbuffers.encode.Get(flatbuffers.packer.uoffset, data, 0)
         model = Table(data, root)
         opcodes = [_read_opcode(t) for t in _table_vector(model, _MODEL_OPERATOR_CODES)]
-        buffer_has_data = tuple(
-            _read_buffer_has_data(t) for t in _table_vector(model, _MODEL_BUFFERS)
-        )
+        buffers = [_read_buffer(t) for t in _table_vector(model, _MODEL_BUFFERS)]
+        buffer_has_data = tuple(has for has, _ in buffers)
+        buffer_payload = tuple(payload for _, payload in buffers)
         subgraphs = tuple(
-            _read_subgraph(t, i, opcodes, buffer_has_data)
+            _read_subgraph(t, i, opcodes, buffer_has_data, buffer_payload)
             for i, t in enumerate(_table_vector(model, _MODEL_SUBGRAPHS))
         )
         description = _string(model, _MODEL_DESCRIPTION)

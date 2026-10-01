@@ -1,0 +1,209 @@
+{
+  "artifacts": [
+    {
+      "file": "nemotron3_diar_encoder_offline_fp16.tflite",
+      "sha256": "b312fd74b1931af83185d84f017dd330d0478887db7ccf6ff0e4b65ff0dda28b",
+      "size_mb": 189.49
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-09-25",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 7200.502,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-09-25",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 58.1,
+        "loads": true,
+        "max_rel_diff": 1.164627734622992e-06,
+        "output_match": true,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-09-25/nemotron-3-diarization__nemotron3_diar_encoder_offline_fp16.json"
+  },
+  "conversion": {
+    "command": "python build_nemotron3diar.py --run-dir $RUN --model-dir $RUN/hf_model --mode offline --ln safe  (exports/n3d_encoder_off_safe_fp16.tflite, renamed on publish)",
+    "quantization": "float16 weight storage (ai-edge-quantizer FLOAT_CASTING; compute stays floating point; bfloat16-exact checkpoint — card 'Contents', NOTICE)",
+    "tool": "litert-torch",
+    "tool_version": "0.9.4 (litert-converter 0.4.0; torch 2.11.0; ai-edge-quantizer 0.9.0 for the float16 cast)"
+  },
+  "cross_runtime": [],
+  "delegation": {
+    "backend": "gpu_mldrift",
+    "blocking_ops": [
+      "DEQUANTIZE"
+    ],
+    "coverage_ops_pct": 93.5,
+    "lint_report_version": "1.1",
+    "litert_version": "2.2.0",
+    "matched_provenance_counts": {
+      "measured": 2919
+    },
+    "partitions": 191
+  },
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-09-24",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 2919,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-n3d-selftest",
+            "os_build": "Android 16 (SDK 36)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "nemotron3diar SelfTest (zoo main a7ce147, HF android/SelfTest.kt): one Environment, CompiledModel(Accelerator.GPU) per graph; inputs = 7 captured steps of the 97.6 s upstream example clip, fed with the transformers fp32 reference's own encoder inputs; latency = write inputs -> run -> readFloat of every output, median of 20 timed runs after 5 warm-ups at step 128 (L=541 rows); parity = graph output vs the reference's chunk logits over the L*8 real rows; sources ~/code/codex-conversions/2026-09-24/n3d-litert/results/gate_device.json, gate_device_offline.json, device_logcat_<tag>.txt (\"Replacing N out of N node(s) with delegate (LITERT_CL) node, yielding 1 partitions\")",
+            "run tag off_safe_fp16_fp32; GPU precision FP32; conditions at start: screen_interactive=True keyguard_locked=False plugged=usb battery=97% 35.4C thermal_status=0 thermal_headroom=0.733; thermal after 0",
+            "offline graph T=684, steps 0/1/3 (L 380/684/505); file mode on the device: the 97.6 s clip in 0.99-1.00 s (4 chunks), 29/29 segments identical to transformers' offline forward (results/runfile_device.md)"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 172.6847135,
+          "loads": true,
+          "max_abs_diff": 4.57763671875e-05,
+          "max_rel_diff": null,
+          "metrics": {
+            "activity_flips_at_0_5": 0,
+            "file_mode_97s_seconds": 1.0,
+            "iterations": 20,
+            "latency_max_ms": 175.246563,
+            "latency_min_ms": 171.704114,
+            "load_compile_ms": 1516.645781,
+            "max_abs_dprob": 7.790031162635547e-06
+          },
+          "output_match": true,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "GpuOptions precision=FP32",
+          "total_ops": 2919,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-09-24/nemotron-3-diarization__nemotron3_diar_encoder_offline_fp16__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-09-24",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 2919,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-n3d-selftest",
+            "os_build": "Android 16 (SDK 36)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "nemotron3diar SelfTest (zoo main a7ce147, HF android/SelfTest.kt): one Environment, CompiledModel(Accelerator.GPU) per graph; inputs = 7 captured steps of the 97.6 s upstream example clip, fed with the transformers fp32 reference's own encoder inputs; latency = write inputs -> run -> readFloat of every output, median of 20 timed runs after 5 warm-ups at step 128 (L=541 rows); parity = graph output vs the reference's chunk logits over the L*8 real rows; sources ~/code/codex-conversions/2026-09-24/n3d-litert/results/gate_device.json, gate_device_offline.json, device_logcat_<tag>.txt (\"Replacing N out of N node(s) with delegate (LITERT_CL) node, yielding 1 partitions\")",
+            "run tag off_safe_fp16_default; GPU precision default (fp16 compute); conditions at start: screen_interactive=True keyguard_locked=False plugged=usb battery=97% 35.4C thermal_status=0 thermal_headroom=0.703; thermal after 0",
+            "activity agreement all rows 99.996 % (4 flips); file mode 0.64-0.65 s for the 97.6 s clip, 7 boundaries moved by 10 ms"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 87.179922,
+          "loads": true,
+          "max_abs_diff": 0.2679729461669922,
+          "max_rel_diff": null,
+          "metrics": {
+            "activity_flips_at_0_5": 4,
+            "file_mode_97s_seconds": 0.645,
+            "iterations": 20,
+            "latency_max_ms": 89.319844,
+            "latency_min_ms": 86.239322,
+            "load_compile_ms": 1438.63625,
+            "max_abs_dprob": 0.02581906676597462
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "GpuOptions precision=default (fp16 compute)",
+          "total_ops": 2919,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-09-24/nemotron-3-diarization__nemotron3_diar_encoder_offline_fp16__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "nemotron-3-diarization",
+    "id": "nemotron-3-diarization__nemotron3_diar_encoder_offline_fp16",
+    "license": "openmdw-1.1",
+    "source_url": "https://huggingface.co/litert-community/Nemotron-3-Diarization-LiteRT",
+    "task": "voice-activity-detection"
+  },
+  "pitfalls": [
+    "GPU precision decides correctness of the closed loop: at the S26 GPU's default precision (fp16 compute) one step is off by max |Δlogit| 0.34 and the speaker cache keeps 3-17 different frames per compression (37 -> 40 segments on the 97.6 s clip); GpuOptions(precision = FP32) matches the transformers reference on every frame at 171 ms per 0.72 s step (card: On-device results). FP32 is the recommended setting.",
+    "All 64 LayerNorms are a scaled form with eps / S^2: the plain LayerNorm export runs fully delegated on the S26 GPU but returns wrong values without NaN at default precision (LayerNorm inputs reach |x| ~ 956, (x-mu)^2 exceeds float16 range) (card: Conversion notes, 'LayerNorm in float16').",
+    "attn_bias is 0 on the L real rows and -30000 on the zero rows (offline graph: 0 / -16384 masked key / -32768 pad); the graph derives its row mask before the output convolution from these values, so other bias values change the output (card: Graph interfaces).",
+    "rope_cos / rope_sin are host-computed tables for positions 0..T-1 (the same every step); they are inputs, not baked constants (card: Graph interfaces).",
+    "Continuous back-to-back streaming heats the S26 GPU until its clock is capped (1300 -> 500 MHz after ~8 s; graph B 135 -> 288 ms); real-time pacing and the offline graph stayed at full speed (card: On-device results).",
+    "The streaming state (Arrival-Order Speaker Cache + FIFO) is host code: sigmoid, mean over 8 rows, FIFO push and cache compression follow transformers' Nemotron3DiarizationSpeakerCache (Python conversion/nemotron3_diar_litert.py, Kotlin android/SpeakerCache.kt) — the graph alone does not diarize (card: Streaming loop).",
+    "Log-mel must match torch.stft rounding: a float32 radix-2 FFT was 2.7e-4 off in the log domain; the Kotlin host ports pocketfft's real FFT and the Python host uses numpy's float32 path rfft(norm='forward') * 512 (card: Conversion notes, 'The FFT of the host mel')."
+  ],
+  "schema_version": "1.2"
+}

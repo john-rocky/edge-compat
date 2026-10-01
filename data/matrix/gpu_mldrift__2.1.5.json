@@ -2,7 +2,7 @@
   "backend": "gpu_mldrift",
   "entries": [
     {
-      "conditions": "DRQ int8 channelwise weights + fp32 activations: an FC on a rank-3 [1,T,C] input whose OUTPUT feeds an ADD (residual or two-input) aborts delegate kernel creation — ml_drift delegate_opencl 'Unable to parse bc coord for BATCH axis. Layout is bhwc' — and the whole CompiledModel GPU compile fails (no CPU fallback). Isolated rank-3 DRQ FC compiles; rank-2 FC+ADD compiles; the identical graph in f32 compiles. Kills every DRQ transformer/conformer block with residual FCs. Minimal repro: 1.0 MB x+Linear(x) tflite (parakeet-ja-work/drq_probes/bisect_resadd1_i8.tflite).",
+      "conditions": "DRQ int8 channelwise weights + fp32 activations: an FC on a rank-3 [1,T,C] input whose OUTPUT feeds an ADD (residual or two-input) aborts delegate kernel creation — ml_drift delegate_opencl 'Unable to parse bc coord for BATCH axis. Layout is bhwc' — and the whole CompiledModel GPU compile fails (no CPU fallback). Isolated rank-3 DRQ FC compiles; rank-2 FC+ADD compiles; the identical graph in f32 compiles. Kills every DRQ transformer/conformer block with residual FCs. Minimal repro: 1.0 MB x+Linear(x) tflite (parakeet-ja-work/drq_probes/bisect_resadd1_i8.tflite). Upstream answer (LiteRT #9277, 2026-10-01T03:50:26Z, https://github.com/google-ai-edge/LiteRT/issues/9277#issuecomment-5924359159): the error \"is caused by MLDrift's batch broadcast coordinate parser failing when a rank-3 tensor is mapped to 4D `BHWC` during fused kernel codegen. Currently, using rank-2 or explicitly reshaping to a 4D tensor before the operation is the only workaround\". Closed as a duplicate of the tracking issue LiteRT #10445 (opened 2026-10-01: standard shape broadcasting, or automatic 4D RESHAPE insertion for lower- and mixed-rank inputs, in the MLDrift GPU delegate).",
       "dtypes": [
         "float32",
         "int8"
@@ -19,6 +19,11 @@
           "expected_effect": "whole-model GPU compile succeeds (f32: parakeet-ja 1862/1862+2083/2083 delegated)",
           "rewrite": "run the i8 file on CPU or ship f32 weights for GPU (both verified)",
           "symptom": "GPU compile fails instantly on any DRQ transformer block (residual FC)"
+        },
+        {
+          "symptom": "GPU compile fails with 'Unable to parse bc coord for BATCH axis' on a DRQ int8 FC whose output feeds an ADD",
+          "rewrite": "reshape the rank-3 activation to a rank-4 tensor before the FC + ADD, or keep it rank 2 (the two workarounds named on LiteRT #9277)",
+          "expected_effect": "not measured here. Rank-2 FC + ADD compiles in this probe set, but the same message also comes from a rank-2 input on Metal 2.2.0 (gpu_metal_mac__2.2.0 FULLY_CONNECTED entry) and from int8-FC GLiNER2.5-Small graphs on a Galaxy S26 with LiteRT 2.2.0 (2026-09-19, failing op not localized), so verify on the target before relying on either form"
         }
       ],
       "status": "crash"

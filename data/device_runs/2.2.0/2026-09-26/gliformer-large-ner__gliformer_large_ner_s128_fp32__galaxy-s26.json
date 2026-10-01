@@ -1,0 +1,70 @@
+{
+ "artifact": "gliformer_large_ner_s128_fp32.tflite",
+ "artifact_sha256": "a868e1baab4a4714f11ff4de6e20248e24c0e7a968508c2d2a6f873c6db35d39",
+ "device": "galaxy-s26",
+ "model_id": "gliformer-large-ner__gliformer_large_ner_s128_fp32",
+ "notes": "GLiFormer Large v1 NER LiteRT (litert-community/GLiFormer-Large-NER-LiteRT, published 2026-09-26, Hub revision dee6ced): the entity-extraction path of knowledgator/gliformer-large-v1 (rev d0a4e53d; DeBERTa-large 24-layer encoder + word BiLSTM + span scorer, 5 labels), window N=128 encoded tokens, T=48 text words; inputs inputs_embeds [1,128,1024] / attention_mask [1,128] / text_routing [1,48,128] / parent_routing [1,1,128] / label_routing [1,5,128] / text_mask [1,48] float32, output output_0 [1,1,48,15] (start/end/inside logits per word x label); the host looks up the word embeddings before the graph (host_assets/word_embeddings_fp32.bin, or the fp16 table upcast to float32) and decodes the logits with the upstream pairing decoder after it. fp32 reference graph: float32 weights (3,996 operators), the exact reference for the wfp16 file. GpuOptions(precision = FP32) is the validated Android setting; with GpuOptions omitted (the runtime's default GPU precision) the s128 wfp16 graph compiled and returned finite logits but 0/10 entity span sets (recorded in the s128 wfp16 file). artifact_sha256 = the on-device sha256 of the pushed file (the run directory's *_hash_*.stdout.log), equal to the Hub LFS sha256 (resolve URL x-linked-etag, read 2026-09-26), public/manifest.json and the local public/ copy. Every number read programmatically from the lane's JSONs / raw outputs (build script kept in the session scratchpad); peak_mem_mb = the process VmHWM in bytes / 1e6 (the bytes are in metrics); model-level facts only, no op row derives from these records.",
+ "quantization": null,
+ "results": [
+  {
+   "accelerator": "gpu_mldrift",
+   "context_length": null,
+   "date": "2026-09-26",
+   "decode_tokens_per_s": null,
+   "delegated_ops": 3996,
+   "env": {
+    "device": "Galaxy S26 (SM-S942Q)",
+    "machine_label": "galaxy-s26-gliformer-gate",
+    "os_build": "Android 16 (SDK 36, build BP4A.251205.006)",
+    "runtime": "litert",
+    "runtime_version": "2.2.0",
+    "soc": "Qualcomm SM8850",
+    "vendor_sdk": null
+   },
+   "error": null,
+   "evidence": [
+    "Native LiteRT 2.2.0 CompiledModel C-API runner (gpu_runner, build gliformer-round4-six-inputs-memory-default-probe-v2; vendor libLiteRt.so sha256 97355a36cb8a... + libLiteRtClGlAccelerator.so sha256 7c63d606a48e... pinned in android/round4/provenance.json (rounds 9 / 10 rebuilt the runner source against the same libraries, android/round9/provenance.json, android/round10/provenance.json)), one process per job, fixture inputs pushed as .f32 files and the model sha256-checked on the device (~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/round4/s128/018_hash_gliformer_large_ner_s128_fp32.stdout.log). Sources: ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/gpu_round4_s128_fp32.json (gate s128_fp32, mode fp32), raw outputs ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/round4/s128/s128_fp32/NN.f32, runner stderr ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/round4/s128/020_run_s128_fp32.stderr.log, own-pid logcat ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/round4/s128/022_own_pid_logcat_s128_fp32.stdout.log; public copy litert-community/GLiFormer-Large-NER-LiteRT/validation/s26_s128_fp32.json.",
+    "logcat/stderr: 'Replacing 3996 out of 3996 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).'; compile status 0 in 5008.2 ms; is_fully_accelerated=true; hardware_accelerators 'GPU only (bitmask 2)'; gpu_options_toml 'precision = 2'.",
+    "conditions (round 4, the four s128 jobs ran back to back in one adb session, USB powered, no cool-start rule and no GPU clock / thermal_status sample in this lane's runner): battery before the s128 shape 29.9 C 94 % (2026-09-26T02:03:22.264820+00:00), after this job 32.0 C 94 % (2026-09-26T02:04:49.837983+00:00); runner wall 11.4 s; compile 5008.2 ms (status 0); process peak RSS (VmHWM) 5,165,268,992 B, RSS after the last readback 3,239,837,696 B. This job ran second of the four s128 jobs (after the wfp16 GPU job).",
+    "parity: 10/10 fixtures' entity span sets (label, start, end) equal the official gliformer 0.1.2 fp32 CPU result (checkpoint rev d0a4e53d, same tokenizer, threshold 0.5); all outputs finite: True; max score diff 1.252e-06 (gate tolerance 0.001); max |dlogit| vs official 4.387e-05.",
+    "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) against the Mac ai-edge-litert 2.1.6 CompiledModel CPU run of the same fp32 graph on the same inputs (~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/litert_cpu_outputs.npz, scripts/parity.py; the device pack android/fixtures/s128/*.f32 is byte-identical to the fixtures/graph_inputs_NN.npz rows of the float32 table that run consumed, checked 2026-09-26), recomputed 2026-09-26 from the saved raw outputs: 10/10 fixtures pass over all 48 x 15 slots (0 violating elements of 7,200); max |d| 5.150e-05, max rel 2.382e-04.",
+    "latency scope: all input lock/write/unlock + CompiledModel run + output lock/read/unlock; no file I/O; 5 timed runs after 2 warm-ups per fixture, 10 fixtures = 50 timed runs; median 82.77 / min 81.16 / max 87.40 ms; per-fixture medians 82.54 ms (first) -> 82.53 ms (last) in run order."
+   ],
+   "failure_class": null,
+   "full_delegation": true,
+   "latency_p50_ms": 82.765599,
+   "loads": true,
+   "max_abs_diff": 5.14984130859375e-05,
+   "max_rel_diff": 0.00023818919726181775,
+   "metrics": {
+    "battery_temp_c_end": 32.0,
+    "battery_temp_c_start": 29.9,
+    "exact_span_sets_vs_official": 10,
+    "fixtures": 10,
+    "iterations": 50,
+    "latency_max_ms": 87.402761,
+    "latency_min_ms": 81.158437,
+    "load_compile_ms": 5008.185779,
+    "loaded_rss_bytes": 3239837696,
+    "max_abs_dlogit_vs_official": 4.38690185546875e-05,
+    "max_score_diff_vs_official": 1.2516975402832031e-06,
+    "peak_rss_bytes": 5165268992,
+    "per_fixture_median_first_ms": 82.539792,
+    "per_fixture_median_last_ms": 82.531146,
+    "repetitions_per_fixture": 5,
+    "shared_rule_pass_fixtures": 10,
+    "shared_rule_violating_elements": 0,
+    "warmups_per_fixture": 2
+   },
+   "output_match": true,
+   "peak_mem_mb": 5165.27,
+   "prefill_tokens_per_s": null,
+   "provenance": "measured",
+   "runs": true,
+   "signature": "GpuOptions precision=FP32",
+   "total_ops": 3996,
+   "ttft_ms": null
+  }
+ ],
+ "schema_version": "1.0"
+}

@@ -51,7 +51,7 @@
       "status": "crash"
     },
     {
-      "conditions": "silently miscomputed: `ADD([N,C] activation, [N,C] constant)` (a learned position embedding added to patch tokens) returns rel-L2 1.25 vs CPU on the Metal accelerator at fp32 precision; the identical add expressed with a leading batch dim (`[1,N,C] + [1,N,C]`, or kept 4-D `[1,H,W,C]`) is bit-exact (rel 7e-7). The micro-graph CONV_2D->RESHAPE->ADD->RESHAPE reproduces it; CONV_2D alone, RESHAPE alone and the rank-3 variant do not. Symptom at the model level: a VLM's vision executor on `--vision-backend gpu` returns embeddings of the wrong image and the decoder answers \"this image is a blank canvas\" — easy to misattribute to fp16 overflow.",
+      "conditions": "silently miscomputed: `ADD([N,C] activation, [N,C] constant)` (a learned position embedding added to patch tokens) returns rel-L2 1.25 vs CPU on the Metal accelerator at fp32 precision; the identical add expressed with a leading batch dim (`[1,N,C] + [1,N,C]`, or kept 4-D `[1,H,W,C]`) is bit-exact (rel 7e-7). The micro-graph CONV_2D->RESHAPE->ADD->RESHAPE reproduces it; CONV_2D alone, RESHAPE alone and the rank-3 variant do not. Symptom at the model level: a VLM's vision executor on `--vision-backend gpu` returns embeddings of the wrong image and the decoder answers \"this image is a blank canvas\" — easy to misattribute to fp16 overflow. Upstream answer (LiteRT #10231, whose report includes this rank-2 constant case; 2026-10-01T03:49:56Z, https://github.com/google-ai-edge/LiteRT/issues/10231#issuecomment-5924354052): \"a known limitation in the MLDrift GPU backend regarding shape broadcasting for mixed/lower-rank tensors (especially when constant tensors are involved, which currently bypass automatic 4D broadcast reshape insertion)\"; \"inserting an explicit `RESHAPE` or `EXPAND_DIMS` before the `ADD` is the recommended workaround\" - the rewrite below. Closed as a duplicate of the tracking issue LiteRT #10445 (opened 2026-10-01: standard shape broadcasting, or automatic 4D RESHAPE insertion for lower- and mixed-rank inputs, in the MLDrift GPU delegate).",
       "constraints": {
         "operand_b": "constant",
         "rank": 2
@@ -75,6 +75,73 @@
         }
       ],
       "status": "incorrect"
+    },
+    {
+      "conditions": "silently miscomputed at the default precision with CompiledModel.is_fully_accelerated() true: ADD(runtime [85,16], constant [1,85,16]) returns max abs diff 2.0 / mean abs 0.73 / cosine 0.742 vs the CPU accelerator (inputs in [-1, 1], table in [-1.8, 1.8]), and ADD(runtime [1024,768] from a FULLY_CONNECTED, constant [1,1024,768]) max abs 3.81 / cosine 0.583. The same graphs with the runtime operand reshaped to [1,85,16] / [1,1024,768] in front of the ADD, and the rank-3-input forms, are fp16-rounding exact (max abs 0.0016 at [85,16], 0.022 at [1024,768]; cosine 1.000000 / 0.999996; the rank-3 ADD row). Identical numbers on 2.2.0 (gpu_metal_mac__2.2.0 row of the same date). Upstream answer (LiteRT #10231, 2026-10-01T03:49:56Z, https://github.com/google-ai-edge/LiteRT/issues/10231#issuecomment-5924354052): \"a known limitation in the MLDrift GPU backend regarding shape broadcasting for mixed/lower-rank tensors (especially when constant tensors are involved, which currently bypass automatic 4D broadcast reshape insertion)\"; \"inserting an explicit `RESHAPE` or `EXPAND_DIMS` before the `ADD` is the recommended workaround\" - the rewrite below. Closed as a duplicate of the tracking issue LiteRT #10445.",
+      "constraints": {
+        "operand_a": "activation",
+        "operand_a_rank": 2,
+        "operand_b": "constant",
+        "operand_b_rank": 3,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-10-01",
+        "litert_version": "ai-edge-litert 2.1.6 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
+        "source_model": "LiteRT #10231 repro graphs add_rank2_input_const_rank3.tflite (ADD runtime [85,16] + constant [1,85,16], sha256 c64a285a…) and fc_add_const_rank3.tflite (FULLY_CONNECTED then ADD runtime [1024,768] + constant [1,1024,768], sha256 ac940c58…), with their RESHAPE-fronted (add_reshape3_const_rank3, prefix2-reshape3) and rank-3-input (add_rank3_input_const_rank3) controls — edge-llm-bench releases add-rank-repro-shapes-2026-09-29 and metal-add-repro-2026-09-24; tools/rank3_prelint_measure_metal_add.py, deterministic input pattern, CPU accelerator as the reference; litertlm-convert tools/rank3_prelint_measure_metal_add_20261001.log"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured on 2.1.6 and 2.2.0: max abs diff 2.0 -> 0.0016 at [85,16] and 3.81 -> 0.022 at [1024,768] (fp16 rounding), cosine 0.742 -> 1.000000",
+          "rewrite": "RESHAPE the runtime operand to the constant's rank ([N,C] -> [1,N,C]) in front of the ADD; the output is already rank 3, nothing is reshaped back",
+          "symptom": "a [N,C] activation plus a [1,N,C] constant table (a position embedding, a broadcast bias) is wrong from that add on; the graph reports full residency",
+          "transform_id": "mixed-rank-elementwise-const-to-rank3"
+        }
+      ],
+      "status": "incorrect"
+    },
+    {
+      "conditions": "the correct form of the mixed-rank row: ADD(runtime [1,85,16], constant [1,85,16]) and the RESHAPE-fronted [85,16] graph are fully accelerated and fp16-rounding exact vs the CPU accelerator (max abs 0.0016, cosine 1.000000); at [1,1024,768] max abs 0.022, cosine 0.999996. Extent stated is exactly these shapes at the default precision",
+      "constraints": {
+        "operand_a": "activation",
+        "operand_a_rank": 3,
+        "operand_b": "constant",
+        "operand_b_rank": 3,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-10-01",
+        "litert_version": "ai-edge-litert 2.1.6 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
+        "source_model": "LiteRT #10231 repro graphs add_rank2_input_const_rank3.tflite (ADD runtime [85,16] + constant [1,85,16], sha256 c64a285a…) and fc_add_const_rank3.tflite (FULLY_CONNECTED then ADD runtime [1024,768] + constant [1,1024,768], sha256 ac940c58…), with their RESHAPE-fronted (add_reshape3_const_rank3, prefix2-reshape3) and rank-3-input (add_rank3_input_const_rank3) controls — edge-llm-bench releases add-rank-repro-shapes-2026-09-29 and metal-add-repro-2026-09-24; tools/rank3_prelint_measure_metal_add.py, deterministic input pattern, CPU accelerator as the reference; litertlm-convert tools/rank3_prelint_measure_metal_add_20261001.log"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "conditions": "RESHAPE [85,16] -> [1,85,16] and [1024,768] -> [1,1024,768] with a constant int32 shape input, in front of an ADD: the two-op graphs report CompiledModel.is_fully_accelerated() true and their numerics are the rank-3 ADD row's. Extent stated is exactly these two graphs",
+      "constraints": {
+        "operand_b": "constant"
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-10-01",
+        "litert_version": "ai-edge-litert 2.1.6 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
+        "source_model": "LiteRT #10231 repro graphs add_rank2_input_const_rank3.tflite (ADD runtime [85,16] + constant [1,85,16], sha256 c64a285a…) and fc_add_const_rank3.tflite (FULLY_CONNECTED then ADD runtime [1024,768] + constant [1,1024,768], sha256 ac940c58…), with their RESHAPE-fronted (add_reshape3_const_rank3, prefix2-reshape3) and rank-3-input (add_rank3_input_const_rank3) controls — edge-llm-bench releases add-rank-repro-shapes-2026-09-29 and metal-add-repro-2026-09-24; tools/rank3_prelint_measure_metal_add.py, deterministic input pattern, CPU accelerator as the reference; litertlm-convert tools/rank3_prelint_measure_metal_add_20261001.log"
+      },
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "status": "delegated"
     }
   ],
   "generated_at": "2026-08-19",

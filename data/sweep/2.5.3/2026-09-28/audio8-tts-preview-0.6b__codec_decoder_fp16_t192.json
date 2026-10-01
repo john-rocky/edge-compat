@@ -1,0 +1,102 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x10x192:int32",
+  "license": "apache-2.0",
+  "model_id": "audio8-tts-preview-0.6b__codec_decoder_fp16_t192",
+  "notes": "Same codec decoder for 192 frames -> 393,216 samples; random int32 codes measure the graph, not speech; fp16 weights read through DEQUANTIZE; 262 MB",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-09-28",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "backend reported a fatal error during run: error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+      "failure_class": "backend_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-09-28",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: ERROR: Following operations are not supported by GPU delegate:",
+        "error: DEQUANTIZE: ",
+        "error: EMBEDDING_LOOKUP: EMBEDDING_LOOKUP: Empty quantization params.",
+        "error: 936 operations will run on the GPU, and the remaining 133 operations will run on the CPU."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "RuntimeError: memory access out of bounds",
+      "failure_class": "wasm_memory_ceiling",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/Audio8-TTS-Preview-0.6b/resolve/main/codec_decoder_fp16_T192.tflite"
+}

@@ -74,6 +74,208 @@
       "benchmark_count": 0,
       "browser": {
         "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-28/audio8-tts-preview-0.6b__codec_decoder_fp16_t128.json"
+      },
+      "card_json": "cards/audio8-tts-preview-0.6b__codec_decoder_fp16_t128/card.json",
+      "card_md": "cards/audio8-tts-preview-0.6b__codec_decoder_fp16_t128/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 81.6,
+        "litert_version": "2.2.0",
+        "partitions": 154
+      },
+      "device": null,
+      "family": "audio8-tts",
+      "id": "audio8-tts-preview-0.6b__codec_decoder_fp16_t128",
+      "license": "apache-2.0",
+      "pitfall_count": 10,
+      "task": "text-to-speech"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-28/audio8-tts-preview-0.6b__codec_decoder_fp16_t192.json"
+      },
+      "card_json": "cards/audio8-tts-preview-0.6b__codec_decoder_fp16_t192/card.json",
+      "card_md": "cards/audio8-tts-preview-0.6b__codec_decoder_fp16_t192/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 81.6,
+        "litert_version": "2.2.0",
+        "partitions": 154
+      },
+      "device": null,
+      "family": "audio8-tts",
+      "id": "audio8-tts-preview-0.6b__codec_decoder_fp16_t192",
+      "license": "apache-2.0",
+      "pitfall_count": 8,
+      "task": "text-to-speech"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-28/audio8-tts-preview-0.6b__codec_decoder_int8_t128.json"
+      },
+      "card_json": "cards/audio8-tts-preview-0.6b__codec_decoder_int8_t128/card.json",
+      "card_md": "cards/audio8-tts-preview-0.6b__codec_decoder_int8_t128/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 90.0,
+        "litert_version": "2.2.0",
+        "partitions": 74
+      },
+      "device": null,
+      "family": "audio8-tts",
+      "id": "audio8-tts-preview-0.6b__codec_decoder_int8_t128",
+      "license": "apache-2.0",
+      "pitfall_count": 9,
+      "task": "text-to-speech"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-28/audio8-tts-preview-0.6b__codec_encoder_fp16_10s.json"
+      },
+      "card_json": "cards/audio8-tts-preview-0.6b__codec_encoder_fp16_10s/card.json",
+      "card_md": "cards/audio8-tts-preview-0.6b__codec_encoder_fp16_10s/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 83.5,
+        "litert_version": "2.2.0",
+        "partitions": 210
+      },
+      "device": null,
+      "family": "audio8-tts",
+      "id": "audio8-tts-preview-0.6b__codec_encoder_fp16_10s",
+      "license": "apache-2.0",
+      "pitfall_count": 8,
+      "task": "text-to-speech"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "output_mismatch"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-28/audio8-tts-preview-0.6b__fast_ar_int8.json"
+      },
+      "card_json": "cards/audio8-tts-preview-0.6b__fast_ar_int8/card.json",
+      "card_md": "cards/audio8-tts-preview-0.6b__fast_ar_int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 91.2,
+        "litert_version": "2.2.0",
+        "partitions": 10
+      },
+      "device": null,
+      "family": "audio8-tts",
+      "id": "audio8-tts-preview-0.6b__fast_ar_int8",
+      "license": "apache-2.0",
+      "pitfall_count": 8,
+      "task": "text-to-speech"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/audio8-tts-preview-0.6b__slow_ar_int4/card.json",
+      "card_md": "cards/audio8-tts-preview-0.6b__slow_ar_int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 93.5,
+        "litert_version": "2.2.0",
+        "partitions": 104
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-28",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@pipeline slow_ar_int4 + fast_ar_int8 + codec_decoder_fp16_T128 (host loop, CPU 4 threads)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-28/audio8-tts-preview-0.6b__slow_ar_int4__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "audio8-tts",
+      "id": "audio8-tts-preview-0.6b__slow_ar_int4",
+      "license": "apache-2.0",
+      "pitfall_count": 8,
+      "task": "text-to-speech"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/audio8-tts-preview-0.6b__slow_ar_int8/card.json",
+      "card_md": "cards/audio8-tts-preview-0.6b__slow_ar_int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 93.5,
+        "litert_version": "2.2.0",
+        "partitions": 104
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-28",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@pipeline slow_ar_int8 + fast_ar_int8 + codec_decoder_fp16_T128 (host loop, CPU 4 threads)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-28",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@pipeline slow_ar_int8 + fast_ar_int8 + codec_decoder_int8_T128 (host loop, CPU 4 threads)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-28/audio8-tts-preview-0.6b__slow_ar_int8__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "audio8-tts",
+      "id": "audio8-tts-preview-0.6b__slow_ar_int8",
+      "license": "apache-2.0",
+      "pitfall_count": 8,
+      "task": "text-to-speech"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
           "wasm_xnnpack": "pass",
           "webgpu_mldrift": "pass"
         },
@@ -645,6 +847,178 @@
       "license": "apache-2.0",
       "pitfall_count": 1,
       "task": "object-detection"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/decider-2b-vision-fp16/card.json",
+      "card_md": "cards/decider-2b-vision-fp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-29",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@150tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-29",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@reference readout decide() (decider_litert.py; CompiledModel CPU, 8 threads; warm caches)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-29",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@150tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-09-29/decider-2b-vision-fp16__mac-studio-m4-max.json",
+          "data/device_runs/2.2.0/2026-09-29/decider-2b-vision-fp16__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "decider",
+      "id": "decider-2b-vision-fp16",
+      "license": "apache-2.0",
+      "pitfall_count": 11,
+      "task": "image-text-to-text"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/decider-2b-vision-fp16-int8vocab/card.json",
+      "card_md": "cards/decider-2b-vision-fp16-int8vocab/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-29",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@150tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-29",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@reference readout decide() (decider_litert.py; CompiledModel CPU, 8 threads; warm caches)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-29",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@150tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-09-29/decider-2b-vision-fp16-int8vocab__mac-studio-m4-max.json",
+          "data/device_runs/2.2.0/2026-09-29/decider-2b-vision-fp16-int8vocab__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "decider",
+      "id": "decider-2b-vision-fp16-int8vocab",
+      "license": "apache-2.0",
+      "pitfall_count": 12,
+      "task": "image-text-to-text"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/decider-2b-vision-int8/card.json",
+      "card_md": "cards/decider-2b-vision-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-29",
+            "device": "galaxy-s26",
+            "label": "cpu@Android app (hfmodels-android samples/ask, release build); one conversation, image + 5 questions",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-29",
+            "device": "galaxy-s26",
+            "label": "cpu@150tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-29",
+            "device": "galaxy-s26",
+            "label": "gpu@Android app (hfmodels-android samples/ask, release build); one conversation, image + 5 questions",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-29",
+            "device": "galaxy-s26",
+            "label": "gpu@150tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-29",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-29",
+            "device": "mac-studio-m4-max",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.0/2026-09-29/decider-2b-vision-int8__galaxy-s26.json",
+          "data/device_runs/0.16.1/2026-09-29/decider-2b-vision-int8__galaxy-s26.json",
+          "data/device_runs/0.17.1/2026-09-29/decider-2b-vision-int8__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "decider",
+      "id": "decider-2b-vision-int8",
+      "license": "apache-2.0",
+      "pitfall_count": 11,
+      "task": "image-text-to-text"
     },
     {
       "benchmark_count": 0,
@@ -1632,6 +2006,91 @@
     },
     {
       "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/fun-asr-nano-2512/card.json",
+      "card_md": "cards/fun-asr-nano-2512/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-27",
+            "device": "galaxy-s26",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-27",
+            "device": "galaxy-s26",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-27",
+            "device": "galaxy-s26",
+            "label": "gpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-27",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-27",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@512tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-27",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-27",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@512tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.1/2026-09-27/fun-asr-nano-2512__galaxy-s26.json",
+          "data/device_runs/0.17.1/2026-09-27/fun-asr-nano-2512__galaxy-s26.json",
+          "data/device_runs/0.17.1/2026-09-27/fun-asr-nano-2512__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "fun-asr",
+      "id": "fun-asr-nano-2512",
+      "license": "apache-2.0",
+      "pitfall_count": 10,
+      "task": "automatic-speech-recognition"
+    },
+    {
+      "benchmark_count": 0,
       "browser": {
         "statuses": {
           "wasm_xnnpack": "pass",
@@ -1731,6 +2190,452 @@
       "license": "apache-2.0",
       "pitfall_count": 1,
       "task": "image-to-image"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-26/gliformer-large-ner__gliformer_large_ner_s128_wfp16.json"
+      },
+      "card_json": "cards/gliformer-large-ner__gliformer_large_ner_s128_wfp16/card.json",
+      "card_md": "cards/gliformer-large-ner__gliformer_large_ner_s128_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 83.6,
+        "litert_version": "2.2.0",
+        "partitions": 681
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CPU XNNPACK (native runner, default threads)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CPU XNNPACK 4 threads; Android sample app (debug build)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions omitted (runtime default GPU precision)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; Android sample app (debug build)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-26/gliformer-large-ner__gliformer_large_ner_s128_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "gliformer-large-ner",
+      "id": "gliformer-large-ner__gliformer_large_ner_s128_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 9,
+      "task": "token-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-26/gliformer-large-ner__gliformer_large_ner_s256_encoder_wfp16.json"
+      },
+      "card_json": "cards/gliformer-large-ner__gliformer_large_ner_s256_encoder_wfp16/card.json",
+      "card_md": "cards/gliformer-large-ner__gliformer_large_ner_s256_encoder_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 89.1,
+        "litert_version": "2.2.0",
+        "partitions": 194
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; Android sample app (debug build)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-26/gliformer-large-ner__gliformer_large_ner_s256_encoder_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "gliformer-large-ner",
+      "id": "gliformer-large-ner__gliformer_large_ner_s256_encoder_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 9,
+      "task": "token-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-26/gliformer-large-ner__gliformer_large_ner_s256_head_wfp16.json"
+      },
+      "card_json": "cards/gliformer-large-ner__gliformer_large_ner_s256_head_wfp16/card.json",
+      "card_md": "cards/gliformer-large-ner__gliformer_large_ner_s256_head_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 79.6,
+        "litert_version": "2.2.0",
+        "partitions": 2568
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CPU XNNPACK (native runner, default threads)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CPU XNNPACK 4 threads; Android sample app (debug build)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "fallback"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-26/gliformer-large-ner__gliformer_large_ner_s256_head_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "gliformer-large-ner",
+      "id": "gliformer-large-ner__gliformer_large_ner_s256_head_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 10,
+      "task": "token-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-26/gliformer-large-ner__gliformer_large_ner_s512_encoder_wfp16.json"
+      },
+      "card_json": "cards/gliformer-large-ner__gliformer_large_ner_s512_encoder_wfp16/card.json",
+      "card_md": "cards/gliformer-large-ner__gliformer_large_ner_s512_encoder_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 89.1,
+        "litert_version": "2.2.0",
+        "partitions": 194
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-26/gliformer-large-ner__gliformer_large_ner_s512_encoder_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "gliformer-large-ner",
+      "id": "gliformer-large-ner__gliformer_large_ner_s512_encoder_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 9,
+      "task": "token-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-26/gliformer-large-ner__gliformer_large_ner_s512_head_wfp16.json"
+      },
+      "card_json": "cards/gliformer-large-ner__gliformer_large_ner_s512_head_wfp16/card.json",
+      "card_md": "cards/gliformer-large-ner__gliformer_large_ner_s512_head_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 79.6,
+        "litert_version": "2.2.0",
+        "partitions": 5128
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CPU XNNPACK (native runner, default threads)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "fallback"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-26/gliformer-large-ner__gliformer_large_ner_s512_head_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "gliformer-large-ner",
+      "id": "gliformer-large-ner__gliformer_large_ner_s512_head_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 10,
+      "task": "token-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-26/gliner2.5-decide__gliner25_decide_s128_wfp16.json"
+      },
+      "card_json": "cards/gliner2.5-decide__gliner25_decide_s128_wfp16/card.json",
+      "card_md": "cards/gliner2.5-decide__gliner25_decide_s128_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 89.0,
+        "litert_version": "2.2.0",
+        "partitions": 196
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CPU XNNPACK 4 threads; Android sample app (debug build)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; Android sample app (debug build)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-26/gliner2.5-decide__gliner25_decide_s128_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "gliner2.5-decide",
+      "id": "gliner2.5-decide__gliner25_decide_s128_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 7,
+      "task": "text-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-26/gliner2.5-decide__gliner25_decide_s256_wfp16.json"
+      },
+      "card_json": "cards/gliner2.5-decide__gliner25_decide_s256_wfp16/card.json",
+      "card_md": "cards/gliner2.5-decide__gliner25_decide_s256_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 89.0,
+        "litert_version": "2.2.0",
+        "partitions": 196
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CPU XNNPACK (native runner, default threads)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CPU XNNPACK 4 threads; Android sample app (debug build)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; Android sample app (debug build)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-26/gliner2.5-decide__gliner25_decide_s256_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "gliner2.5-decide",
+      "id": "gliner2.5-decide__gliner25_decide_s256_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 7,
+      "task": "text-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-26/gliner2.5-decide__gliner25_decide_s512_wfp16.json"
+      },
+      "card_json": "cards/gliner2.5-decide__gliner25_decide_s512_wfp16/card.json",
+      "card_md": "cards/gliner2.5-decide__gliner25_decide_s512_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 89.0,
+        "litert_version": "2.2.0",
+        "partitions": 196
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CPU XNNPACK (native runner, default threads)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CPU XNNPACK 4 threads; Android sample app (debug build)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; Android sample app (debug build)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-26/gliner2.5-decide__gliner25_decide_s512_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "gliner2.5-decide",
+      "id": "gliner2.5-decide__gliner25_decide_s512_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 7,
+      "task": "text-classification"
     },
     {
       "benchmark_count": 0,
@@ -2522,6 +3427,24 @@
             "status": "fallback"
           },
           {
+            "accelerator": "cpu",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "cpu@311tok",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-1dadd00c",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-1dadd00c",
+            "status": "load_failed"
+          },
+          {
             "accelerator": "gpu",
             "date": "2026-08-24",
             "device": "galaxy-s26",
@@ -2529,11 +3452,31 @@
             "runtime": "litert-lm",
             "runtime_version": "0.16.0",
             "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-01",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@311tok",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-1dadd00c",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-01",
+            "device": "mac-studio-m4-max",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-1dadd00c",
+            "status": "load_failed"
           }
         ],
         "sources": [
           "data/device_runs/0.16.0/2026-08-24/internvl3-1b__galaxy-s26.json",
-          "data/device_runs/0.16.0/2026-09-05/internvl3-1b__galaxy-s26.json"
+          "data/device_runs/0.16.0/2026-09-05/internvl3-1b__galaxy-s26.json",
+          "data/device_runs/selfbuilt-1dadd00c/2026-09-26/internvl3-1b__galaxy-s26.json",
+          "data/device_runs/selfbuilt-1dadd00c/2026-10-01/internvl3-1b__mac-studio-m4-max.json"
         ]
       },
       "family": "internvl3",
@@ -5308,6 +6251,162 @@
     },
     {
       "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-25/nemotron-3-diarization__nemotron3_diar_encoder_low_latency_fp16.json"
+      },
+      "card_json": "cards/nemotron-3-diarization__nemotron3_diar_encoder_low_latency_fp16/card.json",
+      "card_md": "cards/nemotron-3-diarization__nemotron3_diar_encoder_low_latency_fp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 93.5,
+        "litert_version": "2.2.0",
+        "partitions": 191
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-24",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP16_WITH_FP32_ACCUM",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-24",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-24",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=default (fp16 compute)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-24/nemotron-3-diarization__nemotron3_diar_encoder_low_latency_fp16__galaxy-s26.json"
+        ]
+      },
+      "family": "nemotron-3-diarization",
+      "id": "nemotron-3-diarization__nemotron3_diar_encoder_low_latency_fp16",
+      "license": "openmdw-1.1",
+      "pitfall_count": 7,
+      "task": "voice-activity-detection"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-25/nemotron-3-diarization__nemotron3_diar_encoder_offline_fp16.json"
+      },
+      "card_json": "cards/nemotron-3-diarization__nemotron3_diar_encoder_offline_fp16/card.json",
+      "card_md": "cards/nemotron-3-diarization__nemotron3_diar_encoder_offline_fp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 93.5,
+        "litert_version": "2.2.0",
+        "partitions": 191
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-24",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-24",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=default (fp16 compute)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-24/nemotron-3-diarization__nemotron3_diar_encoder_offline_fp16__galaxy-s26.json"
+        ]
+      },
+      "family": "nemotron-3-diarization",
+      "id": "nemotron-3-diarization__nemotron3_diar_encoder_offline_fp16",
+      "license": "openmdw-1.1",
+      "pitfall_count": 7,
+      "task": "voice-activity-detection"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-25/nemotron-3-diarization__nemotron3_diar_frontend.json"
+      },
+      "card_json": "cards/nemotron-3-diarization__nemotron3_diar_frontend/card.json",
+      "card_md": "cards/nemotron-3-diarization__nemotron3_diar_frontend/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 100.0,
+        "litert_version": "2.2.0",
+        "partitions": 1
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-24",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-24",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=default (fp16 compute)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-24/nemotron-3-diarization__nemotron3_diar_frontend__galaxy-s26.json"
+        ]
+      },
+      "family": "nemotron-3-diarization",
+      "id": "nemotron-3-diarization__nemotron3_diar_frontend",
+      "license": "openmdw-1.1",
+      "pitfall_count": 3,
+      "task": "voice-activity-detection"
+    },
+    {
+      "benchmark_count": 0,
       "browser": null,
       "card_json": "cards/nemotron-3-nano-4b-int8/card.json",
       "card_md": "cards/nemotron-3-nano-4b-int8/CARD.md",
@@ -5752,6 +6851,41 @@
       "license": "cc-by-4.0",
       "pitfall_count": 1,
       "task": "audio-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-25/parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful.json"
+      },
+      "card_json": "cards/parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful/card.json",
+      "card_md": "cards/parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-25",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-66058c82+omni-eval-patches",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/selfbuilt-66058c82+omni-eval-patches/2026-09-25/parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "parakeet",
+      "id": "parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful",
+      "license": "cc-by-4.0",
+      "pitfall_count": 6,
+      "task": "automatic-speech-recognition"
     },
     {
       "benchmark_count": 0,
@@ -6273,6 +7407,106 @@
       "license": "apache-2.0",
       "pitfall_count": 1,
       "task": "text-recognition"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-25/pp-ocrv6-small__ppocrv6_small_det_640_fp32.json"
+      },
+      "card_json": "cards/pp-ocrv6-small__ppocrv6_small_det_640_fp32/card.json",
+      "card_md": "cards/pp-ocrv6-small__ppocrv6_small_det_640_fp32/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 4.5,
+        "litert_version": "2.2.0",
+        "partitions": 13
+      },
+      "device": null,
+      "family": "pp-ocrv6-small",
+      "id": "pp-ocrv6-small__ppocrv6_small_det_640_fp32",
+      "license": "apache-2.0",
+      "pitfall_count": 4,
+      "task": "image-to-text"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "output_mismatch"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-25/pp-ocrv6-small__ppocrv6_small_rec_320_fp32.json"
+      },
+      "card_json": "cards/pp-ocrv6-small__ppocrv6_small_rec_320_fp32/card.json",
+      "card_md": "cards/pp-ocrv6-small__ppocrv6_small_rec_320_fp32/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 4.6,
+        "litert_version": "2.2.0",
+        "partitions": 13
+      },
+      "device": null,
+      "family": "pp-ocrv6-small",
+      "id": "pp-ocrv6-small__ppocrv6_small_rec_320_fp32",
+      "license": "apache-2.0",
+      "pitfall_count": 4,
+      "task": "image-to-text"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-25/pp-ocrv6-small__ppocrv6_small_rec_640_fp32.json"
+      },
+      "card_json": "cards/pp-ocrv6-small__ppocrv6_small_rec_640_fp32/card.json",
+      "card_md": "cards/pp-ocrv6-small__ppocrv6_small_rec_640_fp32/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 4.6,
+        "litert_version": "2.2.0",
+        "partitions": 13
+      },
+      "device": null,
+      "family": "pp-ocrv6-small",
+      "id": "pp-ocrv6-small__ppocrv6_small_rec_640_fp32",
+      "license": "apache-2.0",
+      "pitfall_count": 4,
+      "task": "image-to-text"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-09-25/pp-ocrv6-small__ppocrv6_small_rec_960_fp32.json"
+      },
+      "card_json": "cards/pp-ocrv6-small__ppocrv6_small_rec_960_fp32/card.json",
+      "card_md": "cards/pp-ocrv6-small__ppocrv6_small_rec_960_fp32/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 4.6,
+        "litert_version": "2.2.0",
+        "partitions": 13
+      },
+      "device": null,
+      "family": "pp-ocrv6-small",
+      "id": "pp-ocrv6-small__ppocrv6_small_rec_960_fp32",
+      "license": "apache-2.0",
+      "pitfall_count": 4,
+      "task": "image-to-text"
     },
     {
       "benchmark_count": 0,
@@ -8606,6 +9840,15 @@
         "records": [
           {
             "accelerator": "cpu",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "cpu@82tok",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-1dadd00c",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
             "date": "2026-09-05",
             "device": "galaxy-s26",
             "label": "cpu@203tok",
@@ -8615,17 +9858,46 @@
           },
           {
             "accelerator": "gpu",
+            "date": "2026-09-26",
+            "device": "galaxy-s26",
+            "label": "gpu@82tok",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-1dadd00c",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
             "date": "2026-08-24",
             "device": "galaxy-s26",
             "label": "gpu@204tok",
             "runtime": "litert-lm",
             "runtime_version": "0.16.0",
             "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-24",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@82tok",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-1dadd00c",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-24",
+            "device": "mac-studio-m4-max",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-1dadd00c",
+            "status": "run_failed"
           }
         ],
         "sources": [
           "data/device_runs/0.16.0/2026-08-24/smolvlm2-500m__galaxy-s26.json",
-          "data/device_runs/0.16.0/2026-09-05/smolvlm2-500m__galaxy-s26.json"
+          "data/device_runs/0.16.0/2026-09-05/smolvlm2-500m__galaxy-s26.json",
+          "data/device_runs/selfbuilt-1dadd00c/2026-09-24/smolvlm2-500m__mac-studio-m4-max.json",
+          "data/device_runs/selfbuilt-1dadd00c/2026-09-26/smolvlm2-500m__galaxy-s26.json"
         ]
       },
       "family": "smolvlm",

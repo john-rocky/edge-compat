@@ -1,0 +1,61 @@
+{
+  "artifact": "parakeet_tdt_0.6b_v3_5s_i8_stateful.tflite",
+  "artifact_sha256": "334745b8bc7fd372b1c213516f0b6338bb827b1a2abb3e77ad35fe6fea5cd16b",
+  "device": "galaxy-s26",
+  "model_id": "parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_5s_i8_stateful",
+  "notes": "LiteRT-LM omni/asr at main@66058c82, self-built (bazel 7.6.1; macOS: Xcode 27, Android: NDK r28 --config=android_arm64), engine defaults (window = model_metadata inputMilliseconds, overlap 0.4, timestamp merger). Numbers, per-utterance outputs and the analysis: https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-25-omni-asr-wer-v1-m4max-mac/NOTES.md Same runner source built for Android (NDK r28), CPU only.",
+  "quantization": "int8 dynamic-range weights, fp32 activations (drq); 5 s window (litert-community/parakeet-tdt-0.6b-v3)",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-25",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-omni-eval",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-66058c82",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-25-omni-asr-wer-v1-s26-android/summary/parakeet-tdt-0.6b-v3-clean-cpu.json: \"model_name\": \"parakeet-tdt-0.6b-v3\", \"backend\": \"cpu\", \"num_threads\": 4, \"utterances\": 2620, \"wer_percent\": 17.67, \"substitutions\": 1328, \"deletions\": 5991, \"insertions\": 2048, \"reference_words\": 53000, \"empty_hypotheses\": 11, \"flush_empty\": 180, \"rtfx_processing\": 19.92, \"processing_seconds\": 976.6, \"audio_hours\": 5.403, \"peak_rss_mb\": 1.4",
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-25-omni-asr-wer-v1-s26-android/summary/parakeet-tdt-0.6b-v3-other-cpu.json: \"model_name\": \"parakeet-tdt-0.6b-v3\", \"backend\": \"cpu\", \"num_threads\": 4, \"utterances\": 2939, \"wer_percent\": 16.74, \"substitutions\": 2432, \"deletions\": 4079, \"insertions\": 2332, \"reference_words\": 52841, \"hung_utterances\": [\"4198-12259-0032\"], \"empty_hypotheses\": 9, \"flush_empty\": 104, \"rtfx_processing\": 20.43, \"processing_seconds\": 941.2, \"audio_hours\": 5.342, \"peak_rss_mb\": 1.4",
+        "Open ASR Leaderboard scoring (EnglishTextNormalizer + corpus WER, jiwer) over LibriSpeech test-clean (2620 utt, 5.403 h) and test-other (2939 utt, 5.342 h); harness = omni_eval_runner on LiteRT-LM OmniEngine (omni/asr, PushInputSource, one session per utterance, CPU num_threads 4), edge-llm-bench tools/omni-eval. WER is pipeline-level (engine front-end + model + decoder), not the .tflite alone; 'hung' = never returned from TdtDecoder::Decode, killed by the driver watchdog and scored as empty; RTFx = audio seconds / engine wall seconds.",
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-25-omni-asr-wer-v1-s26-android/NOTES.md: each cell waits for the battery to cool to 36 C first; the phone was at thermal status 2-3 by the end of each cell (in the RTFx, not in the text); whisper-tiny S/D/I byte-identical to the Mac CPU run",
+        "peak_rss_mb in the S26 summaries is not a valid measurement (1.4) and is omitted"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "empty_hypotheses_test_clean": 11,
+        "empty_hypotheses_test_other": 9,
+        "hung_utterances_test_clean": 0,
+        "hung_utterances_test_other": 1,
+        "num_threads": 4,
+        "rtfx_test_clean": 19.92,
+        "rtfx_test_other": 20.43,
+        "utterances_test_clean": 2620,
+        "utterances_test_other": 2939,
+        "wer_test_clean_pct": 17.67,
+        "wer_test_other_pct": 16.74
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

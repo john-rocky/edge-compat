@@ -23,7 +23,7 @@
       "status": "incorrect"
     },
     {
-      "conditions": "Rank-3 batched matmuls silently miscompute in transformer attention context (stock nn.MultiheadAttention lowers to them; the tent-matmul grid-sample BMM hits the same fault at rank 3); rank-4 equivalents of the same math are exact. Re-confirmed in the RF-DETR-Seg-Nano hunt (earlier witnesses on 2.1.3/2.1.5).",
+      "conditions": "Rank-3 batched matmuls silently miscompute in transformer attention context (stock nn.MultiheadAttention lowers to them; the tent-matmul grid-sample BMM hits the same fault at rank 3); rank-4 equivalents of the same math are exact. Re-confirmed in the RF-DETR-Seg-Nano hunt (earlier witnesses on 2.1.3/2.1.5). Upstream answer on the same symptom in LiteRT #8619 (SAM 2.1 mask decoder, rank-3 attention, Pixel 8a ML Drift; 2026-10-01T03:50:06Z, https://github.com/google-ai-edge/LiteRT/issues/8619#issuecomment-5924355840): \"a known limitation in the MLDrift GPU backend's lower-rank (rank-3) to 4D `BHWC` layout mapping. For now, reshaping/promoting lower-rank attention tensors to rank-4 is the required workaround\" - the rewrite below. Closed as a duplicate of the tracking issue LiteRT #10445 (opened 2026-10-01: standard shape broadcasting, or automatic 4D RESHAPE insertion for lower- and mixed-rank inputs, in the MLDrift GPU delegate).",
       "constraints": {
         "rank": 3
       },

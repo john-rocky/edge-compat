@@ -1,0 +1,102 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x10x128:int32",
+  "license": "apache-2.0",
+  "model_id": "audio8-tts-preview-0.6b__codec_decoder_fp16_t128",
+  "notes": "Codec decoder (RVQ lookup + 8-layer windowed transformer + causal SEANet upsampler) for 128 frames -> 262,144 samples at 44.1 kHz; the int32 input is 10 codebook indices per frame (0..15 from the dimension spec are valid, in-range codes; every gather index is clamped in-graph), so random inputs measure the graph, not speech; fp16 weights read through DEQUANTIZE; 262 MB",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-09-28",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "backend reported a fatal error during run: error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+      "failure_class": "backend_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-09-28",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: ERROR: Following operations are not supported by GPU delegate:",
+        "error: DEQUANTIZE: ",
+        "error: EMBEDDING_LOOKUP: EMBEDDING_LOOKUP: Empty quantization params.",
+        "error: 936 operations will run on the GPU, and the remaining 133 operations will run on the CPU."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "Error: ERROR: [third_party/odml/litert/litert/js/packages/core/src/cpp/litert_web.cc:245]\n└ ERROR: [./third_party/odml/litert/litert/cc/internal/litert_compiled_model_next.h:70]",
+      "failure_class": "compile_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/Audio8-TTS-Preview-0.6b/resolve/main/codec_decoder_fp16_T128.tflite"
+}

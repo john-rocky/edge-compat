@@ -1,0 +1,111 @@
+{
+  "artifact": "codec_fp16_T128_g2.tflite",
+  "device": "galaxy-s26",
+  "model_id": "audio8-tts-preview-0.6b__codec_decoder_fp16_t128",
+  "notes": "Audio8-TTS-Preview-0.6b -> LiteRT (https://huggingface.co/litert-community/Audio8-TTS-Preview-0.6b, rev e8620a9bf9bda6cc1693cb64ad9aebf8984d15f8, own upload 2026-09-28). Per-graph benchmark_model rows (latency + delegate coverage on random inputs; every gather index is clamped in-graph so the tool cannot fault); no on-device functional run exists — functional parity is Mac-only on the same files (FINDINGS §8). `artifact` is the file name the bench driver used on the phone; codec_fp16_T128_g2.tflite = the file shipped as codec_decoder_fp16_T128.tflite (built_from codec/codec_decoder_fp16_T128_g2.tflite); the mapping to the published file is build_manifest.json built_from + FINDINGS ('S26 clean legs ... 2-signature slow graphs = the shipped files', §6 'shipped files') and the card's Performance table, which quotes these legs; the device copy's bytes were not digested in the log, so artifact_sha256 is absent (#167(e) shape). One call decodes 128 frames = 5.94 s of 44.1 kHz audio, so the GPU's 923 ms per call is an RTF of about 0.16 for the codec stage alone and the CPU's 3664 ms about 0.62. The fp32 build of the same graph (codec_fp32_T128_g2.tflite, not published) delegates 971/971 nodes in 1 partition at 924.22 ms avg with a 1461.86 MB footprint (s26_codec3_bench.log lines 1-6) — the fp16 file's CPU remainder (DEQUANTIZE of the fp16 weights + the codebook EMBEDDING_LOOKUP) costs no time, only memory. The earlier attention build (codec_fp16_T128 v1, not published) delegated 422/1246 nodes at 1016 ms (s26_codec_fp16_T128_gpu.log lines 22-42, 172, 190: BROADCAST_TO / rank-5 CONCATENATION and RESHAPE refused) — staged for the matrix, not a row. Dates: the legs carry no per-run stamp; 2026-09-28 is the session date (FINDINGS/NOTES header, the g2 full log's own epoch 1790547879 = 2026-09-28 07:24 JST, out/ mtimes 06:59-07:27 JST, all before the 09:12 JST Hub upload). Hand-built from the logs (build script in the session scratchpad); model-level facts only, no op row derives from this record (the op-level lines are staged separately for the matrix). ",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-09-28",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 1024,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-audio8-benchmark-model",
+        "os_build": "Android 16 (SDK 36, build BP4A.251205.006.S942QOPS1AZF2)",
+        "runtime": "litert",
+        "runtime_version": "prebuilt-55bf01c8",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "~/code/litertlm-convert/audio8_tts_work/evidence/logs/s26_codec2_bench.log lines 8-13: '### codec_fp16_T128_g2.tflite sig=- cpu runs=5 thr=4 | freq: policy0 3628800/3628800 policy6 4742400/4742400  | thermal: IsStatusOverride: false' — frequency caps verified absent before the leg (header: policy0 3628800/3628800, policy6 4742400/4742400 = scaling_max_freq/cpuinfo_max_freq; thermal IsStatusOverride: false).",
+        "~/code/litertlm-convert/audio8_tts_work/evidence/logs/s26_codec2_bench.log: 'VERBOSE: Replacing 1024 out of 1069 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2 partitions for subgraph 0 (main).'.",
+        "~/code/litertlm-convert/audio8_tts_work/evidence/logs/s26_codec2_bench.log: 'Inference (avg): 3664.46 ms (5 runs)' | 'Inference (min): 3616.52 ms' | 'Init footprint: 862.47 MB' | 'Overall footprint: 1433.34 MB' — benchmark_model prints avg/min only, so latency_p50_ms stays null and the figures are in metrics (init/overall footprint are the tool's process footprint, carried in metrics, not as a device-measured peak).",
+        "LiteRT `benchmark_model` at /data/local/tmp/litert-cli/benchmark_model on the phone (sha256 55bf01c89beeb1175ab3889fd820a9178a5d995a13f4a4e5c54476136e125f2f, 8,284,184 B, pushed 2026-09-22 13:05; byte-identical to ~/.cache/litert-cli/binaries/arm64-v8a/benchmark_model on the Mac, the litert-cli package's download cache; adb sha256sum 2026-09-28). CompiledModel-based tool (log: 'compiled_model.cc:829 Flatbuffer model initialized directly from incoming litert model', 'Statically linked GPU accelerator registered', GPU = LITERT_CL / delegate_opencl.cc = ML Drift OpenCL on the Adreno). Driver: audio8_tts_work/device_bench.sh (--num_runs N --warmup_runs 3; CPU legs --num_threads=4, GPU legs --use_gpu=true; output filtered to the Replacing / not supported / Inference / footprint / ERROR lines)."
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "inference_avg_ms": 3664.46,
+        "inference_min_ms": 3616.52,
+        "init_footprint_mb": 862.47,
+        "overall_footprint_mb": 1433.34,
+        "partitions": 2,
+        "requested_runs": 5,
+        "threads": 4,
+        "timed_runs": 5,
+        "warmup_runs": 3
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": null,
+      "total_ops": 1069,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-09-28",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 936,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-audio8-benchmark-model",
+        "os_build": "Android 16 (SDK 36, build BP4A.251205.006.S942QOPS1AZF2)",
+        "runtime": "litert",
+        "runtime_version": "prebuilt-55bf01c8",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "~/code/litertlm-convert/audio8_tts_work/evidence/logs/s26_codec2_bench.log lines 1-7: '### codec_fp16_T128_g2.tflite sig=- gpu runs=10 thr=4 | freq: policy0 3628800/3628800 policy6 4742400/4742400  | thermal: IsStatusOverride: false' — frequency caps verified absent before the leg (header: policy0 3628800/3628800, policy6 4742400/4742400 = scaling_max_freq/cpuinfo_max_freq; thermal IsStatusOverride: false).",
+        "~/code/litertlm-convert/audio8_tts_work/evidence/logs/s26_codec2_bench.log: 'VERBOSE: Replacing 936 out of 1069 node(s) with delegate (LITERT_CL) node, yielding 2 partitions for subgraph 0 (main).'.",
+        "~/code/litertlm-convert/audio8_tts_work/evidence/logs/s26_codec2_bench.log: 'Inference (avg): 923.33 ms (10 runs)' | 'Inference (min): 902.51 ms' | 'Init footprint: 1050.49 MB' | 'Overall footprint: 1050.49 MB' — benchmark_model prints avg/min only, so latency_p50_ms stays null and the figures are in metrics (init/overall footprint are the tool's process footprint, carried in metrics, not as a device-measured peak).",
+        "~/code/litertlm-convert/audio8_tts_work/evidence/logs/s26_codec2_bench.log line 3: 'VERBOSE: Replacing 88 out of 134 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2 partitions for subgraph 0 (main).' — the 133 nodes the GPU delegate left behind ran on XNNPACK.",
+        "~/code/litertlm-convert/audio8_tts_work/evidence/logs/s26_codec_fp16_T128_g2_gpu_full.log (the same file, unfiltered benchmark_model output, epoch 1790547879 = 2026-09-28 07:24 JST): lines 22-26 'ERROR: Following operations are not supported by GPU delegate:' | 'DEQUANTIZE: ' | 'EMBEDDING_LOOKUP: EMBEDDING_LOOKUP: Empty quantization params.' | '936 operations will run on the GPU, and the remaining 133 operations will run on the CPU.' | 'Replacing 936 out of 1069 node(s) with delegate (LITERT_CL) ... 2 partitions'; lines 40-52: 'Signature name: decode' | 'Model initialization: 4519.38 ms' | 'Inference (avg): 936.64 ms (3 runs)' | 'Inference (min): 930.79 ms' | 'Inference (max): 944.28 ms' | count=3 ... median=934852 (us) | 'Init footprint: 1105.18 MB' | 'Overall footprint: 1105.18 MB' | 'Peak memory usage not available.' — the only leg with a printed median (3 runs), carried in metrics.",
+        "LiteRT `benchmark_model` at /data/local/tmp/litert-cli/benchmark_model on the phone (sha256 55bf01c89beeb1175ab3889fd820a9178a5d995a13f4a4e5c54476136e125f2f, 8,284,184 B, pushed 2026-09-22 13:05; byte-identical to ~/.cache/litert-cli/binaries/arm64-v8a/benchmark_model on the Mac, the litert-cli package's download cache; adb sha256sum 2026-09-28). CompiledModel-based tool (log: 'compiled_model.cc:829 Flatbuffer model initialized directly from incoming litert model', 'Statically linked GPU accelerator registered', GPU = LITERT_CL / delegate_opencl.cc = ML Drift OpenCL on the Adreno). Driver: audio8_tts_work/device_bench.sh (--num_runs N --warmup_runs 3; CPU legs --num_threads=4, GPU legs --use_gpu=true; output filtered to the Replacing / not supported / Inference / footprint / ERROR lines)."
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "inference_avg_ms": 923.33,
+        "inference_median_ms_unfiltered_3run_leg": 934.85,
+        "inference_min_ms": 902.51,
+        "init_footprint_mb": 1050.49,
+        "init_ms_unfiltered_3run_leg": 4519.38,
+        "overall_footprint_mb": 1050.49,
+        "overall_footprint_mb_unfiltered_3run_leg": 1105.18,
+        "partitions": 2,
+        "requested_runs": 10,
+        "threads": 4,
+        "timed_runs": 10,
+        "warmup_runs": 3
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": null,
+      "total_ops": 1069,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,72 @@
+{
+ "artifact": "gliformer_large_ner_s512_head_wfp16.tflite",
+ "artifact_sha256": "7488194439006fae6433ffd4be090ca580905e179711cfb67356ac4c059183a3",
+ "device": "galaxy-s26",
+ "model_id": "gliformer-large-ner__gliformer_large_ner_s512_head_wfp16",
+ "notes": "GLiFormer Large v1 NER LiteRT (litert-community/GLiFormer-Large-NER-LiteRT, published 2026-09-26, Hub revision dee6ced): the entity-extraction path of knowledgator/gliformer-large-v1 (rev d0a4e53d; DeBERTa-large 24-layer encoder + word BiLSTM + span scorer, 5 labels), head graph of the s512 split window (text / parent / label routing matmuls, the word BiLSTM unrolled for T=512 words, anchor fusion and the span scorer): inputs encoder_hidden [1,1,512,1024] / text_routing [1,512,512] / parent_routing [1,1,512] / label_routing [1,5,512] / text_mask [1,512] float32, output output_0 [1,1,512,15]. It runs on the CPU on Android: unrolled BiLSTM heads of this size crash CompiledModel creation on the S26 GPU (SIGSEGV in the OpenCL driver once one sequential chain passes about 85 steps, LiteRT issue 10300 with the round-12 reproducers), so no GPU row exists for this file. wfp16 storage: 9 float16 weight tensors read through a DEQUANTIZE to float32, everything else float32 (25,112 operators vs 25,103 in the fp32 reference). GpuOptions(precision = FP32) is the validated Android setting; with GpuOptions omitted (the runtime's default GPU precision) the s128 wfp16 graph compiled and returned finite logits but 0/10 entity span sets (recorded in the s128 wfp16 file). artifact_sha256 = the on-device sha256 of the pushed file (the run directory's *_hash_*.stdout.log), equal to the Hub LFS sha256 (resolve URL x-linked-etag, read 2026-09-26), public/manifest.json and the local public/ copy. Every number read programmatically from the lane's JSONs / raw outputs (build script kept in the session scratchpad); peak_mem_mb = the process VmHWM in bytes / 1e6 (the bytes are in metrics); model-level facts only, no op row derives from these records.",
+ "quantization": null,
+ "results": [
+  {
+   "accelerator": "cpu_xnnpack",
+   "context_length": null,
+   "date": "2026-09-26",
+   "decode_tokens_per_s": null,
+   "delegated_ops": 25109,
+   "env": {
+    "device": "Galaxy S26 (SM-S942Q)",
+    "machine_label": "galaxy-s26-gliformer-gate",
+    "os_build": "Android 16 (SDK 36, build BP4A.251205.006)",
+    "runtime": "litert",
+    "runtime_version": "2.2.0",
+    "soc": "Qualcomm SM8850",
+    "vendor_sdk": null
+   },
+   "error": null,
+   "evidence": [
+    "Native LiteRT 2.2.0 CompiledModel C-API runner (gpu_runner, build gliformer-round5-variable-input-probes-loaded-rss-v3; vendor libLiteRt.so sha256 97355a36cb8a... + libLiteRtClGlAccelerator.so sha256 7c63d606a48e... pinned in android/round4/provenance.json (rounds 9 / 10 rebuilt the runner source against the same libraries, android/round9/provenance.json, android/round10/provenance.json)), one process per job, fixture inputs pushed as .f32 files and the model sha256-checked on the device (~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/round9/device_head_s512_cpu/007_hash_gliformer_large_ner_s512_head_wfp16.stdout.log). Sources: ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/gpu_round9_s512_split.json (head_cpu) + ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/device_round9_head_s512_cpu.json, raw outputs ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/round9/device_head_s512_cpu/output/NN.f32, runner stderr ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/round9/device_head_s512_cpu/017_run_graph.stderr.log, own-pid logcat ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/round9/device_head_s512_cpu/019_own_pid_logcat.stdout.log; public copy litert-community/GLiFormer-Large-NER-LiteRT/validation/s26_s512_split.json. Inputs: the round-9 GPU encoder readbacks of this window plus the captured routing tensors.",
+    "logcat/stderr: 'Created TensorFlow Lite XNNPACK delegate for CPU.' | 'Replacing 25109 out of 25112 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 3 partitions for subgraph 0 (main).'; compile status 0 in 3729.8 ms; hardware_accelerators 'CPU only (bitmask 1)'; native default CPU options (thread count not set by the runner); the three non-XNNPACK nodes are not named by the log.",
+    "conditions (round 9/10 stage job 'head_s512_cpu', one native process for this graph only, USB powered, no cool-start rule and no GPU clock / thermal_status sample in this lane's runner): battery before 38.7 C 85 % -> after 40.0 C 85 %; runner wall 58.4 s; compile 3729.8 ms (status 0); compile peak RSS (VmHWM) 4,593,754,112 B, process peak 4,679,655,424 B, loaded RSS after the last readback 4,676,505,600 B (this graph alone; the two graphs of a split window were measured in separate processes, so these are stage values, not the application's residency).",
+    "pair (round 9 s512 split gate, ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/gpu_round9_s512_split.json; public copy litert-community/GLiFormer-Large-NER-LiteRT/validation/s26_s512_split.json): the pulled GPU encoder hidden states of this stage fed the wfp16 head on the CPU in a separate process; 20/20 fixtures' entity span sets equal the official gliformer 0.1.2 fp32 result, max score diff 2.414e-04, max |dlogit| vs official 1.484e-02, all finite; sum of the two stage medians 1280.35 ms (not a same-process end-to-end measurement).",
+    "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) against the Mac ai-edge-litert 2.1.6 CompiledModel CPU run of the same graph on the same inputs (~/code/codex-conversions/2026-09-26/gliformer-large-v1/fixtures/round9/device_s512_head/cpu_outputs.npz, written by scripts/prepare_split_device_round9.py from the very fixtures/round9/device_s{seq}_head/NN.npz the device consumed, whose encoder_hidden arrays equal the round-9 GPU encoder readbacks byte for byte, checked 2026-09-26), recomputed 2026-09-26 from the saved raw outputs: 20/20 fixtures pass over all 512 x 15 slots (0 violating elements of 153,600); max |d| 1.717e-05, max rel 3.633e-05.",
+    "latency scope: all input lock/write/unlock + CompiledModel run + output lock/read/unlock; no file I/O; 5 timed runs after 2 warm-ups per fixture, 20 fixtures = 100 timed runs; median 348.86 / min 315.18 / max 404.47 ms; per-fixture medians 316.25 ms (first) -> 400.06 ms (last) in run order."
+   ],
+   "failure_class": null,
+   "full_delegation": false,
+   "latency_p50_ms": 348.8584375,
+   "loads": true,
+   "max_abs_diff": 1.71661376953125e-05,
+   "max_rel_diff": 3.6327957786852494e-05,
+   "metrics": {
+    "battery_temp_c_end": 40.0,
+    "battery_temp_c_start": 38.7,
+    "compile_peak_rss_bytes": 4593754112,
+    "fixtures": 20,
+    "iterations": 100,
+    "latency_max_ms": 404.467447,
+    "latency_min_ms": 315.182604,
+    "load_compile_ms": 3729.792655,
+    "loaded_rss_bytes": 4676505600,
+    "pair_exact_span_sets_vs_official": 20,
+    "pair_max_abs_dlogit_vs_official": 0.014841079711914062,
+    "pair_max_score_diff_vs_official": 0.00024139881134033203,
+    "pair_sum_of_stage_medians_ms": 1280.352161,
+    "peak_rss_bytes": 4679655424,
+    "per_fixture_median_first_ms": 316.254531,
+    "per_fixture_median_last_ms": 400.059791,
+    "repetitions_per_fixture": 5,
+    "shared_rule_pass_fixtures": 20,
+    "shared_rule_violating_elements": 0,
+    "warmups_per_fixture": 2
+   },
+   "output_match": true,
+   "peak_mem_mb": 4679.66,
+   "prefill_tokens_per_s": null,
+   "provenance": "measured",
+   "runs": true,
+   "signature": "CPU XNNPACK (native runner, default threads)",
+   "total_ops": 25112,
+   "ttft_ms": null
+  }
+ ],
+ "schema_version": "1.0"
+}

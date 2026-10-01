@@ -1,0 +1,69 @@
+{
+  "artifact": "talker_int4.tflite",
+  "artifact_sha256": "e03df54e73ed1f88b2ae6d47bbf82dd64ea90a3620d753a0f3c8d6a8d60848db",
+  "device": "mac-studio-m4-max",
+  "model_id": "qwen3-tts-12hz-0.6b-base__talker_int4",
+  "notes": "ai-edge-litert 2.1.6 CompiledModel (CPU/XNNPACK) driven by the model's public reference pipeline (task tts-rtf-libri1272-2sent, docs/tts-rtf-v1.md): the record's artifact is the talker; the pipeline also runs mtp_fp32.tflite and codec_decoder_fp32.tflite plus the fp16/fp32 host tables, and the RTF is the whole pipeline's. Definition: https://github.com/john-rocky/edge-llm-bench/blob/main/docs/tts-rtf-v1.md ; records: https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-24-tts-rtf-v1-m4max-mac/NOTES.md ; identities (all nine files Hub-sha verified): https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-24-tts-rtf-v1-m4max-mac/PROVENANCE.md",
+  "quantization": "talker blockwise-32 int4 (card: data-free OCTAV); mtp fp32; codec decoder fp32; host tables fp16/fp32 (the repo's default configuration)",
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-09-24",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max-tts-rtf-v1",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert",
+        "runtime_version": "2.1.6",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-24-tts-rtf-v1-m4max-mac/NOTES.md — the table row (RTF 2.416 [2.411–2.520], 22.4 s for 9.28 s of audio, MTP inner loop 18.6 s = 83 %)",
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-24-tts-rtf-v1-m4max-mac/litert_litert-community_Qwen3-TTS-12Hz-0_6B-Base_tts-rtf-libri1272-2sent.jsonl — 3 launch records (medians here)",
+        "pipeline = qwen3_tts_pipeline.py from john-rocky/litert-samples branch qwen3-tts-sample at a1f5edf (the model's public reference pipeline), graphs talker_int4.tflite + mtp_fp32.tflite + codec_decoder_fp32.tflite (the sample's default set)",
+        "sampler sampling top-k 50, temperature 0.9, repetition penalty 1.05 (pipeline defaults), seed 1; text = 27 words of LibriSpeech dev-clean speaker 1272 (evaldata/tts/libri1272-2sent); voice voices/demo_speaker.npy (the repo's bundled x-vector)",
+        "audio check: the 24 kHz output transcribed back by parakeet-tdt-0.6b-v3 (LiteRT-LM omni/asr main@1dadd00c, CPU) — round-trip WER 0.000 on all 3 launches (ttsAudioCheck pass); the three launches produced byte-identical audio (seed 1)",
+        "session anchor: mlx-swift Qwen3-0.6B-4bit short-chat warm 561.2 tok/s (band 527–550, not throttled); host shared, foreign processes sampled per launch",
+        "RTF = synthesize() wall / audio seconds (> 1 = slower than real time); all compute on the CPU (XNNPACK, 8 threads; the MTP loop single-threaded by the pipeline's design)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "audio_s": 9.28,
+        "codec_s": 1.058,
+        "frames": 116,
+        "launches": 3,
+        "load_s_median": 0.633,
+        "mtp_s": 18.601,
+        "mtp_threads": 1,
+        "pipeline_rtf_median": 2.4123,
+        "prefill_s": 0.128,
+        "reference_words": 27,
+        "round_trip_wer": 0.0,
+        "rtf_max": 2.5196,
+        "rtf_median": 2.4158,
+        "rtf_min": 2.4107,
+        "synthesis_s_median": 22.419,
+        "talker_s": 2.689,
+        "threads": 8
+      },
+      "output_match": null,
+      "peak_mem_mb": 4757.7,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

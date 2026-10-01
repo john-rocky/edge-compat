@@ -1,0 +1,351 @@
+{
+  "artifacts": [
+    {
+      "file": "Fun-ASR-Nano-2512.litertlm",
+      "sha256": "508c3c7e2ea0df9a756d4b42f9751d5aa08db3d60f959ade6bb2c2a2dafebcd4",
+      "size_mb": 1197.715
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "export_audio_encoder.py (one signature: audio f32 [1,504,960] raw 16 kHz PCM in 960-sample frames -> features f32 [1,63,1024] + mask uint8 [1,63]; Kaldi fbank as constant DFT/mel matmuls, LFR 7/6, SAN-M x70, adaptor; the clip length inferred from the last non-zero sample; fp32 export) -> quant_encoder.py --variants fp16 (FLOAT_CASTING, frontend matmuls kept fp32) -> EXTERNALIZE_EMBEDDER=1 CACHE=2048 PREFILL=512,128,32 export_simple_template.py out/lm_native … chatml_simple.jinja dynamic_wi8_afp32 -> litert-lm unpack -> build_bundle.py --enc audio_encoder_504f_fp16.tflite --lm lm_int8/unpack --prefer-act fp32 (GenericModel audio metadata: skip_mel_spectrogram_extraction, 16 kHz, frame=hop=960, delimiter/audio_token_regex on <|AUDIO|>, no start/end audio tokens; ChatML jinja with the default instruction 语音转写：; stops <|im_end|>/<|endoftext|>; sections EMBEDDER, PREFILL_DECODE (prefer_activation_type fp32), AUDIO_ENCODER_HW, HF tokenizer) (FINDINGS rounds 1-3; REPRODUCE entry)",
+    "quantization": "LM: int8 dynamic weights with an int8 embedding table in a separate embedder section, fp32 activations declared on the prefill/decode section (with the GPU's default fp16 activations the LM emits only '!' tokens, also text-only); audio encoder: fp16 weights, fp32 compute, 30.24 s window (Hub card File table + Conversion notes)",
+    "tool": "litert-torch (audio-encoder export from a self-contained torch port of funasr's fbank + LFR + SAN-M + adaptor; LM export through scripts/export_simple_template.py) + ai-edge-quantizer (fp16 casting of the encoder) + litert-lm-builder bundle assembly (repro = hf-to-litertlm funasr_nano_work/: make_fixtures.py -> oracle_funasr.py -> build_lm_native.py -> port_eval.py -> export_audio_encoder.py -> quant_encoder.py --variants fp16 -> export_simple_template.py -> litert-lm unpack -> build_bundle.py --prefer-act fp32 -> mac_gate.py)",
+    "tool_version": "litert-torch 0.9.4 (audio encoder, ~/venvs/lt094dev: torch 2.13.0, transformers 5.14.1, ai-edge-quantizer 0.9.0, ai-edge-litert 2.2.0, litert-lm-builder 0.16.1) / 0.9.3 (LM export, ~/venvs/ltconv040dev, ai-edge-quantizer 0.8.0); reference = funasr 1.4.16 fp32 in its own venv; runtime gates litert-lm-api 0.17.1 (Mac) and litert_lm_advanced_main v0.16.1 tag build (Galaxy S26) (Hub card Conversion notes; FINDINGS Env)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-27",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-funasrnano-app",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "example_zh (5.616 s of audio): send_ms 1025.3, create_conversation_ms 8.8, text '开饭时间早上九点至下午五点。'",
+            "example_en (7.176 s of audio): send_ms 1237.1, create_conversation_ms 2.0, text 'The tribal chieftain called for the boy, and presented him with fifty pieces of gold.'",
+            "example_ja (7.224 s of audio): send_ms 1420.3, create_conversation_ms 8.1, text 'うちの中学は弁当制で、持っていけない場合は、五十円の学校販売のパンを買う。'",
+            "engine: initialize_ms 308.2 + first_conversation_ms 327.6 = engine_load_ms 635.8 (runtime cache present)",
+            "vmhwm_kib 2846824 (whole app process); thermal status 0 before and after; latency_p50_ms = median of the three send_ms"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 1237.1,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "audio_s_total": 20.016,
+            "clips": 3.0,
+            "engine_load_ms": 635.8,
+            "send_ms_max": 1420.3,
+            "send_ms_min": 1025.3
+          },
+          "output_match": null,
+          "peak_mem_mb": 2780.1,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.17.1/2026-09-27/fun-asr-nano-2512__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-27",
+          "decode_tokens_per_s": 31.55,
+          "delegated_ops": 1126,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-funasrnano-cli",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 221 partitions for subgraph 0 (prefill_512).",
+            "VERBOSE: Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 221 partitions for subgraph 1 (prefill_128).",
+            "VERBOSE: Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 221 partitions for subgraph 2 (prefill_32).",
+            "VERBOSE: Replacing 1070 out of 1244 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 226 partitions for subgraph 3 (decode).",
+            "results block: prefill=331.43 decode=31.55 tokens/s",
+            "VERBOSE: Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 221 partitions for subgraph 0 (prefill_512). [LM graph; the 4965/4975 line above is the audio encoder graph (subgraph 0 (main) of tf_lite_audio_encoder_hw)]",
+            "VERBOSE: Replacing 1070 out of 1244 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 226 partitions for subgraph 3 (decode).",
+            "peak from the 25-clip gate run of the same file (s26_gate_s26_r3_cpu_cpu_first_stderr.log:644): I0000 … litert_lm_lib.cc:471] Peak private footprint: 2411.11MB."
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 1.8817,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 2411.11,
+          "prefill_tokens_per_s": 331.43,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1298,
+          "ttft_ms": 800.0
+        },
+        "source": "data/device_runs/0.16.1/2026-09-27/fun-asr-nano-2512__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-27",
+          "decode_tokens_per_s": 26.26,
+          "delegated_ops": 1298,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-funasrnano-cli",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_512).",
+            "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_128).",
+            "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_32).",
+            "VERBOSE: Replacing 1244 out of 1244 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (decode).",
+            "results block: prefill=386.45 decode=26.26 tokens/s",
+            "VERBOSE: Replacing 1244 out of 1244 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (decode).",
+            "peak from the 25-clip gate run of the same file, LM on OpenCL, audio encoder on CPU (s26_gate_s26_r3_gpu_cpu_first_stderr.log:120): I0000 … litert_lm_lib.cc:471] Peak private footprint: 2233.34MB."
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 3.76829,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 2233.34,
+          "prefill_tokens_per_s": 386.45,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1298,
+          "ttft_ms": 700.0
+        },
+        "source": "data/device_runs/0.16.1/2026-09-27/fun-asr-nano-2512__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-27",
+          "decode_tokens_per_s": 48.94,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=1027.03 decode=48.94 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 1027.03,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 480.3
+        },
+        "source": "data/device_runs/0.17.1/2026-09-27/fun-asr-nano-2512__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-27",
+          "decode_tokens_per_s": 50.21,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=1349.72 decode=50.21 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 512.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 1349.72,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 620.9
+        },
+        "source": "data/device_runs/0.17.1/2026-09-27/fun-asr-nano-2512__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-27",
+          "decode_tokens_per_s": 143.03,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=3090.74 decode=143.03 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 256.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 3090.74,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 96.7
+        },
+        "source": "data/device_runs/0.17.1/2026-09-27/fun-asr-nano-2512__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-27",
+          "decode_tokens_per_s": 137.18,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "results block: prefill=6169.85 decode=137.18 tokens/s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "prefill_tokens": 512.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 6169.85,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 97.4
+        },
+        "source": "data/device_runs/0.17.1/2026-09-27/fun-asr-nano-2512__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "fun-asr",
+    "id": "fun-asr-nano-2512",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Fun-ASR-Nano-2512",
+    "task": "automatic-speech-recognition"
+  },
+  "pitfalls": [
+    "One message = one utterance of up to 30.24 s (504 frames x 960 samples): a longer clip in one message is cut by the runtime into windows and the model transcribes only the first window's speech (60.2 s test clip: WER 83/143). Split longer audio into pieces of at most 30 s and send each piece in a NEW conversation, then join the texts (same clip cut at 30.24 s: WER 10/143 = the original model on the whole clip; the two pieces as two turns of one conversation: 22/143, the second turn repeats the start of the first) (Hub card How to send audio; FINDINGS round 3 B).",
+    "The audio encoder must run on the CPU (audio_backend): on the Mac the GPU delegate does not take DEQUANTIZE / PAD / SELECT_V2 of the fp16-weight encoder and conversation creation fails ('Hint fully delegated to single delegate is set, but the graph is not fully delegated'); the LM runs on CPU or GPU (Hub card Known issues; FINDINGS round 2 row 4).",
+    "The prefill/decode section declares prefer_activation_type fp32: with the runtime's default fp16 GPU activations the LM emits token 0 ('!') at every step with 'Invalid decode and sample result … casted to 0', also for a text-only prompt, on Mac WebGPU and on the S26 OpenCL path; leave the engine activation type unset (Hub card Conversion notes; FINDINGS round 3 A).",
+    "Correctness (25 clips = 5 official samples + 20 LibriSpeech dev-clean, 448 words; reference = funasr 1.4.16 fp32, greedy): with the encoder and LM left in fp32 the runtime reproduces the reference text 25/25, so every difference is quantization — int8 LM: Mac CPU 21/25 (WER 19/448), Mac GPU 24/25 (20/448), S26 CPU 21/25 (20/448), S26 GPU 24/25 (20/448) vs the reference 20/448; the differences are one surname's spelling, punctuation on two clips and kana on the Korean sample. FLEURS test 50 clips per language (Mac CPU): en WER 5.48 % (reference 5.13 %), zh CER 6.86 % (6.86 %), ja CER 6.81 % (6.95 %) (Hub card Correctness; FINDINGS rounds 2-3).",
+    "Encoder quantization: fp16 weights are transcript-lossless (25/25 with an fp32 LM); int8 dynamic weights on the encoder's linear layers changed 6 of 25 transcripts and are not used; the fbank DFT/mel constant matmuls must stay fp32 in any FC recipe; ai-edge-quantizer's fp16 needs algorithm_key FLOAT_CASTING or the file stays fp32 unchanged. An int4 (blockwise) LM matched the reference on 14/25 and is not shipped (Hub card Conversion notes; FINDINGS round 2).",
+    "Prompt contract: audio only -> the bundle template supplies 语音转写：; the model's other instructions (no inverse text normalization 语音转写，不进行文本规整：, a language 语音转写成英文：, the hotword prompt) go as a text item in the same message and are placed before the audio; the model has no marker tokens around the audio and the <|AUDIO|> placeholder is consumed by the runtime regex (Hub card How to send audio; FINDINGS round 1 premises).",
+    "Send 16 kHz mono PCM WAV: the runtime's own MP3 decoding (miniaudio) changed the text on 3 of 5 official MP3 samples vs the same audio decoded to WAV by ffmpeg; exact digital silence at the very end of a clip is treated as padding because the runtime passes no clip length (transcripts unchanged on the test clips); no timestamps or CTC output (the checkpoint carries no CTC decoder weights) (Hub card Notes).",
+    "Speed: Mac (litert-lm 0.17.1 benchmark, contended machine, load 5.8-16.0) GPU 3,091 tok/s prefill at p=256 (6,170 at p=512, the unpadded 512 signature) / 143.0 decode / TTFT 0.10 s, CPU 1,027 (1,350) / 48.9 / 0.48 s; end to end 0.37 s per clip with the LM on the GPU (RTF 0.046), 0.68 s on the CPU (0.091). Galaxy S26 (v0.16.1 CLI, uncapped, SKIN < 40 C) GPU (OpenCL) 386 / 26.3 tok/s / 0.70 s, CPU 331 / 31.6 / 0.80 s, peak 2,233 / 2,411 MB; per clip with a loaded engine (Kotlin app, LiteRT-LM Android 0.17.1, CPU) 1.03 / 1.24 / 1.42 s for the 5.6 / 7.2 / 7.2 s samples, engine load 0.64 s with the runtime cache. The earlier derived per-clip figure (process wall minus a load-only run) was retracted the same day (Hub card Performance; FINDINGS round 4 + CORRECTION).",
+    "Reference-side traps (FINDINGS round 1): funasr's dither is only settable at construction (frontend_conf={'dither': 0.0}; an attribute assignment is reverted per generate), ncpu must be passed (torch.set_num_threads is overridden per generate), the first generate call embeds the prompt with the bf16 LLM (one discarded warm-up call), the default decode is greedy because from_config never reads generation_config.json; LayerNorm eps is 1e-5 in the encoder but 1e-12 in the adaptor (vLLM's copy uses 1e-12 for both).",
+    "License Apache-2.0 declared by the base model's card metadata (the official repo ships no LICENSE file; the LICENSE here is the Apache-2.0 text from FunAudioLLM/Fun-ASR-Nano-2512-vllm); changes from the original: weights converted to LiteRT flatbuffers, LM int8 and encoder fp16, front end + encoder + adaptor exported as one graph, prompt format stored as metadata, no CTC decoder (Hub card License and changes)."
+  ],
+  "schema_version": "1.2"
+}

@@ -1,0 +1,62 @@
+{
+  "artifact": "whisper_tiny_30s_i8.tflite",
+  "artifact_sha256": "6748ac565a228c4a00b18d11ea1e2fd7cead3db6fba94e3f0bf35756b13ba4a9",
+  "device": "mac-studio-m4-max",
+  "model_id": "whisper-tiny__whisper_tiny_30s_i8",
+  "notes": "LiteRT-LM omni/asr at main@66058c82 plus the edge-llm-bench tools/omni-eval patches (main@66058c82 + patches 01 (Slaney/power mel), 02 (whisper prompt), 03 (metadata incl. parakeet-tdt-0.6b-v3-30s), 04 (espeak macOS), 06 (valid-length decode stop, margin 4 encoder frames, + 10-symbol cap); diagnostic env hooks inactive unless set). Which patches each model's number needs is in the evidence; record and patches: https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-25-omni-asr-wer-v1-m4max-mac/NOTES.md",
+  "quantization": "int8 (the i8 file of litert-community/whisper-tiny, 30 s window)",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-25",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (Apple M4 Max, 128 GB)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-66058c82+omni-eval-patches",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-25-omni-asr-wer-v1-m4max-mac/fix/whisper-tiny-clean-cpu.json: \"model_name\": \"whisper-tiny\", \"backend\": \"cpu\", \"num_threads\": 4, \"utterances\": 2620, \"wer_percent\": 7.53, \"substitutions\": 2931, \"deletions\": 399, \"insertions\": 660, \"reference_words\": 53000, \"hung_utterances\": [], \"empty_hypotheses\": 0, \"flush_empty\": 0, \"rtfx_processing\": 21.24, \"processing_seconds\": 915.9, \"audio_hours\": 5.403, \"peak_rss_mb\": 401.8",
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-25-omni-asr-wer-v1-m4max-mac/fix/whisper-tiny-other-cpu.json: \"model_name\": \"whisper-tiny\", \"backend\": \"cpu\", \"num_threads\": 4, \"utterances\": 2939, \"wer_percent\": 16.75, \"substitutions\": 6529, \"deletions\": 762, \"insertions\": 1561, \"reference_words\": 52841, \"hung_utterances\": [], \"empty_hypotheses\": 1, \"flush_empty\": 0, \"rtfx_processing\": 18.62, \"processing_seconds\": 1032.8, \"audio_hours\": 5.342, \"peak_rss_mb\": 399.3",
+        "Open ASR Leaderboard scoring (EnglishTextNormalizer + corpus WER, jiwer) over LibriSpeech test-clean (2620 utt, 5.403 h) and test-other (2939 utt, 5.342 h); harness = omni_eval_runner on LiteRT-LM OmniEngine (omni/asr, PushInputSource, one session per utterance, CPU num_threads 4), edge-llm-bench tools/omni-eval. WER is pipeline-level (engine front-end + model + decoder), not the .tflite alone; 'hung' = never returned from TdtDecoder::Decode, killed by the driver watchdog and scored as empty; RTFx = audio seconds / engine wall seconds.",
+        "patches 01 (librosa-compatible Slaney/power mel behind melScale/melPower) + 02 (decodePromptTokenIds 50258 50259 50359 50363) + 03 (metadata); NOTES.md table: | with 01 + 02 + 03 | 7.53 | 16.75 | (openai-whisper tiny on this Mac: 7.44 / 16.79)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "empty_hypotheses_test_clean": 0,
+        "empty_hypotheses_test_other": 1,
+        "hung_utterances_test_clean": 0,
+        "hung_utterances_test_other": 0,
+        "num_threads": 4,
+        "peak_rss_mb_test_clean": 401.8,
+        "peak_rss_mb_test_other": 399.3,
+        "rtfx_test_clean": 21.24,
+        "rtfx_test_other": 18.62,
+        "utterances_test_clean": 2620,
+        "utterances_test_other": 2939,
+        "wer_test_clean_pct": 7.53,
+        "wer_test_other_pct": 16.75
+      },
+      "output_match": null,
+      "peak_mem_mb": 401.8,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

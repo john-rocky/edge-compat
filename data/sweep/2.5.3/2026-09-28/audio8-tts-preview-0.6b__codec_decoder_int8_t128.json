@@ -1,0 +1,90 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x10x128:int32",
+  "license": "apache-2.0",
+  "model_id": "audio8-tts-preview-0.6b__codec_decoder_int8_t128",
+  "notes": "Codec decoder for 128 frames with export-time (PT2E) int8 convolutions and projections, fp32 RVQ codebooks; random int32 codes measure the graph, not speech; the wasm reference runs the int8 kernels while WebGPU dequantizes to float, so output_match on webgpu_mldrift is not a numerics verdict (README caveat 2); 132 MB",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-09-28",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "run timed out after 60000ms",
+      "failure_class": "timeout",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-09-28",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "warning: W0928 04:55:29.444999  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {256, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 256, 1, 1024}}",
+        "warning: W0928 04:55:29.459000  755312 gpu_model_builder.cc:3820] Shape mismatch in GpuModelBuilder::UpdateOutputTensors(output of convolution1x1(conv_generic)). Requested shape:{bhwdc, {512, 1, 1, 1, 1024}} vs reference shape: {bhwdc, {1, 1, 512, 1, 1024}}",
+        "error: E0928 04:55:29.676000  755312 delegate_webgpu.cc:373] Failed to create litert::ml_drift::DelegateKernelLiteRt: INVALID_ARGUMENT: Unable to parse bc coord for BATCH axis. Layout is bhwc, args are res, DST_X + 0, DST_Y + 0, DST_S + 0.; selector object=dst_tensor, selector=Write, args=[res, DST_X + 0, DST_Y + 0, DST_S + 0], template_args=[], descriptor=float32, TensorStorageType::BUFFER, layout: bhwc, shape: {bhwc, {256, 1, 1, 1024}}\n=== Source Location Trace: ===\nthird_party/ml_drift/common/task/gpu_operation.cc:945\nthird_party/ml_drift/common/task/gpu_operation.cc:1439\nthird_party/ml_drift/common/merge_nodes.cc:633\nthird_party/ml_drift/common/gpu_model_builder.cc:3871\nthird_party/odml/litert/ml_drift/delegate/delegate_kernel.cc:830\nthird_party/odml/litert/ml_drift/delegate/delegate_kernel.cc:859\nthird_party/odml/litert/ml_drift/delegate/delegate_kernel.cc:317\nthird_party/odml/litert/ml_drift/delegate/delegate_kernel_litert.cc:169",
+        "error: ERROR: Failed to initialize kernel.",
+        "error: ERROR: Restored original execution plan after delegate application failure."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "Error: ERROR: [third_party/odml/litert/litert/js/packages/core/src/cpp/litert_web.cc:245]\n└ ERROR: [./third_party/odml/litert/litert/cc/internal/litert_compiled_model_next.h:70]",
+      "failure_class": "compile_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/Audio8-TTS-Preview-0.6b/resolve/main/codec_decoder_int8_T128.tflite"
+}

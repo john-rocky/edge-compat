@@ -1,0 +1,62 @@
+{
+  "artifact": "parakeet_tdt_0.6b_v3_30s_i8_stateful.tflite",
+  "artifact_sha256": "378935f8897f0c713ad2aa97d939c73c44e9f26546e12c1cd6af9c76f386f06a",
+  "device": "mac-studio-m4-max",
+  "model_id": "parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful",
+  "notes": "LiteRT-LM omni/asr at main@66058c82 plus the edge-llm-bench tools/omni-eval patches (main@66058c82 + patches 01 (Slaney/power mel), 02 (whisper prompt), 03 (metadata incl. parakeet-tdt-0.6b-v3-30s), 04 (espeak macOS), 06 (valid-length decode stop, margin 4 encoder frames, + 10-symbol cap); diagnostic env hooks inactive unless set). Which patches each model's number needs is in the evidence; record and patches: https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-25-omni-asr-wer-v1-m4max-mac/NOTES.md",
+  "quantization": "int8 dynamic-range weights, fp32 activations (drq); 30 s window (mlboydaisuke/Parakeet-TDT-0.6B-v3-LiteRT)",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-25",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (Apple M4 Max, 128 GB)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-66058c82+omni-eval-patches",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-25-omni-asr-wer-v1-m4max-mac/final/parakeet-tdt-0.6b-v3-30s-clean-cpu.json: \"model_name\": \"parakeet-tdt-0.6b-v3-30s\", \"backend\": \"cpu\", \"num_threads\": 4, \"utterances\": 2620, \"wer_percent\": 2.17, \"substitutions\": 865, \"deletions\": 195, \"insertions\": 92, \"reference_words\": 53000, \"hung_utterances\": [], \"empty_hypotheses\": 8, \"flush_empty\": 8, \"rtfx_processing\": 18.59, \"processing_seconds\": 1046.7, \"audio_hours\": 5.403, \"peak_rss_mb\": 1825.7",
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-25-omni-asr-wer-v1-m4max-mac/final/parakeet-tdt-0.6b-v3-30s-other-cpu.json: \"model_name\": \"parakeet-tdt-0.6b-v3-30s\", \"backend\": \"cpu\", \"num_threads\": 4, \"utterances\": 2939, \"wer_percent\": 5.35, \"substitutions\": 2041, \"deletions\": 508, \"insertions\": 277, \"reference_words\": 52841, \"hung_utterances\": [], \"empty_hypotheses\": 44, \"flush_empty\": 44, \"rtfx_processing\": 17.2, \"processing_seconds\": 1118.3, \"audio_hours\": 5.342, \"peak_rss_mb\": 1820.8",
+        "Open ASR Leaderboard scoring (EnglishTextNormalizer + corpus WER, jiwer) over LibriSpeech test-clean (2620 utt, 5.403 h) and test-other (2939 utt, 5.342 h); harness = omni_eval_runner on LiteRT-LM OmniEngine (omni/asr, PushInputSource, one session per utterance, CPU num_threads 4), edge-llm-bench tools/omni-eval. WER is pipeline-level (engine front-end + model + decoder), not the .tflite alone; 'hung' = never returned from TdtDecoder::Decode, killed by the driver watchdog and scored as empty; RTFx = audio seconds / engine wall seconds.",
+        "patches 01 + 03 (parakeet-tdt-0.6b-v3-30s metadata entry: inputMilliseconds 30000, nFrames 3000) + 06; NOTES.md table row: | 30 s export, Slaney mel + valid-length stop (patch 06) | 2.17 | 5.35 | (NeMo fp32, leaderboard, H200: 1.92 / 3.59)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "empty_hypotheses_test_clean": 8,
+        "empty_hypotheses_test_other": 44,
+        "hung_utterances_test_clean": 0,
+        "hung_utterances_test_other": 0,
+        "num_threads": 4,
+        "peak_rss_mb_test_clean": 1825.7,
+        "peak_rss_mb_test_other": 1820.8,
+        "rtfx_test_clean": 18.59,
+        "rtfx_test_other": 17.2,
+        "utterances_test_clean": 2620,
+        "utterances_test_other": 2939,
+        "wer_test_clean_pct": 2.17,
+        "wer_test_other_pct": 5.35
+      },
+      "output_match": null,
+      "peak_mem_mb": 1825.7,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

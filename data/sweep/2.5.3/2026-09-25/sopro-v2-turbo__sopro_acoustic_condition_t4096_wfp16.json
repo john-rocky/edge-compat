@@ -1,0 +1,93 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x1024:int32;1x1x1024:float32;4096:int32",
+  "license": "apache-2.0",
+  "model_id": "sopro-v2-turbo__sopro_acoustic_condition_t4096_wfp16",
+  "notes": "wfp16 variant; int32 inputs are token ids / position tables, random sweep inputs measure the graph only",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-09-25",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 5711.485,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-09-25",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: ERROR: Following operations are not supported by GPU delegate:",
+        "error: DEQUANTIZE: ",
+        "error: EMBEDDING_LOOKUP: EMBEDDING_LOOKUP: Empty quantization params.",
+        "error: GATHER_ND: Operation is not supported.",
+        "error: 29 operations will run on the GPU, and the remaining 41 operations will run on the CPU.",
+        "error: E0924 15:58:12.843000  755312 delegate_webgpu.cc:373] Failed to create litert::ml_drift::DelegateKernelLiteRt: INVALID_ARGUMENT: Unable to parse bc coord for BATCH axis. Layout is bhwc, args are cond_x, cond_y, cond_z.; selector object=cond_tensor, selector=Read, args=[cond_x, cond_y, cond_z], template_args=[bool], descriptor=bool, TensorStorageType::BUFFER, layout: bhwc, shape: {bhwc, {4096, 1, 1, 1}}\n=== Source Location Trace: ===\nthird_party/ml_drift/common/task/gpu_operation.cc:945\nthird_party/ml_drift/common/task/gpu_operation.cc:1439\nthird_party/ml_drift/common/merge_nodes.cc:633\nthird_party/ml_drift/common/gpu_model_builder.cc:3871\nthird_party/odml/litert/ml_drift/delegate/delegate_kernel.cc:830\nthird_party/odml/litert/ml_drift/delegate/delegate_kernel.cc:859\nthird_party/odml/litert/ml_drift/delegate/delegate_kernel.cc:317\nthird_party/odml/litert/ml_drift/delegate/delegate_kernel_litert.cc:169",
+        "error: ERROR: Failed to initialize kernel.",
+        "error: ERROR: Restored original execution plan after delegate application failure."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "Error: ERROR: [third_party/odml/litert/litert/js/packages/core/src/cpp/litert_web.cc:245]\n└ ERROR: [./third_party/odml/litert/litert/cc/internal/litert_compiled_model_next.h:70]",
+      "failure_class": "compile_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/sopro-v2-turbo/resolve/main/wfp16/sopro_acoustic_condition_t4096_wfp16.tflite"
+}

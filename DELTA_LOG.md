@@ -793,3 +793,702 @@ The native-matrix counterpart is the Phase 8 `release-check` report.
 - removed: `tipsv2-b14-dpt__tipsv2_b14_dpt_erf_fp16`
 - removed: `voyage-4-nano__voyage-4-nano_fp16`
 - removed: `voyage-4-nano__voyage-4-nano_wi8fc`
+
+## @litertjs/core 2.5.3 → 2.5.3 (sweep 2026-09-08 → 2026-09-25)
+
+### Catalog changes (69)
+- added: `dac-16khz__dac_16khz_deconly_zs_fp16`
+- added: `dac-16khz__dac_16khz_encoder_fp16`
+- added: `gliner2.5-small__gliner25_small_s128_fp32`
+- added: `gliner2.5-small__gliner25_small_s128_wfp16`
+- added: `gliner2.5-small__gliner25_small_s256_fp32`
+- added: `gliner2.5-small__gliner25_small_s256_wfp16`
+- added: `gliner2.5-small__gliner25_small_s512_fp32`
+- added: `laya-english__laya_en_act_head_fp32`
+- added: `laya-english__laya_td_act_head_fp32`
+- added: `laya-multilingual__laya_ml_act_head_fp32`
+- added: `laya-multilingual__laya_ml_s256_embeds_wfp16`
+- added: `laya-multilingual__laya_ml_s512_embeds_wfp16`
+- added: `laya__laya_act_head_fp32`
+- added: `laya__laya_ml_act_head_fp32`
+- added: `nemotron-3-diarization__nemotron3_diar_encoder_low_latency_fp16`
+- added: `nemotron-3-diarization__nemotron3_diar_encoder_offline_fp16`
+- added: `nemotron-3-diarization__nemotron3_diar_frontend`
+- added: `parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful`
+- added: `pp-ocrv6-small__ppocrv6_small_det_640_fp32`
+- added: `pp-ocrv6-small__ppocrv6_small_rec_320_fp32`
+- added: `pp-ocrv6-small__ppocrv6_small_rec_640_fp32`
+- added: `pp-ocrv6-small__ppocrv6_small_rec_960_fp32`
+- added: `sopro-v2-turbo__sopro_acoustic_condition_fp32`
+- added: `sopro-v2-turbo__sopro_acoustic_condition_r6_fp32`
+- added: `sopro-v2-turbo__sopro_acoustic_condition_r6_wfp16`
+- added: `sopro-v2-turbo__sopro_acoustic_condition_t4096_fp32`
+- added: `sopro-v2-turbo__sopro_acoustic_condition_t4096_r6_fp32`
+- added: `sopro-v2-turbo__sopro_acoustic_condition_t4096_r6_wfp16`
+- added: `sopro-v2-turbo__sopro_acoustic_condition_t4096_wfp16`
+- added: `sopro-v2-turbo__sopro_acoustic_condition_wfp16`
+- added: `sopro-v2-turbo__sopro_acoustic_velocity_fp32`
+- added: `sopro-v2-turbo__sopro_acoustic_velocity_r6_fp32`
+- added: `sopro-v2-turbo__sopro_acoustic_velocity_r6_wfp16`
+- added: `sopro-v2-turbo__sopro_acoustic_velocity_t4096_fp32`
+- added: `sopro-v2-turbo__sopro_acoustic_velocity_t4096_r6_fp32`
+- added: `sopro-v2-turbo__sopro_acoustic_velocity_t4096_r6_wfp16`
+- added: `sopro-v2-turbo__sopro_acoustic_velocity_t4096_wfp16`
+- added: `sopro-v2-turbo__sopro_acoustic_velocity_wfp16`
+- added: `sopro-v2-turbo__sopro_ar_merged_fp32`
+- added: `sopro-v2-turbo__sopro_ar_merged_i8native`
+- added: `sopro-v2-turbo__sopro_ar_merged_r6_fp32`
+- added: `sopro-v2-turbo__sopro_ar_merged_r6_int8`
+- added: `sopro-v2-turbo__sopro_ar_merged_r6_wfp16`
+- added: `sopro-v2-turbo__sopro_ar_merged_wfp16`
+- added: `sopro-v2-turbo__sopro_ar_prefill_fp32`
+- added: `sopro-v2-turbo__sopro_ar_prefill_wfp16`
+- added: `sopro-v2-turbo__sopro_ar_step_fp32`
+- added: `sopro-v2-turbo__sopro_ar_step_wfp16`
+- added: `sopro-v2-turbo__sopro_semantic_encoder_fp32`
+- added: `sopro-v2-turbo__sopro_semantic_encoder_r6_fp32`
+- added: `sopro-v2-turbo__sopro_semantic_encoder_r6_wfp16`
+- added: `sopro-v2-turbo__sopro_semantic_encoder_wfp16`
+- added: `sopro-v2-turbo__sopro_speaker_encoder_fp32`
+- added: `sopro-v2-turbo__sopro_speaker_encoder_wfp16`
+- added: `sopro-v2-turbo__sopro_style_prefix_fp32`
+- added: `sopro-v2-turbo__sopro_style_prefix_r6_fp32`
+- added: `sopro-v2-turbo__sopro_style_prefix_r6_wfp16`
+- added: `sopro-v2-turbo__sopro_style_prefix_r9_fp32`
+- added: `sopro-v2-turbo__sopro_style_prefix_wfp16`
+- added: `sopro-v2-turbo__sopro_vocoder_fp32`
+- added: `sopro-v2-turbo__sopro_vocoder_stream_flush_fp32`
+- added: `sopro-v2-turbo__sopro_vocoder_stream_flush_wfp16`
+- added: `sopro-v2-turbo__sopro_vocoder_stream_start_fp32`
+- added: `sopro-v2-turbo__sopro_vocoder_stream_start_wfp16`
+- added: `sopro-v2-turbo__sopro_vocoder_stream_step_fp32`
+- added: `sopro-v2-turbo__sopro_vocoder_stream_step_wfp16`
+- added: `sopro-v2-turbo__sopro_vocoder_wfp16`
+- removed: `harrier-oss-v1-0.6b__harrier-oss-v1-0.6b_fp16`
+- removed: `harrier-oss-v1-0.6b__harrier-oss-v1-0.6b_wi8fc`
+
+## litert 2.2.0 → 2.2.0.dev20260804 (device runs 2026-09-24 → 2026-08-31)
+
+### Catalog changes (119)
+- added: `3ddfa-v2 on raspberry-pi-5`
+- added: `6drepnet-headpose on raspberry-pi-5`
+- added: `basic-pitch on raspberry-pi-5`
+- added: `bisenet-face-parsing on raspberry-pi-5`
+- added: `clipseg-rd64__clipseg_decoder on raspberry-pi-5`
+- added: `clipseg-rd64__clipseg_text_fp16 on raspberry-pi-5`
+- added: `clipseg-rd64__clipseg_vision_fp16 on raspberry-pi-5`
+- added: `cloth-segmentation-u2net on raspberry-pi-5`
+- added: `cmgan on raspberry-pi-5`
+- added: `cpga-net-lowlight on raspberry-pi-5`
+- added: `crepe-pitch on raspberry-pi-5`
+- added: `d-fine-s__dfine_grapha_fp16 on raspberry-pi-5`
+- added: `d-fine-s__dfine_graphb_fp16 on raspberry-pi-5`
+- added: `dehazeformer-mct on raspberry-pi-5`
+- added: `depth-anything-3-small on raspberry-pi-5`
+- added: `dewarpnet on raspberry-pi-5`
+- added: `dis-isnet on raspberry-pi-5`
+- added: `dm-count-crowd on raspberry-pi-5`
+- added: `edsr-x4 on raspberry-pi-5`
+- added: `fast-neural-style__style_candy_fp16 on raspberry-pi-5`
+- added: `fast-neural-style__style_mosaic_fp16 on raspberry-pi-5`
+- added: `fast-neural-style__style_rain_princess_fp16 on raspberry-pi-5`
+- added: `fast-neural-style__style_udnie_fp16 on raspberry-pi-5`
+- added: `gfpgan-v1.4__gfpgan_fp16 on raspberry-pi-5`
+- added: `gfpgan-v1.4__yunet_fp16 on raspberry-pi-5`
+- added: `hsemotion-b0 on raspberry-pi-5`
+- added: `japanese-zipformer-base on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_82m_fixedlen_fp32 on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_predictor on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_prosody on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_vocoder on raspberry-pi-5`
+- added: `kokoro-g2p-en-us on raspberry-pi-5`
+- added: `l2cs-gaze360 on raspberry-pi-5`
+- added: `lightweight-openpose__pose_256 on raspberry-pi-5`
+- added: `lightweight-openpose__pose_256_fp16 on raspberry-pi-5`
+- added: `m-lsd-tiny on raspberry-pi-5`
+- added: `matcha-tts__dp_g2p_matcha_fp16 on raspberry-pi-5`
+- added: `matcha-tts__matcha_decoder_fp16 on raspberry-pi-5`
+- added: `matcha-tts__matcha_textenc_fp16 on raspberry-pi-5`
+- added: `matcha-tts__matcha_vocoder_fp16 on raspberry-pi-5`
+- added: `mi-gan-512-places2 on raspberry-pi-5`
+- added: `midas-small on raspberry-pi-5`
+- added: `mimi__mimi_dec_tx_fp16 on raspberry-pi-5`
+- added: `mimi__mimi_deconly_fp16 on raspberry-pi-5`
+- added: `mimi__mimi_enc_conv_fp16 on raspberry-pi-5`
+- added: `mimi__mimi_enc_tx_fp16 on raspberry-pi-5`
+- added: `modnet on raspberry-pi-5`
+- added: `moge-2 on raspberry-pi-5`
+- added: `movinet-a0-stream on raspberry-pi-5`
+- added: `nafnet-gopro-width32 on raspberry-pi-5`
+- added: `nafnet-sidd-width32 on raspberry-pi-5`
+- added: `nima__nima_aesthetic_fp16 on raspberry-pi-5`
+- added: `nima__nima_technical_fp16 on raspberry-pi-5`
+- added: `ormbg on raspberry-pi-5`
+- added: `panns-cnn14-audioset on raspberry-pi-5`
+- added: `parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8 on raspberry-pi-5`
+- added: `parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8_stateful on raspberry-pi-5`
+- added: `pidnet-s-cityscapes on raspberry-pi-5`
+- added: `places365-resnet18 on raspberry-pi-5`
+- added: `plantnet-300k-resnet18 on raspberry-pi-5`
+- added: `pp-ocrv5__ppocr_det_fp16 on raspberry-pi-5`
+- added: `pp-ocrv5__ppocr_rec_fp16 on raspberry-pi-5`
+- added: `pp-ocrv5__ppocr_rec_fp32 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__codec_decoder_fp32 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__codec_parta on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__codec_partb on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__mtp_folded_int8 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__mtp_fp32 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__talker_int4 on raspberry-pi-5`
+- added: `ram-plus__ram_reweight_fp16 on raspberry-pi-5`
+- added: `ram-plus__ram_stage3_tail_fp16 on raspberry-pi-5`
+- added: `ram-plus__ram_swin_s012_fp16 on raspberry-pi-5`
+- added: `ram-plus__ram_taghead_fp16 on raspberry-pi-5`
+- added: `real-esrgan-x4v3 on raspberry-pi-5`
+- added: `rf-detr-nano__rfdetr_grapha_fp16 on raspberry-pi-5`
+- added: `rf-detr-nano__rfdetr_graphb_fp16 on raspberry-pi-5`
+- added: `rf-detr-seg-nano__rfdetrseg_grapha_fp16 on raspberry-pi-5`
+- added: `rf-detr-seg-nano__rfdetrseg_graphb_fp16 on raspberry-pi-5`
+- added: `rt-detrv2-s__rtdetr_grapha_fp16 on raspberry-pi-5`
+- added: `rt-detrv2-s__rtdetr_graphb_fp16 on raspberry-pi-5`
+- added: `rtmpose-animal-ap10k on raspberry-pi-5`
+- added: `rtmpose-face-wflw on raspberry-pi-5`
+- added: `rtmpose-hand on raspberry-pi-5`
+- added: `rtmpose-s on raspberry-pi-5`
+- added: `rtmw-m-wholebody on raspberry-pi-5`
+- added: `sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_fp16 on raspberry-pi-5`
+- added: `sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_v2_fp16 on raspberry-pi-5`
+- added: `silent-face-anti-spoofing on raspberry-pi-5`
+- added: `sinet-v2-camouflage on raspberry-pi-5`
+- added: `speaker-diarization on raspberry-pi-5`
+- added: `tiger-dnr__tiger_dialog_fp16 on raspberry-pi-5`
+- added: `tiger-dnr__tiger_effect_fp16 on raspberry-pi-5`
+- added: `tiger-dnr__tiger_music_fp16 on raspberry-pi-5`
+- added: `tipsv2-b14-dpt__tipsv2_b14_dpt_erf_fp16 on raspberry-pi-5`
+- added: `tipsv2-b14-dpt__tipsv2_b14_dpt_fp16 on raspberry-pi-5`
+- added: `twinlitenet on raspberry-pi-5`
+- added: `u-2-net on raspberry-pi-5`
+- added: `u2net-portrait-sketch on raspberry-pi-5`
+- added: `ultra-fast-lane-detection on raspberry-pi-5`
+- added: `unisal-saliency on raspberry-pi-5`
+- added: `vision-rwkv-s on raspberry-pi-5`
+- added: `wav2vec2-base-960h__w2v2_asr_frontend_fp16 on raspberry-pi-5`
+- added: `wav2vec2-base-960h__w2v2_asr_head_fp16 on raspberry-pi-5`
+- added: `wav2vec2-keyword-spotting__w2v2_frontend_fp16 on raspberry-pi-5`
+- added: `wav2vec2-keyword-spotting__w2v2_head_fp16 on raspberry-pi-5`
+- added: `xfeat__xfeat on raspberry-pi-5`
+- added: `xfeat__xfeat_fp16 on raspberry-pi-5`
+- added: `yolact-resnet50 on raspberry-pi-5`
+- added: `yolox-m on raspberry-pi-5`
+- added: `yolox-nano on raspberry-pi-5`
+- added: `yolox-s on raspberry-pi-5`
+- added: `yolox-tiny on raspberry-pi-5`
+- added: `yunet-face on raspberry-pi-5`
+- added: `zipformer-medium-cr-ctc__zipformer_ctc_fp16 on raspberry-pi-5`
+- added: `zipformer-medium-cr-ctc__zipformer_ctc_large_fp16 on raspberry-pi-5`
+- added: `zipformer-medium-cr-ctc__zipformer_ctc_small_fp16 on raspberry-pi-5`
+- removed: `nemotron-3-diarization__nemotron3_diar_encoder_low_latency_fp16 on galaxy-s26`
+- removed: `nemotron-3-diarization__nemotron3_diar_encoder_offline_fp16 on galaxy-s26`
+- removed: `nemotron-3-diarization__nemotron3_diar_frontend on galaxy-s26`
+
+## @litertjs/core 2.5.3 → 2.5.3 (sweep 2026-09-25 → 2026-09-26)
+
+### Catalog changes (75)
+- added: `gliformer-large-ner__gliformer_large_ner_s128_wfp16`
+- added: `gliformer-large-ner__gliformer_large_ner_s256_encoder_wfp16`
+- added: `gliformer-large-ner__gliformer_large_ner_s256_head_wfp16`
+- added: `gliformer-large-ner__gliformer_large_ner_s512_encoder_wfp16`
+- added: `gliformer-large-ner__gliformer_large_ner_s512_head_wfp16`
+- added: `gliner2.5-decide__gliner25_decide_s128_wfp16`
+- added: `gliner2.5-decide__gliner25_decide_s256_wfp16`
+- added: `gliner2.5-decide__gliner25_decide_s512_wfp16`
+- removed: `dac-16khz__dac_16khz_deconly_zs_fp16`
+- removed: `dac-16khz__dac_16khz_encoder_fp16`
+- removed: `gliner2.5-small__gliner25_small_s128_fp32`
+- removed: `gliner2.5-small__gliner25_small_s128_wfp16`
+- removed: `gliner2.5-small__gliner25_small_s256_fp32`
+- removed: `gliner2.5-small__gliner25_small_s256_wfp16`
+- removed: `gliner2.5-small__gliner25_small_s512_fp32`
+- removed: `laya-english__laya_en_act_head_fp32`
+- removed: `laya-english__laya_td_act_head_fp32`
+- removed: `laya-multilingual__laya_ml_act_head_fp32`
+- removed: `laya-multilingual__laya_ml_s256_embeds_wfp16`
+- removed: `laya-multilingual__laya_ml_s512_embeds_wfp16`
+- removed: `laya__laya_act_head_fp32`
+- removed: `laya__laya_ml_act_head_fp32`
+- removed: `nemotron-3-diarization__nemotron3_diar_encoder_low_latency_fp16`
+- removed: `nemotron-3-diarization__nemotron3_diar_encoder_offline_fp16`
+- removed: `nemotron-3-diarization__nemotron3_diar_frontend`
+- removed: `parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful`
+- removed: `pp-ocrv6-small__ppocrv6_small_det_640_fp32`
+- removed: `pp-ocrv6-small__ppocrv6_small_rec_320_fp32`
+- removed: `pp-ocrv6-small__ppocrv6_small_rec_640_fp32`
+- removed: `pp-ocrv6-small__ppocrv6_small_rec_960_fp32`
+- removed: `sopro-v2-turbo__sopro_acoustic_condition_fp32`
+- removed: `sopro-v2-turbo__sopro_acoustic_condition_r6_fp32`
+- removed: `sopro-v2-turbo__sopro_acoustic_condition_r6_wfp16`
+- removed: `sopro-v2-turbo__sopro_acoustic_condition_t4096_fp32`
+- removed: `sopro-v2-turbo__sopro_acoustic_condition_t4096_r6_fp32`
+- removed: `sopro-v2-turbo__sopro_acoustic_condition_t4096_r6_wfp16`
+- removed: `sopro-v2-turbo__sopro_acoustic_condition_t4096_wfp16`
+- removed: `sopro-v2-turbo__sopro_acoustic_condition_wfp16`
+- removed: `sopro-v2-turbo__sopro_acoustic_velocity_fp32`
+- removed: `sopro-v2-turbo__sopro_acoustic_velocity_r6_fp32`
+- removed: `sopro-v2-turbo__sopro_acoustic_velocity_r6_wfp16`
+- removed: `sopro-v2-turbo__sopro_acoustic_velocity_t4096_fp32`
+- removed: `sopro-v2-turbo__sopro_acoustic_velocity_t4096_r6_fp32`
+- removed: `sopro-v2-turbo__sopro_acoustic_velocity_t4096_r6_wfp16`
+- removed: `sopro-v2-turbo__sopro_acoustic_velocity_t4096_wfp16`
+- removed: `sopro-v2-turbo__sopro_acoustic_velocity_wfp16`
+- removed: `sopro-v2-turbo__sopro_ar_merged_fp32`
+- removed: `sopro-v2-turbo__sopro_ar_merged_i8native`
+- removed: `sopro-v2-turbo__sopro_ar_merged_r6_fp32`
+- removed: `sopro-v2-turbo__sopro_ar_merged_r6_int8`
+- removed: `sopro-v2-turbo__sopro_ar_merged_r6_wfp16`
+- removed: `sopro-v2-turbo__sopro_ar_merged_wfp16`
+- removed: `sopro-v2-turbo__sopro_ar_prefill_fp32`
+- removed: `sopro-v2-turbo__sopro_ar_prefill_wfp16`
+- removed: `sopro-v2-turbo__sopro_ar_step_fp32`
+- removed: `sopro-v2-turbo__sopro_ar_step_wfp16`
+- removed: `sopro-v2-turbo__sopro_semantic_encoder_fp32`
+- removed: `sopro-v2-turbo__sopro_semantic_encoder_r6_fp32`
+- removed: `sopro-v2-turbo__sopro_semantic_encoder_r6_wfp16`
+- removed: `sopro-v2-turbo__sopro_semantic_encoder_wfp16`
+- removed: `sopro-v2-turbo__sopro_speaker_encoder_fp32`
+- removed: `sopro-v2-turbo__sopro_speaker_encoder_wfp16`
+- removed: `sopro-v2-turbo__sopro_style_prefix_fp32`
+- removed: `sopro-v2-turbo__sopro_style_prefix_r6_fp32`
+- removed: `sopro-v2-turbo__sopro_style_prefix_r6_wfp16`
+- removed: `sopro-v2-turbo__sopro_style_prefix_r9_fp32`
+- removed: `sopro-v2-turbo__sopro_style_prefix_wfp16`
+- removed: `sopro-v2-turbo__sopro_vocoder_fp32`
+- removed: `sopro-v2-turbo__sopro_vocoder_stream_flush_fp32`
+- removed: `sopro-v2-turbo__sopro_vocoder_stream_flush_wfp16`
+- removed: `sopro-v2-turbo__sopro_vocoder_stream_start_fp32`
+- removed: `sopro-v2-turbo__sopro_vocoder_stream_start_wfp16`
+- removed: `sopro-v2-turbo__sopro_vocoder_stream_step_fp32`
+- removed: `sopro-v2-turbo__sopro_vocoder_stream_step_wfp16`
+- removed: `sopro-v2-turbo__sopro_vocoder_wfp16`
+
+## litert 2.2.0 → 2.2.0.dev20260804 (device runs 2026-09-26 → 2026-08-31)
+
+### Catalog changes (130)
+- added: `3ddfa-v2 on raspberry-pi-5`
+- added: `6drepnet-headpose on raspberry-pi-5`
+- added: `basic-pitch on raspberry-pi-5`
+- added: `bisenet-face-parsing on raspberry-pi-5`
+- added: `clipseg-rd64__clipseg_decoder on raspberry-pi-5`
+- added: `clipseg-rd64__clipseg_text_fp16 on raspberry-pi-5`
+- added: `clipseg-rd64__clipseg_vision_fp16 on raspberry-pi-5`
+- added: `cloth-segmentation-u2net on raspberry-pi-5`
+- added: `cmgan on raspberry-pi-5`
+- added: `cpga-net-lowlight on raspberry-pi-5`
+- added: `crepe-pitch on raspberry-pi-5`
+- added: `d-fine-s__dfine_grapha_fp16 on raspberry-pi-5`
+- added: `d-fine-s__dfine_graphb_fp16 on raspberry-pi-5`
+- added: `dehazeformer-mct on raspberry-pi-5`
+- added: `depth-anything-3-small on raspberry-pi-5`
+- added: `dewarpnet on raspberry-pi-5`
+- added: `dis-isnet on raspberry-pi-5`
+- added: `dm-count-crowd on raspberry-pi-5`
+- added: `edsr-x4 on raspberry-pi-5`
+- added: `fast-neural-style__style_candy_fp16 on raspberry-pi-5`
+- added: `fast-neural-style__style_mosaic_fp16 on raspberry-pi-5`
+- added: `fast-neural-style__style_rain_princess_fp16 on raspberry-pi-5`
+- added: `fast-neural-style__style_udnie_fp16 on raspberry-pi-5`
+- added: `gfpgan-v1.4__gfpgan_fp16 on raspberry-pi-5`
+- added: `gfpgan-v1.4__yunet_fp16 on raspberry-pi-5`
+- added: `hsemotion-b0 on raspberry-pi-5`
+- added: `japanese-zipformer-base on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_82m_fixedlen_fp32 on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_predictor on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_prosody on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_vocoder on raspberry-pi-5`
+- added: `kokoro-g2p-en-us on raspberry-pi-5`
+- added: `l2cs-gaze360 on raspberry-pi-5`
+- added: `lightweight-openpose__pose_256 on raspberry-pi-5`
+- added: `lightweight-openpose__pose_256_fp16 on raspberry-pi-5`
+- added: `m-lsd-tiny on raspberry-pi-5`
+- added: `matcha-tts__dp_g2p_matcha_fp16 on raspberry-pi-5`
+- added: `matcha-tts__matcha_decoder_fp16 on raspberry-pi-5`
+- added: `matcha-tts__matcha_textenc_fp16 on raspberry-pi-5`
+- added: `matcha-tts__matcha_vocoder_fp16 on raspberry-pi-5`
+- added: `mi-gan-512-places2 on raspberry-pi-5`
+- added: `midas-small on raspberry-pi-5`
+- added: `mimi__mimi_dec_tx_fp16 on raspberry-pi-5`
+- added: `mimi__mimi_deconly_fp16 on raspberry-pi-5`
+- added: `mimi__mimi_enc_conv_fp16 on raspberry-pi-5`
+- added: `mimi__mimi_enc_tx_fp16 on raspberry-pi-5`
+- added: `modnet on raspberry-pi-5`
+- added: `moge-2 on raspberry-pi-5`
+- added: `movinet-a0-stream on raspberry-pi-5`
+- added: `nafnet-gopro-width32 on raspberry-pi-5`
+- added: `nafnet-sidd-width32 on raspberry-pi-5`
+- added: `nima__nima_aesthetic_fp16 on raspberry-pi-5`
+- added: `nima__nima_technical_fp16 on raspberry-pi-5`
+- added: `ormbg on raspberry-pi-5`
+- added: `panns-cnn14-audioset on raspberry-pi-5`
+- added: `parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8 on raspberry-pi-5`
+- added: `parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8_stateful on raspberry-pi-5`
+- added: `pidnet-s-cityscapes on raspberry-pi-5`
+- added: `places365-resnet18 on raspberry-pi-5`
+- added: `plantnet-300k-resnet18 on raspberry-pi-5`
+- added: `pp-ocrv5__ppocr_det_fp16 on raspberry-pi-5`
+- added: `pp-ocrv5__ppocr_rec_fp16 on raspberry-pi-5`
+- added: `pp-ocrv5__ppocr_rec_fp32 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__codec_decoder_fp32 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__codec_parta on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__codec_partb on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__mtp_folded_int8 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__mtp_fp32 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__talker_int4 on raspberry-pi-5`
+- added: `ram-plus__ram_reweight_fp16 on raspberry-pi-5`
+- added: `ram-plus__ram_stage3_tail_fp16 on raspberry-pi-5`
+- added: `ram-plus__ram_swin_s012_fp16 on raspberry-pi-5`
+- added: `ram-plus__ram_taghead_fp16 on raspberry-pi-5`
+- added: `real-esrgan-x4v3 on raspberry-pi-5`
+- added: `rf-detr-nano__rfdetr_grapha_fp16 on raspberry-pi-5`
+- added: `rf-detr-nano__rfdetr_graphb_fp16 on raspberry-pi-5`
+- added: `rf-detr-seg-nano__rfdetrseg_grapha_fp16 on raspberry-pi-5`
+- added: `rf-detr-seg-nano__rfdetrseg_graphb_fp16 on raspberry-pi-5`
+- added: `rt-detrv2-s__rtdetr_grapha_fp16 on raspberry-pi-5`
+- added: `rt-detrv2-s__rtdetr_graphb_fp16 on raspberry-pi-5`
+- added: `rtmpose-animal-ap10k on raspberry-pi-5`
+- added: `rtmpose-face-wflw on raspberry-pi-5`
+- added: `rtmpose-hand on raspberry-pi-5`
+- added: `rtmpose-s on raspberry-pi-5`
+- added: `rtmw-m-wholebody on raspberry-pi-5`
+- added: `sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_fp16 on raspberry-pi-5`
+- added: `sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_v2_fp16 on raspberry-pi-5`
+- added: `silent-face-anti-spoofing on raspberry-pi-5`
+- added: `sinet-v2-camouflage on raspberry-pi-5`
+- added: `speaker-diarization on raspberry-pi-5`
+- added: `tiger-dnr__tiger_dialog_fp16 on raspberry-pi-5`
+- added: `tiger-dnr__tiger_effect_fp16 on raspberry-pi-5`
+- added: `tiger-dnr__tiger_music_fp16 on raspberry-pi-5`
+- added: `tipsv2-b14-dpt__tipsv2_b14_dpt_erf_fp16 on raspberry-pi-5`
+- added: `tipsv2-b14-dpt__tipsv2_b14_dpt_fp16 on raspberry-pi-5`
+- added: `twinlitenet on raspberry-pi-5`
+- added: `u-2-net on raspberry-pi-5`
+- added: `u2net-portrait-sketch on raspberry-pi-5`
+- added: `ultra-fast-lane-detection on raspberry-pi-5`
+- added: `unisal-saliency on raspberry-pi-5`
+- added: `vision-rwkv-s on raspberry-pi-5`
+- added: `wav2vec2-base-960h__w2v2_asr_frontend_fp16 on raspberry-pi-5`
+- added: `wav2vec2-base-960h__w2v2_asr_head_fp16 on raspberry-pi-5`
+- added: `wav2vec2-keyword-spotting__w2v2_frontend_fp16 on raspberry-pi-5`
+- added: `wav2vec2-keyword-spotting__w2v2_head_fp16 on raspberry-pi-5`
+- added: `xfeat__xfeat on raspberry-pi-5`
+- added: `xfeat__xfeat_fp16 on raspberry-pi-5`
+- added: `yolact-resnet50 on raspberry-pi-5`
+- added: `yolox-m on raspberry-pi-5`
+- added: `yolox-nano on raspberry-pi-5`
+- added: `yolox-s on raspberry-pi-5`
+- added: `yolox-tiny on raspberry-pi-5`
+- added: `yunet-face on raspberry-pi-5`
+- added: `zipformer-medium-cr-ctc__zipformer_ctc_fp16 on raspberry-pi-5`
+- added: `zipformer-medium-cr-ctc__zipformer_ctc_large_fp16 on raspberry-pi-5`
+- added: `zipformer-medium-cr-ctc__zipformer_ctc_small_fp16 on raspberry-pi-5`
+- removed: `gliformer-large-ner__gliformer_large_ner_s128_fp32 on galaxy-s26`
+- removed: `gliformer-large-ner__gliformer_large_ner_s128_wfp16 on galaxy-s26`
+- removed: `gliformer-large-ner__gliformer_large_ner_s256_encoder_wfp16 on galaxy-s26`
+- removed: `gliformer-large-ner__gliformer_large_ner_s256_head_fp32 on galaxy-s26`
+- removed: `gliformer-large-ner__gliformer_large_ner_s256_head_wfp16 on galaxy-s26`
+- removed: `gliformer-large-ner__gliformer_large_ner_s512_encoder_wfp16 on galaxy-s26`
+- removed: `gliformer-large-ner__gliformer_large_ner_s512_head_fp32 on galaxy-s26`
+- removed: `gliformer-large-ner__gliformer_large_ner_s512_head_wfp16 on galaxy-s26`
+- removed: `gliner2.5-decide__gliner25_decide_s128_fp32 on galaxy-s26`
+- removed: `gliner2.5-decide__gliner25_decide_s128_wfp16 on galaxy-s26`
+- removed: `gliner2.5-decide__gliner25_decide_s256_fp32 on galaxy-s26`
+- removed: `gliner2.5-decide__gliner25_decide_s256_wfp16 on galaxy-s26`
+- removed: `gliner2.5-decide__gliner25_decide_s512_fp32 on galaxy-s26`
+- removed: `gliner2.5-decide__gliner25_decide_s512_wfp16 on galaxy-s26`
+
+## litert-lm 0.17.0 → 0.17.1 (device runs 2026-09-08 → 2026-09-27)
+
+### Catalog changes (4)
+- added: `fun-asr-nano-2512 on galaxy-s26`
+- added: `fun-asr-nano-2512 on mac-studio-m4-max`
+- removed: `minicpm5-2b-int4 on mac-studio-m4-max`
+- removed: `minicpm5-2b-int8 on mac-studio-m4-max`
+
+## @litertjs/core 2.5.3 → 2.5.3 (sweep 2026-09-26 → 2026-09-28)
+
+### Catalog changes (13)
+- added: `audio8-tts-preview-0.6b__codec_decoder_fp16_t128`
+- added: `audio8-tts-preview-0.6b__codec_decoder_fp16_t192`
+- added: `audio8-tts-preview-0.6b__codec_decoder_int8_t128`
+- added: `audio8-tts-preview-0.6b__codec_encoder_fp16_10s`
+- added: `audio8-tts-preview-0.6b__fast_ar_int8`
+- removed: `gliformer-large-ner__gliformer_large_ner_s128_wfp16`
+- removed: `gliformer-large-ner__gliformer_large_ner_s256_encoder_wfp16`
+- removed: `gliformer-large-ner__gliformer_large_ner_s256_head_wfp16`
+- removed: `gliformer-large-ner__gliformer_large_ner_s512_encoder_wfp16`
+- removed: `gliformer-large-ner__gliformer_large_ner_s512_head_wfp16`
+- removed: `gliner2.5-decide__gliner25_decide_s128_wfp16`
+- removed: `gliner2.5-decide__gliner25_decide_s256_wfp16`
+- removed: `gliner2.5-decide__gliner25_decide_s512_wfp16`
+
+## litert 2.2.0 → 2.2.0.dev20260804 (device runs 2026-09-28 → 2026-08-31)
+
+### Catalog changes (130)
+- added: `3ddfa-v2 on raspberry-pi-5`
+- added: `6drepnet-headpose on raspberry-pi-5`
+- added: `basic-pitch on raspberry-pi-5`
+- added: `bisenet-face-parsing on raspberry-pi-5`
+- added: `clipseg-rd64__clipseg_decoder on raspberry-pi-5`
+- added: `clipseg-rd64__clipseg_text_fp16 on raspberry-pi-5`
+- added: `clipseg-rd64__clipseg_vision_fp16 on raspberry-pi-5`
+- added: `cloth-segmentation-u2net on raspberry-pi-5`
+- added: `cmgan on raspberry-pi-5`
+- added: `cpga-net-lowlight on raspberry-pi-5`
+- added: `crepe-pitch on raspberry-pi-5`
+- added: `d-fine-s__dfine_grapha_fp16 on raspberry-pi-5`
+- added: `d-fine-s__dfine_graphb_fp16 on raspberry-pi-5`
+- added: `dehazeformer-mct on raspberry-pi-5`
+- added: `depth-anything-3-small on raspberry-pi-5`
+- added: `dewarpnet on raspberry-pi-5`
+- added: `dis-isnet on raspberry-pi-5`
+- added: `dm-count-crowd on raspberry-pi-5`
+- added: `edsr-x4 on raspberry-pi-5`
+- added: `fast-neural-style__style_candy_fp16 on raspberry-pi-5`
+- added: `fast-neural-style__style_mosaic_fp16 on raspberry-pi-5`
+- added: `fast-neural-style__style_rain_princess_fp16 on raspberry-pi-5`
+- added: `fast-neural-style__style_udnie_fp16 on raspberry-pi-5`
+- added: `gfpgan-v1.4__gfpgan_fp16 on raspberry-pi-5`
+- added: `gfpgan-v1.4__yunet_fp16 on raspberry-pi-5`
+- added: `hsemotion-b0 on raspberry-pi-5`
+- added: `japanese-zipformer-base on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_82m_fixedlen_fp32 on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_predictor on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_prosody on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_vocoder on raspberry-pi-5`
+- added: `kokoro-g2p-en-us on raspberry-pi-5`
+- added: `l2cs-gaze360 on raspberry-pi-5`
+- added: `lightweight-openpose__pose_256 on raspberry-pi-5`
+- added: `lightweight-openpose__pose_256_fp16 on raspberry-pi-5`
+- added: `m-lsd-tiny on raspberry-pi-5`
+- added: `matcha-tts__dp_g2p_matcha_fp16 on raspberry-pi-5`
+- added: `matcha-tts__matcha_decoder_fp16 on raspberry-pi-5`
+- added: `matcha-tts__matcha_textenc_fp16 on raspberry-pi-5`
+- added: `matcha-tts__matcha_vocoder_fp16 on raspberry-pi-5`
+- added: `mi-gan-512-places2 on raspberry-pi-5`
+- added: `midas-small on raspberry-pi-5`
+- added: `mimi__mimi_dec_tx_fp16 on raspberry-pi-5`
+- added: `mimi__mimi_deconly_fp16 on raspberry-pi-5`
+- added: `mimi__mimi_enc_conv_fp16 on raspberry-pi-5`
+- added: `mimi__mimi_enc_tx_fp16 on raspberry-pi-5`
+- added: `modnet on raspberry-pi-5`
+- added: `moge-2 on raspberry-pi-5`
+- added: `movinet-a0-stream on raspberry-pi-5`
+- added: `nafnet-gopro-width32 on raspberry-pi-5`
+- added: `nafnet-sidd-width32 on raspberry-pi-5`
+- added: `nima__nima_aesthetic_fp16 on raspberry-pi-5`
+- added: `nima__nima_technical_fp16 on raspberry-pi-5`
+- added: `ormbg on raspberry-pi-5`
+- added: `panns-cnn14-audioset on raspberry-pi-5`
+- added: `parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8 on raspberry-pi-5`
+- added: `parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8_stateful on raspberry-pi-5`
+- added: `pidnet-s-cityscapes on raspberry-pi-5`
+- added: `places365-resnet18 on raspberry-pi-5`
+- added: `plantnet-300k-resnet18 on raspberry-pi-5`
+- added: `pp-ocrv5__ppocr_det_fp16 on raspberry-pi-5`
+- added: `pp-ocrv5__ppocr_rec_fp16 on raspberry-pi-5`
+- added: `pp-ocrv5__ppocr_rec_fp32 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__codec_decoder_fp32 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__codec_parta on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__codec_partb on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__mtp_folded_int8 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__mtp_fp32 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__talker_int4 on raspberry-pi-5`
+- added: `ram-plus__ram_reweight_fp16 on raspberry-pi-5`
+- added: `ram-plus__ram_stage3_tail_fp16 on raspberry-pi-5`
+- added: `ram-plus__ram_swin_s012_fp16 on raspberry-pi-5`
+- added: `ram-plus__ram_taghead_fp16 on raspberry-pi-5`
+- added: `real-esrgan-x4v3 on raspberry-pi-5`
+- added: `rf-detr-nano__rfdetr_grapha_fp16 on raspberry-pi-5`
+- added: `rf-detr-nano__rfdetr_graphb_fp16 on raspberry-pi-5`
+- added: `rf-detr-seg-nano__rfdetrseg_grapha_fp16 on raspberry-pi-5`
+- added: `rf-detr-seg-nano__rfdetrseg_graphb_fp16 on raspberry-pi-5`
+- added: `rt-detrv2-s__rtdetr_grapha_fp16 on raspberry-pi-5`
+- added: `rt-detrv2-s__rtdetr_graphb_fp16 on raspberry-pi-5`
+- added: `rtmpose-animal-ap10k on raspberry-pi-5`
+- added: `rtmpose-face-wflw on raspberry-pi-5`
+- added: `rtmpose-hand on raspberry-pi-5`
+- added: `rtmpose-s on raspberry-pi-5`
+- added: `rtmw-m-wholebody on raspberry-pi-5`
+- added: `sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_fp16 on raspberry-pi-5`
+- added: `sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_v2_fp16 on raspberry-pi-5`
+- added: `silent-face-anti-spoofing on raspberry-pi-5`
+- added: `sinet-v2-camouflage on raspberry-pi-5`
+- added: `speaker-diarization on raspberry-pi-5`
+- added: `tiger-dnr__tiger_dialog_fp16 on raspberry-pi-5`
+- added: `tiger-dnr__tiger_effect_fp16 on raspberry-pi-5`
+- added: `tiger-dnr__tiger_music_fp16 on raspberry-pi-5`
+- added: `tipsv2-b14-dpt__tipsv2_b14_dpt_erf_fp16 on raspberry-pi-5`
+- added: `tipsv2-b14-dpt__tipsv2_b14_dpt_fp16 on raspberry-pi-5`
+- added: `twinlitenet on raspberry-pi-5`
+- added: `u-2-net on raspberry-pi-5`
+- added: `u2net-portrait-sketch on raspberry-pi-5`
+- added: `ultra-fast-lane-detection on raspberry-pi-5`
+- added: `unisal-saliency on raspberry-pi-5`
+- added: `vision-rwkv-s on raspberry-pi-5`
+- added: `wav2vec2-base-960h__w2v2_asr_frontend_fp16 on raspberry-pi-5`
+- added: `wav2vec2-base-960h__w2v2_asr_head_fp16 on raspberry-pi-5`
+- added: `wav2vec2-keyword-spotting__w2v2_frontend_fp16 on raspberry-pi-5`
+- added: `wav2vec2-keyword-spotting__w2v2_head_fp16 on raspberry-pi-5`
+- added: `xfeat__xfeat on raspberry-pi-5`
+- added: `xfeat__xfeat_fp16 on raspberry-pi-5`
+- added: `yolact-resnet50 on raspberry-pi-5`
+- added: `yolox-m on raspberry-pi-5`
+- added: `yolox-nano on raspberry-pi-5`
+- added: `yolox-s on raspberry-pi-5`
+- added: `yolox-tiny on raspberry-pi-5`
+- added: `yunet-face on raspberry-pi-5`
+- added: `zipformer-medium-cr-ctc__zipformer_ctc_fp16 on raspberry-pi-5`
+- added: `zipformer-medium-cr-ctc__zipformer_ctc_large_fp16 on raspberry-pi-5`
+- added: `zipformer-medium-cr-ctc__zipformer_ctc_small_fp16 on raspberry-pi-5`
+- removed: `audio8-tts-preview-0.6b__slow_ar_int4 on mac-studio-m4-max`
+- removed: `audio8-tts-preview-0.6b__slow_ar_int8 on mac-studio-m4-max`
+- removed: `laya-multilingual__laya_ml_act_head_fp32 on galaxy-s26`
+- removed: `laya-multilingual__laya_ml_s256_embeds_wfp16 on galaxy-s26`
+- removed: `smolvla-base__smolvla_expert_step on galaxy-s26`
+- removed: `smolvla-base__smolvla_expert_step_f16 on galaxy-s26`
+- removed: `smolvla-base__smolvla_prefix on galaxy-s26`
+- removed: `smolvla-base__smolvla_prefix_exactnorm on galaxy-s26`
+- removed: `smolvla-base__smolvla_prefix_exactnorm_f16 on galaxy-s26`
+- removed: `smolvla-base__smolvla_prefix_f16 on galaxy-s26`
+- removed: `smolvla-base__smolvla_vision on galaxy-s26`
+- removed: `smolvla-base__smolvla_vision_exactnorm on galaxy-s26`
+- removed: `smolvla-base__smolvla_vision_exactnorm_f16 on galaxy-s26`
+- removed: `smolvla-base__smolvla_vision_f16 on galaxy-s26`
+
+## litert 2.2.0 → 2.2.0.dev20260804 (device runs 2026-09-29 → 2026-08-31)
+
+### Catalog changes (118)
+- added: `3ddfa-v2 on raspberry-pi-5`
+- added: `6drepnet-headpose on raspberry-pi-5`
+- added: `basic-pitch on raspberry-pi-5`
+- added: `bisenet-face-parsing on raspberry-pi-5`
+- added: `clipseg-rd64__clipseg_decoder on raspberry-pi-5`
+- added: `clipseg-rd64__clipseg_text_fp16 on raspberry-pi-5`
+- added: `clipseg-rd64__clipseg_vision_fp16 on raspberry-pi-5`
+- added: `cloth-segmentation-u2net on raspberry-pi-5`
+- added: `cmgan on raspberry-pi-5`
+- added: `cpga-net-lowlight on raspberry-pi-5`
+- added: `crepe-pitch on raspberry-pi-5`
+- added: `d-fine-s__dfine_grapha_fp16 on raspberry-pi-5`
+- added: `d-fine-s__dfine_graphb_fp16 on raspberry-pi-5`
+- added: `dehazeformer-mct on raspberry-pi-5`
+- added: `depth-anything-3-small on raspberry-pi-5`
+- added: `dewarpnet on raspberry-pi-5`
+- added: `dis-isnet on raspberry-pi-5`
+- added: `dm-count-crowd on raspberry-pi-5`
+- added: `edsr-x4 on raspberry-pi-5`
+- added: `fast-neural-style__style_candy_fp16 on raspberry-pi-5`
+- added: `fast-neural-style__style_mosaic_fp16 on raspberry-pi-5`
+- added: `fast-neural-style__style_rain_princess_fp16 on raspberry-pi-5`
+- added: `fast-neural-style__style_udnie_fp16 on raspberry-pi-5`
+- added: `gfpgan-v1.4__gfpgan_fp16 on raspberry-pi-5`
+- added: `gfpgan-v1.4__yunet_fp16 on raspberry-pi-5`
+- added: `hsemotion-b0 on raspberry-pi-5`
+- added: `japanese-zipformer-base on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_82m_fixedlen_fp32 on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_predictor on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_prosody on raspberry-pi-5`
+- added: `kokoro-82m__kokoro_vocoder on raspberry-pi-5`
+- added: `kokoro-g2p-en-us on raspberry-pi-5`
+- added: `l2cs-gaze360 on raspberry-pi-5`
+- added: `lightweight-openpose__pose_256 on raspberry-pi-5`
+- added: `lightweight-openpose__pose_256_fp16 on raspberry-pi-5`
+- added: `m-lsd-tiny on raspberry-pi-5`
+- added: `matcha-tts__dp_g2p_matcha_fp16 on raspberry-pi-5`
+- added: `matcha-tts__matcha_decoder_fp16 on raspberry-pi-5`
+- added: `matcha-tts__matcha_textenc_fp16 on raspberry-pi-5`
+- added: `matcha-tts__matcha_vocoder_fp16 on raspberry-pi-5`
+- added: `mi-gan-512-places2 on raspberry-pi-5`
+- added: `midas-small on raspberry-pi-5`
+- added: `mimi__mimi_dec_tx_fp16 on raspberry-pi-5`
+- added: `mimi__mimi_deconly_fp16 on raspberry-pi-5`
+- added: `mimi__mimi_enc_conv_fp16 on raspberry-pi-5`
+- added: `mimi__mimi_enc_tx_fp16 on raspberry-pi-5`
+- added: `modnet on raspberry-pi-5`
+- added: `moge-2 on raspberry-pi-5`
+- added: `movinet-a0-stream on raspberry-pi-5`
+- added: `nafnet-gopro-width32 on raspberry-pi-5`
+- added: `nafnet-sidd-width32 on raspberry-pi-5`
+- added: `nima__nima_aesthetic_fp16 on raspberry-pi-5`
+- added: `nima__nima_technical_fp16 on raspberry-pi-5`
+- added: `ormbg on raspberry-pi-5`
+- added: `panns-cnn14-audioset on raspberry-pi-5`
+- added: `parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8 on raspberry-pi-5`
+- added: `parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8_stateful on raspberry-pi-5`
+- added: `pidnet-s-cityscapes on raspberry-pi-5`
+- added: `places365-resnet18 on raspberry-pi-5`
+- added: `plantnet-300k-resnet18 on raspberry-pi-5`
+- added: `pp-ocrv5__ppocr_det_fp16 on raspberry-pi-5`
+- added: `pp-ocrv5__ppocr_rec_fp16 on raspberry-pi-5`
+- added: `pp-ocrv5__ppocr_rec_fp32 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__codec_decoder_fp32 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__codec_parta on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__codec_partb on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__mtp_folded_int8 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__mtp_fp32 on raspberry-pi-5`
+- added: `qwen3-tts-12hz-0.6b-base__talker_int4 on raspberry-pi-5`
+- added: `ram-plus__ram_reweight_fp16 on raspberry-pi-5`
+- added: `ram-plus__ram_stage3_tail_fp16 on raspberry-pi-5`
+- added: `ram-plus__ram_swin_s012_fp16 on raspberry-pi-5`
+- added: `ram-plus__ram_taghead_fp16 on raspberry-pi-5`
+- added: `real-esrgan-x4v3 on raspberry-pi-5`
+- added: `rf-detr-nano__rfdetr_grapha_fp16 on raspberry-pi-5`
+- added: `rf-detr-nano__rfdetr_graphb_fp16 on raspberry-pi-5`
+- added: `rf-detr-seg-nano__rfdetrseg_grapha_fp16 on raspberry-pi-5`
+- added: `rf-detr-seg-nano__rfdetrseg_graphb_fp16 on raspberry-pi-5`
+- added: `rt-detrv2-s__rtdetr_grapha_fp16 on raspberry-pi-5`
+- added: `rt-detrv2-s__rtdetr_graphb_fp16 on raspberry-pi-5`
+- added: `rtmpose-animal-ap10k on raspberry-pi-5`
+- added: `rtmpose-face-wflw on raspberry-pi-5`
+- added: `rtmpose-hand on raspberry-pi-5`
+- added: `rtmpose-s on raspberry-pi-5`
+- added: `rtmw-m-wholebody on raspberry-pi-5`
+- added: `sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_fp16 on raspberry-pi-5`
+- added: `sam2.1-hiera-tiny-mask-decoder__sam2_tiny_mask_decoder_v2_fp16 on raspberry-pi-5`
+- added: `silent-face-anti-spoofing on raspberry-pi-5`
+- added: `sinet-v2-camouflage on raspberry-pi-5`
+- added: `speaker-diarization on raspberry-pi-5`
+- added: `tiger-dnr__tiger_dialog_fp16 on raspberry-pi-5`
+- added: `tiger-dnr__tiger_effect_fp16 on raspberry-pi-5`
+- added: `tiger-dnr__tiger_music_fp16 on raspberry-pi-5`
+- added: `tipsv2-b14-dpt__tipsv2_b14_dpt_erf_fp16 on raspberry-pi-5`
+- added: `tipsv2-b14-dpt__tipsv2_b14_dpt_fp16 on raspberry-pi-5`
+- added: `twinlitenet on raspberry-pi-5`
+- added: `u-2-net on raspberry-pi-5`
+- added: `u2net-portrait-sketch on raspberry-pi-5`
+- added: `ultra-fast-lane-detection on raspberry-pi-5`
+- added: `unisal-saliency on raspberry-pi-5`
+- added: `vision-rwkv-s on raspberry-pi-5`
+- added: `wav2vec2-base-960h__w2v2_asr_frontend_fp16 on raspberry-pi-5`
+- added: `wav2vec2-base-960h__w2v2_asr_head_fp16 on raspberry-pi-5`
+- added: `wav2vec2-keyword-spotting__w2v2_frontend_fp16 on raspberry-pi-5`
+- added: `wav2vec2-keyword-spotting__w2v2_head_fp16 on raspberry-pi-5`
+- added: `xfeat__xfeat on raspberry-pi-5`
+- added: `xfeat__xfeat_fp16 on raspberry-pi-5`
+- added: `yolact-resnet50 on raspberry-pi-5`
+- added: `yolox-m on raspberry-pi-5`
+- added: `yolox-nano on raspberry-pi-5`
+- added: `yolox-s on raspberry-pi-5`
+- added: `yolox-tiny on raspberry-pi-5`
+- added: `yunet-face on raspberry-pi-5`
+- added: `zipformer-medium-cr-ctc__zipformer_ctc_fp16 on raspberry-pi-5`
+- added: `zipformer-medium-cr-ctc__zipformer_ctc_large_fp16 on raspberry-pi-5`
+- added: `zipformer-medium-cr-ctc__zipformer_ctc_small_fp16 on raspberry-pi-5`
+- removed: `decider-2b-vision-fp16 on mac-studio-m4-max`
+- removed: `decider-2b-vision-fp16-int8vocab on mac-studio-m4-max`
+
+## litert-lm 0.17.1 → 0.17.1 (device runs 2026-09-27 → 2026-09-29)
+
+### Catalog changes (5)
+- added: `decider-2b-vision-fp16 on mac-studio-m4-max`
+- added: `decider-2b-vision-fp16-int8vocab on mac-studio-m4-max`
+- added: `decider-2b-vision-int8 on mac-studio-m4-max`
+- removed: `fun-asr-nano-2512 on galaxy-s26`
+- removed: `fun-asr-nano-2512 on mac-studio-m4-max`

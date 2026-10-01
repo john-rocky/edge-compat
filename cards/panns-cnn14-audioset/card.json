@@ -227,7 +227,7 @@
     "task": "audio-classification"
   },
   "pitfalls": [
-    "The log-mel front-end must run host-side: litert-torch lowers the 1024-tap DFT-conv wrongly (fp32 corr ~0.19) and |STFT|^2 overflows fp16 on Mali; the graph input is the precomputed log-mel [1,1,1001,64] (zoo README L1218)."
+    "The log-mel front-end must run host-side: litert-torch merges the STFT's cos and sin conv weights into one (litert-torch #1061, two non-contiguous constants of one shape alias each other; fp32 spectrogram corr 0.7-0.8 vs torch) and |STFT|^2 overflows fp16 on Mali; the graph input is the precomputed log-mel [1,1,1001,64] (zoo README, PANNs section)."
   ],
   "schema_version": "1.2"
 }

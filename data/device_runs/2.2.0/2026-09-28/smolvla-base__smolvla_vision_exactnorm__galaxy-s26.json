@@ -1,0 +1,144 @@
+{
+  "artifact": "smolvla_vision_exactnorm.tflite",
+  "artifact_sha256": "4b82477d49d32142075f4bfa37257cdc6ab3643fff041c62d38af4d432f0f0ea",
+  "device": "galaxy-s26",
+  "model_id": "smolvla-base__smolvla_vision_exactnorm",
+  "notes": "SmolVLA (lerobot/smolvla_base, Apache-2.0), SigLIP-B/16 512 vision encoder + pixel-shuffle connector: image [1,3,512,512] + pos_embed [1,1024,768] -> img_emb [1,64,960]; plain RMSNorm/LayerNorm formulas (reference variant); fp32 weights. Built locally by smolvla/scripts/build_smolvla.py (zoo main 977bfe1, litert-torch 0.9.4); not uploaded to the Hub. Measured under the file name smolvla_vision.tflite (byte-identical: md5 in the session attachments).",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-09-28",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench-parity",
+        "os_build": "Android 16 (SDK 36)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, CpuOptions default; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources ~/code/standup/drafts/2026-09-28-samples-344-attachments/s26_report.json (leg smolvla_vision_cpu) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_vision_cpu/",
+        "comparison vs the same file on ai-edge-litert 2.2.0 CPU (Mac, same inputs), all elements, tolerance |out - ref| <= max(1e-5, 1e-3*|ref|): img_emb: 100.00% of 61440 within, max|d| 0 (ref max |x| 71)",
+        "vs the torch float32 module on the same inputs: img_emb: max|d| 0.00016",
+        "conditions: thermal NONE->NONE, headroom 0.65->0.6966667, screen woken before the run (keyguard showing), test process in the foreground cpuset (cores 0-5)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 1028.139,
+      "loads": true,
+      "max_abs_diff": 0.0,
+      "max_rel_diff": 0.0,
+      "metrics": {
+        "iterations": 10,
+        "latency_max_ms": 1035.347,
+        "latency_min_ms": 1011.913,
+        "load_compile_ms": 420.4,
+        "warmup_runs": 5
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "CpuOptions default",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-09-28",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench-parity",
+        "os_build": "Android 16 (SDK 36)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, GpuOptions precision=FP32; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources ~/code/standup/drafts/2026-09-28-samples-344-attachments/s26_report.json (leg smolvla_vision_gpu32) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_vision_gpu32/",
+        "comparison vs the same file on ai-edge-litert 2.2.0 CPU (Mac, same inputs), all elements, tolerance |out - ref| <= max(1e-5, 1e-3*|ref|): img_emb: 99.89% of 61440 within, max|d| 0.000298 (ref max |x| 71)",
+        "vs the torch float32 module on the same inputs: img_emb: max|d| 0.000229",
+        "conditions: thermal NONE->NONE, headroom 0.6133334->0.6333333, screen woken before the run (keyguard showing), test process in the foreground cpuset (cores 0-5)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 165.388,
+      "loads": true,
+      "max_abs_diff": 0.000298,
+      "max_rel_diff": 0.191989,
+      "metrics": {
+        "iterations": 10,
+        "latency_max_ms": 658.599,
+        "latency_min_ms": 164.225,
+        "load_compile_ms": 1609.5,
+        "warmup_runs": 5
+      },
+      "output_match": false,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GpuOptions precision=FP32",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-09-28",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 566,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench-parity",
+        "os_build": "Android 16 (SDK 36)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, GpuOptions precision=default; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources ~/code/standup/drafts/2026-09-28-samples-344-attachments/s26_report.json (leg smolvla_vision_gpu) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_vision_gpu/",
+        "comparison vs the same file on ai-edge-litert 2.2.0 CPU (Mac, same inputs), all elements, tolerance |out - ref| <= max(1e-5, 1e-3*|ref|): img_emb: 0.41% of 61440 within, max|d| 46.5 (ref max |x| 71)",
+        "vs the torch float32 module on the same inputs: img_emb: max|d| 46.5",
+        "conditions: thermal NONE->NONE, headroom 0.57666665->0.58000004, screen woken before the run (keyguard showing), test process in the foreground cpuset (cores 0-5)",
+        "delegate line (logcat of a separate residency run of this file, GpuOptions precision=default): Replacing 566 out of 566 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main)."
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 84.046,
+      "loads": true,
+      "max_abs_diff": 46.515274,
+      "max_rel_diff": 10748.499181,
+      "metrics": {
+        "iterations": 10,
+        "latency_max_ms": 325.72,
+        "latency_min_ms": 81.677,
+        "load_compile_ms": 1496.0,
+        "warmup_runs": 5
+      },
+      "output_match": false,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GpuOptions precision=default",
+      "total_ops": 566,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

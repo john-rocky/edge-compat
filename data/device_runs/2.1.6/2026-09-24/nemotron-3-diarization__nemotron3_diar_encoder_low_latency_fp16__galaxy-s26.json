@@ -1,0 +1,56 @@
+{
+ "artifact": "nemotron3_diar_encoder_low_latency_fp16.tflite",
+ "artifact_sha256": "c5685c76a59e115d47d8e3788192582e966a1b19f53add55d34d7841943be3b9",
+ "device": "galaxy-s26",
+ "model_id": "nemotron-3-diarization__nemotron3_diar_encoder_low_latency_fp16",
+ "notes": "Nemotron-3-Diarization LiteRT (litert-community/Nemotron-3-Diarization-LiteRT, published 2026-09-24). Graph B at GpuOptions precision FP32 is the app default and the only setting whose closed-loop output equals the transformers fp32 reference; default precision computes in fp16 and moves speaker-cache selections. Weights: bfloat16-exact checkpoint stored as float16 (no integer quantization).",
+ "quantization": null,
+ "results": [
+  {
+   "accelerator": "gpu_mldrift",
+   "context_length": null,
+   "date": "2026-09-24",
+   "decode_tokens_per_s": null,
+   "delegated_ops": 2915,
+   "env": {
+    "device": "Galaxy S26 (SM-S942Q)",
+    "machine_label": "galaxy-s26-n3d-selftest",
+    "os_build": "Android 16 (SDK 36)",
+    "runtime": "litert",
+    "runtime_version": "2.1.6",
+    "soc": "Qualcomm SM8850",
+    "vendor_sdk": null
+   },
+   "error": null,
+   "evidence": [
+    "nemotron3diar SelfTest (zoo main a7ce147, HF android/SelfTest.kt): one Environment, CompiledModel(Accelerator.GPU) per graph; inputs = 7 captured steps of the 97.6 s upstream example clip, fed with the transformers fp32 reference's own encoder inputs; latency = write inputs -> run -> readFloat of every output, median of 20 timed runs after 5 warm-ups at step 128 (L=541 rows); parity = graph output vs the reference's chunk logits over the L*8 real rows; sources ~/code/codex-conversions/2026-09-24/n3d-litert/results/gate_device.json, gate_device_offline.json, device_logcat_<tag>.txt (\"Replacing N out of N node(s) with delegate (LITERT_CL) node, yielding 1 partitions\")",
+    "run tag safe_fp16_default_litert216; GPU precision default (fp16 compute); conditions at start: screen_interactive=True keyguard_locked=False plugged=usb battery=100% 34.8C thermal_status=0 thermal_headroom=0.680; thermal after 0",
+    "same APK rebuilt with LiteRT 2.1.6: outputs bit-identical to the 2.2.0 default-precision run"
+   ],
+   "failure_class": null,
+   "full_delegation": true,
+   "latency_p50_ms": 80.503672,
+   "loads": true,
+   "max_abs_diff": 0.34325408935546875,
+   "max_rel_diff": null,
+   "metrics": {
+    "activity_cells": 155072,
+    "activity_flips_at_0_5": 1,
+    "iterations": 20,
+    "latency_max_ms": 81.7925,
+    "latency_min_ms": 79.503021,
+    "load_compile_ms": 1453.772187,
+    "max_abs_dprob": 0.03529898872507137
+   },
+   "output_match": false,
+   "peak_mem_mb": null,
+   "prefill_tokens_per_s": null,
+   "provenance": "measured",
+   "runs": true,
+   "signature": "GpuOptions precision=default (fp16 compute)",
+   "total_ops": 2915,
+   "ttft_ms": null
+  }
+ ],
+ "schema_version": "1.0"
+}

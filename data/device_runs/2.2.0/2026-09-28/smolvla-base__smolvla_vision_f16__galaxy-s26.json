@@ -1,0 +1,101 @@
+{
+  "artifact": "smolvla_vision_f16.tflite",
+  "artifact_sha256": "777cbe76896b63d503b80d23eb60e6297dbc77ede7574cc7fc0fa53492178d4f",
+  "device": "galaxy-s26",
+  "model_id": "smolvla-base__smolvla_vision_f16",
+  "notes": "SmolVLA (lerobot/smolvla_base, Apache-2.0), SigLIP-B/16 512 vision encoder + pixel-shuffle connector: image [1,3,512,512] + pos_embed [1,1024,768] -> img_emb [1,64,960]; exact down-scaled RMSNorm/LayerNorm (default); weights stored fp16 (ai_edge_quantizer FLOAT_CASTING), fp32 compute graph. Built locally by smolvla/scripts/build_smolvla.py (zoo main 977bfe1, litert-torch 0.9.4); not uploaded to the Hub. Measured under the file name smolvla_vision_fp16safe_f16.tflite (byte-identical: md5 in the session attachments). With the other two default fp16-weight graphs resident in one process (npubench chain test), one 50-step action chunk took a median 206.7 ms at default GPU precision (process PSS 2301 MiB after the runs) and 351.9 ms with FP32 (3666 MiB); actions vs lerobot float32 max|d| 3.39e-2 / 1.39e-3 (attachments/runlog_s26_chain.txt).",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-09-28",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 888,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench-parity",
+        "os_build": "Android 16 (SDK 36)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, GpuOptions precision=FP32; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources ~/code/standup/drafts/2026-09-28-samples-344-attachments/s26_report.json (leg smolvla_vision_fp16safe_f16_gpu32) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_vision_fp16safe_f16_gpu32/",
+        "comparison vs the same file on ai-edge-litert 2.2.0 CPU (Mac, same inputs), all elements, tolerance |out - ref| <= max(1e-5, 1e-3*|ref|): img_emb: 99.91% of 61440 within, max|d| 0.000168 (ref max |x| 71)",
+        "vs the torch float32 module on the same inputs: img_emb: max|d| 0.000168",
+        "conditions: thermal NONE->NONE, headroom 0.73333335->0.75, screen woken before the run (keyguard showing), test process in the foreground cpuset (cores 0-5)",
+        "delegate line (logcat of a separate residency run of this file, GpuOptions precision=FP32): Replacing 888 out of 888 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main)."
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 138.406,
+      "loads": true,
+      "max_abs_diff": 0.000168,
+      "max_rel_diff": 0.244814,
+      "metrics": {
+        "iterations": 10,
+        "latency_max_ms": 576.851,
+        "latency_min_ms": 137.034,
+        "load_compile_ms": 1940.0,
+        "warmup_runs": 5
+      },
+      "output_match": false,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GpuOptions precision=FP32",
+      "total_ops": 888,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-09-28",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 888,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-npubench-parity",
+        "os_build": "Android 16 (SDK 36)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, GpuOptions precision=default; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources ~/code/standup/drafts/2026-09-28-samples-344-attachments/s26_report.json (leg smolvla_vision_fp16safe_f16_gpu) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_vision_fp16safe_f16_gpu/",
+        "comparison vs the same file on ai-edge-litert 2.2.0 CPU (Mac, same inputs), all elements, tolerance |out - ref| <= max(1e-5, 1e-3*|ref|): img_emb: 2.51% of 61440 within, max|d| 3.52 (ref max |x| 71)",
+        "vs the torch float32 module on the same inputs: img_emb: max|d| 3.52",
+        "conditions: thermal NONE->NONE, headroom 0.7300001->0.73333335, screen woken before the run (keyguard showing), test process in the foreground cpuset (cores 0-5)",
+        "delegate line (logcat of a separate residency run of this file, GpuOptions precision=default): Replacing 888 out of 888 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main)."
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 71.132,
+      "loads": true,
+      "max_abs_diff": 3.518623,
+      "max_rel_diff": 3452.813476,
+      "metrics": {
+        "iterations": 10,
+        "latency_max_ms": 284.138,
+        "latency_min_ms": 70.874,
+        "load_compile_ms": 1753.1,
+        "warmup_runs": 5
+      },
+      "output_match": false,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GpuOptions precision=default",
+      "total_ops": 888,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

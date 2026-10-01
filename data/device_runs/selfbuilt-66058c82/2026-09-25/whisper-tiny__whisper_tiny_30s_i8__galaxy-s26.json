@@ -1,0 +1,61 @@
+{
+  "artifact": "whisper_tiny_30s_i8.tflite",
+  "artifact_sha256": "6748ac565a228c4a00b18d11ea1e2fd7cead3db6fba94e3f0bf35756b13ba4a9",
+  "device": "galaxy-s26",
+  "model_id": "whisper-tiny__whisper_tiny_30s_i8",
+  "notes": "LiteRT-LM omni/asr at main@66058c82, self-built (bazel 7.6.1; macOS: Xcode 27, Android: NDK r28 --config=android_arm64), engine defaults (window = model_metadata inputMilliseconds, overlap 0.4, timestamp merger). Numbers, per-utterance outputs and the analysis: https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-25-omni-asr-wer-v1-m4max-mac/NOTES.md Same runner source built for Android (NDK r28), CPU only.",
+  "quantization": "int8 (the i8 file of litert-community/whisper-tiny, 30 s window)",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-25",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-omni-eval",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-66058c82",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-25-omni-asr-wer-v1-s26-android/summary/whisper-tiny-clean-cpu.json: \"model_name\": \"whisper-tiny\", \"backend\": \"cpu\", \"num_threads\": 4, \"utterances\": 2620, \"wer_percent\": 12.46, \"substitutions\": 4807, \"deletions\": 556, \"insertions\": 1240, \"reference_words\": 53000, \"hung_utterances\": [], \"empty_hypotheses\": 0, \"flush_empty\": 0, \"rtfx_processing\": 9.74, \"processing_seconds\": 1996.3, \"audio_hours\": 5.403, \"peak_rss_mb\": 0.4",
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-25-omni-asr-wer-v1-s26-android/summary/whisper-tiny-other-cpu.json: \"model_name\": \"whisper-tiny\", \"backend\": \"cpu\", \"num_threads\": 4, \"utterances\": 2939, \"wer_percent\": 29.58, \"substitutions\": 11323, \"deletions\": 1520, \"insertions\": 2787, \"reference_words\": 52841, \"hung_utterances\": [], \"empty_hypotheses\": 19, \"flush_empty\": 19, \"rtfx_processing\": 8.87, \"processing_seconds\": 2169.0, \"audio_hours\": 5.342, \"peak_rss_mb\": 0.4",
+        "Open ASR Leaderboard scoring (EnglishTextNormalizer + corpus WER, jiwer) over LibriSpeech test-clean (2620 utt, 5.403 h) and test-other (2939 utt, 5.342 h); harness = omni_eval_runner on LiteRT-LM OmniEngine (omni/asr, PushInputSource, one session per utterance, CPU num_threads 4), edge-llm-bench tools/omni-eval. WER is pipeline-level (engine front-end + model + decoder), not the .tflite alone; 'hung' = never returned from TdtDecoder::Decode, killed by the driver watchdog and scored as empty; RTFx = audio seconds / engine wall seconds.",
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-25-omni-asr-wer-v1-s26-android/NOTES.md: each cell waits for the battery to cool to 36 C first; the phone was at thermal status 2-3 by the end of each cell (in the RTFx, not in the text); whisper-tiny S/D/I byte-identical to the Mac CPU run",
+        "peak_rss_mb in the S26 summaries is not a valid measurement (1.4) and is omitted"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "empty_hypotheses_test_clean": 0,
+        "empty_hypotheses_test_other": 19,
+        "hung_utterances_test_clean": 0,
+        "hung_utterances_test_other": 0,
+        "num_threads": 4,
+        "rtfx_test_clean": 9.74,
+        "rtfx_test_other": 8.87,
+        "utterances_test_clean": 2620,
+        "utterances_test_other": 2939,
+        "wer_test_clean_pct": 12.46,
+        "wer_test_other_pct": 29.58
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

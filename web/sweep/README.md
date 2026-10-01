@@ -154,6 +154,16 @@ aborts, re-run the remainder in small batches (or singly) rather than hunting fo
 single-model runs at a 12 GB heap. The int4 is 0.26 GB, so this is the graph, not the bytes — record such
 models as excluded in the catalog's `notes` instead of chasing them with more heap.
 
+**A run can "succeed" in 0.3 ms with nothing computed.** LiteRT.js resolves `model.run` even when the runtime only
+logged `ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors` (measured 2026-09-26: gliner2.5-decide s512
+wfp16, 811 MB, `wasm_xnnpack` — thirteen such lines, one per warm-up and timed run, and a 0.35 ms "p50" that would have
+been recorded as a pass). The harness treats that line like `failed to prepare` / `failed to create … runtime`:
+`backend_error`, no latency (`isFatalRunLine` in `src/node/results.ts`). The 660 / 711 MB siblings (s128 / s256) load
+on wasm and start computing but their 3 + 10 runs do not finish within the default 60 s step budget (`timeout`, i.e.
+at least 4.6 s per run on average), so the recorded wasm size ceiling now reads: 431 MB runs; 660-711 MB loads and runs
+slower than the default budget; 811 MB fails tensor allocation. WebGPU aborted at load (`RuntimeError: Aborted()`) for
+all three.
+
 **A hosted CI runner cannot hold the catalog, and a harness that cannot launch its browser must still exit.**
 The 2026-08-27 full-tier run (33032586477) pre-downloaded the catalog into `--cache-dir` — the catalog is 33 GB
 (159 files, median 51 MB, 17 over 500 MB), the runner's disk filled after ~55 minutes (`ENOSPC`), Chromium then

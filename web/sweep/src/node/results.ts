@@ -33,6 +33,19 @@ export function p50(values: readonly number[]): number {
   return Math.round(median * 1000) / 1000;
 }
 
+/**
+ * A backend console line meaning `model.run` resolved without computing: the
+ * output buffers were never filled and the sub-ms latency is an error path,
+ * not a measurement. Seen: "Node ... failed to prepare.", "failed to create
+ * XNNPACK runtime" (2026-08) and "ERROR: [litert_compiled_model.cc:164] Failed
+ * to allocate tensors" (2026-09-26: gliner2.5-decide s512 wfp16, 811 MB, on
+ * wasm_xnnpack — thirteen such lines, one per warm-up and timed run, and a
+ * 0.35 ms "p50" that would have read as a pass).
+ */
+export function isFatalRunLine(line: string): boolean {
+  return /failed to prepare|failed to create .* runtime|failed to allocate tensors/i.test(line);
+}
+
 export interface OutputComparison {
   /** Verdict for the record's output_match field (null = not comparable). */
   match: boolean | null;

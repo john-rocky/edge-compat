@@ -1,0 +1,97 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x256x512:float32;1x1x256x256:float32;1:int32",
+  "license": "apache-2.0",
+  "model_id": "sopro-v2-turbo__sopro_ar_merged_fp32",
+  "notes": "fp32 variant; int32 inputs are token ids / position tables, random sweep inputs measure the graph only",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-09-25",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 453.135,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-09-25",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: E0924 15:53:11.260000  755312 model_builder.cc:2484] {\n  type: INT64\n  data: {...}\n  dims: [1]\n} isn't scalar-convertible.",
+        "error: E0924 15:53:11.260000  755312 model_builder.cc:2484] {\n  type: INT64\n  data: {...}\n  dims: [1]\n} isn't scalar-convertible.",
+        "error: ERROR: Following operations are not supported by GPU delegate:",
+        "error: ADD: Can't parse inputs with const tensors.",
+        "error: CAST: Tensor type(INT64) is not supported. ar_graphs.ARPrefillGraph;570",
+        "error: CAST: Tensor type(INT64) is not supported. ar_graphs.ARPrefillGraph;574",
+        "error: GATHER_ND: Operation is not supported.",
+        "error: LESS: Can't parse inputs with const tensors.",
+        "error: RESHAPE: Tensor type(INT64) is not supported. ar_graphs.ARPrefillGraph;573",
+        "error: SELECT: Tensor type(INT64) is not supported. ar_graphs.ARPrefillGraph;572",
+        "error: 927 operations will run on the GPU, and the remaining 21 operations will run on the CPU.",
+        "warning: %c[LiteRT]%c Model not fully compiled for webgpu. Partially delegating to WASM execution. background: #FFA000; color: black; font-weight: bold; padding: 2px 5px; border-radius: 3px; font-weight: bold;"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": 61.905,
+      "loads": true,
+      "max_abs_diff": 0.000034332275390625,
+      "max_rel_diff": 0.7702725101715348,
+      "output_match": false,
+      "provenance": "measured",
+      "runs": true
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/sopro-v2-turbo/resolve/main/fp32/sopro_ar_merged_fp32.tflite"
+}

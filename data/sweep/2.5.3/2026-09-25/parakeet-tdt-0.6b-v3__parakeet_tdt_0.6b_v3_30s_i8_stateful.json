@@ -1,0 +1,86 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x128x3000:float32",
+  "license": "cc-by-4.0",
+  "model_id": "parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful",
+  "notes": "multi-signature model (123 subgraphs; encode 1x128x3000 -> 1x1024x375; decode / decode_1 take encoder output + token ids + LSTM state); own upload 2026-09-25 (mlboydaisuke/Parakeet-TDT-0.6B-v3-LiteRT) = litert-community/parakeet-tdt-0.6b-v3 re-exported with a 30 s window (litert-samples recipe --input_sec 30); 630 MB; harness run",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-09-25",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 7451.368,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-09-25",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: Aborted()"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "RuntimeError: Aborted(). Build with -sASSERTIONS for more info.",
+      "failure_class": "compile_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/mlboydaisuke/Parakeet-TDT-0.6B-v3-LiteRT/resolve/main/parakeet_tdt_0.6b_v3_30s_i8_stateful.tflite"
+}

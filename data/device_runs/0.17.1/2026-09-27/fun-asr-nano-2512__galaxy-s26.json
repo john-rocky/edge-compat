@@ -1,0 +1,55 @@
+{
+  "artifact": "Fun-ASR-Nano-2512.litertlm",
+  "artifact_sha256": "508c3c7e2ea0df9a756d4b42f9751d5aa08db3d60f959ade6bb2c2a2dafebcd4",
+  "device": "galaxy-s26",
+  "model_id": "fun-asr-nano-2512",
+  "notes": "Kotlin demo app (funasr_nano_work/demo/android, package com.mlboydaisuke.funasrdemo) on the litertlm-android 0.17.1 AAR: Engine(backend CPU, audioBackend CPU) created once, one Conversation per clip, sendMessage(Contents.of(Content.AudioFile(wav))) wall time per official sample; take t9 of the round-5 recording (demo/out/funasr-demo-1790492772.json). Texts of all three clips equal the v0.16.1 CLI gate (demo/check_take.py, 3/3 in every recorded take). Over 9 takes: zh 1.01-1.03 s, en 1.22-1.24 s, ja 1.41-1.43 s. This is the direct per-clip measurement that replaced the retracted process-wall-minus-load-only derivation on the Hub card (2026-09-27).",
+  "quantization": "LM int8 dynamic (int8 embedding table), fp32 activations declared on the prefill/decode section; audio encoder fp16 weights, fp32 compute (30.24 s window)",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-27",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-funasrnano-app",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "example_zh (5.616 s of audio): send_ms 1025.3, create_conversation_ms 8.8, text '开饭时间早上九点至下午五点。'",
+        "example_en (7.176 s of audio): send_ms 1237.1, create_conversation_ms 2.0, text 'The tribal chieftain called for the boy, and presented him with fifty pieces of gold.'",
+        "example_ja (7.224 s of audio): send_ms 1420.3, create_conversation_ms 8.1, text 'うちの中学は弁当制で、持っていけない場合は、五十円の学校販売のパンを買う。'",
+        "engine: initialize_ms 308.2 + first_conversation_ms 327.6 = engine_load_ms 635.8 (runtime cache present)",
+        "vmhwm_kib 2846824 (whole app process); thermal status 0 before and after; latency_p50_ms = median of the three send_ms"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 1237.1,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "audio_s_total": 20.016,
+        "clips": 3.0,
+        "engine_load_ms": 635.8,
+        "send_ms_max": 1420.3,
+        "send_ms_min": 1025.3
+      },
+      "output_match": null,
+      "peak_mem_mb": 2780.1,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

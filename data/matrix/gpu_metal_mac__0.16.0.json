@@ -23,7 +23,7 @@
    "status": "incorrect"
   },
   {
-   "conditions": "accepted and silently miscomputed: a rank-3 pad on a NON-FINAL axis returns the tensor shifted by one along that axis, bit-exact (head h receives head h-1, head 0 zeros). Flavor matrix: rank-3 final-axis front and back pads are correct, rank-4 axis-2 trailing is correct, rank-3 middle-axis and leading-axis trailing both shift. Independent of fp16/fp32",
+   "conditions": "accepted and silently miscomputed: a rank-3 pad on a NON-FINAL axis returns the tensor shifted by one along that axis, bit-exact (head h receives head h-1, head 0 zeros). Flavor matrix: rank-3 final-axis front and back pads are correct, rank-4 axis-2 trailing is correct, rank-3 middle-axis and leading-axis trailing both shift. Independent of fp16/fp32. Upstream answer (LiteRT #9272, 2026-10-01T03:50:16Z, https://github.com/google-ai-edge/LiteRT/issues/9272#issuecomment-5924357456): the row shift \"is tied to how MLDrift maps lower-rank tensors into its 4D `BHWC` representation\"; \"promoting the tensor to rank-4 via `RESHAPE` / `EXPAND_DIMS` (or using `CONCAT`) is the recommended workaround\" - the rewrite below. Closed as a duplicate of the tracking issue LiteRT #10445 (opened 2026-10-01: standard shape broadcasting, or automatic 4D RESHAPE insertion for lower- and mixed-rank inputs, in the MLDrift GPU delegate).",
    "constraints": {
     "rank": "3, non-final axis"
    },

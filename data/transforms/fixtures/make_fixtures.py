@@ -16,7 +16,11 @@ import struct
 from pathlib import Path
 
 from litert_compat.parser.builder import (
-    BuiltinOptionsSpec, GraphSpec, OpSpec, TensorSpec, build_tflite,
+    BuiltinOptionsSpec,
+    GraphSpec,
+    OpSpec,
+    TensorSpec,
+    build_tflite,
 )
 
 
@@ -81,11 +85,29 @@ def fixture_rank2_add_const() -> bytes:
     return build_tflite(GraphSpec(tensors, ops, inputs=(0,), outputs=(2,)))
 
 
+def fixture_mixed_rank_add_const() -> bytes:
+    """Rank-2 runtime tensor plus a rank-3 CONSTANT — the LiteRT #10231 form
+    (data/matrix/gpu_metal_mac__2.2.0.json ADD `incorrect`, operand_a_rank=2
+    operand_b_rank=3, measured 2026-10-01: the constant bypasses the delegate's
+    automatic 4D broadcast reshape). Rewritten by
+    mixed-rank-elementwise-const-to-rank3 into RESHAPE -> ADD(rank 3)."""
+    n, c = 8, 4
+    table = struct.pack(f"<{n * c}f", *[0.1 * ((i % 37) - 18) for i in range(n * c)])
+    tensors = (
+        TensorSpec("x", "float32", (n, c)),
+        TensorSpec("table", "float32", (1, n, c), data=table),
+        TensorSpec("output", "float32", (1, n, c)),
+    )
+    ops = (OpSpec("ADD", (0, 1), (2,), builtin_options=BuiltinOptionsSpec(type_code=11)),)
+    return build_tflite(GraphSpec(tensors, ops, inputs=(0,), outputs=(2,)))
+
+
 FIXTURES = {
     "model_select_fixture.tflite": fixture_select(),
     "model_select_v2_fixture.tflite": fixture_select_v2(),
     "model_int64_input_fixture.tflite": fixture_int64_input(),
     "model_rank2_add_const_fixture.tflite": fixture_rank2_add_const(),
+    "model_mixed_rank_add_const_fixture.tflite": fixture_mixed_rank_add_const(),
 }
 
 

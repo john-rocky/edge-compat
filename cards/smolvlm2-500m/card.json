@@ -22,6 +22,62 @@
         "run": {
           "accelerator": "cpu",
           "context_length": null,
+          "date": "2026-09-26",
+          "decode_tokens_per_s": 72.41,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-vl-response-v1",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-1dadd00c",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-26-vl-response-v1-s26-android/NOTES.md — the table row for SmolVLM2-500M litert-lm-cpu (median of 3 launches, range in brackets)",
+            "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-26-vl-response-v1-s26-android/litert-lm_litert-community_SmolVLM2-500M_vl-describe-catcouch-gen64_cpu.jsonl — 3 launch records; medians here are computed over the 3 passing launches",
+            "session anchor right before the sitting: llama.cpp b8999 unsloth/Qwen3-0.6B-GGUF short-chat decode 108.0 / 107.0 / 110.7 tok/s, median 108.0, ratio 1.016 vs the 2026-09-24 reference (106.3, n=6) — ADMITTED under the dashboard rule (SESSION.json)",
+            "screen off in every launch (provenance.deviceBefore.wakefulness = Dozing, stay_on_while_plugged_in = 0); thermal status nominal before and after all 36 launches; battery 30.9–35.0 °C; 45 s between launches, 60–90 s between cells; no CPU frequency cap before any launch (capped after 11 of them, flag only)",
+            "litert-lm_litert-community_SmolVLM2-500M_vl-describe-catcouch-gen64_cpu_run1.stderr.log: VERBOSE: Replacing 1290 out of 1423 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 189 partitions for subgraph 0 (prefill_128). (first partition line; the bundle has several graphs — vision, prefill, decode)",
+            "peak_mem_mb = VmHWM (Android) / ps rss (Mac) of the CLI process, host memory only — a GPU arm's device heap is outside it",
+            "reply (identical across the 3 launches, text check pass): 'A close-up photograph of a tabby kitten, lying on a dark fabric surface. The kitten, with its distinctive striped fur, is gently nuzzling it'"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 64,
+            "invalid_decode_lines": 0,
+            "launches": 3,
+            "load_s_median": 1.224,
+            "passing_launches": 3,
+            "prefill_tokens": 82,
+            "response_s_max": 1.756,
+            "response_s_median": 1.47,
+            "response_s_min": 1.464,
+            "ttft_s_median": 0.29,
+            "vision_encoder_ms_median": 292.0477
+          },
+          "output_match": null,
+          "peak_mem_mb": 875.2,
+          "prefill_tokens_per_s": 294.92,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 290.0
+        },
+        "source": "data/device_runs/selfbuilt-1dadd00c/2026-09-26/smolvlm2-500m__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
           "date": "2026-09-05",
           "decode_tokens_per_s": 76.72,
           "delegated_ops": 1794,
@@ -68,6 +124,63 @@
         "run": {
           "accelerator": "gpu",
           "context_length": null,
+          "date": "2026-09-26",
+          "decode_tokens_per_s": 54.48,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-vl-response-v1",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-1dadd00c",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-26-vl-response-v1-s26-android/NOTES.md — the table row for SmolVLM2-500M litert-lm-gpu (median of 3 launches, range in brackets)",
+            "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-26-vl-response-v1-s26-android/litert-lm_litert-community_SmolVLM2-500M_vl-describe-catcouch-gen64_gpu.jsonl — 3 launch records; medians here are computed over the 3 passing launches",
+            "session anchor right before the sitting: llama.cpp b8999 unsloth/Qwen3-0.6B-GGUF short-chat decode 108.0 / 107.0 / 110.7 tok/s, median 108.0, ratio 1.016 vs the 2026-09-24 reference (106.3, n=6) — ADMITTED under the dashboard rule (SESSION.json)",
+            "screen off in every launch (provenance.deviceBefore.wakefulness = Dozing, stay_on_while_plugged_in = 0); thermal status nominal before and after all 36 launches; battery 30.9–35.0 °C; 45 s between launches, 60–90 s between cells; no CPU frequency cap before any launch (capped after 11 of them, flag only)",
+            "litert-lm_litert-community_SmolVLM2-500M_vl-describe-catcouch-gen64_gpu_run1.stderr.log: Dynamically loaded GPU accelerator(libLiteRtGpuAccelerator.so) registered. — accelerator that computed: LiteRT GPU (libLiteRtGpuAccelerator.so, ML Drift OpenCL; LiteRT-LM prebuilt/android_arm64 at 1dadd00c, sha256 88e716f4ff79970b377597fb4207e930dc4905bc23ddb08479cc3f317627274a)",
+            "litert-lm_litert-community_SmolVLM2-500M_vl-describe-catcouch-gen64_gpu_run1.stderr.log: VERBOSE: Replacing 1423 out of 1423 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128). (first partition line; the bundle has several graphs — vision, prefill, decode)",
+            "peak_mem_mb = VmHWM (Android) / ps rss (Mac) of the CLI process, host memory only — a GPU arm's device heap is outside it",
+            "reply (identical across the 3 launches, text check pass): 'A close-up photograph of a tabby kitten, lying on a dark fabric surface. The kitten, with its distinctive striped fur, is lying on its side,'"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 64,
+            "invalid_decode_lines": 0,
+            "launches": 3,
+            "load_s_median": 2.4,
+            "passing_launches": 3,
+            "prefill_tokens": 82,
+            "response_s_max": 1.563,
+            "response_s_median": 1.465,
+            "response_s_min": 1.447,
+            "ttft_s_median": 0.09,
+            "vision_encoder_ms_median": 200.0972
+          },
+          "output_match": null,
+          "peak_mem_mb": 467.6,
+          "prefill_tokens_per_s": 1115.94,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 90.0
+        },
+        "source": "data/device_runs/selfbuilt-1dadd00c/2026-09-26/smolvlm2-500m__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
           "date": "2026-08-24",
           "decode_tokens_per_s": 76.73,
           "delegated_ops": 1423,
@@ -107,6 +220,106 @@
           "ttft_ms": 160.0
         },
         "source": "data/device_runs/0.16.0/2026-08-24/smolvlm2-500m__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-24",
+          "decode_tokens_per_s": 95.53,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max-vl-response-v1",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-1dadd00c",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-24-vl-response-v1-m4max-mac/NOTES.md — the table row for SmolVLM2-500M litert-lm-cpu (median of 3 launches, range in brackets)",
+            "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-24-vl-response-v1-m4max-mac/litert-lm_litert-community_SmolVLM2-500M_vl-describe-catcouch-gen64_cpu.jsonl — 3 launch records; medians here are computed over the 3 passing launches",
+            "session anchor: mlx-swift Qwen3-0.6B-4bit short-chat warm 559.6 tok/s, 2 % above the 527–550 band of the previous five Mac sessions (not throttled)",
+            "the host was shared (Xcode builds, Chrome and Storage bursts); every launch samples foreign processes >= 20 % CPU into provenance.hostBefore/After; the Gemma 4 pair was re-taken in a quieter window (NOTES.md 'Spread')",
+            "peak_mem_mb = VmHWM (Android) / ps rss (Mac) of the CLI process, host memory only — a GPU arm's device heap is outside it",
+            "reply (identical across the 3 launches, text check pass): 'A close-up photograph of a tabby kitten, lying on a dark fabric surface. The kitten, with its distinctive striped fur, is gently nuzzling it'"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 64,
+            "invalid_decode_lines": 0,
+            "launches": 3,
+            "load_s_median": 0.159,
+            "passing_launches": 3,
+            "prefill_tokens": 82,
+            "response_s_max": 0.991,
+            "response_s_median": 0.975,
+            "response_s_min": 0.972,
+            "ttft_s_median": 0.19
+          },
+          "output_match": null,
+          "peak_mem_mb": 831.2,
+          "prefill_tokens_per_s": 464.71,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 190.0
+        },
+        "source": "data/device_runs/selfbuilt-1dadd00c/2026-09-24/smolvlm2-500m__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-24",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max-vl-response-v1",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-1dadd00c",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": "reply = 64 x <|endoftext|> on every launch; the engine printed rates (TTFT 0.00 s, prefill ~46,000 tok/s) but no text — text check fails, the rates are not a measurement",
+          "evidence": [
+            "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-24-vl-response-v1-m4max-mac/NOTES.md — the table row for SmolVLM2-500M litert-lm-gpu (median of 3 launches, range in brackets)",
+            "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-24-vl-response-v1-m4max-mac/litert-lm_litert-community_SmolVLM2-500M_vl-describe-catcouch-gen64_gpu.jsonl — 3 launch records; medians here are computed over no passing launch",
+            "session anchor: mlx-swift Qwen3-0.6B-4bit short-chat warm 559.6 tok/s, 2 % above the 527–550 band of the previous five Mac sessions (not throttled)",
+            "the host was shared (Xcode builds, Chrome and Storage bursts); every launch samples foreign processes >= 20 % CPU into provenance.hostBefore/After; the Gemma 4 pair was re-taken in a quieter window (NOTES.md 'Spread')",
+            "litert-lm_litert-community_SmolVLM2-500M_vl-describe-catcouch-gen64_gpu_run1.stderr.log: Dynamically loaded GPU accelerator(libLiteRtWebGpuAccelerator.dylib) registered. — accelerator that computed: GPU WebGPU (libLiteRtWebGpuAccelerator.dylib, Dawn with the Metal backend; NOT libLiteRtMetalAccelerator — PROVENANCE.md erratum 2026-09-26)"
+          ],
+          "failure_class": "degenerate_output",
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "exit_code": 0,
+            "launches": 3,
+            "passing_launches": 0
+          },
+          "output_match": null,
+          "peak_mem_mb": 254.7,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/selfbuilt-1dadd00c/2026-09-24/smolvlm2-500m__mac-studio-m4-max.json"
       }
     ]
   },

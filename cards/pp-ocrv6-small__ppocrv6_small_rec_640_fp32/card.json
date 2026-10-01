@@ -1,0 +1,124 @@
+{
+  "artifacts": [
+    {
+      "file": "ppocrv6_small_rec_640_fp32.tflite",
+      "sha256": "904c9a589763123d8a4c01d205c78669cfe3723b2a23b2221bdeb26fccc66a5d",
+      "size_mb": 20.482
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-09-25",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 83.455,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-09-25",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 23.417,
+        "loads": true,
+        "max_rel_diff": 0.00010432126105638897,
+        "output_match": true,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-09-25/pp-ocrv6-small__ppocrv6_small_rec_640_fp32.json"
+  },
+  "conversion": {
+    "command": ".venv/bin/python conversion/build.py rec --width 640",
+    "quantization": "none — fp32 (conversion/README.md: 'Reproduce the FP32 conversion'; the card: 'FP16 and INT8 artifact variants were not evaluated')",
+    "tool": "litert-torch",
+    "tool_version": "0.9.4 (litert-converter 0.4.0; torch 2.13.0; Python 3.12.12 per conversion/README.md)"
+  },
+  "cross_runtime": [],
+  "delegation": {
+    "backend": "gpu_mldrift",
+    "blocking_ops": [
+      "CONV_2D",
+      "ADD",
+      "DEPTHWISE_CONV_2D",
+      "PAD",
+      "SUM",
+      "MUL",
+      "RESHAPE",
+      "SUB",
+      "TRANSPOSE",
+      "MAX_POOL_2D",
+      "CONCATENATION",
+      "AVERAGE_POOL_2D",
+      "LOGISTIC",
+      "MEAN",
+      "SQUARED_DIFFERENCE",
+      "RSQRT",
+      "FULLY_CONNECTED",
+      "SLICE",
+      "BATCH_MATMUL",
+      "SOFTMAX"
+    ],
+    "coverage_ops_pct": 4.6,
+    "lint_report_version": "1.1",
+    "litert_version": "2.2.0",
+    "matched_provenance_counts": {
+      "measured": 17,
+      "unmatched": 264
+    },
+    "partitions": 13
+  },
+  "model": {
+    "family": "pp-ocrv6-small",
+    "id": "pp-ocrv6-small__ppocrv6_small_rec_640_fp32",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/PP-OCRv6-Small-LiteRT",
+    "task": "image-to-text"
+  },
+  "pitfalls": [
+    "FP32 model storage and GPU computation precision are separate settings: the same four files passed only 27/37 tensor cases at the runtime's default GPU precision and 37/37 with explicit FP32 (card, 'FP32 model storage and GPU computation precision are separate settings').",
+    "NPU execution completed but its parity failed (19/37 tensor cases, 0/6 complete image cases); NPU is not a supported configuration for this release (card).",
+    "Outputs are probabilities; do not apply another softmax. The 18,710-entry dictionary already contains blank at index 0 and space at the final index; greedy CTC collapses repeats then drops blank (card, recognizer usage).",
+    "Graph rewrites are exact re-implementations, not approximations: the detector's two k2/s2 transposed convolutions became zero stuffing + flipped convolution, fused QKV split into 4D branches, spatial means split, clamps / hard sigmoid as ReLU differences; exact GELU retained (conversion/README.md)."
+  ],
+  "schema_version": "1.1"
+}

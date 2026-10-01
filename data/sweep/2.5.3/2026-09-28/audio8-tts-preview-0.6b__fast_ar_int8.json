@@ -1,0 +1,113 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x1x896:float32;1:int32;1:float32;1:int32;1x1x1x10:float32;4x1x2x10x64:float32;4x1x2x10x64:float32",
+  "license": "apache-2.0",
+  "model_id": "audio8-tts-preview-0.6b__fast_ar_int8",
+  "notes": "Fast AR step graph of the Audio8 DualAR TTS (4 layers, one codebook token per call, 10 calls per frame): inputs slow hidden state, token id, use_hidden flag, position, additive mask [1,1,1,10] and two rank-5 KV caches [4,1,2,10,64]; random int32 token/position inputs and random caches measure the graph, not speech; dynamic int8 FULLY_CONNECTED + int8 embedding tables; 68 MB",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-09-28",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 2.48,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-09-28",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: ERROR: Following operations are not supported by GPU delegate:",
+        "error: ADD: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_0;39",
+        "error: ADD: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_1;32",
+        "error: ADD: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_2;32",
+        "error: ADD: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_3;32",
+        "error: GATHER_ND: Operation is not supported.",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_0;39",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_0;40",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_0;41",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_1;32",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_1;;__main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_0;4",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_2;32",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_2;;__main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_0;4",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_3;32",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_3;;__main__.Wrap/arktts_port.FastAR_m/arktts_port.ArBlock_0;4",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m;24",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m;26",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m;28",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m;30",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m;32",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m;34",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m;36",
+        "error: RESHAPE: Tensor dimensions must be less than 5. __main__.Wrap/arktts_port.FastAR_m;38",
+        "error: RESHAPE: Tensor dimensions must be less than 5. k_all",
+        "error: RESHAPE: Tensor dimensions must be less than 5. v_all",
+        "error: SLICE: Slicing is unsupported for input with rank > 4",
+        "error: 58 operations will run on the GPU, and the remaining 225 operations will run on the CPU.",
+        "warning: %c[LiteRT]%c Model not fully compiled for webgpu. Partially delegating to WASM execution. background: #FFA000; color: black; font-weight: bold; padding: 2px 5px; border-radius: 3px; font-weight: bold;"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": 3.423,
+      "loads": true,
+      "max_abs_diff": 0.8894538879394531,
+      "max_rel_diff": 168.63736206304307,
+      "output_match": false,
+      "provenance": "measured",
+      "runs": true
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/Audio8-TTS-Preview-0.6b/resolve/main/fast_ar_int8.tflite"
+}

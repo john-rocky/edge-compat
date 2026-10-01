@@ -1,0 +1,73 @@
+{
+ "artifact": "gliformer_large_ner_s512_encoder_wfp16.tflite",
+ "artifact_sha256": "714c1ec99657484aed7aa9128b25b96bf922b0569be5b8acdb108870a0606da8",
+ "device": "galaxy-s26",
+ "model_id": "gliformer-large-ner__gliformer_large_ner_s512_encoder_wfp16",
+ "notes": "GLiFormer Large v1 NER LiteRT (litert-community/GLiFormer-Large-NER-LiteRT, published 2026-09-26, Hub revision dee6ced): the entity-extraction path of knowledgator/gliformer-large-v1 (rev d0a4e53d; DeBERTa-large 24-layer encoder + word BiLSTM + span scorer, 5 labels), encoder graph of the s512 split window (embedding LayerNorm + the 24 DeBERTa layers, window N=512 encoded tokens): inputs inputs_embeds [1,512,1024] / attention_mask [1,512] float32, output output_0 [1,1,512,1024] hidden states that the s512 head graph consumes unchanged (encoder_hidden). The split exists because the single s256 graph (14,341 operators, unpublished) crashed CompiledModel creation on the S26 GPU (SIGSEGV in the OpenCL driver, results/gpu_round4_s256_wfp16.json; LiteRT issue 10300), while the encoder alone compiles in one partition at every window. wfp16 storage: 144 float16 weight tensors read through a DEQUANTIZE to float32, everything else float32 (1,773 operators vs 1,629 in the fp32 reference). GpuOptions(precision = FP32) is the validated Android setting; with GpuOptions omitted (the runtime's default GPU precision) the s128 wfp16 graph compiled and returned finite logits but 0/10 entity span sets (recorded in the s128 wfp16 file). artifact_sha256 = the on-device sha256 of the pushed file (the run directory's *_hash_*.stdout.log), equal to the Hub LFS sha256 (resolve URL x-linked-etag, read 2026-09-26), public/manifest.json and the local public/ copy. Every number read programmatically from the lane's JSONs / raw outputs (build script kept in the session scratchpad); peak_mem_mb = the process VmHWM in bytes / 1e6 (the bytes are in metrics); model-level facts only, no op row derives from these records.",
+ "quantization": null,
+ "results": [
+  {
+   "accelerator": "gpu_mldrift",
+   "context_length": null,
+   "date": "2026-09-26",
+   "decode_tokens_per_s": null,
+   "delegated_ops": 1773,
+   "env": {
+    "device": "Galaxy S26 (SM-S942Q)",
+    "machine_label": "galaxy-s26-gliformer-gate",
+    "os_build": "Android 16 (SDK 36, build BP4A.251205.006)",
+    "runtime": "litert",
+    "runtime_version": "2.2.0",
+    "soc": "Qualcomm SM8850",
+    "vendor_sdk": null
+   },
+   "error": null,
+   "evidence": [
+    "Native LiteRT 2.2.0 CompiledModel C-API runner (gpu_runner, build gliformer-round5-variable-input-probes-loaded-rss-v3; vendor libLiteRt.so sha256 97355a36cb8a... + libLiteRtClGlAccelerator.so sha256 7c63d606a48e... pinned in android/round4/provenance.json (rounds 9 / 10 rebuilt the runner source against the same libraries, android/round9/provenance.json, android/round10/provenance.json)), one process per job, fixture inputs pushed as .f32 files and the model sha256-checked on the device (~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/round9/device_encoder_s512_gpu/007_hash_gliformer_large_ner_s512_encoder_wfp16.stdout.log). Sources: ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/gpu_round9_s512_split.json (encoder_gpu) + ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/device_round9_encoder_s512_gpu.json, raw outputs ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/round9/device_encoder_s512_gpu/output/NN.f32, runner stderr ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/round9/device_encoder_s512_gpu/017_run_graph.stderr.log, own-pid logcat ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/round9/device_encoder_s512_gpu/019_own_pid_logcat.stdout.log; public copy litert-community/GLiFormer-Large-NER-LiteRT/validation/s26_s512_split.json.",
+    "logcat/stderr: 'Replacing 1773 out of 1773 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).'; compile status 0 in 4136.0 ms; fully_accelerated=true; hardware_accelerators 'GPU only (bitmask 2)'; gpu_options_toml 'precision = 2'.",
+    "conditions (round 9/10 stage job 'encoder_s512_gpu', one native process for this graph only, USB powered, no cool-start rule and no GPU clock / thermal_status sample in this lane's runner): battery before 36.5 C 86 % -> after 41.1 C 85 %; runner wall 120.5 s; compile 4136.0 ms (status 0); compile peak RSS (VmHWM) 4,035,690,496 B, process peak 4,035,690,496 B, loaded RSS after the last readback 2,325,684,224 B (this graph alone; the two graphs of a split window were measured in separate processes, so these are stage values, not the application's residency).",
+    "pair (round 9 s512 split gate, ~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/gpu_round9_s512_split.json; public copy litert-community/GLiFormer-Large-NER-LiteRT/validation/s26_s512_split.json): the pulled GPU encoder hidden states of this stage fed the wfp16 head on the CPU in a separate process; 20/20 fixtures' entity span sets equal the official gliformer 0.1.2 fp32 result, max score diff 2.414e-04, max |dlogit| vs official 1.484e-02, all finite; sum of the two stage medians 1280.35 ms (not a same-process end-to-end measurement).",
+    "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) against the Mac ai-edge-litert 2.1.6 CompiledModel CPU run of the same graph on the same inputs (~/code/codex-conversions/2026-09-26/gliformer-large-v1/results/round9/encoder_s512_wfp16_cpu_outputs.npz from fixtures/round9/encoder_s512/NN.npz; the device inputs fixtures/round9/device_s512_encoder/NN.npz are array-equal to those, checked 2026-09-26), recomputed 2026-09-26 from the saved raw outputs: 17/20 fixtures pass over all 512 x 1024 hidden values (30 violating elements of 10,485,760; worst element |d| 1.625e-05 at |ref| 2.341e-03); max |d| 1.061e-04, max rel 3.021e+01. All 30 violating elements sit at valid (unmasked) token positions (30 valid / 0 padded) and at |ref| below 0.032 (an fp32 GPU vs CPU difference of about 1e-4 at near-zero references, over the 1e-5 absolute floor); the head's outputs computed from these hidden states pass the same rule (the head rows).",
+    "latency scope: all input lock/write/unlock + CompiledModel run + output lock/read/unlock; no file I/O; 5 timed runs after 2 warm-ups per fixture, 20 fixtures = 100 timed runs; median 931.49 / min 568.98 / max 1271.44 ms; per-fixture medians 571.62 ms (first) -> 930.17 ms (last) in run order."
+   ],
+   "failure_class": null,
+   "full_delegation": true,
+   "latency_p50_ms": 931.4937235,
+   "loads": true,
+   "max_abs_diff": 0.00010609626770019531,
+   "max_rel_diff": 30.214284896850586,
+   "metrics": {
+    "battery_temp_c_end": 41.1,
+    "battery_temp_c_start": 36.5,
+    "compile_peak_rss_bytes": 4035690496,
+    "fixtures": 20,
+    "iterations": 100,
+    "latency_max_ms": 1271.435156,
+    "latency_min_ms": 568.975365,
+    "load_compile_ms": 4135.989166,
+    "loaded_rss_bytes": 2325684224,
+    "pair_exact_span_sets_vs_official": 20,
+    "pair_max_abs_dlogit_vs_official": 0.014841079711914062,
+    "pair_max_score_diff_vs_official": 0.00024139881134033203,
+    "pair_sum_of_stage_medians_ms": 1280.352161,
+    "peak_rss_bytes": 4035690496,
+    "per_fixture_median_first_ms": 571.618854,
+    "per_fixture_median_last_ms": 930.171667,
+    "repetitions_per_fixture": 5,
+    "shared_rule_pass_fixtures": 17,
+    "shared_rule_violating_elements": 30,
+    "shared_rule_violating_elements_valid_positions": 30,
+    "warmups_per_fixture": 2
+   },
+   "output_match": false,
+   "peak_mem_mb": 4035.69,
+   "prefill_tokens_per_s": null,
+   "provenance": "measured",
+   "runs": true,
+   "signature": "GpuOptions precision=FP32",
+   "total_ops": 1773,
+   "ttft_ms": null
+  }
+ ],
+ "schema_version": "1.0"
+}

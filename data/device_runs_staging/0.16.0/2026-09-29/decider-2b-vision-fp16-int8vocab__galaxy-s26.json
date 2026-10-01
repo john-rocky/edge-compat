@@ -1,0 +1,62 @@
+{
+  "artifact": "decider-2b-vision_v7c.litertlm",
+  "artifact_sha256": "72f6836051f54ad32f7804e06bc0dae2e022a22f97d864d480f39710f17357bc",
+  "device": "galaxy-s26",
+  "model_id": "decider-2b-vision-fp16-int8vocab",
+  "notes": "Published as decider-2b-vision_fp16-int8vocab.litertlm (the lane's name decider-2b-vision_v7c.litertlm; content unchanged) in litert-community/decider-2b-vision-LiteRT (Hub commit 6c024e94, 2026-09-29): the Hub LFS sha256 equals the measured file's (72f68360..., 4,498,201,472 B). The device-side sha256 after the push equals it (results/s26_r5.json legs.L2.push). Runtime: litert_lm_advanced_main of the S4 kit in /data/local/tmp/gputest_s4 (binary sha256 e5de2d90..., mtime 2026-08-17; the kit directory the committed 0.16.0 'S4 kit' records name) with the kit's libLiteRtGpuAccelerator.so (1287e5ae...), attributed to LiteRT-LM v0.16.0 by this lane and by the granite42 lane ('litert-lm v0.16.0 release kit'); the binary prints no version string. The bundles were written by litert-lm-builder 0.17.1; the v0.16.0 kit loaded them. One fresh process per row: '[image:<row>.png]' + the prompt text the Mac runtime sent, via --input_prompt_file, with --max_num_tokens=4096 --max_num_images=1 --max_output_tokens=3 --sampler_backend=cpu --disable_input_prompt_as_hint=true --benchmark and --vision_backend = --backend; greedy (no sampler params in the bundle); runtime default cache next to the bundle. Rows: six published single-question image rows fixed before any device result (per family the smallest fp32-graph top-1/top-2 logit gap). Pass line: prefill = the upstream input length and the first generated token = upstream fp32's vocabulary top-1 (Mapika/decider-2b-vision rev 863e2908, the checkpoint's own decider/vision.py, transformers 5.17.0, fp32 CPU). The runtime path returns text only, so probabilities were not measured on the phone. A device-side guard killed any process above 6,347,656 kB VmHWM or below 409,600 kB MemAvailable. Source: litertlm-convert decider2bv_work round 5 (results/s26_r5.json, results/s26_r5_rows/, logs/s26_r5/), 2026-09-29 02:32-02:54 JST. This leg's first process (the published row game_pong_atari_level, GPU, cold) was killed by that guard during engine creation; by the rule fixed before the run a killed process ended the leg, so no other row ran. CPU was not run (the file's XNNPACK weight cache alone is 6.0 GB, above the ~6 GB line at which this phone has restarted its framework).",
+  "quantization": "decoder fully connected weights fp16, output head dynamic int8, token embedding int8 (channelwise); vision encoder and adapter fp16; fp32 activation preference declared on the decoder section",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-09-29",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-decider2bv-gate",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "KILLED_OVER_RAM VmHWM_KB=6396212 CAP_KB=6347656; EXIT=137 (killed by the harness's VmHWM guard during engine creation, OpenCL initialisation of prefill_1024)",
+      "evidence": [
+        "VERBOSE: Replacing 25945 out of 25945 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024). (the only decoder signature that printed its delegation line before the kill; full delegation of the other six was not observed)",
+        "I0000 00:00:1790617292.162491   27340 delegate_kernel.cc:877] Initializing OpenCL-based API from serialized data. (last stderr line)",
+        "KILLED_OVER_RAM VmHWM_KB=6396212 CAP_KB=6347656",
+        "EXIT=137",
+        "PEAK_VmHWM_KB=6396212 MIN_MEMAVAILABLE_KB=693688 (MEMAVAILABLE_KB_BEFORE=6894912)",
+        "VmHWM rose steadily from about 13 s after launch until the kill (243 polls in r5_L2_v7c_gpu_game_pong_atari_level.poll); peak_mem_mb is left null because the value at the kill is a lower bound of what engine creation needs, not a completed run's peak",
+        "lmkd reclaimed three cached apps during the run: com.samsung.android.app.reminder / com.samsung.android.privateaccesstokens / com.samsung.android.scpm",
+        "no reboot, no framework restart: /proc/uptime 519637.02 -> 519692.12, system_server pid 4856 -> 4856",
+        "conditions before the run: thermal status 0, SKIN 37.9 C, every cpufreq policy at cpuinfo_max, rested 180.7 s",
+        "device fingerprint samsung/m1qjpnx/m1q:16/BP4A.251205.006/S942QOPS1AZF2_SJP1AZF2:user/release-keys",
+        "files: litertlm-convert/decider2bv_work/logs/s26_r5/r5_L2_v7c_gpu_game_pong_atari_level.err / .out / .probe.txt / .poll; litertlm-convert/decider2bv_work/results/s26_r5_rows/r5_L2_v7c_gpu_game_pong_atari_level.json"
+      ],
+      "failure_class": "memory_cap_exceeded",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "max_num_tokens": 4096,
+        "memavailable_before_mb": 7060.39,
+        "memory_cap_mb": 6500.0,
+        "min_memavailable_mb": 710.34,
+        "vmhwm_at_kill_mb": 6549.72,
+        "wall_s": 55.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

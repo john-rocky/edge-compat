@@ -19,7 +19,7 @@ import {
 } from './catalog.ts';
 import { type SweepEnv, buildEnv } from './env.ts';
 import { buildFixtureInputs, loadFixtureFile } from './inputs.ts';
-import { canonicalStringify, compareOutputs, p50 } from './results.ts';
+import { canonicalStringify, compareOutputs, isFatalRunLine, p50 } from './results.ts';
 import { type SweepServer, startServer } from './server.ts';
 import { validateSweepResult } from './validate.ts';
 
@@ -281,12 +281,11 @@ async function measureBackend(params: {
       return { record, outputs };
     }
     // A run can resolve with outputs while the backend logged a fatal
-    // preparation error ("Node ... failed to prepare.", "failed to create
-    // XNNPACK runtime") — the buffers were never computed and the sub-ms
-    // latency is an error path, not a measurement.
-    const fatal = (handle?.evidence ?? []).find((line) =>
-      /failed to prepare|failed to create .* runtime/i.test(line),
-    );
+    // preparation or allocation error ("Node ... failed to prepare.", "failed
+    // to create XNNPACK runtime", "Failed to allocate tensors") — the buffers
+    // were never computed and the sub-ms latency is an error path, not a
+    // measurement (README "Traps"; `isFatalRunLine` lists the lines).
+    const fatal = (handle?.evidence ?? []).find((line) => isFatalRunLine(line));
     if (fatal !== undefined) {
       record.failure_class = 'backend_error';
       record.error = `backend reported a fatal error during run: ${fatal}`;

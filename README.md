@@ -220,6 +220,20 @@ labeled heuristic → report.
   construct a probe without reopening the model (consumed by the Phase 8 probe
   suite). Custom ops are listed separately; they are outside the matrix
   vocabulary and not probeable.
+- **Constraint keys the linter computes** (matched, never reported — pinned
+  reports do not change): `rank` and `dynamic_shape` of the output; per input
+  `operand_a..d` (`constant` | `activation`) and `operand_a_rank..d_rank`; for the
+  PAD family `axis` (`innermost` | `non-innermost` | `none` | `unknown`, read from
+  the constant paddings); for `FULLY_CONNECTED` / `CONV_2D` / `DEPTHWISE_CONV_2D`
+  `weight_dtype` and `weight_source` (`constant` | `DEQUANTIZE` | `activation`);
+  and `consumer_ops` (the distinct builtins consuming output 0, `+`-joined).
+  These are what the rows of the LiteRT #10445 class name — a rank-2 runtime
+  tensor plus a rank-3 constant (#10231), a rank-3 `PAD` on a non-innermost
+  axis (#9272), an int8 `FULLY_CONNECTED` feeding an `ADD` (#9277), an
+  explicit-dequantize `FULLY_CONNECTED` (#9523) — so those measured rows match
+  nodes instead of staying documentation-only. Any other constraint key still
+  matches by equality against this dict; a key the linter does not compute
+  never matches (unknowable never resolves toward a verdict).
 - **`--backend`** is optional and defaults to the matrix file's backend; a
   mismatch is a usage error — one snapshot per (backend × litert_version),
   and no output ever presents one backend's result as another's.

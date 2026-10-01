@@ -1,0 +1,85 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x1024:float32;1x4:float32",
+  "license": "apache-2.0",
+  "model_id": "laya-english__laya_td_act_head_fp32",
+  "notes": "act-head scorer graphs (1 MB); the encoder graphs are over the sweep ceiling",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-09-25",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 0.085,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-09-25",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 0.438,
+      "loads": true,
+      "max_abs_diff": 8.940696716308594e-8,
+      "max_rel_diff": 3.2106514861356576e-7,
+      "output_match": true,
+      "provenance": "measured",
+      "runs": true
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/Laya-English-LiteRT/resolve/main/typed-decisions/laya_td_act_head_fp32.tflite"
+}

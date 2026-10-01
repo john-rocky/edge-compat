@@ -1,0 +1,288 @@
+{
+ "schema_version": "1.2",
+ "litert_version": "2.2.0",
+ "backend": "gpu_metal_mac",
+ "generated_at": "2026-09-10",
+ "entries": [
+  {
+   "op": "PAD",
+   "dtypes": [
+    "float32"
+   ],
+   "constraints": {
+    "rank": 3,
+    "axis": "non-innermost"
+   },
+   "status": "incorrect",
+   "provenance": "measured",
+   "evidence": {
+    "source_model": "synthetic 5-op graph ADD-MUL-PAD-ADD-MUL at the LiteRT #9272 shape ([16,32,1] -> [16,64,1], middle axis); litert_gpu_toolkit bisect names op 2 PAD, prefix through op 1 matches CPU",
+    "litert_version": "ai-edge-litert 2.2.0 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
+    "date": "2026-09-10"
+   },
+   "conditions": "still present on the 2.2.0 wheel: a rank-3 PAD on a non-innermost axis returns the tensor shifted by one row along the outermost axis (row 0 zeros). Same result at fp16 and enforce_f32. Innermost-axis pads and the rank-4 form are correct (LiteRT #9272 flavor matrix). Reproduced here inside a graph, not only as a single op: the bisect walks straight to the PAD. Upstream answer (LiteRT #9272, 2026-10-01T03:50:16Z, https://github.com/google-ai-edge/LiteRT/issues/9272#issuecomment-5924357456): the row shift \"is tied to how MLDrift maps lower-rank tensors into its 4D `BHWC` representation\"; \"promoting the tensor to rank-4 via `RESHAPE` / `EXPAND_DIMS` (or using `CONCAT`) is the recommended workaround\" - the rewrite below. Closed as a duplicate of the tracking issue LiteRT #10445 (opened 2026-10-01: standard shape broadcasting, or automatic 4D RESHAPE insertion for lower- and mixed-rank inputs, in the MLDrift GPU delegate).",
+   "rewrite_hints": [
+    {
+     "symptom": "per-head or per-row data lands one row off after a pad; the graph reports full GPU residency",
+     "rewrite": "unsqueeze to rank 4 before padding, or express the pad as CONCATENATION with an explicit zero block",
+     "expected_effect": "measured on litert-lm 0.16.0 (gpu_metal_mac__0.16.0 PAD entry): kernel bit-exact after the rewrite"
+    }
+   ]
+  },
+  {
+   "op": "SUM",
+   "dtypes": [
+    "float32"
+   ],
+   "constraints": {
+    "precision": "fp16 (default)",
+    "reduced_total": "> 65504"
+   },
+   "status": "incorrect",
+   "provenance": "measured",
+   "evidence": {
+    "source_model": "litert-community/efficientnet_b0 (efficientnet_b0.tflite, uniform [0,1) input seed 0), litert-community/Matcha-TTS matcha_decoder_fp16.tflite and litert-community/Gecko-110m-en Gecko_256_f32.tflite (random token ids); litert_gpu_toolkit bisect: efficientnet op 8 SUM [1,112,112,32]->[1,32] returns Inf/NaN in 6 of 32 channels, exactly the channels whose CPU total exceeds 65504; Matcha op 76 SUM [1,8,32,512]->[1,8,32] 53 NaN of 256, tensor scale 6.4e4; Gecko op 19 SUM [1,256,768]->[1,256] (the LayerNorm variance sum) 34 NaN of 256, tensor scale 6.4e4",
+    "litert_version": "ai-edge-litert 2.2.0 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
+    "date": "2026-09-10"
+   },
+   "conditions": "SUM accumulates in fp16 under the default GPU precision, so any reduction whose running total passes 65504 returns Inf, which reaches the graph output as NaN (LiteRT #9249) — squeeze-excite pooling (efficientnet_b0), an attention-side reduction (Matcha) and a LayerNorm variance (Gecko) all trip it. The element count is irrelevant, only the magnitude of the total. With enforce_f32 the same files verify (efficientnet_b0 max abs diff 3.7e-5, Gecko 1.4e-7). AVERAGE_POOL_2D-lowered pooling (efficientnet_b1) does not overflow",
+   "rewrite_hints": [
+    {
+     "symptom": "whole output NaN on GPU, correct on CPU; bisect stops at the first SUM whose CPU output exceeds 65504",
+     "rewrite": "run with GpuOptions(enforce_f32=True), or lower the reduction as MEAN / AVERAGE_POOL_2D (divides while accumulating) or a hierarchical mean (litert_gpu_toolkit.hierarchical_mean)",
+     "expected_effect": "measured: efficientnet_b0 verifies at enforce_f32 (max abs diff 3.7e-5 vs CPU)"
+    }
+   ]
+  },
+  {
+   "op": "ADD",
+   "dtypes": [
+    "float32"
+   ],
+   "constraints": {
+    "rank": 2,
+    "operand_b": "constant",
+    "shape": "[4096,256]"
+   },
+   "status": "incorrect",
+   "provenance": "measured",
+   "evidence": {
+    "source_model": "litert-community/SAM2.1-Hiera-Tiny-Mask-Decoder sam2_tiny_mask_decoder_fp16.tflite (v1 export) + single-op control graphs; bisect names op 41 ADD([4096,256] activation, [4096,256] const), the flattened image embedding plus its positional encoding; sites 41, 169, 261",
+    "litert_version": "ai-edge-litert 2.2.0 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
+    "date": "2026-09-10"
+   },
+   "conditions": "silently miscomputed at both fp16 and enforce_f32: the single op ADD([4096,256] activation, [4096,256] constant) returns max abs diff 7.4 vs CPU (values ~N(0,2)); the identical add at rank 3 ([1,4096,256]) is bit-exact. Whole-model control: lifting only the three rank-2 constant adds of the SAM 2.1 mask decoder v1 to rank 3 (RESHAPE-ADD-RESHAPE) takes the decoder from max abs diff 18.9 to 1.07e-4 at enforce_f32, the same figure as the rank-4 v2 export. On this backend the v1/v2 difference reported in LiteRT #8619 is these adds, not the attention rank; the Pixel 8a result in that issue is not re-measured here. Upstream answers (2026-10-01): on LiteRT #8619 (https://github.com/google-ai-edge/LiteRT/issues/8619#issuecomment-5924355840, 03:50:06Z) the decoder miscompute is \"a known limitation in the MLDrift GPU backend's lower-rank (rank-3) to 4D `BHWC` layout mapping. For now, reshaping/promoting lower-rank attention tensors to rank-4 is the required workaround\"; on LiteRT #10231 (https://github.com/google-ai-edge/LiteRT/issues/10231#issuecomment-5924354052, 03:49:56Z) the rank-2 + rank-3 constant ADD is \"a known limitation in the MLDrift GPU backend regarding shape broadcasting for mixed/lower-rank tensors (especially when constant tensors are involved, which currently bypass automatic 4D broadcast reshape insertion)\"; \"inserting an explicit `RESHAPE` or `EXPAND_DIMS` before the `ADD` is the recommended workaround\". The #8619 answer names the attention rank, the site measured on this backend is the rank-2 constant add; both are lower-rank inputs in the class of the tracking issue LiteRT #10445 (opened 2026-10-01: standard shape broadcasting, or automatic 4D RESHAPE insertion for lower- and mixed-rank inputs, in the MLDrift GPU delegate), as a duplicate of which both issues were closed.",
+   "rewrite_hints": [
+    {
+     "symptom": "an encoder or decoder that flattens to [N,C] before adding a learned position embedding is wrong from that add on; the graph reports full residency",
+     "rewrite": "keep the activation rank >= 3 with a leading batch dim around the add (RESHAPE [N,C]->[1,N,C], ADD, RESHAPE back)",
+     "expected_effect": "measured: SAM 2.1 mask decoder v1 max abs diff 18.9 -> 1.07e-4 vs CPU at enforce_f32 with only the three adds lifted",
+     "transform_id": "rank2-elementwise-const-to-rank3"
+    }
+   ]
+  },
+  {
+   "op": "MUL",
+   "dtypes": [
+    "float32"
+   ],
+   "constraints": {
+    "rank": 2,
+    "operand_b": "constant rank 3 [1,1,C]",
+    "output_rank": 3
+   },
+   "status": "incorrect",
+   "provenance": "measured",
+   "evidence": {
+    "source_model": "litert-community/Matcha-TTS matcha_decoder_fp16.tflite (six sites: ops 161, 327, 488, 641, 795, 966) and litert-community/Qwen3-TTS-12Hz-0.6B-Base codec_decoder_fp32.tflite (two sites: ops 637, 667) + single-op control graphs; litert_gpu_toolkit bisect at enforce_f32 names op 161 MUL([512,1024] activation, [1,1,1024] const) -> [1,512,1024] in Matcha and op 637 MUL([128,1024], [1,1,1024]) in the codec decoder",
+    "litert_version": "ai-edge-litert 2.2.0 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
+    "date": "2026-09-10"
+   },
+   "conditions": "silently miscomputed at both fp16 and enforce_f32: MUL of a rank-2 activation by a rank-3 [1,1,C] constant with a rank-3 result returns max abs diff 14 vs CPU as a single op; the same MUL with the activation already rank 3 ([1,512,1024]) is bit-exact. Whole-model controls: reshaping the activation to rank 3 at the six Matcha sites takes the flow-matching decoder from max abs diff 3.9 to 1.3e-5 at enforce_f32 (the fp16 run still fails on the SUM overflow entry above); the same lift at the two Qwen3-TTS codec-decoder sites takes it from 0.20 to 1.8e-6",
+   "rewrite_hints": [
+    {
+     "symptom": "a decoder whose per-channel scale/shift (time embedding, FiLM) is applied to a [T,C] activation by broadcasting a [1,1,C] constant is wrong from that op on",
+     "rewrite": "reshape the activation to [1,T,C] before the broadcast multiply (same fix family as the rank-2 ADD entry)",
+     "expected_effect": "measured: Matcha decoder max abs diff 3.9 -> 1.3e-5 and Qwen3-TTS codec decoder 0.20 -> 1.8e-6 vs CPU at enforce_f32",
+     "transform_id": "rank2-elementwise-const-to-rank3"
+    }
+   ]
+  },
+  {
+   "op": "BATCH_MATMUL",
+   "dtypes": [
+    "float32"
+   ],
+   "constraints": {
+    "operands": "both runtime",
+    "N": 40,
+    "M_mod_64": "1..61",
+    "batch": ">= 2"
+   },
+   "status": "incorrect",
+   "provenance": "measured",
+   "evidence": {
+    "source_model": "litert-community/PP-OCRv5-LiteRT ppocr_rec_fp16.tflite and litert-community/moonshine-tiny moonshine_tiny_5s_f32.tflite + single-op control graphs against a numpy reference; bisect at enforce_f32 names PP-OCR op 705 BATCH_MATMUL [8,40,15] x [8,15,40] -> [8,40,40] (SVTR attention scores, 8 heads, head dim 15, sequence 40) and moonshine encode op 77, the odml.scaled_dot_product_attention composite whose decomposition holds BATCH_MATMUL [8,207,207] x [8,207,40] (8 heads, head dim 40, 207 frames)",
+    "litert_version": "ai-edge-litert 2.2.0 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
+    "date": "2026-09-10"
+   },
+   "conditions": "silently miscomputed at both fp16 and enforce_f32 for runtime x runtime operands whose output width is N = 40: single-op probes (rank 3 [B,M,K] and rank 4 [1,B,M,K]) are wrong (max abs diff 10-80 on N(0,1) inputs, CPU exact) exactly when M mod 64 is in 1..61 (M = 1, 8, 40, 56, 65, 96, 200, 207, 1000, 1025 wrong; M = 62, 63, 64, 126, 127, 128, 192, 256, 320, 1024 right) and the batch is at least 2 (batch 1 right at every M tried; batch 2 right at M = 40 and wrong at M = 207; batch 3..64 wrong at every failing M). K does not matter (1..256). Every other N tried is right: 4..36 and 44..264 in steps of 4, and 41, at M = 40, 56, 207 and 4096. Extent stated is exactly the shapes probed; the mechanism is not known",
+   "rewrite_hints": [
+    {
+     "symptom": "an attention block with head dim 40 (moonshine: attn @ V) or sequence length 40 (PP-OCRv5 recognizer crops: Q @ K^T) is wrong on GPU while the rest of the graph is fine; the graph reports full residency",
+     "rewrite": "none verified model-side; run that model on CPU (as the LiteRT.js report #9661 does), or pad the output width to 41/44 — the padded shapes are correct as single ops",
+     "expected_effect": "untested on a model — the padding workaround is inferred from the single-op probes (N = 41 and 44 correct at every M tried)"
+    }
+   ]
+  },
+  {
+   "op": "DYNAMIC_UPDATE_SLICE",
+   "dtypes": [
+    "float32"
+   ],
+   "constraints": {
+    "placement": "CPU partition of a GPU|CPU compile",
+    "graph": "MediaPipe-style LLM export (_seq128_*_ekv1280)"
+   },
+   "status": "crash",
+   "provenance": "measured",
+   "evidence": {
+    "source_model": "litert-community/Qwen2.5-1.5B-Instruct, DeepSeek-R1-Distill-Qwen-1.5B, Qwen2.5-0.5B-Instruct (seq128_q8_ekv1280) and SmolLM-135M-Instruct (seq128_f32_ekv1280); crash report Python-2026-09-10-092451.ips: SIGSEGV in tflite::ops::builtin::dynamic_update_slice::DynamicUpdateSlice <- Subgraph::InvokeImpl <- LiteRtCompiledModelT::Run",
+    "litert_version": "ai-edge-litert 2.2.0 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
+    "date": "2026-09-10"
+   },
+   "conditions": "GPU-only compile is refused (CAST int64, GATHER_ND, GREATER_EQUAL/LESS_EQUAL with const inputs: '1531 operations will run on the GPU, and the remaining 57 operations will run on the CPU'); the GPU|CPU compile succeeds, and the first run of either signature (decode or prefill_128) then segfaults inside the CPU-resident DYNAMIC_UPDATE_SLICE kernel (KERN_INVALID_ADDRESS at 0x0 in _platform_memmove). CPU-only compile and run of the same four files pass with random token ids. Reproduced on all four files at both fp16 and enforce_f32; the process dies, so no numerics can be read and the op-level bisect cannot start",
+   "rewrite_hints": [
+    {
+     "symptom": "check_gpu_compatibility on a MediaPipe-style LLM .tflite kills the Python process (rc -11) right after 'Initializing Metal-based API from graph'",
+     "rewrite": "none model-side tested; run these exports on CPU, or through the LiteRT-LM .litertlm path that ships them for GPU",
+     "expected_effect": "untested — recorded so that the sweep row is not mistaken for a numerics result"
+    }
+   ]
+  },
+  {
+   "op": "MUL",
+   "dtypes": [
+    "float32"
+   ],
+   "constraints": {
+    "precision": "fp16 (default)",
+    "shape": "[1,32,1,1] operands",
+    "context": "GroupNorm tail, CPU-fallback graph"
+   },
+   "status": "incorrect",
+   "provenance": "measured",
+   "evidence": {
+    "source_model": "litert-community/Bonsai-Image-ternary-4B vae_dec_fp32.tflite (882 ops, GPU|CPU compile: GATHER_ND falls back); litert_gpu_toolkit bisect at fp16 stops in the first GroupNorm's tail: op 43 MUL(rsqrt(var+eps) [1,32,1,1], gamma const [1,32,16,1]) -> [1,32,16,1] when the mean tensor is exposed through a RESHAPE copy, op 44 MUL(mean [1,32,1,1], scalar const) when it is exposed directly; prefix through op 42 matches CPU either way",
+    "litert_version": "ai-edge-litert 2.2.0 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
+    "date": "2026-09-10"
+   },
+   "conditions": "at the default fp16 precision the whole decoder differs from CPU by 0.58 max abs and is bit-exact (0.0) at enforce_f32. The bisect pins the divergence to the [1,32,1,1] chain that closes the first GroupNorm: the per-channel mean (values -0.06 .. -8.5, well inside fp16 range) reads back as -inf in 26 of 32 channels and the rsqrt x gamma product [1,32,16,1] as all zeros, at cut 43 with the mean exposed through a RESHAPE copy; exposed directly, cut 43 is clean and cut 44 (the mean times a scalar) shows the same -inf/zeros pair. Which op is named flips with how the mean tensor is exposed. Mechanism not known; no single-op repro attempted",
+   "rewrite_hints": [
+    {
+     "symptom": "an image-decoder VAE is wrong on GPU at the default precision from its first GroupNorm on, correct at enforce_f32; the graph needs CPU fallback for a GATHER_ND",
+     "rewrite": "run with GpuOptions(enforce_f32=True); or express GroupNorm's shift as (beta - mean * scale) with rank-4 broadcasts (litert_gpu_toolkit ManualGroupNorm) — untested against this fault",
+     "expected_effect": "measured: enforce_f32 gives max abs diff 0.0 vs CPU on the whole decoder"
+    }
+   ]
+  },
+  {
+   "op": "FULLY_CONNECTED",
+   "dtypes": [
+    "int8"
+   ],
+   "constraints": {
+    "weight_dtype": "int8 (per-channel, dynamic-range)",
+    "input_rank": 2,
+    "input_shape": "[63,1024]"
+   },
+   "status": "crash",
+   "provenance": "measured",
+   "evidence": {
+    "source_model": "litert-community/parakeet-ctc-0.6b parakeet_ctc_0.6b_5s_i8.tflite (encode: 1578 ops, 193 FULLY_CONNECTED, 292 int8 weight tensors; ops 40, 105, ... are FULLY_CONNECTED([63,1024] activation, int8 [1024,1024]) -> [63,1024], the shape the refused kernel names)",
+    "litert_version": "ai-edge-litert 2.2.0 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
+    "date": "2026-09-10"
+   },
+   "conditions": "both the GPU-only and the GPU|CPU compile fail at kernel creation, at fp16 and enforce_f32 alike: `Failed to create DelegateKernelLiteRtMetal: INVALID_ARGUMENT: Unable to parse bc coord for BATCH axis. Layout is bhwc ... descriptor=float16, TensorStorageType::BUFFER, layout: bhwc, shape: {bhwc, {63, 1, 1, 1024}}` then `Failed to initialize kernel` / `Restored original execution plan`. The refused shape is the rank-2 [63,1024] activation of the attention projections' dynamic-range int8 FULLY_CONNECTED (63 = frames of the 5 s window). Same message as LiteRT #9277, reported on the Mali ML Drift backend for DRQ int8 FULLY_CONNECTED + ADD on rank-3 input — here on Metal 2.2.0. No numerics can be read; the op-level bisect cannot start. Upstream answer (LiteRT #9277, 2026-10-01T03:50:26Z, https://github.com/google-ai-edge/LiteRT/issues/9277#issuecomment-5924359159): the error \"is caused by MLDrift's batch broadcast coordinate parser failing when a rank-3 tensor is mapped to 4D `BHWC` during fused kernel codegen. Currently, using rank-2 or explicitly reshaping to a 4D tensor before the operation is the only workaround\". Closed as a duplicate of the tracking issue LiteRT #10445 (opened 2026-10-01: standard shape broadcasting, or automatic 4D RESHAPE insertion for lower- and mixed-rank inputs, in the MLDrift GPU delegate). The refused activation here is already rank 2, one of the two workarounds that answer names; the rank-3 rewrite below was inferred from #9277 before the answer, which names rank 3 as the failing mapping.",
+   "rewrite_hints": [
+    {
+     "symptom": "the whole int8 export is refused by the GPU accelerator while the float export of the same model compiles",
+     "rewrite": "keep the activation feeding an int8 FULLY_CONNECTED at rank 3 with a leading batch dim ([1,63,1024]); the rank-3 projections of the same graph (ops 16, 74, 81: [1,63,4096] x int8 [1024,4096]) are not the ones named by the error",
+     "expected_effect": "untested here — inferred from the refused shape and from #9277; verify with the bisect once the file compiles"
+    },
+    {
+     "symptom": "the whole int8 export is refused with 'Unable to parse bc coord for BATCH axis' while the float export compiles",
+     "rewrite": "reshape the activation feeding the int8 FULLY_CONNECTED to a rank-4 tensor before the op (the 4D workaround named on LiteRT #9277)",
+     "expected_effect": "not measured here - verify with the bisect once the file compiles"
+    }
+   ]
+  },
+  {
+   "op": "ADD",
+   "dtypes": [
+    "float32"
+   ],
+   "constraints": {
+    "rank": 3,
+    "operand_a": "activation",
+    "operand_a_rank": 2,
+    "operand_b": "constant",
+    "operand_b_rank": 3
+   },
+   "status": "incorrect",
+   "provenance": "measured",
+   "evidence": {
+    "source_model": "LiteRT #10231 repro graphs add_rank2_input_const_rank3.tflite (ADD runtime [85,16] + constant [1,85,16], sha256 c64a285a…) and fc_add_const_rank3.tflite (FULLY_CONNECTED then ADD runtime [1024,768] + constant [1,1024,768], sha256 ac940c58…), with their RESHAPE-fronted (add_reshape3_const_rank3, prefix2-reshape3) and rank-3-input (add_rank3_input_const_rank3) controls — edge-llm-bench releases add-rank-repro-shapes-2026-09-29 and metal-add-repro-2026-09-24; tools/rank3_prelint_measure_metal_add.py, deterministic input pattern, CPU accelerator as the reference; litertlm-convert tools/rank3_prelint_measure_metal_add_20261001.log",
+    "litert_version": "ai-edge-litert 2.2.0 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
+    "date": "2026-10-01"
+   },
+   "conditions": "silently miscomputed at the default precision with CompiledModel.is_fully_accelerated() true: ADD(runtime [85,16], constant [1,85,16]) returns max abs diff 2.0 / mean abs 0.73 / cosine 0.742 vs the CPU accelerator (inputs in [-1, 1], table in [-1.8, 1.8]), and ADD(runtime [1024,768] from a FULLY_CONNECTED, constant [1,1024,768]) max abs 3.81 / cosine 0.583. The same graphs with the runtime operand reshaped to [1,85,16] / [1,1024,768] in front of the ADD, and the rank-3-input forms, are fp16-rounding exact (max abs 0.0016 at [85,16], 0.022 at [1024,768]; cosine 1.000000 / 0.999996; the rank-3 ADD row). Identical numbers on 2.1.6 (gpu_metal_mac__2.1.6 row of the same date). Upstream answer (LiteRT #10231, 2026-10-01T03:49:56Z, https://github.com/google-ai-edge/LiteRT/issues/10231#issuecomment-5924354052): \"a known limitation in the MLDrift GPU backend regarding shape broadcasting for mixed/lower-rank tensors (especially when constant tensors are involved, which currently bypass automatic 4D broadcast reshape insertion)\"; \"inserting an explicit `RESHAPE` or `EXPAND_DIMS` before the `ADD` is the recommended workaround\" - the rewrite below. Closed as a duplicate of the tracking issue LiteRT #10445.",
+   "rewrite_hints": [
+    {
+     "symptom": "a [N,C] activation plus a [1,N,C] constant table (a position embedding, a broadcast bias) is wrong from that add on; the graph reports full residency",
+     "rewrite": "RESHAPE the runtime operand to the constant's rank ([N,C] -> [1,N,C]) in front of the ADD; the output is already rank 3, nothing is reshaped back",
+     "expected_effect": "measured on 2.2.0 and 2.1.6: max abs diff 2.0 -> 0.0016 at [85,16] and 3.81 -> 0.022 at [1024,768] (fp16 rounding), cosine 0.742 -> 1.000000",
+     "transform_id": "mixed-rank-elementwise-const-to-rank3"
+    }
+   ]
+  },
+  {
+   "op": "ADD",
+   "dtypes": [
+    "float32"
+   ],
+   "constraints": {
+    "rank": 3,
+    "operand_a": "activation",
+    "operand_a_rank": 3,
+    "operand_b": "constant",
+    "operand_b_rank": 3
+   },
+   "status": "delegated",
+   "provenance": "measured",
+   "evidence": {
+    "source_model": "LiteRT #10231 repro graphs add_rank2_input_const_rank3.tflite (ADD runtime [85,16] + constant [1,85,16], sha256 c64a285a…) and fc_add_const_rank3.tflite (FULLY_CONNECTED then ADD runtime [1024,768] + constant [1,1024,768], sha256 ac940c58…), with their RESHAPE-fronted (add_reshape3_const_rank3, prefix2-reshape3) and rank-3-input (add_rank3_input_const_rank3) controls — edge-llm-bench releases add-rank-repro-shapes-2026-09-29 and metal-add-repro-2026-09-24; tools/rank3_prelint_measure_metal_add.py, deterministic input pattern, CPU accelerator as the reference; litertlm-convert tools/rank3_prelint_measure_metal_add_20261001.log",
+    "litert_version": "ai-edge-litert 2.2.0 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
+    "date": "2026-10-01"
+   },
+   "conditions": "the correct form of the mixed-rank row: ADD(runtime [1,85,16], constant [1,85,16]) and the RESHAPE-fronted [85,16] graph are fully accelerated and fp16-rounding exact vs the CPU accelerator (max abs 0.0016, cosine 1.000000); at [1,1024,768] max abs 0.022, cosine 0.999996. Extent stated is exactly these shapes at the default precision"
+  },
+  {
+   "op": "RESHAPE",
+   "dtypes": [
+    "float32"
+   ],
+   "constraints": {
+    "operand_b": "constant"
+   },
+   "status": "delegated",
+   "provenance": "measured",
+   "evidence": {
+    "source_model": "LiteRT #10231 repro graphs add_rank2_input_const_rank3.tflite (ADD runtime [85,16] + constant [1,85,16], sha256 c64a285a…) and fc_add_const_rank3.tflite (FULLY_CONNECTED then ADD runtime [1024,768] + constant [1,1024,768], sha256 ac940c58…), with their RESHAPE-fronted (add_reshape3_const_rank3, prefix2-reshape3) and rank-3-input (add_rank3_input_const_rank3) controls — edge-llm-bench releases add-rank-repro-shapes-2026-09-29 and metal-add-repro-2026-09-24; tools/rank3_prelint_measure_metal_add.py, deterministic input pattern, CPU accelerator as the reference; litertlm-convert tools/rank3_prelint_measure_metal_add_20261001.log",
+    "litert_version": "ai-edge-litert 2.2.0 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
+    "date": "2026-10-01"
+   },
+   "conditions": "RESHAPE [85,16] -> [1,85,16] and [1024,768] -> [1,1024,768] with a constant int32 shape input, in front of an ADD: the two-op graphs report CompiledModel.is_fully_accelerated() true and their numerics are the rank-3 ADD row's. Extent stated is exactly these two graphs"
+  }
+ ]
+}
