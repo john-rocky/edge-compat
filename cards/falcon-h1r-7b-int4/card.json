@@ -1,0 +1,211 @@
+{
+  "artifacts": [
+    {
+      "file": "Falcon-H1R-7B_int4.litertlm",
+      "sha256": "7a8820ae4f38bc82b40b06f181ed013c012ec38dbf5329b866d68183080a8ea1",
+      "size_mb": 4471.815
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "falcon_h1_work/convert_falcon_h1r_7b.sh (hf-to-litertlm): float export (6 prefill signatures 1024, 256, 64, 16, 4, 1 + decode, KV budget 4096, 176 state buffers = 44 KV pairs + 44 conv windows + 44 SSM states) -> int4 blockwise-32 min-max on the linears with the block scales floored at 2^-14, int8 output projection and embedding -> metadata (the bundle template, no start token, stop ids 11 / 228, the thought channel, fp32 GPU activations, max_num_tokens 4096)",
+    "quantization": "int4 blockwise-32 on the linears (block scales floored at 2^-14), int8 output projection and embedding; fp32 GPU activations declared (card L32, L106)",
+    "tool": "litert-torch (commit 115a136 + the Falcon-H1 patch of hf-to-litertlm falcon_h1_work/falcon_h1_litert_torch.patch; lightweight export, 1e8-byte lazy-constant threshold); repro = hf-to-litertlm falcon_h1_work/convert_falcon_h1r_7b.sh",
+    "tool_version": "litert-torch 115a136 + Falcon-H1 patch (torch 2.12.1, transformers 5.14.1, ai-edge-quantizer 0.8.0, litert-converter 0.3.0); packed by the litert-lm 0.18.0 CLI"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-15",
+          "decode_tokens_per_s": 12.35,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "command (both passes; the file = cand/Falcon-H1R-7B_int4.litertlm, sha256 = ship = the Hub file): /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_b2_work/falcon_h1r_7b/cand/Falcon-H1R-7B_int4.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+            "pass 1 (bench/cpu_int4_p1.log): prefill 60.73 / decode 12.65 tok/s, TTFT 16.9508 s, init 19.684 s",
+            "pass 2 (bench/cpu_int4_p2.log): prefill 59.92 / decode 12.05 tok/s, TTFT 17.1805 s, init 20.2172 s",
+            "process footprint (swap guard, 15 s samples): max 49.41 GB over each CPU pass (bench/cpu_p1.peak.json, bench/cpu_p2.peak.json); no guard kill"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "guard_footprint_max_gb": 49.41,
+            "init_s": 19.9506,
+            "iterations": 3.0,
+            "max_num_tokens": 2048.0,
+            "pass1_decode_tok_s": 12.65,
+            "pass1_init_s": 19.684,
+            "pass1_prefill_tok_s": 60.73,
+            "pass1_ttft_s": 16.9508,
+            "pass2_decode_tok_s": 12.05,
+            "pass2_init_s": 20.2172,
+            "pass2_prefill_tok_s": 59.92,
+            "pass2_ttft_s": 17.1805,
+            "passes": 2.0,
+            "prefill_tokens": 1024.0,
+            "t_1024_256_s": 37.7165
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 60.325,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 17065.6
+        },
+        "source": "data/device_runs/0.18.0/2026-10-15/falcon-h1r-7b-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-15",
+          "decode_tokens_per_s": 39.705,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "command (both passes; the file = cand/Falcon-H1R-7B_int4.litertlm, sha256 = ship = the Hub file): /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_b2_work/falcon_h1r_7b/cand/Falcon-H1R-7B_int4.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+            "pass 1 (bench/gpu_int4_p1.log): prefill 565.79 / decode 39.03 tok/s, TTFT 1.8355 s, init 19.1439 s",
+            "pass 2 (bench/gpu_int4_p2.log): prefill 565.76 / decode 40.38 tok/s, TTFT 1.8347 s, init 18.8654 s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 19.0046,
+            "iterations": 3.0,
+            "max_num_tokens": 2048.0,
+            "pass1_decode_tok_s": 39.03,
+            "pass1_init_s": 19.1439,
+            "pass1_prefill_tok_s": 565.79,
+            "pass1_ttft_s": 1.8355,
+            "pass2_decode_tok_s": 40.38,
+            "pass2_init_s": 18.8654,
+            "pass2_prefill_tok_s": 565.76,
+            "pass2_ttft_s": 1.8347,
+            "passes": 2.0,
+            "prefill_tokens": 1024.0,
+            "t_1024_256_s": 8.2593
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 565.775,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 1835.1
+        },
+        "source": "data/device_runs/0.18.0/2026-10-15/falcon-h1r-7b-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-15",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-aab2",
+            "os_build": "Android 16 (CP1A.260505.005)",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "soc": "Google Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": "GUARD_KILL avail=307456 pid=23500",
+          "evidence": [
+            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, sha256 adac974b…; kit = litertlm-convert team_repack_20261009/r9/binary/prebuilt)",
+            "[16:31:26] bundle on device: 7a8820ae4f38bc82b40b06f181ed013c012ec38dbf5329b866d68183080a8ea1 (4689037856 B, push 103.0 s) = Mac",
+            "one attempt by rule (--backend=gpu, text prompt 'What is the capital of France? Answer in one sentence.', --max_output_tokens=1024); a 2-second sampler stops the process when MemAvailable falls under 400,000 kB",
+            "VERBOSE: Replacing 6865 out of 6865 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "W0000 00:00:1792049490.782907   23500 gpu_model_builder.cc:4455] Weights preparation on Gpu is disabled for PowerVR, Broadcom, Mali GPUs and non-OpenCL/WebGPU/Metal backends.",
+            "[16:32:22] prompt_1 done: rc(adb)=0 EXIT=143 wall 50.8 s",
+            "GUARD_KILL avail=307456 pid=23500"
+          ],
+          "failure_class": "memory_cap_exceeded",
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": false,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "memavail_at_start_kib": 3888840.0,
+            "memavail_min_kib": 307456.0,
+            "sampler_samples": 20.0,
+            "seconds_to_stop": 50.8,
+            "signatures_compiled": 1.0,
+            "uptime_after_s": 20924.7,
+            "uptime_before_s": 20869.76,
+            "vmhwm_kib": 1921792.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/prebuilt-adac974b/2026-10-15/falcon-h1r-7b-int4__pixel-8a.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "falcon-h1",
+    "id": "falcon-h1r-7b-int4",
+    "license": "other (falcon-llm-license)",
+    "source_url": "https://huggingface.co/litert-community/Falcon-H1R-7B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Block scales: the plain int4 build left 96 zero and 748 subnormal fp16 block scales (dead 32-weight blocks in 7 Mamba-mixer tensors), and XNNPACK prepares a blockwise int4 layer only when every scale is a normal float; this file floors its block scales at 2^-14 (847 of 212,044,800 scales; the weights are otherwise the plain build's) (card L106).",
+    "Reasoning model: it opens <think>…</think> on its own; the bundle declares the thought channel (<think> / </think>), so the runtime separates the reasoning from the answer and --thinking-budget works (card L27).",
+    "GPU precision: the file declares fp32 activations; with the runtime's default fp16 activations the int8 file of this conversion answered none of the 8 check questions (<|pad|> from the first token) (card L63, L107).",
+    "Galaxy S26: no row — in the one GPU try (2026-10-15) the OpenCL delegate took every node of all 7 signatures and 69 s after the start, during the warm-up, the phone rebooted (its uptime dates the boot 17 s after it left USB) and stayed locked until its owner unlocked it; not run again, CPU not tried; on a device-lab Galaxy S26 of the same model line (SM-S942U1) the low-memory killer removed 92 apps in 27 seconds and the system services died 11 s after the last runtime line — the GPU engine of this file does not build on a 12 GB Galaxy S26 (card L38, L98).",
+    "Pixel 8a: the one GPU try was stopped by the harness's memory rule (MemAvailable 307,456 kB 50 s after the start, from 3,888,840 kB, after prefill_1024 was delegated 6865/6865 to the OpenCL delegate; the runtime prepares weights on the CPU side for Mali GPUs; no restart) (card L99).",
+    "iOS not measured: the file is one TFLite section of 4.36 GiB (the embedding table inside it), over the ~2 GiB single-section limit (card L43).",
+    "Accuracy: GSM8K questions 0-99 with a 2,048-token budget, scored after </think> (an unclosed reply on its whole text): 98 / 100, 10 unclosed thoughts (9 right on their whole text); closed replies alone 89 of 90; counting every unclosed reply as wrong 89; the bf16 reference got 21 / 21 on questions 0-20, as did this file (card L57-L63).",
+    "Prompt-length check (17 lengths between 28 and 60 tokens): GPU 17/17, CPU 16/17 — at length 41 the thought quoted the prompt's filler words and repeated \"well\" to the 512-token cap in 3 of 3 runs (card L49).",
+    "Answers: this file's replies use narrow no-break spaces (U+202F) inside dates (\"May 3 and May 17.\"), so a byte comparison with a typed string fails (card L75).",
+    "One Engine per conversation: on litert-lm 0.18.0 a new Conversation on an Engine that already ran another starts from the earlier conversation's recurrent state (LiteRT-LM issue #3165); give each conversation its own Engine (card L81).",
+    "Mac: the faster file on the GPU (8.26 vs 8.95 s for the 1024 / 256 workload, decode 39.7 vs 35.9 tok/s), the slower on the CPU (its blockwise prefill runs at 44 % of int8's); without --cache, `run` writes a 4.24 GB compiled-weights cache next to the model; a three-signature variant (prefill 1024 / 256 / 1) took 2.5 % less time with a shorter init and a slower first token on a 15-token prompt — the six-signature file ships (card L36-L43, L75, L94).",
+    "Runtime: tested on litert-lm 0.18.0 (Mac); the int4 file was not run on litert-lm 0.17.1 (card L23)."
+  ],
+  "schema_version": "1.2"
+}

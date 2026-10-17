@@ -1,0 +1,53 @@
+{
+ "schema_version": "1.0",
+ "model_id": "qwen35-4b",
+ "device": "galaxy-s26",
+ "artifact": "Qwen3.5-4B_int8.litertlm",
+ "artifact_sha256": "a360b83d0bcc2e8ab3e83df78e83ec028e4c0687ae95970af6f470473da67a50",
+ "quantization": "int8 (dynamic int8 FC + embedding, fp32 activations declared)",
+ "notes": "Lane qwen35_work/gpucheck_20261012 (litertlm-convert), 2026-10-12, answering SF's Doc question whether the Hub Qwen3.5 files work on a phone GPU. Binary: Google's prebuilt litert_lm_advanced_main (sha256 adac974b…) + 6 .so from gs://litert/binaries/latest/android_arm64/litert_lm/ (object dated 2026-09-18), the same kit as the 2026-10-05 / 2026-10-10 records on this axis. Protocol: the bundle pushed and sha256-read back on the phone, compile/weight caches removed, one warm process (cold engine init), one bench process (--benchmark_prefill_tokens=256 --benchmark_decode_tokens=64 --num_iterations=3 --max_num_tokens=1280 --report_peak_memory_footprint=true), one prompt process ('What is 17 times 23?', --max_output_tokens 400 / 1024 for the 4B); figures = median of iterations 2–3; a 2-second sampler beside each process (MemAvailable guard < 400,000 kB). 4B int8: GPU NOT attempted on any phone (the public manifest's known_issues: a Galaxy S26 hard-rebooted during the 2026-08-24 GPU gate); this record is the one CPU smoke process the lane ran.",
+ "results": [
+  {
+   "accelerator": "cpu",
+   "loads": true,
+   "runs": true,
+   "failure_class": null,
+   "error": null,
+   "full_delegation": false,
+   "delegated_ops": 32830,
+   "total_ops": 34373,
+   "output_match": null,
+   "max_abs_diff": null,
+   "max_rel_diff": null,
+   "latency_p50_ms": null,
+   "prefill_tokens_per_s": null,
+   "decode_tokens_per_s": null,
+   "ttft_ms": null,
+   "peak_mem_mb": null,
+   "context_length": null,
+   "metrics": {
+    "wall_s": 44.2,
+    "max_output_tokens": 1024.0,
+    "vmhwm_kib": 6120492.0,
+    "memavail_min_kib": 5817552.0
+   },
+   "evidence": [
+    "VERBOSE: Replacing 32830 out of 34373 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2993 partitions for subgraph 0 (prefill_1024).",
+    "VERBOSE: Replacing 23638 out of 25157 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 1 (prefill_256).",
+    "prompt 'What is 17 times 23?' -> Final Answer: **391** (EXIT=0)",
+    "one prompt process only (smoke): no benchmark, throughput not measured; thinking on by default (no switch in this binary), the reply ended with 'Final Answer: **391**' inside the 1024-token cap"
+   ],
+   "env": {
+    "device": "Galaxy S26 (SM-S942Q)",
+    "machine_label": "galaxy-s26-gpucheck",
+    "os_build": "Android 16",
+    "runtime": "litert-lm",
+    "runtime_version": "prebuilt-adac974b",
+    "soc": "Qualcomm SM8850",
+    "vendor_sdk": null
+   },
+   "date": "2026-10-12",
+   "provenance": "measured"
+  }
+ ]
+}

@@ -1,0 +1,169 @@
+{
+  "artifacts": [
+    {
+      "file": "julia1_s1024_fp32.tflite",
+      "sha256": "b4f260595776c0a126f0e1aadbefb0c2acc6e0b1ca0cfe9499b4d322d591e632",
+      "size_mb": 179.771
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-10-09",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 2014.363,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-10-09",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 43.43,
+        "loads": true,
+        "max_rel_diff": 0.006589250508776393,
+        "output_match": true,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-10-09/julia-1__julia1_s1024_fp32.json"
+  },
+  "conversion": {
+    "command": "conversion/ scripts of the Hub repo (host-side token lookup, rotary tables baked per window, sliding-window band as a constant, question type as a one-hot matmul, the two head layers written out, exact GELU); REPRODUCE.md of the Hub repo",
+    "quantization": "float32 weights: 1,704 operators, no quantization; the token table is the checkpoint's float32 embedding rounded to float16 on the host side (card 'Files', 'Provenance').",
+    "tool": "litert-torch",
+    "tool_version": "0.9.3 (torch 2.12.1; transformers 5.0.0; ai-edge-litert 2.1.6 for the desktop checks)"
+  },
+  "cross_runtime": [],
+  "delegation": {
+    "backend": "gpu_mldrift",
+    "blocking_ops": [
+      "SQUARED_DIFFERENCE"
+    ],
+    "coverage_ops_pct": 97.1,
+    "lint_report_version": "1.1",
+    "litert_version": "2.2.0",
+    "matched_provenance_counts": {
+      "measured": 1654,
+      "unmatched": 50
+    },
+    "partitions": 51
+  },
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-09-30",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1704,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-julia-gate",
+            "os_build": "Android 16 (SDK 36)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Debug gate app com.julia.gate (android_gate/, Kotlin CompiledModel 2.2.0), one cold process per run, fixture ids + markers pushed as JSON, host token-table lookup outside the timed interval; timed interval = input writes + run + output readback per row. Source: /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s1024_fp32_fp16table.json, logcat /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s1024_fp32_fp16table.logcat.txt, state /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s1024_fp32_fp16table.state_before.txt / .state_after.txt.",
+            "conditions: before thermal status None, battery 41.3 C; after thermal status None, battery 41.9 C; screen on, USB powered, no cool-start wait.",
+            "parity vs the author's implementation (oracle /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/fixtures/oracle_typed.json + oracle_parity.json, scripts/device_compare.py): same winning option on 100/100 rows (18 boundary = reference top-1 < 0.9); max |dprob| 0.00767; rows over 0.01: 0.",
+            "output_match null: no Mac CPU gate of these graph bytes holds per-row logits for these ids (results/host_e2e_julia1_s1024_* keep aggregates only); the argmax / |dprob| metrics against the author's implementation are the lane's own criterion.",
+            "09-30 09:51:09.888 30986 31015 I litert  : [compiled_model.cc:1250] 0 compiler plugins were applied successfully:",
+            "09-30 09:51:09.994 30986 31015 I tflite  : Replacing 1704 out of 1704 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main)."
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 298.463958,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "argmax_equal_official": 100,
+            "battery_temp_c_end": 41.9,
+            "battery_temp_c_start": 41.3,
+            "boundary_rows": 18,
+            "first_call_ms": 163.107187,
+            "fixtures": 100,
+            "load_compile_ms": 1473.3325,
+            "max_abs_dprob_vs_official": 0.00767,
+            "partitions": 1,
+            "rows_dprob_gt_1e2": 0,
+            "warm_max_ms": 305.159843,
+            "warm_median_ms": 298.463958,
+            "warm_min_ms": 155.552344
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "GpuOptions precision=FP32; host fp16 token table (shipped form); debug gate app com.julia.gate",
+          "total_ops": 1704,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-09-30/julia-1__julia1_s1024_fp32__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "julia-1",
+    "id": "julia-1__julia1_s1024_fp32",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Julia-1-LiteRT",
+    "task": "text-classification"
+  },
+  "pitfalls": [
+    "Weight storage does not set the GPU compute precision: request GpuOptions(precision = FP32). The fp16 paths change answers: S26 Hexagon NPU (JIT, fp32 graph) 685/706 same argmax with probabilities off by up to 0.418; Mac Metal at its default fp16 precision 375/400 (card 'fp16 and the NPU', 'Measured quality and performance').",
+    "The graph takes host-built inputs: inputs_embeds [1,1024,384] from julia1_token_table_fp16.bin ([256000,384] little-endian float16 rows, padding positions included), attention_mask [1,1024] (1 real / 0 pad), qtype_onehot [1,3] (choice / score / noul); output token_logits [1,1024], read at the <mask> marker positions; softmax at temperature 1 runs on the host (card 'Host contract').",
+    "Sequence: <bos> '{type} question: {question}' <eos> <mask> ' option0' <mask> ' option1' … <eos> state <eos>; 2 to 20 options, at most 48 tokens each; a request that does not fit raises an error, nothing is truncated (35 of the 2,000 typed-decisions questions need more than 512 tokens and fit the S1024 graph) (card 'Host contract').",
+    "The graph computes LayerNorm on x*2^-k with eps*2^-2k (k = 8 in layers 12-21 and the final norm, k = 2 in the head and scorer norms), uses -1e4 attention masks and scales q by 1/8 before QK^T; exact in fp32 (bit-identical token logits), finite but not the same answers in fp16 (card 'fp16 and the NPU', 'Provenance').",
+    "The float16 token table changes no answer and moves probabilities by up to 0.0077 (desktop CPU and S26 GPU); the host lookup is outside the measured graph time (Kotlin loop 19.0 ms float32 table / 23.6 ms float16 table per question in the gate app) (card 'Files', 'Measured quality and performance').",
+    "Validated against the author's runtime (CPU FP32), not task accuracy; one phone (Galaxy S26 SM-S942Q, LiteRT 2.2.0 Kotlin CompiledModel); English text only; S26 GPU explicit FP32: 100/100 rows (the 35 typed-decisions questions longer than 512 tokens + 65 others) with the shipped float16 table, max probability difference 0.0077, median 298.5 ms at thermal status 2; desktop CPU all 2,000 typed-decisions questions with the author's answers (426/600 choice, 542/800 score, 483/600 noul) (card 'Limits', 'Measured quality and performance')."
+  ],
+  "schema_version": "1.2"
+}

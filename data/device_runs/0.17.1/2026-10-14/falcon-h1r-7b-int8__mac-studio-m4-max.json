@@ -1,0 +1,52 @@
+{
+  "artifact": "Falcon-H1R-7B_int8.litertlm",
+  "artifact_sha256": "9bde28ab1e3026dfec0b16fb5d21e035e8fcb82b7e6c7cd9c679f898ef0a726e",
+  "device": "mac-studio-m4-max",
+  "model_id": "falcon-h1r-7b-int8",
+  "notes": "Hub litert-community/Falcon-H1R-7B (upload commit 658c67ae). Lane litertlm-convert aa_mobile_b2_work/falcon_h1r_7b round r6 (GPU batch B, 2026-10-14 16:42-17:48 JST; gate/int8/gpu/v0171.json): the litert-lm 0.17.1 CLI `run` on the GPU with the prompt \"What is the capital of France? Answer briefly.\", one fresh process: a closed [thought] block, then \"Paris.\" (21 s). The file is cand/Falcon-H1R-7B_int8.litertlm, whose sha256 = ship = the Hub file (tools/r6z_cand_sha256.txt). The Hub card states this run (line 23; the int4 file was not run on 0.17.1). The manifest's min_runtime_version stays 0.18.0. No benchmark: throughput cells null; the run's delegation lines were not kept (delegation cells null).",
+  "quantization": "int8 dynamic on every linear (wi8fc) + int8 embedding; the Mamba conv and scan float; fp32 GPU activations declared",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-14",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "job (gate/jobs_gpu_B.txt): /Users/USER/code/litertlm-convert/aa_mobile_b2_work/falcon_h1r_7b/gate/int8/gpu/v0171.json v0171 /Users/USER/code/litertlm-convert/aa_mobile_b2_work/falcon_h1r_7b/cand/Falcon-H1R-7B_int8.litertlm gpu What is the capital of France? Answer briefly.",
+        "command (tools/run_job.sh, kind v0171): ~/venvs/lt0171run/bin/litert-lm run <cand int8> --backend gpu --prompt <the prompt> --cache no --top-k 1 --seed 0 --max-num-tokens 4096 (no --verbose)",
+        "stdout tail: [thought] … [/thought] Paris.",
+        "exit 0, Validation error 0, Shape mismatch 0"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "answers_with_expect": 1.0,
+        "processes": 1.0,
+        "seconds": 21.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

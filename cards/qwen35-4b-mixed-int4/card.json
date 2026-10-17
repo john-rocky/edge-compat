@@ -2,7 +2,7 @@
   "artifacts": [
     {
       "file": "Qwen3.5-4B_mixed_int4.litertlm",
-      "sha256": "176b5a2b6c20bde7739fba98e653a04f5d5b4a753a4b9dd0ff529aba7c35be99",
+      "sha256": "37209c42c4bd8108373305e7f9820a84fd6d8f8a3481549a31c48bd7880b700f",
       "size_mb": 2626.768
     }
   ],
@@ -17,6 +17,144 @@
   "delegation": null,
   "device": {
     "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-09",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-cli-tagbuild",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-b2f686e2",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "binary: litert_lm_main built from the LiteRT-LM v0.18.0 tag (commit b2f686e2ed4718fb84ec398a61dd59ca0f0aff27) on 2026-10-07 (edge-llm-bench/android/bin/v0.18.0); SHA256SUMS: litert_lm_main 54832c4992f932aec76e85be546b63dcb1e2820236d76c8f38d66c0ecc62774a, libLiteRtOpenClAccelerator.so dfc714a0b59d5e1bf5155db7533070bf13da28574a3bc52396a4ba22d23d893c, libLiteRtGpuAccelerator.so 75ee49f6f31faf44b3b5ac54f15d58abd75438bc9e2f9abcf47f24279d337bc8; all 8 listed files checked on the Mac and on the device before the leg (r5/l4_cpu_qwen35_4b_mixed_int4.runner.log: 'kit OK on device (8 files = SHA256SUMS)')",
+            "bundle: Qwen3.5-4B_mixed_int4.litertlm sha256 37209c42c4bd8108373305e7f9820a84fd6d8f8a3481549a31c48bd7880b700f (2754365536 B) = the device-side sha256 after the push = the Mac file (r5/l4_cpu_qwen35_4b_mixed_int4.meta.json) = the Hub LFS oid of litert-community/Qwen3.5-4B at main (commit 1f89ed8a) (tree API read 2026-10-09 22:57:16 JST); command: cd /data/local/tmp/sf1r5 && LD_LIBRARY_PATH=. ./litert_lm_main --backend=cpu --model_path=<bundle> --input_prompt='What is the capital of France? Answer in one word.' --max_num_tokens=1024 < /dev/null (v0.18.0 litert_lm_main does not read --max_num_tokens, so the bundle's own context applies: K/ROUND5.md 訂正); single cold run on a shared phone under the lane's device hold (20:38:21-20:45:02 JST, released after)",
+            "throughput not recorded: one cold invocation with a one-word answer is a function gate, not a measurement (the lane's rule; the BenchmarkInfo block is in the log)",
+            "r5/l4_cpu_qwen35_4b_mixed_int4.log: VERBOSE: Replacing 32830 out of 34373 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2993 partitions for subgraph 0 (prefill_1024).",
+            "r5/l4_cpu_qwen35_4b_mixed_int4.log: VERBOSE: Replacing 23638 out of 25157 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 1 (prefill_256).",
+            "r5/l4_cpu_qwen35_4b_mixed_int4.log: VERBOSE: Replacing 20950 out of 22469 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 2 (prefill_64).",
+            "r5/l4_cpu_qwen35_4b_mixed_int4.log: VERBOSE: Replacing 21070 out of 22589 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 3 (prefill_16).",
+            "r5/l4_cpu_qwen35_4b_mixed_int4.log: VERBOSE: Replacing 21070 out of 22589 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 4 (prefill_4).",
+            "r5/l4_cpu_qwen35_4b_mixed_int4.log: VERBOSE: Replacing 2791 out of 2866 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 65 partitions for subgraph 5 (prefill_1).",
+            "r5/l4_cpu_qwen35_4b_mixed_int4.log: VERBOSE: Replacing 2845 out of 2920 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 66 partitions for subgraph 6 (decode).",
+            "r5/l4_cpu_qwen35_4b_mixed_int4.log: printed answer line: Paris; EXIT=0; 0 error lines and 0 lines matching 'Failed to apply template'; Init Total: 23361.86 ms; Prefill Turn 1: Processed 24 tokens in 798.408177ms duration.; Decode Turn 1: Processed 2 tokens in 231.346979ms duration."
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 2.0,
+            "init_s": 23.36186,
+            "prefill_tokens": 24.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/selfbuilt-b2f686e2/2026-10-09/qwen35-4b-mixed-int4__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-12",
+          "decode_tokens_per_s": 5.39,
+          "delegated_ops": 34373,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-gpucheck",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 34373 out of 34373 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 25157 out of 25157 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256).",
+            "VERBOSE: Replacing 22469 out of 22469 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_64).",
+            "- Init Total: 85156.80 ms",
+            "Time to first token: 3.36 s",
+            "Prefill Speed: 78.51 tokens/sec.",
+            "Decode Speed: 9.59 tokens/sec.",
+            "Peak system ram usage: 4089.17MB.",
+            "- Init Total: 85156.80 ms",
+            "Time to first token: 3.39 s",
+            "Prefill Speed: 79.02 tokens/sec.",
+            "Decode Speed: 6.63 tokens/sec.",
+            "Peak system ram usage: 4089.17MB.",
+            "- Init Total: 85156.80 ms",
+            "Time to first token: 4.80 s",
+            "Prefill Speed: 56.13 tokens/sec.",
+            "Decode Speed: 4.15 tokens/sec.",
+            "Peak system ram usage: 4089.17MB.",
+            "prompt 'What is 17 times 23?' -> 17 times 23 is **391**. (EXIT=0)",
+            "round 1 bench process (10:27 JST) was killed by the hold deadline in its teardown after all three iterations had printed (rc 124): it1 70.78/8.85 tok/s; it2 86.4/7.28 tok/s; it3 75.15/5.74 tok/s"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "bench_init_s": 85.157,
+            "cpu_capped_samples": 65.0,
+            "decode_tok_s_it1": 9.59,
+            "decode_tok_s_max": 9.59,
+            "decode_tok_s_min": 4.15,
+            "decode_tokens": 64.0,
+            "init_s": 85.728,
+            "iterations": 3.0,
+            "kgsl_max_clock_min_mhz": 160.0,
+            "max_num_tokens": 1280.0,
+            "memavail_min_kib": 553576.0,
+            "prefill_tok_s_it1": 78.51,
+            "prefill_tok_s_max": 79.02,
+            "prefill_tok_s_min": 56.13,
+            "prefill_tokens": 256.0,
+            "round1_decode_tok_s_max": 8.85,
+            "round1_decode_tok_s_min": 5.74,
+            "round1_init_s": 73.143,
+            "round1_kgsl_max_clock_min_mhz": 382.0,
+            "round1_peak_mem_mb": 3801.75,
+            "round1_prefill_tok_s_it1": 70.78,
+            "round1_prefill_tok_s_max": 86.4,
+            "round1_prefill_tok_s_min": 70.78,
+            "sampler_samples": 67.0,
+            "ttft_s_it1": 3.36,
+            "ttft_s_max": 4.8,
+            "ttft_s_min": 3.36,
+            "vmhwm_kib": 4187308.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 4089.17,
+          "prefill_tokens_per_s": 67.58,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 34373,
+          "ttft_ms": 4095
+        },
+        "source": "data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-4b-mixed-int4__galaxy-s26.json"
+      },
       {
         "device": "iphone-17-pro",
         "run": {
@@ -200,6 +338,82 @@
         "run": {
           "accelerator": "cpu",
           "context_length": null,
+          "date": "2026-10-12",
+          "decode_tokens_per_s": 5.59,
+          "delegated_ops": 32830,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-gpucheck",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 32830 out of 34373 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2993 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 23638 out of 25157 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 1 (prefill_256).",
+            "VERBOSE: Replacing 20950 out of 22469 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 2 (prefill_64).",
+            "- Init Total: 32483.72 ms",
+            "Time to first token: 7.91 s",
+            "Prefill Speed: 33.04 tokens/sec.",
+            "Decode Speed: 6.38 tokens/sec.",
+            "Peak system ram usage: 3962.55MB.",
+            "- Init Total: 32483.72 ms",
+            "Time to first token: 8.44 s",
+            "Prefill Speed: 30.96 tokens/sec.",
+            "Decode Speed: 6.01 tokens/sec.",
+            "Peak system ram usage: 3986.36MB.",
+            "- Init Total: 32483.72 ms",
+            "Time to first token: 9.67 s",
+            "Prefill Speed: 27.01 tokens/sec.",
+            "Decode Speed: 5.18 tokens/sec.",
+            "Peak system ram usage: 3986.43MB.",
+            "prompt 'What is 17 times 23?' -> 17 times 23 is **391**. (EXIT=0)"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "bench_init_s": 32.484,
+            "cpu_capped_samples": 28.0,
+            "decode_tok_s_it1": 6.38,
+            "decode_tok_s_max": 6.38,
+            "decode_tok_s_min": 5.18,
+            "decode_tokens": 64.0,
+            "init_s": 40.474,
+            "iterations": 3.0,
+            "max_num_tokens": 1280.0,
+            "memavail_min_kib": 3328444.0,
+            "prefill_tok_s_it1": 33.04,
+            "prefill_tok_s_max": 33.04,
+            "prefill_tok_s_min": 27.01,
+            "prefill_tokens": 256.0,
+            "sampler_samples": 34.0,
+            "ttft_s_it1": 7.91,
+            "ttft_s_max": 9.67,
+            "ttft_s_min": 7.91,
+            "vmhwm_kib": 4082104.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 3986.43,
+          "prefill_tokens_per_s": 28.98,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 34373,
+          "ttft_ms": 9055
+        },
+        "source": "data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-4b-mixed-int4__pixel-8a.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
           "date": "2026-08-27",
           "decode_tokens_per_s": 6.3,
           "delegated_ops": 32830,
@@ -240,6 +454,52 @@
           "ttft_ms": 11910.0
         },
         "source": "data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__pixel-8a.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-12",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-gpucheck",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": "GUARD_KILL avail=139628 pid=19747",
+          "evidence": [
+            "VERBOSE: Replacing 34373 out of 34373 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+            "EXIT=143",
+            "GUARD_KILL avail=139628 pid=19747",
+            "10-12 10:03:40.407   492   492 I lowmemorykiller: Kill 'com.google.android.calendar' (11307), uid 10195, oom_score_adj 905 to free 59536kB rss, 54436kB swap, 0kB dmabuf_pss, 0kB dmabuf_rss; reason: low watermark is breached",
+            "10-12 10:03:40.455   492   492 I lowmemorykiller: Kill 'com.google.android.apps.safetyhub' (12600), uid 10172, oom_score_adj 905 to free 59504kB rss, 45096kB swap, 0kB dmabuf_pss, 0kB dmabuf_rss; reason: low watermark is breached"
+          ],
+          "failure_class": "memory_cap_exceeded",
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": false,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "memavail_min_kib": 139628.0,
+            "signatures_compiled": 1.0,
+            "vmhwm_kib": 3067824.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-4b-mixed-int4__pixel-8a.json"
       },
       {
         "device": "raspberry-pi-5",
@@ -317,7 +577,8 @@
     "Gates on the shipped file: 8Q 8/8 on CPU and GPU on litert-lm 0.15.0 AND 0.16.0; BANANA hermetic CPU 40/40 + GPU 20/20; iPhone 17 Pro composite 8-question probe 8/8 on BOTH Metal and CPU (the int8 sibling's CPU path answers 6/8) — Metal 11.38 tok/s decode / 88.7 prefill / TTFT 1.89 s / peak 5736 MB, CPU 8.87 / 46.7 / 3.12 s / 1679 MB, cold, unplugged. Mac bench (0.16.0, cache no, p256/d256, quiet, 300 s GPU rest): GPU 669.33/68.45 TTFT 0.40 s vs CPU 100.08/20.07 TTFT 2.61 s.",
     "Mac CPU prefill is ~2.4x SLOWER than the int8 sibling (100 vs 243 tok/s; TTFT 2.61 vs 1.11 s) — int4 unpack cost in XNNPACK prefill; decode is equal or faster everywhere. iPhone CPU is the exception (prefill 46.7 vs int8's 24.0 — faster).",
     "Pixel 8a (8 GB) CPU: FITS and generates coherently — VmHWM 4.43 GB, prefill 22.1 / decode 6.30 tok/s (260-token prompt / 204 decoded), TTFT 11.9 s, engine init 32-48 s, XNNPACK delegates 32830/34373 nodes (litert_lm_main android_arm64 v0.16.0, warm weight cache). GPU on 8 GB devices NOT attempted — engine creation is the known device-killer (2B lesson).",
-    "First Android CPU run writes a 2.66 GB XNNPACK weight cache next to the model. The cache key embeds the model file mtime: two runs that see mtimes 1 s apart build TWO 2.66 GB caches — check `ls *.xnnpack_cache | wc -l` after first runs."
+    "First Android CPU run writes a 2.66 GB XNNPACK weight cache next to the model. The cache key embeds the model file mtime: two runs that see mtimes 1 s apart build TWO 2.66 GB caches — check `ls *.xnnpack_cache | wc -l` after first runs.",
+    "Metadata-only updates of the published files (README dated notes; TFLite, tokenizer and executor metadata byte-identical each time): 2026-09-21, the chat template accepts the litert-lm 0.18 content-parts form (string form unchanged); 2026-10-09, the template is LiteRT-LM models/qwen3_5/chat_template.jinja at 87ab9334 with a format_content macro that reads content as a string or as parts (text and tool_response) and enable_thinking defaulting to false: with nothing set a single-turn prompt renders byte for byte as before, enable_thinking=true pre-fills <think>\\n and the reasoning comes back on the thought channel (<think>\\n / \\n</think>), supports_thinking is true; llm_model_type stays generic_model, so tool calls come back as text and supports_function_calling is false (README Chat template note)."
   ],
   "schema_version": "1.2"
 }

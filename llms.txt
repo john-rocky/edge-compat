@@ -24,10 +24,13 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [clipseg-rd64__clipseg_vision_fp16](cards/clipseg-rd64__clipseg_vision_fp16/CARD.md): image-segmentation — machine-readable source of truth at cards/clipseg-rd64__clipseg_vision_fp16/card.json
 - [cloth-segmentation-u2net](cards/cloth-segmentation-u2net/CARD.md): image-segmentation — machine-readable source of truth at cards/cloth-segmentation-u2net/card.json
 - [cmgan](cards/cmgan/CARD.md): audio-to-audio — machine-readable source of truth at cards/cmgan/card.json
+- [confucius4-r2t2](cards/confucius4-r2t2/CARD.md): automatic-speech-recognition — machine-readable source of truth at cards/confucius4-r2t2/card.json
 - [cpga-net-lowlight](cards/cpga-net-lowlight/CARD.md): image-to-image — machine-readable source of truth at cards/cpga-net-lowlight/card.json
 - [crepe-pitch](cards/crepe-pitch/CARD.md): audio-classification — machine-readable source of truth at cards/crepe-pitch/card.json
 - [d-fine-s__dfine_grapha_fp16](cards/d-fine-s__dfine_grapha_fp16/CARD.md): object-detection — machine-readable source of truth at cards/d-fine-s__dfine_grapha_fp16/card.json
 - [d-fine-s__dfine_graphb_fp16](cards/d-fine-s__dfine_graphb_fp16/CARD.md): object-detection — machine-readable source of truth at cards/d-fine-s__dfine_graphb_fp16/card.json
+- [decider-0.8b-fp16](cards/decider-0.8b-fp16/CARD.md): text-classification — machine-readable source of truth at cards/decider-0.8b-fp16/card.json
+- [decider-0.8b-int8](cards/decider-0.8b-int8/CARD.md): text-classification — machine-readable source of truth at cards/decider-0.8b-int8/card.json
 - [decider-2b-vision-fp16](cards/decider-2b-vision-fp16/CARD.md): image-text-to-text — machine-readable source of truth at cards/decider-2b-vision-fp16/card.json
 - [decider-2b-vision-fp16-int8vocab](cards/decider-2b-vision-fp16-int8vocab/CARD.md): image-text-to-text — machine-readable source of truth at cards/decider-2b-vision-fp16-int8vocab/card.json
 - [decider-2b-vision-int8](cards/decider-2b-vision-int8/CARD.md): image-text-to-text — machine-readable source of truth at cards/decider-2b-vision-int8/card.json
@@ -38,6 +41,10 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [dis-isnet](cards/dis-isnet/CARD.md): image-segmentation — machine-readable source of truth at cards/dis-isnet/card.json
 - [dm-count-crowd](cards/dm-count-crowd/CARD.md): image-to-image — machine-readable source of truth at cards/dm-count-crowd/card.json
 - [edsr-x4](cards/edsr-x4/CARD.md): image-to-image — machine-readable source of truth at cards/edsr-x4/card.json
+- [ema-lightning__ema_align_multi_fp32](cards/ema-lightning__ema_align_multi_fp32/CARD.md): text-to-speech — machine-readable source of truth at cards/ema-lightning__ema_align_multi_fp32/card.json
+- [ema-lightning__ema_decoder_multi_fp16](cards/ema-lightning__ema_decoder_multi_fp16/CARD.md): text-to-speech — machine-readable source of truth at cards/ema-lightning__ema_decoder_multi_fp16/card.json
+- [ema-lightning__ema_step_multi_fp32](cards/ema-lightning__ema_step_multi_fp32/CARD.md): text-to-speech — machine-readable source of truth at cards/ema-lightning__ema_step_multi_fp32/card.json
+- [ema-lightning__ema_text_multi_fp32](cards/ema-lightning__ema_text_multi_fp32/CARD.md): text-to-speech — machine-readable source of truth at cards/ema-lightning__ema_text_multi_fp32/card.json
 - [example-tiny-clean](cards/example-tiny-clean/CARD.md): image-classification — machine-readable source of truth at cards/example-tiny-clean/card.json
 - [example-tiny-mixed](cards/example-tiny-mixed/CARD.md): image-segmentation — machine-readable source of truth at cards/example-tiny-mixed/card.json
 - [example-web-a](cards/example-web-a/CARD.md): example-elementwise — machine-readable source of truth at cards/example-web-a/card.json
@@ -46,6 +53,8 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [falcon-h1-1.5b-deep-instruct-int8](cards/falcon-h1-1.5b-deep-instruct-int8/CARD.md): text-generation — machine-readable source of truth at cards/falcon-h1-1.5b-deep-instruct-int8/card.json
 - [falcon-h1-1.5b-instruct-int8](cards/falcon-h1-1.5b-instruct-int8/CARD.md): text-generation — machine-readable source of truth at cards/falcon-h1-1.5b-instruct-int8/card.json
 - [falcon-h1-tiny-r-0.6b-int8](cards/falcon-h1-tiny-r-0.6b-int8/CARD.md): text-generation — machine-readable source of truth at cards/falcon-h1-tiny-r-0.6b-int8/card.json
+- [falcon-h1r-7b-int4](cards/falcon-h1r-7b-int4/CARD.md): text-generation — machine-readable source of truth at cards/falcon-h1r-7b-int4/card.json
+- [falcon-h1r-7b-int8](cards/falcon-h1r-7b-int8/CARD.md): text-generation — machine-readable source of truth at cards/falcon-h1r-7b-int8/card.json
 - [falconh1-3b](cards/falconh1-3b/CARD.md): text-generation — machine-readable source of truth at cards/falconh1-3b/card.json
 - [fast-neural-style__style_candy_fp16](cards/fast-neural-style__style_candy_fp16/CARD.md): image-to-image — machine-readable source of truth at cards/fast-neural-style__style_candy_fp16/card.json
 - [fast-neural-style__style_mosaic_fp16](cards/fast-neural-style__style_mosaic_fp16/CARD.md): image-to-image — machine-readable source of truth at cards/fast-neural-style__style_mosaic_fp16/card.json
@@ -54,8 +63,14 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [fastcontext-1.0-4b-sft-model-block128](cards/fastcontext-1.0-4b-sft-model-block128/CARD.md): text-generation — machine-readable source of truth at cards/fastcontext-1.0-4b-sft-model-block128/card.json
 - [fastcontext-4b](cards/fastcontext-4b/CARD.md): text-generation — machine-readable source of truth at cards/fastcontext-4b/card.json
 - [fun-asr-nano-2512](cards/fun-asr-nano-2512/CARD.md): automatic-speech-recognition — machine-readable source of truth at cards/fun-asr-nano-2512/card.json
+- [g9v3-3b-int4](cards/g9v3-3b-int4/CARD.md): text-generation — machine-readable source of truth at cards/g9v3-3b-int4/card.json
+- [g9v3-3b-int8](cards/g9v3-3b-int8/CARD.md): text-generation — machine-readable source of truth at cards/g9v3-3b-int8/card.json
 - [gfpgan-v1.4__gfpgan_fp16](cards/gfpgan-v1.4__gfpgan_fp16/CARD.md): image-to-image — machine-readable source of truth at cards/gfpgan-v1.4__gfpgan_fp16/card.json
 - [gfpgan-v1.4__yunet_fp16](cards/gfpgan-v1.4__yunet_fp16/CARD.md): image-to-image — machine-readable source of truth at cards/gfpgan-v1.4__yunet_fp16/card.json
+- [gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32](cards/gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32/CARD.md): zero-shot-classification — machine-readable source of truth at cards/gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32/card.json
+- [gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16](cards/gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16/CARD.md): zero-shot-classification — machine-readable source of truth at cards/gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16/card.json
+- [gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32](cards/gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32/CARD.md): zero-shot-classification — machine-readable source of truth at cards/gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32/card.json
+- [gliclass-edge-v3.0__gliclass_edge_v3_s256_wfp16](cards/gliclass-edge-v3.0__gliclass_edge_v3_s256_wfp16/CARD.md): zero-shot-classification — machine-readable source of truth at cards/gliclass-edge-v3.0__gliclass_edge_v3_s256_wfp16/card.json
 - [gliformer-large-ner__gliformer_large_ner_s128_wfp16](cards/gliformer-large-ner__gliformer_large_ner_s128_wfp16/CARD.md): token-classification — machine-readable source of truth at cards/gliformer-large-ner__gliformer_large_ner_s128_wfp16/card.json
 - [gliformer-large-ner__gliformer_large_ner_s256_encoder_wfp16](cards/gliformer-large-ner__gliformer_large_ner_s256_encoder_wfp16/CARD.md): token-classification — machine-readable source of truth at cards/gliformer-large-ner__gliformer_large_ner_s256_encoder_wfp16/card.json
 - [gliformer-large-ner__gliformer_large_ner_s256_head_wfp16](cards/gliformer-large-ner__gliformer_large_ner_s256_head_wfp16/CARD.md): token-classification — machine-readable source of truth at cards/gliformer-large-ner__gliformer_large_ner_s256_head_wfp16/card.json
@@ -64,12 +79,19 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [gliner2.5-decide__gliner25_decide_s128_wfp16](cards/gliner2.5-decide__gliner25_decide_s128_wfp16/CARD.md): text-classification — machine-readable source of truth at cards/gliner2.5-decide__gliner25_decide_s128_wfp16/card.json
 - [gliner2.5-decide__gliner25_decide_s256_wfp16](cards/gliner2.5-decide__gliner25_decide_s256_wfp16/CARD.md): text-classification — machine-readable source of truth at cards/gliner2.5-decide__gliner25_decide_s256_wfp16/card.json
 - [gliner2.5-decide__gliner25_decide_s512_wfp16](cards/gliner2.5-decide__gliner25_decide_s512_wfp16/CARD.md): text-classification — machine-readable source of truth at cards/gliner2.5-decide__gliner25_decide_s512_wfp16/card.json
+- [gliner2.5-multi__gliner25_multi_s128_wfp16](cards/gliner2.5-multi__gliner25_multi_s128_wfp16/CARD.md): token-classification — machine-readable source of truth at cards/gliner2.5-multi__gliner25_multi_s128_wfp16/card.json
+- [gliner2.5-multi__gliner25_multi_s256_wfp16](cards/gliner2.5-multi__gliner25_multi_s256_wfp16/CARD.md): token-classification — machine-readable source of truth at cards/gliner2.5-multi__gliner25_multi_s256_wfp16/card.json
+- [gliner2.5-multi__gliner25_multi_s512_wfp16](cards/gliner2.5-multi__gliner25_multi_s512_wfp16/CARD.md): token-classification — machine-readable source of truth at cards/gliner2.5-multi__gliner25_multi_s512_wfp16/card.json
 - [granite-4.0-h-1b](cards/granite-4.0-h-1b/CARD.md): text-generation — machine-readable source of truth at cards/granite-4.0-h-1b/card.json
 - [granite-4.0-h-350m-fp16](cards/granite-4.0-h-350m-fp16/CARD.md): text-generation — machine-readable source of truth at cards/granite-4.0-h-350m-fp16/card.json
 - [granite-4.0-h-350m-int8](cards/granite-4.0-h-350m-int8/CARD.md): text-generation — machine-readable source of truth at cards/granite-4.0-h-350m-int8/card.json
 - [granite-4.0-h-350m-int8-gpu](cards/granite-4.0-h-350m-int8-gpu/CARD.md): text-generation — machine-readable source of truth at cards/granite-4.0-h-350m-int8-gpu/card.json
+- [granite-4.0-micro-int4](cards/granite-4.0-micro-int4/CARD.md): text-generation — machine-readable source of truth at cards/granite-4.0-micro-int4/card.json
+- [granite-4.0-micro-int8](cards/granite-4.0-micro-int8/CARD.md): text-generation — machine-readable source of truth at cards/granite-4.0-micro-int8/card.json
 - [granite-4.1-3b-int4](cards/granite-4.1-3b-int4/CARD.md): text-generation — machine-readable source of truth at cards/granite-4.1-3b-int4/card.json
 - [granite-4.1-3b-int8](cards/granite-4.1-3b-int8/CARD.md): text-generation — machine-readable source of truth at cards/granite-4.1-3b-int8/card.json
+- [granite-4.1-8b-int4](cards/granite-4.1-8b-int4/CARD.md): text-generation — machine-readable source of truth at cards/granite-4.1-8b-int4/card.json
+- [granite-4.1-8b-int8](cards/granite-4.1-8b-int8/CARD.md): text-generation — machine-readable source of truth at cards/granite-4.1-8b-int8/card.json
 - [granite-4.2-3b-int4](cards/granite-4.2-3b-int4/CARD.md): text-generation — machine-readable source of truth at cards/granite-4.2-3b-int4/card.json
 - [granite-4.2-3b-int8](cards/granite-4.2-3b-int8/CARD.md): text-generation — machine-readable source of truth at cards/granite-4.2-3b-int8/card.json
 - [granite-docling-258m](cards/granite-docling-258m/CARD.md): image-text-to-text — machine-readable source of truth at cards/granite-docling-258m/card.json
@@ -82,7 +104,15 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [jan-nano](cards/jan-nano/CARD.md): text-generation — machine-readable source of truth at cards/jan-nano/card.json
 - [jan-nano-model-block32](cards/jan-nano-model-block32/CARD.md): text-generation — machine-readable source of truth at cards/jan-nano-model-block32/card.json
 - [japanese-zipformer-base](cards/japanese-zipformer-base/CARD.md): automatic-speech-recognition — machine-readable source of truth at cards/japanese-zipformer-base/card.json
+- [julia-1__julia1_s1024_fp32](cards/julia-1__julia1_s1024_fp32/CARD.md): text-classification — machine-readable source of truth at cards/julia-1__julia1_s1024_fp32/card.json
+- [julia-1__julia1_s512_fp32](cards/julia-1__julia1_s512_fp32/CARD.md): text-classification — machine-readable source of truth at cards/julia-1__julia1_s512_fp32/card.json
 - [l2cs-gaze360](cards/l2cs-gaze360/CARD.md): image-classification — machine-readable source of truth at cards/l2cs-gaze360/card.json
+- [lfm2-2.6b-exp-int4](cards/lfm2-2.6b-exp-int4/CARD.md): text-generation — machine-readable source of truth at cards/lfm2-2.6b-exp-int4/card.json
+- [lfm2-2.6b-exp-int8](cards/lfm2-2.6b-exp-int8/CARD.md): text-generation — machine-readable source of truth at cards/lfm2-2.6b-exp-int8/card.json
+- [lfm2-2.6b-int4](cards/lfm2-2.6b-int4/CARD.md): text-generation — machine-readable source of truth at cards/lfm2-2.6b-int4/card.json
+- [lfm2-2.6b-int8](cards/lfm2-2.6b-int8/CARD.md): text-generation — machine-readable source of truth at cards/lfm2-2.6b-int8/card.json
+- [lfm2-700m-int4](cards/lfm2-700m-int4/CARD.md): text-generation — machine-readable source of truth at cards/lfm2-700m-int4/card.json
+- [lfm2-700m-int8](cards/lfm2-700m-int8/CARD.md): text-generation — machine-readable source of truth at cards/lfm2-700m-int8/card.json
 - [lfm2.5-1.2b-instruct-int4](cards/lfm2.5-1.2b-instruct-int4/CARD.md): text-generation — machine-readable source of truth at cards/lfm2.5-1.2b-instruct-int4/card.json
 - [lfm2.5-1.2b-instruct-int8](cards/lfm2.5-1.2b-instruct-int8/CARD.md): text-generation — machine-readable source of truth at cards/lfm2.5-1.2b-instruct-int8/card.json
 - [lfm2.5-1.2b-jp-int4](cards/lfm2.5-1.2b-jp-int4/CARD.md): text-generation — machine-readable source of truth at cards/lfm2.5-1.2b-jp-int4/card.json
@@ -93,6 +123,8 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [lfm2.5-2.6b-int8](cards/lfm2.5-2.6b-int8/CARD.md): text-generation — machine-readable source of truth at cards/lfm2.5-2.6b-int8/card.json
 - [lfm2.5-230m-int4](cards/lfm2.5-230m-int4/CARD.md): text-generation — machine-readable source of truth at cards/lfm2.5-230m-int4/card.json
 - [lfm2.5-230m-int8](cards/lfm2.5-230m-int8/CARD.md): text-generation — machine-readable source of truth at cards/lfm2.5-230m-int8/card.json
+- [lfm2.5-350m-int4](cards/lfm2.5-350m-int4/CARD.md): text-generation — machine-readable source of truth at cards/lfm2.5-350m-int4/card.json
+- [lfm2.5-350m-int8](cards/lfm2.5-350m-int8/CARD.md): text-generation — machine-readable source of truth at cards/lfm2.5-350m-int8/card.json
 - [lfm2.5-vl-3b-int8](cards/lfm2.5-vl-3b-int8/CARD.md): image-text-to-text — machine-readable source of truth at cards/lfm2.5-vl-3b-int8/card.json
 - [lfm25-12b-instruct-int4-gpu-093](cards/lfm25-12b-instruct-int4-gpu-093/CARD.md): text-generation — machine-readable source of truth at cards/lfm25-12b-instruct-int4-gpu-093/card.json
 - [lfm25-12b-int4-gpu](cards/lfm25-12b-int4-gpu/CARD.md): text-generation — machine-readable source of truth at cards/lfm25-12b-int4-gpu/card.json
@@ -124,6 +156,10 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [minicpm5-2b-int8](cards/minicpm5-2b-int8/CARD.md): text-generation — machine-readable source of truth at cards/minicpm5-2b-int8/card.json
 - [ministral3-3b](cards/ministral3-3b/CARD.md): text-generation — machine-readable source of truth at cards/ministral3-3b/card.json
 - [ministral3-3b-reasoning](cards/ministral3-3b-reasoning/CARD.md): text-generation — machine-readable source of truth at cards/ministral3-3b-reasoning/card.json
+- [ministral3-8b-int4](cards/ministral3-8b-int4/CARD.md): text-generation — machine-readable source of truth at cards/ministral3-8b-int4/card.json
+- [ministral3-8b-int8](cards/ministral3-8b-int8/CARD.md): text-generation — machine-readable source of truth at cards/ministral3-8b-int8/card.json
+- [modernbert-ja-310m-decision__modernbert_ja_310m_decision_s256_wfp16](cards/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s256_wfp16/CARD.md): typed decisions in Japanese (question + state + candidates -> one logit per (context, candidate) pair; softmax over a question's candidates = choice / score / true-false; text-classification) — machine-readable source of truth at cards/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s256_wfp16/card.json
+- [modernbert-ja-310m-decision__modernbert_ja_310m_decision_s512_wfp16](cards/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s512_wfp16/CARD.md): typed decisions in Japanese (question + state + candidates -> one logit per (context, candidate) pair; softmax over a question's candidates = choice / score / true-false; text-classification) — machine-readable source of truth at cards/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s512_wfp16/card.json
 - [modnet](cards/modnet/CARD.md): image-segmentation — machine-readable source of truth at cards/modnet/card.json
 - [mordant-3b-think-int8](cards/mordant-3b-think-int8/CARD.md): text-generation — machine-readable source of truth at cards/mordant-3b-think-int8/card.json
 - [movinet-a0-stream](cards/movinet-a0-stream/CARD.md): video-classification — machine-readable source of truth at cards/movinet-a0-stream/card.json
@@ -137,9 +173,20 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [nemotron-3-diarization__nemotron3_diar_frontend](cards/nemotron-3-diarization__nemotron3_diar_frontend/CARD.md): voice-activity-detection — machine-readable source of truth at cards/nemotron-3-diarization__nemotron3_diar_frontend/card.json
 - [nemotron-3-nano-4b-int8](cards/nemotron-3-nano-4b-int8/CARD.md): text-generation — machine-readable source of truth at cards/nemotron-3-nano-4b-int8/card.json
 - [nemotron-h-4b](cards/nemotron-h-4b/CARD.md): text-generation — machine-readable source of truth at cards/nemotron-h-4b/card.json
+- [nemotron-nano-9b-v2-int4](cards/nemotron-nano-9b-v2-int4/CARD.md): text-generation — machine-readable source of truth at cards/nemotron-nano-9b-v2-int4/card.json
+- [nemotron-nano-9b-v2-int8](cards/nemotron-nano-9b-v2-int8/CARD.md): text-generation — machine-readable source of truth at cards/nemotron-nano-9b-v2-int8/card.json
 - [north-micro-vision-instruct-wi8](cards/north-micro-vision-instruct-wi8/CARD.md): image-text-to-text — machine-readable source of truth at cards/north-micro-vision-instruct-wi8/card.json
 - [olmo-2-1b-instruct-q4-block32-ekv4096](cards/olmo-2-1b-instruct-q4-block32-ekv4096/CARD.md): text-generation — machine-readable source of truth at cards/olmo-2-1b-instruct-q4-block32-ekv4096/card.json
+- [olmo-3-7b-think-int4](cards/olmo-3-7b-think-int4/CARD.md): text-generation — machine-readable source of truth at cards/olmo-3-7b-think-int4/card.json
+- [olmo-3-7b-think-int4-c2048](cards/olmo-3-7b-think-int4-c2048/CARD.md): text-generation — machine-readable source of truth at cards/olmo-3-7b-think-int4-c2048/card.json
+- [olmo-3-7b-think-int8](cards/olmo-3-7b-think-int8/CARD.md): text-generation — machine-readable source of truth at cards/olmo-3-7b-think-int8/card.json
+- [open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16](cards/open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16/CARD.md): typed decisions (state + choice / score / noul questions -> one calibrated distribution per question; text-classification) — machine-readable source of truth at cards/open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16/card.json
+- [open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16](cards/open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16/CARD.md): typed decisions (state + choice / score / noul questions -> one calibrated distribution per question; text-classification) — machine-readable source of truth at cards/open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16/card.json
 - [ormbg](cards/ormbg/CARD.md): image-segmentation — machine-readable source of truth at cards/ormbg/card.json
+- [ornith-1.0-9b-int8](cards/ornith-1.0-9b-int8/CARD.md): text-generation — machine-readable source of truth at cards/ornith-1.0-9b-int8/card.json
+- [ornith-1.0-9b-mixed-int4](cards/ornith-1.0-9b-mixed-int4/CARD.md): text-generation — machine-readable source of truth at cards/ornith-1.0-9b-mixed-int4/card.json
+- [ornith-1.5-9b-int8](cards/ornith-1.5-9b-int8/CARD.md): text-generation — machine-readable source of truth at cards/ornith-1.5-9b-int8/card.json
+- [ornith-1.5-9b-mixed-int4](cards/ornith-1.5-9b-mixed-int4/CARD.md): text-generation — machine-readable source of truth at cards/ornith-1.5-9b-mixed-int4/card.json
 - [ovis2_5-2b](cards/ovis2_5-2b/CARD.md): image-text-to-text — machine-readable source of truth at cards/ovis2_5-2b/card.json
 - [ovisocr2-int8](cards/ovisocr2-int8/CARD.md): image-text-to-text — machine-readable source of truth at cards/ovisocr2-int8/card.json
 - [paddleocr-vl-1.6](cards/paddleocr-vl-1.6/CARD.md): image-text-to-text — machine-readable source of truth at cards/paddleocr-vl-1.6/card.json
@@ -150,6 +197,12 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8](cards/parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8/CARD.md): automatic-speech-recognition — machine-readable source of truth at cards/parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8/card.json
 - [parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8_stateful](cards/parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8_stateful/CARD.md): automatic-speech-recognition — machine-readable source of truth at cards/parakeet-tdt_ctc-0.6b-ja__parakeet_tdt_ctc_0.6b_ja_5s_i8_stateful/card.json
 - [phi4-mini-reasoning](cards/phi4-mini-reasoning/CARD.md): text-generation — machine-readable source of truth at cards/phi4-mini-reasoning/card.json
+- [phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_embeds](cards/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_embeds/CARD.md): text-classification — machine-readable source of truth at cards/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_embeds/card.json
+- [phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_int8emb](cards/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_int8emb/CARD.md): text-classification — machine-readable source of truth at cards/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_int8emb/card.json
+- [phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_embeds](cards/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_embeds/CARD.md): text-classification — machine-readable source of truth at cards/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_embeds/card.json
+- [phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb](cards/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb/CARD.md): text-classification — machine-readable source of truth at cards/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb/card.json
+- [phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_embeds](cards/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_embeds/CARD.md): text-classification — machine-readable source of truth at cards/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_embeds/card.json
+- [phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_int8emb](cards/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_int8emb/CARD.md): text-classification — machine-readable source of truth at cards/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_int8emb/card.json
 - [pidnet-s-cityscapes](cards/pidnet-s-cityscapes/CARD.md): image-segmentation — machine-readable source of truth at cards/pidnet-s-cityscapes/card.json
 - [places365-resnet18](cards/places365-resnet18/CARD.md): image-classification — machine-readable source of truth at cards/places365-resnet18/card.json
 - [plantnet-300k-resnet18](cards/plantnet-300k-resnet18/CARD.md): image-classification — machine-readable source of truth at cards/plantnet-300k-resnet18/card.json
@@ -163,6 +216,7 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [qwen25-coder-1.5b-int4](cards/qwen25-coder-1.5b-int4/CARD.md): text-generation — machine-readable source of truth at cards/qwen25-coder-1.5b-int4/card.json
 - [qwen3-4b-thinking](cards/qwen3-4b-thinking/CARD.md): text-generation — machine-readable source of truth at cards/qwen3-4b-thinking/card.json
 - [qwen3-4b-thinking-dynamic-wi4b32-afp32](cards/qwen3-4b-thinking-dynamic-wi4b32-afp32/CARD.md): text-generation — machine-readable source of truth at cards/qwen3-4b-thinking-dynamic-wi4b32-afp32/card.json
+- [qwen3-asr-1.7b](cards/qwen3-asr-1.7b/CARD.md): automatic-speech-recognition — machine-readable source of truth at cards/qwen3-asr-1.7b/card.json
 - [qwen3-embedding-0.6b](cards/qwen3-embedding-0.6b/CARD.md): sentence-similarity — machine-readable source of truth at cards/qwen3-embedding-0.6b/card.json
 - [qwen3-reranker-0.6b](cards/qwen3-reranker-0.6b/CARD.md): text-ranking — machine-readable source of truth at cards/qwen3-reranker-0.6b/card.json
 - [qwen35-0.8b](cards/qwen35-0.8b/CARD.md): text-generation — machine-readable source of truth at cards/qwen35-0.8b/card.json
@@ -172,6 +226,8 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [qwen35-2b-vl-int8](cards/qwen35-2b-vl-int8/CARD.md): image-text-to-text — machine-readable source of truth at cards/qwen35-2b-vl-int8/card.json
 - [qwen35-4b](cards/qwen35-4b/CARD.md): text-generation — machine-readable source of truth at cards/qwen35-4b/card.json
 - [qwen35-4b-mixed-int4](cards/qwen35-4b-mixed-int4/CARD.md): text-generation — machine-readable source of truth at cards/qwen35-4b-mixed-int4/card.json
+- [qwen35-9b](cards/qwen35-9b/CARD.md): text-generation — machine-readable source of truth at cards/qwen35-9b/card.json
+- [qwen35-9b-mixed-int4](cards/qwen35-9b-mixed-int4/CARD.md): text-generation — machine-readable source of truth at cards/qwen35-9b-mixed-int4/card.json
 - [r1-distill-qwen-1.5b](cards/r1-distill-qwen-1.5b/CARD.md): text-generation — machine-readable source of truth at cards/r1-distill-qwen-1.5b/card.json
 - [ram-plus__ram_reweight_fp16](cards/ram-plus__ram_reweight_fp16/CARD.md): image-classification — machine-readable source of truth at cards/ram-plus__ram_reweight_fp16/card.json
 - [ram-plus__ram_stage3_tail_fp16](cards/ram-plus__ram_stage3_tail_fp16/CARD.md): image-classification — machine-readable source of truth at cards/ram-plus__ram_stage3_tail_fp16/card.json
@@ -375,20 +431,34 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [audio8-tts-preview-0.6b__codec_decoder_int8_t128](data/sweep/2.5.3/2026-09-28/audio8-tts-preview-0.6b__codec_decoder_int8_t128.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
 - [audio8-tts-preview-0.6b__codec_encoder_fp16_10s](data/sweep/2.5.3/2026-09-28/audio8-tts-preview-0.6b__codec_encoder_fp16_10s.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
 - [audio8-tts-preview-0.6b__fast_ar_int8](data/sweep/2.5.3/2026-09-28/audio8-tts-preview-0.6b__fast_ar_int8.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32](data/sweep/2.5.3/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16](data/sweep/2.5.3/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32](data/sweep/2.5.3/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [gliclass-edge-v3.0__gliclass_edge_v3_s256_wfp16](data/sweep/2.5.3/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s256_wfp16.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [gliner2.5-multi__gliner25_multi_s128_wfp16](data/sweep/2.5.3/2026-10-02/gliner2.5-multi__gliner25_multi_s128_wfp16.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [gliner2.5-multi__gliner25_multi_s256_wfp16](data/sweep/2.5.3/2026-10-02/gliner2.5-multi__gliner25_multi_s256_wfp16.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [gliner2.5-multi__gliner25_multi_s512_wfp16](data/sweep/2.5.3/2026-10-02/gliner2.5-multi__gliner25_multi_s512_wfp16.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [modernbert-ja-310m-decision__modernbert_ja_310m_decision_s256_wfp16](data/sweep/2.5.3/2026-10-02/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s256_wfp16.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [modernbert-ja-310m-decision__modernbert_ja_310m_decision_s512_wfp16](data/sweep/2.5.3/2026-10-02/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s512_wfp16.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16](data/sweep/2.5.3/2026-10-02/open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16](data/sweep/2.5.3/2026-10-02/open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [julia-1__julia1_s1024_fp32](data/sweep/2.5.3/2026-10-09/julia-1__julia1_s1024_fp32.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [julia-1__julia1_s512_fp32](data/sweep/2.5.3/2026-10-09/julia-1__julia1_s512_fp32.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_embeds](data/sweep/2.5.3/2026-10-11/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_embeds.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_int8emb](data/sweep/2.5.3/2026-10-11/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_int8emb.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_embeds](data/sweep/2.5.3/2026-10-11/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_embeds.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb](data/sweep/2.5.3/2026-10-11/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_embeds](data/sweep/2.5.3/2026-10-11/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_embeds.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
+- [phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_int8emb](data/sweep/2.5.3/2026-10-11/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_int8emb.json): model-level LiteRT.js sweep record (sweep_result.schema.json)
 
 ## Device-run results
 
 - [lfm2.5-1.2b-instruct-int4__mac-studio-m4-max](data/device_runs/0.14.0/2026-07-22/lfm2.5-1.2b-instruct-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
-- [ministral3-3b__mac-studio-m4-max](data/device_runs/0.14.0/2026-07-22/ministral3-3b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [nanbeige4.1-3b__mac-studio-m4-max](data/device_runs/0.14.0/2026-07-22/nanbeige4.1-3b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [r1-distill-qwen-1.5b__mac-studio-m4-max](data/device_runs/0.14.0/2026-07-22/r1-distill-qwen-1.5b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
-- [smollm3-3b__mac-studio-m4-max](data/device_runs/0.14.0/2026-07-22/smollm3-3b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [fastcontext-4b__mac-studio-m4-max](data/device_runs/0.14.0/2026-07-23/fastcontext-4b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [jan-nano__mac-studio-m4-max](data/device_runs/0.14.0/2026-07-23/jan-nano__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
-- [phi4-mini-reasoning__mac-studio-m4-max](data/device_runs/0.14.0/2026-07-23/phi4-mini-reasoning__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [polaris-4b__mac-studio-m4-max](data/device_runs/0.14.0/2026-07-23/polaris-4b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
-- [qwen3-4b-thinking__mac-studio-m4-max](data/device_runs/0.14.0/2026-07-23/qwen3-4b-thinking__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
-- [vibethinker-3b__mac-studio-m4-max](data/device_runs/0.14.0/2026-07-23/vibethinker-3b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [granite-4.0-h-350m-int8-gpu__iphone-17-pro](data/device_runs/0.15.0/2026-08-28/granite-4.0-h-350m-int8-gpu__iphone-17-pro.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [nanbeige4.2-3b-fp32act__iphone-17-pro](data/device_runs/0.15.0/2026-08-28/nanbeige4.2-3b-fp32act__iphone-17-pro.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [granite-4.2-3b-int4__iphone-17-pro](data/device_runs/0.15.0/2026-08-31/granite-4.2-3b-int4__iphone-17-pro.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
@@ -490,7 +560,6 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [tashkeel-350m-v2-int8__mac-studio-m4-max](data/device_runs/0.16.0/2026-08-25/tashkeel-350m-v2-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [lfm25-12b-int4-gpu__iphone-17-pro](data/device_runs/0.16.0/2026-08-26/lfm25-12b-int4-gpu__iphone-17-pro.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [granite-4.0-h-350m-int8-gpu__galaxy-s26](data/device_runs/0.16.0/2026-08-27/granite-4.0-h-350m-int8-gpu__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
-- [hy-mt2-1.8b-int8__mac-studio-m4-max](data/device_runs/0.16.0/2026-08-27/hy-mt2-1.8b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [lfm25-12b-int4-gpu__mac-studio-m4-max](data/device_runs/0.16.0/2026-08-27/lfm25-12b-int4-gpu__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [nanbeige4.2-3b-fp32act__galaxy-s26](data/device_runs/0.16.0/2026-08-27/nanbeige4.2-3b-fp32act__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [nemotron-3-nano-4b-int8__mac-studio-m4-max](data/device_runs/0.16.0/2026-08-27/nemotron-3-nano-4b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
@@ -592,7 +661,10 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [spark-x2.5-4b-int8__galaxy-s26](data/device_runs/0.16.0/2026-09-07/spark-x2.5-4b-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [minicpm5-2b-int4__galaxy-s26](data/device_runs/0.16.0/2026-09-08/minicpm5-2b-int4__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [minicpm5-2b-int8__galaxy-s26](data/device_runs/0.16.0/2026-09-08/minicpm5-2b-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [decider-0.8b-fp16__galaxy-s26](data/device_runs/0.16.0/2026-09-23/decider-0.8b-fp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [decider-0.8b-int8__galaxy-s26](data/device_runs/0.16.0/2026-09-23/decider-0.8b-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [decider-2b-vision-int8__galaxy-s26](data/device_runs/0.16.0/2026-09-29/decider-2b-vision-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [nemotron-3-nano-4b-int8__mac-studio-m4-max](data/device_runs/0.16.0/2026-10-13/nemotron-3-nano-4b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [north-micro-vision-instruct-wi8__pixel-8a](data/device_runs/0.16.1/2026-08-19/north-micro-vision-instruct-wi8__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [granite-docling-258m__galaxy-s26](data/device_runs/0.16.1/2026-08-24/granite-docling-258m__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [deepseek-r1-distill-qwen-7b-q4-block32-ekv4096__raspberry-pi-5](data/device_runs/0.16.1/2026-09-01/deepseek-r1-distill-qwen-7b-q4-block32-ekv4096__raspberry-pi-5.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
@@ -653,6 +725,8 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [vibevoice-asr-bitnet__galaxy-s26](data/device_runs/0.16.1/2026-09-04/vibevoice-asr-bitnet__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [fun-asr-nano-2512__galaxy-s26](data/device_runs/0.16.1/2026-09-27/fun-asr-nano-2512__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [decider-2b-vision-int8__galaxy-s26](data/device_runs/0.16.1/2026-09-29/decider-2b-vision-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [confucius4-r2t2__galaxy-s26](data/device_runs/0.16.1/2026-10-02/confucius4-r2t2__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [decider-2b-vision-int8__galaxy-s26](data/device_runs/0.16.1/2026-10-10/decider-2b-vision-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [granite-4.0-h-350m-int8__mac-studio-m4-max](data/device_runs/0.17.0/2026-09-06/granite-4.0-h-350m-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [lfm2.5-1.2b-instruct-int4__mac-studio-m4-max](data/device_runs/0.17.0/2026-09-06/lfm2.5-1.2b-instruct-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [lfm2.5-1.2b-instruct-int8__mac-studio-m4-max](data/device_runs/0.17.0/2026-09-06/lfm2.5-1.2b-instruct-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
@@ -666,11 +740,84 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [spark-x2.5-4b-int8__mac-studio-m4-max](data/device_runs/0.17.0/2026-09-07/spark-x2.5-4b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [minicpm5-2b-int4__mac-studio-m4-max](data/device_runs/0.17.0/2026-09-08/minicpm5-2b-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [minicpm5-2b-int8__mac-studio-m4-max](data/device_runs/0.17.0/2026-09-08/minicpm5-2b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ministral3-3b__iphone-18-pro](data/device_runs/0.17.0/2026-10-05/ministral3-3b__iphone-18-pro.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [smollm3-3b__iphone-18-pro](data/device_runs/0.17.0/2026-10-05/smollm3-3b__iphone-18-pro.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [decider-0.8b-fp16__mac-studio-m4-max](data/device_runs/0.17.1/2026-09-23/decider-0.8b-fp16__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [decider-0.8b-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-09-23/decider-0.8b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [fun-asr-nano-2512__galaxy-s26](data/device_runs/0.17.1/2026-09-27/fun-asr-nano-2512__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [fun-asr-nano-2512__mac-studio-m4-max](data/device_runs/0.17.1/2026-09-27/fun-asr-nano-2512__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [decider-2b-vision-fp16-int8vocab__mac-studio-m4-max](data/device_runs/0.17.1/2026-09-29/decider-2b-vision-fp16-int8vocab__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [decider-2b-vision-fp16__mac-studio-m4-max](data/device_runs/0.17.1/2026-09-29/decider-2b-vision-fp16__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [decider-2b-vision-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-09-29/decider-2b-vision-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [confucius4-r2t2__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-02/confucius4-r2t2__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen3-asr-1.7b__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-03/qwen3-asr-1.7b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [deepseek-r1-distill-qwen-7b-q4-block32-ekv4096__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-05/deepseek-r1-distill-qwen-7b-q4-block32-ekv4096__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [hy-mt2-1.8b-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-05/hy-mt2-1.8b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ministral3-3b__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-05/ministral3-3b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [phi4-mini-reasoning__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-05/phi4-mini-reasoning__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen3-4b-thinking__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-05/qwen3-4b-thinking__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [smollm3-3b-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-05/smollm3-3b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [smollm3-3b__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-05/smollm3-3b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [vibethinker-3b__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-05/vibethinker-3b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [fun-asr-nano-2512__galaxy-s26](data/device_runs/0.17.1/2026-10-09/fun-asr-nano-2512__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen3-asr-1.7b__galaxy-s26](data/device_runs/0.17.1/2026-10-09/qwen3-asr-1.7b__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [confucius4-r2t2__galaxy-s26](data/device_runs/0.17.1/2026-10-10/confucius4-r2t2__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [fun-asr-nano-2512__galaxy-s26](data/device_runs/0.17.1/2026-10-10/fun-asr-nano-2512__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-2.6b-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-12/lfm2-2.6b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-700m-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-12/lfm2-700m-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2.5-350m-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-12/lfm2.5-350m-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [g9v3-3b-int4__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-13/g9v3-3b-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [g9v3-3b-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-13/g9v3-3b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-2.6b-exp-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-13/lfm2-2.6b-exp-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [falcon-h1r-7b-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-14/falcon-h1r-7b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [granite-4.1-8b-int4__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-14/granite-4.1-8b-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [granite-4.1-8b-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-14/granite-4.1-8b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ministral3-8b-int4__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-14/ministral3-8b-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ministral3-8b-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-14/ministral3-8b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [nemotron-nano-9b-v2-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-14/nemotron-nano-9b-v2-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ornith-1.0-9b-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-15/ornith-1.0-9b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ornith-1.0-9b-mixed-int4__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-15/ornith-1.0-9b-mixed-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ornith-1.5-9b-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-15/ornith-1.5-9b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ornith-1.5-9b-mixed-int4__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-15/ornith-1.5-9b-mixed-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [olmo-3-7b-think-int4__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-16/olmo-3-7b-think-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [olmo-3-7b-think-int8__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-16/olmo-3-7b-think-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-9b-mixed-int4__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-16/qwen35-9b-mixed-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-9b__mac-studio-m4-max](data/device_runs/0.17.1/2026-10-16/qwen35-9b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2.5-1.2b-instruct-int4__mac-m4-max](data/device_runs/0.18.0/2026-10-07/lfm2.5-1.2b-instruct-int4__mac-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [g9v3-3b-int8__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-12/g9v3-3b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-2.6b-exp-int4__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-12/lfm2-2.6b-exp-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-2.6b-exp-int8__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-12/lfm2-2.6b-exp-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-2.6b-int4__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-12/lfm2-2.6b-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-2.6b-int8__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-12/lfm2-2.6b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-700m-int4__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-12/lfm2-700m-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-700m-int8__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-12/lfm2-700m-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2.5-350m-int4__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-12/lfm2.5-350m-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2.5-350m-int8__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-12/lfm2.5-350m-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [g9v3-3b-int4__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-13/g9v3-3b-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [nemotron-3-nano-4b-int8__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-13/nemotron-3-nano-4b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen3-asr-1.7b__galaxy-s26](data/device_runs/0.18.0/2026-10-13/qwen3-asr-1.7b__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen3-asr-1.7b__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-13/qwen3-asr-1.7b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen3-asr-1.7b__pixel-8a](data/device_runs/0.18.0/2026-10-13/qwen3-asr-1.7b__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-4b__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-13/qwen35-4b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [granite-4.0-micro-int4__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-14/granite-4.0-micro-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [granite-4.0-micro-int8__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-14/granite-4.0-micro-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [falcon-h1r-7b-int4__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-15/falcon-h1r-7b-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [falcon-h1r-7b-int8__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-15/falcon-h1r-7b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [granite-4.1-8b-int4__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-15/granite-4.1-8b-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [granite-4.1-8b-int8__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-15/granite-4.1-8b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ministral3-8b-int4__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-15/ministral3-8b-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ministral3-8b-int8__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-15/ministral3-8b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [nemotron-nano-9b-v2-int4__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-15/nemotron-nano-9b-v2-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [nemotron-nano-9b-v2-int8__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-15/nemotron-nano-9b-v2-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ornith-1.0-9b-int8__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-15/ornith-1.0-9b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ornith-1.0-9b-mixed-int4__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-15/ornith-1.0-9b-mixed-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ornith-1.5-9b-int8__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-15/ornith-1.5-9b-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ornith-1.5-9b-mixed-int4__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-15/ornith-1.5-9b-mixed-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [olmo-3-7b-think-int4-c2048__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-16/olmo-3-7b-think-int4-c2048__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [olmo-3-7b-think-int4__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-16/olmo-3-7b-think-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [olmo-3-7b-think-int8__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-16/olmo-3-7b-think-int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-9b-mixed-int4__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-16/qwen35-9b-mixed-int4__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-9b__mac-studio-m4-max](data/device_runs/0.18.0/2026-10-16/qwen35-9b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [3ddfa-v2__raspberry-pi-5](data/device_runs/2.2.0.dev20260804/2026-08-31/3ddfa-v2__raspberry-pi-5.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [6drepnet-headpose__raspberry-pi-5](data/device_runs/2.2.0.dev20260804/2026-08-31/6drepnet-headpose__raspberry-pi-5.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [basic-pitch__raspberry-pi-5](data/device_runs/2.2.0.dev20260804/2026-08-31/basic-pitch__raspberry-pi-5.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
@@ -839,12 +986,107 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 - [audio8-tts-preview-0.6b__slow_ar_int8__mac-studio-m4-max](data/device_runs/2.2.0/2026-09-28/audio8-tts-preview-0.6b__slow_ar_int8__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [decider-2b-vision-fp16-int8vocab__mac-studio-m4-max](data/device_runs/2.2.0/2026-09-29/decider-2b-vision-fp16-int8vocab__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [decider-2b-vision-fp16__mac-studio-m4-max](data/device_runs/2.2.0/2026-09-29/decider-2b-vision-fp16__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [julia-1__julia1_s1024_fp32__galaxy-s26](data/device_runs/2.2.0/2026-09-30/julia-1__julia1_s1024_fp32__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [julia-1__julia1_s512_fp32__galaxy-s26](data/device_runs/2.2.0/2026-09-30/julia-1__julia1_s512_fp32__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32__galaxy-s26](data/device_runs/2.2.0/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32__galaxy-s26](data/device_runs/2.2.0/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [gliclass-edge-v3.0__gliclass_edge_v3_s256_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s256_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [gliner2.5-multi__gliner25_multi_s128_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-02/gliner2.5-multi__gliner25_multi_s128_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [gliner2.5-multi__gliner25_multi_s256_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-02/gliner2.5-multi__gliner25_multi_s256_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [gliner2.5-multi__gliner25_multi_s512_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-02/gliner2.5-multi__gliner25_multi_s512_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [modernbert-ja-310m-decision__modernbert_ja_310m_decision_s256_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-02/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s256_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [modernbert-ja-310m-decision__modernbert_ja_310m_decision_s512_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-02/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s512_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-02/open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-02/open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32__galaxy-s26](data/device_runs/2.2.0/2026-10-03/gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [gliner2.5-decide__gliner25_decide_s128_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-03/gliner2.5-decide__gliner25_decide_s128_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [gliner2.5-decide__gliner25_decide_s256_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-03/gliner2.5-decide__gliner25_decide_s256_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-03/open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32__galaxy-s26](data/device_runs/2.2.0/2026-10-04/gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32__galaxy-s26](data/device_runs/2.2.0/2026-10-04/gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [gliner2.5-decide__gliner25_decide_s128_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-04/gliner2.5-decide__gliner25_decide_s128_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [gliner2.5-decide__gliner25_decide_s512_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-04/gliner2.5-decide__gliner25_decide_s512_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-04/open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-04/open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16__galaxy-s26](data/device_runs/2.2.0/2026-10-05/open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [audio8-tts-preview-0.6b__codec_decoder_fp16_t128__galaxy-s26](data/device_runs/2.2.0/2026-10-10/audio8-tts-preview-0.6b__codec_decoder_fp16_t128__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [audio8-tts-preview-0.6b__slow_ar_int8__galaxy-s26](data/device_runs/2.2.0/2026-10-10/audio8-tts-preview-0.6b__slow_ar_int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_embeds__galaxy-s26](data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_embeds__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_int8emb__galaxy-s26](data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_int8emb__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_embeds__galaxy-s26](data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_embeds__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb__galaxy-s26](data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_embeds__galaxy-s26](data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_embeds__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_int8emb__galaxy-s26](data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_int8emb__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ema-lightning__ema_align_multi_fp32__galaxy-s26](data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ema-lightning__ema_align_multi_fp32__mac-studio-m4-max](data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ema-lightning__ema_decoder_multi_fp16__galaxy-s26](data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_decoder_multi_fp16__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ema-lightning__ema_decoder_multi_fp16__mac-studio-m4-max](data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_decoder_multi_fp16__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ema-lightning__ema_step_multi_fp32__galaxy-s26](data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_step_multi_fp32__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ema-lightning__ema_step_multi_fp32__mac-studio-m4-max](data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_step_multi_fp32__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ema-lightning__ema_text_multi_fp32__galaxy-s26](data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_text_multi_fp32__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ema-lightning__ema_text_multi_fp32__mac-studio-m4-max](data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_text_multi_fp32__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [bitcpm-cann-1b-int4__pixel-8a](data/device_runs/gallery-1.0.15/2026-07-23/bitcpm-cann-1b-int4__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [ministral3-3b__pixel-8a](data/device_runs/gallery-1.0.15/2026-07-23/ministral3-3b__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [deepseek-r1-distill-qwen-7b-q4-block32-ekv4096__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-05/deepseek-r1-distill-qwen-7b-q4-block32-ekv4096__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [hy-mt2-1.8b-int8__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-05/hy-mt2-1.8b-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ministral3-3b__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-05/ministral3-3b__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [phi4-mini-reasoning__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-05/phi4-mini-reasoning__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen3-4b-thinking__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-05/qwen3-4b-thinking__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [smollm3-3b-int8__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-05/smollm3-3b-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [smollm3-3b__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-05/smollm3-3b__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [vibethinker-3b__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-05/vibethinker-3b__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-2.6b-exp-int4__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-exp-int4__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-2.6b-exp-int4__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-exp-int4__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-2.6b-exp-int8__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-exp-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-2.6b-exp-int8__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-exp-int8__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-2.6b-int4__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-int4__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-2.6b-int4__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-int4__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-2.6b-int8__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-2.6b-int8__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-int8__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-700m-int4__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-700m-int4__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-700m-int4__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-700m-int4__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-700m-int8__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-700m-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2-700m-int8__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-700m-int8__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2.5-350m-int4__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2.5-350m-int4__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2.5-350m-int4__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2.5-350m-int4__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2.5-350m-int8__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2.5-350m-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [lfm2.5-350m-int8__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-12/lfm2.5-350m-int8__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-0.8b-vl-int8__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-0.8b-vl-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-0.8b-vl-int8__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-0.8b-vl-int8__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-0.8b__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-0.8b__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-0.8b__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-0.8b__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-2b-vl-int8__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-2b-vl-int8__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-2b__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-2b__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-4b-mixed-int4__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-4b-mixed-int4__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-4b-mixed-int4__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-4b-mixed-int4__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [g9v3-3b-int4__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-13/g9v3-3b-int4__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [g9v3-3b-int4__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-13/g9v3-3b-int4__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [g9v3-3b-int8__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-13/g9v3-3b-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [g9v3-3b-int8__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-13/g9v3-3b-int8__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-2b__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-2b__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-2b__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-2b__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-4b__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-4b__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-4b__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-4b__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [granite-4.1-8b-int4__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-14/granite-4.1-8b-int4__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ministral3-8b-int4__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-14/ministral3-8b-int4__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [falcon-h1r-7b-int4__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-15/falcon-h1r-7b-int4__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [granite-4.0-micro-int4__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-15/granite-4.0-micro-int4__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [granite-4.0-micro-int4__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-15/granite-4.0-micro-int4__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [granite-4.0-micro-int8__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-15/granite-4.0-micro-int8__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [granite-4.1-8b-int4__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-15/granite-4.1-8b-int4__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [ministral3-8b-int4__galaxy-s26](data/device_runs/prebuilt-adac974b/2026-10-15/ministral3-8b-int4__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [nemotron-nano-9b-v2-int4__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-15/nemotron-nano-9b-v2-int4__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [granite-4.0-micro-int4__pixel-8a](data/device_runs/prebuilt-adac974b/2026-10-16/granite-4.0-micro-int4__pixel-8a.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [smolvlm2-500m__mac-studio-m4-max](data/device_runs/selfbuilt-1dadd00c/2026-09-24/smolvlm2-500m__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [internvl3-1b__galaxy-s26](data/device_runs/selfbuilt-1dadd00c/2026-09-26/internvl3-1b__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [smolvlm2-500m__galaxy-s26](data/device_runs/selfbuilt-1dadd00c/2026-09-26/smolvlm2-500m__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [internvl3-1b__mac-studio-m4-max](data/device_runs/selfbuilt-1dadd00c/2026-10-01/internvl3-1b__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [phi4-mini-reasoning__galaxy-s26](data/device_runs/selfbuilt-3dbb23e1e/2026-10-05/phi4-mini-reasoning__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [smollm3-3b-int8__galaxy-s26](data/device_runs/selfbuilt-3dbb23e1e/2026-10-05/smollm3-3b-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful__mac-studio-m4-max](data/device_runs/selfbuilt-66058c82+omni-eval-patches/2026-09-25/parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful__mac-studio-m4-max.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen3-4b-thinking-dynamic-wi4b32-afp32__galaxy-s26](data/device_runs/selfbuilt-b2f686e2/2026-10-07/qwen3-4b-thinking-dynamic-wi4b32-afp32__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [qwen35-4b-mixed-int4__galaxy-s26](data/device_runs/selfbuilt-b2f686e2/2026-10-09/qwen35-4b-mixed-int4__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
+- [nemotron-3-nano-4b-int8__galaxy-s26](data/device_runs/selfbuilt-b2f686e2/2026-10-13/nemotron-3-nano-4b-int8__galaxy-s26.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [example-tiny-clean__example-phone](data/examples/device_runs/0.0.0-example/2026-01-01/example-tiny-clean__example-phone.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)
 - [example-tiny-mixed__example-workstation](data/examples/device_runs/0.0.0-example/2026-01-02/example-tiny-mixed__example-workstation.json): model-level device-run record — NPU / LiteRT-LM lanes (device_run_result.schema.json)

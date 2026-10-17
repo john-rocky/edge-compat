@@ -1,0 +1,203 @@
+{
+  "artifacts": [
+    {
+      "file": "granite-4.1-8b_int8.litertlm",
+      "sha256": "3ed1e7d4a3429e75a77b7445cbc4ce051aba888104eb254dcede457b5dfc70d9",
+      "size_mb": 8535.254
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "granite41_work/convert_granite41_8b.sh (hf-to-litertlm): export (6 prefill signatures 1024..1 + decode, KV cache 4096, embedder externalized, no start token, IBM's chat_template.jinja embedded) -> metadata edit (stop id 100257 only, max_num_tokens 4096) -> tools/gpu_graph/gpu_graph_retrofit.py --decomp exporter --mask add_bcast",
+    "quantization": "int8 dynamic on linears, float activations; the embedding table as a separate section (card L24)",
+    "tool": "litert-torch (lightweight export, 1e8-byte lazy-constant threshold) + hf-to-litertlm tools/gpu_graph/ GPU-composite rewrite; repro = hf-to-litertlm granite41_work/",
+    "tool_version": "litert-torch 0.9.4 (litert-converter 0.4.0, ai-edge-quantizer 0.9.0, transformers 5.14.1, torch 2.13.0); packed by the litert-lm 0.18.0 CLI"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-14",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "command (tools/v0171_run.sh, \"$L\" = a symlink to cand/granite-4.1-8b_int8_gpuc.litertlm): uvx --from litert-lm==0.17.1 litert-lm run \"$L\" --backend cpu --prompt \"What is the capital of France? Answer in one word.\" --cache disk ) < /dev/null > \"$o\" 2>&1",
+            "quiet_turn: turn after 308 s in line, running: bash /Users/USER/code/litertlm-convert/aa_mobile_b2_work/tools/guarded.sh /Users/USER/code/litertlm-co",
+            "stdout: Paris",
+            "EXIT=0",
+            "== 13:27:10 guard start v0171r_int8_gpuc pids 35984; swap used 1472.38 MB; PhysMem: 37G used (5604M wired, 2850M compressor), 91G unused.; reclaimable 113.43 GB",
+            "process footprint (swap guard, 15 s samples, binary GB): max 0 GB"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "answers_with_expect": 1.0,
+            "guard_footprint_max_gb": 0.0,
+            "processes": 1.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.17.1/2026-10-14/granite-4.1-8b-int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-15",
+          "decode_tokens_per_s": 9.815,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "command (both passes): /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_b2_work/granite41_8b/ship/granite-4.1-8b_int8.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+            "pass 1 (bench/clean/cpu_int8_p1.log): prefill 111.22 / decode 9.97 tok/s, TTFT 9.3078 s, init 63.4007 s",
+            "pass 2 (bench/clean/cpu_int8_p2.log): prefill 109.98 / decode 9.66 tok/s, TTFT 9.415 s, init 65.0144 s",
+            "process footprint (swap guard, 15 s samples, binary GB): max 54 GB (bench/clean/cpu_int8_p1.guard.log, _p2.guard.log); swap unchanged"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "guard_footprint_max_gb": 54.0,
+            "init_s": 64.2075,
+            "iterations": 3.0,
+            "max_num_tokens": 2048.0,
+            "pass1_decode_tok_s": 9.97,
+            "pass1_init_s": 63.4007,
+            "pass1_prefill_tok_s": 111.22,
+            "pass1_ttft_s": 9.3078,
+            "pass2_decode_tok_s": 9.66,
+            "pass2_init_s": 65.0144,
+            "pass2_prefill_tok_s": 109.98,
+            "pass2_ttft_s": 9.415,
+            "passes": 2.0,
+            "prefill_tokens": 1024.0,
+            "t_1024_256_s": 35.3479
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 110.6,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 9361.4
+        },
+        "source": "data/device_runs/0.18.0/2026-10-15/granite-4.1-8b-int8__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-15",
+          "decode_tokens_per_s": 46.07,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "command (both passes): /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_b2_work/granite41_8b/ship/granite-4.1-8b_int8.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+            "pass 1 (bench/clean/gpu_int8_p1.log): prefill 719.34 / decode 46.2 tok/s, TTFT 1.4452 s, init 5.5602 s",
+            "pass 2 (bench/clean/gpu_int8_p2.log): prefill 716.58 / decode 45.94 tok/s, TTFT 1.4508 s, init 5.4684 s"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 5.5143,
+            "iterations": 3.0,
+            "max_num_tokens": 2048.0,
+            "pass1_decode_tok_s": 46.2,
+            "pass1_init_s": 5.5602,
+            "pass1_prefill_tok_s": 719.34,
+            "pass1_ttft_s": 1.4452,
+            "pass2_decode_tok_s": 45.94,
+            "pass2_init_s": 5.4684,
+            "pass2_prefill_tok_s": 716.58,
+            "pass2_ttft_s": 1.4508,
+            "passes": 2.0,
+            "prefill_tokens": 1024.0,
+            "t_1024_256_s": 6.9831
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 717.96,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 1448.0
+        },
+        "source": "data/device_runs/0.18.0/2026-10-15/granite-4.1-8b-int8__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "granite",
+    "id": "granite-4.1-8b-int8",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/granite-4.1-8b",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Runtime: tested on litert-lm 0.18.0 (Mac); on litert-lm 0.17.1 the file answered a plain `run` with \"Paris\" (one CPU process) (card L18).",
+    "GPU-composite graph: each layer's two DYNAMIC_UPDATE_SLICE KV writes are one odml.cache_update and the attention products odml.runtime_bmm; on the Mac GPU the rewrite took the 1024 / 256 workload from 8.20 to 6.95 s in the same measurement windows, and before the rewrite the same weights scored the same on GSM8K (95), no question changing between right and wrong (card L54, L98).",
+    "Lightweight export: the default litert-torch export path reached 98.8 GB on a 128 GB Mac in the converter passes; with the 1 MiB default lazy-constant threshold the converter left the 40 o_proj weights unquantized behind a constant-only multiply by Granite's residual multiplier 0.22, so the export uses a 1e8-byte threshold (every FULLY_CONNECTED weight an int8 constant, no op with all-constant inputs). Export peaks 50-56 GiB (card L97).",
+    "Chat template: IBM's chat_template.jinja byte for byte, no default system message (no system turn without one); no start token; the only stop token <|end_of_text|> (id 100257); no thinking declared. A tool result passed as a Python-API content part renders empty — pass it as the tool message's text (card L68).",
+    "Tool calls come back as text: the model writes <tool_call>{\"name\": ..., \"arguments\": ...}</tool_call> and the app has to parse it (the bundle's generic model type has no tool-call parser) (card L70).",
+    "Engine reuse: one Engine can serve one conversation after another (a second conversation gave the same replies as a fresh Engine in 3 of 3 runs, Mac GPU; KV cache only, no recurrent state) (card L70).",
+    "GPU precision: the file runs the GPU with the runtime's default fp16 activations; fp32 activations declared gave the same eight check answers and ran 15 % slower, so none is declared (card L54).",
+    "Galaxy S26: not run on this phone — after another 8B int8 file of the same recipe class dropped the phone off USB during its GPU engine warm-up (2026-10-14), the lane does not start 8B int8 engines on it; a rule, not a measured limit. No CPU row on either phone (batch-1 CPU peak factors put the file above MemTotal); Pixel 8a not tried (8.95 GB, more than the phone's RAM) (card L92).",
+    "iOS not measured: the main weights section is 8,528,914,704 bytes, over 2 GiB (card L36).",
+    "Accuracy: GSM8K n=100 (greedy, at most 1024 output tokens, fresh process per question, Mac GPU): bf16 96 / int8 95 — one question differs (right only in bf16) (card L46-L54)."
+  ],
+  "schema_version": "1.2"
+}

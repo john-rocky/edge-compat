@@ -1,0 +1,252 @@
+{
+  "artifacts": [
+    {
+      "file": "decider-0.8b_fp16.litertlm",
+      "sha256": "477c1dcadbb229833cbcb9613f3436ad7057dcdbc4de2038ca3e8f4ec0485f25",
+      "size_mb": 1549.774
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "hf-to-litertlm decider_work/ (converter, gates, fixtures); source checkpoint Mapika/decider-0.8b rev 1ea54127d3bd52f6d753d9257b32a6380b873907",
+    "quantization": "FP16 casting of fully connected and embedding weights; float compute; fp32 activation preference (Hub card 'Files', 'License and changes').",
+    "tool": "litert-torch fork john-rocky/litert-torch @115a13607c730c81018bb9789138a3e5e5119e3d with the owner's hybrid patch (card 'License and changes')",
+    "tool_version": "see the Hub card's Reproduction link (hf-to-litertlm decider_work/); runtime checks on LiteRT-LM 0.17.1 (describe + engine) and ai-edge-litert 2.2.0 (graph reader)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-23",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 24723,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-decider08b-gate",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 24723 out of 25885 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2245 partitions for subgraph 0 (prefill_1024).",
+            "12 subgraphs, every one replaced whole: False (delegate TfLiteXNNPackDelegate)",
+            "- Init Total: 18089.28 ms",
+            "Time to first token: 5.92 s",
+            "Prefill Turn 1: Processed 262 tokens in 5.829601821s duration.",
+            "Prefill Speed: 44.94 tokens/sec.",
+            "Decode Speed: 10.98 tokens/sec. (informational: the runtime's generated tokens carry no decision meaning; not recorded as decode_tokens_per_s)",
+            "EXIT=0",
+            "peak_mem_mb = VmHWM 6240060 kB x 1024 / 10^6 (the probe's 6093.81 MiB); includes init, prefill and the full decode",
+            "conditions before the run: thermal status 0, SKIN 37.9 C, cpufreq cpu0/4/7 at max {'0': [3628800, 3628800], '4': [3628800, 3628800], '7': [4742400, 4742400]}; cold (runtime cache removed), one process, n = 1, started 2026-09-22T23:42:38.158853+00:00",
+            "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_fp16.litertlm r7_fp16_256_r1 /data/local/tmp/gputest_s4/dec08b_prompt_256.txt > /dev/null 2>&1 < /dev/null &",
+            "files: codex-conversions/2026-09-21/decider-08b/logs/s26_r7/r7_fp16_256_r1.log; row source codex-conversions/2026-09-21/decider-08b/results/s26_fp16_rows.jsonl"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 3834,
+            "init_s": 18.08928,
+            "max_num_tokens": 4096,
+            "peak_vmhwm_kb": 6240060,
+            "prefill_tokens": 262,
+            "skin_c_start": 37.9,
+            "thermal_status_start": 0
+          },
+          "output_match": null,
+          "peak_mem_mb": 6389.82,
+          "prefill_tokens_per_s": 44.94,
+          "provenance": "measured",
+          "runs": true,
+          "signature": null,
+          "total_ops": 25885,
+          "ttft_ms": 5920.0
+        },
+        "source": "data/device_runs/0.16.0/2026-09-23/decider-0.8b-fp16__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-23",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 25656,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-decider08b-gate",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": "ERROR: Hint fully delegated to single delegate is set, but the graph is not fully delegated.",
+          "evidence": [
+            "ERROR: Following operations are not supported by GPU delegate:",
+            "VERBOSE: Replacing 25656 out of 25885 node(s) with delegate (LITERT_CL) node, yielding 2 partitions for subgraph 0 (prefill_1024).",
+            "ERROR: Hint fully delegated to single delegate is set, but the graph is not fully delegated.",
+            "lane reading: GPU engine creation rejected partial delegation: EMBEDDING_LOOKUP has empty quantization params; DEQUANTIZE unsupported; fully-delegated hint unmet (exit 2); Engine creation stopped at prefill_1024; remaining signatures were not compiled/run",
+            "conditions before the run: thermal status 0, SKIN 37.9 C; cold, one process, started 2026-09-23T00:14:29.120975+00:00",
+            "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_fp16.litertlm r8_fp16_gpu_256_r1 /data/local/tmp/gputest_s4/dec08b_prompt_256.txt gpu > /dev/null 2>&1 < /dev/null &",
+            "files: codex-conversions/2026-09-21/decider-08b/logs/s26_r8/r8_fp16_gpu_256_r1.log; row source codex-conversions/2026-09-21/decider-08b/results/s26_r8_rows.jsonl"
+          ],
+          "failure_class": "engine_create_failed",
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": false,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "max_num_tokens": 4096,
+            "prefill_tokens": 262,
+            "process_peak_vmhwm_kb": 3534072,
+            "skin_c_start": 37.9,
+            "thermal_status_start": 0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "signature": null,
+          "total_ops": 25885,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.16.0/2026-09-23/decider-0.8b-fp16__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-09-23",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 25656,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-decider08b-gate",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": "ERROR: Hint fully delegated to single delegate is set, but the graph is not fully delegated.",
+          "evidence": [
+            "ERROR: Following operations are not supported by GPU delegate:",
+            "VERBOSE: Replacing 25656 out of 25885 node(s) with delegate (LITERT_CL) node, yielding 2 partitions for subgraph 0 (prefill_1024).",
+            "ERROR: Hint fully delegated to single delegate is set, but the graph is not fully delegated.",
+            "lane reading: GPU engine creation rejected partial delegation: EMBEDDING_LOOKUP has empty quantization params; DEQUANTIZE unsupported; fully-delegated hint unmet (exit 2); Engine creation stopped at prefill_1024; remaining signatures were not compiled/run",
+            "conditions before the run: thermal status 0, SKIN 37.9 C; cold, one process, started 2026-09-23T00:15:45.471660+00:00",
+            "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_fp16.litertlm r8_fp16_gpu_512_r1 /data/local/tmp/gputest_s4/dec08b_prompt_512.txt gpu > /dev/null 2>&1 < /dev/null &",
+            "files: codex-conversions/2026-09-21/decider-08b/logs/s26_r8/r8_fp16_gpu_512_r1.log; row source codex-conversions/2026-09-21/decider-08b/results/s26_r8_rows.jsonl"
+          ],
+          "failure_class": "engine_create_failed",
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": false,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "max_num_tokens": 4096,
+            "prefill_tokens": 503,
+            "process_peak_vmhwm_kb": 3531756,
+            "skin_c_start": 37.9,
+            "thermal_status_start": 0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": false,
+          "signature": null,
+          "total_ops": 25885,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.16.0/2026-09-23/decider-0.8b-fp16__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-09-23",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Prefill speed:        533.23 tokens/s",
+            "Time to first token:  0.5335 s",
+            "Init time:            42.3812 s",
+            "Decode speed:         18.82 tokens/s (informational, not recorded as decode_tokens_per_s)",
+            "litert-lm benchmark CLI 0.17.1 (PyPI), --backend cpu -p 256 -d 8 --runs 3 --cache no --cpu-thread-count 4; CLI mean of 3 measured iterations after one excluded warmup; init from the first measured iteration",
+            "conditions: quiet machine (no other Codex run; supervisor checked); 2026-09-23",
+            "files: codex-conversions/2026-09-21/decider-08b/logs/mac_bench_fp16_quiet.log"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 8,
+            "init_s": 42.3812,
+            "max_num_tokens": 4096,
+            "measured_runs": 3,
+            "prefill_tokens": 256,
+            "threads": 4,
+            "warmup_runs": 1
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 533.23,
+          "provenance": "measured",
+          "runs": true,
+          "signature": null,
+          "total_ops": null,
+          "ttft_ms": 533.5
+        },
+        "source": "data/device_runs/0.17.1/2026-09-23/decider-0.8b-fp16__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "decider",
+    "id": "decider-0.8b-fp16",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/decider-0.8b-LiteRT",
+    "task": "text-classification"
+  },
+  "pitfalls": [
+    "Probability fidelity: on Mac CPU (exact-fit chunked prefill, ai-edge-litert 2.2.0 graph reader) all 120 fixture rows keep the upstream fp32 argmax with max |dp| 6.6e-6; the Hub card recommends this file for desktop/CPU (card 'Correctness and probability preservation').",
+    "Not recommended on phones (card 'Performance'): on the Galaxy S26 (LiteRT-LM v0.16.0 S4 kit) the 262-token CPU row ran at 44.94 tok/s prefill, 5.92 s TTFT and 6,094 MiB peak; the 503-token CPU row lost the device (framework restart); GPU engine creation failed because partial delegation was refused (the device record quotes the log: 25,656 of 25,885 prefill_1024 nodes on LITERT_CL, 'Hint fully delegated to single delegate is set, but the graph is not fully delegated').",
+    "The model returns option probabilities, not text: build one independent row per decision (score questions expand to one yes/no row per level), prefill ids[:-1], decode ids[-1] once, read only the label logits at the last token and softmax at T = 1.03; generated text from runtime benchmarks is not a model capability claim (card 'Readout contract', 'Limitations').",
+    "GPU feeding rule: zero all state per row and feed ids[:-1] in ONE padded prefill chunk (the smallest exported prefill signature that fits); chaining several prefill chunks on the GPU corrupts the carried state of this hybrid graph (Mac Metal max |dp| 0.177 multi-chunk vs 9.8e-6 one padded chunk). Rows longer than 1024 tokens run on CPU (card 'Readout contract').",
+    "Bundle metadata: identity template, no start token, stop token 248044, ExecutorMetadata for 48 state buffers, fp32 activation preference; at most 4096 tokens per rendered row; requires LiteRT-LM >= 0.15 for generalized hybrid-state binding (card intro, 'Files').",
+    "Engine scoring (RunTextScoring) advances session state on this hybrid architecture: use a fresh process/engine per scoring call; shared-engine prefix reuse can retain stale recurrent/conv state (card 'Readout contract').",
+    "Validation is conversion agreement on 40 synthetic English fixtures (120 rows) against pinned upstream fp32 on Apple M4 Max CPU, not real-traffic calibration or task accuracy (card 'Correctness', 'Limitations')."
+  ],
+  "schema_version": "1.2"
+}

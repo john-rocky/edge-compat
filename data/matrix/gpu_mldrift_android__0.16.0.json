@@ -3,6 +3,9 @@
   "entries": [
     {
       "conditions": "accepted and silently miscomputed: a RANK-0 tensor entering broadcast arithmetic. Measured with a CPU-vs-GPU tensor diff on identical inputs — a bare `arange` matches CPU exactly and `100.0 + arange` matches exactly, but `rank0_scalar + arange` does not (CPU [12,13,14,15], GPU max 12). Any selector built from that index comes back all-zero, so the mamba pad guard stored an all-zero conv state in every layer and generation collapsed. No rejection is logged — the graph reports full delegation",
+      "constraints": {
+        "min_operand_rank": 0
+      },
       "dtypes": [
         "float32"
       ],

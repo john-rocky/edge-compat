@@ -1,0 +1,5118 @@
+{
+  "backend": "webgpu_mldrift",
+  "blocking_ops": [],
+  "custom_ops": [],
+  "findings": [
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 0,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 1,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 2,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 3,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 4,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 5,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 6,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 7,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 8,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 9,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 10,
+      "op": "COS",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 11,
+      "op": "SIN",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 12,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 13,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 14,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 15,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 16,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 17,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 18,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 19,
+      "op": "COS",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 20,
+      "op": "SIN",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 21,
+      "op": "SLICE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 22,
+      "op": "SLICE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 23,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 24,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 25,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 26,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 27,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 28,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 29,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 30,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 31,
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 32,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 33,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 34,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 35,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 36,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 37,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 38,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 39,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 40,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 41,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 42,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 43,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 44,
+      "op": "SOFTMAX",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 45,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 46,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 47,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 48,
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 49,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 50,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 51,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 52,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 0
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 0,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 1,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 2,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 3,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 4,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 5,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 6,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 7,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 8,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 9,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 10,
+      "op": "COS",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 11,
+      "op": "SIN",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 12,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 13,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 14,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 15,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 16,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 17,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 18,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 19,
+      "op": "COS",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 20,
+      "op": "SIN",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 21,
+      "op": "SLICE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 22,
+      "op": "SLICE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 23,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 24,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 25,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 26,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 27,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 28,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 29,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 30,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 31,
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 32,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 33,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 34,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 35,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 36,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 37,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 38,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 39,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 40,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 41,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 42,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 43,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 44,
+      "op": "SOFTMAX",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 45,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 46,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 47,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 48,
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 49,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 50,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 51,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 52,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 1
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 0,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 1,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 2,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 3,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 4,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 5,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 6,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 7,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 8,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 9,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 10,
+      "op": "COS",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 11,
+      "op": "SIN",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 12,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 13,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 14,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 15,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 16,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 17,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 18,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 19,
+      "op": "COS",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 20,
+      "op": "SIN",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 21,
+      "op": "SLICE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 22,
+      "op": "SLICE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 23,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 24,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 25,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 26,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 27,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 28,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 29,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 30,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 31,
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 32,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 33,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 34,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 35,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 36,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 37,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 38,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 39,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 40,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 41,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 42,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 43,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 44,
+      "op": "SOFTMAX",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 45,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 46,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 47,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 48,
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 49,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 50,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 51,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 52,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 2
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 0,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 1,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 2,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 3,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 4,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 5,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 6,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 7,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 8,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 9,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 10,
+      "op": "COS",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 11,
+      "op": "SIN",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 12,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 13,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 14,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 15,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 16,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 17,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 18,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 19,
+      "op": "COS",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 20,
+      "op": "SIN",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 21,
+      "op": "SLICE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 22,
+      "op": "SLICE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 23,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 24,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 25,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 26,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 27,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 28,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 29,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 30,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 31,
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 32,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 33,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 34,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 35,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 36,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 37,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 38,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 39,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 40,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 41,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 42,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 43,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 44,
+      "op": "SOFTMAX",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 45,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 46,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 47,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 48,
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 49,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 50,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 51,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 52,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 3
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 0,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 1,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 2,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 3,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 4,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 5,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 6,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 7,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 8,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 9,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 10,
+      "op": "COS",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 11,
+      "op": "SIN",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 12,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 13,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 14,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 15,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 16,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 17,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 18,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 19,
+      "op": "COS",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 20,
+      "op": "SIN",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 21,
+      "op": "SLICE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 22,
+      "op": "SLICE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 23,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 24,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 25,
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 26,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 27,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 28,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 29,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 30,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 31,
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 32,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 33,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 34,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 35,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 36,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 37,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 38,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 39,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 40,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 41,
+      "op": "SUB",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 42,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 43,
+      "op": "ADD",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 44,
+      "op": "SOFTMAX",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 45,
+      "op": "MUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 46,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 47,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 48,
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 49,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 50,
+      "op": "TRANSPOSE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 51,
+      "op": "RESHAPE",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    },
+    {
+      "claimed": true,
+      "conditions": null,
+      "custom_code": null,
+      "dtypes": [
+        "float32"
+      ],
+      "node_index": 52,
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "reason": "matched entry specific to op, dtypes, and constraints",
+      "shape_meta": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "status": "delegated",
+      "subgraph": 4
+    }
+  ],
+  "impact_note": "impact_score is a heuristic (output element count as a FLOPs proxy, adjacent-partition cost split across each CPU island) — a ranking aid, not a measurement",
+  "litert_version": "2.5.3",
+  "matrix": {
+    "file": "data/matrix/webgpu_mldrift__2.5.3.json",
+    "generated_at": "2026-08-12",
+    "litert_version": "2.5.3"
+  },
+  "model": {
+    "path": "/Users/USER/code/litertlm-convert/ema_tts_work/out/ship/EMA-Lightning-LiteRT/ema_align_multi_fp32.tflite",
+    "sha256": "c80117ce7fcf38e7f872b80cc35237adaa290342187239e1fee0ca2433f3a6b4",
+    "subgraph_count": 5
+  },
+  "needs_probe": [],
+  "partitions": [
+    {
+      "first_node": 0,
+      "index": 0,
+      "last_node": 52,
+      "op_count": 53,
+      "ops": [
+        "FULLY_CONNECTED",
+        "RESHAPE",
+        "TRANSPOSE",
+        "FULLY_CONNECTED",
+        "RESHAPE",
+        "TRANSPOSE",
+        "MUL",
+        "RESHAPE",
+        "MUL",
+        "CONCATENATION",
+        "COS",
+        "SIN",
+        "MUL",
+        "MUL",
+        "ADD",
+        "MUL",
+        "RESHAPE",
+        "MUL",
+        "CONCATENATION",
+        "COS",
+        "SIN",
+        "SLICE",
+        "SLICE",
+        "MUL",
+        "MUL",
+        "CONCATENATION",
+        "MUL",
+        "ADD",
+        "TRANSPOSE",
+        "RESHAPE",
+        "RESHAPE",
+        "BATCH_MATMUL",
+        "MUL",
+        "MUL",
+        "RESHAPE",
+        "SUB",
+        "MUL",
+        "MUL",
+        "MUL",
+        "SUB",
+        "MUL",
+        "SUB",
+        "MUL",
+        "ADD",
+        "SOFTMAX",
+        "MUL",
+        "RESHAPE",
+        "RESHAPE",
+        "BATCH_MATMUL",
+        "RESHAPE",
+        "TRANSPOSE",
+        "RESHAPE",
+        "FULLY_CONNECTED"
+      ],
+      "subgraph": 0
+    },
+    {
+      "first_node": 0,
+      "index": 1,
+      "last_node": 52,
+      "op_count": 53,
+      "ops": [
+        "FULLY_CONNECTED",
+        "RESHAPE",
+        "TRANSPOSE",
+        "FULLY_CONNECTED",
+        "RESHAPE",
+        "TRANSPOSE",
+        "MUL",
+        "RESHAPE",
+        "MUL",
+        "CONCATENATION",
+        "COS",
+        "SIN",
+        "MUL",
+        "MUL",
+        "ADD",
+        "MUL",
+        "RESHAPE",
+        "MUL",
+        "CONCATENATION",
+        "COS",
+        "SIN",
+        "SLICE",
+        "SLICE",
+        "MUL",
+        "MUL",
+        "CONCATENATION",
+        "MUL",
+        "ADD",
+        "TRANSPOSE",
+        "RESHAPE",
+        "RESHAPE",
+        "BATCH_MATMUL",
+        "MUL",
+        "MUL",
+        "RESHAPE",
+        "SUB",
+        "MUL",
+        "MUL",
+        "MUL",
+        "SUB",
+        "MUL",
+        "SUB",
+        "MUL",
+        "ADD",
+        "SOFTMAX",
+        "MUL",
+        "RESHAPE",
+        "RESHAPE",
+        "BATCH_MATMUL",
+        "RESHAPE",
+        "TRANSPOSE",
+        "RESHAPE",
+        "FULLY_CONNECTED"
+      ],
+      "subgraph": 1
+    },
+    {
+      "first_node": 0,
+      "index": 2,
+      "last_node": 52,
+      "op_count": 53,
+      "ops": [
+        "FULLY_CONNECTED",
+        "RESHAPE",
+        "TRANSPOSE",
+        "FULLY_CONNECTED",
+        "RESHAPE",
+        "TRANSPOSE",
+        "MUL",
+        "RESHAPE",
+        "MUL",
+        "CONCATENATION",
+        "COS",
+        "SIN",
+        "MUL",
+        "MUL",
+        "ADD",
+        "MUL",
+        "RESHAPE",
+        "MUL",
+        "CONCATENATION",
+        "COS",
+        "SIN",
+        "SLICE",
+        "SLICE",
+        "MUL",
+        "MUL",
+        "CONCATENATION",
+        "MUL",
+        "ADD",
+        "TRANSPOSE",
+        "RESHAPE",
+        "RESHAPE",
+        "BATCH_MATMUL",
+        "MUL",
+        "MUL",
+        "RESHAPE",
+        "SUB",
+        "MUL",
+        "MUL",
+        "MUL",
+        "SUB",
+        "MUL",
+        "SUB",
+        "MUL",
+        "ADD",
+        "SOFTMAX",
+        "MUL",
+        "RESHAPE",
+        "RESHAPE",
+        "BATCH_MATMUL",
+        "RESHAPE",
+        "TRANSPOSE",
+        "RESHAPE",
+        "FULLY_CONNECTED"
+      ],
+      "subgraph": 2
+    },
+    {
+      "first_node": 0,
+      "index": 3,
+      "last_node": 52,
+      "op_count": 53,
+      "ops": [
+        "FULLY_CONNECTED",
+        "RESHAPE",
+        "TRANSPOSE",
+        "FULLY_CONNECTED",
+        "RESHAPE",
+        "TRANSPOSE",
+        "MUL",
+        "RESHAPE",
+        "MUL",
+        "CONCATENATION",
+        "COS",
+        "SIN",
+        "MUL",
+        "MUL",
+        "ADD",
+        "MUL",
+        "RESHAPE",
+        "MUL",
+        "CONCATENATION",
+        "COS",
+        "SIN",
+        "SLICE",
+        "SLICE",
+        "MUL",
+        "MUL",
+        "CONCATENATION",
+        "MUL",
+        "ADD",
+        "TRANSPOSE",
+        "RESHAPE",
+        "RESHAPE",
+        "BATCH_MATMUL",
+        "MUL",
+        "MUL",
+        "RESHAPE",
+        "SUB",
+        "MUL",
+        "MUL",
+        "MUL",
+        "SUB",
+        "MUL",
+        "SUB",
+        "MUL",
+        "ADD",
+        "SOFTMAX",
+        "MUL",
+        "RESHAPE",
+        "RESHAPE",
+        "BATCH_MATMUL",
+        "RESHAPE",
+        "TRANSPOSE",
+        "RESHAPE",
+        "FULLY_CONNECTED"
+      ],
+      "subgraph": 3
+    },
+    {
+      "first_node": 0,
+      "index": 4,
+      "last_node": 52,
+      "op_count": 53,
+      "ops": [
+        "FULLY_CONNECTED",
+        "RESHAPE",
+        "TRANSPOSE",
+        "FULLY_CONNECTED",
+        "RESHAPE",
+        "TRANSPOSE",
+        "MUL",
+        "RESHAPE",
+        "MUL",
+        "CONCATENATION",
+        "COS",
+        "SIN",
+        "MUL",
+        "MUL",
+        "ADD",
+        "MUL",
+        "RESHAPE",
+        "MUL",
+        "CONCATENATION",
+        "COS",
+        "SIN",
+        "SLICE",
+        "SLICE",
+        "MUL",
+        "MUL",
+        "CONCATENATION",
+        "MUL",
+        "ADD",
+        "TRANSPOSE",
+        "RESHAPE",
+        "RESHAPE",
+        "BATCH_MATMUL",
+        "MUL",
+        "MUL",
+        "RESHAPE",
+        "SUB",
+        "MUL",
+        "MUL",
+        "MUL",
+        "SUB",
+        "MUL",
+        "SUB",
+        "MUL",
+        "ADD",
+        "SOFTMAX",
+        "MUL",
+        "RESHAPE",
+        "RESHAPE",
+        "BATCH_MATMUL",
+        "RESHAPE",
+        "TRANSPOSE",
+        "RESHAPE",
+        "FULLY_CONNECTED"
+      ],
+      "subgraph": 4
+    }
+  ],
+  "rewrite_suggestions": [],
+  "schema_version": "1.1",
+  "summary": {
+    "blocking_op_count": 0,
+    "claimed_ops": 265,
+    "coverage_ops_pct": 100.0,
+    "matched_provenance_counts": {
+      "measured": 265
+    },
+    "partition_count": 5,
+    "status_counts": {
+      "delegated": 265
+    },
+    "sync_boundaries": 0,
+    "total_ops": 265
+  }
+}

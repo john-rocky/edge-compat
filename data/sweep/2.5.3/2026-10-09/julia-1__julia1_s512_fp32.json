@@ -1,0 +1,85 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x512x384:float32;1x512:float32;1x3:float32",
+  "license": "apache-2.0",
+  "model_id": "julia-1__julia1_s512_fp32",
+  "notes": "typed-decision graph (Julia-1 = SupersonicLabs/Julia-1 rev a85b1273: mmBERT-small encoder + question-type embedding + two head layers + option scorer, window N=512 tokens, 2-20 options); inputs inputs_embeds [1,512,384] (host token-table lookup, fp16 table), attention_mask [1,512], qtype_onehot [1,3]; output token_logits [1,512] read at the <mask> marker positions; float32 weights (1,704 operators); 185095348 B; the graph carries a power-of-two LayerNorm pre-scale, a -1e4 mask and q*1/8 (fp32-exact); random inputs give meaningless logits but exercise every op; GPU needs explicit FP32 precision on devices (fp16 paths move answers: S26 NPU 685/706, Mac Metal default 375/400, see the device records)",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-10-09",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 845.915,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-10-09",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 23.355,
+      "loads": true,
+      "max_abs_diff": 0.000027418136596679688,
+      "max_rel_diff": 0.0048866693197388575,
+      "output_match": true,
+      "provenance": "measured",
+      "runs": true
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/Julia-1-LiteRT/resolve/main/julia1_s512_fp32.tflite"
+}

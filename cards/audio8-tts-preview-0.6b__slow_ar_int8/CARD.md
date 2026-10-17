@@ -49,10 +49,11 @@ Static `edge-lint` verdicts against the delegate compatibility matrix — no run
 
 ## Device runs (NPU / LiteRT-LM)
 
-Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/2.2.0/2026-09-28/audio8-tts-preview-0.6b__slow_ar_int8__mac-studio-m4-max.json`.
+Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/2.2.0/2026-09-28/audio8-tts-preview-0.6b__slow_ar_int8__mac-studio-m4-max.json`, `data/device_runs/2.2.0/2026-10-10/audio8-tts-preview-0.6b__slow_ar_int8__galaxy-s26.json`.
 
 | Device | Accelerator | Status | Full delegation | Output match | Prompt (tokens) | Latency p50 (ms) | Prefill tok/s | Decode tok/s | TTFT (ms) | Peak mem (MB) | Environment | Date | Provenance |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| galaxy-s26 | cpu_xnnpack | pass | - | - | sig:pipeline slow_ar_int8 + fast_ar_int8 + codec_decoder_int8_T128 (Android sample app audio8_tts, Audio8DeviceCheck, CompiledModel CPU 4 threads) | - | - | - | - | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert 2.2.0 · Android 16 (build BP4A.251205.006.S942QOPS1AZH9) | 2026-10-10 | measured |
 | mac-studio-m4-max | cpu_xnnpack | pass | - | - | sig:pipeline slow_ar_int8 + fast_ar_int8 + codec_decoder_fp16_T128 (host loop, CPU 4 threads) | - | - | - | - | - | Mac Studio (M4 Max) · Apple M4 Max · litert 2.2.0 · macOS 27.0 (26A428) | 2026-09-28 | measured |
 | mac-studio-m4-max | cpu_xnnpack | pass | - | - | sig:pipeline slow_ar_int8 + fast_ar_int8 + codec_decoder_int8_T128 (host loop, CPU 4 threads) | - | - | - | - | - | Mac Studio (M4 Max) · Apple M4 Max · litert 2.2.0 · macOS 27.0 (26A428) | 2026-09-28 | measured |
 

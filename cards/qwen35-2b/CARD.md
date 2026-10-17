@@ -35,12 +35,15 @@ No benchmark data yet.
 
 ## Device runs (NPU / LiteRT-LM)
 
-Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-14/qwen35-2b__mac-m4-max.json`, `data/device_runs/0.16.1/2026-09-01/qwen35-2b__raspberry-pi-5.json`.
+Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-14/qwen35-2b__mac-m4-max.json`, `data/device_runs/0.16.1/2026-09-01/qwen35-2b__raspberry-pi-5.json`, `data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-2b__pixel-8a.json`, `data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-2b__galaxy-s26.json`, `data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-2b__pixel-8a.json`.
 
 | Device | Accelerator | Status | Full delegation | Output match | Prompt (tokens) | Latency p50 (ms) | Prefill tok/s | Decode tok/s | TTFT (ms) | Peak mem (MB) | Environment | Date | Provenance |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| galaxy-s26 | gpu | pass | yes | - | 256 | - | 296.22 | 18.48 | 920 | 4671.8 | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-13 | measured |
 | mac-m4-max | cpu | pass | - | - | 256 | - | 592.1 | 37.6 | 461.7 | - | mac-m4-max · litert-lm 0.16.0 | 2026-08-14 | measured |
 | mac-m4-max | gpu | pass | - | - | 256 | - | 1485.71 | 114.34 | 181.1 | - | mac-m4-max · litert-lm 0.16.0 | 2026-08-14 | measured |
+| pixel-8a | cpu | fallback | no | - | 256 | - | 140.34 | 9.69 | 1930 | 3085.09 | Pixel 8a · Tensor G3 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-13 | measured |
+| pixel-8a | gpu | load_failed | - | - | - | - | - | - | - | - | Pixel 8a · Tensor G3 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-12 | measured |
 | raspberry-pi-5 | cpu | pass | - | - | 256 | - | 55.1 | 4.25 | 4881.2 | 3863.0 | Raspberry Pi 5 Model B Rev 1.1 · Broadcom BCM2712 · litert-lm 0.16.1 · Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41 | 2026-09-01 | measured |
 
 ## Pitfalls

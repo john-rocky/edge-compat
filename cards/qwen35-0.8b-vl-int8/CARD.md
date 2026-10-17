@@ -35,17 +35,20 @@ No benchmark data yet.
 
 ## Device runs (NPU / LiteRT-LM)
 
-Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-28/qwen35-0.8b-vl-int8__iphone-17-pro.json`, `data/device_runs/0.16.0/2026-08-28/qwen35-0.8b-vl-int8__mac-studio-m4-max.json`, `data/device_runs/0.16.0/2026-08-31/qwen35-0.8b-vl-int8__iphone-17-pro.json`, `data/device_runs/0.16.0/2026-09-05/qwen35-0.8b-vl-int8__galaxy-s26.json`, `data/device_runs/0.16.0/2026-09-05/qwen35-0.8b-vl-int8__pixel-8a.json`, `data/device_runs/0.16.1/2026-09-01/qwen35-0.8b-vl-int8__raspberry-pi-5.json`.
+Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-28/qwen35-0.8b-vl-int8__iphone-17-pro.json`, `data/device_runs/0.16.0/2026-08-28/qwen35-0.8b-vl-int8__mac-studio-m4-max.json`, `data/device_runs/0.16.0/2026-08-31/qwen35-0.8b-vl-int8__iphone-17-pro.json`, `data/device_runs/0.16.0/2026-09-05/qwen35-0.8b-vl-int8__galaxy-s26.json`, `data/device_runs/0.16.0/2026-09-05/qwen35-0.8b-vl-int8__pixel-8a.json`, `data/device_runs/0.16.1/2026-09-01/qwen35-0.8b-vl-int8__raspberry-pi-5.json`, `data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-0.8b-vl-int8__galaxy-s26.json`, `data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-0.8b-vl-int8__pixel-8a.json`.
 
 | Device | Accelerator | Status | Full delegation | Output match | Prompt (tokens) | Latency p50 (ms) | Prefill tok/s | Decode tok/s | TTFT (ms) | Peak mem (MB) | Environment | Date | Provenance |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | galaxy-s26 | cpu | fallback | no | - | 207 | - | 213.9 | 32.41 | 1000.0 | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm 0.16.0 · Android 16 | 2026-09-05 | measured |
 | galaxy-s26 | gpu | pass | yes | - | 207 | - | 551.13 | 35.07 | 400.0 | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm 0.16.0 · Android 16 | 2026-09-05 | measured |
+| galaxy-s26 | gpu | pass | yes | - | 256 | - | 764.58 | 34.36 | 365 | 3777.53 | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-12 | measured |
 | iphone-17-pro | cpu | pass | - | - | - | - | 100.09 | 26.01 | 1988.0 | 643.316 | iPhone 17 Pro · A19-Pro · litert-lm 0.16.0 · iOS 27.0 | 2026-08-31 | measured |
 | iphone-17-pro | gpu | pass | - | - | - | - | 587.81 | 45.71 | 1684.0 | 3930.396 | iPhone 17 Pro · A19-Pro · litert-lm 0.16.0 · iOS 27.0 | 2026-08-28 | measured |
 | mac-studio-m4-max | cpu | pass | - | - | 256 | - | 649.12 | 46.63 | 436.4 | - | Mac Studio (M4 Max) · litert-lm 0.16.0 | 2026-08-28 | measured |
 | mac-studio-m4-max | gpu | pass | - | - | 256 | - | 1890.53 | 126.17 | 154.4 | - | Mac Studio (M4 Max) · litert-lm 0.16.0 | 2026-08-28 | measured |
 | pixel-8a | cpu | fallback | no | - | 207 | - | 148.09 | 15.77 | 1460.0 | - | Pixel 8a · Tensor G3 · litert-lm 0.16.0 · Android 16 | 2026-09-05 | measured |
+| pixel-8a | cpu | fallback | no | - | 256 | - | 212.26 | 19.86 | 1255 | 1567.76 | Pixel 8a · Tensor G3 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-12 | measured |
+| pixel-8a | gpu | load_failed | - | - | - | - | - | - | - | - | Pixel 8a · Tensor G3 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-12 | measured |
 | raspberry-pi-5 | cpu | pass | - | - | 256 | - | 71.56 | 6.91 | 3805.0 | 2117.0 | Raspberry Pi 5 Model B Rev 1.1 · Broadcom BCM2712 · litert-lm 0.16.1 · Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41 | 2026-09-01 | measured |
 
 ## Pitfalls

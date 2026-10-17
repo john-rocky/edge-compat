@@ -1,0 +1,54 @@
+{
+  "artifact": "Ministral-3-8B-Instruct-2512_int4.litertlm",
+  "artifact_sha256": "babb24c5d76bedcbc0b4418e2e6f07f8b92673df481fb4514848542daa50b160",
+  "device": "mac-studio-m4-max",
+  "model_id": "ministral3-8b-int4",
+  "notes": "Hub litert-community/Ministral-3-8B-Instruct-2512 (upload commit f61f6659). Lane litertlm-convert aa_mobile_b2_work/ministral3_8b round r2c (card_probes/v0171_ship/, 2026-10-14 14:13 JST): `uvx --from litert-lm==0.17.1 litert-lm run <file> --backend gpu --prompt \"What is the capital of France? Answer in one word.\" --cache no`, one fresh GPU process per file, both files in one Mac window (quiet_hold aa-b2-m38b-probe-gpu). The file is card/cmd_cwd/Ministral-3-8B-Instruct-2512_int4.litertlm, a clone of ship/ whose sha256 = the Hub file (card/cmd_runlog.txt line 3, card_probes/engine_share_ship/clone_sha256.txt, tools/r2z_clone_sha256.txt). The Hub card states this run (line 19: both files answered \"Paris\" on 0.17.1, one GPU process each): 0.17.1 runs the GPU-composite graph (odml.cache_update / runtime_bmm) on the Mac GPU. The manifest's min_runtime_version stays 0.18.0. No benchmark: throughput cells null. Round r2b's 0.17.1 CPU runs (card_probes/v0171/, also \"Paris\") read the plain exported files, which never shipped: not rows (#174(3)).",
+  "quantization": "int4 blockwise-32 + OCTAV on linears, int8 embedding; GPU-composite graph (odml.cache_update / odml.runtime_bmm)",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-14",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "command (card/tools/probes_r2c.sh v0171gpu, \"$B\" = card/cmd_cwd/Ministral-3-8B-Instruct-2512_int4.litertlm, an APFS clone of ship/): ( cd \"$V\" && uvx --from litert-lm==0.17.1 litert-lm run \"$B\" --backend gpu --prompt \"What is the capital of France? Answer in one word.\" --cache no ) < /dev/null > \"$o\" 2>&1",
+        "quiet_hold: window taken after 831 s wait: aa-b2-m38b-probe-gpu timing pid 38611 since 2026-10-14T14:13:11+0900",
+        "quiet_hold: window released after 31 s, rc=0",
+        "2026-10-14 14:13:27 JST start int4",
+        "2026-10-14 14:13:38 JST end int4",
+        "stdout: Paris",
+        "EXIT=0"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "answers_with_expect": 1.0,
+        "processes": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

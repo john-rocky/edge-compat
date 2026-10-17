@@ -1,0 +1,86 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x256x1024:float32;1x256:float32;1x128x256:float32;1x128x256:float32",
+  "license": "apache-2.0",
+  "model_id": "open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16",
+  "notes": "typed-decision graph (DeBERTa-v3-large encoder + span-pool head of com-kotobalabs/open-jev-deberta-v3-large, window N=256 tokens, up to 128 option slots); inputs inputs_embeds [1,256,1024] (host word-table lookup), attention_mask [1,256], q_routing / o_routing [1,128,256] (host-built mean-pool weights); output logits [1,1,1,128]; fp16 FULLY_CONNECTED weights + DEQUANTIZE, everything else float32; 712780432 B = above the ~500 MB catalogue rule on purpose (this run's instruction, as the GLiNER2.5-Decide rows); random inputs give meaningless logits but exercise every op; GPU needs explicit FP32 precision on devices (default fp16 -> non-finite, see the device records)",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-10-02",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "run timed out after 60000ms",
+      "failure_class": "timeout",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-10-02",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: Aborted()"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "RuntimeError: Aborted(). Build with -sASSERTIONS for more info.",
+      "failure_class": "compile_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT/resolve/main/deberta_v3_large_decision_s256_wfp16.tflite"
+}

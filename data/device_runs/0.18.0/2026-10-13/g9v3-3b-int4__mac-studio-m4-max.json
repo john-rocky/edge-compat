@@ -1,0 +1,63 @@
+{
+  "artifact": "G9v3-3B_int4.litertlm",
+  "artifact_sha256": "ea2c773ec678d44ffca43c0fca21a46622fd812fb9b53706f82d966d02e3c468",
+  "device": "mac-studio-m4-max",
+  "model_id": "g9v3-3b-int4",
+  "notes": "Hub litert-community/G9v3-3B (upload commit ff998a44, 2026-10-13 17:52 JST; main 90f1a68a; the Hub tree's LFS sha256 = the lane's ship/SHA256SUMS). Lane litertlm-convert aa_mobile_work/g9v3_3b: the Mac GPU bench of the published file (stage A2 of round r5c (bench/c/stage_a2.log: 13:12:27-13:14:29 JST, 'JST start: ship int4 ea2c773ec678d44f, control 2a91add53fd9f127; rest 300 s (no own job)'); SPEED_LADDER.md row 44: 'int4 6-sig GPTQ, GPU fp16 declared = ship bytes (aa5c, ea2c773e…)') = the Hub card's Mac GPU row; litert-lm 0.18.0 CLI benchmark, --cache no, 1024-token prefill / 256 decode / max number of tokens 2048, a warmup then the mean of 3 iterations; two passes, cells = the median of the two (per-pass values in metrics; bench/c/parse_c.json). The file is ship/G9v3-3B_int4.litertlm, sha256 = the Hub file (round r5c's swap A1 at 13:06 put the fp16-declared ea2c773e… there before the 13:12 bench, ROUND5c.md). GPU = WebGPU on Metal with the declared fp16 activations; the verbose run of the same bytes (gate/c/int4_fp16_ship_gpu_run_verbose.log) replaced every node of all 7 decoder signatures with LITERT_WEBGPU (prefill_1024 2323, prefill_1 2064, decode 2092 nodes; the embedding section's 4-op signatures run on the CPU) - delegation cells null here. No CPU record: the card's Mac CPU row (ladder row 32, bench/b/parse_b.json: the median of two passes, prefill 174.585 / decode 29.735 tok/s) ran the fp32-declared int4 of round r5b (2a91add53fd9f127…), bytes that were never on the Hub - not a row (#214 owner answer (a), #174(3); the card says the CPU path does not read the declaration). Not entered: the 11-signature files, the undeclared fp16-default GPU forms, the other declaration of each file and round r5's int4 (the shape and precision levers, ladder rows 2-8, 10-12, 33-35, 45); the 8-question, GSM8K, BOS and three-turn gates (correctness checks quoted in the card).",
+  "quantization": "GPTQ-calibrated int4 (group 128) carried as blockwise-128 int4 on linears, int8 lm_head + embedding; GPU activations declared fp16",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-13",
+      "decode_tokens_per_s": 61.485,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "bench/c/gpu_int4_fp16_p1.log: prefill 1516.27 / decode 61.71 tok/s, TTFT 0.6916 s, init 4.3384 s",
+        "bench/c/gpu_int4_fp16_p2.log: prefill 1497.48 / decode 61.26 tok/s, TTFT 0.7004 s, init 4.3647 s",
+        "bench/c/parse_c.json: the median of the two passes = prefill 1506.875 / decode 61.485 tok/s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 4.3515,
+        "iterations": 3.0,
+        "max_num_tokens": 2048.0,
+        "pass1_decode_tok_s": 61.71,
+        "pass1_init_s": 4.3384,
+        "pass1_prefill_tok_s": 1516.27,
+        "pass1_ttft_s": 0.6916,
+        "pass2_decode_tok_s": 61.26,
+        "pass2_init_s": 4.3647,
+        "pass2_prefill_tok_s": 1497.48,
+        "pass2_ttft_s": 0.7004,
+        "passes": 2.0,
+        "prefill_tokens": 1024.0,
+        "t_1024_256_s": 4.8433
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 1506.875,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 696.0
+    }
+  ],
+  "schema_version": "1.0"
+}

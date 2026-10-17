@@ -1,0 +1,1 @@
+warning: matrix snapshot is verified against litert 2.2.0, but the latest known release is 2.3.0 (checked 2026-10-07). Verdicts are unchanged; re-measure via `edge-compat release-check` (native) or a re-sweep (web) to refresh.

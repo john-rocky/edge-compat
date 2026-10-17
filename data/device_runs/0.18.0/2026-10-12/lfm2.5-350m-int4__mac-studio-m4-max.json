@@ -1,0 +1,100 @@
+{
+  "artifact": "LFM2.5-350M_int4.litertlm",
+  "artifact_sha256": "272b0a1ca55f8b39fe636927deffe4049feb93b5eda7c05a5dbbb3141d6d53f8",
+  "device": "mac-studio-m4-max",
+  "model_id": "lfm2.5-350m-int4",
+  "notes": "Hub litert-community/LFM2.5-350M (upload commit c3476665, 2026-10-13 10:45 JST; main 0fdead63 = README only since; the Hub tree's LFS sha256 = the lane's ship/SHA256SUMS). Lane litertlm-convert aa_mobile_work/lfm25_350m round r1: the Mac bench of 2026-10-12 (bench/bench_mac.log: CPU 15:31:02-15:31:52 JST through quiet_wait, rest 300 s before GPU, GPU 15:36:52-15:37:09 JST under quiet_hold; SPEED_LADDER.md rows 2 (CPU) / 5 (GPU: 'int4, GPU fp16 activations (runtime default)')) = the Hub card's Mac table. litert-lm 0.18.0 CLI benchmark, --cache no, 1024-token prefill / 256 decode / max number of tokens 2048, a warmup then the mean of 3 iterations; one pass per file and backend (cells = that pass). The file is cand/LFM2.5-350M_int4.litertlm, which repack wrote with the ship sha256 (repack/int4.json new_sha256 = ship) and which round r1b found still equal to ship (ROUND1b.md); deleted 2026-10-13 (aa_mobile_work/deleted_paths_20261013.txt: '247747696  lfm25_350m/cand/LFM2.5-350M_int4.litertlm'). GPU = WebGPU on Metal; the verbose benchmark run of the same bytes in the same window (bench/gpu_int4_verbose.log; bench_mac.log 'JST gpu int4 verbose exit 0 validation_error=0 shape_mismatch=0 replacing=24') replaced every node of all 12 decoder signatures with LITERT_WEBGPU (prefill_1024 560, prefill_1 501, decode 519 nodes) - not printed in these runs, so the delegation cells are null here. Not entered: the conv-int8 arm (cand wi8, rows 3 / 6) and the fp32-activation arm (row 7) - bytes that never shipped (#174(3)); the shape round r1b's controls of the published bytes (rows 21-24) - the card's table is this bench; the 8-question, IFEval-lite and GSM8K gates (correctness checks quoted in the card).",
+  "quantization": "int4 blockwise-32 + OCTAV on linears, int8 lm_head + embedding",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-12",
+      "decode_tokens_per_s": 123.11,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "command (tools/bench_mac.sh, through quiet_wait): ~/venvs/lt0180run/bin/litert-lm benchmark cand/LFM2.5-350M_int4.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+        "bench/cpu_int4.log: Benchmarking model: LFM2.5-350M_int4.litertlm (/Users/USER/code/litertlm-convert/aa_mobile_work/lfm25_350m/cand/LFM2.5-350M_int4.litertlm) | Backend                    : cpu | Cache                      : no | Prefill speed:        1195.41 tokens/s | Decode speed:         123.11 tokens/s | Init time:            1.1431 s | Time to first token:  0.8649 s",
+        "2026-10-12 15:31:34 JST cpu int4 exit 0"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 1.1431,
+        "iterations": 3.0,
+        "max_num_tokens": 2048.0,
+        "passes": 1.0,
+        "prefill_tokens": 1024.0,
+        "t_1024_256_s": 2.9361
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 1195.41,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 864.9
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-12",
+      "decode_tokens_per_s": 425.85,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "command (tools/bench_mac.sh, through quiet_hold aa1-350m-bench-gpu): ~/venvs/lt0180run/bin/litert-lm benchmark cand/LFM2.5-350M_int4.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+        "bench/gpu_int4.log: Benchmarking model: LFM2.5-350M_int4.litertlm (/Users/USER/code/litertlm-convert/aa_mobile_work/lfm25_350m/cand/LFM2.5-350M_int4.litertlm) | Backend                    : gpu | Cache                      : no | Prefill speed:        13965.02 tokens/s | Decode speed:         425.85 tokens/s | Init time:            1.1679 s | Time to first token:  0.0757 s",
+        "2026-10-12 15:37:03 JST gpu int4 exit 0",
+        "2026-10-12 15:37:14 JST gpu int4 verbose exit 0 validation_error=0 shape_mismatch=0 replacing=24"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 1.1679,
+        "iterations": 3.0,
+        "max_num_tokens": 2048.0,
+        "passes": 1.0,
+        "prefill_tokens": 1024.0,
+        "t_1024_256_s": 0.6745
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 13965.02,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 75.7
+    }
+  ],
+  "schema_version": "1.0"
+}

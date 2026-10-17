@@ -1,0 +1,63 @@
+{
+  "artifact": "G9v3-3B_int8.litertlm",
+  "artifact_sha256": "c8c45d5bc3a5078290b38024651efda7b5a01cb1dce1d3b32284f9994d41afec",
+  "device": "mac-studio-m4-max",
+  "model_id": "g9v3-3b-int8",
+  "notes": "Hub litert-community/G9v3-3B (upload commit ff998a44, 2026-10-13 17:52 JST; main 90f1a68a; the Hub tree's LFS sha256 = the lane's ship/SHA256SUMS). Lane litertlm-convert aa_mobile_work/g9v3_3b: the Mac GPU bench of the published file (stage E3 of round r5 (quiet_hold: window taken after 0 s wait: aa5-g9v3-bench-gpu timing pid 2297 since 2026-10-12T23:47:04+0900; quiet_hold: window released after 243 s, rc=0; gate/fp32act/stage_e.log: '2026-10-12 23:51:07 JST E3 gpu fp32act bench exit 0'); SPEED_LADDER.md row 9: 'int8 6-sig, GPU fp32 activations declared = ship bytes') = the Hub card's Mac GPU row; litert-lm 0.18.0 CLI benchmark, --cache no, 1024-token prefill / 256 decode / max number of tokens 2048, a warmup then the mean of 3 iterations; two passes, cells = the median of the two (per-pass values in metrics; bench/parse_e3.json). The file is cand/G9v3-3B_int8_fp32act.litertlm, sha256 = the Hub file (ROUND5.md's ship table: ship = cand/G9v3-3B_int8_fp32act.litertlm). GPU = WebGPU on Metal with the declared fp32 activations; the verbose run of the same bytes (bench/fp32/gpu_int8_verbose.log) replaced every node of all 7 decoder signatures with LITERT_WEBGPU (prefill_1024 2323, prefill_1 2064, decode 2092 nodes; the embedding section's 4-op signatures run on the CPU) - delegation cells null here. No CPU record: the card's Mac CPU row (ladder row 1, bench/parse_d.json: the median of two passes, prefill 261.48 / decode 24.73 tok/s) ran the undeclared int8 copy cand/G9v3-3B_int8.litertlm (the same five sections but the GPU declaration; repack/fp32act/section_compare_int8.json), bytes that were never on the Hub - not a row (#214 owner answer (a), #174(3); the card says the CPU path does not read the declaration). Not entered: the 11-signature files, the undeclared fp16-default GPU forms, the other declaration of each file and round r5's int4 (the shape and precision levers, ladder rows 2-8, 10-12, 33-35, 45); the 8-question, GSM8K, BOS and three-turn gates (correctness checks quoted in the card).",
+  "quantization": "int8 dynamic on linears, float activations; embedding table in its own section; GPU activations declared fp32",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-12",
+      "decode_tokens_per_s": 62.425,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "bench/fp32/gpu_int8_p1.log: prefill 1428.68 / decode 61.76 tok/s, TTFT 0.733 s, init 4.3341 s",
+        "bench/fp32/gpu_int8_p2.log: prefill 1429.35 / decode 63.09 tok/s, TTFT 0.7323 s, init 4.2651 s",
+        "bench/parse_e3.json: the median of the two passes = prefill 1429.015 / decode 62.425 tok/s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 4.2996,
+        "iterations": 3.0,
+        "max_num_tokens": 2048.0,
+        "pass1_decode_tok_s": 61.76,
+        "pass1_init_s": 4.3341,
+        "pass1_prefill_tok_s": 1428.68,
+        "pass1_ttft_s": 0.733,
+        "pass2_decode_tok_s": 63.09,
+        "pass2_init_s": 4.2651,
+        "pass2_prefill_tok_s": 1429.35,
+        "pass2_ttft_s": 0.7323,
+        "passes": 2.0,
+        "prefill_tokens": 1024.0,
+        "t_1024_256_s": 4.818
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 1429.015,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 732.7
+    }
+  ],
+  "schema_version": "1.0"
+}

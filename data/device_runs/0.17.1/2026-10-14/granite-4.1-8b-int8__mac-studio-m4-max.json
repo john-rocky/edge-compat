@@ -1,0 +1,54 @@
+{
+  "artifact": "granite-4.1-8b_int8.litertlm",
+  "artifact_sha256": "3ed1e7d4a3429e75a77b7445cbc4ce051aba888104eb254dcede457b5dfc70d9",
+  "device": "mac-studio-m4-max",
+  "model_id": "granite-4.1-8b-int8",
+  "notes": "Hub litert-community/granite-4.1-8b (upload commit 99579c31). Lane litertlm-convert aa_mobile_b2_work/granite41_8b round r1 (card_probes/v0171/, 2026-10-14 13:2x-13:4x JST): `uvx --from litert-lm==0.17.1 litert-lm run <file> --backend cpu --prompt \"What is the capital of France? Answer in one word.\"` with the lane's own 0.17.1 XNNPACK weight cache (--cache disk next to a symlink), one process, behind a RAM gate and a swap guard. The file is cand/granite-4.1-8b_int8_gpuc.litertlm, whose sha256 = the Hub file (tools/r1z_cand_sha256.txt). The Hub card states this run (both files answered \"Paris\" on 0.17.1); the manifest's min_runtime_version stays 0.18.0. No benchmark: throughput cells null.",
+  "quantization": "int8 dynamic on linears, float activations; GPU-composite graph (odml.cache_update / odml.runtime_bmm)",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-14",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "command (tools/v0171_run.sh, \"$L\" = a symlink to cand/granite-4.1-8b_int8_gpuc.litertlm): uvx --from litert-lm==0.17.1 litert-lm run \"$L\" --backend cpu --prompt \"What is the capital of France? Answer in one word.\" --cache disk ) < /dev/null > \"$o\" 2>&1",
+        "quiet_turn: turn after 308 s in line, running: bash /Users/USER/code/litertlm-convert/aa_mobile_b2_work/tools/guarded.sh /Users/USER/code/litertlm-co",
+        "stdout: Paris",
+        "EXIT=0",
+        "== 13:27:10 guard start v0171r_int8_gpuc pids 35984; swap used 1472.38 MB; PhysMem: 37G used (5604M wired, 2850M compressor), 91G unused.; reclaimable 113.43 GB",
+        "process footprint (swap guard, 15 s samples, binary GB): max 0 GB"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "answers_with_expect": 1.0,
+        "guard_footprint_max_gb": 0.0,
+        "processes": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

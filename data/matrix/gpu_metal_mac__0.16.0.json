@@ -3,6 +3,9 @@
  "entries": [
   {
    "conditions": "same rank-0 broadcast defect as the Android OpenCL lane \u2014 reproduced on Metal with the same tensor-diff harness, so it is not delegate-specific",
+   "constraints": {
+    "min_operand_rank": 0
+   },
    "dtypes": [
     "float32"
    ],

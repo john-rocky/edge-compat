@@ -1,0 +1,108 @@
+{
+  "artifact": "LFM2-700M_int4.litertlm",
+  "artifact_sha256": "4ecfc71299a304e97e8f0ef5134085ecc4b5d414755b8c1709f6b552d20250b9",
+  "device": "mac-studio-m4-max",
+  "model_id": "lfm2-700m-int4",
+  "notes": "Hub litert-community/LFM2-700M (upload commit cdaa9f66, 2026-10-13 11:09 JST; main 456d2ea7; the Hub tree's LFS sha256 = the lane's ship/SHA256SUMS). Lane litertlm-convert aa_mobile_work/lfm2_700m: the Mac bench of 2026-10-12 (SPEED_LADDER.md rows 8 (CPU) / 10 (GPU: 'int4, 11-sig, GPU fp16 activations')) = the Hub card's Mac table: CPU = the mean of 2 passes (bench/rerun/cpu_int4_p1.log, bench/rerun/cpu_int4_p2.log); GPU = one process (bench/gpu_int4.log). litert-lm 0.18.0 CLI benchmark, --cache no, 1024-token prefill / 256 decode / max number of tokens 2048, a warmup then the mean of 3 iterations. The CPU passes ran in one quiet_hold window (bench/rerun/rerun.log: 20:03:29-20:06:50 JST, released after 202 s rc=0; 'pass 1 uptime: 20:03  up 15:11, 22 users, load averages: 7.28 7.60 7.67'); the first CPU pass of 19:45-19:47 ran next to other lanes' jobs and is not entered (bench/cpu_int4.log; the ladder's metric line). The file is cand/LFM2-700M_int4.litertlm, which repack wrote with the ship sha256 (repack/int4.json new_sha256 = ship; deleted 2026-10-13, aa_mobile_work/deleted_paths_20261013.txt). GPU = WebGPU on Metal; the verbose benchmark run of the same bytes (bench/gpu_int4_verbose.log) replaced every node of all 12 decoder signatures with LITERT_WEBGPU (prefill_1024 560, prefill_1 501, decode 519 nodes) - not printed in the timed runs, so the delegation cells are null here. Not entered: the post-hoc wi8fc int8 arm (rows 6 / 7; IFEval-lite below the bar) and the fp32-activation arm (row 5) - bytes that never shipped (#174(3)); the 6-signature files (rows 2, 4, 9, 11); the 8-question, IFEval-lite and GSM8K gates (correctness checks quoted in the card).",
+  "quantization": "int4 blockwise-32 + OCTAV on linears, int8 lm_head + embedding, convs float",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-12",
+      "decode_tokens_per_s": 105.965,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "bench/rerun/cpu_int4_p1.log: prefill 599.41 / decode 112.19 tok/s, TTFT 1.7175 s, init 2.3496 s",
+        "bench/rerun/cpu_int4_p2.log: prefill 562.0 / decode 99.74 tok/s, TTFT 1.8477 s, init 2.3285 s",
+        "2026-10-12 (cpu window) cpu int4 p1 exit 0 Prefill speed: 599.41 tokens/s Decode speed: 112.19 tokens/s",
+        "2026-10-12 (cpu window) cpu int4 p2 exit 0 Prefill speed: 562.00 tokens/s Decode speed: 99.74 tokens/s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 2.3391,
+        "iterations": 3.0,
+        "max_num_tokens": 2048.0,
+        "prefill_tokens": 1024.0,
+        "processes": 2.0,
+        "run1_decode_tok_s": 112.19,
+        "run1_init_s": 2.3496,
+        "run1_prefill_tok_s": 599.41,
+        "run1_ttft_s": 1.7175,
+        "run2_decode_tok_s": 99.74,
+        "run2_init_s": 2.3285,
+        "run2_prefill_tok_s": 562.0,
+        "run2_ttft_s": 1.8477,
+        "t_1024_256_s": 4.1793
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 580.705,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 1782.6
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-12",
+      "decode_tokens_per_s": 348.26,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "bench/gpu_int4.log: prefill 7839.15 / decode 348.26 tok/s, TTFT 0.1335 s, init 1.4619 s (quiet_hold: window taken after 0 s wait: aa2-700m-bench-gpu timing pid 60702 since 2026-10-12T19:53:38+0900)",
+        "2026-10-12 19:54:06 JST gpu int4 verbose exit 0 validation_error=0 shape_mismatch=0 replacing=24",
+        "2026-10-12 19:53:45 JST gpu int4 exit 0"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 1.4619,
+        "iterations": 3.0,
+        "max_num_tokens": 2048.0,
+        "prefill_tokens": 1024.0,
+        "processes": 1.0,
+        "t_1024_256_s": 0.8657
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 7839.15,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 133.5
+    }
+  ],
+  "schema_version": "1.0"
+}

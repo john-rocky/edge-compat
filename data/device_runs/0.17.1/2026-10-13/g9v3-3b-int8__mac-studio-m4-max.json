@@ -1,0 +1,52 @@
+{
+  "artifact": "G9v3-3B_int8.litertlm",
+  "artifact_sha256": "c8c45d5bc3a5078290b38024651efda7b5a01cb1dce1d3b32284f9994d41afec",
+  "device": "mac-studio-m4-max",
+  "model_id": "g9v3-3b-int8",
+  "notes": "Hub litert-community/G9v3-3B (upload commit ff998a44, 2026-10-13 17:52 JST; main 90f1a68a; the Hub tree's LFS sha256 = the lane's ship/SHA256SUMS). Lane litertlm-convert aa_mobile_work/g9v3_3b round r5c (2026-10-13; the 14:52 probe of ROUND5c.md, card/tools/v0171_ship_r5c.sh): `litert-lm run G9v3-3B_int8.litertlm --prompt \"What is the capital of France?\" --cache no` on litert-lm 0.17.1 (no --backend = CPU), one fresh process, on the card/cmd_cwd/ clone of ship/ (sha256 matched in the log) = the Hub card's first paragraph (both files answered). Throughput null. Round r5's earlier 0.17.1 run read the undeclared copy cand/G9v3-3B_int8.litertlm (ROUND5c.md part B 3): not a row (#174(3)). The manifest's min_runtime_version is 0.18.0.",
+  "quantization": "int8 dynamic on linears, float activations; embedding table in its own section; GPU activations declared fp32",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-13",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "### file /Users/USER/code/litertlm-convert/aa_mobile_work/g9v3_3b/card/cmd_cwd/G9v3-3B_int8.litertlm sha256 c8c45d5bc3a5078290b38024651efda7b5a01cb1dce1d3b32284f9994d41afec (ship/SHA256SUMS: c8c45d5bc3a5078290b38024651efda7b5a01cb1dce1d3b32284f9994d41afec, match)",
+        "command (card/tools/v0171_ship_r5c.sh, through quiet_wait, in card/cmd_cwd/): (cd \"$W\" && \"${QW[@]}\" \"$BIN/litert-lm\" run \"./$f\" --prompt \"What is the capital of France?\" --cache no < /dev/null >> \"$o\" 2>&1); echo \"EXIT=$?\" >> \"$o\"",
+        "stdout: The capital of France is Paris.",
+        "EXIT=0",
+        "litert-lm 0.17.1 (card/probes/v0171_ship_version.txt)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "answers_with_expect": 1.0,
+        "processes": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

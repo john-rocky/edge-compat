@@ -1,0 +1,88 @@
+{
+  "artifact": "MiniCPM-V-4.7-1B_int8.litertlm",
+  "artifact_sha256": "92d7d2e57b9d9bf9b3cba2cdcb2434578a0168721c06fa224dc75755701aad2a",
+  "device": "mac-studio-m4-max",
+  "model_id": "minicpm-v-4.7-1b-int8",
+  "notes": "Hub litert-community/MiniCPM-V-4.7-1B (upload commit 9d7638b2, 2026-10-13 23:16 JST; the tree's sha256 read back equal to the lane's shipped files, litertlm-convert minicpmv47_work/LANE.md §3). These rows are the lane's round-9 runs on the shipped bytes (K/out/ship, litertlm-convert minicpmv47_work/r9): the card's commands plus the manifest checks (r9/card_cmd_runlog.txt) and the mini re-gate (r9/regate/), one fresh process each, greedy (--temperature 0 where the gate script sets it), Mac Studio M4 Max. No benchmark ran on these bytes, so the throughput cells are null. The shipped files are a metadata-only re-pack of the files the lane measured (round 9: the chat template ends an assistant turn at <|im_end|> and puts its newline at the head of the next turn, so a second turn prefills the upstream template's tokens); the swap reports (r9/swap_MiniCPM-V-4.7-1B_int8.json) read TFLite raw bytes, tokenizer and ExecutorMetadata identical (tflite_weights_byte_identical True, llm_metadata_only_template_changed True); a single-turn prompt renders the same text before and after (r9/template_check_r9.json). Text-only file (the decoder with its embedding inside the graph, 12 signatures). For contrast (#174(3)): the measured pre-repack file 5d6f2220… on litert-lm 0.18.0 `benchmark -p 256 -d 256 --runs 3 --cache no` (r6/bench.md, quiet windows): GPU prefill 2019.51 / 2007.55 and decode 158.39 / 158.16 tok/s in two legs of one window, TTFT 0.1331 / 0.1338 s, init 93.3271 / 100.4196 s; CPU 723.37 / 51.06 tok/s, TTFT 0.3761 s, init 44.4096 s (the first CPU window overlapped another lane's build and is not used); 8 questions CPU 8/8 regex (r1/gate8q_cpu.json), GPU 7/8 and 7/8 regex in two rounds with the miss = the fp32 model's own rhyme answer (r1/GATE.md); one of 20 fresh GPU processes answered the capital question with an extra word (r1/flake_gpu_capital_japan.txt). Not run on a phone.",
+  "quantization": "text decoder only (no vision): dynamic-range int8 weights on 151 fully connected layers including the untied output head, the 36 GatedDeltaNet decay/gate projections (in_proj_a, in_proj_b) kept float, token embedding int8 per channel inside the graph, fp32 activation preference",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-13",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "b_text_cpu (litert-lm 0.18.0 CLI, shipped bytes): `litert-lm run ./MiniCPM-V-4.7-1B_int8.litertlm --backend cpu --cache no --prompt \"What is the capital of France? Answer in one sentence.\"` exit 0, stdout begins \"The capital of France is Paris.\"",
+        "2-turn (litert-lm 0.18.0 python API, r9/regate/multiturn_table.json): multiturn_text_cpu_p1.json: turn 1 \"Paris.\", KV after turn 1 = 25, turn 2 rendered 23 tokens, context = HF 48 ids"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "card_commands_exit0": 1.0,
+        "two_turn_kv_after_turn1": 25.0,
+        "two_turn_runs": 1.0,
+        "two_turn_turn2_rendered_tokens": 23.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-13",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "b_text_gpu (litert-lm 0.18.0 CLI, shipped bytes): `litert-lm run ./MiniCPM-V-4.7-1B_int8.litertlm --backend gpu --cache no --prompt \"What is the capital of France? Answer in one sentence.\"` exit 0, stdout begins \"The capital of France is Paris.\"",
+        "E0000 00:00:1791895266.126422 43570119 gpu_model_builder.cc:4114] TopK requires src tensor C dimension to be divisible by 4."
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "card_commands_exit0": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

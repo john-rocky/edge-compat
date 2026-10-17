@@ -1,0 +1,393 @@
+{
+  "artifacts": [
+    {
+      "file": "phocinae_largha_150m_L384_fp16fc_int8emb.tflite",
+      "sha256": "377c06a9b9685a74cb8aaa821410f0c6cee2f26ad49620104dc952ee386fd9f8",
+      "size_mb": 185.747
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-10-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 726.63,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-10-11",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 20.145,
+        "loads": true,
+        "max_rel_diff": 0.00027210438317542537,
+        "output_match": true,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-10-11/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb.json"
+  },
+  "conversion": {
+    "command": "conversion/ scripts of the Hub repo (export.py per window, quantize.py for the fp16 FC weights and the table forms, tables.py for the host fp16 table); REPRODUCE.md of the Hub repo",
+    "quantization": "int8 EMBEDDING_LOOKUP table inside the graph (input_ids form) + fp16 FULLY_CONNECTED weights read through DEQUANTIZE; the int8 table costs max |Δp| 0.0066 to 0.0107 against the reference (card 'Conversion notes'); the L256 graph has 1,804 operators, among them 1 EMBEDDING_LOOKUP and 99 FULLY_CONNECTED",
+    "tool": "litert-torch",
+    "tool_version": "0.10.0 (ai-edge-litert 2.2.0 for the desktop checks)"
+  },
+  "cross_runtime": [],
+  "delegation": {
+    "backend": "gpu_mldrift",
+    "blocking_ops": [
+      "DEQUANTIZE",
+      "SQUARED_DIFFERENCE",
+      "RESHAPE",
+      "EMBEDDING_LOOKUP"
+    ],
+    "coverage_ops_pct": 91.6,
+    "lint_report_version": "1.1",
+    "litert_version": "2.2.0",
+    "matched_provenance_counts": {
+      "measured": 1752,
+      "unmatched": 52
+    },
+    "partitions": 150
+  },
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-10-10",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1802,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-phocinae-gate",
+            "os_build": "Android 36 build BP4A.251205.006.S942QOPS1AZH9",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Debug gate app com.phocinae.gate (android/gate/, Kotlin CompiledModel 2.2.0), one cold process per leg, fixture ids + markers pushed as JSON, the host token-table lookup (embeds form) outside the measured interval; measured interval = input writes + run + output readback per row. Source: /Users/USER/code/litertlm-convert/phocinae_work/device/device_parity_phocinae_s26_cpu_fp32_L384_ids_v2_fp16fc_i8emb_shift.json (summary + per-row |dp|), raw report /Users/USER/code/litertlm-convert/phocinae_work/device/phocinae_s26_cpu_fp32_L384_ids_v2_fp16fc_i8emb_shift.json, logcat /Users/USER/code/litertlm-convert/phocinae_work/device/phocinae_s26_cpu_fp32_L384_ids_v2_fp16fc_i8emb_shift.logcat.txt, rested leg /Users/USER/code/litertlm-convert/phocinae_work/device/phocinae_s26_cpu_fp32_L384_ids_v2_fp16fc_i8emb_shift_n5_timing.json.",
+            "parity vs the publisher's fp32 PyTorch (phocinae-server 0.1.5 Engine, /Users/USER/code/litertlm-convert/phocinae_work/oracle/oracle.json; scripts/device_compare.py): same answer on 1552/1552 non-near-tie test rows and 41/45 near ties (reference top-2 gap <= 0.02), max |dp| 0.0107, mean 6.3e-04 over 2051 rows (test + reversed-order + control); bar (argmax 100 % on non-near-tie rows, max |dp| <= 0.02, mean <= 0.002): PASS.",
+            "output_match = element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) over 5486 option logits of the 1597 test rows against the PyTorch logits: 4397 violations (fp16 weights move logits by up to 0.0340; the lane's bar is on probabilities).",
+            "latency_p50_ms = the rested leg (thermal status 0, CPU / GPU caps off, 45 s rest): a 294-token row, median of 20 calls after 5 warm-ups = 63.00 ms (min 60.95, max 64.82); the 2051-row parity leg's warm median was 152.67 ms (a long leg caps the GPU to 461 MHz and the CPU to ~1.5 GHz by its end).",
+            "conditions: screen on (gate activity over the keyguard), USB powered, airplane mode off, one process per leg; compile 267 ms (NPU: JIT, cold cache on the first leg of a graph).",
+            "10-10 16:29:02.474   839   863 I litert  : [compiled_model.cc:1250] 0 compiler plugins were applied successfully:",
+            "10-10 16:29:02.571   839   863 I tflite  : Replacing 1802 out of 1804 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2 partitions for subgraph 0 (main).",
+            "10-10 16:29:02.698   839   863 I litert  : [compiled_model.cc:1250] 0 compiler plugins were applied successfully:",
+            "10-10 16:29:02.698   839   863 I tflite  : Replacing 4 out of 4 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 0 (main)."
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": 63.004531,
+          "loads": true,
+          "max_abs_diff": 0.034007370471954346,
+          "max_rel_diff": 6.092772586094159,
+          "metrics": {
+            "all_rows": 2051,
+            "argmax_equal_official": 1552,
+            "bar_pass": 1,
+            "element_rule_elements": 5486,
+            "element_rule_violations": 4397,
+            "first_call_ms": 91.099166,
+            "fixtures": 1597,
+            "load_compile_ms": 267.316979,
+            "max_abs_dprob_vs_official": 0.010686568120104711,
+            "mean_abs_dprob_vs_official": 0.000627397842250124,
+            "near_tie_argmax_equal": 41,
+            "near_tie_rows": 45,
+            "non_near_tie_rows": 1552,
+            "parity_leg_warm_max_ms": 167.334948,
+            "parity_leg_warm_median_ms": 152.673698,
+            "parity_leg_warm_min_ms": 77.1,
+            "partitions": 2,
+            "rested_leg_max_ms": 64.82401,
+            "rested_leg_median_ms": 63.004531,
+            "rested_leg_min_ms": 60.951875,
+            "rested_leg_n": 20,
+            "rested_leg_row_len": 294,
+            "rested_leg_warmups": 5,
+            "rows_dprob_gt_1e2": 1,
+            "threads": 4
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "CPU XNNPACK 4 threads; int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+          "total_ops": 1804,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-10-10",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1804,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-phocinae-gate",
+            "os_build": "Android 36 build BP4A.251205.006.S942QOPS1AZH9",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Debug gate app com.phocinae.gate (android/gate/, Kotlin CompiledModel 2.2.0), one cold process per leg, fixture ids + markers pushed as JSON, the host token-table lookup (embeds form) outside the measured interval; measured interval = input writes + run + output readback per row. Source: /Users/USER/code/litertlm-convert/phocinae_work/device/device_parity_phocinae_s26_gpu_fp16_L384_ids_v2_fp16fc_i8emb_shift.json (summary + per-row |dp|), raw report /Users/USER/code/litertlm-convert/phocinae_work/device/phocinae_s26_gpu_fp16_L384_ids_v2_fp16fc_i8emb_shift.json, logcat /Users/USER/code/litertlm-convert/phocinae_work/device/phocinae_s26_gpu_fp16_L384_ids_v2_fp16fc_i8emb_shift.logcat.txt.",
+            "parity vs the publisher's fp32 PyTorch (phocinae-server 0.1.5 Engine, /Users/USER/code/litertlm-convert/phocinae_work/oracle/oracle.json; scripts/device_compare.py): same answer on 1552/1552 non-near-tie test rows and 39/45 near ties (reference top-2 gap <= 0.02), max |dp| 0.0141, mean 1.2e-03 over 2051 rows (test + reversed-order + control); bar (argmax 100 % on non-near-tie rows, max |dp| <= 0.02, mean <= 0.002): PASS.",
+            "output_match = element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) over 5486 option logits of the 1597 test rows against the PyTorch logits: 4996 violations (fp16 weights move logits by up to 0.0451; the lane's bar is on probabilities).",
+            "latency_p50_ms = the parity leg's warm median (50.08 ms over 2051 rows, min 39.00, max 60.33); no rested leg for this form (the parity leg heats the phone: see SPEED_LADDER.md).",
+            "conditions: screen on (gate activity over the keyguard), USB powered, airplane mode off, one process per leg; compile 2969 ms (NPU: JIT, cold cache on the first leg of a graph).",
+            "10-10 16:22:31.784 30848 30872 I litert  : [compiled_model.cc:1250] 0 compiler plugins were applied successfully:",
+            "10-10 16:22:31.893 30848 30872 I tflite  : Replacing 1804 out of 1804 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
+            "10-10 16:22:34.711 30848 30872 I litert  : [compiled_model.cc:1250] 0 compiler plugins were applied successfully:",
+            "10-10 16:22:34.711 30848 30872 I tflite  : Replacing 4 out of 4 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 0 (main)."
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 50.082344,
+          "loads": true,
+          "max_abs_diff": 0.04514575004577637,
+          "max_rel_diff": 40.178727114210986,
+          "metrics": {
+            "all_rows": 2051,
+            "argmax_equal_official": 1552,
+            "bar_pass": 1,
+            "element_rule_elements": 5486,
+            "element_rule_violations": 4996,
+            "first_call_ms": 30.645885,
+            "fixtures": 1597,
+            "load_compile_ms": 2969.436769,
+            "max_abs_dprob_vs_official": 0.014109275330179805,
+            "mean_abs_dprob_vs_official": 0.001199655063166662,
+            "near_tie_argmax_equal": 39,
+            "near_tie_rows": 45,
+            "non_near_tie_rows": 1552,
+            "parity_leg_warm_max_ms": 60.325052,
+            "parity_leg_warm_median_ms": 50.082344,
+            "parity_leg_warm_min_ms": 38.999219,
+            "partitions": 1,
+            "rows_dprob_gt_1e2": 8
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "GpuOptions precision=FP16; int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+          "total_ops": 1804,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-10-10",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1804,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-phocinae-gate",
+            "os_build": "Android 36 build BP4A.251205.006.S942QOPS1AZH9",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Debug gate app com.phocinae.gate (android/gate/, Kotlin CompiledModel 2.2.0), one cold process per leg, fixture ids + markers pushed as JSON, the host token-table lookup (embeds form) outside the measured interval; measured interval = input writes + run + output readback per row. Source: /Users/USER/code/litertlm-convert/phocinae_work/device/device_parity_phocinae_s26_gpu_fp16acc32_L384_ids_v2_fp16fc_i8emb_shift.json (summary + per-row |dp|), raw report /Users/USER/code/litertlm-convert/phocinae_work/device/phocinae_s26_gpu_fp16acc32_L384_ids_v2_fp16fc_i8emb_shift.json, logcat /Users/USER/code/litertlm-convert/phocinae_work/device/phocinae_s26_gpu_fp16acc32_L384_ids_v2_fp16fc_i8emb_shift.logcat.txt.",
+            "parity vs the publisher's fp32 PyTorch (phocinae-server 0.1.5 Engine, /Users/USER/code/litertlm-convert/phocinae_work/oracle/oracle.json; scripts/device_compare.py): same answer on 1552/1552 non-near-tie test rows and 41/45 near ties (reference top-2 gap <= 0.02), max |dp| 0.0137, mean 6.7e-04 over 2051 rows (test + reversed-order + control); bar (argmax 100 % on non-near-tie rows, max |dp| <= 0.02, mean <= 0.002): PASS.",
+            "output_match = element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) over 5486 option logits of the 1597 test rows against the PyTorch logits: 4453 violations (fp16 weights move logits by up to 0.0446; the lane's bar is on probabilities).",
+            "latency_p50_ms = the parity leg's warm median (55.50 ms over 2051 rows, min 30.68, max 89.33); no rested leg for this form (the parity leg heats the phone: see SPEED_LADDER.md).",
+            "conditions: screen on (gate activity over the keyguard), USB powered, airplane mode off, one process per leg; compile 1820 ms (NPU: JIT, cold cache on the first leg of a graph).",
+            "10-10 16:15:47.923 28973 28996 I litert  : [compiled_model.cc:1250] 0 compiler plugins were applied successfully:",
+            "10-10 16:15:48.013 28973 28996 I tflite  : Replacing 1804 out of 1804 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
+            "10-10 16:15:49.712 28973 28996 I litert  : [compiled_model.cc:1250] 0 compiler plugins were applied successfully:",
+            "10-10 16:15:49.712 28973 28996 I tflite  : Replacing 4 out of 4 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 0 (main)."
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 55.495885,
+          "loads": true,
+          "max_abs_diff": 0.04464519023895264,
+          "max_rel_diff": 9.537053182214473,
+          "metrics": {
+            "all_rows": 2051,
+            "argmax_equal_official": 1552,
+            "bar_pass": 1,
+            "element_rule_elements": 5486,
+            "element_rule_violations": 4453,
+            "first_call_ms": 44.743698,
+            "fixtures": 1597,
+            "load_compile_ms": 1819.988853,
+            "max_abs_dprob_vs_official": 0.013656290934337956,
+            "mean_abs_dprob_vs_official": 0.0006724727158293738,
+            "near_tie_argmax_equal": 41,
+            "near_tie_rows": 45,
+            "non_near_tie_rows": 1552,
+            "parity_leg_warm_max_ms": 89.325625,
+            "parity_leg_warm_median_ms": 55.495885,
+            "parity_leg_warm_min_ms": 30.684114,
+            "partitions": 1,
+            "rows_dprob_gt_1e2": 1
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "GpuOptions precision=FP16_WITH_FP32_ACCUM; int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+          "total_ops": 1804,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-10-10",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1804,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-phocinae-gate",
+            "os_build": "Android 36 build BP4A.251205.006.S942QOPS1AZH9",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Debug gate app com.phocinae.gate (android/gate/, Kotlin CompiledModel 2.2.0), one cold process per leg, fixture ids + markers pushed as JSON, the host token-table lookup (embeds form) outside the measured interval; measured interval = input writes + run + output readback per row. Source: /Users/USER/code/litertlm-convert/phocinae_work/device/device_parity_phocinae_s26_gpu_fp32_L384_ids_v2_fp16fc_i8emb_shift.json (summary + per-row |dp|), raw report /Users/USER/code/litertlm-convert/phocinae_work/device/phocinae_s26_gpu_fp32_L384_ids_v2_fp16fc_i8emb_shift.json, logcat /Users/USER/code/litertlm-convert/phocinae_work/device/phocinae_s26_gpu_fp32_L384_ids_v2_fp16fc_i8emb_shift.logcat.txt, rested leg /Users/USER/code/litertlm-convert/phocinae_work/device/phocinae_s26_gpu_fp32_L384_ids_v2_fp16fc_i8emb_shift_n5_timing.json.",
+            "parity vs the publisher's fp32 PyTorch (phocinae-server 0.1.5 Engine, /Users/USER/code/litertlm-convert/phocinae_work/oracle/oracle.json; scripts/device_compare.py): same answer on 1552/1552 non-near-tie test rows and 41/45 near ties (reference top-2 gap <= 0.02), max |dp| 0.0107, mean 6.3e-04 over 2051 rows (test + reversed-order + control); bar (argmax 100 % on non-near-tie rows, max |dp| <= 0.02, mean <= 0.002): PASS.",
+            "output_match = element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) over 5486 option logits of the 1597 test rows against the PyTorch logits: 4397 violations (fp16 weights move logits by up to 0.0340; the lane's bar is on probabilities).",
+            "latency_p50_ms = the rested leg (thermal status 0, CPU / GPU caps off, 45 s rest): a 294-token row, median of 20 calls after 5 warm-ups = 42.13 ms (min 41.54, max 43.85); the 2051-row parity leg's warm median was 89.28 ms (a long leg caps the GPU to 461 MHz and the CPU to ~1.5 GHz by its end).",
+            "conditions: screen on (gate activity over the keyguard), USB powered, airplane mode off, one process per leg; compile 1861 ms (NPU: JIT, cold cache on the first leg of a graph).",
+            "10-10 16:10:55.137 27587 27613 I litert  : [compiled_model.cc:1250] 0 compiler plugins were applied successfully:",
+            "10-10 16:10:55.233 27587 27613 I tflite  : Replacing 1804 out of 1804 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
+            "10-10 16:10:56.966 27587 27613 I litert  : [compiled_model.cc:1250] 0 compiler plugins were applied successfully:",
+            "10-10 16:10:56.967 27587 27613 I tflite  : Replacing 4 out of 4 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 0 (main)."
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 42.128542,
+          "loads": true,
+          "max_abs_diff": 0.03400743007659912,
+          "max_rel_diff": 6.092530786835223,
+          "metrics": {
+            "all_rows": 2051,
+            "argmax_equal_official": 1552,
+            "bar_pass": 1,
+            "element_rule_elements": 5486,
+            "element_rule_violations": 4397,
+            "first_call_ms": 60.137812,
+            "fixtures": 1597,
+            "load_compile_ms": 1860.863541,
+            "max_abs_dprob_vs_official": 0.010686647339958721,
+            "mean_abs_dprob_vs_official": 0.000627397470594106,
+            "near_tie_argmax_equal": 41,
+            "near_tie_rows": 45,
+            "non_near_tie_rows": 1552,
+            "parity_leg_warm_max_ms": 101.98099,
+            "parity_leg_warm_median_ms": 89.281875,
+            "parity_leg_warm_min_ms": 41.347344,
+            "partitions": 1,
+            "rested_leg_max_ms": 43.853334,
+            "rested_leg_median_ms": 42.128542,
+            "rested_leg_min_ms": 41.538802,
+            "rested_leg_n": 20,
+            "rested_leg_row_len": 294,
+            "rested_leg_warmups": 5,
+            "rows_dprob_gt_1e2": 1
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "GpuOptions precision=FP32; int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+          "total_ops": 1804,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "phocinae-largha-150m",
+    "id": "phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Phocinae-Largha-150M-LiteRT",
+    "task": "text-classification"
+  },
+  "pitfalls": [
+    "Every graph computes 21 LayerNorms on x·2⁻⁶ with the epsilon scaled to match: bit-identical in fp32; without it the sums of squares inside these norms leave the float16 range, so fp16 arithmetic and the NPU need it (card 'Conversion notes').",
+    "Inputs: `input_ids` int32 [1,L] (int8emb) or `inputs_embeds` float32 [1,L,384] (embeds), `attention_mask` float32 [1,L], `qtype_onehot` float32 [1,3] in the order choice, score, noul; outputs `token_logits` float32 [1,L] and `pooled_cls` float32 [1,384]. Gather token_logits at each option's <mask> marker, divide by the question type's temperature from rl_agent_config.json (choice 0.8660, score 0.8081, noul 0.6625) and softmax; the act head takes pooled_cls + four features of the pre-temperature softmax and returns act_logits (card 'Raw CompiledModel contract').",
+    "GPU FP16 (float16 arithmetic) passes the bar with less margin: it flipped 1 to 2 of the 20 near ties at L256 and its max |Δp| reaches 0.0188 at L512 (Mac Metal default, embeds); GPU FP32, FP16_WITH_FP32_ACCUM and the NPU keep max |Δp| at or below 0.0137 (card 'Limits').",
+    "Dynamic int8 FULLY_CONNECTED fails the bar (max |Δp| 0.0835) and does not ship; the GPU delegate refuses a float16 table inside the graph, so the float16 table ships for host lookup instead (card 'Limits', 'Conversion notes').",
+    "A graph computes every position of its window, so a smaller window runs faster; the host cuts the state to fit the window while the publisher's runtime cuts at 512 (card 'Conversion notes', 'Limits').",
+    "The checks measure agreement with the publisher's fp32 runtime (phocinae-server) on the public typed-decisions test split, not accuracy against gold labels; measured on one Apple M4 Max and one Galaxy S26 only, not through the hfmodels-android SDK (card 'Checks', 'Limits').",
+    "Of the 2,000 test decisions the state is cut on 403 at L384 (card 'Limits').",
+    "The int8emb form was not run on the NPU at L384 or L512; at L256 it ran with the int8 lookup on the CPU, in a second partition (card 'Limits')."
+  ],
+  "schema_version": "1.2"
+}

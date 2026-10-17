@@ -1,0 +1,137 @@
+{
+  "artifact": "reader_w10.tflite",
+  "artifact_sha256": "9419000ac89aa3f34478906dda81523f48bf0e8c802929df3345ba0850b72d3f",
+  "device": "pixel-8a",
+  "model_id": "embeddinggemma-2-transcribe__reader_w10",
+  "notes": "EmbeddingGemma 2 Transcribe, LiteRT form: the audio encoder of google/embeddinggemma-2 (rev 914f7f89; Gemma 4 audio tower + embed_audio) exported to raw LiteRT graphs with an fp16-safe rewrite of its RMSNorm sites (per-site 2^-k rescale, eps x 4^-k, rsqrt clamp, attention mask -30000; bit-identical to the float32 model in fp32), fp16 weights (FLOAT_CASTING on FC / CONV_2D / DEPTHWISE_CONV_2D), one signature per file (audio_30s / audio_10s: mel float32 [1, F, 128] + mask -> soft tokens [1, F/4, 512] + mask), plus reader v1 (a 4-layer transformer over the soft tokens with the 200,000-word table FC and ARG_MAX in-graph) = speech to words on the phone. This file: reader_w10.tflite (361238720 B), sha256 = hf_stage FILES.sha256 of the upload set; every phone leg below ran these bytes (sha256 lines in the evidence). reader v1 for 10 s windows (T 250; the lane's reader_v1_w10.tflite). FP16_WITH_FP32_ACCUM is faster but flips one token label at the only near tie of the fixture set (round 10) = the app keeps FP32. Lane record: litertlm-convert eg2_stt_work (LANE.md, ROUND1–11, SPEED_LADDER.md lint PASS with user-stop 2026-10-14). Landed 2026-10-15 (DECISIONS #216): the file is on the Hub at mlboydaisuke/EmbeddingGemma-2-Transcribe-LiteRT (upload commit 54d0e902cd50bd6f04958a81ab93e02bf5c77b9d = main, 2026-10-14 18:00:44 UTC = 2026-10-15 03:00 JST); its LFS oid equals artifact_sha256 (anonymous API read 2026-10-15 03:08 JST).",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-10-14",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-eg2stt-app",
+        "os_build": "Android 16 (build CP1A.260505.005)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "Harness: the sample app eg2-transcribe (debug APK app-debug-r10.apk sha256 b2938ba2…, commit 2b7d24d, LiteRT 2.2.0 Kotlin CompiledModel), window setting 'auto': a recording of at most 249 tokens runs on the 10 s pair (eg2_audio_f16safe_fp16w_w10.tflite + reader_w10.tflite); Pixel 8a hold 2026-10-14 20:54:17–21:12:52 (round 10).",
+        "the 11 fixtures of reader/fixtures that fit one 10 s window: transcripts equal to reader/RELEASE.md 11 / 11; each fixture is one window, latency_p50_ms = the median of their 11 calls (write + run + read) of this graph (eg2_stt_work/app/device/r10_p8a_20261014-205416/check_r10.json, fixture_runs.fx_cpu).",
+        "output_match = the transcripts equal to RELEASE.md; max_abs_diff null."
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 837.96521,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "fixtures": 11.0,
+        "per_fixture_ms_max": 956.732259,
+        "per_fixture_ms_min": 753.017416,
+        "transcripts_equal_release": 11.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "CPU XNNPACK; Android sample app eg2-transcribe (debug build r10), auto window, the fixtures on the 10 s pair",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-10-14",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-eg2stt-app",
+        "os_build": "Android 16 (build CP1A.260505.005)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "Harness: the sample app eg2-transcribe (debug APK app-debug-r10.apk sha256 b2938ba2…, commit 2b7d24d, LiteRT 2.2.0 Kotlin CompiledModel), window setting 'auto': a recording of at most 249 tokens runs on the 10 s pair (eg2_audio_f16safe_fp16w_w10.tflite + reader_w10.tflite); Pixel 8a hold 2026-10-14 20:54:17–21:12:52 (round 10).",
+        "the 11 fixtures of reader/fixtures that fit one 10 s window: transcripts equal to reader/RELEASE.md 11 / 11; each fixture is one window, latency_p50_ms = the median of their 11 calls (write + run + read) of this graph (eg2_stt_work/app/device/r10_p8a_20261014-205416/check_r10.json, fixture_runs.fx_gpu16a32).",
+        "output_match = the transcripts equal to RELEASE.md; max_abs_diff null."
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 118.429199,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "fixtures": 11.0,
+        "per_fixture_ms_max": 120.646566,
+        "per_fixture_ms_min": 117.078247,
+        "transcripts_equal_release": 11.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GpuOptions precision=FP16_WITH_FP32_ACCUM (reader only); Android sample app eg2-transcribe (debug build r10), auto window, the fixtures on the 10 s pair",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-10-14",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-eg2stt-app",
+        "os_build": "Android 16 (build CP1A.260505.005)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "Harness: the sample app eg2-transcribe (debug APK app-debug-r10.apk sha256 b2938ba2…, commit 2b7d24d, LiteRT 2.2.0 Kotlin CompiledModel), window setting 'auto': a recording of at most 249 tokens runs on the 10 s pair (eg2_audio_f16safe_fp16w_w10.tflite + reader_w10.tflite); Pixel 8a hold 2026-10-14 20:54:17–21:12:52 (round 10).",
+        "the 11 fixtures of reader/fixtures that fit one 10 s window: transcripts equal to reader/RELEASE.md 11 / 11; each fixture is one window, latency_p50_ms = the median of their 11 calls (write + run + read) of this graph (eg2_stt_work/app/device/r10_p8a_20261014-205416/check_r10.json, fixture_runs.fx_gpu).",
+        "output_match = the transcripts equal to RELEASE.md; max_abs_diff null."
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 205.410848,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "fixtures": 11.0,
+        "per_fixture_ms_max": 206.020548,
+        "per_fixture_ms_min": 202.798014,
+        "transcripts_equal_release": 11.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GpuOptions precision=FP32; Android sample app eg2-transcribe (debug build r10), auto window, the fixtures on the 10 s pair",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,60 @@
+{
+  "artifact": "Falcon-H1R-7B_int4.litertlm",
+  "artifact_sha256": "7a8820ae4f38bc82b40b06f181ed013c012ec38dbf5329b866d68183080a8ea1",
+  "device": "pixel-8a",
+  "model_id": "falcon-h1r-7b-int4",
+  "notes": "Hub litert-community/Falcon-H1R-7B (upload commit 658c67ae, 2026-10-17 03:37 JST; the Hub tree's LFS sha256 = the lane's ship/SHA256SUMS). Lane litertlm-convert aa_mobile_b2_work/falcon_h1r_7b round r6 (device/r1/p8a, hold 2026-10-15 16:29:23-16:32:25 JST; SPEED_LADDER.md row 9 = no-go). Pixel 8a (Tensor G3, Mali-G715, MemTotal 7,754,700 kB, MemAvailable 3,888,840 kB at the first sample): the int4 file's GPU engine build delegated prefill_1024 whole to LITERT_CL, then the runtime prepared the weights on the CPU side (Mali) and MemAvailable fell to 307,456 kB while the process RSS stayed far below its 1,921,792 kB VmHWM (the memory went outside the process), where the harness's guard stopped it (no answer; uptime 20869.76 -> 20924.7 s = no reboot) - the stop of granite-4.1-8b and Ministral-3-8B-Instruct-2512 on this phone (DECISIONS #222 / #223), recorded the same way (memory_cap_exceeded, the guard line as error). A capacity stop before the hybrid's GPU kernels ran a token. The int8 file (7,810,102,560 B) was not tried: about the phone's total RAM. Galaxy S26: The int4 file's one Galaxy S26 GPU try (home phone SM-S942Q, 2026-10-15, lane round r6, device/r1/s26/; SPEED_LADDER.md row 5 = no-go: memory) is not a record: the phone rebooted during the GPU engine warm-up, so loads / runs cannot be set (the #199(3) shape). Facts: Falcon-H1R-7B_int4.litertlm (device-side sha256 = Mac = the Hub file) pushed in 125.5 s; before the warm process uptime 133001.98 s, MemAvailable 7,555,180 kB, thermal status 1 / skin 39.9 C; the warm `--benchmark` process started at 22:46:19 JST and LITERT_CL replaced every node of all 7 signatures (6865 out of 6865; 6865 out of 6865; 7039 out of 7039; 7039 out of 7039; 7039 out of 7039; 4058 out of 4058; 4109 out of 4109), the decode line being the log's last; 69 s after the start the driver logged 'DEVICE GONE during warm'. The reboot was proven when the phone came back (2026-10-17 01:29 JST, device/r1/s26/after_return.txt): /proc/uptime 96110.67 s, boot at Thu Oct 15 22:47:45 2026 JST, 17 s after it left USB; no SYSTEM_RESTART entry in the dropbox (not a framework restart); the dropbox list holds 2026-10-17 01:27:49 SYSTEM_LAST_KMSG_14_20261017_012749_KP (compressed text, 13542 bytes) (logged with the SYSTEM_BOOT of the unlock; its content was not read). The lane starts no GPU engine of this file on that phone again (a reboot is a hard stop for the phone's rows) and ran no CPU leg (2.0 x the file is above the 7.9 GB process that restarted this phone's framework).",
+  "quantization": "int4 blockwise-32 min-max on the linears with the block scales floored at 2^-14, int8 lm_head and embedding; fp32 GPU activations declared",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-15",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-aab2",
+        "os_build": "Android 16 (CP1A.260505.005)",
+        "runtime": "litert-lm",
+        "runtime_version": "prebuilt-adac974b",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": "GUARD_KILL avail=307456 pid=23500",
+      "evidence": [
+        "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, sha256 adac974b…; kit = litertlm-convert team_repack_20261009/r9/binary/prebuilt)",
+        "[16:31:26] bundle on device: 7a8820ae4f38bc82b40b06f181ed013c012ec38dbf5329b866d68183080a8ea1 (4689037856 B, push 103.0 s) = Mac",
+        "one attempt by rule (--backend=gpu, text prompt 'What is the capital of France? Answer in one sentence.', --max_output_tokens=1024); a 2-second sampler stops the process when MemAvailable falls under 400,000 kB",
+        "VERBOSE: Replacing 6865 out of 6865 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+        "W0000 00:00:1792049490.782907   23500 gpu_model_builder.cc:4455] Weights preparation on Gpu is disabled for PowerVR, Broadcom, Mali GPUs and non-OpenCL/WebGPU/Metal backends.",
+        "[16:32:22] prompt_1 done: rc(adb)=0 EXIT=143 wall 50.8 s",
+        "GUARD_KILL avail=307456 pid=23500"
+      ],
+      "failure_class": "memory_cap_exceeded",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "memavail_at_start_kib": 3888840.0,
+        "memavail_min_kib": 307456.0,
+        "sampler_samples": 20.0,
+        "seconds_to_stop": 50.8,
+        "signatures_compiled": 1.0,
+        "uptime_after_s": 20924.7,
+        "uptime_before_s": 20869.76,
+        "vmhwm_kib": 1921792.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

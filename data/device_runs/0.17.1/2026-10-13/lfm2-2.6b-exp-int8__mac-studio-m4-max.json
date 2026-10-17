@@ -1,0 +1,51 @@
+{
+  "artifact": "LFM2-2.6B-Exp_int8.litertlm",
+  "artifact_sha256": "a44c3cfd0644e9fe9036c0efe3955df48a91990fe6e42855a9de0020c4e76258",
+  "device": "mac-studio-m4-max",
+  "model_id": "lfm2-2.6b-exp-int8",
+  "notes": "Hub litert-community/LFM2-2.6B-Exp (upload commit fc47ce13, 2026-10-13 16:13 JST; main 96e6b95b; the Hub tree's LFS sha256 = the lane's ship/SHA256SUMS). Lane litertlm-convert aa_mobile_work/lfm2_26b_exp round r4c's card probes (card/probes/litert_lm_0171_run_int8.log, 2026-10-13 10:02 JST, through quiet_wait + quiet_yield): `litert-lm run ship/LFM2-2.6B-Exp_int8.litertlm --prompt \"What is the capital of France?\" --cache no` on litert-lm 0.17.1 (no --backend = CPU), one fresh process: exit 0 with a reply asking for the rest of the message - the Hub card's first paragraph ('the int8 file answered \"What is the capital of France?\" as if no question had been asked'). Recorded as degenerate_output (loads true, runs false: exit 0, tokens, no answer to the prompt; DECISIONS 2026-09-08 (b)), the shape of the LFM2.5-350M 0.17.1 record (#231), whose prefill probe read the empty user turn; no prefill count was taken for this file. The int4 file was not run on 0.17.1. The manifest's min_runtime_version is 0.18.0.",
+  "quantization": "int8 dynamic on linears + int8 embedding, convs float",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-13",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": "It seems like your message got cut off. Could you please provide more details or clarify what you'd like assistance with? Whether it's a question, a topic you're curious about, or something else, I'm here to help!",
+      "evidence": [
+        "command: ~/venvs/lt0171run/bin/litert-lm run ~/code/litertlm-convert/aa_mobile_work/lfm2_26b_exp/ship/LFM2-2.6B-Exp_int8.litertlm --prompt \"What is the capital of France?\" --cache no < /dev/null",
+        "litert-lm 0.17.1 (the log's version line)",
+        "stdout: It seems like your message got cut off. Could you please provide more details or clarify what you'd like assistance with? Whether it's a question, a topic you're curious about, or something else, I'm here to help! Here are some examples of what you might be asking about: - **General Knowledge**: Facts, definitions, or explanations. - **Problem Solving**: Math problems, coding, or logical puzzles. - **Writing Help**: Editing, brainstorming, or structuring content. - **Learning Tips**: Study strategies, productivity, or skill development. - **Creative Ideas**: Writing prompts, project concepts, or brainstorming. Let me know how I can assist! 😊",
+        "### EXIT: 0",
+        "2026-10-13 10:02:54 JST 0.17.1 run int8: It seems like your message got cut off. Could you please provide more details or clarify what you'd like assistance with? Whether it's a question, a topic you're curious about, or something else, I'm here to help!  Here are some examples of what you might be "
+      ],
+      "failure_class": "degenerate_output",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "processes": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

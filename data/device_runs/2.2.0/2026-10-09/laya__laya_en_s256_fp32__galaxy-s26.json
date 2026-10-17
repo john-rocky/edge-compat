@@ -1,0 +1,73 @@
+{
+  "artifact": "laya_en_s256_fp32.tflite",
+  "artifact_sha256": "683c03749b123fdb7ec168f257b9d54462c3fc8205539cb2fb83bc617962ecc8",
+  "device": "galaxy-s26",
+  "model_id": "laya__laya_en_s256_fp32",
+  "notes": "laya-LiteRT variant en_s256_fp32 at commit 35bf9cd6 (the graph the publisher replaced on 2026-09-29, main 683c0374…) through the hfmodels-android SDK in the sample samples/decide's inbox screen (InboxActivity, one decide per text with the panel's question of five options), GPU profile = GpuOptions precision FP32 on LiteRT 2.2.0. One decide runs this graph and the act head laya_act_head_fp32.tflite (sha256 c6f8de9b…, 1,057,960 B) plus the SDK's tokenizer and decode, so latency_p50_ms is the SDK's DecisionTiming.totalMs per text over the 24 panel texts (#186(2) uses one forward instead; this row's signature names the difference). The app had been bound to the earlier commit bbdc85e6; the lane rebound it to the head with one online load (the import line, evidence) before the offline check. output_match and full_delegation null (#186(3)/(4): answers are labels; LiteRT 2.2.0 reports no per-op target). earlier_run_* = the same check on the APK before a colour fix of the Paste button, 3 minutes earlier. The supervisor's rerun on 2026-10-10 00:10 read 132.5 ms (p90 142.8, thermal 1) and is not a row (the README cites this run).",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-10-09",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-hfmodels-inbox-check",
+        "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "harness: hfmodels-android samples/decide (main 4fb5364; the inbox code is commits c1d4b62 and e5e7b8e), androidTest InboxDeviceCheck with -e network offline on hfmodels 0.2.1-SNAPSHOT, LiteRT 2.2.0",
+        "10-09 23:48:54.623   865   902 I hfmodels: resolve litert-community/laya-LiteRT: commit=35bf9cd6 via RESOLVED_BRANCH, descriptor=litert-community/laya-LiteRT@35bf9cd6/hfmodels.json sha=4abbd6f5",
+        "10-09 23:48:57.547   865   902 I hfmodels: imported laya_en_s256_fp32.tflite: 1684756736 bytes, sha256 ok, from /storage/emulated/0/Android/data/io.github.johnrocky.hfmodels.samples.decide/files/laya_en_s256_fp32.tflite",
+        "10-09 23:49:01.684   865   865 I inbox   : ready litert-community/laya-LiteRT@35bf9cd6 variant=en_s256_fp32 profile=gpu notes=[family=laya compile_ms=3850 on gpu (precision fp32), observed backend is UNKNOWN: litert 2.2.0 reports no per-op execution target; 'initialized' is the accelerator the CompiledModel was created with]",
+        "10-09 23:55:25.056  3946  3960 I hfmodels-check: RESULT step=load ok=true model=litert-community/laya-LiteRT variant=en_s256_fp32 profile=gpu backend=GPU network=Offline compile_ms=5021 load_ms=5565 downloaded=false fallback=[] commit=35bf9cd6",
+        "10-09 23:55:28.222  3946  3960 I hfmodels-check: RESULT step=panel ok=true model=litert-community/laya-LiteRT variant=en_s256_fp32 profile=gpu agree=19/21 n=24 ms_median=130.606979 ms_p90=136.786563 ms_min=123.280677 ms_max=143.467864 ms_first=143.467864 total_ms=3163.850051 bins=[nothing to do:7, code:5, delivery:4, payment:3, appointment:5] disagree=[#14:bill=nothing to do, #20:reply=appointment] scams=[#22=code, #23=payment, #24=code]",
+        "10-09 23:55:29.957  3946  3960 I hfmodels-check: RESULT ok=true model=litert-community/laya-LiteRT@35bf9cd6 variant=en_s256_fp32 profile=gpu failed=[] failure_paths=4/4 sdk=0.2.1-SNAPSHOT runtime=litert 2.2.0 device=SM-S942Q soc=SM8850 build=BP4A.251205.006.S942QOPS1AZH9 thermal=0->0"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 130.606979,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "again_ms_median": 129.312865,
+        "close_ms": 133.0,
+        "compile_ms": 5021.0,
+        "earlier_run_ms_median": 131.3461195,
+        "earlier_run_ms_p90": 135.535989,
+        "failure_paths_ok": 4.0,
+        "load_ms": 5565.0,
+        "ms_first": 143.467864,
+        "ms_max": 143.467864,
+        "ms_min": 123.280677,
+        "ms_p90": 136.786563,
+        "panel_agree": 19.0,
+        "panel_labelled": 21.0,
+        "panel_total_ms": 3163.850051,
+        "paste_ms_median": 128.877084,
+        "paste_rows": 5.0,
+        "stop_cancel_to_end_ms": 85.791614,
+        "texts": 24.0,
+        "thermal_status_end": 0.0,
+        "thermal_status_start": 0.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GpuOptions precision=FP32; hfmodels-android samples/decide InboxDeviceCheck (EncoderDecisions laya), one decide per text: tokenize, encoder, act head, decode",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

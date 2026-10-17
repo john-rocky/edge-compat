@@ -100,6 +100,56 @@
     },
     "partitions": 154
   },
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-10",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-audio8-tts-check",
+            "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": "GPU output ignores the input: corr 0.0097 against the CPU int8 decoder on the same codes, corr 1.0 between the GPU wavs for real and all-zero codes (the app's load-time check; the app then uses the CPU int8 decoder)",
+          "evidence": [
+            "harness: LiteRT-Models zoo audio8_tts (github.com/john-rocky/LiteRT-Models, commit 8ebed7c, main 1859b9b), androidTest Audio8DeviceCheck, com.google.ai.edge.litert:litert 2.2.0 (gradle/libs.versions.toml)",
+            "10-10 00:39:37.615 32156 32170 I audio8-check: RESULT step=load ok=true load_s=10.598 codec=CPU codec_mode=auto gpu_corr=0.010 gpu_error=\"output check failed: corr vs CPU int8 = 0.009665471098470177, corr vs zero input = 1.0\" threads=4 tokenizer_self_test=true create_ms={slow_ar_int8:1201.736,fast_ar_int8:120.662,codec_fp16_T128_gpu:1458.260,codec_int8_T128_cpu:275.506} warmup_ms={codec_fp16_T128_gpu:927.228,codec_int8_T128_cpu:2140.210,slow_decode:43.643,fast_step:2.499} step_s=10.611",
+            "supervisor rerun 2026-10-10 01:07 (K/sup/r5_check.log): RESULT step=load ok=true load_s=10.231 codec=CPU codec_mode=auto gpu_corr=0.010 gpu_error=\"output check failed: corr vs CPU int8 = 0.009665471098470177, corr vs zero input = 1.0\" threads=4 tokenizer_self_test=true create_ms={slow_ar_int8:1074.365,fast_ar_int8:"
+          ],
+          "failure_class": "silent-miscompute",
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "frames": 128.0,
+            "gpu_codec_check_corr_vs_cpu_int8": 0.009665471098470177,
+            "gpu_codec_check_corr_vs_zero_input": 1.0,
+            "rerun_gpu_codec_check_corr_vs_cpu_int8": 0.01
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "codec_decoder_fp16_T128 alone, one 128-frame decode (Android sample app audio8_tts, Audio8DeviceCheck load step, CompiledModel GPU with CPU fallback)",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-10/audio8-tts-preview-0.6b__codec_decoder_fp16_t128__galaxy-s26.json"
+      }
+    ]
+  },
   "model": {
     "family": "audio8-tts",
     "id": "audio8-tts-preview-0.6b__codec_decoder_fp16_t128",
@@ -119,5 +169,5 @@
     "fp16 weights give the AR graphs no speed or RAM gain on the CPU (XNNPACK unpacks them to fp32 at init), so the AR graphs ship int8/int4 and only the codec ships fp16 (FINDINGS §4).",
     "Preview checkpoint: the vendor documents limited dialect coverage and sensitivity to noisy or mis-transcribed references. Generated speech can be misused for impersonation; obtain consent before cloning a voice and disclose synthetic audio (card Limitations)."
   ],
-  "schema_version": "1.1"
+  "schema_version": "1.2"
 }

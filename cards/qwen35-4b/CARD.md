@@ -27,7 +27,7 @@ task: text-generation
 
 | File | SHA-256 | Size (MB) |
 |---|---|---|
-| `Qwen3.5-4B_int8.litertlm` | `f0abbbc69b4126ddcb208a75e8904ecadff87aa24202e3de6ffd518c198af1ec` | 4203.251 |
+| `Qwen3.5-4B_int8.litertlm` | `a360b83d0bcc2e8ab3e83df78e83ec028e4c0687ae95970af6f470473da67a50` | 4203.251 |
 
 ## Performance
 
@@ -35,12 +35,17 @@ No benchmark data yet.
 
 ## Device runs (NPU / LiteRT-LM)
 
-Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-14/qwen35-4b__mac-m4-max.json`, `data/device_runs/0.16.1/2026-09-01/qwen35-4b__raspberry-pi-5.json`.
+Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-14/qwen35-4b__mac-m4-max.json`, `data/device_runs/0.16.1/2026-09-01/qwen35-4b__raspberry-pi-5.json`, `data/device_runs/0.18.0/2026-10-13/qwen35-4b__mac-studio-m4-max.json`, `data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-4b__galaxy-s26.json`, `data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-4b__pixel-8a.json`.
 
 | Device | Accelerator | Status | Full delegation | Output match | Prompt (tokens) | Latency p50 (ms) | Prefill tok/s | Decode tok/s | TTFT (ms) | Peak mem (MB) | Environment | Date | Provenance |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| galaxy-s26 | cpu | fallback | no | - | - | - | - | - | - | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-13 | measured |
+| galaxy-s26 | cpu | fallback | no | - | 256 | - | 178.85 | 8.93 | 1545 | 5516.81 | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-13 | measured |
 | mac-m4-max | cpu | pass | - | - | 256 | - | 242.61 | 19.9 | 1105.5 | - | mac-m4-max · litert-lm 0.16.0 | 2026-08-14 | measured |
 | mac-m4-max | gpu | pass | - | - | 256 | - | 672.16 | 61.98 | 397.0 | - | mac-m4-max · litert-lm 0.16.0 | 2026-08-14 | measured |
+| mac-studio-m4-max | cpu | pass | - | - | - | - | - | - | - | - | Mac Studio (M4 Max) · litert-lm 0.18.0 | 2026-10-13 | measured |
+| mac-studio-m4-max | gpu | pass | - | - | - | - | - | - | - | - | Mac Studio (M4 Max) · litert-lm 0.18.0 | 2026-10-13 | measured |
+| pixel-8a | cpu | fallback | no | - | - | - | - | - | - | - | Pixel 8a · Tensor G3 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-13 | measured |
 | raspberry-pi-5 | cpu | pass | - | - | 256 | - | 20.24 | 1.83 | 13196.2 | 6368.0 | Raspberry Pi 5 Model B Rev 1.1 · Broadcom BCM2712 · litert-lm 0.16.1 · Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41 | 2026-09-01 | measured |
 
 ## Pitfalls
@@ -51,6 +56,7 @@ Model-level on-device results — measured behavior of this exact artifact on th
 - Gates on the shipped file: FP parity 48 positions top-1/top-5 100% / Pearson 1.0000 / KL ~0 (split harness scripts/parity_logits_bigmodel.py — the 16 GB fp32 tflite exceeds the Python Interpreter's flatbuffer limit, so pt/lt stages run in separate venvs over a decode+p32,16 dev export); 8Q 8/8 on CPU and GPU on litert-lm 0.15.0 AND 0.16.0; BANANA hermetic CPU 40/40 + GPU 20/20; iPhone 17 Pro Metal composite 8-question probe word-for-word identical to HF fp32 (9.28 tok/s decode / 87.1 prefill / TTFT 1.93 s / peak 4975 MB; CPU 5.43 / 24.0 / 1703 MB). Mac bench (0.16.0, cache no, p256/d256, quiet): GPU 672.16/61.98 TTFT 0.40 s vs CPU 242.61/19.90 TTFT 1.11 s.
 - Honest quality note (HF card): on the composite 8-question probe the CPU int8 path answers 6 of 8 (every given answer correct; HF fp32 itself answers 8/8 — an int8-on-CPU cost); single-question gates are 8/8 on every backend. GPU is the fidelity path for this file.
 - Android: 8 GB-class phones cannot fit the 4.1 GB file (Pixel 8a not attempted — 3.3 GB free vs 4.1 GB); Apple-hardware-first release.
+- Metadata-only updates of the published files (README dated notes; TFLite, tokenizer and executor metadata byte-identical each time): 2026-09-21, the chat template accepts the litert-lm 0.18 content-parts form (string form unchanged); 2026-10-09, the template is LiteRT-LM models/qwen3_5/chat_template.jinja at 87ab9334 with a format_content macro that reads content as a string or as parts (text and tool_response) and enable_thinking defaulting to false: with nothing set a single-turn prompt renders byte for byte as before, enable_thinking=true pre-fills <think>\n and the reasoning comes back on the thought channel (<think>\n / \n</think>), supports_thinking is true; llm_model_type stays generic_model, so tool calls come back as text and supports_function_calling is false (README Chat template note).
 
 ---
 

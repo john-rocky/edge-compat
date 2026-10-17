@@ -1,0 +1,273 @@
+{
+  "artifact": "ema_align_multi_fp32.tflite",
+  "artifact_sha256": "c80117ce7fcf38e7f872b80cc35237adaa290342187239e1fee0ca2433f3a6b4",
+  "device": "mac-studio-m4-max",
+  "model_id": "ema-lightning__ema_align_multi_fp32",
+  "notes": "EMA Lightning -> LiteRT (https://huggingface.co/litert-community/EMA-Lightning-LiteRT, main 9d7633c79d5588f42fedb26532e09ce9ee205caf, published 2026-10-11). The Mac rows: (a) the shipped multi-signature files (the out/fp32 and out/fp16 multi files the lane's assemble_ship.py copied into out/ship; sha256 identical to config.json and to the Hub LFS) through the lane's host loop hostloop_e2e.py --split --multi --threads 4 (ai-edge-litert 2.2.0 Interpreter, XNNPACK, normalizer-tr frontend + the package's chunker; one say() per fixture text, per-stage wall time of single calls — not a median of 20, so latency_p50_ms stays null and the calls sit in metrics; DECISIONS #174(1)); (b) bench_mac.py medians of 20 calls on the single-bucket fp32 exports of the same signatures (one signature per file, the same fp32 weights; the lane verified identical outputs to the multi files, out/mixed/verify_fp32_split_multi.json), each row naming its file. Parity of the shipped set on the Mac CPU = the whole pipeline vs the pip package ema-lightning 1.1.2 (PyTorch fp32 eager, seed 0, speed 1) on six fixed sentences (the base card's three 'Listen' sentences + three of the lane's own): frames identical on all six, latents corr >= 0.9999999, audio SNR 56.40-57.11 dB (out/mixed/verify_textfp32_soundfp32_decoderfp16_split_multi.json; the lane bar is frames identical + latents corr >= 0.9999 + audio SNR >= 30 dB on every fixture) — a comparison against the upstream PyTorch model, not a same-runtime CPU reference, so output_match stays null. Host: Mac Studio (M4 Max, 128 GB), macOS 27.0 (26A428) read with sw_vers on the measurement day; ai-edge-litert 2.2.0 from the lane venv ~/venvs/ema (FINDINGS.md header; the venv was deleted at lane close). Pipeline totals per fixture (the same host loop): readme1 3.52 s of audio in 105.6 ms (RTF 0.0300, first audio 40.2 ms); readme2 8.56 s of audio in 187.4 ms (RTF 0.0219, first audio 57.6 ms); readme3 8.28 s of audio in 188.0 ms (RTF 0.0227, first audio 57.7 ms); own1 2.68 s of audio in 105.4 ms (RTF 0.0393, first audio 39.9 ms); own2 6.12 s of audio in 139.0 ms (RTF 0.0227, first audio 45.4 ms); own3 5.12 s of audio in 137.3 ms (RTF 0.0268, first audio 44.9 ms). Records hand-built 2026-10-11 by the session's build_ema_records.py (scratchpad) from the files cited; model-level facts only.",
+  "quantization": "none (fp32 weights)",
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-10-11",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "file measured: the single-bucket fp32 export out/fp32/ema_align_L128_T192_fp32.tflite (615860 B, sha256 3986a2a48ed13e62be46067c5614edbac29c9fc522f3ed6dcc3a2032ef1c4a9b read from the file today; the same graph and weights as the shipped multi-signature file's ema_align_L128_T192 signature, one signature per file; identical outputs verified by the lane, out/mixed/verify_fp32_split_multi.json); harness: bench_mac.py --threads 4 --n 20 (ai-edge-litert 2.2.0 Interpreter, XNNPACK)",
+        "/Users/USER/code/litertlm-convert/ema_tts_work/out/chain2.log:121: 'ema_align_L128_T192_fp32.tflite      median     0.55 ms  min     0.50 ms  (n=20, threads=4)' (bench_mac.py --threads 4 --n 20: invoke + output read per call, median and min of 20 after warm-up)",
+        "parity of the single-bucket fp32 set vs the package oracle: /Users/USER/code/litertlm-convert/ema_tts_work/out/fp32/verify_fp32.json (SPEED_LADDER.md row 1: PASS 6/6, min SNR 56 dB); no same-runtime element comparison in the bench, so output_match stays null"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 0.55,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "rested_leg_median_ms": 0.55,
+        "rested_leg_min_ms": 0.5,
+        "rested_leg_n": 20.0,
+        "threads": 4.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "ema_align_L128_T192 (single-bucket fp32 export ema_align_L128_T192_fp32.tflite); bench_mac.py median of 20",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-10-11",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "file measured: the single-bucket fp32 export out/fp32/ema_align_L256_T384_fp32.tflite (615860 B, sha256 3a12ef992b304ad3f2b3d6f2910ccac79714b9d34c719450af85f12fcb08cbfd read from the file today; the same graph and weights as the shipped multi-signature file's ema_align_L256_T384 signature, one signature per file; identical outputs verified by the lane, out/mixed/verify_fp32_split_multi.json); harness: bench_mac.py --threads 4 --n 20 (ai-edge-litert 2.2.0 Interpreter, XNNPACK)",
+        "/Users/USER/code/litertlm-convert/ema_tts_work/out/chain2.log:122: 'ema_align_L256_T384_fp32.tflite      median     1.01 ms  min     0.96 ms  (n=20, threads=4)' (bench_mac.py --threads 4 --n 20: invoke + output read per call, median and min of 20 after warm-up)",
+        "parity of the single-bucket fp32 set vs the package oracle: /Users/USER/code/litertlm-convert/ema_tts_work/out/fp32/verify_fp32.json (SPEED_LADDER.md row 1: PASS 6/6, min SNR 56 dB); no same-runtime element comparison in the bench, so output_match stays null"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 1.01,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "rested_leg_median_ms": 1.01,
+        "rested_leg_min_ms": 0.96,
+        "rested_leg_n": 20.0,
+        "threads": 4.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "ema_align_L256_T384 (single-bucket fp32 export ema_align_L256_T384_fp32.tflite); bench_mac.py median of 20",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-10-11",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "file measured: the single-bucket fp32 export out/fp32/ema_align_L256_T512_fp32.tflite (615860 B, sha256 f56ca1f69ac49899f277ebc72b0321cd9dd0f118c8eb19df66fb5a9e1e198b34 read from the file today; the same graph and weights as the shipped multi-signature file's ema_align_L256_T512 signature, one signature per file; identical outputs verified by the lane, out/mixed/verify_fp32_split_multi.json); harness: bench_mac.py --threads 4 --n 20 (ai-edge-litert 2.2.0 Interpreter, XNNPACK)",
+        "/Users/USER/code/litertlm-convert/ema_tts_work/out/chain2.log:123: 'ema_align_L256_T512_fp32.tflite      median     1.17 ms  min     1.11 ms  (n=20, threads=4)' (bench_mac.py --threads 4 --n 20: invoke + output read per call, median and min of 20 after warm-up)",
+        "parity of the single-bucket fp32 set vs the package oracle: /Users/USER/code/litertlm-convert/ema_tts_work/out/fp32/verify_fp32.json (SPEED_LADDER.md row 1: PASS 6/6, min SNR 56 dB); no same-runtime element comparison in the bench, so output_match stays null"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 1.17,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "rested_leg_median_ms": 1.17,
+        "rested_leg_min_ms": 1.11,
+        "rested_leg_n": 20.0,
+        "threads": 4.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "ema_align_L256_T512 (single-bucket fp32 export ema_align_L256_T512_fp32.tflite); bench_mac.py median of 20",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-10-11",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "file measured: the single-bucket fp32 export out/fp32/ema_align_L32_T48_fp32.tflite (615852 B, sha256 9bf59fca795a912f29afcbbb3a84c3e8fff68b703da1dfdc01c7a4134940e5f0 read from the file today; the same graph and weights as the shipped multi-signature file's ema_align_L32_T48 signature, one signature per file; identical outputs verified by the lane, out/mixed/verify_fp32_split_multi.json); harness: bench_mac.py --threads 4 --n 20 (ai-edge-litert 2.2.0 Interpreter, XNNPACK)",
+        "/Users/USER/code/litertlm-convert/ema_tts_work/out/chain2.log:124: 'ema_align_L32_T48_fp32.tflite        median     0.18 ms  min     0.17 ms  (n=20, threads=4)' (bench_mac.py --threads 4 --n 20: invoke + output read per call, median and min of 20 after warm-up)",
+        "parity of the single-bucket fp32 set vs the package oracle: /Users/USER/code/litertlm-convert/ema_tts_work/out/fp32/verify_fp32.json (SPEED_LADDER.md row 1: PASS 6/6, min SNR 56 dB); no same-runtime element comparison in the bench, so output_match stays null"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 0.18,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "rested_leg_median_ms": 0.18,
+        "rested_leg_min_ms": 0.17,
+        "rested_leg_n": 20.0,
+        "threads": 4.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "ema_align_L32_T48 (single-bucket fp32 export ema_align_L32_T48_fp32.tflite); bench_mac.py median of 20",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-10-11",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "file measured: the single-bucket fp32 export out/fp32/ema_align_L64_T96_fp32.tflite (615852 B, sha256 89f5c0f1badb417a4dc925cb1f9057aeeafba5385048f3c55533725283fc4bee read from the file today; the same graph and weights as the shipped multi-signature file's ema_align_L64_T96 signature, one signature per file; identical outputs verified by the lane, out/mixed/verify_fp32_split_multi.json); harness: bench_mac.py --threads 4 --n 20 (ai-edge-litert 2.2.0 Interpreter, XNNPACK)",
+        "/Users/USER/code/litertlm-convert/ema_tts_work/out/chain2.log:125: 'ema_align_L64_T96_fp32.tflite        median     0.33 ms  min     0.30 ms  (n=20, threads=4)' (bench_mac.py --threads 4 --n 20: invoke + output read per call, median and min of 20 after warm-up)",
+        "parity of the single-bucket fp32 set vs the package oracle: /Users/USER/code/litertlm-convert/ema_tts_work/out/fp32/verify_fp32.json (SPEED_LADDER.md row 1: PASS 6/6, min SNR 56 dB); no same-runtime element comparison in the bench, so output_match stays null"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 0.33,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "rested_leg_median_ms": 0.33,
+        "rested_leg_min_ms": 0.3,
+        "rested_leg_n": 20.0,
+        "threads": 4.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "ema_align_L64_T96 (single-bucket fp32 export ema_align_L64_T96_fp32.tflite); bench_mac.py median of 20",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-10-11",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "harness: the lane's host loop hostloop_e2e.py --split --multi --threads 4 (ai-edge-litert 2.2.0 Interpreter, XNNPACK 4 threads; normalizer-tr frontend + the package's chunker; per-stage wall time of single calls: write inputs + run + read outputs) on the shipped multi-signature files (out/fp32 and out/fp16 multi files, sha256 = config.json = the Hub LFS)",
+        "/Users/USER/code/litertlm-convert/ema_tts_work/out/e2e/hostloop_mac_textfp32_soundfp32_decoderfp16_split_multi_t4.json: per text the piece's L / T, the bucket Lb / Tb it ran in, text_ms, sound_ms (= align + the four steps + the host Euler mixing), decode_ms per window, first_audio_ms, total_ms; forms {\"text\": \"fp32\", \"sound\": \"fp32\", \"decoder\": \"fp16\"}, split True, threads 4",
+        "/Users/USER/code/litertlm-convert/ema_tts_work/out/mixed/verify_textfp32_soundfp32_decoderfp16_split_multi.json (verify_tflite.py --multi on the same files vs the package oracle fixtures/): per fixture frames_ok, |dh|, |ddur|, |dlat|, corr_lat, |daudio|, corr_audio, snr_db — readme1: frames_ok True, |dh| 1.91e-06, |ddur| 1.31e-06, corr_lat 1.000000000, SNR 56.40 dB, corr_audio 0.9999995; readme2: frames_ok True, |dh| 1.79e-06, |ddur| 2.62e-06, corr_lat 1.000000000, SNR 56.82 dB, corr_audio 0.9999995; readme3: frames_ok True, |dh| 1.43e-06, |ddur| 2.38e-06, corr_lat 1.000000000, SNR 56.84 dB, corr_audio 0.9999996; own1: frames_ok True, |dh| 1.19e-06, |ddur| 1.31e-06, corr_lat 1.000000000, SNR 57.11 dB, corr_audio 0.9999996; own2: frames_ok True, |dh| 1.43e-06, |ddur| 1.55e-06, corr_lat 1.000000000, SNR 56.57 dB, corr_audio 0.9999995; own3: frames_ok True, |dh| 1.31e-06, |ddur| 1.79e-06, corr_lat 1.000000000, SNR 56.57 dB, corr_audio 0.9999995",
+        "output_match null: the comparison is against the upstream PyTorch package (the lane oracle), not a same-runtime CPU reference (DECISIONS #175 shape); the lane bar passes on all six fixtures"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "align_plus_4_steps_ms_own1_L64_T96": 10.7476,
+        "align_plus_4_steps_ms_own2_L128_T192": 15.7549,
+        "align_plus_4_steps_ms_own3_L128_T192": 15.5673,
+        "align_plus_4_steps_ms_readme1_L64_T96": 10.8862,
+        "align_plus_4_steps_ms_readme2_L256_T384": 27.7937,
+        "align_plus_4_steps_ms_readme3_L256_T384": 27.7448,
+        "corr_latents_vs_pytorch_own1": 0.9999999999519535,
+        "corr_latents_vs_pytorch_own2": 0.9999999999510488,
+        "corr_latents_vs_pytorch_own3": 0.9999999998416187,
+        "corr_latents_vs_pytorch_readme1": 0.999999999984055,
+        "corr_latents_vs_pytorch_readme2": 0.9999999996144746,
+        "corr_latents_vs_pytorch_readme3": 0.9999999997009323,
+        "threads": 4.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "ema_align_L{L}_T{T} (the shipped file); host loop, one call per fixture",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

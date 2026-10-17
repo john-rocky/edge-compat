@@ -262,3 +262,11 @@ runs exceed the 60 s budget (timeout, >= 4.6 s per run; not re-run with a larger
 DEQUANTIZE / EMBEDDING_LOOKUP refusals (compile_error, litert_compiled_model_next.h:70), the int8 decoder fails ML Drift kernel init ("Unable to parse bc coord
 for BATCH axis" on convolution1x1, compile_error), T192 and the encoder abort with `RuntimeError: memory access out of bounds` (wasm_memory_ceiling). The op-naming
 lines are staged in data/matrix_staging/webgpu_mldrift__2.5.3-audio8-additions.csv; the rest stays model-level in the sweep records.
+
+2026-10-05: the four graphs for float16 hardware of the typed-decisions lane (own uploads; GLiNER2.5-Decide-LiteRT
+`gliner25_decide_s128_npu_wfp16.tflite` 660 MB at 310090c3, `gliner25_decide_s256_npu_wfp16.tflite` 711 MB and
+`gliner25_decide_s512_fp16hw_wfp16.tflite` 811 MB at 600fe62b; Open-Decision-DeBERTa-v3-Large-LiteRT
+`deberta_v3_large_decision_s256_npu_wfp16.tflite` 713 MB at 26a2b642) are NOT catalogued: above the ~500 MB rule, and each has
+the inputs, outputs and size of a catalogued default graph of its window (660 / 711 / 811 / 713 MB, float32 inputs), whose
+rows already bracket the wasm ceiling (s128 / s256 `timeout`, 811 MB `backend_error`, WebGPU `Aborted()`), so a sweep would add
+no new fact about the ceiling. Their phone records are under data/device_runs/2.2.0/2026-10-04 and 2026-10-05 (DECISIONS #188).

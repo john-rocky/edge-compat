@@ -1,0 +1,58 @@
+{
+  "artifact": "granite-4.1-8b_int4.litertlm",
+  "artifact_sha256": "7de1d77fb951572d12b8b17984d6418909b841e582d1df7866c5d08b3920ea60",
+  "device": "pixel-8a",
+  "model_id": "granite-4.1-8b-int4",
+  "notes": "Hub litert-community/granite-4.1-8b (upload commit 99579c31). Lane litertlm-convert aa_mobile_b2_work/granite41_8b round r1 (device/r1/p8a, hold 2026-10-14 11:23:02-11:26:25 JST; SPEED_LADDER.md row 10 = no-go). Pixel 8a (Tensor G3, Mali-G715, MemTotal 7,754,700 kB, MemAvailable 4,105,436 kB before the run): the int4 file's GPU engine build delegated prefill_1024 whole to LITERT_CL, then the runtime prepared the weights on the CPU side (Mali) and MemAvailable fell to 327,604 kB, where the harness's guard stopped the process (no answer, no reboot) - the same stop as the Qwen3.5 Hub files on this phone (DECISIONS #206), recorded the same way (memory_cap_exceeded, the guard line as error). The int8 file (8,949,862,832 B) was not tried: larger than the phone's RAM. Lane rule since 2026-10-15: an 8B-class int4 GPU try on this phone is not needed (the file exceeds the MemAvailable at start).",
+  "quantization": "int4 blockwise-32 + OCTAV on linears, int8 embedding; GPU-composite graph (odml.cache_update / odml.runtime_bmm)",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-14",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-aab2",
+        "os_build": "Android 16 (CP1A.260505.005)",
+        "runtime": "litert-lm",
+        "runtime_version": "prebuilt-adac974b",
+        "soc": "Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": "GUARD_KILL avail=327604 pid=13150",
+      "evidence": [
+        "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, sha256 adac974b…; kit = litertlm-convert team_repack_20261009/r9/binary/prebuilt)",
+        "[11:25:21] bundle on device: 7de1d77fb951572d12b8b17984d6418909b841e582d1df7866c5d08b3920ea60 (5151986096 B, push 115.0 s) = Mac",
+        "one attempt by rule (--backend=gpu, text prompt 'What is the capital of France? Answer in one sentence.'); a 2-second sampler stops the process when MemAvailable falls under 400,000 kB",
+        "VERBOSE: Replacing 1860 out of 1860 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+        "W0000 00:00:1791944725.928400   13150 gpu_model_builder.cc:4455] Weights preparation on Gpu is disabled for PowerVR, Broadcom, Mali GPUs and non-OpenCL/WebGPU/Metal backends.",
+        "[11:26:21] prompt_1 done: rc(adb)=0 EXIT=143 wall 55.3 s",
+        "GUARD_KILL avail=327604 pid=13150"
+      ],
+      "failure_class": "memory_cap_exceeded",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "memavail_at_start_kib": 4105436.0,
+        "memavail_min_kib": 327604.0,
+        "sampler_samples": 22.0,
+        "seconds_to_stop": 55.3,
+        "signatures_compiled": 1.0,
+        "vmhwm_kib": 510812.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

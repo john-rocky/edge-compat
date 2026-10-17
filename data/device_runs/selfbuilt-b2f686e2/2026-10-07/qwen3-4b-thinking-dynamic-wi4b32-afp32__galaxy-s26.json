@@ -1,0 +1,99 @@
+{
+  "artifact": "Qwen3_4b_thinking_dynamic_wi4b32_afp32.litertlm",
+  "artifact_sha256": "110098cfd2766cc46a5138bb03b44f0350b7608052cb48321a47b9f0ebdb89d9",
+  "device": "galaxy-s26",
+  "model_id": "qwen3-4b-thinking-dynamic-wi4b32-afp32",
+  "notes": "Function gate of the 2026-10-08 template re-ship (chat template made parts-safe for litert-lm 0.18.0; TFLite graph, weights, tokenizer and executor metadata byte-identical to the 2026-08-31 file sha256 a412d77d...). Runtime token selfbuilt-b2f686e2 = the v0.18.0 tag commit, built from source (not the PyPI/AAR 0.18.0 release binary). Source record: litertlm-convert template_parts_work/results/round6_qwen34bt_reship.md section 5.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-07",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 1282,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cli-tagbuild",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-b2f686e2",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "binary: litert_lm_main built from the LiteRT-LM v0.18.0 tag (commit b2f686e2ed4718fb84ec398a61dd59ca0f0aff27) by edge-llm-bench/android/scripts/build_litert_lm_main.sh LITERTLM_TAG=v0.18.0 on 2026-10-07; android/bin/v0.18.0/SHA256SUMS: litert_lm_main 54832c4992f932aec76e85be546b63dcb1e2820236d76c8f38d66c0ecc62774a, libLiteRtOpenClAccelerator.so dfc714a0b59d5e1bf5155db7533070bf13da28574a3bc52396a4ba22d23d893c, libLiteRtGpuAccelerator.so 75ee49f6f31faf44b3b5ac54f15d58abd75438bc9e2f9abcf47f24279d337bc8",
+        "bundle: the template re-ship file (sha256 110098cf... per the HF LFS API after the 2026-10-08 upload, commit afda1d60; the pushed local file is the uploaded file), pushed to /data/local/tmp/q34bt/model.litertlm; single cold run per backend on a shared phone (device hold taken, released after), --input_prompt='What is 17 + 25? Answer briefly.' --max_num_tokens=1024; logs litertlm-convert template_parts_work/work/q34bt/{gate.log,run_gpu.log,run_cpu.log}",
+        "throughput not recorded: one cold invocation with a 23-token prompt is a function gate, not a measurement (the lane's rule; the BenchmarkInfo block is in the log)",
+        "run_gpu.log: --backend=gpu; VERBOSE: Replacing 1282 out of 1282 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+        "run_gpu.log: VERBOSE: Replacing 1282 out of 1282 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_1024).",
+        "run_gpu.log: VERBOSE: Replacing 1200 out of 1200 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (decode).",
+        "run_gpu.log: INFO: Loaded OpenCL library with dlopen.; printed answer line: 42; 0 lines matching 'Failed to apply template' (the previous file, sha256 a412d77d..., fails at the template on litert-lm 0.18.0: 'tried to use + operator on unsupported types string and sequence'); BenchmarkInfo Init Total: 16870.03 ms, Prefill Turn 1: Processed 23 tokens, Decode Turn 1: Processed 334 tokens"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 334.0,
+        "init_s": 16.87003,
+        "prefill_tokens": 23.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": 1282,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-07",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-cli-tagbuild",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-b2f686e2",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "binary: litert_lm_main built from the LiteRT-LM v0.18.0 tag (commit b2f686e2ed4718fb84ec398a61dd59ca0f0aff27) by edge-llm-bench/android/scripts/build_litert_lm_main.sh LITERTLM_TAG=v0.18.0 on 2026-10-07; android/bin/v0.18.0/SHA256SUMS: litert_lm_main 54832c4992f932aec76e85be546b63dcb1e2820236d76c8f38d66c0ecc62774a, libLiteRtOpenClAccelerator.so dfc714a0b59d5e1bf5155db7533070bf13da28574a3bc52396a4ba22d23d893c, libLiteRtGpuAccelerator.so 75ee49f6f31faf44b3b5ac54f15d58abd75438bc9e2f9abcf47f24279d337bc8",
+        "bundle: the template re-ship file (sha256 110098cf... per the HF LFS API after the 2026-10-08 upload, commit afda1d60; the pushed local file is the uploaded file), pushed to /data/local/tmp/q34bt/model.litertlm; single cold run per backend on a shared phone (device hold taken, released after), --input_prompt='What is 17 + 25? Answer briefly.' --max_num_tokens=1024; logs litertlm-convert template_parts_work/work/q34bt/{gate.log,run_gpu.log,run_cpu.log}",
+        "throughput not recorded: one cold invocation with a 23-token prompt is a function gate, not a measurement (the lane's rule; the BenchmarkInfo block is in the log)",
+        "run_cpu.log: --backend=cpu (XNNPACK); VERBOSE: Replacing 919 out of 1282 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 427 partitions for subgraph 0 (prefill_128).",
+        "run_cpu.log: VERBOSE: Replacing 919 out of 1282 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 427 partitions for subgraph 1 (prefill_1024).",
+        "run_cpu.log: VERBOSE: Replacing 831 out of 1200 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 436 partitions for subgraph 2 (decode).",
+        "run_cpu.log: printed answer line: 42; 0 lines matching 'Failed to apply template'; BenchmarkInfo Init Total: 6034.22 ms, Prefill Turn 1: Processed 23 tokens, Decode Turn 1: Processed 219 tokens"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 219.0,
+        "init_s": 6.03422,
+        "prefill_tokens": 23.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

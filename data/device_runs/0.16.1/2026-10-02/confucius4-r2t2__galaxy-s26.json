@@ -1,0 +1,109 @@
+{
+ "schema_version": "1.0",
+ "model_id": "confucius4-r2t2",
+ "artifact": "Confucius4-R2T2.litertlm",
+ "artifact_sha256": "6938f236ec25b0a3c2c8d8a2a43bf6c5891b857331e3246f28b9e95140312c5e",
+ "quantization": "LM int8 dynamic (int8 embedding table); audio encoder fp16 weights, fp32 compute, in-graph log-mel, 30 s window (390 audio tokens); KV cache 1024; litert-torch Qwen3-ASR prompt in the template (mlboydaisuke/Confucius4-R2T2-LiteRT rev b52ffc6f)",
+ "device": "galaxy-s26",
+ "notes": "litert_lm_advanced_main built from the v0.16.1 release tag (the VibeVoice lane's binary), one process per clip, --num_cpu_threads=4, audio encoder on the CPU in both rows, the 20 shortest clips of the 155-clip set (127.6 s of audio) on the CPU and the 5 example clips on the GPU (OpenCL). Reference values: scaling_max_freq fell from 3,628,800 / 4,742,400 kHz (cpuinfo max) to 1,785,600 / 1,747,200 kHz during the CPU leg (thermal status 0 -> 1, battery 33.0 -> 39.0 C) and the GPU leg started under that limit; the CPU leg ran without a weight cache (no cache_dir), so every process repacked the weights. Wall per process includes engine load. Hold with pid, no reboot (uptime continuous), /data/local/tmp/c4r3_gate removed after the run. Evidence: litertlm-convert/confucius4_r2t2_work/gates/r3/s26/s26_cpu.json, s26_gpu.json, *_first_stderr.log.",
+ "results": [
+  {
+   "accelerator": "cpu",
+   "context_length": null,
+   "date": "2026-10-02",
+   "decode_tokens_per_s": null,
+   "delegated_ops": 1126,
+   "env": {
+    "device": "Galaxy S26 (SM-S942Q)",
+    "machine_label": "galaxy-s26-confucius4-cli",
+    "os_build": "Android 16",
+    "runtime": "litert-lm",
+    "runtime_version": "0.16.1",
+    "soc": "Qualcomm SM8850",
+    "vendor_sdk": null
+   },
+   "error": null,
+   "evidence": [
+    "VERBOSE: Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 221 partitions for subgraph 0 (prefill_128). (litertlm-convert/confucius4_r2t2_work/gates/r3/s26/s26_cpu_first_stderr.log)",
+    "VERBOSE: Replacing 1070 out of 1244 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 226 partitions for subgraph 1 (decode).",
+    "litert_lm_lib.cc:471 Peak private footprint: 7470.18MB.",
+    "litertlm-convert/confucius4_r2t2_work/gates/r3/s26/s26_cpu.json summary: clips 20, exit0 20, empty 0, equal_to_mac_cpu 15, wall_seconds 334.729, mem_available_min_kb 3062480; post scaling_max_vs_cpuinfo_max policy0 [1785600, 3628800], policy6 [1747200, 4742400]",
+    "FLEURS error counts on the 20 clips equal the Mac CPU run's (en 5/142 words, zh 8/173 chars); no weight cache (cache_dir absent)"
+   ],
+   "failure_class": null,
+   "full_delegation": false,
+   "latency_p50_ms": null,
+   "loads": true,
+   "max_abs_diff": null,
+   "max_rel_diff": null,
+   "metrics": {
+    "clips": 20,
+    "audio_seconds": 127.6,
+    "wall_per_process_s_min": 10.4,
+    "wall_per_process_s_max": 19.6,
+    "raw_equal_to_mac_cpu_run": 15,
+    "empty_transcripts": 0,
+    "threads": 4,
+    "fleurs_en_word_errors": 5,
+    "fleurs_en_ref_words": 142,
+    "fleurs_zh_char_errors": 8,
+    "fleurs_zh_ref_chars": 173,
+    "scaling_max_khz_policy0_after_run": 1785600,
+    "scaling_max_khz_policy6_after_run": 1747200,
+    "weight_cache": 0
+   },
+   "output_match": null,
+   "peak_mem_mb": 7470.0,
+   "prefill_tokens_per_s": null,
+   "provenance": "measured",
+   "runs": true,
+   "total_ops": 1298,
+   "ttft_ms": null
+  },
+  {
+   "accelerator": "gpu",
+   "context_length": null,
+   "date": "2026-10-02",
+   "decode_tokens_per_s": null,
+   "delegated_ops": 1298,
+   "env": {
+    "device": "Galaxy S26 (SM-S942Q)",
+    "machine_label": "galaxy-s26-confucius4-cli",
+    "os_build": "Android 16",
+    "runtime": "litert-lm",
+    "runtime_version": "0.16.1",
+    "soc": "Qualcomm SM8850",
+    "vendor_sdk": null
+   },
+   "error": null,
+   "evidence": [
+    "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128). (litertlm-convert/confucius4_r2t2_work/gates/r3/s26/s26_gpu_first_stderr.log)",
+    "VERBOSE: Replacing 1244 out of 1244 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (decode).",
+    "litert_lm_lib.cc:471 Peak private footprint: 1931.7MB.",
+    "litertlm-convert/confucius4_r2t2_work/gates/r3/s26/s26_gpu.json summary: clips 5, exit0 5, empty 0, equal_to_mac_cpu 4",
+    "audio encoder on the CPU (audio_backend=cpu)"
+   ],
+   "failure_class": null,
+   "full_delegation": true,
+   "latency_p50_ms": null,
+   "loads": true,
+   "max_abs_diff": null,
+   "max_rel_diff": null,
+   "metrics": {
+    "clips": 5,
+    "audio_seconds": 29.8,
+    "wall_per_process_s_min": 5.6,
+    "wall_per_process_s_max": 9.3,
+    "raw_equal_to_mac_cpu_run": 4,
+    "empty_transcripts": 0
+   },
+   "output_match": null,
+   "peak_mem_mb": 1932.0,
+   "prefill_tokens_per_s": null,
+   "provenance": "measured",
+   "runs": true,
+   "total_ops": 1298,
+   "ttft_ms": null
+  }
+ ]
+}

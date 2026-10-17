@@ -1,0 +1,54 @@
+{
+  "artifact": "Olmo-3-7B-Think_int8.litertlm",
+  "artifact_sha256": "e075c5c92582fa1446723003225239b4dd131a07195ca49e4a7117388641bfbb",
+  "device": "mac-studio-m4-max",
+  "model_id": "olmo-3-7b-think-int8",
+  "notes": "Hub litert-community/Olmo-3-7B-Think (upload commit 0975ed9e). Lane litertlm-convert aa_mobile_b2_work/olmo3_7b_think round r8b (card_probes/v0171/, 2026-10-16 12:03-12:17 JST, inside the lane's export slot after the 0.18.0 bench, each run after a turn in the Mac window line): `uvx --from litert-lm==0.17.1 litert-lm run <file> --backend cpu --prompt \"What is the capital of France? Answer in one word.\" --cache no`, one fresh CPU process per file. The file is cand/Olmo-3-7B-Think_int8.litertlm, the bytes of ship/ (tools/r8z_cand_sha256.txt). 0.17.1 printed the declared thought channel as [thought] ... [/thought] and then the answer; the Hub card states this run (both files answered \"Paris\" on the Mac CPU, one run each). The manifest's min_runtime_version stays 0.18.0. No benchmark: throughput cells null. The cache-2048 file was not run on 0.17.1.",
+  "quantization": "int8 dynamic on linears, int8 embedding table, float activations (GPU fp16 default); the exporter's graph (no GPU composites), KV cache 4096",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-16",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "command (tools/v0171_run.sh, \"$B\" = cand/Olmo-3-7B-Think_int8.litertlm): uvx --from litert-lm==0.17.1 litert-lm run \"$B\" --backend cpu --prompt \"What is the capital of France? Answer in one word.\" --cache no",
+        "quiet_turn: turn after 254 s in line, running: bash /Users/m ...",
+        "stdout: [thought] ... [/thought] then Paris",
+        "EXIT=0",
+        "process footprint (swap guard, 15 s samples, binary GB): max 46 GB (card_probes/v0171/run_int8.guard.log); no guard kill",
+        "2026-10-16 12:17:44 JST batch: 0.17.1 runs exit 0 (int8: EXIT=0 int4: EXIT=0 )"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "answers_with_expect": 1.0,
+        "guard_footprint_max_gb": 46.0,
+        "processes": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,56 @@
+{
+  "artifact": "SmolLM3-3B.litertlm",
+  "artifact_sha256": "c1c6c635194745456d03ba3a851b9ebf3a2714218ce35d930d9eb93f7cf97e20",
+  "device": "galaxy-s26",
+  "model_id": "smollm3-3b-int8",
+  "notes": "SmolLM3-3B.litertlm as uploaded to litert-community/SmolLM3-3B on 2026-10-06 (Hub commit af261561): graph rewrite of the previous Hub file (KV-cache writes -> odml.cache_update, attention products -> odml.runtime_bmm, param_tensor input, broadcast mask add) plus one copied 16-token prefill signature; the weights are byte-identical to the previous file (sha256 f9aa844c27f5...), which this upload replaced. Built and measured by the litertlm-convert GPU graph re-ship lane (rounds 1-21). Mac gate of this file (round 19, litertlm-convert gpu_reship_work/results/ship_verify): 6/6 points — weights and every other section byte-identical to the previous file, tflite CPU outputs bit-identical, litert-lm CPU answers 9/9 byte-identical, GPU (WebGPU) fully delegated with fp32 activations 9/9 byte-identical; GPU fp16 (the default) final answers 7/8 against 7/8 without the 16-token signature. Galaxy S26 GPU gate (round 20, Session path, greedy): 4/4 questions, long prompt correct, the same points as the file without the 16-token signature on the same phone. Previous file on the same Mac in the same lock window (litert-lm 0.17.1, same flags): gpu p256 d256: decode 76.99 tok/s, prefill 1413.98 tok/s, TTFT 0.2052 s; gpu p16 d32: decode 74.47 tok/s, prefill 88.27 tok/s, TTFT 0.2047 s; cpu p256 d256: decode 24.41 tok/s, prefill 461.14 tok/s, TTFT 1.9967 s; cpu p16 d32: decode 11.9 tok/s, prefill 28.49 tok/s, TTFT 2.0327 s. NPU row: one start of the generic compiler-plugin path with a self-built LiteRT-LM main 3dbb23e1e kit; the QNN validator refused some ops and the rest went to the QNN compile, where the lane's VmRSS guard stopped the process — staged like DECISIONS #175(5) (a guard-bounded negative is the owner's call).",
+  "quantization": "int8 weights, channelwise (every FULLY_CONNECTED weight in the bundle is INT8/channelwise: 253 of 253 read from the file)",
+  "results": [
+    {
+      "accelerator": "npu",
+      "context_length": null,
+      "date": "2026-10-05",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-gpureship",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-3dbb23e1e",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": "QAIRT 2.47.0.260601114230 (QNN JIT libraries)"
+      },
+      "error": "killed by the lane's guard: VmRSS_above_6000000KiB (VmHWM 6548084 kB) during the QNN compile",
+      "evidence": [
+        "W0000 00:00:1791203212.668494   26951 llm_litert_compiled_model_executor_factory.cc:221] NPU backend requested, but TF_LITE_AUX is not packaged in the model. Using the generic LiteRT compiler-plugin path.",
+        "INFO: [compiler_plugin.cc:948] Applying plugin with SDK version: v2.47.0.260601114230",
+        "'is not supported in Qualcomm Compiler' lines in npu.err: DynamicUpdateSlice (code=151) x144, EmbeddingLookup (code=7) x6",
+        "INFO: [compiler_plugin.cc:742] Partitioned subgraph<0>, selected 1417 ops, from a total of 1418 ops. resulted in 2 partitions.",
+        "INFO: [compiler_plugin.cc:742] Partitioned subgraph<1>, selected 1511 ops, from a total of 1584 ops. resulted in 73 partitions.",
+        "INFO: [compiler_plugin.cc:742] Partitioned subgraph<360>, selected 1511 ops, from a total of 1584 ops. resulted in 73 partitions.",
+        "the 1 s memory samples (npu.mem) rose from 267732 -> 1706856 -> 4037412 -> 6529780 kB before the guard's stop; no Replacing line for the NPU was printed = no evidence that anything ran on the NPU",
+        "bundle pushed 3125204208 B, device sha256 c1c6c6351947... = the shipped file; NPU kit: litert_lm_advanced_main built from LiteRT-LM main 3dbb23e1e (sha256 b27172b1ad8e...) with the same build's dispatch / compiler-plugin libraries rebuilt from LiteRT 86112a32 and the QAIRT 2.47 JIT libraries",
+        "command: --backend=npu --use_session=true --async=false --disable_cache=true, one gate prompt, guard = 60 s / VmRSS 6.0e6 kB / MemAvailable 1.2e6 kB; source: litertlm-convert gpu_reship_work/device/r20/logs/T1/npu_s3i8v2/"
+      ],
+      "failure_class": "memory_cap_exceeded",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "seconds_to_stop": 6.0,
+        "vmhwm_at_stop_kib": 6548084.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

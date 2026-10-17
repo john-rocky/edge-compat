@@ -1,0 +1,57 @@
+{
+  "artifact": "LFM2.5-350M_int8.litertlm",
+  "artifact_sha256": "6a78c7a2746386f8919476a34ef0ca40d596a5c44e979520fae8318da5cfb1f6",
+  "device": "mac-studio-m4-max",
+  "model_id": "lfm2.5-350m-int8",
+  "notes": "Hub litert-community/LFM2.5-350M (upload commit c3476665, 2026-10-13 10:45 JST; main 0fdead63 = README only since; the Hub tree's LFS sha256 = the lane's ship/SHA256SUMS). Lane litertlm-convert aa_mobile_work/lfm25_350m round r1c (card_probes/v0171/, 2026-10-12 17:38:05 JST; ROUND1c.md (b) / (b2)): `litert-lm run ship/LFM2.5-350M_int8.litertlm --prompt \"What is the capital of France?\" --cache no` on litert-lm 0.17.1 (no --backend = CPU), one fresh process: exit 0 with a reply asking for the question; the same command on 0.18.0 answered \"The capital of France is Paris.\". The engine prefilled 9 tokens on 0.17.1, the length of the empty user turn of the HF template, where 0.18.0 prefilled 16, the full turn - the Hub card's first paragraph. Recorded as degenerate_output (loads true, runs false: exit 0, tokens, no answer to the prompt; DECISIONS 2026-09-08 (b)); the card states no cause. The int4 file was not run on 0.17.1. The manifest's min_runtime_version is 0.18.0.",
+  "quantization": "int8 dynamic on linears + int8 embedding, convs float",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-12",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": "It seems like your message might be incomplete. Could you please provide more context or clarify what you're asking? For example:",
+      "evidence": [
+        "command: /Users/USER/venvs/lt0171run/bin/litert-lm run /Users/USER/code/litertlm-convert/aa_mobile_work/lfm25_350m/ship/LFM2.5-350M_int8.litertlm --prompt \"What is the capital of France?\" --cache no < /dev/null",
+        "exit 0",
+        "stdout: It seems like your message might be incomplete. Could you please provide more context or clarify what you're asking? For example: - Are you referring to a specific topic (e.g., science, technology, philosophy)? - Do you need help with something like writing, problem-solving, or research? - Is this related to a project, query, or idea? Let me know, and I’ll do my best to assist! 😊",
+        "control, the same command on litert-lm 0.18.0 (card_probes/v0171/run_0180_int8.*): \"The capital of France is Paris.\"",
+        "prefill probe (card_probes/prefill/prefill_0171_int8_r2.json, Python API, CPU): engine_prefill_tokens 9, reading 'empty user turn', reply \"It seems like your message might be incomplete or unclear. Could you please provide more\"",
+        "0.18.0 (card_probes/prefill/prefill_0180_int8.json): engine_prefill_tokens 16, reading 'full user turn', reply \"The capital of France is Paris.\"",
+        "HF reference (card_probes/prefill/hf_turn_ref.json, transformers 5.14.1): full user turn 16 ids, empty user turn 9 ids (\"<|startoftext|><|im_start|>user\\n<|im_end|>\\n<|im_start|>assistant\\n\")"
+      ],
+      "failure_class": "degenerate_output",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "engine_prefill_tokens": 9.0,
+        "engine_prefill_tokens_0180": 16.0,
+        "hf_empty_user_turn_tokens": 9.0,
+        "hf_full_user_turn_tokens": 16.0,
+        "processes": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

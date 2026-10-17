@@ -1,0 +1,244 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "regression_result.schema.json",
+  "title": "Catalog regression result (one file per bundle x litert-lm wheel x date)",
+  "description": "One `.litertlm` bundle run through the catalog regression suite v1 (tools/regression/run_regression.py) on one litert-lm wheel: 13 checks in a fixed order, each in a fresh process (describe; plain_paris; three digit_default runs; digit_default_uncapped; digit_think_off; digit_think_on; tool_call_auto; engine_shared_2conv; two_turn_memory; digit_gpu_default; cpu_gpu_match, the last derived from digit_default_1 and digit_gpu_default). Every judge is mechanical and every check record keeps the head of the answer it judged. Model-level behavior only: op-level matrix entries are never derived from these records. Layout: data/regression/<runtime_version>/<YYYY-MM-DD>/<bundle_id>.json plus the generated SUMMARY.md of that directory; the bundle list itself is data/regression/bundles.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "bundle_id", "hf_repo", "hub_commit", "artifact", "artifact_sha256",
+    "size_bytes", "source", "env", "date", "suite", "provenance", "describe", "checks",
+    "summary", "notes"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "bundle_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "description": "The row id in data/regression/bundles.json (the lab card id when one card names the file); names this file."
+    },
+    "hf_repo": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*/[A-Za-z0-9][A-Za-z0-9._-]*$",
+      "description": "Hugging Face repo the bundle was read from."
+    },
+    "hub_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "description": "Repo commit the bundle list read the file at (the download URL is resolve/<hub_commit>/<artifact>)."
+    },
+    "artifact": { "type": "string", "pattern": "\\.litertlm$" },
+    "artifact_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Hub LFS sha256 from the bundle list; the runner hashed the file it ran and it matched, or every check is NA with reason sha_mismatch."
+    },
+    "size_bytes": { "type": "integer", "minimum": 1 },
+    "source": {
+      "enum": ["hf_cache", "extra_local", "download"],
+      "description": "Where the measured bytes came from: an HF cache blob (read only), a local copy passed with --extra-local (read only), or a download from resolve/<hub_commit>."
+    },
+    "env": { "$ref": "#/$defs/env" },
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "suite": { "const": "v1" },
+    "provenance": {
+      "enum": ["measured", "example"],
+      "description": "example = synthetic fixture; measured = the checks ran on the recorded env."
+    },
+    "describe": { "$ref": "#/$defs/describe" },
+    "checks": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "prefixItems": [
+        { "allOf": [{ "$ref": "#/$defs/check" }, { "properties": { "id": { "const": "describe" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/check" }, { "properties": { "id": { "const": "plain_paris" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/check" }, { "properties": { "id": { "const": "digit_default_1" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/check" }, { "properties": { "id": { "const": "digit_default_2" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/check" }, { "properties": { "id": { "const": "digit_default_3" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/check" }, { "properties": { "id": { "const": "digit_default_uncapped" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/check" }, { "properties": { "id": { "const": "digit_think_off" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/check" }, { "properties": { "id": { "const": "digit_think_on" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/check" }, { "properties": { "id": { "const": "tool_call_auto" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/check" }, { "properties": { "id": { "const": "engine_shared_2conv" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/check" }, { "properties": { "id": { "const": "two_turn_memory" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/check" }, { "properties": { "id": { "const": "digit_gpu_default" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/check" }, { "properties": { "id": { "const": "cpu_gpu_match" } } }] }
+      ],
+      "items": false,
+      "description": "The 13 suite-v1 checks, always all of them, in this order."
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pass", "fail", "na"],
+      "properties": {
+        "pass": { "type": "integer", "minimum": 0 },
+        "fail": { "type": "integer", "minimum": 0 },
+        "na": { "type": "integer", "minimum": 0 }
+      },
+      "description": "Counts of the check statuses (they sum to 13)."
+    },
+    "notes": { "type": "string" }
+  },
+  "$defs": {
+    "env": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runtime", "runtime_version", "wheel_source", "python", "host", "machine_label", "os"],
+      "properties": {
+        "runtime": { "const": "litert-lm" },
+        "runtime_version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The litert-lm wheel version installed in the probe interpreter; equals the directory's version segment."
+        },
+        "wheel_source": { "enum": ["PyPI", "local"] },
+        "python": { "type": "string", "minLength": 1, "description": "Version of the probe interpreter." },
+        "host": { "type": "string", "minLength": 1 },
+        "machine_label": { "type": "string", "minLength": 1 },
+        "os": { "type": "string", "minLength": 1, "description": "OS version (macOS: sw_vers -productVersion)." }
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "backend", "status", "reason", "raw_head", "elapsed_s", "exit_code", "timeout",
+        "max_output_tokens", "thinking_config", "details"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "describe", "plain_paris", "digit_default_1", "digit_default_2", "digit_default_3",
+            "digit_default_uncapped", "digit_think_off", "digit_think_on", "tool_call_auto",
+            "engine_shared_2conv", "two_turn_memory", "digit_gpu_default", "cpu_gpu_match"
+          ]
+        },
+        "backend": { "enum": ["cpu", "gpu", null], "description": "null = no engine (describe) or derived (cpu_gpu_match)." },
+        "status": { "enum": ["PASS", "FAIL", "NA"] },
+        "reason": { "type": "string", "description": "Empty on PASS; the machine-readable cause otherwise." },
+        "raw_head": {
+          "type": "string",
+          "maxLength": 160,
+          "description": "First 160 characters of the final answer judged (the exception text on an error). A text in <angle brackets> describes what came instead of text (no text, tool calls, thought only, killed)."
+        },
+        "elapsed_s": { "type": "number", "minimum": 0, "description": "Wall time of the probe process(es), counted from the probe's start (after any wait for the measurement window). A duration of the check, not a speed figure." },
+        "exit_code": { "type": ["integer", "null"] },
+        "timeout": { "type": "boolean" },
+        "max_output_tokens": { "type": ["integer", "null"], "minimum": 1, "description": "Per message; null = not passed." },
+        "thinking_config": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["enable_thinking", "thinking_token_budget"],
+              "properties": {
+                "enable_thinking": { "type": "boolean" },
+                "thinking_token_budget": { "type": "integer" }
+              }
+            }
+          ],
+          "description": "The ThinkingConfig passed to create_conversation; null = none passed (the bundle's default)."
+        },
+        "details": { "type": "object", "description": "Free-form observations behind the verdict." }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "PASS" } } },
+          "then": { "properties": { "reason": { "const": "" }, "raw_head": { "minLength": 1 } } }
+        },
+        {
+          "if": { "properties": { "status": { "const": "FAIL" } } },
+          "then": {
+            "properties": {
+              "raw_head": { "minLength": 1 },
+              "reason": {
+                "pattern": "^(wrong_answer|loop|empty|cap_hit|not_called|raw_tag|state_leak|control_failed|unreadable|timeout [0-9]+|error:.+|engine_create_failed:.+|(cpu|gpu) failed .+)$"
+              }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "status": { "const": "NA" } } },
+          "then": {
+            "properties": {
+              "reason": { "pattern": "^(not run: .+|sha_mismatch|(cpu|gpu) gave no answer .+|both failed .+)$" }
+            }
+          }
+        }
+      ]
+    },
+    "describe": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "What the bundle says about itself, read without an engine. Empty when the describe check could not read the file.",
+      "properties": {
+        "describe_stdout": { "type": "string", "description": "`litert-lm describe <file>` stdout, verbatim." },
+        "max_context_tokens": { "oneOf": [{ "type": "integer" }, { "const": "unverified" }] },
+        "sections": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["index", "type", "model_type", "size_bytes"],
+                "properties": {
+                  "index": { "type": "integer", "minimum": 0 },
+                  "type": { "type": ["string", "null"] },
+                  "model_type": { "type": ["string", "null"] },
+                  "size_bytes": { "type": ["integer", "null"], "minimum": 0 }
+                }
+              }
+            },
+            { "const": "unverified" }
+          ],
+          "description": "Section list as `litert-lm-peek` prints it."
+        },
+        "container_version": { "type": "string" },
+        "llm_metadata": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "llm_model_type": { "type": "string" },
+                "max_num_tokens": { "oneOf": [{ "type": "integer" }, { "const": "unverified" }] },
+                "channels": { "type": "array", "items": { "type": "object" } },
+                "supports_thinking": { "oneOf": [{ "type": "boolean" }, { "const": "unverified" }] },
+                "supports_function_calling": { "oneOf": [{ "type": "boolean" }, { "const": "unverified" }] },
+                "sampler_params": { "oneOf": [{ "type": "object" }, { "const": "unverified" }] },
+                "min_runtime_version": { "type": "string" }
+              }
+            },
+            { "const": "unverified" }
+          ],
+          "description": "LlmMetadata fields; a field the proto leaves unset is \"unverified\"."
+        },
+        "template": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["has_template", "content_is_string", "reads_parts"],
+          "properties": {
+            "has_template": { "type": "boolean" },
+            "content_is_string": { "type": "boolean", "description": "The template tests `content is string`." },
+            "reads_parts": { "type": "boolean", "description": "The template tests `content is sequence` or reads item['type'] (0.18 content parts)." },
+            "length": { "type": "integer", "minimum": 0 },
+            "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        },
+        "prefill_lengths": {
+          "oneOf": [
+            { "type": "array", "items": { "type": "integer", "minimum": 1 } },
+            { "const": "unverified" }
+          ],
+          "description": "Prefill lengths of the prefill_decode model's signatures."
+        },
+        "prefill_lengths_reason": { "type": "string" },
+        "signature_keys": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

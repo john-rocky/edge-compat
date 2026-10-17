@@ -1,0 +1,59 @@
+{
+  "artifact": "model.litertlm",
+  "artifact_sha256": "d507262ca3d01d93d59c573a82e6f2eeb3aec21d9a67c31fb4c0f93d17225b8f",
+  "device": "galaxy-s26",
+  "model_id": "phi4-mini-reasoning",
+  "notes": "model.litertlm as uploaded to litert-community/Phi-4-mini-reasoning on 2026-10-06 (Hub commit 73cd8af0): graph rewrite of the previous Hub file (KV-cache writes -> odml.cache_update, attention products -> odml.runtime_bmm, param_tensor input, broadcast mask add), no extra prefill signature; the weights are byte-identical to the previous file (sha256 0e6b9daeeb45...), which this upload replaced. Built and measured by the litertlm-convert GPU graph re-ship lane (rounds 1-21). Mac gate of this file (rounds 6, 8, 19): weights and every other section byte-identical to the previous file, tflite CPU outputs bit-identical, litert-lm CPU answers byte-identical, GPU (WebGPU) fully delegated with fp32 activations byte-identical; GPU fp16 final answers 8/8. Galaxy S26 GPU gate (round 11, Session path, greedy): 4/4 questions, long prompt correct. Previous file on the same Mac in the same lock window (litert-lm 0.17.1, same flags): gpu p256 d256: decode 80.57 tok/s, prefill 1157.57 tok/s, TTFT 0.2388 s; gpu p16 d32: decode 75.88 tok/s, prefill 143.75 tok/s, TTFT 0.1296 s; cpu p256 d256: decode 19.74 tok/s, prefill 114.92 tok/s, TTFT 2.7103 s; cpu p16 d32: decode 15.36 tok/s, prefill 14.57 tok/s, TTFT 1.5968 s. NPU row: one start of the generic compiler-plugin path (the bundle has no TF_LITE_AUX section) with a self-built LiteRT-LM main 3dbb23e1e kit; the Qualcomm compiler plugin refused the transformer graph.",
+  "quantization": "blockwise-32 int4 + OCTAV, embeddings INT8, KV cache 4096, externalize_embedder=True",
+  "results": [
+    {
+      "accelerator": "npu",
+      "context_length": null,
+      "date": "2026-10-05",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-gpureship",
+        "os_build": "Android 16",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-3dbb23e1e",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": "QAIRT 2.47.0.260601114230 (QNN JIT libraries)"
+      },
+      "error": "ERROR: [qnn_compose_graph.cc:320] Unsupported quantization type.",
+      "evidence": [
+        "W0000 00:00:1791166266.887164   31089 llm_litert_compiled_model_executor_factory.cc:221] NPU backend requested, but TF_LITE_AUX is not packaged in the model. Using the generic LiteRT compiler-plugin path.",
+        "INFO: [compiler_plugin.cc:948] Applying plugin with SDK version: v2.47.0.260601114230",
+        "ERROR: [qnn_compose_graph.cc:320] Unsupported quantization type.",
+        "INFO: [compiled_model.cc:1397] 0 compiler plugins were applied successfully:",
+        "INFO: [compiler_plugin.cc:948] Applying plugin with SDK version: v2.47.0.260601114230",
+        "INFO: [compiled_model.cc:1397] 1 compiler plugins were applied successfully: Qualcomm compiler plugin (ver 0.1.0)",
+        "VERBOSE: Replacing 1543 out of 1706 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 251 partitions for subgraph 0 (prefill_128).",
+        "VERBOSE: Replacing 1415 out of 1581 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 258 partitions for subgraph 1 (decode).",
+        "the second 'Applying plugin' / '1 compiler plugins were applied' pair is the separate embedder section (the external embedder graph: INFO: [compiler_plugin.cc:742] Partitioned subgraph<0>, selected 3 ops, from a total of 4 ops. resulted in 2 partitions.; INFO: [compiler_plugin.cc:742] Partitioned subgraph<1>, selected 3 ops, from a total of 4 ops. resulted in 2 partitions.), not the transformer; no DispatchDelegate line was printed before the stop",
+        "the transformer signatures fell back to XNNPACK (lines above); the lane's guard then stopped the process at VmRSS_above_6000000KiB after 6 s (VmHWM 7215692 kB) = the guard bounded the CPU fallback, not the NPU verdict, which the compiler had already given",
+        "bundle pushed 2784187376 B, device sha256 d507262ca3d0... = the shipped file; NPU kit: litert_lm_advanced_main built from LiteRT-LM main 3dbb23e1e (sha256 b27172b1ad8e...) with the same build's dispatch / compiler-plugin libraries rebuilt from LiteRT 86112a32 and the QAIRT 2.47 JIT libraries",
+        "command: --backend=npu --use_session=true --async=false --disable_cache=true, one gate prompt, guard = 60 s / VmRSS 6.0e6 kB / MemAvailable 1.2e6 kB; source: litertlm-convert gpu_reship_work/device/r11/logs/T4/npu_phi4/"
+      ],
+      "failure_class": "engine_create_failed",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "seconds_to_stop": 6.0,
+        "vmhwm_at_stop_kib": 7215692.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,85 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x128x384:float32;1x128:float32;1x25x128:float32",
+  "license": "apache-2.0",
+  "model_id": "gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32",
+  "notes": "zero-shot text classification graph (GLiClass-Edge v3.0 = ModernBERT ettin-encoder-32m uni-encoder of knowledgator/gliclass-edge-v3.0, window N=128 tokens, up to 25 labels); inputs inputs_embeds [1,128,384] (host token-table lookup, fp16 table), attention_mask [1,128], label_routing [1,25,128] (host one-hot rows at the <<LABEL>> tokens); output logits [1,1,1,25]; float32 weights (670 operators); 53703480 B; the graph carries a power-of-two LayerNorm pre-scale (fp32-exact) and a -1e4 mask; random inputs give meaningless logits but exercise every op; GPU needs explicit FP32 precision on devices (default fp16 keeps 475/482 answers, see the device records)",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-10-02",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 48.098,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-10-02",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 5.635,
+      "loads": true,
+      "max_abs_diff": 0.0000514984130859375,
+      "max_rel_diff": 0.000018194276951746214,
+      "output_match": true,
+      "provenance": "measured",
+      "runs": true
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/GLiClass-Edge-v3.0-LiteRT/resolve/main/gliclass_edge_v3_s128_fp32.tflite"
+}

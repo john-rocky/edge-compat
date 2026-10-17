@@ -1,0 +1,65 @@
+{
+  "artifact": "Nemotron-3-Nano-4B_int8.litertlm",
+  "artifact_sha256": "e9274fb21c95944c5ad76b10a8294ebfe5b54a359d6d6166b1879a958331ca6a",
+  "device": "mac-studio-m4-max",
+  "model_id": "nemotron-3-nano-4b-int8",
+  "notes": "Nemotron-3-Nano-4B_int8.litertlm as on the main branch of litert-community/Nemotron-3-Nano-4B since 2026-10-14 (file commit b4200576): a metadata-only re-pack of the previous file (sha256 feefdcd5...). The previous chat template rendered an assistant turn by its position (the latest one with its full think block, earlier ones as `<think></think>`), so on litert-lm 0.18.0, which hands the template each reply's reasoning_content, a second message with thinking on failed the Conversation's prefix check (`INTERNAL: The new rendered template string does not start with the previous rendered template string`; LiteRT-LM#3166 describes the check). The new template renders every assistant history turn as `<think></think>` plus the answer, the form the previous one used once a newer user turn followed; the TFLite, tokenizer and executor-metadata sections are byte-identical to the previous file, the container header is 1.7.0 (written by the 0.18 builder). litert-lm 0.17.1 hands the template each history message as a plain string without the reasoning content, so the previous file also passed three turns on it (the same token counts, 76 -> 104 -> 118, in a run of 2026-10-13). A function gate, not a throughput measurement.",
+  "quantization": "dynamic int8 (linears + embedding; convolutions and the selective scan stay float), fp32 activations declared, reduced 7-signature prefill ladder",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-13",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": null,
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "harness: a Python script on the litert-lm 0.17.1 wheel's Engine / Conversation API (sha256 80d2ee295745cbffb1cb401f689423dda6337727800ac7c236efa44d1b16aa03), one process, CPU backend, max_num_tokens 1024, a 100-token cap per reply, thinking config not set, three user messages in one Conversation: 'My name is Kenji.' / 'What is my name? Answer with the name only.' / 'What is 17 times 23? Answer with the number only.'; PASS = turn 2's content contains Kenji and turn 3's content contains 391",
+        "bundle: Nemotron-3-Nano-4B_int8.litertlm sha256 e9274fb21c95944c5ad76b10a8294ebfe5b54a359d6d6166b1879a958331ca6a = the Hugging Face LFS oid of litert-community/Nemotron-3-Nano-4B at main (commit a790c691), tree API read 2026-10-14 02:26:02 +0900",
+        "turn 1: content \"\\nHello Kenji! How can I assist you today?\", token_count 0 -> 76",
+        "turn 2: content \"\\nKenji\", token_count 76 -> 104",
+        "turn 3: content \"\\n391\", token_count 104 -> 118",
+        "status PASS (the run record's verdict)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "engine_s": 2.76,
+        "max_num_tokens": 1024.0,
+        "max_output_tokens": 100.0,
+        "turn1_elapsed_s": 3.03,
+        "turn1_thought_chars": 168.0,
+        "turn1_token_count": 76.0,
+        "turn2_elapsed_s": 2.99,
+        "turn2_thought_chars": 155.0,
+        "turn2_token_count": 104.0,
+        "turn3_elapsed_s": 1.99,
+        "turn3_thought_chars": 58.0,
+        "turn3_token_count": 118.0,
+        "turns_passed": 3.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "three-turn conversation, thinking unset (Python API)",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

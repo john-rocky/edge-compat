@@ -2,7 +2,7 @@
   "artifacts": [
     {
       "file": "Qwen3.5-4B_int8.litertlm",
-      "sha256": "f0abbbc69b4126ddcb208a75e8904ecadff87aa24202e3de6ffd518c198af1ec",
+      "sha256": "a360b83d0bcc2e8ab3e83df78e83ec028e4c0687ae95970af6f470473da67a50",
       "size_mb": 4203.251
     }
   ],
@@ -17,6 +17,132 @@
   "delegation": null,
   "device": {
     "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-13",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 32830,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-gpucheck",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 32830 out of 34373 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2993 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 23638 out of 25157 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 1 (prefill_256).",
+            "prompt_1 'What is 17 times 23?' (--max_output_tokens=400) -> 17 times 23 is **391**. (EXIT=0, 483 chars, wall 46.8 s)",
+            "prompt_2 'What is 17 times 23?' (--max_output_tokens=400) -> 17 times 23 is **391**. (EXIT=0, 483 chars, wall 37.5 s)",
+            "prompt_3 'What is 17 times 23?' (--max_output_tokens=400) -> 17 times 23 is **391**. (EXIT=0, 483 chars, wall 35.3 s)"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "answer_chars_max": 483.0,
+            "answer_chars_min": 483.0,
+            "max_output_tokens": 400.0,
+            "memavail_min_kib": 5797792.0,
+            "passes": 3.0,
+            "processes": 3.0,
+            "vmhwm_kib": 6140004.0,
+            "wall_s_max": 46.8,
+            "wall_s_min": 35.3
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 34373,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-4b__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-13",
+          "decode_tokens_per_s": 8.93,
+          "delegated_ops": 32830,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-gpucheck",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 32830 out of 34373 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2993 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 23638 out of 25157 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 1 (prefill_256).",
+            "- Init Total: 12662.41 ms",
+            "Time to first token: 1.36 s",
+            "Prefill Speed: 201.46 tokens/sec.",
+            "Decode Speed: 11.11 tokens/sec.",
+            "Peak system ram usage: 5498.23MB.",
+            "- Init Total: 12662.41 ms",
+            "Time to first token: 1.52 s",
+            "Prefill Speed: 181.65 tokens/sec.",
+            "Decode Speed: 8.95 tokens/sec.",
+            "Peak system ram usage: 5516.5MB.",
+            "- Init Total: 12662.41 ms",
+            "Time to first token: 1.57 s",
+            "Prefill Speed: 176.05 tokens/sec.",
+            "Decode Speed: 8.91 tokens/sec.",
+            "Peak system ram usage: 5516.81MB.",
+            "prompt 'What is 17 times 23?' (--max_output_tokens=400) -> 17 times 23 is **391**. (EXIT=0, 483 chars)",
+            "the CPU frequency cap was active in 14 of 18 2-second bench samples: the bench figure is a sustained-run value (the phone caps the CPU within seconds of a bench start)"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "bench_init_s": 12.662,
+            "bench_memavail_min_kib": 6356868.0,
+            "bench_vmhwm_kib": 5649212.0,
+            "cpu_capped_samples": 14.0,
+            "cpu_samples": 18.0,
+            "decode_tok_s_it1": 11.11,
+            "decode_tok_s_max": 11.11,
+            "decode_tok_s_min": 8.91,
+            "decode_tokens": 64.0,
+            "init_s": 17.931,
+            "iterations": 3.0,
+            "max_num_tokens": 1280.0,
+            "max_output_tokens": 400.0,
+            "prefill_tok_s_it1": 201.46,
+            "prefill_tokens": 256.0,
+            "prompt_answer_chars": 483.0,
+            "prompt_wall_s": 35.1
+          },
+          "output_match": null,
+          "peak_mem_mb": 5516.81,
+          "prefill_tokens_per_s": 178.85,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 34373,
+          "ttft_ms": 1545
+        },
+        "source": "data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-4b__galaxy-s26.json"
+      },
       {
         "device": "mac-m4-max",
         "run": {
@@ -98,6 +224,186 @@
         "source": "data/device_runs/0.16.0/2026-08-14/qwen35-4b__mac-m4-max.json"
       },
       {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-13",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "litert-lm 0.18.0 (python API, CPU); engine {'backend': 'CPU', 'max_num_tokens': 1024}; conversation {'thinking_config': 'ThinkingConfig(enable_thinking=False, thinking_token_budget=-1)'}; one fresh process per run, --max-output-tokens 400; readout rules (tools/readout_battery.sh): 'ends by itself' = under 700 characters and no line repeated 4+ times in a row; LONG = 700+ characters (a 400-token reply is roughly this long; the tail says whether the cap cut it); REPEATED LINE = the loop symptom",
+            "17x23 (expect 391): r1 product present, 483 chars, ends by itself, gen 16.0 s; r2 product present, 483 chars, ends by itself, gen 19.6 s; r3 product present, 500 chars, ends by itself, gen 16.0 s",
+            "23x17 (expect 391): r1 product present, 555 chars, ends by itself, gen 18.7 s; r2 product present, 556 chars, ends by itself, gen 15.0 s; r3 product present, 556 chars, ends by itself, gen 15.1 s",
+            "12x34 (expect 408): r1 product present, 407 chars, ends by itself, gen 10.2 s; r2 product present, 394 chars, ends by itself, gen 9.7 s; r3 product present, 394 chars, ends by itself, gen 9.5 s",
+            "9x87 (expect 783): r1 product present, 465 chars, ends by itself, gen 11.9 s; r2 product present, 264 chars, ends by itself, gen 6.6 s; r3 product present, 307 chars, ends by itself, gen 7.1 s",
+            "45x12 (expect 540): r1 product present, 462 chars, ends by itself, gen 13.4 s; r2 product present, 366 chars, ends by itself, gen 9.4 s; r3 product present, 474 chars, ends by itself, gen 11.3 s",
+            "36x25 (expect 900): r1 product present, 856 chars, LONG (>= 700 chars; cap reached or near), tail: '}{r} 36 \\\\\\\\ \\\\times 25 \\\\\\\\ \\\\hline 180 \\\\quad (36 \\\\times 5) \\\\\\\\ 720 \\\\quad (36 \\\\times 20) \\\\\\\\', gen 23.4 s; r2 product present, 531 chars, ends by itself, gen 13.0 s; r3 product present, 459 chars, ends by itself, gen 12.0 s",
+            "36x25 re-run with --max-output-tokens 1000: product present, 694 chars, ends by itself, gen 22.4 s; tail: '\\\\ 720 & (36 \\\\times 20) \\\\\\\\ \\\\hline 900 & \\\\end{array} $$ **Answer:** 36 times 25 is **900**.'",
+            "raw '<think>' prefill, 17x23: r1 thought closed, 391 present, 983 chars; r2 thought closed, 391 present, 1103 chars; r3 thought closed, 391 present, 1016 chars",
+            "thinking unset (17x23, --max-output-tokens 400; conversation {}): r1 answer text 503 chars, 391 present; r2 answer text 500 chars, 391 present; r3 answer text 483 chars, 391 present",
+            "thinking budget300 (17x23, --max-output-tokens 400; conversation {'thinking_config': 'ThinkingConfig(enable_thinking=True, thinking_token_budget=300)'}): r1 answer text 70 chars (thought channel 729 chars), 391 present; r2 answer text 70 chars (thought channel 730 chars), 391 present; r3 answer text 70 chars (thought channel 731 chars), 391 present",
+            "gate8q (cpu, temperature 0): 8/8 correct, 0 degenerate (PASS); answers: 17+25=42 -> '42'; capital=Tokyo -> 'Tokyo'; opp(hot)=cold -> 'Cold'; days/week=7 -> 'There are 7 days in a week.'; thanks(fr)=merci -> 'You say \"merci\" in French.'; 8*7=56 -> '56'; 0.9>0.11 -> '0.9 is larger.'; rhyme=blue -> 'blue'"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "battery_product_present": 18.0,
+            "battery_runs": 18.0,
+            "battery_runs_flagged_long_or_repeating": 1.0,
+            "battery_runs_under_700_chars_no_repeat": 17.0,
+            "battery_runs_with_repeated_line": 0.0,
+            "gate8q_correct": 8.0,
+            "gate8q_degenerate": 0.0,
+            "gen_s_median": 12.5,
+            "load_s_median": 41.5,
+            "max_output_tokens": 400.0,
+            "questions": 6.0,
+            "think_raw_closed": 3.0,
+            "think_raw_product_present": 3.0,
+            "think_raw_runs": 3.0,
+            "thinking_budget300_answer_text_nonempty": 3.0,
+            "thinking_budget300_product_present": 3.0,
+            "thinking_budget300_runs": 3.0,
+            "thinking_unset_answer_text_nonempty": 3.0,
+            "thinking_unset_product_present": 3.0,
+            "thinking_unset_runs": 3.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.18.0/2026-10-13/qwen35-4b__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-13",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": null,
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "soc": null,
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "litert-lm 0.18.0 (python API, GPU); engine {'backend': 'GPU', 'max_num_tokens': 1024}; conversation {'thinking_config': 'ThinkingConfig(enable_thinking=False, thinking_token_budget=-1)'}; one fresh process per run, --max-output-tokens 400; readout rules (tools/readout_battery.sh): 'ends by itself' = under 700 characters and no line repeated 4+ times in a row; LONG = 700+ characters (a 400-token reply is roughly this long; the tail says whether the cap cut it); REPEATED LINE = the loop symptom",
+            "17x23 (expect 391): r1 product present, 483 chars, ends by itself, gen 4.0 s",
+            "23x17 (expect 391): r1 product present, 556 chars, ends by itself, gen 5.1 s",
+            "12x34 (expect 408): r1 product present, 391 chars, ends by itself, gen 3.2 s",
+            "9x87 (expect 783): r1 product present, 264 chars, ends by itself, gen 2.1 s",
+            "45x12 (expect 540): r1 product present, 292 chars, ends by itself, gen 2.6 s",
+            "36x25 (expect 900): r1 product present, 889 chars, LONG (>= 700 chars; cap reached or near), tail: \"s stick to: $36 \\\\times 25 = (36 \\\\times 4) \\\\times (25/4)$ is definitely wrong. Let's\", gen 7.0 s",
+            "gate8q (gpu, temperature 0): 8/8 correct, 0 degenerate (PASS); answers: 17+25=42 -> '42'; capital=Tokyo -> 'Tokyo'; opp(hot)=cold -> 'Cold'; days/week=7 -> 'There are 7 days in a week.'; thanks(fr)=merci -> 'You say \"merci\" (singular) or \"merci bea'; 8*7=56 -> '56'; 0.9>0.11 -> '0.9 is larger.'; rhyme=blue -> 'blue'"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "battery_product_present": 6.0,
+            "battery_runs": 6.0,
+            "battery_runs_flagged_long_or_repeating": 1.0,
+            "battery_runs_under_700_chars_no_repeat": 5.0,
+            "battery_runs_with_repeated_line": 0.0,
+            "gate8q_correct": 8.0,
+            "gate8q_degenerate": 0.0,
+            "gen_s_median": 3.6,
+            "load_s_median": 46.8,
+            "max_output_tokens": 400.0,
+            "questions": 6.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.18.0/2026-10-13/qwen35-4b__mac-studio-m4-max.json"
+      },
+      {
+        "device": "pixel-8a",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-13",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 32830,
+          "env": {
+            "device": "Pixel 8a",
+            "machine_label": "pixel-8a-gpucheck",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "soc": "Tensor G3",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 32830 out of 34373 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2993 partitions for subgraph 0 (prefill_1024).",
+            "VERBOSE: Replacing 23638 out of 25157 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 1 (prefill_256).",
+            "prompt_1 'What is 17 times 23?' (--max_output_tokens=400) -> 17 times 23 is **391**. (EXIT=0, 483 chars, wall 146.8 s)",
+            "sampler: 52 samples, VmHWM 5,407,976 KiB, MemAvailable 5,120,440 KiB before -> min 3,542,768 KiB; the 400,000 KiB guard never fired",
+            "the wall includes the first-run XNNPACK weight-cache build (caches removed before the leg); no benchmark process was run on this phone (one guarded process only)"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "answer_chars_max": 483.0,
+            "answer_chars_min": 483.0,
+            "max_output_tokens": 400.0,
+            "memavail_min_kib": 3542768.0,
+            "passes": 1.0,
+            "processes": 1.0,
+            "push_s": 104.5,
+            "vmhwm_kib": 5407976.0,
+            "wall_s_max": 146.8,
+            "wall_s_min": 146.8
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 34373,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-4b__pixel-8a.json"
+      },
+      {
         "device": "raspberry-pi-5",
         "run": {
           "accelerator": "cpu",
@@ -171,7 +477,8 @@
     "fp32 activations mandatory on GPU (family requirement, declared in the bundle TOML).",
     "Gates on the shipped file: FP parity 48 positions top-1/top-5 100% / Pearson 1.0000 / KL ~0 (split harness scripts/parity_logits_bigmodel.py — the 16 GB fp32 tflite exceeds the Python Interpreter's flatbuffer limit, so pt/lt stages run in separate venvs over a decode+p32,16 dev export); 8Q 8/8 on CPU and GPU on litert-lm 0.15.0 AND 0.16.0; BANANA hermetic CPU 40/40 + GPU 20/20; iPhone 17 Pro Metal composite 8-question probe word-for-word identical to HF fp32 (9.28 tok/s decode / 87.1 prefill / TTFT 1.93 s / peak 4975 MB; CPU 5.43 / 24.0 / 1703 MB). Mac bench (0.16.0, cache no, p256/d256, quiet): GPU 672.16/61.98 TTFT 0.40 s vs CPU 242.61/19.90 TTFT 1.11 s.",
     "Honest quality note (HF card): on the composite 8-question probe the CPU int8 path answers 6 of 8 (every given answer correct; HF fp32 itself answers 8/8 — an int8-on-CPU cost); single-question gates are 8/8 on every backend. GPU is the fidelity path for this file.",
-    "Android: 8 GB-class phones cannot fit the 4.1 GB file (Pixel 8a not attempted — 3.3 GB free vs 4.1 GB); Apple-hardware-first release."
+    "Android: 8 GB-class phones cannot fit the 4.1 GB file (Pixel 8a not attempted — 3.3 GB free vs 4.1 GB); Apple-hardware-first release.",
+    "Metadata-only updates of the published files (README dated notes; TFLite, tokenizer and executor metadata byte-identical each time): 2026-09-21, the chat template accepts the litert-lm 0.18 content-parts form (string form unchanged); 2026-10-09, the template is LiteRT-LM models/qwen3_5/chat_template.jinja at 87ab9334 with a format_content macro that reads content as a string or as parts (text and tool_response) and enable_thinking defaulting to false: with nothing set a single-turn prompt renders byte for byte as before, enable_thinking=true pre-fills <think>\\n and the reasoning comes back on the thought channel (<think>\\n / \\n</think>), supports_thinking is true; llm_model_type stays generic_model, so tool calls come back as text and supports_function_calling is false (README Chat template note)."
   ],
   "schema_version": "1.2"
 }

@@ -1,0 +1,259 @@
+{
+  "artifact": "example-bundle.litertlm",
+  "artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "bundle_id": "example-bundle",
+  "checks": [
+    {
+      "backend": null,
+      "details": {
+        "describe_exit": 0,
+        "max_context_tokens": 1024,
+        "peek_exit": 0
+      },
+      "elapsed_s": 0.5,
+      "exit_code": 0,
+      "id": "describe",
+      "max_output_tokens": null,
+      "raw_head": "Supports Function Call: NO | Supports Thinking: NO | Max Context Tokens: 1024 (example)",
+      "reason": "",
+      "status": "PASS",
+      "thinking_config": null,
+      "timeout": false
+    },
+    {
+      "backend": "cpu",
+      "details": {},
+      "elapsed_s": 1.0,
+      "exit_code": 0,
+      "id": "plain_paris",
+      "max_output_tokens": 400,
+      "raw_head": "Paris (example answer)",
+      "reason": "",
+      "status": "PASS",
+      "thinking_config": null,
+      "timeout": false
+    },
+    {
+      "backend": "cpu",
+      "details": {},
+      "elapsed_s": 1.0,
+      "exit_code": 0,
+      "id": "digit_default_1",
+      "max_output_tokens": 400,
+      "raw_head": "17 times 23 is 391. (example answer)",
+      "reason": "",
+      "status": "PASS",
+      "thinking_config": null,
+      "timeout": false
+    },
+    {
+      "backend": "cpu",
+      "details": {},
+      "elapsed_s": 9.0,
+      "exit_code": 0,
+      "id": "digit_default_2",
+      "max_output_tokens": 400,
+      "raw_head": "17 times 23 is 39999999999999999999999999999999999999 (example answer)",
+      "reason": "loop",
+      "status": "FAIL",
+      "thinking_config": null,
+      "timeout": false
+    },
+    {
+      "backend": "cpu",
+      "details": {},
+      "elapsed_s": 1.0,
+      "exit_code": 0,
+      "id": "digit_default_3",
+      "max_output_tokens": 400,
+      "raw_head": "17 times 23 is 391. (example answer)",
+      "reason": "",
+      "status": "PASS",
+      "thinking_config": null,
+      "timeout": false
+    },
+    {
+      "backend": "cpu",
+      "details": {},
+      "elapsed_s": 1.0,
+      "exit_code": 0,
+      "id": "digit_default_uncapped",
+      "max_output_tokens": null,
+      "raw_head": "17 times 23 is 391. (example answer)",
+      "reason": "",
+      "status": "PASS",
+      "thinking_config": null,
+      "timeout": false
+    },
+    {
+      "backend": "cpu",
+      "details": {},
+      "elapsed_s": 1.0,
+      "exit_code": 0,
+      "id": "digit_think_off",
+      "max_output_tokens": 400,
+      "raw_head": "17 times 23 is 399. (example answer)",
+      "reason": "wrong_answer",
+      "status": "FAIL",
+      "thinking_config": {
+        "enable_thinking": false,
+        "thinking_token_budget": -1
+      },
+      "timeout": false
+    },
+    {
+      "backend": "cpu",
+      "details": {
+        "thought_channel_present": true,
+        "thought_head": "17 x 23 = 391 (example thought)"
+      },
+      "elapsed_s": 2.0,
+      "exit_code": 0,
+      "id": "digit_think_on",
+      "max_output_tokens": 400,
+      "raw_head": "391 (example answer)",
+      "reason": "",
+      "status": "PASS",
+      "thinking_config": {
+        "enable_thinking": true,
+        "thinking_token_budget": 300
+      },
+      "timeout": false
+    },
+    {
+      "backend": "cpu",
+      "details": {
+        "tool_events": 0,
+        "tool_executions": []
+      },
+      "elapsed_s": 1.0,
+      "exit_code": 0,
+      "id": "tool_call_auto",
+      "max_output_tokens": 400,
+      "raw_head": "The weather in Paris is sunny. (example answer)",
+      "reason": "not_called",
+      "status": "FAIL",
+      "thinking_config": null,
+      "timeout": false
+    },
+    {
+      "backend": "cpu",
+      "details": {
+        "pirate_marker_in_shared_conv2": true
+      },
+      "elapsed_s": 6.0,
+      "exit_code": 0,
+      "id": "engine_shared_2conv",
+      "max_output_tokens": 200,
+      "raw_head": "Paris, arr! | 391, arr! | Blue, arr! (example answers)",
+      "reason": "state_leak",
+      "status": "FAIL",
+      "thinking_config": null,
+      "timeout": false
+    },
+    {
+      "backend": "cpu",
+      "details": {},
+      "elapsed_s": 1.0,
+      "exit_code": 0,
+      "id": "two_turn_memory",
+      "max_output_tokens": 100,
+      "raw_head": "Kenji (example answer)",
+      "reason": "",
+      "status": "PASS",
+      "thinking_config": null,
+      "timeout": false
+    },
+    {
+      "backend": "gpu",
+      "details": {},
+      "elapsed_s": 0.0,
+      "exit_code": 75,
+      "id": "digit_gpu_default",
+      "max_output_tokens": 400,
+      "raw_head": "",
+      "reason": "not run: measurement window held past quiet_wait --max-wait 3600 s",
+      "status": "NA",
+      "thinking_config": null,
+      "timeout": false
+    },
+    {
+      "backend": null,
+      "details": {},
+      "elapsed_s": 0.0,
+      "exit_code": null,
+      "id": "cpu_gpu_match",
+      "max_output_tokens": null,
+      "raw_head": "cpu PASS: 17 times 23 is 391. (example answer) | gpu NA: ",
+      "reason": "gpu gave no answer (not run: measurement window held past quiet_wait --max-wait 3600 s)",
+      "status": "NA",
+      "thinking_config": null,
+      "timeout": false
+    }
+  ],
+  "date": "2026-01-01",
+  "describe": {
+    "container_version": "1.6.0",
+    "describe_stdout": "(example) litert-lm describe output\n",
+    "llm_metadata": {
+      "channels": [],
+      "llm_model_type": "generic_model",
+      "max_num_tokens": 1024,
+      "min_runtime_version": "unverified",
+      "sampler_params": "unverified",
+      "supports_function_calling": "unverified",
+      "supports_thinking": "unverified"
+    },
+    "max_context_tokens": 1024,
+    "prefill_lengths": [
+      128
+    ],
+    "sections": [
+      {
+        "index": 0,
+        "model_type": null,
+        "size_bytes": 100,
+        "type": "LlmMetadataProto"
+      },
+      {
+        "index": 1,
+        "model_type": "tf_lite_prefill_decode",
+        "size_bytes": 1000,
+        "type": "TFLiteModel"
+      }
+    ],
+    "signature_keys": [
+      "prefill_128",
+      "decode"
+    ],
+    "template": {
+      "content_is_string": true,
+      "has_template": true,
+      "length": 10,
+      "reads_parts": false,
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  },
+  "env": {
+    "host": "example-host",
+    "machine_label": "example-host",
+    "os": "0.0",
+    "python": "0.0.0",
+    "runtime": "litert-lm",
+    "runtime_version": "0.0.0",
+    "wheel_source": "PyPI"
+  },
+  "hf_repo": "example-org/example-bundle",
+  "hub_commit": "0000000000000000000000000000000000000000",
+  "notes": "example-provenance fixture: every value is made up; it exercises the schema, the judge vocabulary and SUMMARY.md",
+  "provenance": "example",
+  "schema_version": "1.0",
+  "size_bytes": 1,
+  "source": "hf_cache",
+  "suite": "v1",
+  "summary": {
+    "fail": 4,
+    "na": 2,
+    "pass": 7
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "model_id": "julia-1__julia1_s1024_fp32",
+  "device": "galaxy-s26",
+  "artifact": "julia1_s1024_fp32.tflite",
+  "artifact_sha256": "b4f260595776c0a126f0e1aadbefb0c2acc6e0b1ca0cfe9499b4d322d591e632",
+  "quantization": null,
+  "notes": "Julia-1 typed decisions (litert-community/Julia-1-LiteRT, Hub revision b92a0d21eb1aedad6afdc815e027a47896d16eb3, published 2026-09-30): SupersonicLabs/Julia-1 (rev a85b1273, Apache-2.0) = mmBERT-small encoder + typed decision head (laya's DecisionModel at half width), one state + typed questions (choice / score / noul) -> one logit per option. Host-lookup form: the host reads the token table (shipped julia1_token_table_fp16.bin, sha256 5c7ad7bd7325d4d230a822d1ecee5e33b6c36376df1c028e8e7ddafb7d43be9c) and feeds embeddings, so the table precision is a host condition, not a graph property. fp16 safety rewrites (LayerNorm 2^-k pre-scale, mask -1e4, q 1/8 pre-scale) are fp32 bit-identical. GpuOptions(precision = FP32) is the validated setting. artifact_sha256 = the Hub LFS sha256 (API siblings.lfs, read 2026-10-09) = sha256 of the lane's export. Reference for parity = the author's implementation on CPU fp32 (fixtures/oracle_typed.json, oracle_parity.json). Lane record: ~/code/standup/handoffs/2026-09-30-julia-1-litert.md; run dir /Users/USER/code/codex-conversions/2026-09-30/julia1-litert; records written 2026-10-09 by scripts/litert_compat_records.py. Window N=1024: 100 fixture rows (35 longer than 512 tokens + 65). GPU only; the NPU was not tried on this graph.",
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "loads": true,
+      "runs": true,
+      "failure_class": null,
+      "error": null,
+      "full_delegation": true,
+      "delegated_ops": 1704,
+      "total_ops": 1704,
+      "output_match": null,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "latency_p50_ms": 298.463958,
+      "prefill_tokens_per_s": null,
+      "decode_tokens_per_s": null,
+      "ttft_ms": null,
+      "peak_mem_mb": null,
+      "context_length": null,
+      "signature": "GpuOptions precision=FP32; host fp16 token table (shipped form); debug gate app com.julia.gate",
+      "metrics": {
+        "fixtures": 100,
+        "argmax_equal_official": 100,
+        "boundary_rows": 18,
+        "max_abs_dprob_vs_official": 0.00767,
+        "rows_dprob_gt_1e2": 0,
+        "load_compile_ms": 1473.3325,
+        "warm_median_ms": 298.463958,
+        "warm_min_ms": 155.552344,
+        "warm_max_ms": 305.159843,
+        "first_call_ms": 163.107187,
+        "partitions": 1,
+        "battery_temp_c_start": 41.3,
+        "battery_temp_c_end": 41.9
+      },
+      "evidence": [
+        "Debug gate app com.julia.gate (android_gate/, Kotlin CompiledModel 2.2.0), one cold process per run, fixture ids + markers pushed as JSON, host token-table lookup outside the timed interval; timed interval = input writes + run + output readback per row. Source: /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s1024_fp32_fp16table.json, logcat /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s1024_fp32_fp16table.logcat.txt, state /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s1024_fp32_fp16table.state_before.txt / .state_after.txt.",
+        "conditions: before thermal status None, battery 41.3 C; after thermal status None, battery 41.9 C; screen on, USB powered, no cool-start wait.",
+        "parity vs the author's implementation (oracle /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/fixtures/oracle_typed.json + oracle_parity.json, scripts/device_compare.py): same winning option on 100/100 rows (18 boundary = reference top-1 < 0.9); max |dprob| 0.00767; rows over 0.01: 0.",
+        "output_match null: no Mac CPU gate of these graph bytes holds per-row logits for these ids (results/host_e2e_julia1_s1024_* keep aggregates only); the argmax / |dprob| metrics against the author's implementation are the lane's own criterion.",
+        "09-30 09:51:09.888 30986 31015 I litert  : [compiled_model.cc:1250] 0 compiler plugins were applied successfully:",
+        "09-30 09:51:09.994 30986 31015 I tflite  : Replacing 1704 out of 1704 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main)."
+      ],
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-julia-gate",
+        "os_build": "Android 16 (SDK 36)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "date": "2026-09-30",
+      "provenance": "measured"
+    }
+  ]
+}

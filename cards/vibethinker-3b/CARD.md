@@ -35,12 +35,18 @@ No benchmark data yet.
 
 ## Device runs (NPU / LiteRT-LM)
 
-Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.14.0/2026-07-23/vibethinker-3b__mac-studio-m4-max.json`, `data/device_runs/0.16.0/2026-08-17/vibethinker-3b__pixel-8a.json`, `data/device_runs/0.16.0/2026-08-24/vibethinker-3b__galaxy-s26.json`, `data/device_runs/0.16.1/2026-09-01/vibethinker-3b__raspberry-pi-5.json`.
+Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-17/vibethinker-3b__pixel-8a.json`, `data/device_runs/0.16.0/2026-08-24/vibethinker-3b__galaxy-s26.json`, `data/device_runs/0.16.1/2026-09-01/vibethinker-3b__raspberry-pi-5.json`, `data/device_runs/0.17.1/2026-10-05/vibethinker-3b__mac-studio-m4-max.json`, `data/device_runs/prebuilt-adac974b/2026-10-05/vibethinker-3b__galaxy-s26.json`.
 
 | Device | Accelerator | Status | Full delegation | Output match | Prompt (tokens) | Latency p50 (ms) | Prefill tok/s | Decode tok/s | TTFT (ms) | Peak mem (MB) | Environment | Date | Provenance |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| galaxy-s26 | cpu | fallback | no | - | 1024 | - | 74.49 | 16.09 | 14080.0 | 2785.4 | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-05 | measured |
+| galaxy-s26 | gpu | pass | yes | - | 16 | - | 247.34 | 23.54 | 110.0 | 1144.2 | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-05 | measured |
 | galaxy-s26 | gpu | pass | yes | - | 202 | - | 157.44 | 13.88 | 1360.0 | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm 0.16.0 · Android 16 | 2026-08-24 | measured |
-| mac-studio-m4-max | gpu | pass | - | - | 256 | - | 1358.96 | 93.16 | 199.1 | - | Mac Studio (M4 Max) · Apple M4 Max · litert-lm 0.14.0 | 2026-07-23 | measured |
+| galaxy-s26 | gpu | pass | yes | - | 1024 | - | 387.52 | 25.23 | 2680.0 | 1144.9 | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-05 | measured |
+| mac-studio-m4-max | cpu | fallback | no | - | 16 | - | 135.31 | 24.73 | 526.5 | - | Mac Studio (M4 Max) · Apple M4 Max · litert-lm 0.17.1 | 2026-10-05 | measured |
+| mac-studio-m4-max | cpu | fallback | no | - | 256 | - | 138.82 | 29.84 | 2223.0 | - | Mac Studio (M4 Max) · Apple M4 Max · litert-lm 0.17.1 | 2026-10-05 | measured |
+| mac-studio-m4-max | gpu | pass | yes | - | 16 | - | 816.46 | 117.04 | 35.4 | - | Mac Studio (M4 Max) · Apple M4 Max · litert-lm 0.17.1 | 2026-10-05 | measured |
+| mac-studio-m4-max | gpu | pass | yes | - | 256 | - | 1458.51 | 125.62 | 185.9 | - | Mac Studio (M4 Max) · Apple M4 Max · litert-lm 0.17.1 | 2026-10-05 | measured |
 | pixel-8a | gpu | pass | yes | - | 17 | - | 12.6 | 7.58 | 1480.0 | - | Pixel 8a · Tensor G3 · litert-lm 0.16.0 | 2026-08-17 | measured |
 | raspberry-pi-5 | cpu | pass | - | - | 256 | - | 22.53 | 3.36 | 13618.3 | 2808.0 | Raspberry Pi 5 Model B Rev 1.1 · Broadcom BCM2712 · litert-lm 0.16.1 · Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41 | 2026-09-01 | measured |
 

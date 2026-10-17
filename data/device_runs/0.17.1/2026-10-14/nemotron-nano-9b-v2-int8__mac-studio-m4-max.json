@@ -1,0 +1,52 @@
+{
+  "artifact": "NVIDIA-Nemotron-Nano-9B-v2_int8.litertlm",
+  "artifact_sha256": "575505ddb315537b347ad1b5bc3385f5770f4c0152840884ae825e394ed3a194",
+  "device": "mac-studio-m4-max",
+  "model_id": "nemotron-nano-9b-v2-int8",
+  "notes": "Hub litert-community/NVIDIA-Nemotron-Nano-9B-v2 (upload commit 8bdf9ff0). Lane litertlm-convert aa_mobile_b2_work/nemotron_nano_9b_v2 round r7 (GPU batch B, hold 11, 2026-10-14 20:37-20:50 JST; gate/int8/gpu/v0171.json): the litert-lm 0.17.1 CLI `run` on the GPU with the prompt \"What is the capital of France? Answer briefly. /no_think\" (thinking off by the vendor's user-level switch), one fresh process: \"The capital of France is Paris.\" (19 s). The file is cand/NVIDIA-Nemotron-Nano-9B-v2_int8.litertlm, a hard link of ship/ (tools/r7z_cand_inodes.txt) = the Hub file. The Hub card states this run (line 30; the int4 file was not run on 0.17.1). The manifest's min_runtime_version stays 0.18.0. No benchmark: throughput cells null; the run was not verbose (delegation cells null).",
+  "quantization": "int8 dynamic on every linear (wi8fc) + int8 embedding; the Mamba2 conv and scan float; fp32 GPU activations declared",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-14",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "job (gate/jobs_gpu_B.txt): /Users/USER/code/litertlm-convert/aa_mobile_b2_work/nemotron_nano_9b_v2/gate/int8/gpu/v0171.json v0171 /Users/USER/code/litertlm-convert/aa_mobile_b2_work/nemotron_nano_9b_v2/cand/NVIDIA-Nemotron-Nano-9B-v2_int8.litertlm gpu What is the capital of France? Answer briefly. /no_think",
+        "command (tools/run_job.sh, kind v0171): ~/venvs/lt0171run/bin/litert-lm run <cand int8> --backend gpu --prompt <the prompt> --cache no --top-k 1 --seed 0 --max-num-tokens 4096 (no --verbose)",
+        "stdout tail: The capital of France is Paris.",
+        "exit 0, Validation error 0, Shape mismatch 0"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "answers_with_expect": 1.0,
+        "processes": 1.0,
+        "seconds": 19.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

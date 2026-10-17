@@ -1,0 +1,206 @@
+{
+  "artifacts": [
+    {
+      "file": "Olmo-3-7B-Think_int4.litertlm",
+      "sha256": "133ef829dcb98c1ad28f700cd3cd5f18e5fb60ae9bfb6f4efe52d60ef21969be",
+      "size_mb": 4109.819
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "olmo3_work/convert_olmo3_7b_think.sh (hf-to-litertlm): allenai/Olmo-3-7B-Think at d97e442d -> export with the 2^-14 block-scale floor (6 prefill signatures 1024..1 + decode, KV cache 4096, embedder externalized, the bundle template embedded) -> int4 block-scale scan -> metadata edit (no start token, stop ids 100265 / 100257, the thought channel, max_num_tokens 4096) -> the repo's tokenizer.json as the tokenizer section",
+    "quantization": "int4 blockwise-32 (OCTAV) on every linear layer, block scales floored at 2^-14 (3,606,703 scales in 55 tensors; every scale normal after), int8 embedding table; activations float (card L32, L108)",
+    "tool": "litert-torch (stock export_hf path, lightweight conversion, embedding table as its own section) with the int4 block scales floored at 2^-14 before rounding; repro = hf-to-litertlm olmo3_work/",
+    "tool_version": "litert-torch 0.9.4 (litert-converter 0.4.0, ai-edge-quantizer 0.9.0, transformers 5.14.1, torch 2.13.0); packed and checked with litert-lm 0.18.0"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-16",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "command (tools/v0171_run.sh, \"$B\" = cand/Olmo-3-7B-Think_int4.litertlm): uvx --from litert-lm==0.17.1 litert-lm run \"$B\" --backend cpu --prompt \"What is the capital of France? Answer in one word.\" --cache no",
+            "quiet_turn: turn after 249 s in line, running: bash /Users/m ...",
+            "stdout: [thought] ... [/thought] then Paris",
+            "EXIT=0",
+            "process footprint (swap guard, 15 s samples, binary GB): max 28 GB (card_probes/v0171/run_int4.guard.log); no guard kill",
+            "2026-10-16 12:17:44 JST batch: 0.17.1 runs exit 0 (int8: EXIT=0 int4: EXIT=0 )"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "answers_with_expect": 1.0,
+            "guard_footprint_max_gb": 28.0,
+            "processes": 1.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.17.1/2026-10-16/olmo-3-7b-think-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-16",
+          "decode_tokens_per_s": 7.105,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "command (both passes): /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_b2_work/olmo3_7b_think/cand/Olmo-3-7B-Think_int4.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+            "pass 1 (bench/cpu_int4_p1.log): prefill 64.06 / decode 7.0 tok/s, TTFT 16.1282 s, init 13.5495 s",
+            "pass 2 (bench/cpu_int4_p2.log): prefill 64.49 / decode 7.21 tok/s, TTFT 16.0162 s, init 13.6285 s",
+            "process footprint (swap guard, 15 s samples, binary GB): max 29 GB (bench/cpu_int4_p1.guard.log, _p2.guard.log); no guard kill"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "guard_footprint_max_gb": 29.0,
+            "init_s": 13.589,
+            "iterations": 3.0,
+            "max_num_tokens": 2048.0,
+            "pass1_decode_tok_s": 7.0,
+            "pass1_init_s": 13.5495,
+            "pass1_prefill_tok_s": 64.06,
+            "pass1_ttft_s": 16.1282,
+            "pass2_decode_tok_s": 7.21,
+            "pass2_init_s": 13.6285,
+            "pass2_prefill_tok_s": 64.49,
+            "pass2_ttft_s": 16.0162,
+            "passes": 2.0,
+            "prefill_tokens": 1024.0,
+            "t_1024_256_s": 51.9706
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 64.275,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 16072.2
+        },
+        "source": "data/device_runs/0.18.0/2026-10-16/olmo-3-7b-think-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-16",
+          "decode_tokens_per_s": 34.76,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "command (both passes; one quiet_hold per pass for the four files of the lane, the header of bench/gpu_int4_p1.log): Olmo-3-7B-Think_int4.litertlm --backend gpu, prefill 1024, decode 256, max tokens 2048, --runs 3, --cache no",
+            "pass 1 (bench/gpu_int4_p1.log): prefill 838.26 / decode 34.8 tok/s, TTFT 1.2503 s, init 5.841 s",
+            "pass 2 (bench/gpu_int4_p2.log): prefill 834.84 / decode 34.72 tok/s, TTFT 1.2554 s, init 6.1579 s",
+            "each GPU pass logged 'TopK requires src tensor C dimension to be divisible by 4.' (4 / 4 lines: warmup + 3 iterations; vocabulary 100,278 = 2 mod 4)",
+            "delegation from the verbose run of the same bytes (gate/int4/gpu/cli_verbose.log, 2026-10-16, the round r8 gate): Replacing 1436 out of 1436 node(s) with delegate (LITERT_WEBGPU) node, yielding 1 partitions for subgraph 0 (prefill_1024). .. Replacing 1336 out of 1336 node(s) with delegate (LITERT_WEBGPU) node, yielding 1 partitions for subgraph 6 (decode). (7 decoder signatures, 9823 / 9823 nodes)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 5.9994,
+            "iterations": 3.0,
+            "max_num_tokens": 2048.0,
+            "pass1_decode_tok_s": 34.8,
+            "pass1_init_s": 5.841,
+            "pass1_prefill_tok_s": 838.26,
+            "pass1_ttft_s": 1.2503,
+            "pass2_decode_tok_s": 34.72,
+            "pass2_init_s": 6.1579,
+            "pass2_prefill_tok_s": 834.84,
+            "pass2_ttft_s": 1.2554,
+            "passes": 2.0,
+            "prefill_tokens": 1024.0,
+            "t_1024_256_s": 8.5889
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 836.55,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 1252.9
+        },
+        "source": "data/device_runs/0.18.0/2026-10-16/olmo-3-7b-think-int4__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "olmo3",
+    "id": "olmo-3-7b-think-int4",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Olmo-3-7B-Think",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Block scales: the plain int4 build wrote 1,574,919 zero and 2,031,784 subnormal fp16 block scales (of 215,210,752), and XNNPACK prepares a blockwise int4 layer only when every scale is a normal float, so this file floors every block scale at 2^-14 before the weights are rounded (card L108).",
+    "Always thinks: the template ends the prompt with an opened <think>; the CLI's --thinking false and --thinking-budget 0 leave the output byte for byte the same, and a positive budget closes the thought channel at the budget while the model goes on reasoning in the visible text (card L27, L79).",
+    "CPU reasons longer: on the 8-question check the rhyme question's thought was still open at the 2,048-token cap on the CPU (7/8) and closed at 2,125 tokens with a 4,096-token cap; the GPU closed it at 1,542 tokens; the cause was not measured (card L49).",
+    "Accuracy: GSM8K n=100 (greedy, 2,048 output tokens, answers scored after </think>, a never-closed reply scored on its whole text, Mac GPU): bf16 84 / int4 80, unclosed thoughts 26 / 37 (card L57-L66).",
+    "Tool calling is not wired: tools= is not rendered and the generic model type has no tool-call parser; with Ai2's `functions` form this file (GPU) announced the get_weather call and then wrote a made-up result (22 °C, sunny) as if the call had happened, with no call parsed (card L83).",
+    "Chat template: Ai2's chat_template.jinja with three edits for the runtime's template engine; Ai2's default system message from the template file, which differs from the README's \"Default System Message\" section; no start token; stop ids 100265 / 100257; no sampler in the bundle (card L79, L81).",
+    "GPU sampler: every GPU run logs `TopK requires src tensor C dimension to be divisible by 4.` (vocabulary 100,278); the last two ids can never be sampled on the GPU (card L51).",
+    "Galaxy S26 (12 GB class): this 4,096-token-cache file did not build its GPU engine on a platform device-lab unit (all 7 signatures delegated, then free memory fell from 2.59 to 0.67 GB and the system server restarted); the 2,048-token-cache file of the same weights is the form that runs there (card L100).",
+    "Pixel 8a not run: the file plus a 1-2 GiB KV cache is more than the phone's free memory at a session start; not run on an NPU (card L101-L102).",
+    "iOS not measured: the decoder graph is one 3.62 GiB TFLite section, over the ~2 GiB single-section limit (card L45).",
+    "Mac: the faster file on the GPU (8.59 vs 9.64 s, decode 34.8 vs 30.4 tok/s) and the slower on the CPU (blockwise prefill 64 vs 131 tok/s); without --cache, the first CPU `run` writes a 3.89 GB compiled-weights cache next to the model (card L45, L79)."
+  ],
+  "schema_version": "1.2"
+}

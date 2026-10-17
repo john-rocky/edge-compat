@@ -88,7 +88,22 @@
         "litert_version": "2.2.0",
         "partitions": 154
       },
-      "device": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu@codec_decoder_fp16_T128 alone, one 128-frame decode (Android sample app audio8_tts, Audio8DeviceCheck load step, CompiledModel GPU with CPU fallback)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-10/audio8-tts-preview-0.6b__codec_decoder_fp16_t128__galaxy-s26.json"
+        ]
+      },
       "family": "audio8-tts",
       "id": "audio8-tts-preview-0.6b__codec_decoder_fp16_t128",
       "license": "apache-2.0",
@@ -245,6 +260,15 @@
         "records": [
           {
             "accelerator": "cpu_xnnpack",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@pipeline slow_ar_int8 + fast_ar_int8 + codec_decoder_int8_T128 (Android sample app audio8_tts, Audio8DeviceCheck, CompiledModel CPU 4 threads)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
             "date": "2026-09-28",
             "device": "mac-studio-m4-max",
             "label": "cpu_xnnpack@pipeline slow_ar_int8 + fast_ar_int8 + codec_decoder_fp16_T128 (host loop, CPU 4 threads)",
@@ -263,7 +287,8 @@
           }
         ],
         "sources": [
-          "data/device_runs/2.2.0/2026-09-28/audio8-tts-preview-0.6b__slow_ar_int8__mac-studio-m4-max.json"
+          "data/device_runs/2.2.0/2026-09-28/audio8-tts-preview-0.6b__slow_ar_int8__mac-studio-m4-max.json",
+          "data/device_runs/2.2.0/2026-10-10/audio8-tts-preview-0.6b__slow_ar_int8__galaxy-s26.json"
         ]
       },
       "family": "audio8-tts",
@@ -653,6 +678,73 @@
     },
     {
       "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/confucius4-r2t2/card.json",
+      "card_md": "cards/confucius4-r2t2/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "cpu@Android sample app (LiteRT-Models asr_litertlm), AsrDeviceCheck; Engine on the CPU with 4 threads and the audio encoder on the CPU, one Conversation per clip",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-02",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-02",
+            "device": "mac-studio-m4-max",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.1/2026-10-02/confucius4-r2t2__galaxy-s26.json",
+          "data/device_runs/0.17.1/2026-10-02/confucius4-r2t2__mac-studio-m4-max.json",
+          "data/device_runs/0.17.1/2026-10-10/confucius4-r2t2__galaxy-s26.json"
+        ]
+      },
+      "family": "qwen3-asr",
+      "id": "confucius4-r2t2",
+      "license": "other (NetEase Youdao Model Use License Agreement; MODEL_LICENSE + MODEL_LICENSE_zh in the repo, the Chinese text prevails)",
+      "pitfall_count": 12,
+      "task": "automatic-speech-recognition"
+    },
+    {
+      "benchmark_count": 0,
       "browser": {
         "statuses": {
           "wasm_xnnpack": "pass",
@@ -851,6 +943,120 @@
     {
       "benchmark_count": 0,
       "browser": null,
+      "card_json": "cards/decider-0.8b-fp16/card.json",
+      "card_md": "cards/decider-0.8b-fp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-23",
+            "device": "galaxy-s26",
+            "label": "cpu@262tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-23",
+            "device": "galaxy-s26",
+            "label": "gpu@262tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "load_failed"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-23",
+            "device": "galaxy-s26",
+            "label": "gpu@503tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "load_failed"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-23",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.0/2026-09-23/decider-0.8b-fp16__galaxy-s26.json",
+          "data/device_runs/0.17.1/2026-09-23/decider-0.8b-fp16__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "decider",
+      "id": "decider-0.8b-fp16",
+      "license": "apache-2.0",
+      "pitfall_count": 7,
+      "task": "text-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/decider-0.8b-int8/card.json",
+      "card_md": "cards/decider-0.8b-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-23",
+            "device": "galaxy-s26",
+            "label": "cpu@262tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-23",
+            "device": "galaxy-s26",
+            "label": "gpu@262tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-09-23",
+            "device": "galaxy-s26",
+            "label": "gpu@503tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-09-23",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.16.0/2026-09-23/decider-0.8b-int8__galaxy-s26.json",
+          "data/device_runs/0.17.1/2026-09-23/decider-0.8b-int8__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "decider",
+      "id": "decider-0.8b-int8",
+      "license": "apache-2.0",
+      "pitfall_count": 7,
+      "task": "text-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
       "card_json": "cards/decider-2b-vision-fp16/card.json",
       "card_md": "cards/decider-2b-vision-fp16/CARD.md",
       "cross_runtime_count": 0,
@@ -964,6 +1170,15 @@
           },
           {
             "accelerator": "cpu",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "cpu@Android sample app (hfmodels-android samples/ask, debug build), AskDeviceCheck; one conversation per picture: the picture and a question in turn 1, further questions as text-only turns",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
             "date": "2026-09-29",
             "device": "galaxy-s26",
             "label": "cpu@150tok",
@@ -976,6 +1191,15 @@
             "date": "2026-09-29",
             "device": "galaxy-s26",
             "label": "gpu@Android app (hfmodels-android samples/ask, release build); one conversation, image + 5 questions",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu@Android sample app (hfmodels-android samples/ask, debug build), AskDeviceCheck; one conversation per picture: the picture and a question in turn 1, further questions as text-only turns",
             "runtime": "litert-lm",
             "runtime_version": "0.16.1",
             "status": "pass"
@@ -1011,6 +1235,7 @@
         "sources": [
           "data/device_runs/0.16.0/2026-09-29/decider-2b-vision-int8__galaxy-s26.json",
           "data/device_runs/0.16.1/2026-09-29/decider-2b-vision-int8__galaxy-s26.json",
+          "data/device_runs/0.16.1/2026-10-10/decider-2b-vision-int8__galaxy-s26.json",
           "data/device_runs/0.17.1/2026-09-29/decider-2b-vision-int8__mac-studio-m4-max.json"
         ]
       },
@@ -1030,12 +1255,84 @@
       "device": {
         "records": [
           {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "cpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
             "accelerator": "gpu",
             "date": "2026-08-24",
             "device": "galaxy-s26",
             "label": "gpu@197tok",
             "runtime": "litert-lm",
             "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
             "status": "pass"
           },
           {
@@ -1050,7 +1347,9 @@
         ],
         "sources": [
           "data/device_runs/0.16.0/2026-08-24/deepseek-r1-distill-qwen-7b-q4-block32-ekv4096__galaxy-s26.json",
-          "data/device_runs/0.16.1/2026-09-01/deepseek-r1-distill-qwen-7b-q4-block32-ekv4096__raspberry-pi-5.json"
+          "data/device_runs/0.16.1/2026-09-01/deepseek-r1-distill-qwen-7b-q4-block32-ekv4096__raspberry-pi-5.json",
+          "data/device_runs/0.17.1/2026-10-05/deepseek-r1-distill-qwen-7b-q4-block32-ekv4096__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-05/deepseek-r1-distill-qwen-7b-q4-block32-ekv4096__galaxy-s26.json"
         ]
       },
       "family": "deepseek-r1-distill-qwen",
@@ -1253,6 +1552,461 @@
       "license": "apache-2.0",
       "pitfall_count": 0,
       "task": "image-to-image"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/ema-lightning__ema_align_multi_fp32/card.json",
+      "card_md": "cards/ema-lightning__ema_align_multi_fp32/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 92.5,
+        "litert_version": "2.2.0",
+        "partitions": 15
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@ema_align_L64_T96 (single-bucket fp32 export ema_align_L64_T96_fp32.tflite); CPU XNNPACK 4 threads; gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@ema_align_L64_T96 (the shipped file); CPU XNNPACK 4 threads; gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@ema_align_L64_T96 (single-bucket fp32 export ema_align_L64_T96_fp32.tflite); GPU default precision (fp16 activations); gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@ema_align_L64_T96 (single-bucket fp32 export ema_align_L64_T96_fp32.tflite); GpuOptions precision=FP32; gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@ema_align_L64_T96 (single-bucket fp32 export ema_align_L64_T96_fp32.tflite); HTP JIT via the Qualcomm compiler plugin (BURST, cold cache); C-API runner",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_align_L128_T192 (single-bucket fp32 export ema_align_L128_T192_fp32.tflite); bench_mac.py median of 20",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_align_L256_T384 (single-bucket fp32 export ema_align_L256_T384_fp32.tflite); bench_mac.py median of 20",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_align_L256_T512 (single-bucket fp32 export ema_align_L256_T512_fp32.tflite); bench_mac.py median of 20",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_align_L32_T48 (single-bucket fp32 export ema_align_L32_T48_fp32.tflite); bench_mac.py median of 20",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_align_L64_T96 (single-bucket fp32 export ema_align_L64_T96_fp32.tflite); bench_mac.py median of 20",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_align_L{L}_T{T} (the shipped file); host loop, one call per fixture",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "ema-lightning",
+      "id": "ema-lightning__ema_align_multi_fp32",
+      "license": "apache-2.0",
+      "pitfall_count": 5,
+      "task": "text-to-speech"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/ema-lightning__ema_decoder_multi_fp16/card.json",
+      "card_md": "cards/ema-lightning__ema_decoder_multi_fp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 76.7,
+        "litert_version": "2.2.0",
+        "partitions": 442
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@ema_decoder_P120 (the shipped file); CPU XNNPACK 4 threads; gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@ema_decoder_P120 (the shipped file); GPU default precision (fp16 activations); gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@ema_decoder_P48 (the shipped file); GPU default precision (fp16 activations); gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_decoder_P{48,120} (the shipped file); host loop, one call per fixture",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_decoder_multi_fp16__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_decoder_multi_fp16__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "ema-lightning",
+      "id": "ema-lightning__ema_decoder_multi_fp16",
+      "license": "apache-2.0",
+      "pitfall_count": 6,
+      "task": "text-to-speech"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/ema-lightning__ema_step_multi_fp32/card.json",
+      "card_md": "cards/ema-lightning__ema_step_multi_fp32/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 96.4,
+        "litert_version": "2.2.0",
+        "partitions": 100
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@ema_step_T384 (the shipped file); CPU XNNPACK 4 threads; gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@ema_step_T96 (single-bucket fp32 export ema_step_T96_fp32.tflite); CPU XNNPACK 4 threads; gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@ema_step_T96 (the shipped file); CPU XNNPACK 4 threads; gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@ema_step_T96 (single-bucket fp32 export ema_step_T96_fp32.tflite); GPU default precision (fp16 activations); gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@ema_step_T96 (single-bucket fp32 export ema_step_T96_fp32.tflite); GpuOptions precision=FP32 through the C-API runner (the A/B control of the HTP legs); C-API runner",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@ema_step_T96 (single-bucket fp32 export ema_step_T96_fp32.tflite); GpuOptions precision=FP32; gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@ema_step_T96 (single-bucket fp32 export ema_step_T96_fp32.tflite); HTP JIT via the Qualcomm compiler plugin (BURST, cold cache); C-API runner",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_step_T192 (single-bucket fp32 export ema_step_T192_fp32.tflite); bench_mac.py median of 20",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_step_T384 (single-bucket fp32 export ema_step_T384_fp32.tflite); bench_mac.py median of 20",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_step_T48 (single-bucket fp32 export ema_step_T48_fp32.tflite); bench_mac.py median of 20",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_step_T512 (single-bucket fp32 export ema_step_T512_fp32.tflite); bench_mac.py median of 20",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_step_T96 (single-bucket fp32 export ema_step_T96_fp32.tflite); bench_mac.py median of 20",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_step_T{48,96,192,384,512} (the shipped file); host loop, one call per fixture",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_step_multi_fp32__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_step_multi_fp32__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "ema-lightning",
+      "id": "ema-lightning__ema_step_multi_fp32",
+      "license": "apache-2.0",
+      "pitfall_count": 4,
+      "task": "text-to-speech"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/ema-lightning__ema_text_multi_fp32/card.json",
+      "card_md": "cards/ema-lightning__ema_text_multi_fp32/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 89.9,
+        "litert_version": "2.2.0",
+        "partitions": 60
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@ema_text_L64 (single-bucket fp32 export ema_text_L64_fp32.tflite); CPU XNNPACK 4 threads; gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@ema_text_L64 (the shipped file); CPU XNNPACK 4 threads; gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@ema_text_L64 (single-bucket fp32 export ema_text_L64_fp32.tflite); GPU default precision (fp16 activations); gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@ema_text_L64 (single-bucket fp32 export ema_text_L64_fp32.tflite); GpuOptions precision=FP32; gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@ema_text_L64 (the shipped file); GpuOptions precision=FP32; gate app",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@ema_text_L64 (single-bucket fp32 export ema_text_L64_fp32.tflite); HTP JIT via the Qualcomm compiler plugin (BURST, cold cache); C-API runner",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_text_L128 (single-bucket fp32 export ema_text_L128_fp32.tflite); bench_mac.py median of 20",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_text_L256 (single-bucket fp32 export ema_text_L256_fp32.tflite); bench_mac.py median of 20",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_text_L32 (single-bucket fp32 export ema_text_L32_fp32.tflite); bench_mac.py median of 20",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_text_L64 (single-bucket fp32 export ema_text_L64_fp32.tflite); bench_mac.py median of 20",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-11",
+            "device": "mac-studio-m4-max",
+            "label": "cpu_xnnpack@ema_text_L{32,64,128,256} (the shipped file); host loop, one call per fixture",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_text_multi_fp32__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_text_multi_fp32__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "ema-lightning",
+      "id": "ema-lightning__ema_text_multi_fp32",
+      "license": "apache-2.0",
+      "pitfall_count": 7,
+      "task": "text-to-speech"
     },
     {
       "benchmark_count": 2,
@@ -1621,6 +2375,102 @@
       "id": "falcon-h1-tiny-r-0.6b-int8",
       "license": "other (falcon-llm-license)",
       "pitfall_count": 8,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/falcon-h1r-7b-int4/card.json",
+      "card_md": "cards/falcon-h1r-7b-int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "pixel-8a",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "load_failed"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.18.0/2026-10-15/falcon-h1r-7b-int4__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-15/falcon-h1r-7b-int4__pixel-8a.json"
+        ]
+      },
+      "family": "falcon-h1",
+      "id": "falcon-h1r-7b-int4",
+      "license": "other (falcon-llm-license)",
+      "pitfall_count": 12,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/falcon-h1r-7b-int8/card.json",
+      "card_md": "cards/falcon-h1r-7b-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-14",
+            "device": "mac-studio-m4-max",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-14/falcon-h1r-7b-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-15/falcon-h1r-7b-int8__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "falcon-h1",
+      "id": "falcon-h1r-7b-int8",
+      "license": "other (falcon-llm-license)",
+      "pitfall_count": 13,
       "task": "text-generation"
     },
     {
@@ -2024,12 +2874,30 @@
           },
           {
             "accelerator": "cpu",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "cpu@Android sample app (LiteRT-Models asr_litertlm), AsrDeviceCheck; Engine on the CPU with 4 threads and the audio encoder on the CPU, one Conversation per clip",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
             "date": "2026-09-27",
             "device": "galaxy-s26",
             "label": "cpu@256tok",
             "runtime": "litert-lm",
             "runtime_version": "0.16.1",
             "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-09",
+            "device": "galaxy-s26",
+            "label": "gpu@Android sample app (LiteRT-Models asr_litertlm), AsrDeviceCheck gpu method; Engine on the GPU and the audio encoder on the CPU, one Conversation per clip",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
           },
           {
             "accelerator": "gpu",
@@ -2080,7 +2948,9 @@
         "sources": [
           "data/device_runs/0.16.1/2026-09-27/fun-asr-nano-2512__galaxy-s26.json",
           "data/device_runs/0.17.1/2026-09-27/fun-asr-nano-2512__galaxy-s26.json",
-          "data/device_runs/0.17.1/2026-09-27/fun-asr-nano-2512__mac-studio-m4-max.json"
+          "data/device_runs/0.17.1/2026-09-27/fun-asr-nano-2512__mac-studio-m4-max.json",
+          "data/device_runs/0.17.1/2026-10-09/fun-asr-nano-2512__galaxy-s26.json",
+          "data/device_runs/0.17.1/2026-10-10/fun-asr-nano-2512__galaxy-s26.json"
         ]
       },
       "family": "fun-asr",
@@ -2088,6 +2958,142 @@
       "license": "apache-2.0",
       "pitfall_count": 10,
       "task": "automatic-speech-recognition"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/g9v3-3b-int4/card.json",
+      "card_md": "cards/g9v3-3b-int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-13",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-13",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-13",
+            "device": "pixel-8a",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-13/g9v3-3b-int4__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-13/g9v3-3b-int4__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-13/g9v3-3b-int4__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-13/g9v3-3b-int4__pixel-8a.json"
+        ]
+      },
+      "family": "g9v3",
+      "id": "g9v3-3b-int4",
+      "license": "apache-2.0",
+      "pitfall_count": 11,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/g9v3-3b-int8/card.json",
+      "card_md": "cards/g9v3-3b-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-13",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "pixel-8a",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-13",
+            "device": "pixel-8a",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "load_failed"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-13/g9v3-3b-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-12/g9v3-3b-int8__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-13/g9v3-3b-int8__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-13/g9v3-3b-int8__pixel-8a.json"
+        ]
+      },
+      "family": "g9v3",
+      "id": "g9v3-3b-int8",
+      "license": "apache-2.0",
+      "pitfall_count": 12,
+      "task": "text-generation"
     },
     {
       "benchmark_count": 0,
@@ -2190,6 +3196,277 @@
       "license": "apache-2.0",
       "pitfall_count": 1,
       "task": "image-to-image"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32.json"
+      },
+      "card_json": "cards/gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32/card.json",
+      "card_md": "cards/gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 96.9,
+        "litert_version": "2.2.0",
+        "partitions": 22
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-03",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CpuOptions 4 threads; hfmodels-android SDK device test (EncoderDecisions gliclass)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CpuOptions numThreads=4 (XNNPACK); Android sample app com.gliclass (zoo gliclass/, debug build, on-device tokenizer)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CpuOptions numThreads=4 (XNNPACK); debug gate app com.gliclass.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=DEFAULT (fp16 compute) — diagnostic probe, not a shipping setting; debug gate app com.gliclass.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; Android sample app com.gliclass (zoo gliclass/, debug build, on-device tokenizer)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; debug gate app com.gliclass.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-04",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; hfmodels-android SDK device test (EncoderDecisions gliclass)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-03/gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-04/gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32__galaxy-s26.json"
+        ]
+      },
+      "family": "gliclass-edge-v3.0",
+      "id": "gliclass-edge-v3.0__gliclass_edge_v3_s128_fp32",
+      "license": "apache-2.0",
+      "pitfall_count": 6,
+      "task": "zero-shot-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16.json"
+      },
+      "card_json": "cards/gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16/card.json",
+      "card_md": "cards/gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 86.8,
+        "litert_version": "2.2.0",
+        "partitions": 100
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=DEFAULT (fp16 compute) — diagnostic probe, not a shipping setting; debug gate app com.gliclass.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; debug gate app com.gliclass.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions htpPerformanceMode=BURST, JIT (first compile, cache dir of a fresh app process); debug gate app com.gliclass.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "gliclass-edge-v3.0",
+      "id": "gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 7,
+      "task": "zero-shot-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32.json"
+      },
+      "card_json": "cards/gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32/card.json",
+      "card_md": "cards/gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 96.9,
+        "litert_version": "2.2.0",
+        "partitions": 22
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-04",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CpuOptions 4 threads; hfmodels-android SDK device test (EncoderDecisions gliclass)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CpuOptions numThreads=4 (XNNPACK); Android sample app com.gliclass (zoo gliclass/, debug build, on-device tokenizer)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; Android sample app com.gliclass (zoo gliclass/, debug build, on-device tokenizer)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; debug gate app com.gliclass.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-04",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; hfmodels-android SDK device test (EncoderDecisions gliclass)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-04/gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32__galaxy-s26.json"
+        ]
+      },
+      "family": "gliclass-edge-v3.0",
+      "id": "gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32",
+      "license": "apache-2.0",
+      "pitfall_count": 6,
+      "task": "zero-shot-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s256_wfp16.json"
+      },
+      "card_json": "cards/gliclass-edge-v3.0__gliclass_edge_v3_s256_wfp16/card.json",
+      "card_md": "cards/gliclass-edge-v3.0__gliclass_edge_v3_s256_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 86.8,
+        "litert_version": "2.2.0",
+        "partitions": 100
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; debug gate app com.gliclass.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s256_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "gliclass-edge-v3.0",
+      "id": "gliclass-edge-v3.0__gliclass_edge_v3_s256_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 7,
+      "task": "zero-shot-classification"
     },
     {
       "benchmark_count": 0,
@@ -2475,6 +3752,15 @@
             "status": "pass"
           },
           {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-03",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CpuOptions 4 threads; hfmodels-android SDK device test (EncoderDecisions gliner2_decide)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
             "accelerator": "gpu_mldrift",
             "date": "2026-09-26",
             "device": "galaxy-s26",
@@ -2491,10 +3777,21 @@
             "runtime": "litert",
             "runtime_version": "2.2.0",
             "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-04",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; hfmodels-android SDK device test (EncoderDecisions gliner2_decide)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
           }
         ],
         "sources": [
-          "data/device_runs/2.2.0/2026-09-26/gliner2.5-decide__gliner25_decide_s128_wfp16__galaxy-s26.json"
+          "data/device_runs/2.2.0/2026-09-26/gliner2.5-decide__gliner25_decide_s128_wfp16__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-03/gliner2.5-decide__gliner25_decide_s128_wfp16__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-04/gliner2.5-decide__gliner25_decide_s128_wfp16__galaxy-s26.json"
         ]
       },
       "family": "gliner2.5-decide",
@@ -2542,6 +3839,15 @@
             "status": "pass"
           },
           {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-03",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CpuOptions 4 threads; hfmodels-android SDK device test (EncoderDecisions gliner2_decide)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
             "accelerator": "gpu_mldrift",
             "date": "2026-09-26",
             "device": "galaxy-s26",
@@ -2558,10 +3864,20 @@
             "runtime": "litert",
             "runtime_version": "2.2.0",
             "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-03",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; hfmodels-android SDK device test (EncoderDecisions gliner2_decide)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
           }
         ],
         "sources": [
-          "data/device_runs/2.2.0/2026-09-26/gliner2.5-decide__gliner25_decide_s256_wfp16__galaxy-s26.json"
+          "data/device_runs/2.2.0/2026-09-26/gliner2.5-decide__gliner25_decide_s256_wfp16__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-03/gliner2.5-decide__gliner25_decide_s256_wfp16__galaxy-s26.json"
         ]
       },
       "family": "gliner2.5-decide",
@@ -2625,10 +3941,29 @@
             "runtime": "litert",
             "runtime_version": "2.2.0",
             "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-04",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; hfmodels-android SDK device test (EncoderDecisions gliner2_decide)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-04",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; hfmodels-android SDK device test (EncoderDecisions gliner2_decide); started after a 5-minute cool-down",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
           }
         ],
         "sources": [
-          "data/device_runs/2.2.0/2026-09-26/gliner2.5-decide__gliner25_decide_s512_wfp16__galaxy-s26.json"
+          "data/device_runs/2.2.0/2026-09-26/gliner2.5-decide__gliner25_decide_s512_wfp16__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-04/gliner2.5-decide__gliner25_decide_s512_wfp16__galaxy-s26.json"
         ]
       },
       "family": "gliner2.5-decide",
@@ -2636,6 +3971,189 @@
       "license": "apache-2.0",
       "pitfall_count": 7,
       "task": "text-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "output_mismatch"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-02/gliner2.5-multi__gliner25_multi_s128_wfp16.json"
+      },
+      "card_json": "cards/gliner2.5-multi__gliner25_multi_s128_wfp16/card.json",
+      "card_md": "cards/gliner2.5-multi__gliner25_multi_s128_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 89.0,
+        "litert_version": "2.2.0",
+        "partitions": 127
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CpuOptions numThreads=4 (XNNPACK); debug gate app com.gliner25multi.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=DEFAULT (fp16 compute) — diagnostic probe, not a shipping setting; debug gate app com.gliner25multi.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; debug gate app com.gliner25multi.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions htpPerformanceMode=BURST, JIT (first compile, cache dir of a fresh app process); debug gate app com.gliner25multi.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-02/gliner2.5-multi__gliner25_multi_s128_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "gliner2.5-multi",
+      "id": "gliner2.5-multi__gliner25_multi_s128_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 6,
+      "task": "token-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "output_mismatch"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-02/gliner2.5-multi__gliner25_multi_s256_wfp16.json"
+      },
+      "card_json": "cards/gliner2.5-multi__gliner25_multi_s256_wfp16/card.json",
+      "card_md": "cards/gliner2.5-multi__gliner25_multi_s256_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 89.0,
+        "litert_version": "2.2.0",
+        "partitions": 127
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CpuOptions numThreads=4 (XNNPACK); debug gate app com.gliner25multi.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; debug gate app com.gliner25multi.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions htpPerformanceMode=BURST, JIT (first compile, cache dir of a fresh app process); debug gate app com.gliner25multi.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-02/gliner2.5-multi__gliner25_multi_s256_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "gliner2.5-multi",
+      "id": "gliner2.5-multi__gliner25_multi_s256_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 6,
+      "task": "token-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-02/gliner2.5-multi__gliner25_multi_s512_wfp16.json"
+      },
+      "card_json": "cards/gliner2.5-multi__gliner25_multi_s512_wfp16/card.json",
+      "card_md": "cards/gliner2.5-multi__gliner25_multi_s512_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 89.0,
+        "litert_version": "2.2.0",
+        "partitions": 127
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CpuOptions numThreads=4 (XNNPACK); debug gate app com.gliner25multi.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; debug gate app com.gliner25multi.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions htpPerformanceMode=BURST, JIT (first compile, cache dir of a fresh app process); debug gate app com.gliner25multi.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-02/gliner2.5-multi__gliner25_multi_s512_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "gliner2.5-multi",
+      "id": "gliner2.5-multi__gliner25_multi_s512_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 6,
+      "task": "token-classification"
     },
     {
       "benchmark_count": 0,
@@ -2913,6 +4431,122 @@
     {
       "benchmark_count": 0,
       "browser": null,
+      "card_json": "cards/granite-4.0-micro-int4/card.json",
+      "card_md": "cards/granite-4.0-micro-int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-14",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-14",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "pixel-8a",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-16",
+            "device": "pixel-8a",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.18.0/2026-10-14/granite-4.0-micro-int4__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-15/granite-4.0-micro-int4__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-15/granite-4.0-micro-int4__pixel-8a.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-16/granite-4.0-micro-int4__pixel-8a.json"
+        ]
+      },
+      "family": "granite",
+      "id": "granite-4.0-micro-int4",
+      "license": "apache-2.0",
+      "pitfall_count": 10,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/granite-4.0-micro-int8/card.json",
+      "card_md": "cards/granite-4.0-micro-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-14",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-14",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "pixel-8a",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.18.0/2026-10-14/granite-4.0-micro-int8__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-15/granite-4.0-micro-int8__pixel-8a.json"
+        ]
+      },
+      "family": "granite",
+      "id": "granite-4.0-micro-int8",
+      "license": "apache-2.0",
+      "pitfall_count": 10,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
       "card_json": "cards/granite-4.1-3b-int4/card.json",
       "card_md": "cards/granite-4.1-3b-int4/CARD.md",
       "cross_runtime_count": 0,
@@ -3036,6 +4670,122 @@
       "id": "granite-4.1-3b-int8",
       "license": "apache-2.0",
       "pitfall_count": 5,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/granite-4.1-8b-int4/card.json",
+      "card_md": "cards/granite-4.1-8b-int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-14",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-14",
+            "device": "pixel-8a",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "load_failed"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-14/granite-4.1-8b-int4__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-15/granite-4.1-8b-int4__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-14/granite-4.1-8b-int4__pixel-8a.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-15/granite-4.1-8b-int4__galaxy-s26.json"
+        ]
+      },
+      "family": "granite",
+      "id": "granite-4.1-8b-int4",
+      "license": "apache-2.0",
+      "pitfall_count": 10,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/granite-4.1-8b-int8/card.json",
+      "card_md": "cards/granite-4.1-8b-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-14",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-14/granite-4.1-8b-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-15/granite-4.1-8b-int8__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "granite",
+      "id": "granite-4.1-8b-int8",
+      "license": "apache-2.0",
+      "pitfall_count": 10,
       "task": "text-generation"
     },
     {
@@ -3350,6 +5100,24 @@
             "status": "fallback"
           },
           {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
             "accelerator": "gpu",
             "date": "2026-09-05",
             "device": "galaxy-s26",
@@ -3359,21 +5127,48 @@
             "status": "pass"
           },
           {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
             "accelerator": "cpu",
-            "date": "2026-08-27",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
             "device": "mac-studio-m4-max",
             "label": "cpu@256tok",
             "runtime": "litert-lm",
-            "runtime_version": "0.16.0",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
             "status": "pass"
           },
           {
             "accelerator": "gpu",
-            "date": "2026-08-27",
+            "date": "2026-10-05",
             "device": "mac-studio-m4-max",
             "label": "gpu@256tok",
             "runtime": "litert-lm",
-            "runtime_version": "0.16.0",
+            "runtime_version": "0.17.1",
             "status": "pass"
           },
           {
@@ -3396,10 +5191,11 @@
           }
         ],
         "sources": [
-          "data/device_runs/0.16.0/2026-08-27/hy-mt2-1.8b-int8__mac-studio-m4-max.json",
           "data/device_runs/0.16.0/2026-09-05/hy-mt2-1.8b-int8__galaxy-s26.json",
           "data/device_runs/0.16.0/2026-09-05/hy-mt2-1.8b-int8__pixel-8a.json",
-          "data/device_runs/0.16.1/2026-09-02/hy-mt2-1.8b-int8__raspberry-pi-5.json"
+          "data/device_runs/0.16.1/2026-09-02/hy-mt2-1.8b-int8__raspberry-pi-5.json",
+          "data/device_runs/0.17.1/2026-10-05/hy-mt2-1.8b-int8__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-05/hy-mt2-1.8b-int8__galaxy-s26.json"
         ]
       },
       "family": "hy-mt2",
@@ -3693,6 +5489,104 @@
           "wasm_xnnpack": "pass",
           "webgpu_mldrift": "pass"
         },
+        "sweep_source": "data/sweep/2.5.3/2026-10-09/julia-1__julia1_s1024_fp32.json"
+      },
+      "card_json": "cards/julia-1__julia1_s1024_fp32/card.json",
+      "card_md": "cards/julia-1__julia1_s1024_fp32/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 97.1,
+        "litert_version": "2.2.0",
+        "partitions": 51
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-30",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; host fp16 token table (shipped form); debug gate app com.julia.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-30/julia-1__julia1_s1024_fp32__galaxy-s26.json"
+        ]
+      },
+      "family": "julia-1",
+      "id": "julia-1__julia1_s1024_fp32",
+      "license": "apache-2.0",
+      "pitfall_count": 6,
+      "task": "text-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-09/julia-1__julia1_s512_fp32.json"
+      },
+      "card_json": "cards/julia-1__julia1_s512_fp32/card.json",
+      "card_md": "cards/julia-1__julia1_s512_fp32/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 97.1,
+        "litert_version": "2.2.0",
+        "partitions": 51
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-30",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; host f32 token table; debug gate app com.julia.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-09-30",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; host fp16 token table (shipped form); debug gate app com.julia.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-09-30",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions JIT (first compile, no cache); host f32 token table; debug gate app com.julia.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-09-30/julia-1__julia1_s512_fp32__galaxy-s26.json"
+        ]
+      },
+      "family": "julia-1",
+      "id": "julia-1__julia1_s512_fp32",
+      "license": "apache-2.0",
+      "pitfall_count": 6,
+      "task": "text-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
         "sweep_source": "data/sweep/2.5.3/2026-08-11/l2cs-gaze360.json"
       },
       "card_json": "cards/l2cs-gaze360/card.json",
@@ -3743,6 +5637,492 @@
     {
       "benchmark_count": 0,
       "browser": null,
+      "card_json": "cards/lfm2-2.6b-exp-int4/card.json",
+      "card_md": "cards/lfm2-2.6b-exp-int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.18.0/2026-10-12/lfm2-2.6b-exp-int4__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-exp-int4__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-exp-int4__pixel-8a.json"
+        ]
+      },
+      "family": "lfm2",
+      "id": "lfm2-2.6b-exp-int4",
+      "license": "other (lfm1.0)",
+      "pitfall_count": 13,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/lfm2-2.6b-exp-int8/card.json",
+      "card_md": "cards/lfm2-2.6b-exp-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "run_failed"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-13/lfm2-2.6b-exp-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-12/lfm2-2.6b-exp-int8__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-exp-int8__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-exp-int8__pixel-8a.json"
+        ]
+      },
+      "family": "lfm2",
+      "id": "lfm2-2.6b-exp-int8",
+      "license": "other (lfm1.0)",
+      "pitfall_count": 12,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/lfm2-2.6b-int4/card.json",
+      "card_md": "cards/lfm2-2.6b-int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.18.0/2026-10-12/lfm2-2.6b-int4__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-int4__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-int4__pixel-8a.json"
+        ]
+      },
+      "family": "lfm2",
+      "id": "lfm2-2.6b-int4",
+      "license": "other (lfm1.0)",
+      "pitfall_count": 12,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/lfm2-2.6b-int8/card.json",
+      "card_md": "cards/lfm2-2.6b-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "run_failed"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-12/lfm2-2.6b-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-12/lfm2-2.6b-int8__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-int8__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-2.6b-int8__pixel-8a.json"
+        ]
+      },
+      "family": "lfm2",
+      "id": "lfm2-2.6b-int8",
+      "license": "other (lfm1.0)",
+      "pitfall_count": 12,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/lfm2-700m-int4/card.json",
+      "card_md": "cards/lfm2-700m-int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.18.0/2026-10-12/lfm2-700m-int4__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-700m-int4__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-700m-int4__pixel-8a.json"
+        ]
+      },
+      "family": "lfm2",
+      "id": "lfm2-700m-int4",
+      "license": "other (lfm1.0)",
+      "pitfall_count": 11,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/lfm2-700m-int8/card.json",
+      "card_md": "cards/lfm2-700m-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "run_failed"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-12/lfm2-700m-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-12/lfm2-700m-int8__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-700m-int8__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2-700m-int8__pixel-8a.json"
+        ]
+      },
+      "family": "lfm2",
+      "id": "lfm2-700m-int8",
+      "license": "other (lfm1.0)",
+      "pitfall_count": 11,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
       "card_json": "cards/lfm2.5-1.2b-instruct-int4/card.json",
       "card_md": "cards/lfm2.5-1.2b-instruct-int4/CARD.md",
       "cross_runtime_count": 0,
@@ -3756,6 +6136,15 @@
             "label": "gpu",
             "runtime": "litert-lm",
             "runtime_version": "0.16.0",
+            "status": "load_failed"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-07",
+            "device": "mac-m4-max",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
             "status": "load_failed"
           },
           {
@@ -3800,7 +6189,8 @@
           "data/device_runs/0.16.0/2026-08-12/lfm2.5-1.2b-instruct-int4__pixel-8a.json",
           "data/device_runs/0.16.0/2026-08-23/lfm2.5-1.2b-instruct-int4__galaxy-s26.json",
           "data/device_runs/0.16.1/2026-09-01/lfm2.5-1.2b-instruct-int4__raspberry-pi-5.json",
-          "data/device_runs/0.17.0/2026-09-06/lfm2.5-1.2b-instruct-int4__mac-studio-m4-max.json"
+          "data/device_runs/0.17.0/2026-09-06/lfm2.5-1.2b-instruct-int4__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-07/lfm2.5-1.2b-instruct-int4__mac-m4-max.json"
         ]
       },
       "family": "lfm2.5",
@@ -4341,6 +6731,168 @@
       "id": "lfm2.5-230m-int8",
       "license": "other (lfm1.0)",
       "pitfall_count": 8,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/lfm2.5-350m-int4/card.json",
+      "card_md": "cards/lfm2.5-350m-int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.18.0/2026-10-12/lfm2.5-350m-int4__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2.5-350m-int4__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2.5-350m-int4__pixel-8a.json"
+        ]
+      },
+      "family": "lfm2.5",
+      "id": "lfm2.5-350m-int4",
+      "license": "other (lfm1.0)",
+      "pitfall_count": 10,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/lfm2.5-350m-int8/card.json",
+      "card_md": "cards/lfm2.5-350m-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "run_failed"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-12/lfm2.5-350m-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-12/lfm2.5-350m-int8__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2.5-350m-int8__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/lfm2.5-350m-int8__pixel-8a.json"
+        ]
+      },
+      "family": "lfm2.5",
+      "id": "lfm2.5-350m-int8",
+      "license": "other (lfm1.0)",
+      "pitfall_count": 10,
       "task": "text-generation"
     },
     {
@@ -5741,6 +8293,33 @@
       "device": {
         "records": [
           {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "cpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
             "accelerator": "gpu",
             "date": "2026-08-24",
             "device": "galaxy-s26",
@@ -5751,11 +8330,83 @@
           },
           {
             "accelerator": "gpu",
-            "date": "2026-07-22",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "iphone-18-pro",
+            "label": "cpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "iphone-18-pro",
+            "label": "cpu@128tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "iphone-18-pro",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "iphone-18-pro",
+            "label": "gpu@128tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
             "device": "mac-studio-m4-max",
             "label": "gpu@256tok",
             "runtime": "litert-lm",
-            "runtime_version": "0.14.0",
+            "runtime_version": "0.17.1",
             "status": "pass"
           },
           {
@@ -5787,11 +8438,13 @@
           }
         ],
         "sources": [
-          "data/device_runs/0.14.0/2026-07-22/ministral3-3b__mac-studio-m4-max.json",
           "data/device_runs/0.16.0/2026-08-17/ministral3-3b__pixel-8a.json",
           "data/device_runs/0.16.0/2026-08-24/ministral3-3b__galaxy-s26.json",
           "data/device_runs/0.16.1/2026-09-01/ministral3-3b__raspberry-pi-5.json",
-          "data/device_runs/gallery-1.0.15/2026-07-23/ministral3-3b__pixel-8a.json"
+          "data/device_runs/0.17.0/2026-10-05/ministral3-3b__iphone-18-pro.json",
+          "data/device_runs/0.17.1/2026-10-05/ministral3-3b__mac-studio-m4-max.json",
+          "data/device_runs/gallery-1.0.15/2026-07-23/ministral3-3b__pixel-8a.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-05/ministral3-3b__galaxy-s26.json"
         ]
       },
       "family": "mistral",
@@ -5838,6 +8491,256 @@
       "license": "apache-2.0",
       "pitfall_count": 5,
       "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/ministral3-8b-int4/card.json",
+      "card_md": "cards/ministral3-8b-int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-14",
+            "device": "mac-studio-m4-max",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-14",
+            "device": "pixel-8a",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "load_failed"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-14/ministral3-8b-int4__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-15/ministral3-8b-int4__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-14/ministral3-8b-int4__pixel-8a.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-15/ministral3-8b-int4__galaxy-s26.json"
+        ]
+      },
+      "family": "mistral",
+      "id": "ministral3-8b-int4",
+      "license": "apache-2.0",
+      "pitfall_count": 12,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/ministral3-8b-int8/card.json",
+      "card_md": "cards/ministral3-8b-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-14",
+            "device": "mac-studio-m4-max",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-14/ministral3-8b-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-15/ministral3-8b-int8__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "mistral",
+      "id": "ministral3-8b-int8",
+      "license": "apache-2.0",
+      "pitfall_count": 12,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-02/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s256_wfp16.json"
+      },
+      "card_json": "cards/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s256_wfp16/card.json",
+      "card_md": "cards/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s256_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 91.9,
+        "litert_version": "2.2.0",
+        "partitions": 155
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; debug gate app com.decisionja.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions htpPerformanceMode=BURST, JIT (first compile, no cache); debug gate app com.decisionja.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions htpPerformanceMode=BURST, JIT from the on-device cache; debug gate app com.decisionja.gate; float32 host table (not published)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-02/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s256_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "modernbert-ja-310m",
+      "id": "modernbert-ja-310m-decision__modernbert_ja_310m_decision_s256_wfp16",
+      "license": "cc-by-sa-4.0",
+      "pitfall_count": 8,
+      "task": "typed decisions in Japanese (question + state + candidates -> one logit per (context, candidate) pair; softmax over a question's candidates = choice / score / true-false; text-classification)"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-02/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s512_wfp16.json"
+      },
+      "card_json": "cards/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s512_wfp16/card.json",
+      "card_md": "cards/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s512_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 91.9,
+        "litert_version": "2.2.0",
+        "partitions": 155
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=DEFAULT (fp16 kernels); debug gate app com.decisionja.gate; first 60 JNLI requests",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP16; debug gate app com.decisionja.gate; first 60 JNLI requests",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP16_WITH_FP32_ACCUM; debug gate app com.decisionja.gate; first 60 JNLI requests",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; debug gate app com.decisionja.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions htpPerformanceMode=BURST, JIT (first compile, no cache); debug gate app com.decisionja.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-02/modernbert-ja-310m-decision__modernbert_ja_310m_decision_s512_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "modernbert-ja-310m",
+      "id": "modernbert-ja-310m-decision__modernbert_ja_310m_decision_s512_wfp16",
+      "license": "cc-by-sa-4.0",
+      "pitfall_count": 8,
+      "task": "typed decisions in Japanese (question + state + candidates -> one logit per (context, candidate) pair; softmax over a question's candidates = choice / score / true-false; text-classification)"
     },
     {
       "benchmark_count": 0,
@@ -6416,6 +9319,33 @@
         "records": [
           {
             "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "galaxy-s26",
+            "label": "cpu@three-turn conversation, thinking default",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-b2f686e2",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "galaxy-s26",
+            "label": "cpu@three-turn conversation, thinking off",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-b2f686e2",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "galaxy-s26",
+            "label": "cpu@three-turn conversation, thinking on",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-b2f686e2",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
             "date": "2026-09-05",
             "device": "galaxy-s26",
             "label": "cpu@211tok",
@@ -6434,11 +9364,56 @@
           },
           {
             "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@8-question gate (CLI run --cache no)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@one prompt (CLI run --cache no)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@three-turn conversation, thinking off (Python API)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@three-turn conversation, thinking unset (Python API)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
             "date": "2026-08-27",
             "device": "mac-studio-m4-max",
             "label": "cpu@256tok",
             "runtime": "litert-lm",
             "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-13",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@8-question gate (CLI run --backend gpu --cache no)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
             "status": "pass"
           },
           {
@@ -6463,13 +9438,16 @@
         "sources": [
           "data/device_runs/0.16.0/2026-08-27/nemotron-3-nano-4b-int8__mac-studio-m4-max.json",
           "data/device_runs/0.16.0/2026-09-05/nemotron-3-nano-4b-int8__galaxy-s26.json",
-          "data/device_runs/0.16.1/2026-09-02/nemotron-3-nano-4b-int8__raspberry-pi-5.json"
+          "data/device_runs/0.16.0/2026-10-13/nemotron-3-nano-4b-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.16.1/2026-09-02/nemotron-3-nano-4b-int8__raspberry-pi-5.json",
+          "data/device_runs/0.18.0/2026-10-13/nemotron-3-nano-4b-int8__mac-studio-m4-max.json",
+          "data/device_runs/selfbuilt-b2f686e2/2026-10-13/nemotron-3-nano-4b-int8__galaxy-s26.json"
         ]
       },
       "family": "nemotron-3-nano",
       "id": "nemotron-3-nano-4b-int8",
       "license": "other (nvidia-nemotron-open-model-license)",
-      "pitfall_count": 7,
+      "pitfall_count": 8,
       "task": "text-generation"
     },
     {
@@ -6499,6 +9477,102 @@
       "id": "nemotron-h-4b",
       "license": "other (nvidia-open-model-license)",
       "pitfall_count": 3,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/nemotron-nano-9b-v2-int4/card.json",
+      "card_md": "cards/nemotron-nano-9b-v2-int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "pixel-8a",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "load_failed"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.18.0/2026-10-15/nemotron-nano-9b-v2-int4__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-15/nemotron-nano-9b-v2-int4__pixel-8a.json"
+        ]
+      },
+      "family": "nemotron-h",
+      "id": "nemotron-nano-9b-v2-int4",
+      "license": "other (nvidia-open-model-license)",
+      "pitfall_count": 12,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/nemotron-nano-9b-v2-int8/card.json",
+      "card_md": "cards/nemotron-nano-9b-v2-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-14",
+            "device": "mac-studio-m4-max",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-14/nemotron-nano-9b-v2-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-15/nemotron-nano-9b-v2-int8__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "nemotron-h",
+      "id": "nemotron-nano-9b-v2-int8",
+      "license": "other (nvidia-open-model-license)",
+      "pitfall_count": 11,
       "task": "text-generation"
     },
     {
@@ -6601,6 +9675,296 @@
     },
     {
       "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/olmo-3-7b-think-int4/card.json",
+      "card_md": "cards/olmo-3-7b-think-int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-16/olmo-3-7b-think-int4__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-16/olmo-3-7b-think-int4__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "olmo3",
+      "id": "olmo-3-7b-think-int4",
+      "license": "apache-2.0",
+      "pitfall_count": 11,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/olmo-3-7b-think-int4-c2048/card.json",
+      "card_md": "cards/olmo-3-7b-think-int4-c2048/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.18.0/2026-10-16/olmo-3-7b-think-int4-c2048__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "olmo3",
+      "id": "olmo-3-7b-think-int4-c2048",
+      "license": "apache-2.0",
+      "pitfall_count": 6,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/olmo-3-7b-think-int8/card.json",
+      "card_md": "cards/olmo-3-7b-think-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-16/olmo-3-7b-think-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-16/olmo-3-7b-think-int8__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "olmo3",
+      "id": "olmo-3-7b-think-int8",
+      "license": "apache-2.0",
+      "pitfall_count": 12,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-02/open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16.json"
+      },
+      "card_json": "cards/open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16/card.json",
+      "card_md": "cards/open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 89.1,
+        "litert_version": "2.2.0",
+        "partitions": 196
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-03",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CpuOptions 4 threads; hfmodels-android SDK device test (EncoderDecisions deberta_decision)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; Android sample app com.opendecision (zoo opendecision/, debug build, on-device tokenizer)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; debug gate app com.decision.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-04",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; hfmodels-android SDK device test (EncoderDecisions deberta_decision)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions htpPerformanceMode=BURST, JIT (first compile, no cache); debug gate app com.decision.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-02/open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-03/open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-04/open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "deberta-v3-large",
+      "id": "open-decision-deberta-v3-large__deberta_v3_large_decision_s256_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 6,
+      "task": "typed decisions (state + choice / score / noul questions -> one calibrated distribution per question; text-classification)"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "run_failed",
+          "webgpu_mldrift": "load_failed"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-02/open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16.json"
+      },
+      "card_json": "cards/open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16/card.json",
+      "card_md": "cards/open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 89.1,
+        "litert_version": "2.2.0",
+        "partitions": 196
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; Android sample app com.opendecision (zoo opendecision/, debug build, on-device tokenizer)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; debug gate app com.decision.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-04",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; hfmodels-android SDK device test (EncoderDecisions deberta_decision)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; hfmodels-android SDK device test (EncoderDecisions deberta_decision); parity step skipped (parity=0), the demo first after the warm-up",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-04",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; hfmodels-android SDK device test (EncoderDecisions deberta_decision); started after a 5-minute cool-down",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-02",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions htpPerformanceMode=BURST, JIT (no AOT); debug gate app com.decision.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "load_failed"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-02/open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-04/open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16__galaxy-s26.json",
+          "data/device_runs/2.2.0/2026-10-05/open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16__galaxy-s26.json"
+        ]
+      },
+      "family": "deberta-v3-large",
+      "id": "open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16",
+      "license": "apache-2.0",
+      "pitfall_count": 6,
+      "task": "typed decisions (state + choice / score / noul questions -> one calibrated distribution per question; text-classification)"
+    },
+    {
+      "benchmark_count": 0,
       "browser": {
         "statuses": {
           "wasm_xnnpack": "pass",
@@ -6633,6 +9997,198 @@
       "license": "apache-2.0",
       "pitfall_count": 0,
       "task": "image-segmentation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/ornith-1.0-9b-int8/card.json",
+      "card_md": "cards/ornith-1.0-9b-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-15/ornith-1.0-9b-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-15/ornith-1.0-9b-int8__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "ornith",
+      "id": "ornith-1.0-9b-int8",
+      "license": "mit",
+      "pitfall_count": 12,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/ornith-1.0-9b-mixed-int4/card.json",
+      "card_md": "cards/ornith-1.0-9b-mixed-int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-15/ornith-1.0-9b-mixed-int4__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-15/ornith-1.0-9b-mixed-int4__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "ornith",
+      "id": "ornith-1.0-9b-mixed-int4",
+      "license": "mit",
+      "pitfall_count": 12,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/ornith-1.5-9b-int8/card.json",
+      "card_md": "cards/ornith-1.5-9b-int8/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-15/ornith-1.5-9b-int8__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-15/ornith-1.5-9b-int8__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "ornith",
+      "id": "ornith-1.5-9b-int8",
+      "license": "mit",
+      "pitfall_count": 13,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/ornith-1.5-9b-mixed-int4/card.json",
+      "card_md": "cards/ornith-1.5-9b-mixed-int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-15",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-15/ornith-1.5-9b-mixed-int4__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-15/ornith-1.5-9b-mixed-int4__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "ornith",
+      "id": "ornith-1.5-9b-mixed-int4",
+      "license": "mit",
+      "pitfall_count": 13,
+      "task": "text-generation"
     },
     {
       "benchmark_count": 0,
@@ -7108,12 +10664,66 @@
       "device": {
         "records": [
           {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
             "accelerator": "gpu",
-            "date": "2026-07-23",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "npu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "npu",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-3dbb23e1e",
+            "status": "load_failed"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
             "device": "mac-studio-m4-max",
             "label": "gpu@256tok",
             "runtime": "litert-lm",
-            "runtime_version": "0.14.0",
+            "runtime_version": "0.17.1",
             "status": "pass"
           },
           {
@@ -7127,8 +10737,10 @@
           }
         ],
         "sources": [
-          "data/device_runs/0.14.0/2026-07-23/phi4-mini-reasoning__mac-studio-m4-max.json",
-          "data/device_runs/0.16.1/2026-09-01/phi4-mini-reasoning__raspberry-pi-5.json"
+          "data/device_runs/0.16.1/2026-09-01/phi4-mini-reasoning__raspberry-pi-5.json",
+          "data/device_runs/0.17.1/2026-10-05/phi4-mini-reasoning__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-05/phi4-mini-reasoning__galaxy-s26.json",
+          "data/device_runs/selfbuilt-3dbb23e1e/2026-10-05/phi4-mini-reasoning__galaxy-s26.json"
         ]
       },
       "family": "phi",
@@ -7136,6 +10748,417 @@
       "license": "mit",
       "pitfall_count": 3,
       "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-11/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_embeds.json"
+      },
+      "card_json": "cards/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_embeds/card.json",
+      "card_md": "cards/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_embeds/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 91.7,
+        "litert_version": "2.2.0",
+        "partitions": 150
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CPU XNNPACK 4 threads; host fp16 token table (inputs_embeds); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP16; host fp16 token table (inputs_embeds); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP16_WITH_FP32_ACCUM; host fp16 token table (inputs_embeds); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; host fp16 token table (inputs_embeds); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions JIT (HTP, BURST); host fp16 token table (inputs_embeds); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_embeds__galaxy-s26.json"
+        ]
+      },
+      "family": "phocinae-largha-150m",
+      "id": "phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_embeds",
+      "license": "apache-2.0",
+      "pitfall_count": 7,
+      "task": "text-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-11/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_int8emb.json"
+      },
+      "card_json": "cards/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_int8emb/card.json",
+      "card_md": "cards/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_int8emb/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 91.6,
+        "litert_version": "2.2.0",
+        "partitions": 150
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CPU XNNPACK 4 threads; int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP16; int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP16_WITH_FP32_ACCUM; int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions JIT (HTP, BURST); int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_int8emb__galaxy-s26.json"
+        ]
+      },
+      "family": "phocinae-largha-150m",
+      "id": "phocinae-largha-150m__phocinae_largha_150m_l256_fp16fc_int8emb",
+      "license": "apache-2.0",
+      "pitfall_count": 8,
+      "task": "text-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-11/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_embeds.json"
+      },
+      "card_json": "cards/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_embeds/card.json",
+      "card_md": "cards/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_embeds/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 91.7,
+        "litert_version": "2.2.0",
+        "partitions": 150
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP16; host fp16 token table (inputs_embeds); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP16; host fp16 token table (inputs_embeds); zoo sample app com.phocinae debug gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP16_WITH_FP32_ACCUM; host fp16 token table (inputs_embeds); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; host fp16 token table (inputs_embeds); zoo sample app com.phocinae debug gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions JIT (HTP, BURST); host fp16 token table (inputs_embeds); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-11",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions JIT (HTP, BURST, cached compile); host fp16 token table (inputs_embeds); zoo sample app com.phocinae debug gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_embeds__galaxy-s26.json"
+        ]
+      },
+      "family": "phocinae-largha-150m",
+      "id": "phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_embeds",
+      "license": "apache-2.0",
+      "pitfall_count": 7,
+      "task": "text-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-11/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb.json"
+      },
+      "card_json": "cards/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb/card.json",
+      "card_md": "cards/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 91.6,
+        "litert_version": "2.2.0",
+        "partitions": 150
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CPU XNNPACK 4 threads; int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP16; int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP16_WITH_FP32_ACCUM; int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb__galaxy-s26.json"
+        ]
+      },
+      "family": "phocinae-largha-150m",
+      "id": "phocinae-largha-150m__phocinae_largha_150m_l384_fp16fc_int8emb",
+      "license": "apache-2.0",
+      "pitfall_count": 8,
+      "task": "text-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-11/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_embeds.json"
+      },
+      "card_json": "cards/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_embeds/card.json",
+      "card_md": "cards/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_embeds/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 91.7,
+        "litert_version": "2.2.0",
+        "partitions": 150
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP16; host fp16 token table (inputs_embeds); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP16_WITH_FP32_ACCUM; host fp16 token table (inputs_embeds); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "npu_qnn",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "npu_qnn@QualcommOptions JIT (HTP, BURST); host fp16 token table (inputs_embeds); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_embeds__galaxy-s26.json"
+        ]
+      },
+      "family": "phocinae-largha-150m",
+      "id": "phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_embeds",
+      "license": "apache-2.0",
+      "pitfall_count": 7,
+      "task": "text-classification"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": {
+        "statuses": {
+          "wasm_xnnpack": "pass",
+          "webgpu_mldrift": "pass"
+        },
+        "sweep_source": "data/sweep/2.5.3/2026-10-11/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_int8emb.json"
+      },
+      "card_json": "cards/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_int8emb/card.json",
+      "card_md": "cards/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_int8emb/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": {
+        "backend": "gpu_mldrift",
+        "coverage_ops_pct": 91.6,
+        "litert_version": "2.2.0",
+        "partitions": 150
+      },
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu_xnnpack",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "cpu_xnnpack@CPU XNNPACK 4 threads; int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          },
+          {
+            "accelerator": "gpu_mldrift",
+            "date": "2026-10-10",
+            "device": "galaxy-s26",
+            "label": "gpu_mldrift@GpuOptions precision=FP32; int8 EMBEDDING_LOOKUP table in the graph (input_ids); debug gate app com.phocinae.gate",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "status": "output_mismatch"
+          }
+        ],
+        "sources": [
+          "data/device_runs/2.2.0/2026-10-10/phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_int8emb__galaxy-s26.json"
+        ]
+      },
+      "family": "phocinae-largha-150m",
+      "id": "phocinae-largha-150m__phocinae_largha_150m_l512_fp16fc_int8emb",
+      "license": "apache-2.0",
+      "pitfall_count": 8,
+      "task": "text-classification"
     },
     {
       "benchmark_count": 0,
@@ -7587,6 +11610,15 @@
         "records": [
           {
             "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "cpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
             "date": "2026-09-05",
             "device": "galaxy-s26",
             "label": "cpu@204tok",
@@ -7595,12 +11627,66 @@
             "status": "fallback"
           },
           {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
             "accelerator": "gpu",
-            "date": "2026-07-23",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
             "device": "mac-studio-m4-max",
             "label": "gpu@256tok",
             "runtime": "litert-lm",
-            "runtime_version": "0.14.0",
+            "runtime_version": "0.17.1",
             "status": "pass"
           },
           {
@@ -7614,9 +11700,10 @@
           }
         ],
         "sources": [
-          "data/device_runs/0.14.0/2026-07-23/qwen3-4b-thinking__mac-studio-m4-max.json",
           "data/device_runs/0.16.0/2026-09-05/qwen3-4b-thinking__galaxy-s26.json",
-          "data/device_runs/0.16.1/2026-09-01/qwen3-4b-thinking__raspberry-pi-5.json"
+          "data/device_runs/0.16.1/2026-09-01/qwen3-4b-thinking__raspberry-pi-5.json",
+          "data/device_runs/0.17.1/2026-10-05/qwen3-4b-thinking__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-05/qwen3-4b-thinking__galaxy-s26.json"
         ]
       },
       "family": "qwen3",
@@ -7634,6 +11721,24 @@
       "delegation": null,
       "device": {
         "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-07",
+            "device": "galaxy-s26",
+            "label": "cpu@23tok",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-b2f686e2",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-07",
+            "device": "galaxy-s26",
+            "label": "gpu@23tok",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-b2f686e2",
+            "status": "pass"
+          },
           {
             "accelerator": "gpu",
             "date": "2026-08-24",
@@ -7655,14 +11760,120 @@
         ],
         "sources": [
           "data/device_runs/0.16.0/2026-08-24/qwen3-4b-thinking-dynamic-wi4b32-afp32__galaxy-s26.json",
-          "data/device_runs/0.16.1/2026-09-01/qwen3-4b-thinking-dynamic-wi4b32-afp32__raspberry-pi-5.json"
+          "data/device_runs/0.16.1/2026-09-01/qwen3-4b-thinking-dynamic-wi4b32-afp32__raspberry-pi-5.json",
+          "data/device_runs/selfbuilt-b2f686e2/2026-10-07/qwen3-4b-thinking-dynamic-wi4b32-afp32__galaxy-s26.json"
         ]
       },
       "family": "qwen3",
       "id": "qwen3-4b-thinking-dynamic-wi4b32-afp32",
       "license": "apache-2.0",
-      "pitfall_count": 6,
+      "pitfall_count": 7,
       "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/qwen3-asr-1.7b/card.json",
+      "card_md": "cards/qwen3-asr-1.7b/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-09",
+            "device": "galaxy-s26",
+            "label": "cpu@Android sample app (LiteRT-Models asr_litertlm), AsrDeviceCheck; Engine on the CPU with 4 threads and the audio encoder on the CPU, one Conversation per clip",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "galaxy-s26",
+            "label": "cpu@398tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-13",
+            "device": "galaxy-s26",
+            "label": "gpu@398tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-03",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@398tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-03",
+            "device": "mac-studio-m4-max",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-13",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@398tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "pixel-8a",
+            "label": "cpu@398tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-13",
+            "device": "pixel-8a",
+            "label": "gpu@398tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-03/qwen3-asr-1.7b__mac-studio-m4-max.json",
+          "data/device_runs/0.17.1/2026-10-09/qwen3-asr-1.7b__galaxy-s26.json",
+          "data/device_runs/0.18.0/2026-10-13/qwen3-asr-1.7b__galaxy-s26.json",
+          "data/device_runs/0.18.0/2026-10-13/qwen3-asr-1.7b__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-13/qwen3-asr-1.7b__pixel-8a.json"
+        ]
+      },
+      "family": "qwen3-asr",
+      "id": "qwen3-asr-1.7b",
+      "license": "apache-2.0 (the license of Qwen/Qwen3-ASR-1.7B-hf)",
+      "pitfall_count": 10,
+      "task": "automatic-speech-recognition"
     },
     {
       "benchmark_count": 0,
@@ -7762,6 +11973,33 @@
       "device": {
         "records": [
           {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "gpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "load_failed"
+          },
+          {
             "accelerator": "cpu",
             "date": "2026-09-01",
             "device": "raspberry-pi-5",
@@ -7772,7 +12010,9 @@
           }
         ],
         "sources": [
-          "data/device_runs/0.16.1/2026-09-01/qwen35-0.8b__raspberry-pi-5.json"
+          "data/device_runs/0.16.1/2026-09-01/qwen35-0.8b__raspberry-pi-5.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-0.8b__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-0.8b__pixel-8a.json"
         ]
       },
       "family": "qwen3_5",
@@ -7806,6 +12046,15 @@
             "label": "gpu@207tok",
             "runtime": "litert-lm",
             "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "gpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
             "status": "pass"
           },
           {
@@ -7855,6 +12104,24 @@
           },
           {
             "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "load_failed"
+          },
+          {
+            "accelerator": "cpu",
             "date": "2026-09-01",
             "device": "raspberry-pi-5",
             "label": "cpu@256tok",
@@ -7869,7 +12136,9 @@
           "data/device_runs/0.16.0/2026-08-31/qwen35-0.8b-vl-int8__iphone-17-pro.json",
           "data/device_runs/0.16.0/2026-09-05/qwen35-0.8b-vl-int8__galaxy-s26.json",
           "data/device_runs/0.16.0/2026-09-05/qwen35-0.8b-vl-int8__pixel-8a.json",
-          "data/device_runs/0.16.1/2026-09-01/qwen35-0.8b-vl-int8__raspberry-pi-5.json"
+          "data/device_runs/0.16.1/2026-09-01/qwen35-0.8b-vl-int8__raspberry-pi-5.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-0.8b-vl-int8__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-0.8b-vl-int8__pixel-8a.json"
         ]
       },
       "family": "qwen3_5",
@@ -7917,6 +12186,15 @@
       "device": {
         "records": [
           {
+            "accelerator": "gpu",
+            "date": "2026-10-13",
+            "device": "galaxy-s26",
+            "label": "gpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
             "accelerator": "cpu",
             "date": "2026-08-14",
             "device": "mac-m4-max",
@@ -7936,6 +12214,24 @@
           },
           {
             "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "pixel-8a",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "load_failed"
+          },
+          {
+            "accelerator": "cpu",
             "date": "2026-09-01",
             "device": "raspberry-pi-5",
             "label": "cpu@256tok",
@@ -7946,7 +12242,10 @@
         ],
         "sources": [
           "data/device_runs/0.16.0/2026-08-14/qwen35-2b__mac-m4-max.json",
-          "data/device_runs/0.16.1/2026-09-01/qwen35-2b__raspberry-pi-5.json"
+          "data/device_runs/0.16.1/2026-09-01/qwen35-2b__raspberry-pi-5.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-2b__pixel-8a.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-2b__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-2b__pixel-8a.json"
         ]
       },
       "family": "qwen3_5",
@@ -7984,6 +12283,24 @@
           },
           {
             "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "load_failed"
+          },
+          {
+            "accelerator": "cpu",
             "date": "2026-09-01",
             "device": "raspberry-pi-5",
             "label": "cpu@256tok",
@@ -7994,7 +12311,8 @@
         ],
         "sources": [
           "data/device_runs/0.16.0/2026-09-05/qwen35-2b-vl-int8__galaxy-s26.json",
-          "data/device_runs/0.16.1/2026-09-01/qwen35-2b-vl-int8__raspberry-pi-5.json"
+          "data/device_runs/0.16.1/2026-09-01/qwen35-2b-vl-int8__raspberry-pi-5.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-2b-vl-int8__pixel-8a.json"
         ]
       },
       "family": "qwen3_5",
@@ -8012,6 +12330,24 @@
       "delegation": null,
       "device": {
         "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "galaxy-s26",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "galaxy-s26",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
           {
             "accelerator": "cpu",
             "date": "2026-08-14",
@@ -8032,6 +12368,33 @@
           },
           {
             "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "mac-studio-m4-max",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-13",
+            "device": "mac-studio-m4-max",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-13",
+            "device": "pixel-8a",
+            "label": "cpu",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
             "date": "2026-09-01",
             "device": "raspberry-pi-5",
             "label": "cpu@256tok",
@@ -8042,13 +12405,16 @@
         ],
         "sources": [
           "data/device_runs/0.16.0/2026-08-14/qwen35-4b__mac-m4-max.json",
-          "data/device_runs/0.16.1/2026-09-01/qwen35-4b__raspberry-pi-5.json"
+          "data/device_runs/0.16.1/2026-09-01/qwen35-4b__raspberry-pi-5.json",
+          "data/device_runs/0.18.0/2026-10-13/qwen35-4b__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-4b__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-13/qwen35-4b__pixel-8a.json"
         ]
       },
       "family": "qwen3.5",
       "id": "qwen35-4b",
       "license": "apache-2.0",
-      "pitfall_count": 6,
+      "pitfall_count": 7,
       "task": "text-generation"
     },
     {
@@ -8060,6 +12426,24 @@
       "delegation": null,
       "device": {
         "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-09",
+            "device": "galaxy-s26",
+            "label": "cpu@24tok",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-b2f686e2",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "galaxy-s26",
+            "label": "gpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
           {
             "accelerator": "cpu",
             "date": "2026-08-27",
@@ -8098,12 +12482,30 @@
           },
           {
             "accelerator": "cpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
             "date": "2026-08-27",
             "device": "pixel-8a",
             "label": "cpu@260tok",
             "runtime": "litert-lm",
             "runtime_version": "0.16.0",
             "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-12",
+            "device": "pixel-8a",
+            "label": "gpu",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "load_failed"
           },
           {
             "accelerator": "cpu",
@@ -8119,13 +12521,184 @@
           "data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__iphone-17-pro.json",
           "data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__mac-studio-m4-max.json",
           "data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__pixel-8a.json",
-          "data/device_runs/0.16.1/2026-09-01/qwen35-4b-mixed-int4__raspberry-pi-5.json"
+          "data/device_runs/0.16.1/2026-09-01/qwen35-4b-mixed-int4__raspberry-pi-5.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-4b-mixed-int4__galaxy-s26.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-4b-mixed-int4__pixel-8a.json",
+          "data/device_runs/selfbuilt-b2f686e2/2026-10-09/qwen35-4b-mixed-int4__galaxy-s26.json"
         ]
       },
       "family": "qwen3.5",
       "id": "qwen35-4b-mixed-int4",
       "license": "apache-2.0",
-      "pitfall_count": 8,
+      "pitfall_count": 9,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/qwen35-9b/card.json",
+      "card_md": "cards/qwen35-9b/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@8-question gate (CLI run --cache disk)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@one prompt (CLI run --cache no)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@three-turn conversation, thinking off (Python API)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@three-turn conversation, thinking on with thinking_token_budget 300 (Python API)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@8-question gate (CLI run --backend gpu --cache no)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@three-turn conversation, thinking off (Python API)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@three-turn conversation, thinking on with thinking_token_budget 300 (Python API)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-16/qwen35-9b__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-16/qwen35-9b__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "qwen3.5",
+      "id": "qwen35-9b",
+      "license": "apache-2.0",
+      "pitfall_count": 12,
+      "task": "text-generation"
+    },
+    {
+      "benchmark_count": 0,
+      "browser": null,
+      "card_json": "cards/qwen35-9b-mixed-int4/card.json",
+      "card_md": "cards/qwen35-9b-mixed-int4/CARD.md",
+      "cross_runtime_count": 0,
+      "delegation": null,
+      "device": {
+        "records": [
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@8-question gate (CLI run --cache disk)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@one prompt (CLI run --cache no)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@three-turn conversation, thinking off (Python API)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@three-turn conversation, thinking on with thinking_token_budget 300 (Python API)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@8-question gate (CLI run --backend gpu --cache no)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@three-turn conversation, thinking off (Python API)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-16",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@three-turn conversation, thinking on with thinking_token_budget 300 (Python API)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "status": "pass"
+          }
+        ],
+        "sources": [
+          "data/device_runs/0.17.1/2026-10-16/qwen35-9b-mixed-int4__mac-studio-m4-max.json",
+          "data/device_runs/0.18.0/2026-10-16/qwen35-9b-mixed-int4__mac-studio-m4-max.json"
+        ]
+      },
+      "family": "qwen3.5",
+      "id": "qwen35-9b-mixed-int4",
+      "license": "apache-2.0",
+      "pitfall_count": 12,
       "task": "text-generation"
     },
     {
@@ -9703,12 +14276,39 @@
         "records": [
           {
             "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "cpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
             "date": "2026-09-05",
             "device": "galaxy-s26",
             "label": "cpu@442tok",
             "runtime": "litert-lm",
             "runtime_version": "0.16.0",
             "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
           },
           {
             "accelerator": "gpu",
@@ -9721,11 +14321,83 @@
           },
           {
             "accelerator": "gpu",
-            "date": "2026-07-22",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "iphone-18-pro",
+            "label": "cpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "iphone-18-pro",
+            "label": "cpu@128tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "iphone-18-pro",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "iphone-18-pro",
+            "label": "gpu@128tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
             "device": "mac-studio-m4-max",
             "label": "gpu@256tok",
             "runtime": "litert-lm",
-            "runtime_version": "0.14.0",
+            "runtime_version": "0.17.1",
             "status": "pass"
           },
           {
@@ -9748,11 +14420,13 @@
           }
         ],
         "sources": [
-          "data/device_runs/0.14.0/2026-07-22/smollm3-3b__mac-studio-m4-max.json",
           "data/device_runs/0.16.0/2026-08-17/smollm3-3b__pixel-8a.json",
           "data/device_runs/0.16.0/2026-08-24/smollm3-3b__galaxy-s26.json",
           "data/device_runs/0.16.0/2026-09-05/smollm3-3b__galaxy-s26.json",
-          "data/device_runs/0.16.1/2026-09-01/smollm3-3b__raspberry-pi-5.json"
+          "data/device_runs/0.16.1/2026-09-01/smollm3-3b__raspberry-pi-5.json",
+          "data/device_runs/0.17.0/2026-10-05/smollm3-3b__iphone-18-pro.json",
+          "data/device_runs/0.17.1/2026-10-05/smollm3-3b__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-05/smollm3-3b__galaxy-s26.json"
         ]
       },
       "family": "smollm3",
@@ -9771,12 +14445,84 @@
       "device": {
         "records": [
           {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
             "accelerator": "gpu",
             "date": "2026-08-24",
             "device": "galaxy-s26",
             "label": "gpu@211tok",
             "runtime": "litert-lm",
             "runtime_version": "0.16.0",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "npu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "npu",
+            "runtime": "litert-lm",
+            "runtime_version": "selfbuilt-3dbb23e1e",
+            "status": "load_failed"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
             "status": "pass"
           },
           {
@@ -9791,7 +14537,10 @@
         ],
         "sources": [
           "data/device_runs/0.16.0/2026-08-24/smollm3-3b-int8__galaxy-s26.json",
-          "data/device_runs/0.16.1/2026-09-01/smollm3-3b-int8__raspberry-pi-5.json"
+          "data/device_runs/0.16.1/2026-09-01/smollm3-3b-int8__raspberry-pi-5.json",
+          "data/device_runs/0.17.1/2026-10-05/smollm3-3b-int8__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-05/smollm3-3b-int8__galaxy-s26.json",
+          "data/device_runs/selfbuilt-3dbb23e1e/2026-10-05/smollm3-3b-int8__galaxy-s26.json"
         ]
       },
       "family": "smollm3",
@@ -10704,6 +15453,24 @@
       "device": {
         "records": [
           {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "cpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
             "accelerator": "gpu",
             "date": "2026-08-24",
             "device": "galaxy-s26",
@@ -10714,11 +15481,47 @@
           },
           {
             "accelerator": "gpu",
-            "date": "2026-07-23",
+            "date": "2026-10-05",
+            "device": "galaxy-s26",
+            "label": "gpu@1024tok",
+            "runtime": "litert-lm",
+            "runtime_version": "prebuilt-adac974b",
+            "status": "pass"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "cpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "cpu@256tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "fallback"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
+            "device": "mac-studio-m4-max",
+            "label": "gpu@16tok",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "status": "pass"
+          },
+          {
+            "accelerator": "gpu",
+            "date": "2026-10-05",
             "device": "mac-studio-m4-max",
             "label": "gpu@256tok",
             "runtime": "litert-lm",
-            "runtime_version": "0.14.0",
+            "runtime_version": "0.17.1",
             "status": "pass"
           },
           {
@@ -10741,10 +15544,11 @@
           }
         ],
         "sources": [
-          "data/device_runs/0.14.0/2026-07-23/vibethinker-3b__mac-studio-m4-max.json",
           "data/device_runs/0.16.0/2026-08-17/vibethinker-3b__pixel-8a.json",
           "data/device_runs/0.16.0/2026-08-24/vibethinker-3b__galaxy-s26.json",
-          "data/device_runs/0.16.1/2026-09-01/vibethinker-3b__raspberry-pi-5.json"
+          "data/device_runs/0.16.1/2026-09-01/vibethinker-3b__raspberry-pi-5.json",
+          "data/device_runs/0.17.1/2026-10-05/vibethinker-3b__mac-studio-m4-max.json",
+          "data/device_runs/prebuilt-adac974b/2026-10-05/vibethinker-3b__galaxy-s26.json"
         ]
       },
       "family": "qwen2",

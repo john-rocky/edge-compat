@@ -1,0 +1,67 @@
+{
+  "artifact": "vae_dec_256_fp32.tflite",
+  "artifact_sha256": "f3ac3b1bca6a48a4fee55779317a3e6adf797336afe82aaa03e8a9b5bbdab324",
+  "device": "galaxy-s26",
+  "model_id": "bonsai-image-ternary-4b__vae_dec_256_fp32",
+  "notes": "Bonsai-Image-ternary-4B (litert-community/Bonsai-Image-ternary-4B rev 8878f895) at 256x256 through the zoo sample app bonsai_image on LiteRT 2.1.3 (com.google.ai.edge.litert:litert, bonsai_image/gradle.properties litertVersion=2.1.3; the app's log prints TensorFlowLite.runtimeVersion() 2.22.0 for the core inside it), CompiledModel on the CPU with 6 XNNPACK threads. The three 256 graphs (text encoder, DiT, VAE decoder) were already on the phone from 2026-09-27 and their sha256 on the phone equalled the Hub oids (the keep line, evidence; the digests are the script's list of Hub oids). The row is the check's first generate on a cold phone (thermal 0, CPU ceilings at their maximum at the start): latency_p50_ms = the median of this graph's calls in that generate (one call, or the four DiT steps); capped_rerun_* = the generate right after a Cancel, when the CPU ceilings had dropped (2.75 / 2.67 GHz at the end of the check). The image of both generates equals the S26 reference of round 2 pixel for pixel (a pipeline check, so output_match stays null). The 512x512 pair and the GPU / NPU forms have their own 2.2.0 records; the supervisor's rerun the next day (generate 28.72 s at thermal 1) is not a row.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-10-09",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-bonsai-image-check",
+        "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.1.3",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "harness: LiteRT-Models zoo bonsai_image (github.com/john-rocky/LiteRT-Models, commit bd33d24, merged 651f388), androidTest BonsaiDeviceCheck",
+        "23:23:43 keep vae_dec_256_fp32.tflite (already on the phone, 198831180 B, sha ok)",
+        "10-09 23:24:34.806 17810 17827 I bonsai-check: RESULT step=generate ok=true total_s=23.54 textenc_s=1.00 steps_s=3.71,3.79,3.77,4.71 vae_s=1.20 model_load_s=4.77 textenc_load_s=1.29 dit_load_s=2.63 vae_load_s=0.86 png=bonsai_256_seed7_1791555874619.png w=256 h=256 std=68.73 mean=164.32 rgb_sha256=d7b860e2d681512b same_as_s26_reference=true thermal_before=0 thermal_after=0 vmhwm_kib=4801060 pills=TEXT_ENCODER>LOADING_DiT>STEP_1/4>STEP_2/4>STEP_3/4>STEP_4/4>DECODING>DONE limit_s=60",
+        "10-09 23:25:14.668 17810 17827 I bonsai-check: RESULT step=regenerate ok=true total_s=29.03 textenc_s=1.63 steps_s=4.72,5.32,5.57,5.48 vae_s=1.26 model_load_s=4.41 textenc_load_s=1.46 dit_load_s=2.57 vae_load_s=0.37 png=bonsai_256_seed7_1791555914551.png w=256 h=256 std=68.73 mean=164.32 rgb_sha256=d7b860e2d681512b same_as_s26_reference=true thermal_before=0 thermal_after=0 vmhwm_kib=4806352 pills=TEXT_ENCODER>LOADING_DiT>STEP_1/4>STEP_2/4>STEP_3/4>STEP_4/4>DECODING>DONE same_as_generate=true",
+        "10-09 23:25:14.681 17810 17827 I bonsai-check: RESULT ok=true steps=10 failed=none failure_paths_ok=6 line_pass=true generate_total_s=23.54",
+        "23:24:09 check start (device time 10-09 23:24:09.000) thermal=0 caps=[cpu0 3628800 3628800 cpu2 3628800 3628800 cpu7 4742400 4742400 ] uptime=617137.14",
+        "23:25:15 check end thermal=0 caps=[cpu0 2745600 3628800 cpu2 2745600 3628800 cpu7 2668800 4742400 ] uptime=617203.35"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 1200.0,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "calls": 1.0,
+        "capped_rerun_load_ms": 370.0,
+        "capped_rerun_ms": 1260.0,
+        "capped_rerun_pipeline_total_s": 29.03,
+        "load_ms": 860.0,
+        "pipeline_png_equal_s26_reference": 1.0,
+        "pipeline_process_vmhwm_mb": 4688.5,
+        "pipeline_total_s": 23.54,
+        "scaling_max_khz_cpu0_after_check": 2745600.0,
+        "scaling_max_khz_cpu0_start": 3628800.0,
+        "scaling_max_khz_cpu7_after_check": 2668800.0,
+        "scaling_max_khz_cpu7_start": 4742400.0,
+        "thermal_status_end": 0.0,
+        "thermal_status_start": 0.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "CpuOptions 6 threads (XNNPACK); Bonsai sample app (LiteRT-Models bonsai_image), BonsaiDeviceCheck: one call inside a 256x256 generate of 4 steps",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

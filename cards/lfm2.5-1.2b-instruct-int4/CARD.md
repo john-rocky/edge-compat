@@ -35,11 +35,12 @@ No benchmark data yet.
 
 ## Device runs (NPU / LiteRT-LM)
 
-Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.14.0/2026-07-22/lfm2.5-1.2b-instruct-int4__mac-studio-m4-max.json`, `data/device_runs/0.16.0/2026-08-12/lfm2.5-1.2b-instruct-int4__pixel-8a.json`, `data/device_runs/0.16.0/2026-08-23/lfm2.5-1.2b-instruct-int4__galaxy-s26.json`, `data/device_runs/0.16.1/2026-09-01/lfm2.5-1.2b-instruct-int4__raspberry-pi-5.json`, `data/device_runs/0.17.0/2026-09-06/lfm2.5-1.2b-instruct-int4__mac-studio-m4-max.json`.
+Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.14.0/2026-07-22/lfm2.5-1.2b-instruct-int4__mac-studio-m4-max.json`, `data/device_runs/0.16.0/2026-08-12/lfm2.5-1.2b-instruct-int4__pixel-8a.json`, `data/device_runs/0.16.0/2026-08-23/lfm2.5-1.2b-instruct-int4__galaxy-s26.json`, `data/device_runs/0.16.1/2026-09-01/lfm2.5-1.2b-instruct-int4__raspberry-pi-5.json`, `data/device_runs/0.17.0/2026-09-06/lfm2.5-1.2b-instruct-int4__mac-studio-m4-max.json`, `data/device_runs/0.18.0/2026-10-07/lfm2.5-1.2b-instruct-int4__mac-m4-max.json`.
 
 | Device | Accelerator | Status | Full delegation | Output match | Prompt (tokens) | Latency p50 (ms) | Prefill tok/s | Decode tok/s | TTFT (ms) | Peak mem (MB) | Environment | Date | Provenance |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | galaxy-s26 | gpu | load_failed | no | - | - | - | - | - | - | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm 0.16.0 · Android 16 | 2026-08-23 | measured |
+| mac-m4-max | gpu | load_failed | no | - | - | - | - | - | - | - | Mac Studio (Mac16,9), Apple M4 Max · litert-lm 0.18.0 · macOS 27.0 | 2026-10-07 | measured |
 | mac-studio-m4-max | cpu | pass | - | - | - | - | - | - | - | - | Mac Studio (M4 Max) · litert-lm 0.17.0 | 2026-09-06 | measured |
 | mac-studio-m4-max | gpu | load_failed | no | - | - | - | - | - | - | - | Mac Studio (M4 Max) · Apple M4 Max · litert-lm 0.14.0 | 2026-07-22 | measured |
 | pixel-8a | gpu | load_failed | no | - | - | - | - | - | - | - | Pixel 8a · Google Tensor G3 · litert-lm 0.16.0 | 2026-08-12 | measured |

@@ -1,0 +1,100 @@
+{
+  "artifact": "LFM2-2.6B-Exp_int8.litertlm",
+  "artifact_sha256": "a44c3cfd0644e9fe9036c0efe3955df48a91990fe6e42855a9de0020c4e76258",
+  "device": "mac-studio-m4-max",
+  "model_id": "lfm2-2.6b-exp-int8",
+  "notes": "Hub litert-community/LFM2-2.6B-Exp (upload commit fc47ce13, 2026-10-13 16:13 JST; main 96e6b95b; the Hub tree's LFS sha256 = the lane's ship/SHA256SUMS). Lane litertlm-convert aa_mobile_work/lfm2_26b_exp: the Mac bench of 2026-10-12 (bench/bench_mac.log: CPU block 21:16:49-21:23:38 JST, rest 300 s before GPU, GPU block 21:28:38-21:29:56 JST; every process under quiet_hold + tools/settle_run.sh, which waits for other lanes' engine / export jobs that were already running; SPEED_LADDER.md rows 1 (CPU) / 6 (GPU: 'int8 (wi8fc), GPU fp16 activations (runtime default)')) = the Hub card's Mac table: CPU = one process (bench/cpu_int8.log); GPU = one process (bench/gpu_int8.log). litert-lm 0.18.0 CLI benchmark, --cache no, 1024-token prefill / 256 decode / max number of tokens 2048, a warmup then the mean of 3 iterations. The file is ship/LFM2-2.6B-Exp_int8.litertlm itself (the bench logs' model path; ship/SHA256SUMS = the Hub file). GPU = WebGPU on Metal with the runtime's default fp16 activations; the verbose benchmark run of the same bytes (bench/gpu_int8_verbose.log) replaced every node of all 12 decoder signatures with LITERT_WEBGPU (prefill_1024 978, prefill_1 877, decode 895 nodes) - not printed in the timed runs, so the delegation cells are null here. Not entered: the export-time conv-int8 arm (wi8, rows 3 / 8) and the fp32-activation arm (row 11) - bytes that never shipped (#174(3)); the 6-signature files (rows 4, 5, 9, 10); the 8-question, GSM8K and IFEval-lite gates (correctness checks quoted in the card).",
+  "quantization": "int8 dynamic on linears + int8 embedding, convs float",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-12",
+      "decode_tokens_per_s": 38.27,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "bench/cpu_int8.log: prefill 377.26 / decode 38.27 tok/s, TTFT 2.7405 s, init 31.9277 s (quiet_hold: window taken after 0 s wait: aa4-26bexp-bench-cpu timing pid 2352 since 2026-10-12T21:16:49+0900)",
+        "settle_run: quiet after 12 s; run: /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_work/lfm2_26b_exp/ship/LFM2-2.6B-Exp_int8.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+        "2026-10-12 21:18:43 JST cpu int8 exit 0"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 31.9277,
+        "iterations": 3.0,
+        "max_num_tokens": 2048.0,
+        "prefill_tokens": 1024.0,
+        "processes": 1.0,
+        "t_1024_256_s": 9.4036
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 377.26,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 2740.5
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-12",
+      "decode_tokens_per_s": 123.39,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "bench/gpu_int8.log: prefill 2441.36 / decode 123.39 tok/s, TTFT 0.4275 s, init 2.8241 s (quiet_hold: window taken after 0 s wait: aa4-26bexp-bench-gpu timing pid 31348 since 2026-10-12T21:28:38+0900)",
+        "settle_run: quiet after 3 s; run: /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_work/lfm2_26b_exp/ship/LFM2-2.6B-Exp_int8.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+        "2026-10-12 21:30:04 JST gpu int8 verbose exit 0 validation_error=0 shape_mismatch=0 replacing=24",
+        "2026-10-12 21:28:57 JST gpu int8 exit 0"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 2.8241,
+        "iterations": 3.0,
+        "max_num_tokens": 2048.0,
+        "prefill_tokens": 1024.0,
+        "processes": 1.0,
+        "t_1024_256_s": 2.4942
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 2441.36,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 427.5
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,639 @@
+{
+  "artifacts": [
+    {
+      "file": "ema_align_multi_fp32.tflite",
+      "sha256": "c80117ce7fcf38e7f872b80cc35237adaa290342187239e1fee0ca2433f3a6b4",
+      "size_mb": 0.629
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "TODO — the Hub card states the tool and the runtime but publishes no conversion command or script (the repo ships the graphs, config.json and the host loop ema_host.py)",
+    "quantization": "none: fp32 weights (card 'Files' / 'Weights': aligner fp32)",
+    "tool": "litert-torch",
+    "tool_version": "0.9.4 (LiteRT 2.2.0 CompiledModel for the checks)"
+  },
+  "cross_runtime": [],
+  "delegation": {
+    "backend": "gpu_mldrift",
+    "blocking_ops": [
+      "COS",
+      "SIN"
+    ],
+    "coverage_ops_pct": 92.5,
+    "lint_report_version": "1.1",
+    "litert_version": "2.2.0",
+    "matched_provenance_counts": {
+      "measured": 245,
+      "unmatched": 20
+    },
+    "partitions": 15
+  },
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-10-11",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 53,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-ema-gate",
+            "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "harness: the d1_omni lane's debug gate app com.mlboydaisuke.d1omni.gate (d1_omni_work/device/app-debug.r9.apk, generic mode, Kotlin CompiledModel LiteRT 2.2.0; one process per leg; a rows file from make_rows.py names the signature and its inputs as little-endian files; measured interval = write inputs + run + read outputs per call)",
+            "file measured: the single-bucket fp32 export ema_align_L64_T96_fp32.tflite (615852 B, sha256 of the phone copy 89f5c0f1badb417a4dc925cb1f9057aeeafba5385048f3c55533725283fc4bee = the Mac file, device/p2/inputs.sha256 / device/n1/s_graphs.txt): the same aligner graph and weights as the shipped multi-signature file's ema_align_L64_T96 signature, one signature per file (export_graphs.py without --multisig); the lane verified identical outputs of the two packagings on the Mac (out/mixed/verify_fp32_split_multi.json)",
+            "latency_p50_ms = /Users/USER/code/litertlm-convert/ema_tts_work/device/p2/P2_cpu4_align.json (mode generic_timing, round p2, rested phone): timing.t_align.per_call_ms_write_run_read median 0.2490625 ms (min 0.183021, max 0.521406, n 20) after 3 warm-up calls on fixture row 0 of ema_align_L64_T96.json; run-only median 0.214922 ms; compile_ms 9.27401; graph ema_align_L64_T96_fp32.tflite (615852 B); litert 2.2.0, device SM-S942Q, android API 36, threads 4",
+            "/Users/USER/code/litertlm-convert/ema_tts_work/device/p2/P2_cpu4_align.logcat.txt: 10-11 19:56:58.453 25745 25766 I tflite  : Replacing 53 out of 53 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 0 (main).",
+            "parity vs the Mac fp32 graph (expected outputs computed by make_rows.py with ai-edge-litert 2.2.0 XNNPACK on the lane fixtures, scored by device_score.py / npu_score.py): /Users/USER/code/litertlm-convert/ema_tts_work/results/s26_parity_P1b_cpu4_align_p1b.json — summary min_snr_db 337.62, min_corr 1.000000, max_abs 0, bar {'corr': 0.999, 'snr_db': 30.0} -> PASS; rows: readme1__output_0: corr 1.000000, SNR 338.9 dB, max |d| 0; own1__output_0: corr 1.000000, SNR 337.6 dB, max |d| 0",
+            "output_match = the repo element rule |out - ref| <= max(1e-5, 1e-3 |ref|) against the Mac fp32 graph (ai-edge-litert 2.2.0 XNNPACK) on the same inputs: max |d| = 0 <= 1e-5 on every (row, output), so the absolute term holds at every element; max_rel_diff 0.0 (bit-exact)"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 0.2490625,
+          "loads": true,
+          "max_abs_diff": 0.0,
+          "max_rel_diff": 0.0,
+          "metrics": {
+            "bar_pass": 1.0,
+            "compile_ms": 9.27401,
+            "max_abs_vs_mac_fp32": 0.0,
+            "min_corr_vs_mac_fp32": 0.9999999999999999,
+            "min_snr_db_vs_mac_fp32": 337.62,
+            "parity_rows": 2.0,
+            "partitions": 1.0,
+            "rested_leg_max_ms": 0.521406,
+            "rested_leg_median_ms": 0.2490625,
+            "rested_leg_min_ms": 0.183021,
+            "rested_leg_n": 20.0,
+            "rested_leg_warmups": 3.0,
+            "run_only_median_ms": 0.214922,
+            "threads": 4.0
+          },
+          "output_match": true,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "ema_align_L64_T96 (single-bucket fp32 export ema_align_L64_T96_fp32.tflite); CPU XNNPACK 4 threads; gate app",
+          "total_ops": 53,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-10-11",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 53,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-ema-gate",
+            "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "harness: the d1_omni lane's debug gate app com.mlboydaisuke.d1omni.gate (d1_omni_work/device/app-debug.r9.apk, generic mode, Kotlin CompiledModel LiteRT 2.2.0; one process per leg; a rows file from make_rows.py names the signature and its inputs as little-endian files; measured interval = write inputs + run + read outputs per call)",
+            "file measured: the shipped ema_align_multi_fp32.tflite (659484 B, sha256 c80117ce7fcf38e7f872b80cc35237adaa290342187239e1fee0ca2433f3a6b4 = config.json = the Hub LFS sha256; the phone copy digested MATCH in device/p3/s_graphs.txt / device/p4/s_graphs.txt), signatures ema_align_L32_T48, ema_align_L64_T96, ema_align_L128_T192, ema_align_L256_T384, ema_align_L256_T512",
+            "latency_p50_ms = /Users/USER/code/litertlm-convert/ema_tts_work/device/p3/P3t_cpu4_align.json (mode generic_timing, round p3, rested phone): timing.t_align.per_call_ms_write_run_read median 0.22031250000000002 ms (min 0.19776, max 0.407552, n 20) after 3 warm-up calls on fixture row 0 of ema_align_L64_T96.json; run-only median 0.19192700000000001 ms; compile_ms 7.656354; graph ema_align_multi_fp32.tflite (659484 B); litert 2.2.0, device SM-S942Q, android API 36, threads 4",
+            "gate leg /Users/USER/code/litertlm-convert/ema_tts_work/device/p3/P3_cpu4_align.json (mode generic, round p3): 2 fixture rows, warm median 0.49166699999999997 ms (a parity leg, not the timing figure); compile_ms 11.100104",
+            "/Users/USER/code/litertlm-convert/ema_tts_work/device/p3/P3t_cpu4_align.logcat.txt: 10-11 20:34:45.490 31338 31372 I tflite  : Replacing 53 out of 53 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 1 (ema_align_L64_T96).",
+            "parity vs the Mac fp32 graph (expected outputs computed by make_rows.py with ai-edge-litert 2.2.0 XNNPACK on the lane fixtures, scored by device_score.py / npu_score.py): /Users/USER/code/litertlm-convert/ema_tts_work/results/s26_parity_P3_cpu4_align_p3.json — summary min_snr_db 337.62, min_corr 1.000000, max_abs 0, bar {'corr': 0.999, 'snr_db': 30.0} -> PASS; rows: readme1__output_0: corr 1.000000, SNR 338.9 dB, max |d| 0; own1__output_0: corr 1.000000, SNR 337.6 dB, max |d| 0",
+            "output_match = the repo element rule |out - ref| <= max(1e-5, 1e-3 |ref|) against the Mac fp32 graph (ai-edge-litert 2.2.0 XNNPACK) on the same inputs: max |d| = 0 <= 1e-5 on every (row, output), so the absolute term holds at every element; max_rel_diff 0.0 (bit-exact)"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 0.22031250000000002,
+          "loads": true,
+          "max_abs_diff": 0.0,
+          "max_rel_diff": 0.0,
+          "metrics": {
+            "bar_pass": 1.0,
+            "compile_ms": 11.100104,
+            "gate_leg_first_call_ms": 0.755365,
+            "gate_leg_rows": 2.0,
+            "gate_leg_warm_max_ms": 0.755365,
+            "gate_leg_warm_median_ms": 0.49166699999999997,
+            "gate_leg_warm_min_ms": 0.227969,
+            "gate_leg_warm_rows": 2.0,
+            "max_abs_vs_mac_fp32": 0.0,
+            "min_corr_vs_mac_fp32": 0.9999999999999999,
+            "min_snr_db_vs_mac_fp32": 337.62,
+            "parity_rows": 2.0,
+            "partitions": 1.0,
+            "rested_leg_max_ms": 0.407552,
+            "rested_leg_median_ms": 0.22031250000000002,
+            "rested_leg_min_ms": 0.19776,
+            "rested_leg_n": 20.0,
+            "rested_leg_warmups": 3.0,
+            "run_only_median_ms": 0.19192700000000001,
+            "threads": 4.0
+          },
+          "output_match": true,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "ema_align_L64_T96 (the shipped file); CPU XNNPACK 4 threads; gate app",
+          "total_ops": 53,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-10-11",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 53,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-ema-gate",
+            "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "harness: the d1_omni lane's debug gate app com.mlboydaisuke.d1omni.gate (d1_omni_work/device/app-debug.r9.apk, generic mode, Kotlin CompiledModel LiteRT 2.2.0; one process per leg; a rows file from make_rows.py names the signature and its inputs as little-endian files; measured interval = write inputs + run + read outputs per call)",
+            "file measured: the single-bucket fp32 export ema_align_L64_T96_fp32.tflite (615852 B, sha256 of the phone copy 89f5c0f1badb417a4dc925cb1f9057aeeafba5385048f3c55533725283fc4bee = the Mac file, device/p2/inputs.sha256 / device/n1/s_graphs.txt): the same aligner graph and weights as the shipped multi-signature file's ema_align_L64_T96 signature, one signature per file (export_graphs.py without --multisig); the lane verified identical outputs of the two packagings on the Mac (out/mixed/verify_fp32_split_multi.json)",
+            "latency_p50_ms = /Users/USER/code/litertlm-convert/ema_tts_work/device/p2/P2_gpu16_align.json (mode generic_timing, round p2, rested phone): timing.t_align.per_call_ms_write_run_read median 0.6097915 ms (min 0.483229, max 0.809323, n 20) after 3 warm-up calls on fixture row 0 of ema_align_L64_T96.json; run-only median 0.06489600000000001 ms; compile_ms 279.421875; graph ema_align_L64_T96_fp32.tflite (615852 B); litert 2.2.0, device SM-S942Q, android API 36",
+            "/Users/USER/code/litertlm-convert/ema_tts_work/device/p2/P2_gpu16_align.logcat.txt: 10-11 20:01:44.029 31157 31177 I tflite  : Replacing 53 out of 53 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
+            "parity vs the Mac fp32 graph (expected outputs computed by make_rows.py with ai-edge-litert 2.2.0 XNNPACK on the lane fixtures, scored by device_score.py / npu_score.py): /Users/USER/code/litertlm-convert/ema_tts_work/results/s26_parity_P1b_gpu16_align_p1b.json — summary min_snr_db 48.44, min_corr 0.999993, max_abs 0.0407, bar {'corr': 0.999, 'snr_db': 30.0} -> PASS; rows: readme1__output_0: corr 0.999993, SNR 48.4 dB, max |d| 0.0407; own1__output_0: corr 0.999995, SNR 50.0 dB, max |d| 0.0349",
+            "output_match = the repo element rule |out - ref| <= max(1e-5, 1e-3 |ref|) against the Mac fp32 graph on the same inputs: provably violated — max |d| = 0.0407 with the row's SNR below 60 dB bounds sum ref^2 so tightly that no element can carry that difference under the rule (the bound: d_i^2 <= 1e-10 + 1e-6 ref_i^2 summed, with sum d^2 = sum ref^2 * 10^(-snr/10)); max_rel_diff not computed. The lane's own bar (corr >= 0.999 and SNR >= 30 dB per row and output) is in metrics.bar_pass"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 0.6097915,
+          "loads": true,
+          "max_abs_diff": 0.040676943957805634,
+          "max_rel_diff": null,
+          "metrics": {
+            "bar_pass": 1.0,
+            "compile_ms": 279.421875,
+            "max_abs_vs_mac_fp32": 0.040676943957805634,
+            "min_corr_vs_mac_fp32": 0.9999928254777023,
+            "min_snr_db_vs_mac_fp32": 48.438,
+            "parity_rows": 2.0,
+            "partitions": 1.0,
+            "rested_leg_max_ms": 0.809323,
+            "rested_leg_median_ms": 0.6097915,
+            "rested_leg_min_ms": 0.483229,
+            "rested_leg_n": 20.0,
+            "rested_leg_warmups": 3.0,
+            "run_only_median_ms": 0.06489600000000001
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "ema_align_L64_T96 (single-bucket fp32 export ema_align_L64_T96_fp32.tflite); GPU default precision (fp16 activations); gate app",
+          "total_ops": 53,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-10-11",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 53,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-ema-gate",
+            "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "harness: the d1_omni lane's debug gate app com.mlboydaisuke.d1omni.gate (d1_omni_work/device/app-debug.r9.apk, generic mode, Kotlin CompiledModel LiteRT 2.2.0; one process per leg; a rows file from make_rows.py names the signature and its inputs as little-endian files; measured interval = write inputs + run + read outputs per call)",
+            "file measured: the single-bucket fp32 export ema_align_L64_T96_fp32.tflite (615852 B, sha256 of the phone copy 89f5c0f1badb417a4dc925cb1f9057aeeafba5385048f3c55533725283fc4bee = the Mac file, device/p2/inputs.sha256 / device/n1/s_graphs.txt): the same aligner graph and weights as the shipped multi-signature file's ema_align_L64_T96 signature, one signature per file (export_graphs.py without --multisig); the lane verified identical outputs of the two packagings on the Mac (out/mixed/verify_fp32_split_multi.json)",
+            "latency_p50_ms = /Users/USER/code/litertlm-convert/ema_tts_work/device/p2/P2_gpu32_align.json (mode generic_timing, round p2, rested phone): timing.t_align.per_call_ms_write_run_read median 0.6510415 ms (min 0.451459, max 0.966094, n 20) after 3 warm-up calls on fixture row 0 of ema_align_L64_T96.json; run-only median 0.070625 ms; compile_ms 285.074167; graph ema_align_L64_T96_fp32.tflite (615852 B); litert 2.2.0, device SM-S942Q, android API 36",
+            "/Users/USER/code/litertlm-convert/ema_tts_work/device/p2/P2_gpu32_align.logcat.txt: 10-11 20:01:16.539 30464 30484 I tflite  : Replacing 53 out of 53 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
+            "parity vs the Mac fp32 graph (expected outputs computed by make_rows.py with ai-edge-litert 2.2.0 XNNPACK on the lane fixtures, scored by device_score.py / npu_score.py): /Users/USER/code/litertlm-convert/ema_tts_work/results/s26_parity_P1b_gpu32_align_p1b.json — summary min_snr_db 135.43, min_corr 1.000000, max_abs 2.86e-06, bar {'corr': 0.999, 'snr_db': 30.0} -> PASS; rows: readme1__output_0: corr 1.000000, SNR 135.4 dB, max |d| 2.86e-06; own1__output_0: corr 1.000000, SNR 136.7 dB, max |d| 1.91e-06",
+            "output_match = the repo element rule |out - ref| <= max(1e-5, 1e-3 |ref|) against the Mac fp32 graph (ai-edge-litert 2.2.0 XNNPACK) on the same inputs: max |d| = 2.86e-06 <= 1e-5 on every (row, output), so the absolute term holds at every element; max_rel_diff not computed (the per-element reference is not at hand)"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 0.6510415,
+          "loads": true,
+          "max_abs_diff": 2.86102294921875e-06,
+          "max_rel_diff": null,
+          "metrics": {
+            "bar_pass": 1.0,
+            "compile_ms": 285.074167,
+            "max_abs_vs_mac_fp32": 2.86102294921875e-06,
+            "min_corr_vs_mac_fp32": 0.9999999999999855,
+            "min_snr_db_vs_mac_fp32": 135.426,
+            "parity_rows": 2.0,
+            "partitions": 1.0,
+            "rested_leg_max_ms": 0.966094,
+            "rested_leg_median_ms": 0.6510415,
+            "rested_leg_min_ms": 0.451459,
+            "rested_leg_n": 20.0,
+            "rested_leg_warmups": 3.0,
+            "run_only_median_ms": 0.070625
+          },
+          "output_match": true,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "ema_align_L64_T96 (single-bucket fp32 export ema_align_L64_T96_fp32.tflite); GpuOptions precision=FP32; gate app",
+          "total_ops": 53,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-10-11",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 53,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-ema-npu-runner",
+            "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "Qualcomm QNN HTP runtime libraries staged beside the runner (libQnnHtp.so, libQnnHtpPrepare.so, libQnnHtpV81Skel.so / Stub.so, libQnnSystem.so; the Kev lane's set kev_work/npu/libs, sha256 MATCH in device/n1/s0_setup.txt) with LiteRT's libLiteRtCompilerPlugin_Qualcomm.so / libLiteRtDispatch_Qualcomm.so; no version string is printed by the runner"
+          },
+          "error": null,
+          "evidence": [
+            "harness: the Kev lane's C-API runner ema_npu_runner (kev_work/cache/r17/r17_npu_runner, LiteRT 2.2.0 C API, --accel npu+cpu --burst 1, the Qualcomm compiler plugin / dispatch and QNN HTP libraries staged in /data/local/tmp/ema_npu, JIT with a new cache dir per leg; measured interval = write inputs + run + read outputs per round)",
+            "file measured: the single-bucket fp32 export ema_align_L64_T96_fp32.tflite (615852 B, sha256 of the phone copy 89f5c0f1badb417a4dc925cb1f9057aeeafba5385048f3c55533725283fc4bee = the Mac file, device/p2/inputs.sha256 / device/n1/s_graphs.txt): the same aligner graph and weights as the shipped multi-signature file's ema_align_L64_T96 signature, one signature per file (export_graphs.py without --multisig); the lane verified identical outputs of the two packagings on the Mac (out/mixed/verify_fp32_split_multi.json)",
+            "latency_p50_ms = /Users/USER/code/litertlm-convert/ema_tts_work/results/s26_npu_timing_N1_npu_align96_n1.json: call_ms (write inputs + run + read outputs) median 0.487 ms (min 0.475, max 0.501) over 20 rounds after 5 warm-ups (runner summary line: {\"n\": \"20\", \"median\": \"0.487\", \"min\": \"0.475\", \"max\": \"0.501\", \"nonfinite_rounds\": \"0\", \"compile_ms\": \"283.4\", \"fully_accelerated\": \"true\"}); run-only median 0.4645 ms; JIT compile with a cold cache 283.4 ms",
+            "/Users/USER/code/litertlm-convert/ema_tts_work/device/n1/N1_npu_align96.stderr.txt: INFO: [compiler_plugin.cc:741] Partitioned subgraph<0>, selected 53 ops, from a total of 53 ops. resulted in 1 partitions.",
+            "/Users/USER/code/litertlm-convert/ema_tts_work/device/n1/N1_npu_align96.stderr.txt: VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (main).",
+            "parity vs the Mac fp32 graph (expected outputs computed by make_rows.py with ai-edge-litert 2.2.0 XNNPACK on the lane fixtures, scored by device_score.py / npu_score.py): /Users/USER/code/litertlm-convert/ema_tts_work/results/s26_npu_parity_N1_npu_align96_n1.json — summary min_snr_db 42.86, min_corr 0.999974, max_abs 0.0982, bar {'corr': 0.999, 'snr_db': 30.0} -> PASS; rows: readme1: corr 0.999974, SNR 42.9 dB, max |d| 0.0982; own1: corr 0.999989, SNR 46.5 dB, max |d| 0.0507",
+            "output_match = the repo element rule |out - ref| <= max(1e-5, 1e-3 |ref|) against the Mac fp32 graph on the same inputs: provably violated — max |d| = 0.0982 with the row's SNR below 60 dB bounds sum ref^2 so tightly that no element can carry that difference under the rule (the bound: d_i^2 <= 1e-10 + 1e-6 ref_i^2 summed, with sum d^2 = sum ref^2 * 10^(-snr/10)); max_rel_diff not computed. The lane's own bar (corr >= 0.999 and SNR >= 30 dB per row and output) is in metrics.bar_pass",
+            "the C-API runner dumps output 0 only, so the HTP parity rows score output 0 (npu_score.py: 'parity of the dumps against the rows file's expected output 0'); for the text graph that is h [1,L,224] — dur [1,L] is not scored on the HTP"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 0.487,
+          "loads": true,
+          "max_abs_diff": 0.098184734582901,
+          "max_rel_diff": null,
+          "metrics": {
+            "bar_pass": 1.0,
+            "compile_ms": 283.4,
+            "max_abs_vs_mac_fp32": 0.098184734582901,
+            "min_corr_vs_mac_fp32": 0.9999744864738085,
+            "min_snr_db_vs_mac_fp32": 42.857,
+            "parity_call_median_ms": 0.5,
+            "parity_rows": 2.0,
+            "partitions": 1.0,
+            "rested_leg_max_ms": 0.501,
+            "rested_leg_median_ms": 0.487,
+            "rested_leg_min_ms": 0.475,
+            "rested_leg_n": 20.0,
+            "rested_leg_warmups": 5.0,
+            "run_only_median_ms": 0.4645
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "ema_align_L64_T96 (single-bucket fp32 export ema_align_L64_T96_fp32.tflite); HTP JIT via the Qualcomm compiler plugin (BURST, cold cache); C-API runner",
+          "total_ops": 53,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-10-11",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "file measured: the single-bucket fp32 export out/fp32/ema_align_L128_T192_fp32.tflite (615860 B, sha256 3986a2a48ed13e62be46067c5614edbac29c9fc522f3ed6dcc3a2032ef1c4a9b read from the file today; the same graph and weights as the shipped multi-signature file's ema_align_L128_T192 signature, one signature per file; identical outputs verified by the lane, out/mixed/verify_fp32_split_multi.json); harness: bench_mac.py --threads 4 --n 20 (ai-edge-litert 2.2.0 Interpreter, XNNPACK)",
+            "/Users/USER/code/litertlm-convert/ema_tts_work/out/chain2.log:121: 'ema_align_L128_T192_fp32.tflite      median     0.55 ms  min     0.50 ms  (n=20, threads=4)' (bench_mac.py --threads 4 --n 20: invoke + output read per call, median and min of 20 after warm-up)",
+            "parity of the single-bucket fp32 set vs the package oracle: /Users/USER/code/litertlm-convert/ema_tts_work/out/fp32/verify_fp32.json (SPEED_LADDER.md row 1: PASS 6/6, min SNR 56 dB); no same-runtime element comparison in the bench, so output_match stays null"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 0.55,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "rested_leg_median_ms": 0.55,
+            "rested_leg_min_ms": 0.5,
+            "rested_leg_n": 20.0,
+            "threads": 4.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "ema_align_L128_T192 (single-bucket fp32 export ema_align_L128_T192_fp32.tflite); bench_mac.py median of 20",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-10-11",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "file measured: the single-bucket fp32 export out/fp32/ema_align_L256_T384_fp32.tflite (615860 B, sha256 3a12ef992b304ad3f2b3d6f2910ccac79714b9d34c719450af85f12fcb08cbfd read from the file today; the same graph and weights as the shipped multi-signature file's ema_align_L256_T384 signature, one signature per file; identical outputs verified by the lane, out/mixed/verify_fp32_split_multi.json); harness: bench_mac.py --threads 4 --n 20 (ai-edge-litert 2.2.0 Interpreter, XNNPACK)",
+            "/Users/USER/code/litertlm-convert/ema_tts_work/out/chain2.log:122: 'ema_align_L256_T384_fp32.tflite      median     1.01 ms  min     0.96 ms  (n=20, threads=4)' (bench_mac.py --threads 4 --n 20: invoke + output read per call, median and min of 20 after warm-up)",
+            "parity of the single-bucket fp32 set vs the package oracle: /Users/USER/code/litertlm-convert/ema_tts_work/out/fp32/verify_fp32.json (SPEED_LADDER.md row 1: PASS 6/6, min SNR 56 dB); no same-runtime element comparison in the bench, so output_match stays null"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 1.01,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "rested_leg_median_ms": 1.01,
+            "rested_leg_min_ms": 0.96,
+            "rested_leg_n": 20.0,
+            "threads": 4.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "ema_align_L256_T384 (single-bucket fp32 export ema_align_L256_T384_fp32.tflite); bench_mac.py median of 20",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-10-11",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "file measured: the single-bucket fp32 export out/fp32/ema_align_L256_T512_fp32.tflite (615860 B, sha256 f56ca1f69ac49899f277ebc72b0321cd9dd0f118c8eb19df66fb5a9e1e198b34 read from the file today; the same graph and weights as the shipped multi-signature file's ema_align_L256_T512 signature, one signature per file; identical outputs verified by the lane, out/mixed/verify_fp32_split_multi.json); harness: bench_mac.py --threads 4 --n 20 (ai-edge-litert 2.2.0 Interpreter, XNNPACK)",
+            "/Users/USER/code/litertlm-convert/ema_tts_work/out/chain2.log:123: 'ema_align_L256_T512_fp32.tflite      median     1.17 ms  min     1.11 ms  (n=20, threads=4)' (bench_mac.py --threads 4 --n 20: invoke + output read per call, median and min of 20 after warm-up)",
+            "parity of the single-bucket fp32 set vs the package oracle: /Users/USER/code/litertlm-convert/ema_tts_work/out/fp32/verify_fp32.json (SPEED_LADDER.md row 1: PASS 6/6, min SNR 56 dB); no same-runtime element comparison in the bench, so output_match stays null"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 1.17,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "rested_leg_median_ms": 1.17,
+            "rested_leg_min_ms": 1.11,
+            "rested_leg_n": 20.0,
+            "threads": 4.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "ema_align_L256_T512 (single-bucket fp32 export ema_align_L256_T512_fp32.tflite); bench_mac.py median of 20",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-10-11",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "file measured: the single-bucket fp32 export out/fp32/ema_align_L32_T48_fp32.tflite (615852 B, sha256 9bf59fca795a912f29afcbbb3a84c3e8fff68b703da1dfdc01c7a4134940e5f0 read from the file today; the same graph and weights as the shipped multi-signature file's ema_align_L32_T48 signature, one signature per file; identical outputs verified by the lane, out/mixed/verify_fp32_split_multi.json); harness: bench_mac.py --threads 4 --n 20 (ai-edge-litert 2.2.0 Interpreter, XNNPACK)",
+            "/Users/USER/code/litertlm-convert/ema_tts_work/out/chain2.log:124: 'ema_align_L32_T48_fp32.tflite        median     0.18 ms  min     0.17 ms  (n=20, threads=4)' (bench_mac.py --threads 4 --n 20: invoke + output read per call, median and min of 20 after warm-up)",
+            "parity of the single-bucket fp32 set vs the package oracle: /Users/USER/code/litertlm-convert/ema_tts_work/out/fp32/verify_fp32.json (SPEED_LADDER.md row 1: PASS 6/6, min SNR 56 dB); no same-runtime element comparison in the bench, so output_match stays null"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 0.18,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "rested_leg_median_ms": 0.18,
+            "rested_leg_min_ms": 0.17,
+            "rested_leg_n": 20.0,
+            "threads": 4.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "ema_align_L32_T48 (single-bucket fp32 export ema_align_L32_T48_fp32.tflite); bench_mac.py median of 20",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-10-11",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "file measured: the single-bucket fp32 export out/fp32/ema_align_L64_T96_fp32.tflite (615852 B, sha256 89f5c0f1badb417a4dc925cb1f9057aeeafba5385048f3c55533725283fc4bee read from the file today; the same graph and weights as the shipped multi-signature file's ema_align_L64_T96 signature, one signature per file; identical outputs verified by the lane, out/mixed/verify_fp32_split_multi.json); harness: bench_mac.py --threads 4 --n 20 (ai-edge-litert 2.2.0 Interpreter, XNNPACK)",
+            "/Users/USER/code/litertlm-convert/ema_tts_work/out/chain2.log:125: 'ema_align_L64_T96_fp32.tflite        median     0.33 ms  min     0.30 ms  (n=20, threads=4)' (bench_mac.py --threads 4 --n 20: invoke + output read per call, median and min of 20 after warm-up)",
+            "parity of the single-bucket fp32 set vs the package oracle: /Users/USER/code/litertlm-convert/ema_tts_work/out/fp32/verify_fp32.json (SPEED_LADDER.md row 1: PASS 6/6, min SNR 56 dB); no same-runtime element comparison in the bench, so output_match stays null"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 0.33,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "rested_leg_median_ms": 0.33,
+            "rested_leg_min_ms": 0.3,
+            "rested_leg_n": 20.0,
+            "threads": 4.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "ema_align_L64_T96 (single-bucket fp32 export ema_align_L64_T96_fp32.tflite); bench_mac.py median of 20",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-10-11",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "harness: the lane's host loop hostloop_e2e.py --split --multi --threads 4 (ai-edge-litert 2.2.0 Interpreter, XNNPACK 4 threads; normalizer-tr frontend + the package's chunker; per-stage wall time of single calls: write inputs + run + read outputs) on the shipped multi-signature files (out/fp32 and out/fp16 multi files, sha256 = config.json = the Hub LFS)",
+            "/Users/USER/code/litertlm-convert/ema_tts_work/out/e2e/hostloop_mac_textfp32_soundfp32_decoderfp16_split_multi_t4.json: per text the piece's L / T, the bucket Lb / Tb it ran in, text_ms, sound_ms (= align + the four steps + the host Euler mixing), decode_ms per window, first_audio_ms, total_ms; forms {\"text\": \"fp32\", \"sound\": \"fp32\", \"decoder\": \"fp16\"}, split True, threads 4",
+            "/Users/USER/code/litertlm-convert/ema_tts_work/out/mixed/verify_textfp32_soundfp32_decoderfp16_split_multi.json (verify_tflite.py --multi on the same files vs the package oracle fixtures/): per fixture frames_ok, |dh|, |ddur|, |dlat|, corr_lat, |daudio|, corr_audio, snr_db — readme1: frames_ok True, |dh| 1.91e-06, |ddur| 1.31e-06, corr_lat 1.000000000, SNR 56.40 dB, corr_audio 0.9999995; readme2: frames_ok True, |dh| 1.79e-06, |ddur| 2.62e-06, corr_lat 1.000000000, SNR 56.82 dB, corr_audio 0.9999995; readme3: frames_ok True, |dh| 1.43e-06, |ddur| 2.38e-06, corr_lat 1.000000000, SNR 56.84 dB, corr_audio 0.9999996; own1: frames_ok True, |dh| 1.19e-06, |ddur| 1.31e-06, corr_lat 1.000000000, SNR 57.11 dB, corr_audio 0.9999996; own2: frames_ok True, |dh| 1.43e-06, |ddur| 1.55e-06, corr_lat 1.000000000, SNR 56.57 dB, corr_audio 0.9999995; own3: frames_ok True, |dh| 1.31e-06, |ddur| 1.79e-06, corr_lat 1.000000000, SNR 56.57 dB, corr_audio 0.9999995",
+            "output_match null: the comparison is against the upstream PyTorch package (the lane oracle), not a same-runtime CPU reference (DECISIONS #175 shape); the lane bar passes on all six fixtures"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "align_plus_4_steps_ms_own1_L64_T96": 10.7476,
+            "align_plus_4_steps_ms_own2_L128_T192": 15.7549,
+            "align_plus_4_steps_ms_own3_L128_T192": 15.5673,
+            "align_plus_4_steps_ms_readme1_L64_T96": 10.8862,
+            "align_plus_4_steps_ms_readme2_L256_T384": 27.7937,
+            "align_plus_4_steps_ms_readme3_L256_T384": 27.7448,
+            "corr_latents_vs_pytorch_own1": 0.9999999999519535,
+            "corr_latents_vs_pytorch_own2": 0.9999999999510488,
+            "corr_latents_vs_pytorch_own3": 0.9999999998416187,
+            "corr_latents_vs_pytorch_readme1": 0.999999999984055,
+            "corr_latents_vs_pytorch_readme2": 0.9999999996144746,
+            "corr_latents_vs_pytorch_readme3": 0.9999999997009323,
+            "threads": 4.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "ema_align_L{L}_T{T} (the shipped file); host loop, one call per fixture",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-11/ema-lightning__ema_align_multi_fp32__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "ema-lightning",
+    "id": "ema-lightning__ema_align_multi_fp32",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/EMA-Lightning-LiteRT",
+    "task": "text-to-speech"
+  },
+  "pitfalls": [
+    "Aligner contract (card 'Files'): h [1,L,224], cg [1,L], fg [1,T], allow [1,1,T,L] -> cond [1,T,224] — the windowed Gaussian aligner, once per piece; signatures ema_align_L{L}_T{T} for (32,48) (64,96) (128,192) (256,384) (256,512), shapes fixed per signature. cg / fg are the letter and frame positions inside their word and allow is the window mask (each frame reads only its own and the adjacent words) that the host builds from the text graph's per-letter frame counts (card 'How the host loop works' steps 2–3).",
+    "The host groups the text graph's frame counts per word, rounds them to whole frames (1–250 per word, <= 3000 per piece) and gives every frame a word and a position inside it; this bookkeeping is outside the graphs (card 'How the host loop works').",
+    "On the Galaxy S26 this graph takes GPU fp16 (48 dB vs the fp32 graph) but runs faster on the CPU (0.2 ms CPU 4 threads vs 0.7 ms GPU fp32, per-launch overhead); the card's ship configuration keeps text + align on the CPU (card 'Performance', 'Parity').",
+    "Turkish only, one voice; the text frontend (normalizer-tr) is a separate component; fixed buckets — a piece longer than 256 letters / 512 frames is cut by the chunker first, speeds far from 1.0 may move a piece to a larger bucket (card 'Limitations').",
+    "Dynamic int8 weights anywhere fail the parity bar (6–24 dB) and do not ship (card 'Parity')."
+  ],
+  "schema_version": "1.2"
+}

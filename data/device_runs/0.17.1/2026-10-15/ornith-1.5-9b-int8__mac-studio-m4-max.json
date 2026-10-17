@@ -1,0 +1,61 @@
+{
+  "artifact": "Ornith-1.5-9B_int8.litertlm",
+  "artifact_sha256": "f21058268a2b66a351007a1c3268dba79387943ea27cb595e6203c3b36d05586",
+  "device": "mac-studio-m4-max",
+  "model_id": "ornith-1.5-9b-int8",
+  "notes": "Hub litert-community/Ornith-1.5-9B (upload commit 75418dc3). Lane litertlm-convert aa_mobile_b2_work/ornith15_9b round r5 (gate/v0171/, 2026-10-15 10:17-12:07 JST, one pass of the lane's export slot ('slot: /Users/USER/code/litertlm-convert/aa_mobile_b2_work/.export_slot acquired after 0 s'), each process behind a RAM gate of 70 GB x 3, a turn in the Mac window line and a swap guard): `uvx --from litert-lm==0.17.1 litert-lm run <file> --backend cpu --prompt \"What is the capital of France? Answer in one word.\" --cache no`, one fresh CPU process, then a second process on the 0.17.1 wheel's Engine.tokenize (gate/tokrt/v0171_cpu_int8.json) = the tokenizer section (the repo's tokenizer.json, whose pre-tokenizer regex carries \\p{M}) reads on 0.17.1 with the same ids. The file is cand/Ornith-1.5-9B_int8.litertlm, the bytes of ship/. The Hub card states the 0.17.1 run (both files answered a plain `run`, \"Paris\", Mac CPU, one run each). The manifest's min_runtime_version stays 0.18.0. No benchmark: throughput cells null.",
+  "quantization": "dynamic int8 on every linear layer + int8 embedding; the convs, the delta rule and the 48 GatedDeltaNet in_proj_a / in_proj_b projections float; fp32 GPU activations declared; 6 prefill signatures + decode",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-15",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "command (tools_o15/slot_batch.sh, \"$(F $n)\" = cand/Ornith-1.5-9B_int8.litertlm): uvx --from litert-lm==0.17.1 litert-lm run \"$(F $n)\" --backend cpu --prompt \"What is the capital of France? Answer in one word.\" --cache no",
+        "bundle: cand/Ornith-1.5-9B_int8.litertlm sha256 f21058268a2b66a351007a1c3268dba79387943ea27cb595e6203c3b36d05586 (inspect/cand_sha256.txt; now a hard link of ship/Ornith-1.5-9B_int8.litertlm) = the Hugging Face LFS oid of litert-community/Ornith-1.5-9B at main (upload commit 75418dc3), tree API read 2026-10-17 17:48 JST (litertlm-convert aa_mobile_b2_work/ornith15_9b/tools_o15/r5z_hub_tree_20261017.json)",
+        "ramgate: held 3 samples after 120 s (reclaimable 110.2 GB (need 70), window n-a, export slot n-a)",
+        "quiet_turn: turn after 1301 s in line, running: bash /Users/ ...",
+        "stdout: Paris",
+        "EXIT=0",
+        "process footprint (swap guard, 15 s samples): max 39 GB (gate/v0171/run_int8.guard.log); no guard kill",
+        "gate/gate_ship.log: 2026-10-15 10:42:18 JST 0.17.1 run int8 exit 0: Paris EXIT=0",
+        "Engine.tokenize on the litert-lm 0.17.1 wheel (CPU engine, cache_dir ':nocache', gate/tokrt/v0171_cpu_int8.json, 2026-10-15T11:14:23+0900 .. 2026-10-15T11:15:32+0900): ids equal to the tokenizers library on the repo's tokenizer.json for 174 of 174 probes (21 corpus texts + every gate / eval prompt + the 8 rendered 8-question prompts); detokenize round trip 171 of 174 (the 3 others are NFD inputs that tokenizers itself does not return)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "answers_with_expect": 1.0,
+        "detokenize_roundtrip_equal": 171.0,
+        "guard_footprint_max_gb": 39.0,
+        "processes": 2.0,
+        "tokenize_engine_s": 69.14,
+        "tokenize_ids_equal": 174.0,
+        "tokenize_probes": 174.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

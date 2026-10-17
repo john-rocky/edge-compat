@@ -1,0 +1,71 @@
+{
+ "schema_version": "1.0",
+ "model_id": "qwen3-4b-mixed-int4",
+ "device": "mac-studio-m4-max",
+ "artifact": "qwen3_4b_mixed_int4.litertlm",
+ "artifact_sha256": "569fe029f51e55b6377f98ebd7f6d26431bc73e1d632034f5389f2fd720da701",
+ "quantization": "TorchAO mixed int4 (the Hub card: FC blockwise int4 group 32, int8 embeddings, float KV cache); prefill_256 + decode signatures, context 2048, odml.rms_norm / runtime_bmm / cache_update composites; LiteRT-LM's official qwen3 metadata since the Hub's metadata-only re-pack of 2026-10-11 (PR #3)",
+ "notes": "Lane qwen3_gpuopt_work/exports_4b_17b_20261015 (litertlm-convert, T1c 2026-10-15/16; LANE.md §5, MATRIX.md, device/RESULTS.md, metal/metal_table.md): the published bundle as the lane's control on Mac Metal, same windows as Q4B (metal/metal_table.md). Unpublished bytes measured in the same sittings (notes only, DECISIONS #174 (3) / #208): Q4B = the held litert-torch 0a81bf6f3 export with --apply_gpu_composites=True (sha256 9a59e8d51d486bd4…, r1/FILES.md): 1810.7 / 132.36 tok/s vs this file's 1396.2 / 108.07 on this path. The same file's Mac rows on the PyPI nightly (litert-lm-api-nightly 0.19.0.dev20261013: WebGPU and CPU speed, GSM8K-100 greedy 96/100 GPU and 95/100 CPU) have no axis and stay in the lane record (r2/speed/table.md, r2/GSM8K.md). The lane's cloud-lab (DDP) rows of this file stay in the lane record (device/RESULTS.md); lab results are not published and get no litert-compat record.",
+ "results": [
+  {
+   "accelerator": "gpu",
+   "loads": true,
+   "runs": true,
+   "failure_class": null,
+   "error": null,
+   "full_delegation": null,
+   "delegated_ops": null,
+   "total_ops": null,
+   "output_match": null,
+   "max_abs_diff": null,
+   "max_rel_diff": null,
+   "latency_p50_ms": null,
+   "prefill_tokens_per_s": 1396.2,
+   "decode_tokens_per_s": 108.07,
+   "ttft_ms": 740,
+   "peak_mem_mb": null,
+   "context_length": 2048,
+   "metrics": {
+    "processes": 3.0,
+    "prefill_tokens": 1024.0,
+    "decode_tokens": 256.0,
+    "max_num_tokens": 2048.0,
+    "prefill_tok_s_p1": 1395.12,
+    "decode_tok_s_p1": 107.83,
+    "prefill_tok_s_p2": 1397.33,
+    "decode_tok_s_p2": 108.07,
+    "prefill_tok_s_p3": 1396.2,
+    "decode_tok_s_p3": 108.2,
+    "init_ms_p1": 4592.74,
+    "init_ms_p2": 4577.85,
+    "init_ms_p3": 4895.73,
+    "force_f32_prefill_tok_s": 1044.5,
+    "force_f32_decode_tok_s": 91.35,
+    "dashboard_prompt_tokens": 1338.0,
+    "dashboard_prefill_tok_s_it1": 960.72,
+    "dashboard_decode_tok_s_it1": 107.21,
+    "gate8q_correct": 8.0
+   },
+   "evidence": [
+    "binary: litert_lm_advanced_main built at LiteRT-LM main b7c40ea8178b80919f7f5af79855c922a40bfaf7 for macOS arm64 (--config=public_cache) sha256 1ea82ec156c7a5a949baeaa31284361d1f45f4d3b91ed3937f127dde1cd3089f, run with the commit's prebuilt macos_arm64 dylibs only (libLiteRtMetalAccelerator.dylib 0495ae28f7d80415…, libLiteRtTopKMetalSampler.dylib 73adc56be3c7bf34…, libGemmaModelConstraintProvider.dylib f98767361b14bb4a…; each = its LFS pointer oid), DYLD_LIBRARY_PATH = that dir",
+    "benchmark 1024 / 256, --max_num_tokens=2048, 3 iterations per process, 3 fresh processes, cell = median of the process medians (1395.12, 1397.33, 1396.2 prefill; 107.83, 108.07, 108.2 decode); --disable_cache=true; round-robin with the lane's new export in the lane's own Mac measurement windows t1c-qwen3-r2-metal-4b (2026-10-15T18:38:02+0900 → 2026-10-15 18:39:12 rc 75; 2026-10-15T19:20:24+0900 → 2026-10-15 19:24:38 rc 0; a void window = a busy foreign process, timing legs retaken; r2/holds.log, metal/summary.txt)",
+    "every M4B leg kept: accelerator ['GPU Metal'], exit [0], Shape mismatch + Validation error + 'Failed to get buffer requirements' lines = 0",
+    "--force_f32 (1 process): 1044.5 / 91.35 tok/s",
+    "dashboard-condition prompt (1 process, bundle sampler, thinking on): prefill 1338 tokens at 960.72 tok/s, decode 107.21 tok/s; verdict on-prompt",
+    "passage prompt (`run`, bundle sampler): verdict on-prompt",
+    "8-question gate (bundle sampler, seed unset, --max_num_tokens 2048): 8/8 (metal/q8_M4B.json; missed: none)"
+   ],
+   "env": {
+    "device": "Mac Studio (M4 Max)",
+    "machine_label": "mac-studio-m4-max",
+    "os_build": null,
+    "runtime": "litert-lm",
+    "runtime_version": "selfbuilt-b7c40ea8",
+    "soc": null,
+    "vendor_sdk": null
+   },
+   "date": "2026-10-15",
+   "provenance": "measured"
+  }
+ ]
+}

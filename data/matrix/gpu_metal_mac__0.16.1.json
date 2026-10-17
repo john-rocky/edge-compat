@@ -3,6 +3,9 @@
   "entries": [
     {
       "conditions": "input tensor of rank 0 (a scalar statistic such as a mean/RMS reduced without keepdim): the delegate rejects the op with 'has bad input dims size: 0' and it runs on the CPU; with the fully-delegated hint set the LiteRT-LM audio executor then refuses to create the conversation (INTERNAL, audio_litert_compiled_model_executor.cc:383)",
+      "constraints": {
+        "min_operand_rank": 0
+      },
       "dtypes": [
         "float32"
       ],
@@ -24,6 +27,9 @@
     },
     {
       "conditions": "input tensor of rank 0 (same scalar-statistic pattern): 'MUL: Tensor ... has bad input dims size: 0.'",
+      "constraints": {
+        "min_operand_rank": 0
+      },
       "dtypes": [
         "float32"
       ],

@@ -58,14 +58,16 @@ Model-level sweep results — measured behavior of this exact `.tflite` in the b
 
 ## Device runs (NPU / LiteRT-LM)
 
-Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/2.2.0/2026-09-26/gliner2.5-decide__gliner25_decide_s256_wfp16__galaxy-s26.json`.
+Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/2.2.0/2026-09-26/gliner2.5-decide__gliner25_decide_s256_wfp16__galaxy-s26.json`, `data/device_runs/2.2.0/2026-10-03/gliner2.5-decide__gliner25_decide_s256_wfp16__galaxy-s26.json`.
 
 | Device | Accelerator | Status | Full delegation | Output match | Prompt (tokens) | Latency p50 (ms) | Prefill tok/s | Decode tok/s | TTFT (ms) | Peak mem (MB) | Environment | Date | Provenance |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | galaxy-s26 | cpu_xnnpack | pass | yes | pass | sig:CPU XNNPACK (native runner, default threads) | 509.982031 | - | - | - | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert 2.2.0 · Android 16 (SDK 36, build BP4A.251205.006) | 2026-09-26 | measured |
 | galaxy-s26 | cpu_xnnpack | pass | yes | pass | sig:CPU XNNPACK 4 threads; Android sample app (debug build) | 474.6950255 | - | - | - | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert 2.2.0 · Android 16 (SDK 36, build BP4A.251205.006) | 2026-09-26 | measured |
+| galaxy-s26 | cpu_xnnpack | pass | - | - | sig:CpuOptions 4 threads; hfmodels-android SDK device test (EncoderDecisions gliner2_decide) | 556.168854 | - | - | - | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert 2.2.0 · Android 16 (build BP4A.251205.006.S942QOPS1AZH9) | 2026-10-03 | measured |
 | galaxy-s26 | gpu_mldrift | pass | yes | pass | sig:GpuOptions precision=FP32 | 198.833698 | - | - | - | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert 2.2.0 · Android 16 (SDK 36, build BP4A.251205.006) | 2026-09-26 | measured |
 | galaxy-s26 | gpu_mldrift | pass | yes | pass | sig:GpuOptions precision=FP32; Android sample app (debug build) | 205.67757749999998 | - | - | - | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert 2.2.0 · Android 16 (SDK 36, build BP4A.251205.006) | 2026-09-26 | measured |
+| galaxy-s26 | gpu_mldrift | pass | - | - | sig:GpuOptions precision=FP32; hfmodels-android SDK device test (EncoderDecisions gliner2_decide) | 184.383958 | - | - | - | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert 2.2.0 · Android 16 (build BP4A.251205.006.S942QOPS1AZH9) | 2026-10-03 | measured |
 
 ## Pitfalls
 

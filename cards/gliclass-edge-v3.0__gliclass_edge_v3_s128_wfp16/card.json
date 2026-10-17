@@ -1,0 +1,315 @@
+{
+  "artifacts": [
+    {
+      "file": "gliclass_edge_v3_s128_wfp16.tflite",
+      "sha256": "b8b5b2f3aee38041d19d73c7a6a39381becd6ed5935eac50d98b6f45126ff7a4",
+      "size_mb": 25.761
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-10-02",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 48.648,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-10-02",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 5.575,
+        "loads": true,
+        "max_rel_diff": 1.537985566897656e-05,
+        "output_match": true,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16.json"
+  },
+  "conversion": {
+    "command": "conversion/export.py --seq 128 --matmul rank4 --ln-shift audit --suffix sln (litert-torch convert of the classification-path graph; the fp16-weight file by ai-edge-quantizer FLOAT_CASTING in the same script); card 'Provenance, conversion and license', REPRODUCE.md of the Hub repo",
+    "quantization": "float16 weight storage (ai-edge-quantizer 0.8.0 FLOAT_CASTING, weight-only): the 78 FULLY_CONNECTED weights stored as float16 behind a DEQUANTIZE operator; activations and every other constant stay float32 (748 operators; card 'Files').",
+    "tool": "litert-torch",
+    "tool_version": "0.9.3 (torch 2.12.1; transformers 5.17.0; gliclass 0.1.20; ai-edge-litert 2.1.6; ai-edge-quantizer 0.8.0 for the float16 weight storage)"
+  },
+  "cross_runtime": [],
+  "delegation": {
+    "backend": "gpu_mldrift",
+    "blocking_ops": [
+      "DEQUANTIZE",
+      "SQUARED_DIFFERENCE"
+    ],
+    "coverage_ops_pct": 86.8,
+    "lint_report_version": "1.1",
+    "litert_version": "2.2.0",
+    "matched_provenance_counts": {
+      "measured": 727,
+      "unmatched": 21
+    },
+    "partitions": 100
+  },
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-10-02",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 748,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-gliclass-gate",
+            "os_build": "Android 16 (SDK 36)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Debug gate app com.gliclass.gate (android_gate/ of the run dir, Kotlin CompiledModel 2.2.0, Environment.create(context, DispatchLibraryDir + CompilerPluginLibraryDir = nativeLibraryDir with the Qualcomm dispatch/compiler libraries in jniLibs), one process per run, the official token ids + <<LABEL>> positions pushed as JSON, host fp16 table lookup (android.util.Half) outside the timed interval; timed interval = the three input writes + run + logits readback per request, warm median after 5 warm-up requests. Source: /Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/device/gliclass_gpu_default_gliclass_edge_v3_s128_r4mm_sln_wfp16_tok_embeddings_fp16.json, logcat /Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/device/gliclass_gpu_default_gliclass_edge_v3_s128_r4mm_sln_wfp16_tok_embeddings_fp16.logcat.txt, state /Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/device/gliclass_gpu_default_gliclass_edge_v3_s128_r4mm_sln_wfp16_tok_embeddings_fp16.state_before.txt / .state_after.txt.",
+            "conditions: before thermal status 1, battery 40.1 C; after thermal status 1, battery 40.0 C; screen on (FLAG_KEEP_SCREEN_ON, setShowWhenLocked), USB powered, gate activity top-resumed (cgroup top-app).",
+            "parity vs the official gliclass 0.1.20 pipeline (CPU fp32, transformers 5.17.0; oracle /Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/fixtures/oracle.json): same top label (softmax argmax) on 475/482 requests and same multi-label set (sigmoid >= 0.5) on 455/482 (344/351 boundary = reference top-1 < 0.9); max |dlogit| 0.3723; max |dp| softmax 0.0396 / sigmoid 0.0753; non-finite requests 0.",
+            "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) over the valid label logits (4588 elements over 482 requests) against the Mac ai-edge-litert 2.1.6 CPU run of the same graph bytes on the same fp16-table inputs (/Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/results/gate_gliclass_edge_v3_s128_r4mm_sln_wfp16_cpu_tf16.json; recomputed by scripts/litert_compat_records.py 2026-10-02): 4349 violating elements, max |d| 0.3603, max |d|/|ref| 479.5.",
+            "Default GPU precision: logits bit-identical to the fp32-weight graph's default-precision run (482/482 rows); 475/482 top labels, 455/482 label sets.",
+            "10-02 12:17:28.847 15881 15904 I tflite  : Replacing 748 out of 748 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
+            "10-02 12:17:29.314 15881 15904 I GliclassGate: GLICLASS_GATE compiled in 591.826406 ms"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 3.8475,
+          "loads": true,
+          "max_abs_diff": 0.36025792360305786,
+          "max_rel_diff": 479.5162745825603,
+          "metrics": {
+            "argmax_equal_official": 475.0,
+            "battery_temp_c_end": 40.0,
+            "battery_temp_c_start": 40.1,
+            "boundary_argmax_equal_official": 344.0,
+            "boundary_fixtures": 351.0,
+            "element_rule_elements": 4588.0,
+            "element_rule_violations": 4349.0,
+            "finite_fixtures": 482.0,
+            "first_call_ms": 4.87073,
+            "fixtures": 482.0,
+            "label_set_equal_official": 455.0,
+            "load_compile_ms": 591.826406,
+            "max_abs_dlogit_vs_official": 0.37231284379959106,
+            "max_abs_dp_sigmoid_vs_official": 0.07527854223295394,
+            "max_abs_dp_softmax_vs_official": 0.03959111781434543,
+            "thermal_status_end": 1.0,
+            "thermal_status_start": 1.0,
+            "warm_max_ms": 5.123907,
+            "warm_median_ms": 3.8475,
+            "warm_min_ms": 3.590468,
+            "warmup_rows_excluded": 5.0
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "GpuOptions precision=DEFAULT (fp16 compute) — diagnostic probe, not a shipping setting; debug gate app com.gliclass.gate",
+          "total_ops": 748,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-10-02",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 748,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-gliclass-gate",
+            "os_build": "Android 16 (SDK 36)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Debug gate app com.gliclass.gate (android_gate/ of the run dir, Kotlin CompiledModel 2.2.0, Environment.create(context, DispatchLibraryDir + CompilerPluginLibraryDir = nativeLibraryDir with the Qualcomm dispatch/compiler libraries in jniLibs), one process per run, the official token ids + <<LABEL>> positions pushed as JSON, host fp16 table lookup (android.util.Half) outside the timed interval; timed interval = the three input writes + run + logits readback per request, warm median after 5 warm-up requests. Source: /Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/device_r5/gliclass_gpu_fp32_gliclass_edge_v3_s128_r4mm_sln_wfp16_tok_embeddings_fp16.json, logcat /Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/device_r5/gliclass_gpu_fp32_gliclass_edge_v3_s128_r4mm_sln_wfp16_tok_embeddings_fp16.logcat.txt, state /Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/device_r5/gliclass_gpu_fp32_gliclass_edge_v3_s128_r4mm_sln_wfp16_tok_embeddings_fp16.state_before.txt / .state_after.txt.",
+            "conditions: before thermal status 0, battery 37.4 C; after thermal status 0, battery 37.2 C; screen on (FLAG_KEEP_SCREEN_ON, setShowWhenLocked), USB powered, gate activity top-resumed (cgroup top-app).",
+            "parity vs the official gliclass 0.1.20 pipeline (CPU fp32, transformers 5.17.0; oracle /Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/fixtures/oracle.json): same top label (softmax argmax) on 481/482 requests and same multi-label set (sigmoid >= 0.5) on 481/482 (350/351 boundary = reference top-1 < 0.9); max |dlogit| 0.01697; max |dp| softmax 0.00173 / sigmoid 0.00264; non-finite requests 0.",
+            "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) over the valid label logits (4588 elements over 482 requests) against the Mac ai-edge-litert 2.1.6 CPU run of the same graph bytes on the same fp16-table inputs (/Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/results/gate_gliclass_edge_v3_s128_r4mm_sln_wfp16_cpu_tf16.json; recomputed by scripts/litert_compat_records.py 2026-10-02): 1 violating elements, max |d| 4.16e-05, max |d|/|ref| 0.2184.",
+            "fp16 weight storage of an F32 checkpoint: the 2 requests that differ from the official pipeline (banking77_015: top-2 softmax gap 0.00038; banking77_064: one sigmoid at 0.4998) are the same on desktop CPU; the float32-weight graph keeps all 482.",
+            "10-02 13:48:18.344  5515  5664 I tflite  : Replacing 748 out of 748 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
+            "10-02 13:48:18.778  5515  5664 I GliclassGate: GLICLASS_GATE compiled in 553.841875 ms"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 5.844427,
+          "loads": true,
+          "max_abs_diff": 4.1604042053222656e-05,
+          "max_rel_diff": 0.21840148423005565,
+          "metrics": {
+            "argmax_equal_official": 481.0,
+            "battery_temp_c_end": 37.2,
+            "battery_temp_c_start": 37.4,
+            "boundary_argmax_equal_official": 350.0,
+            "boundary_fixtures": 351.0,
+            "element_rule_elements": 4588.0,
+            "element_rule_violations": 1.0,
+            "finite_fixtures": 482.0,
+            "first_call_ms": 6.451406,
+            "fixtures": 482.0,
+            "label_set_equal_official": 481.0,
+            "load_compile_ms": 553.841875,
+            "max_abs_dlogit_vs_official": 0.0169680118560791,
+            "max_abs_dp_sigmoid_vs_official": 0.0026392276536300052,
+            "max_abs_dp_softmax_vs_official": 0.001732879758586714,
+            "thermal_status_end": 0.0,
+            "thermal_status_start": 0.0,
+            "warm_max_ms": 7.654479,
+            "warm_median_ms": 5.844427,
+            "warm_min_ms": 5.463021,
+            "warmup_rows_excluded": 5.0
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "GpuOptions precision=FP32; debug gate app com.gliclass.gate",
+          "total_ops": 748,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-10-02",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-gliclass-gate",
+            "os_build": "Android 16 (SDK 36)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Debug gate app com.gliclass.gate (android_gate/ of the run dir, Kotlin CompiledModel 2.2.0, Environment.create(context, DispatchLibraryDir + CompilerPluginLibraryDir = nativeLibraryDir with the Qualcomm dispatch/compiler libraries in jniLibs), one process per run, the official token ids + <<LABEL>> positions pushed as JSON, host fp16 table lookup (android.util.Half) outside the timed interval; timed interval = the three input writes + run + logits readback per request, warm median after 5 warm-up requests. Source: /Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/device/gliclass_npu_default_gliclass_edge_v3_s128_r4mm_sln_wfp16_tok_embeddings_fp16.json, logcat /Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/device/gliclass_npu_default_gliclass_edge_v3_s128_r4mm_sln_wfp16_tok_embeddings_fp16.logcat.txt, state /Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/device/gliclass_npu_default_gliclass_edge_v3_s128_r4mm_sln_wfp16_tok_embeddings_fp16.state_before.txt / .state_after.txt.",
+            "conditions: before thermal status 1, battery 40.1 C; after thermal status 1, battery 40.0 C; screen on (FLAG_KEEP_SCREEN_ON, setShowWhenLocked), USB powered, gate activity top-resumed (cgroup top-app).",
+            "parity vs the official gliclass 0.1.20 pipeline (CPU fp32, transformers 5.17.0; oracle /Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/fixtures/oracle.json): same top label (softmax argmax) on 480/482 requests and same multi-label set (sigmoid >= 0.5) on 462/482 (349/351 boundary = reference top-1 < 0.9); max |dlogit| 0.2365; max |dp| softmax 0.0302 / sigmoid 0.0365; non-finite requests 0.",
+            "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) over the valid label logits (4588 elements over 482 requests) against the Mac ai-edge-litert 2.1.6 CPU run of the same graph bytes on the same fp16-table inputs (/Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/results/gate_gliclass_edge_v3_s128_r4mm_sln_wfp16_cpu_tf16.json; recomputed by scripts/litert_compat_records.py 2026-10-02): 4213 violating elements, max |d| 0.2379, max |d|/|ref| 230.7.",
+            "The whole graph ran as one DispatchDelegate node ('Partitioned subgraph<0>, selected 748 ops, from a total of 748 ops. resulted in 1 partitions'); load_compile_ms includes the on-device JIT compile (0.98 s). fp16 arithmetic keeps 480/482 top labels (reference softmax gaps <= 0.0043 on the 2 changed) and 462/482 label sets (sigmoid margins <= 0.026 on the 20 changed); the card reports the NPU and does not call it a validated path.",
+            "10-02 12:18:49.790 16393 16415 I litert  : [npu_registry.cc:30] NPU accelerator registered.",
+            "10-02 12:18:49.938 16393 16415 I litert  : [compiler_plugin.cc:741] Partitioned subgraph<0>, selected 748 ops, from a total of 748 ops. resulted in 1 partitions.",
+            "10-02 12:18:50.758 16393 16415 I tflite  : Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (main)."
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 2.51302,
+          "loads": true,
+          "max_abs_diff": 0.23793542385101318,
+          "max_rel_diff": 230.6983332096475,
+          "metrics": {
+            "argmax_equal_official": 480.0,
+            "battery_temp_c_end": 40.0,
+            "battery_temp_c_start": 40.1,
+            "boundary_argmax_equal_official": 349.0,
+            "boundary_fixtures": 351.0,
+            "element_rule_elements": 4588.0,
+            "element_rule_violations": 4213.0,
+            "finite_fixtures": 482.0,
+            "first_call_ms": 4.767552,
+            "fixtures": 482.0,
+            "label_set_equal_official": 462.0,
+            "load_compile_ms": 978.126458,
+            "max_abs_dlogit_vs_official": 0.23645234107971191,
+            "max_abs_dp_sigmoid_vs_official": 0.03654936989768687,
+            "max_abs_dp_softmax_vs_official": 0.030159104660267055,
+            "thermal_status_end": 1.0,
+            "thermal_status_start": 1.0,
+            "warm_max_ms": 2.806198,
+            "warm_median_ms": 2.51302,
+            "warm_min_ms": 2.444323,
+            "warmup_rows_excluded": 5.0
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "QualcommOptions htpPerformanceMode=BURST, JIT (first compile, cache dir of a fresh app process); debug gate app com.gliclass.gate",
+          "total_ops": 1,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-02/gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "gliclass-edge-v3.0",
+    "id": "gliclass-edge-v3.0__gliclass_edge_v3_s128_wfp16",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/GLiClass-Edge-v3.0-LiteRT",
+    "task": "zero-shot-classification"
+  },
+  "pitfalls": [
+    "Weight storage does not set the GPU compute precision: request GpuOptions(precision = FP32). At the default precision the outputs stay finite but the answers move: Galaxy S26 475/482 top labels and 455/482 label sets, Mac Metal 479/469 (card 'Galaxy S26, gate app' and 'fp16, the GPU default precision and the NPU').",
+    "The graph takes host-built inputs: inputs_embeds [1,128,384] from host_assets/tok_embeddings_fp16.bin ([50370,384] float16 rows upcast to float32, [PAD] 50283 rows at padded positions), attention_mask [1,128] (1 real / 0 pad), label_routing [1,25,128] (row k = 1 at the k-th <<LABEL>> token); output logits [1,1,1,25], slots past the request's labels are ignored; softmax (single-label) or sigmoid >= threshold (multi-label) runs on the host (card 'Host contract').",
+    "The request string is <<LABEL>>label 1<<LABEL>>label 2…<<SEP>> + prompt + text with nothing between the prompt and the text; tokenize with the source tokenizer.json ([CLS] … [SEP], ByteLevel prefix space per piece between added tokens); at most 25 labels and 128 tokens, longer requests raise an error, nothing is truncated (card 'Host contract', 'Limits').",
+    "Size option, not the default: on the 552 test requests the float16-weight graphs change 2 near-tie answers (banking77_015, top-2 logits 0.0012 apart; banking77_064, one sigmoid 0.0002 below 0.5) that the float32-weight graphs keep, because the converter folds each LayerNorm scale into the next FULLY_CONNECTED weights and float16 rounds those products by up to 7.7e-4 (card 'fp16, the GPU default precision and the NPU').",
+    "The shipped graph computes 15 LayerNorms on x*2^-k with eps*2^-2k (k = 5 in layers 3-6, 6 in layers 7-9 and the final norm) and uses a -1e4 mask; this is exact in FP32 (bit-identical logits to the unmodified graph) and keeps fp16 computation finite but not exact: the Galaxy S26 Hexagon NPU (JIT, one partition, 2.51 ms) keeps 480/482 top labels and 462/482 label sets, every change a near tie, so the card reports the NPU and does not call it a validated path (card 'fp16, the GPU default precision and the NPU').",
+    "The checkpoint is float32: the float16 host table rounds values by up to 1.2e-4 (max logit difference 0.0090 against 0.000036 with a float32 table, same answers on all 552 requests) (card 'fp16 …').",
+    "Validated on one desktop (Apple M4 Max, ai-edge-litert 2.1.6 CPU and Metal explicit FP32) and one phone (Galaxy S26, LiteRT 2.2.0 GPU explicit FP32 and CPU); English only; conversion fidelity to the official gliclass pipeline (552/552 answers), not a task-accuracy claim — own-subset gold agreement 67/144 SemIf, 115/200 ag_news, 71/200 banking77 (25-way) is not the publisher's benchmark (card 'Agreement with the dataset labels', 'Limits')."
+  ],
+  "schema_version": "1.2"
+}

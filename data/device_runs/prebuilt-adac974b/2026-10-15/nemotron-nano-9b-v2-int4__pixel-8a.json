@@ -1,0 +1,63 @@
+{
+  "artifact": "NVIDIA-Nemotron-Nano-9B-v2_int4.litertlm",
+  "artifact_sha256": "9b0bd48b3695051274cd738c4a7931198e2f830fc268bca59573eab0a07d84a3",
+  "device": "pixel-8a",
+  "model_id": "nemotron-nano-9b-v2-int4",
+  "notes": "Hub litert-community/NVIDIA-Nemotron-Nano-9B-v2 (upload commit 8bdf9ff0, 2026-10-16 15:13 JST; main 968a4ca6 changed README.md only; the Hub tree's LFS sha256 = the lane's ship/SHA256SUMS). Lane litertlm-convert aa_mobile_b2_work/nemotron_nano_9b_v2 round r7 (device/r1/p8a, hold 2026-10-15 16:32:26-16:35:44 JST; SPEED_LADDER.md row 10 = no-go). Pixel 8a (Tensor G3, Mali-G715, MemTotal 7,754,700 kB, MemAvailable 4,321,480 kB at the first sample): the int4 file's GPU engine build delegated prefill_1024 whole to LITERT_CL, then the runtime prepared the weights on the CPU side (Mali) and MemAvailable fell to 382,932 kB while the process RSS stayed far below its 2,608,204 kB VmHWM (the memory went outside the process), where the harness's guard stopped it (no answer; uptime 21076.0 -> 21122.87 s = no reboot) - the stop of granite-4.1-8b, Ministral-3-8B-Instruct-2512 and Falcon-H1R-7B on this phone (DECISIONS #222 / #223 / #227), recorded the same way (memory_cap_exceeded, the guard line as error). A capacity stop before the hybrid's GPU kernels ran a token. The round dir itself was removed by the lane's dry run at 18:04; the evidence is the transcript copy (device/r1_p8a_lost_20261015/README.md). The int8 file (9,072,259,712 B) was not tried: larger than the phone's RAM. Galaxy S26 (SM-S942Q, MemTotal 11,389,756 kB): no record - not run by the lane's rule. Its one hold for this file (2026-10-15, acquired 22:47:32 JST, device/r1/s26/) came right after a sibling's hold in which the phone left USB, so it found the phone absent (device_id.txt 'adb: device 'RFGL80R6A6H' not found'; 'STOP: RFGL80R6A6H not in adb devices' at 22:47:43, leg exit 99, REBOOT_STOP; 'STOP: device gone or rebooted during i4_gpu_timing - hard stop for this phone'): nothing was pushed and no engine started. The lane then ruled the phone's GPU rows of this file no-go, not attempted (SPEED_LADDER.md rows 6 / 13): Mamba2-hybrid GPU engines took that phone down twice (Zamba2-2.7B int8 on litert-lm 0.16.0, 2026-08-25; Falcon-H1R-7B int4 4.69 GB on this kit, 2026-10-15, the #227 notes) and this int4 file is 5.59 GB. The int8 file was not started on the S26 GPU (an 8B-class int8 warm-up restarted that phone on 2026-10-14, #223 (4)) and neither file on its CPU (peak arithmetic: 1.5 x the int8 / 2.0 x the int4 file, above the 7.9 GB process that restarted the phone's framework).",
+  "quantization": "int4 blockwise-32 min-max on the linears with the block scales floored at 2^-14, int8 lm_head and embedding; fp32 GPU activations declared",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-15",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-aab2",
+        "os_build": "Android 16 (CP1A.260505.005)",
+        "runtime": "litert-lm",
+        "runtime_version": "prebuilt-adac974b",
+        "soc": "Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": "GUARD_KILL avail=382932 pid=24383",
+      "evidence": [
+        "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, sha256 adac974b…; kit = litertlm-convert team_repack_20261009/r9/binary/prebuilt)",
+        "[16:34:52] bundle on device: 9b0bd48b3695051274cd738c4a7931198e2f830fc268bca59573eab0a07d84a3 (5592589856 B, push 120.4 s) = Mac",
+        "one attempt by rule (--backend=gpu, text prompt 'What is the capital of France? Answer in one sentence. /no_think', --max_output_tokens=400); a 2-second sampler stops the process when MemAvailable falls under 400,000 kB",
+        "VERBOSE: Replacing 3582 out of 3582 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
+        "W0000 00:00:1792049696.810634   24383 gpu_model_builder.cc:4455] Weights preparation on Gpu is disabled for PowerVR, Broadcom, Mali GPUs and non-OpenCL/WebGPU/Metal backends.",
+        "[16:35:40] prompt_1 done: rc(adb)=0 EXIT=143 wall 42.7 s",
+        "GUARD_KILL avail=382932 pid=24383",
+        "parsed: i4_gpu_try gpu: gate FAIL 0/1 | answers: ''",
+        "source: litertlm-convert aa_mobile_b2_work/nemotron_nano_9b_v2/device/r1_p8a_lost_20261015/ = transcript copies of what the round's files printed before the lane's own dry run deleted the round dir at 18:04 the same day (README.md there = the source and what is lost: gpu_leg.json, samples 4-14 of 17, the full logs); accepted as the ladder row's evidence by the lane's supervisor",
+        "OS build and SoC from aa_mobile_b2_work/falcon_h1r_7b/device/r1/p8a/device_id.txt (the same phone 3 minutes earlier in the same boot: boot epoch 1792028616.3 there, 1792028616.1 here)"
+      ],
+      "failure_class": "memory_cap_exceeded",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "memavail_at_start_kib": 4321480.0,
+        "memavail_min_kib": 382932.0,
+        "sampler_samples": 17.0,
+        "seconds_to_stop": 42.7,
+        "signatures_compiled": 1.0,
+        "uptime_after_s": 21122.87,
+        "uptime_before_s": 21076.0,
+        "vmhwm_kib": 2608204.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

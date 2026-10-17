@@ -123,6 +123,11 @@ def operand_meta(
     - `operand_a_rank..d_rank` = the input tensor's rank when known — the
       mixed-rank rows of the LiteRT #10445 class (`ADD` of a rank-2 runtime
       tensor and a rank-3 constant, #10231) name both ranks;
+    - `min_operand_rank` = the smallest known input rank — the rank-0 rows
+      (a reduction without `keepdim` feeding broadcast arithmetic: ML Drift
+      accepts the `ADD` and miscomputes it, or refuses `DIV` / `MUL` with
+      "has bad input dims size: 0") name it as `min_operand_rank: 0`, whichever
+      side the scalar is on;
     - PAD family: `axis` (see `pad_axis`);
     - FULLY_CONNECTED / CONV_2D / DEPTHWISE_CONV_2D: `weight_dtype` (the
       constant weight's dtype, e.g. "int8") and `weight_source` ("constant",
@@ -139,6 +144,13 @@ def operand_meta(
         meta[key] = "constant" if tensor.is_constant else "activation"
         if tensor.rank is not None:
             meta[f"{key}_rank"] = tensor.rank
+    known_ranks = [
+        subgraph.tensors[i].rank
+        for i in node.inputs
+        if i >= 0 and subgraph.tensors[i].rank is not None
+    ]
+    if known_ranks:
+        meta["min_operand_rank"] = min(known_ranks)
     if node.op in _PAD_OPS:
         meta["axis"] = pad_axis(subgraph, node)
     if node.op in _WEIGHTED_OPS and len(node.inputs) >= 2:

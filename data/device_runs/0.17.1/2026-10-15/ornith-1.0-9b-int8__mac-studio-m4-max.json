@@ -1,0 +1,55 @@
+{
+  "artifact": "Ornith-1.0-9B_int8.litertlm",
+  "artifact_sha256": "b42d5c1e7393b26b2006e79d2f339b2051c6bae0a7e49f48981f7bcbe37e122f",
+  "device": "mac-studio-m4-max",
+  "model_id": "ornith-1.0-9b-int8",
+  "notes": "Hub litert-community/Ornith-1.0-9B (upload commit f0360451). Lane litertlm-convert aa_mobile_b2_work/ornith10_9b round r4 (gate/v0171/, 2026-10-15 07:07-07:12 JST, one pass of the lanes' export slot (slot: /Users/USER/code/litertlm-convert/aa_mobile_b2_work/.export_slot acquired after 9534 s), each run behind a RAM gate of 70 GB x 3, a turn in the Mac window line and a swap guard): `uvx --from litert-lm==0.17.1 litert-lm run <file> --backend cpu --prompt \"What is the capital of France? Answer in one word.\" --cache no`, one fresh CPU process per file, on cand/Ornith-1.0-9B_int8.litertlm (the bytes of ship/). The Hub card states this run (paragraph 1: on litert-lm 0.17.1 both files answered a plain `run`, \"Paris\", Mac CPU, one run each). The manifest's min_runtime_version stays 0.18.0. No benchmark: throughput cells null.",
+  "quantization": "dynamic int8 on every linear layer + int8 embedding; the convs, the delta rule and the 48 GatedDeltaNet in_proj_a / in_proj_b projections float; fp32 GPU activations declared; 6 prefill signatures + decode",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-15",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "command (tools_o10/slot_batch.sh step v0171, \"$(F $n)\" = cand/Ornith-1.0-9B_int8.litertlm): uvx --from litert-lm==0.17.1 litert-lm run \"$(F $n)\" --backend cpu --prompt \"What is the capital of France? Answer in one word.\" --cache no",
+        "bundle: Ornith-1.0-9B_int8.litertlm sha256 b42d5c1e7393b26b2006e79d2f339b2051c6bae0a7e49f48981f7bcbe37e122f = the Hugging Face LFS oid of litert-community/Ornith-1.0-9B at main (upload commit f0360451), tree API read 2026-10-17 17:48 JST (litertlm-convert aa_mobile_b2_work/ornith10_9b/tools_o10/r4z_hub_tree_20261017.json); run as cand/Ornith-1.0-9B_int8.litertlm, an APFS clone with the same sha256 (inspect/cand_sha256.txt)",
+        "ramgate: held 3 samples after 120 s (reclaimable 102.7 GB (need 70), window n-a, export slot n-a)",
+        "quiet_turn: turn after 360 s in line, running: bash /Users/m ...",
+        "stdout: Paris",
+        "EXIT=0",
+        "gate/gate_ship.log: 2026-10-15 07:09:22 JST 0.17.1 run int8 exit 0: Paris EXIT=0",
+        "log: gate/v0171/run_int8.log"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "answers_with_expect": 1.0,
+        "processes": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -57,9 +57,26 @@
         }
       ],
       "status": "delegated"
+    },
+    {
+      "conditions": "Galaxy S26 (SM-S942Q, SM8850 Hexagon), Android 16 (build BP4A.251205.006.S942QOPS1AZH9), LiteRT 2.2.0 C-API runner (--accel npu+cpu, BURST, JIT with a cold cache): the Qualcomm compiler plugin (QAIRT 2.47.0.260601114230) maps each odml.rms_norm composite to the HTP RmsNorm (q::rmsnorm_fp16 in the compile log, 104 lines for the 104 composite sites; the whole graph 1902 / 1902 ops in 1 partition, DispatchDelegate 1 / 1); the arithmetic is fp16: a site whose fp16-safe rescale needs a clamp (eps x 4^-k underflows fp16) cannot be a composite and stays plain ops (4 sites here); per-token parity equals the plain-op form of the same graph on the 90-window whole set (both miss the lane bar at quiet non-silent tokens: min 0.79147 vs 0.77306); 75.0 vs 96.0 ms per 10 s call, JIT compile 55.8 vs 97.2 s",
+      "constraints": {
+        "composite_name": "odml.rms_norm"
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-10-13",
+        "litert_version": "2.2.0",
+        "source_model": "EmbeddingGemma 2 audio encoder (fp16-safe rewrite with composite norms; 10 s graph)"
+      },
+      "op": "STABLEHLO_COMPOSITE",
+      "provenance": "measured",
+      "status": "delegated"
     }
   ],
-  "generated_at": "2026-08-28",
+  "generated_at": "2026-10-15",
   "litert_version": "2.2.0",
   "schema_version": "1.0",
   "target": {

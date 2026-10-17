@@ -1,0 +1,113 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x256x768:float32;1x256:float32",
+  "license": "cc-by-sa-4.0",
+  "model_id": "modernbert-ja-310m-decision__modernbert_ja_310m_decision_s256_wfp16",
+  "notes": "Japanese cross-encoder decision graph (ModernBERT-Ja-310M of argos1111/modernbert-ja-310m-jev, window N=256 tokens, one logit per (context, candidate) pair); inputs inputs_embeds [1,256,768] (host token-table lookup, fp16 table), attention_mask [1,256]; output logit [1,1,1,1]; fp16 FULLY_CONNECTED weights + DEQUANTIZE, everything else float32 (1,911 operators); 473888976 B; random inputs give a meaningless logit but exercise every op; GPU needs explicit FP32 precision on devices (default fp16 moves answers, see the device records)",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-10-02",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: ERROR: failed to create XNNPACK runtime",
+        "error: ERROR: Node number 1911 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 1911 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 1911 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 1911 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 1911 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 1911 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 1911 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 1911 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 1911 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 1911 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 1911 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 1911 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors",
+        "error: ERROR: Node number 1911 (TfLiteXNNPackDelegate) failed to prepare.",
+        "error: ERROR: [litert_compiled_model.cc:164] Failed to allocate tensors"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "backend reported a fatal error during run: error: ERROR: failed to create XNNPACK runtime",
+      "failure_class": "backend_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-10-02",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: Aborted()"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": "RuntimeError: Aborted(). Build with -sASSERTIONS for more info.",
+      "failure_class": "compile_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/mlboydaisuke/ModernBERT-Ja-310M-Decision-LiteRT/resolve/main/modernbert_ja_310m_decision_s256_wfp16.tflite"
+}

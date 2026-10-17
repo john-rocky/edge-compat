@@ -1,0 +1,391 @@
+{
+  "artifacts": [
+    {
+      "file": "gliner25_multi_s128_wfp16.tflite",
+      "sha256": "a4603fbcead732e6d50a0716ce80a79fbecd9e3763c07e7d2463f827a1c8b87d",
+      "size_mb": 182.988
+    }
+  ],
+  "benchmarks": [],
+  "browser": {
+    "backends": [
+      {
+        "backend": "wasm_xnnpack",
+        "date": "2026-10-02",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": null,
+        "latency_p50_ms": 1308.485,
+        "loads": true,
+        "max_rel_diff": null,
+        "output_match": null,
+        "provenance": "measured",
+        "runs": true
+      },
+      {
+        "backend": "webgpu_mldrift",
+        "date": "2026-10-02",
+        "env": {
+          "browser": "chromium",
+          "browser_version": "151.0.7922.34",
+          "headless": true,
+          "jspi": true,
+          "litertjs_core_version": "2.5.3",
+          "machine_label": "mac-studio-m4-max",
+          "os": "macOS",
+          "os_version": "27.0.0",
+          "webgpu_adapter": {
+            "architecture": "metal-3",
+            "description": "",
+            "device": "",
+            "vendor": "apple"
+          }
+        },
+        "full_delegation": true,
+        "latency_p50_ms": 21.68,
+        "loads": true,
+        "max_rel_diff": 1.5858585858585859,
+        "output_match": false,
+        "provenance": "measured",
+        "runs": true
+      }
+    ],
+    "demo_url": null,
+    "sweep_source": "data/sweep/2.5.3/2026-10-02/gliner2.5-multi__gliner25_multi_s128_wfp16.json"
+  },
+  "conversion": {
+    "command": "export_round3.py --seq 128 (unified dense-prefix recipe with --mask-neg -1e4 --ln-shift 3) then quantize_shipment.py --seq 128 (ai-edge-quantizer 0.8.0 FLOAT_CASTING, FULLY_CONNECTED weights only); REPRODUCE.md of the lane, graph contract graph_contract_s128.json",
+    "quantization": "float16 weight storage (ai-edge-quantizer 0.8.0 FLOAT_CASTING, weight-only 16-bit): the 96 FULLY_CONNECTED weight tensors stored as float16 with a DEQUANTIZE to float32; inputs, outputs, activations and every other constant stay float32 (card 'Files and supported configuration').",
+    "tool": "litert-torch",
+    "tool_version": "0.9.3 (ai-edge-litert 2.1.6; torch 2.12.1; transformers 4.57.6; gliner2 2.0.0; ai-edge-quantizer 0.8.0 for the float16 weight storage)"
+  },
+  "cross_runtime": [],
+  "delegation": {
+    "backend": "gpu_mldrift",
+    "blocking_ops": [
+      "DEQUANTIZE",
+      "SQUARED_DIFFERENCE",
+      "LOGISTIC"
+    ],
+    "coverage_ops_pct": 89.0,
+    "lint_report_version": "1.1",
+    "litert_version": "2.2.0",
+    "matched_provenance_counts": {
+      "measured": 1118,
+      "unmatched": 30
+    },
+    "partitions": 127
+  },
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-10-02",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1147,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-gliner25multi-gate",
+            "os_build": "Android 16 (SDK 36)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Debug gate app com.gliner25multi.gate (android/gate/, Kotlin CompiledModel 2.2.0, Environment.create(context, BuiltinNpuAcceleratorProvider(Qualcomm)) with the Qualcomm dispatch/compiler libraries in jniLibs), one process per (graph, accelerator), inputs pushed as raw float32 files built on the Mac from the float16 host table (rows upcast to float32); timed interval = the five input writes + run + packed-output readback per input, 2 warm-ups + 5 timed repetitions, median per input. Source: /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/cpu_default_gliner25_multi_s128_wfp16_20261002_130743.annotated.json, decoded spans /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/cpu_default_gliner25_multi_s128_wfp16_20261002_130743.decoded.json, logcat /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/cpu_default_gliner25_multi_s128_wfp16_20261002_130743.logcat.txt, dumpsys before/after /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/cpu_default_gliner25_multi_s128_wfp16_20261002_130743.before.txt / .after.txt.",
+            "conditions: job start thermal status 0, battery 37.6 C; job end status 1, battery 38.8 C; first timed input at status 0, 37.6 C; screen on (FLAG_KEEP_SCREEN_ON, setShowWhenLocked), USB powered, gate activity top-resumed (warm).",
+            "parity vs the official gliner2 2.0.0 fp32 CPU implementation (oracle /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/fixtures/f1/oracle_fp32.json, whitespace splitter for English / char splitter for Japanese, threshold 0.5): identical span sets on 70/70 inputs, span micro-F1 1.000, max |dconfidence| 0.001377, non-finite inputs 0.",
+            "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) over the packed output (5467700 elements over 70 inputs) against the Mac ai-edge-litert 2.1.6 CPU run of the same graph bytes on the same float16-table inputs (recomputed by scripts/litert_compat_records.py 2026-10-02): 1572 violating elements, max |d| 0.0002432, max |d|/|ref| 2.098.",
+            "Reference row: on-device CPU with the same inputs; XNNPACK takes all but one node (the DEQUANTIZE-fed FULLY_CONNECTED weights are float16 constants).",
+            "10-02 13:17:44.021 28777 28800 I litert  : [cpu_registry.cc:75] XNNPACK CPU accelerator registered.",
+            "10-02 13:17:44.151 28777 28800 I tflite  : Created TensorFlow Lite XNNPACK delegate for CPU.",
+            "10-02 13:17:44.152 28777 28800 I tflite  : Replacing 1147 out of 1148 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 3 partitions for subgraph 0 (main)."
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": 49.4759895,
+          "loads": true,
+          "max_abs_diff": 0.00024318695068359375,
+          "max_rel_diff": 2.09808349609375,
+          "metrics": {
+            "battery_temp_c_end": 38.8,
+            "battery_temp_c_first_input": 37.6,
+            "battery_temp_c_start": 37.6,
+            "element_rule_elements": 5467700.0,
+            "element_rule_violations": 1572.0,
+            "first_input_median_ms": 32.720156,
+            "fixtures": 70.0,
+            "identical_span_sets": 70.0,
+            "load_compile_ms": 332.425989,
+            "max_abs_dconfidence_vs_reference": 0.0013766884803771973,
+            "max_ms": 59.023803,
+            "min_ms": 31.200469,
+            "nonfinite_inputs": 0.0,
+            "span_f1": 1.0,
+            "spans_fn": 0.0,
+            "spans_fp": 0.0,
+            "spans_tp": 277.0,
+            "sustained_median_ms": 49.4759895,
+            "thermal_status_end": 1.0,
+            "thermal_status_first_input": 0.0,
+            "thermal_status_start": 0.0,
+            "timed_repetitions_per_input": 5.0,
+            "warmups_per_input": 2.0
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "CpuOptions numThreads=4 (XNNPACK); debug gate app com.gliner25multi.gate",
+          "total_ops": 1148,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-02/gliner2.5-multi__gliner25_multi_s128_wfp16__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-10-02",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1148,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-gliner25multi-gate",
+            "os_build": "Android 16 (SDK 36)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Debug gate app com.gliner25multi.gate (android/gate/, Kotlin CompiledModel 2.2.0, Environment.create(context, BuiltinNpuAcceleratorProvider(Qualcomm)) with the Qualcomm dispatch/compiler libraries in jniLibs), one process per (graph, accelerator), inputs pushed as raw float32 files built on the Mac from the float16 host table (rows upcast to float32); timed interval = the five input writes + run + packed-output readback per input, 2 warm-ups + 5 timed repetitions, median per input. Source: /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/gpu_default_gliner25_multi_s128_wfp16_20261002_134342.annotated.json, decoded spans /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/gpu_default_gliner25_multi_s128_wfp16_20261002_134342.decoded.json, logcat /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/gpu_default_gliner25_multi_s128_wfp16_20261002_134342.logcat.txt, dumpsys before/after /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/gpu_default_gliner25_multi_s128_wfp16_20261002_134342.before.txt / .after.txt.",
+            "conditions: job start thermal status 0, battery 36.6 C; job end status 0, battery 36.6 C; first timed input at status 0, 36.6 C; screen on (FLAG_KEEP_SCREEN_ON, setShowWhenLocked), USB powered, gate activity top-resumed (foreground).",
+            "parity vs the official gliner2 2.0.0 fp32 CPU implementation (oracle /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/fixtures/f1/oracle_fp32.json, whitespace splitter for English / char splitter for Japanese, threshold 0.5): identical span sets on 69/70 inputs, span micro-F1 0.998, max |dconfidence| 0.03256, non-finite inputs 0.",
+            "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) over the packed output (5467700 elements over 70 inputs) against the Mac ai-edge-litert 2.1.6 CPU run of the same graph bytes on the same float16-table inputs (recomputed by scripts/litert_compat_records.py 2026-10-02): 2682186 violating elements, max |d| 2.281, max |d|/|ref| 2.031e+04.",
+            "Default GPU precision: finite outputs, one 0.5-threshold span flipped (fixture 30 person 'Marco', official confidence 0.517), max |dconfidence| 0.033 — the reason the card requires explicit FP32.",
+            "10-02 13:46:45.866  3116  3138 I litert  : [npu_registry.cc:30] NPU accelerator registered.",
+            "10-02 13:46:46.004  3116  3138 I tflite  : Replacing 1148 out of 1148 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main)."
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 15.035599000000001,
+          "loads": true,
+          "max_abs_diff": 2.2813587188720703,
+          "max_rel_diff": 20312.8828125,
+          "metrics": {
+            "battery_temp_c_end": 36.6,
+            "battery_temp_c_first_input": 36.6,
+            "battery_temp_c_start": 36.6,
+            "element_rule_elements": 5467700.0,
+            "element_rule_violations": 2682186.0,
+            "first_input_median_ms": 13.904739,
+            "fixtures": 70.0,
+            "identical_span_sets": 69.0,
+            "load_compile_ms": 1225.536405,
+            "max_abs_dconfidence_vs_reference": 0.032560884952545166,
+            "max_ms": 19.388073,
+            "min_ms": 13.821771,
+            "nonfinite_inputs": 0.0,
+            "span_f1": 0.9981916817359855,
+            "spans_fn": 1.0,
+            "spans_fp": 0.0,
+            "spans_tp": 276.0,
+            "sustained_median_ms": 15.035599000000001,
+            "thermal_status_end": 0.0,
+            "thermal_status_first_input": 0.0,
+            "thermal_status_start": 0.0,
+            "timed_repetitions_per_input": 5.0,
+            "warmups_per_input": 2.0
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "GpuOptions precision=DEFAULT (fp16 compute) — diagnostic probe, not a shipping setting; debug gate app com.gliner25multi.gate",
+          "total_ops": 1148,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-02/gliner2.5-multi__gliner25_multi_s128_wfp16__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu_mldrift",
+          "context_length": null,
+          "date": "2026-10-02",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1148,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-gliner25multi-gate",
+            "os_build": "Android 16 (SDK 36)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Debug gate app com.gliner25multi.gate (android/gate/, Kotlin CompiledModel 2.2.0, Environment.create(context, BuiltinNpuAcceleratorProvider(Qualcomm)) with the Qualcomm dispatch/compiler libraries in jniLibs), one process per (graph, accelerator), inputs pushed as raw float32 files built on the Mac from the float16 host table (rows upcast to float32); timed interval = the five input writes + run + packed-output readback per input, 2 warm-ups + 5 timed repetitions, median per input. Source: /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/gpu_fp32_gliner25_multi_s128_wfp16_20261002_105709.annotated.json, decoded spans /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/gpu_fp32_gliner25_multi_s128_wfp16_20261002_105709.decoded.json, logcat /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/gpu_fp32_gliner25_multi_s128_wfp16_20261002_105709.logcat.txt, dumpsys before/after /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/gpu_fp32_gliner25_multi_s128_wfp16_20261002_105709.before.txt / .after.txt.",
+            "conditions: job start thermal status 0, battery 34.1 C; job end status 0, battery 34.1 C; first timed input at status 0, 34.1 C; screen on (FLAG_KEEP_SCREEN_ON, setShowWhenLocked), USB powered, gate activity top-resumed (foreground).",
+            "parity vs the official gliner2 2.0.0 fp32 CPU implementation (oracle /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/fixtures/f1/oracle_fp32.json, whitespace splitter for English / char splitter for Japanese, threshold 0.5): identical span sets on 70/70 inputs, span micro-F1 1.000, max |dconfidence| 0.001369, non-finite inputs 0.",
+            "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) over the packed output (5467700 elements over 70 inputs) against the Mac ai-edge-litert 2.1.6 CPU run of the same graph bytes on the same float16-table inputs (recomputed by scripts/litert_compat_records.py 2026-10-02): 2152 violating elements, max |d| 0.0001841, max |d|/|ref| 3.052.",
+            "GPU explicit FP32 is the validated setting of this family (the default precision stays finite but flips a 0.5-threshold span: s128 69/70, see the probe row for s128).",
+            "10-02 10:57:10.007 27340 27364 I litert  : [npu_registry.cc:30] NPU accelerator registered.",
+            "10-02 10:57:10.307 27340 27364 I tflite  : Replacing 1148 out of 1148 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main)."
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 24.286589,
+          "loads": true,
+          "max_abs_diff": 0.00018405914306640625,
+          "max_rel_diff": 3.0517578125,
+          "metrics": {
+            "battery_temp_c_end": 34.1,
+            "battery_temp_c_first_input": 34.1,
+            "battery_temp_c_start": 34.1,
+            "element_rule_elements": 5467700.0,
+            "element_rule_violations": 2152.0,
+            "first_input_median_ms": 24.468073,
+            "fixtures": 70.0,
+            "identical_span_sets": 70.0,
+            "load_compile_ms": 1489.946718,
+            "max_abs_dconfidence_vs_reference": 0.0013687610626220703,
+            "max_ms": 31.088385,
+            "min_ms": 22.834375,
+            "nonfinite_inputs": 0.0,
+            "span_f1": 1.0,
+            "spans_fn": 0.0,
+            "spans_fp": 0.0,
+            "spans_tp": 277.0,
+            "sustained_median_ms": 24.286589,
+            "thermal_status_end": 0.0,
+            "thermal_status_first_input": 0.0,
+            "thermal_status_start": 0.0,
+            "timed_repetitions_per_input": 5.0,
+            "warmups_per_input": 2.0
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "GpuOptions precision=FP32; debug gate app com.gliner25multi.gate",
+          "total_ops": 1148,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-02/gliner2.5-multi__gliner25_multi_s128_wfp16__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-10-02",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1148,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-gliner25multi-gate",
+            "os_build": "Android 16 (SDK 36)",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Debug gate app com.gliner25multi.gate (android/gate/, Kotlin CompiledModel 2.2.0, Environment.create(context, BuiltinNpuAcceleratorProvider(Qualcomm)) with the Qualcomm dispatch/compiler libraries in jniLibs), one process per (graph, accelerator), inputs pushed as raw float32 files built on the Mac from the float16 host table (rows upcast to float32); timed interval = the five input writes + run + packed-output readback per input, 2 warm-ups + 5 timed repetitions, median per input. Source: /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/npu_default_gliner25_multi_s128_wfp16_20261002_123951.annotated.json, decoded spans /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/npu_default_gliner25_multi_s128_wfp16_20261002_123951.decoded.json, logcat /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/npu_default_gliner25_multi_s128_wfp16_20261002_123951.logcat.txt, dumpsys before/after /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/device/round5/npu_default_gliner25_multi_s128_wfp16_20261002_123951.before.txt / .after.txt.",
+            "conditions: job start thermal status 0, battery 36 C; job end status 0, battery 36 C; first timed input at status 0, 36 C; screen on (FLAG_KEEP_SCREEN_ON, setShowWhenLocked), USB powered, gate activity top-resumed (foreground).",
+            "parity vs the official gliner2 2.0.0 fp32 CPU implementation (oracle /Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/fixtures/f1/oracle_fp32.json, whitespace splitter for English / char splitter for Japanese, threshold 0.5): identical span sets on 69/70 inputs, span micro-F1 0.998, max |dconfidence| 0.04781, non-finite inputs 0.",
+            "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) over the packed output (5467700 elements over 70 inputs) against the Mac ai-edge-litert 2.1.6 CPU run of the same graph bytes on the same float16-table inputs (recomputed by scripts/litert_compat_records.py 2026-10-02): 2655666 violating elements, max |d| 1.06, max |d|/|ref| 1.936e+04.",
+            "The whole graph ran as one DispatchDelegate node ('Replacing 1 out of 1 node(s) with delegate (DispatchDelegate)' after 'Partitioned subgraph<0>, selected N ops, from a total of N ops'); load_compile_ms is the on-device JIT compile. Every span-set difference is a 0.5-threshold near-tie: official confidences 0.502 (fixture 71 product) and 0.503 (fixture 46 location) dropped, one extra span at NPU confidence 0.519 (fixture 72 location); the lane reports the NPU on the card but does not call it a validated path.",
+            "10-02 12:47:28.583 20944 20971 I litert  : [npu_registry.cc:30] NPU accelerator registered.",
+            "10-02 12:47:28.851 20944 20971 I litert  : [compiler_plugin.cc:741] Partitioned subgraph<0>, selected 1148 ops, from a total of 1148 ops. resulted in 1 partitions.",
+            "10-02 12:47:33.943 20944 20971 I tflite  : Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (main)."
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 8.253828,
+          "loads": true,
+          "max_abs_diff": 1.0596599578857422,
+          "max_rel_diff": 19361.908203125,
+          "metrics": {
+            "battery_temp_c_end": 36.0,
+            "battery_temp_c_first_input": 36.0,
+            "battery_temp_c_start": 36.0,
+            "element_rule_elements": 5467700.0,
+            "element_rule_violations": 2655666.0,
+            "first_input_median_ms": 8.348594,
+            "fixtures": 70.0,
+            "identical_span_sets": 69.0,
+            "load_compile_ms": 5402.455311,
+            "max_abs_dconfidence_vs_reference": 0.04780912399291992,
+            "max_ms": 9.721094,
+            "min_ms": 8.061354,
+            "nonfinite_inputs": 0.0,
+            "span_f1": 0.9981916817359855,
+            "spans_fn": 1.0,
+            "spans_fp": 0.0,
+            "spans_tp": 276.0,
+            "sustained_median_ms": 8.253828,
+            "thermal_status_end": 0.0,
+            "thermal_status_first_input": 0.0,
+            "thermal_status_start": 0.0,
+            "timed_repetitions_per_input": 5.0,
+            "warmups_per_input": 2.0
+          },
+          "output_match": false,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "QualcommOptions htpPerformanceMode=BURST, JIT (first compile, cache dir of a fresh app process); debug gate app com.gliner25multi.gate",
+          "total_ops": 1148,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-02/gliner2.5-multi__gliner25_multi_s128_wfp16__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "gliner2.5-multi",
+    "id": "gliner2.5-multi__gliner25_multi_s128_wfp16",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/GLiNER2.5-Multi-LiteRT",
+    "task": "token-classification"
+  },
+  "pitfalls": [
+    "Weight storage does not set the GPU compute precision: request GpuOptions(precision = FP32). At the default precision the outputs stay finite but one of 70 span sets changes (card 'Measured quality and performance', s128 row 69/70, max confidence drift 3.3e-2).",
+    "The graph is the dense prefix of the upstream BoundaryExtractor (mDeBERTa-v3-base encoder, boundary encoder, boundary query head, per-token projections): the host looks up the word-embedding rows before the graph (host_assets/word_embeddings_fp16.bin [250112,768] float16, rows upcast to float32; fp32 table as reference) and runs the upstream gliner2 sparse decoder after it (host_assets/runtime/, 16 decoder tensors); the five inputs are args_0..args_4 = inputs_embeds [1,128,768], attention_mask [1,128], text_routing [1,48,128], query_routing [1,5,128], text_mask [1,48]; one packed float32 output [1,1,1,78110] with 17 logical slices (graph_contract_s128.json).",
+    "The caller selects the word splitter per request — official whitespace for space-delimited text such as English, official char for Japanese / CJK; there is no language detector, and capacity counts processed text slots and encoded tokens (text ending in 。 takes one extra slot). Fixed window N=128 / T=48: longer inputs are rejected, not truncated (card 'Files and supported configuration', HOST_CONTRACT.md).",
+    "Two fp32-exact rewrites are inside the shipped graph (attention-mask fill -10000 instead of the float32 minimum; each of the 29 active LayerNorms computed on x*2^-3 with eps*2^-6; 60/60 bit-identical comparisons with the stock graph) so the same files stay finite under fp16 delegates — finite, not exact: the Galaxy S26 Hexagon NPU (JIT) matched 69/70, 72/75 and 77/80 span sets with every difference a 0.5-threshold near-tie (max confidence drift 4.8e-2), so the card reports the NPU and does not offer it as a supported path (card 'Measured quality and performance').",
+    "Back-to-back requests heat the phone: the s256 and s512 GPU jobs rose from thermal status 0 to 1-2 and their sustained medians (93.0 / 422.5 ms) are 1.5-2.1x the cool opening values (63.5 / 200.9 ms); the card states both with their condition. Latency is a single-device sample (card 'Measured quality and performance').",
+    "Validated only for the five fixed labels in that order, threshold 0.5, English (whitespace) and Japanese (char), one window per call, on the Galaxy S26 (card 'Limits'); conversion fidelity to the official gliner2 fp32 implementation (span F1 1.000 on 80 bilingual inputs), not a general accuracy claim — upstream misses carry over (4 of 10 expected organizations on ten early Japanese sentences)."
+  ],
+  "schema_version": "1.2"
+}

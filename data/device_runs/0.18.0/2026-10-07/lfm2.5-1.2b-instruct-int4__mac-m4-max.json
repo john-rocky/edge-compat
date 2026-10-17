@@ -1,0 +1,54 @@
+{
+  "artifact": "LFM2.5-1.2B-Instruct_int4.litertlm",
+  "device": "mac-m4-max",
+  "model_id": "lfm2.5-1.2b-instruct-int4",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-07",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 105,
+      "env": {
+        "device": "Mac Studio (Mac16,9), Apple M4 Max",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": "E0000 00:00:1791350243.180969 85617673 engine.cc:854] Failed to create engine: UNKNOWN: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor_factory.cc:236]",
+      "evidence": [
+        "VERBOSE: Replacing 105 out of 579 node(s) with delegate (LITERT_WEBGPU) node, yielding 3 partitions for subgraph 0 (prefill_1024).",
+        "ADD: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM_ …[trace truncated]",
+        "CAST: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM …[trace truncated]",
+        "CAST: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM …[trace truncated]",
+        "CAST: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM …[trace truncated]",
+        "DYNAMIC_UPDATE_SLICE: Updated_slice shape must be less or equal to the array to update, but they are updated_slice: [18102464], array_to_update: [1825664]",
+        "DYNAMIC_UPDATE_SLICE: Updated_slice shape must be less or equal to the array to update, but they are updated_slice: [18641024], array_to_update: [1864256]",
+        "GATHER_ND: Operation is not supported.",
+        "GREATER_EQUAL: Can't parse inputs with const tensors.",
+        "LESS_EQUAL: Can't parse inputs with const tensors.",
+        "SUM: Tensor type(INT64) is not supported. litert_torch.generative.export_hf.core.exportable_module.LiteRTExportableModuleForDecoderOnlyLMPrefill/transformers.models.lfm2.modeling_lfm2.Lfm2ForCausalLM_ …[trace truncated]",
+        "105 operations will run on the GPU, and the remaining 474 operations will run on the CPU.",
+        "E0000 00:00:1791350243.180969 85617673 engine.cc:854] Failed to create engine: UNKNOWN: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor_factory.cc:236]"
+      ],
+      "failure_class": "engine_create_failed",
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": 579,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

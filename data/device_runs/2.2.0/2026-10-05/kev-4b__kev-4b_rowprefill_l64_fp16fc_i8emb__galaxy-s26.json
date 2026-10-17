@@ -1,0 +1,73 @@
+{
+ "schema_version": "1.0",
+ "model_id": "kev-4b__kev-4b_rowprefill_l64_fp16fc_i8emb",
+ "device": "galaxy-s26",
+ "artifact": "kev-4b_rowprefill_L64_fp16fc_i8emb.tflite",
+ "artifact_sha256": "9c6b332e446425beb8a423c7c4a017b00e1c3e17c9fc8f04dca44b6f20c1f465",
+ "quantization": null,
+ "notes": "Kev-4B (litert-community/Kev-4B-LiteRT v2); source jaredpalmer/kev-4b @ v1.0 (Apache-2.0) on Qwen/Qwen3.5-4B-Base, d = 2560. Typed decisions (noul / choice / score) over a state and a question, rendered with the author's to_record + encode (Kev repo tokenizer.json). Row graph = state-free row prefill, one signature serving_default: ids int32 [1,L] + valid float32 [1,L] -> hidden float32 [1,L,d] (after the final RMSNorm, every position); pair graph = shared-state prefill, two signatures: state_prefill_<Ls> (ids + valid of the state) -> 48 state tensors, and question_step_<Ls>_64 (the state + a 64-token question row) -> hidden [1,64,d]. The pointer head and the answer shaping run on the host in fp32. Storage: FULLY_CONNECTED weights fp16 (FLOAT_CASTING, DEQUANTIZE), embedding table int8. v2 = the release rebuilt on the final GatedDeltaNet kernel (rounds 9-18): rows L64 / L128 / L256 = form C7 (form C + a size-1 SUM after the in_proj_z and q_proj FCs, which keeps the HTP sigmoid accurate; fp32-identical to C), rows L512 / L1024 / L2048 and both pairs = form C (R64 chunk kernel + softplus / exp-clamp / decay-sum rewrites + the power-of-two gated-norm scale vs6). Shipping GPU setting: GpuOptions(precision = FP16_WITH_FP32_ACCUM). This file: kev-4b_rowprefill_L64_fp16fc_i8emb.tflite = run-dir kev4b_rowprefill_L64_v2_fp16fc_i8emb_r15R64-sp-ec-dd-vs6-in1-fn5.tflite (form 4B final). artifact_sha256 = its line in staging_v2/Kev-4B-LiteRT/SHA256SUMS, equal to the sha256 the phone runs staged (device/r14/inputs_r14_C.json, device/r14/s_graphs.txt MATCH lines). Landed 2026-10-05 (DECISIONS #190): the v2 bytes are on the Hub, litert-community/Kev-4B-LiteRT commit 90285c9e (uploaded 2026-10-05 12:03 JST); an anonymous API tree read at 2026-10-05 16:29 JST shows this file's LFS oid equal to artifact_sha256. Records and numbers are as staged (#187 / #189). soc from the phone's own QNN line 'prepare_options.cc:342:STAT: soc_type=SM8850' (device/r17/B/kev_s26_r17_B_N7_64_npucpu_jit_cold_c7.logcat_all.txt). Lane record: ~/code/standup/handoffs/2026-10-03-kev-litert.md (§2m-§2r); run dir ~/code/litertlm-convert/kev_work (ROUND14.md, ROUND17.md, ROUND18.md).",
+ "results": [
+  {
+   "accelerator": "gpu_mldrift",
+   "loads": false,
+   "runs": false,
+   "failure_class": "memory_cap_exceeded",
+   "error": "2026-10-05 00:14:02 MemAvailable 1193224 kB < 1500000 kB -> force-stop",
+   "full_delegation": null,
+   "delegated_ops": null,
+   "total_ops": null,
+   "output_match": null,
+   "max_abs_diff": null,
+   "max_rel_diff": null,
+   "latency_p50_ms": null,
+   "prefill_tokens_per_s": null,
+   "decode_tokens_per_s": null,
+   "ttft_ms": null,
+   "peak_mem_mb": null,
+   "context_length": null,
+   "signature": "GpuOptions precision=FP16_WITH_FP32_ACCUM; gate app (per-call build), timing mode, one attempt stopped by the lane's memory guard (round 14 hold 11)",
+   "metrics": {
+    "attempts": 1.0,
+    "mem_guard_threshold_kb": 1500000.0,
+    "mem_available_kb_at_guard": 1193224.0,
+    "vmhwm_kb_last_sample": 5806320.0,
+    "vmswap_kb_last_sample": 2331352.0,
+    "kgsl_page_alloc_bytes_last_sample": 285249536.0,
+    "mem_available_kb_first_sample": 6629580.0,
+    "lmkd_reclaim_lines_other_apps": 89.0,
+    "graph_bytes": 7785929712.0,
+    "thermal_status_start": 1.0,
+    "thermal_status_end": 1.0,
+    "battery_temp_tenths_c_start": 398.0,
+    "battery_temp_tenths_c_end": 398.0,
+    "kgsl_max_clock_mhz_start": 1300.0,
+    "kgsl_max_clock_mhz_end": 1300.0,
+    "kgsl_thermal_pwrlevel_start": 0.0,
+    "kgsl_thermal_pwrlevel_end": 0.0,
+    "mem_available_kb_start": 6627320.0
+   },
+   "evidence": [
+    "Debug gate app com.mlboydaisuke.kev.gate (~/code/litertlm-convert/kev_work/android/kev_gate/; published copy android/measure/GateActivity.kt in the staged repo), Kotlin CompiledModel, com.google.ai.edge.litert:litert 2.2.0, one process per leg after force-stop = cold compile without a program cache; build per ROUND14.md (environment): round 14 holds 1-7 the round-10 build device/r10/app-debug.r10b_probe.apk (sha256 6071dea8...), from hold 9 the per-call builds device/r14/app-debug.r14_percall*.apk, the last one _cool (sha256 e22ae9ea...: every call's device time and ms, warm-up count, repetitions, cool_ms; timing reports of holds 10-13 record cool_ms 20000); the app writes ids int32 [1,L] and valid float32 [1,L], runs the signature and reads hidden float32 [1,L,1024], keeping the read-out rows ([decide, *option ends]) for the host pointer head.",
+    "one attempt, GPU FP16_WITH_FP32_ACCUM, timing mode (leg kev_s26_r14_T4B_C_gpu_fp16acc32_L64_timing); result as recorded: result=PROCESS_DIED status=NO_REPORT pid=14888 wall_s=10 / PROCESS_DIED kev_s26_r14_T4B_C_gpu_fp16acc32_L64_timing at 00:14:05; no retry, no CPU attempt, no reboot.",
+    "the lane's memory guard (host side, 2 s samples, force-stop when MemAvailable < 1,500,000 kB) stopped the app during CompiledModel.create: '2026-10-05 00:14:02 MemAvailable 1193224 kB < 1500000 kB -> force-stop' (~/code/litertlm-convert/kev_work/device/r14/kev_s26_r14_T4B_C_gpu_fp16acc32_L64_timing.MEMGUARD); samples ~/code/litertlm-convert/kev_work/device/r14/kev_s26_r14_T4B_C_gpu_fp16acc32_L64_timing.samples.txt: MemAvailable 6629580 kB (00:13:55) -> 4413944 kB (00:13:57) -> 3488960 kB (00:13:59) -> 1193224 kB (00:14:02); VmHWM 5806320 kB (= 5.95 GB), VmSwap 2331352 kB, kgsl page_alloc 285249536 B (the GPU weight upload had not started).",
+    "lmkd reclaimed other apps (89 Reclaim lines, min watermark breached) but never the gate app (~/code/litertlm-convert/kev_work/device/r14/kev_s26_r14_T4B_C_gpu_fp16acc32_L64_timing.kill_lines.txt, logcat_all_since_start.txt); the stop is the guard's force-stop (ActivityManager 'stop ... due to from pid').",
+    "Context: the v1 Kev-4B L1024 file at FP32 (DECISIONS #185(4), round 6) was reclaimed by lmkd during CompiledModel.create; this v2 attempt was stopped by the lane's own guard before the GPU weight upload, so the record is bounded by the harness and staged (DECISIONS #175(5) shape).",
+    "conditions (phone state files ~/code/litertlm-convert/kev_work/device/r14/kev_s26_r14_T4B_C_gpu_fp16acc32_L64_timing.state_before.txt / .state_after.txt): before 2026-10-05 00:13:55 thermal status 1, battery temperature:398 (tenths of a degree C), kgsl max_clock_mhz 1300 thermal_pwrlevel 0, freq_capped: none; after 2026-10-05 00:14:07 thermal status 1, temperature:398, kgsl max_clock_mhz 1300 thermal_pwrlevel 0, freq_capped: policy0:2899200/3628800 policy6:2880000/4742400.",
+    "10-05 00:13:56.263 14888 14912 I tflite  : Replacing 5307 out of 5307 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
+    "10-05 00:14:01.971  3448  3541 I ActivityManager: Killing 14888:com.mlboydaisuke.kev.gate/u0a462 (adj 0): stop com.mlboydaisuke.kev.gate due to from pid 15088",
+    "10-05 00:14:01.972  3448  3541 I am_kill : [0,14888,com.mlboydaisuke.kev.gate,0,stop com.mlboydaisuke.kev.gate due to from pid 15088,5652924]"
+   ],
+   "env": {
+    "device": "Galaxy S26 (SM-S942Q)",
+    "machine_label": "galaxy-s26-kev-gate",
+    "os_build": "Android 16 (SDK 36)",
+    "runtime": "litert",
+    "runtime_version": "2.2.0",
+    "soc": "Qualcomm SM8850",
+    "vendor_sdk": null
+   },
+   "date": "2026-10-05",
+   "provenance": "measured"
+  }
+ ]
+}

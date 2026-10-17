@@ -1,0 +1,149 @@
+{
+  "artifact": "eg2_audio_f16safe_fp16w_w10.tflite",
+  "artifact_sha256": "1405986b353c3152e4a677d9446a5694a0f8fd0b13b794d26c892ef85295188c",
+  "device": "pixel-8a",
+  "model_id": "embeddinggemma-2-transcribe__eg2_audio_f16safe_fp16w_w10",
+  "notes": "EmbeddingGemma 2 Transcribe, LiteRT form: the audio encoder of google/embeddinggemma-2 (rev 914f7f89; Gemma 4 audio tower + embed_audio) exported to raw LiteRT graphs with an fp16-safe rewrite of its RMSNorm sites (per-site 2^-k rescale, eps x 4^-k, rsqrt clamp, attention mask -30000; bit-identical to the float32 model in fp32), fp16 weights (FLOAT_CASTING on FC / CONV_2D / DEPTHWISE_CONV_2D), one signature per file (audio_30s / audio_10s: mel float32 [1, F, 128] + mask -> soft tokens [1, F/4, 512] + mask), plus reader v1 (a 4-layer transformer over the soft tokens with the 200,000-word table FC and ARG_MAX in-graph) = speech to words on the phone. This file: eg2_audio_f16safe_fp16w_w10.tflite (589015376 B), sha256 = hf_stage FILES.sha256 of the upload set; every phone leg below ran these bytes (sha256 lines in the evidence). Pixel 8a: GPU FP32 passes the 90-window whole set; the sample app's auto window sends a recording of at most 249 tokens through this file and reader_w10. Lane record: litertlm-convert eg2_stt_work (LANE.md, ROUND1–11, SPEED_LADDER.md lint PASS with user-stop 2026-10-14). Landed 2026-10-15 (DECISIONS #216): the file is on the Hub at mlboydaisuke/EmbeddingGemma-2-Transcribe-LiteRT (upload commit 54d0e902cd50bd6f04958a81ab93e02bf5c77b9d = main, 2026-10-14 18:00:44 UTC = 2026-10-15 03:00 JST); its LFS oid equals artifact_sha256 (anonymous API read 2026-10-15 03:08 JST).",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-10-14",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-eg2stt-app",
+        "os_build": "Android 16 (build CP1A.260505.005)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "Harness: the sample app eg2-transcribe (debug APK app-debug-r10.apk sha256 b2938ba2…, commit 2b7d24d, LiteRT 2.2.0 Kotlin CompiledModel), window setting 'auto': a recording of at most 249 tokens runs on the 10 s pair (eg2_audio_f16safe_fp16w_w10.tflite + reader_w10.tflite); Pixel 8a hold 2026-10-14 20:54:17–21:12:52 (round 10).",
+        "the 11 fixtures of reader/fixtures that fit one 10 s window: transcripts equal to reader/RELEASE.md 11 / 11; each fixture is one window, latency_p50_ms = the median of their 11 calls (write + run + read) of this graph (eg2_stt_work/app/device/r10_p8a_20261014-205416/check_r10.json, fixture_runs.fx_cpu).",
+        "output_match = soft tokens vs the float32 reference at min cos >= 0.99 per fixture; max_abs_diff null."
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 1360.362875,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "cos_min_vs_reference": 0.9999999928716242,
+        "fixtures": 11.0,
+        "per_fixture_ms_max": 1536.128296,
+        "per_fixture_ms_min": 1250.151409,
+        "transcripts_equal_release": 11.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "CPU XNNPACK; Android sample app eg2-transcribe (debug build r10), auto window, the fixtures on the 10 s pair",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-10-14",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-eg2stt-app",
+        "os_build": "Android 16 (build CP1A.260505.005)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "Harness: the sample app eg2-transcribe (debug APK app-debug-r10.apk sha256 b2938ba2…, commit 2b7d24d, LiteRT 2.2.0 Kotlin CompiledModel), window setting 'auto': a recording of at most 249 tokens runs on the 10 s pair (eg2_audio_f16safe_fp16w_w10.tflite + reader_w10.tflite); Pixel 8a hold 2026-10-14 20:54:17–21:12:52 (round 10).",
+        "the 11 fixtures of reader/fixtures that fit one 10 s window: transcripts equal to reader/RELEASE.md 11 / 11; each fixture is one window, latency_p50_ms = the median of their 11 calls (write + run + read) of this graph (eg2_stt_work/app/device/r10_p8a_20261014-205416/check_r10.json, fixture_runs.fx_gpu).",
+        "output_match = soft tokens vs the float32 reference at min cos >= 0.99 per fixture; max_abs_diff null."
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 462.276367,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "cos_min_vs_reference": 0.9999999981280777,
+        "fixtures": 11.0,
+        "per_fixture_ms_max": 475.339519,
+        "per_fixture_ms_min": 426.617716,
+        "transcripts_equal_release": 11.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GpuOptions precision=FP32; Android sample app eg2-transcribe (debug build r10), auto window, the fixtures on the 10 s pair",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-10-14",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 2767,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-eg2stt-gate",
+        "os_build": "Android 16 (build CP1A.260505.005)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "Harness: the shared device chain litertlm-convert/community_accel_work/devicebench (chain.sh) driving the gate app d1_omni_work/device/app-debug.r9.apk (sha256 2d89d57a…, LiteRT 2.2.0) in generic mode (one call = write the mel + mask inputs, run, read the soft-token output); scored on the Mac by eg2_stt_work/device_score.py; round 9 whole set: 90 windows (20,286 valid tokens) in parts a / b / c pooled by combine_parts_r6.py.",
+        "sha256 eg2_audio_f16safe_fp16w_w10.tflite phone=1405986b353c3152e4a677d9446a5694a0f8fd0b13b794d26c892ef85295188c mac=1405986b353c3152e4a677d9446a5694a0f8fd0b13b794d26c892ef85295188c MATCH",
+        "10-14 20:45:07.061  4404  4434 I tflite  : Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
+        "PASS over the whole set: 20286 valid tokens, cos mean 1.0000000000 min 1.000000, max|d| 0.0004996; parts: P4_gpu32_fp16w_w10a PASS 5286 tokens cos mean 1.0000000 min 1.00000; P4_gpu32_fp16w_w10b PASS 7500 tokens cos mean 1.0000000 min 1.00000; P4_gpu32_fp16w_w10c PASS 7500 tokens cos mean 1.0000000 min 1.00000; tokens under 0.99 0.0 (digital silence 0.0) (the lane's bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa); eg2_stt_work/results/pixel8a/p8a_parity_P4_gpu32_fp16w_w10_full_p4.json, pooled by eg2_stt_work/scripts/combine_parts_r6.py).",
+        "no timing leg on these bytes in this run: latency_p50_ms null (the gate rows' calls are not a rested timed set).",
+        "output_match = the lane's bar (not the shared element rule; no element rule over raw outputs was computed for this record); max_abs_diff = max |d| vs the reference over the valid tokens; max_rel_diff null."
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": 0.0004996061325073242,
+      "max_rel_diff": null,
+      "metrics": {
+        "cos_mean_vs_reference": 0.9999999999974363,
+        "cos_min_vs_reference": 0.9999999942903074,
+        "lane_bar_pass": 1.0,
+        "max_abs_vs_reference": 0.0004996061325073242,
+        "nonsilent_cos_min": 0.9999999942903074,
+        "parts": 3.0,
+        "same_bytes_mac_cpu_cos_min": 0.9999999824121535,
+        "same_bytes_mac_cpu_max_abs": 0.0008790493011474609,
+        "silent_tokens_below_0_99": 0.0,
+        "tokens_below_0_99": 0.0,
+        "valid_tokens": 20286.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GpuOptions precision=FP32; gate app (devicebench generic), round 9 whole set: 90 windows (20,286 valid tokens) in parts a / b / c pooled by combine_parts_r6.py",
+      "total_ops": 2767,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

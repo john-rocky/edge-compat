@@ -1,0 +1,51 @@
+{
+  "artifact": "LFM2-2.6B_int8.litertlm",
+  "artifact_sha256": "3dda920ce47e5ef2597c1a43732daeecc5d4b9b91fe29599cb9eaafb874b29e8",
+  "device": "mac-studio-m4-max",
+  "model_id": "lfm2-2.6b-int8",
+  "notes": "Hub litert-community/LFM2-2.6B (upload commit 8920b7b9, 2026-10-13 11:19 JST; main 8e6c817a; the Hub tree's LFS sha256 = the lane's ship/SHA256SUMS). Lane litertlm-convert aa_mobile_work/lfm2_26b round r3's card probes (card_probes/litert_lm_0171_run_int8.log, 2026-10-12 20:13 JST, through quiet_wait): `litert-lm run ship/LFM2-2.6B_int8.litertlm --prompt \"What is the capital of France?\" --cache no` on litert-lm 0.17.1 (no --backend = CPU), one fresh process: exit 0 with a reply asking for the rest of the message - the Hub card's first paragraph ('the int8 file answered \"What is the capital of France?\" as if no question had been asked'). Recorded as degenerate_output (loads true, runs false: exit 0, tokens, no answer to the prompt; DECISIONS 2026-09-08 (b)), the shape of the LFM2.5-350M 0.17.1 record (#231), whose prefill probe read the empty user turn; no prefill count was taken for this file. The int4 file was not run on 0.17.1. The manifest's min_runtime_version is 0.18.0.",
+  "quantization": "int8 dynamic on linears + int8 embedding, convs float",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-12",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": "It seems like your message might be incomplete. Could you please provide more details or clarify what you need assistance with? Whether it's a question, a topic you'd like to discuss, or something else, I'm here to help!",
+      "evidence": [
+        "command: /Users/USER/venvs/lt0171run/bin/litert-lm run /Users/USER/code/litertlm-convert/aa_mobile_work/lfm2_26b/ship/LFM2-2.6B_int8.litertlm --prompt \"What is the capital of France?\" --cache no < /dev/null",
+        "litert-lm 0.17.1 (the log's version line)",
+        "stdout: It seems like your message might be incomplete. Could you please provide more details or clarify what you need assistance with? Whether it's a question, a topic you'd like to discuss, or something else, I'm here to help!",
+        "### EXIT: 0",
+        "2026-10-12 20:13:10 JST 0.17.1 run int8: quiet_wait: window open (aa2-700m-bench-gpu timing pid 15227 since 2026-10-12T20:12:03+0900) — waiting quiet_wait: window open (aa2-700m-bench-gpu timing pid 16144 since 2026-10-12T20:12:17+0900) — waiting quiet_wait: waited 30 s, running: /Users/majimadaisuk"
+      ],
+      "failure_class": "degenerate_output",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "processes": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

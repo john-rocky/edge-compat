@@ -56,6 +56,14 @@ Model-level sweep results — measured behavior of this exact `.tflite` in the b
 | wasm_xnnpack | run_failed | - | - | - | - | mac-studio-m4-max · chromium 151.0.7922.34 headless · macOS · @litertjs/core 2.5.3 | 2026-09-28 | measured |
 | webgpu_mldrift | load_failed | - | - | - | - | mac-studio-m4-max · chromium 151.0.7922.34 headless · macOS · @litertjs/core 2.5.3 | 2026-09-28 | measured |
 
+## Device runs (NPU / LiteRT-LM)
+
+Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/2.2.0/2026-10-10/audio8-tts-preview-0.6b__codec_decoder_fp16_t128__galaxy-s26.json`.
+
+| Device | Accelerator | Status | Full delegation | Output match | Prompt (tokens) | Latency p50 (ms) | Prefill tok/s | Decode tok/s | TTFT (ms) | Peak mem (MB) | Environment | Date | Provenance |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| galaxy-s26 | gpu | output_mismatch | - | MISMATCH | sig:codec_decoder_fp16_T128 alone, one 128-frame decode (Android sample app audio8_tts, Audio8DeviceCheck load step, CompiledModel GPU with CPU fallback) | - | - | - | - | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert 2.2.0 · Android 16 (build BP4A.251205.006.S942QOPS1AZH9) | 2026-10-10 | measured |
+
 ## Pitfalls
 
 - One call covers up to 128 frames = 5.9 s (128 x 2,048 samples at 44.1 kHz). The decoder is causal but its post-transformer stacks eight 128-frame sliding-window layers, so decoding in windows is not sample-exact against one offline decode: with 127 frames of left context the frames after a boundary differ by max|d| 0.08 (corr 0.9968), with 32 frames of context corr 0.70. The host loop makes one T128 call for utterances up to 5.9 s, one T192 call up to 8.9 s, and beyond that T192 windows with 128 frames of left context (the vendor's ONNX runtime uses context 128 + a 1-frame guard) (card Limitations; FINDINGS §7).

@@ -1,0 +1,333 @@
+{
+  "artifacts": [
+    {
+      "file": "Confucius4-R2T2.litertlm",
+      "sha256": "6938f236ec25b0a3c2c8d8a2a43bf6c5891b857331e3246f28b9e95140312c5e",
+      "size_mb": 2568.306
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "convert_layout.py (original thinker.* checkpoint -> transformers -hf layout, rename only) -> export_bundle_r2.py --input_sec 30 --cache_length 1024 --quantization_recipe none (block-diagonal 104-token attention mask as a numpy constant; litert-torch PR #1295 carries the same fix) -> quant_sections.py --lm dynamic_wi8_afp32 --emb dynamic_wi8_afp32 --enc fp16 -> export_bundle_r3.py --window 30 --prompt litert (encoder audio f32 [1,3000,160] -> features f32 [1,390,2048] + mask uint8 [1,390], fp16 weights, in-graph log-mel; generic_model metadata; litert-torch Qwen3-ASR prompt as the jinja). One-command reproduction: https://github.com/john-rocky/hf-to-litertlm/tree/main/confucius4_r2t2_work",
+    "quantization": "LM: int8 dynamic weights with an int8 embedding table (separate embedder section); audio encoder: fp16 weights, fp32 compute; 30 s window (3000 frames x 160 samples at 16 kHz -> 390 audio tokens); KV cache 1024",
+    "tool": "litert-torch export_hf (task automatic_speech_recognition) for the fp32 graphs, with the encoder attention patched to the original 104-token windows; per-section quantization with ai-edge-quantizer; repack with litert-lm pack as a generic_model bundle whose encoder starts at raw PCM frames and computes the Whisper-style log-mel in-graph",
+    "tool_version": "litert-torch 0.10.0 (main 731ef0a / 5a31633, same qwen3_asr.py), transformers 5.14.1, torch 2.13.0, ai-edge-quantizer 0.9.0, ai-edge-litert 2.2.0, litert-lm-builder 0.17.0 (PYTHONPATH overlay), litert-lm (pack) 0.16.0"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-02",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1126,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-confucius4-cli",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 221 partitions for subgraph 0 (prefill_128). (litertlm-convert/confucius4_r2t2_work/gates/r3/s26/s26_cpu_first_stderr.log)",
+            "VERBOSE: Replacing 1070 out of 1244 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 226 partitions for subgraph 1 (decode).",
+            "litert_lm_lib.cc:471 Peak private footprint: 7470.18MB.",
+            "litertlm-convert/confucius4_r2t2_work/gates/r3/s26/s26_cpu.json summary: clips 20, exit0 20, empty 0, equal_to_mac_cpu 15, wall_seconds 334.729, mem_available_min_kb 3062480; post scaling_max_vs_cpuinfo_max policy0 [1785600, 3628800], policy6 [1747200, 4742400]",
+            "FLEURS error counts on the 20 clips equal the Mac CPU run's (en 5/142 words, zh 8/173 chars); no weight cache (cache_dir absent)"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "audio_seconds": 127.6,
+            "clips": 20,
+            "empty_transcripts": 0,
+            "fleurs_en_ref_words": 142,
+            "fleurs_en_word_errors": 5,
+            "fleurs_zh_char_errors": 8,
+            "fleurs_zh_ref_chars": 173,
+            "raw_equal_to_mac_cpu_run": 15,
+            "scaling_max_khz_policy0_after_run": 1785600,
+            "scaling_max_khz_policy6_after_run": 1747200,
+            "threads": 4,
+            "wall_per_process_s_max": 19.6,
+            "wall_per_process_s_min": 10.4,
+            "weight_cache": 0
+          },
+          "output_match": null,
+          "peak_mem_mb": 7470.0,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1298,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.16.1/2026-10-02/confucius4-r2t2__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-10",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-asr-litertlm-check",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "harness: LiteRT-Models zoo asr_litertlm (github.com/john-rocky/LiteRT-Models, commits 90f9c39 and 07c2670, pushed to main 2026-10-10), androidTest AsrDeviceCheck run by am instrument; litertlm-android 0.17.1 (asr_litertlm/gradle.properties litertlmVersion=0.17.1); the bundle pushed with adb into the app's external files dir and touched (LiteRT-LM #3772) before the check",
+            "RESULT step=load ok=true model=confucius4-r2t2 backend=CPU load_s=9.25 initialize_s=2.20 first_conversation_s=7.05 cache=written cache_mb=2999 threads=4 vmhwm_mb=4394 vmrss_mb=3883 mem_available_mb=6668",
+            "RESULT step=clip ok=true model=confucius4-r2t2 clip=zh backend=CPU audio_s=9.72 send_s=3.48 rtf=0.358 conversation_s=0.00 language=Chinese match=true cer=0.0000 text=宇宙中的一切都由物质构成，而所有的物质都由被称为原子的微小颗粒组成。",
+            "RESULT step=clip ok=true model=confucius4-r2t2 clip=en backend=CPU audio_s=6.42 send_s=2.59 rtf=0.404 conversation_s=0.00 language=English match=true cer=0.0000 text=\"Everything in the universe is made of matter. All matter is made of tiny particles called atoms.\"",
+            "RESULT step=clip ok=true model=confucius4-r2t2 clip=ja backend=CPU audio_s=11.04 send_s=3.54 rtf=0.321 conversation_s=0.00 language=Japanese match=true cer=0.0000 text=宇宙に存在するあらゆるものは物質でできています。あらゆる物質は原子と呼ばれる微小な粒子でできています。",
+            "RESULT step=mic ok=true model=confucius4-r2t2 rec_s=9.00 send_s=3.17 rtf=0.352 cer=0.0000 language=English text=\"Everything in the universe is made of matter. All matter is made of tiny particles called atoms.\"",
+            "RESULT ok=true scope=check steps=14 failed=0",
+            "00:22:34 r3 confucius4 check start thermal=0 caps=[cpu0 3628800/3628800 cpu2 3628800/3628800 cpu7 4742400/4742400 ]",
+            "00:23:17 r3 confucius4 check end thermal=1 caps=[cpu0 3628800/3628800 cpu2 3628800/3628800 cpu7 4742400/4742400 ]"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 3480.0,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "audio_s_total": 27.18,
+            "clips": 3.0,
+            "clips_text_equal_expected": 3.0,
+            "engine_initialize_ms": 2200.0,
+            "engine_load_ms": 9250.0,
+            "first_conversation_ms": 7050.0,
+            "long_clip_audio_s": 33.6,
+            "long_clip_send_ms": 3300.0,
+            "long_clip_sent_s": 30.0,
+            "mic_cer": 0.0,
+            "mic_recorded_s": 9.0,
+            "mic_send_ms": 3170.0,
+            "reload_engine_load_ms": 1920.0,
+            "rtf": 0.3536,
+            "runtime_cache_mb": 2999.0,
+            "runtime_cache_written": 1.0,
+            "scaling_max_khz_cpu0_end": 3628800.0,
+            "scaling_max_khz_cpu0_start": 3628800.0,
+            "scaling_max_khz_cpu7_end": 4742400.0,
+            "scaling_max_khz_cpu7_start": 4742400.0,
+            "send_ms_en": 2590.0,
+            "send_ms_ja": 3540.0,
+            "send_ms_max": 3540.0,
+            "send_ms_min": 2590.0,
+            "send_ms_zh": 3480.0,
+            "thermal_status_end": 1.0,
+            "thermal_status_start": 0.0,
+            "threads": 4.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 4767.0,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "Android sample app (LiteRT-Models asr_litertlm), AsrDeviceCheck; Engine on the CPU with 4 threads and the audio encoder on the CPU, one Conversation per clip",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.17.1/2026-10-10/confucius4-r2t2__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-02",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1298,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-confucius4-cli",
+            "os_build": "Android 16",
+            "runtime": "litert-lm",
+            "runtime_version": "0.16.1",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128). (litertlm-convert/confucius4_r2t2_work/gates/r3/s26/s26_gpu_first_stderr.log)",
+            "VERBOSE: Replacing 1244 out of 1244 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (decode).",
+            "litert_lm_lib.cc:471 Peak private footprint: 1931.7MB.",
+            "litertlm-convert/confucius4_r2t2_work/gates/r3/s26/s26_gpu.json summary: clips 5, exit0 5, empty 0, equal_to_mac_cpu 4",
+            "audio encoder on the CPU (audio_backend=cpu)"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "audio_seconds": 29.8,
+            "clips": 5,
+            "empty_transcripts": 0,
+            "raw_equal_to_mac_cpu_run": 4,
+            "wall_per_process_s_max": 9.3,
+            "wall_per_process_s_min": 5.6
+          },
+          "output_match": null,
+          "peak_mem_mb": 1932.0,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1298,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.16.1/2026-10-02/confucius4-r2t2__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-02",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "litertlm-convert/confucius4_r2t2_work/gates/r3/rt/c4r3_30s_C_lt_full155_bundle_cpu.jsonl: 155 rows, errors 0, empty 0; sum(seconds) 227.1 over 1836.1 s of audio (RTF 0.124), median 1.42 s per clip",
+            "/usr/bin/time -l on the warm 155-clip re-run (litertlm-convert/confucius4_r2t2_work/gates/r3/rt/r3_rt_ship_full155_cpu_warm.tail.log): maximum resident set size 4546035712, peak memory footprint 775705208; transcripts = first run 155/155",
+            "scorer (gates/r3/gate6b_r2.json shape): en 51/1150 words, zh 125/1954 chars, ja 167/2689 chars",
+            "audio encoder graph on XNNPACK: 'Replacing 534 out of 588 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 102 partitions for subgraph 0 (main)' (litertlm-convert/confucius4_r2t2_work/gates/r3/r3_rt_ship_ex5_gpu_verbose.log; the encoder ran on the CPU in that run too)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": 1420.0,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "audio_seconds": 1836.1,
+            "clips": 155,
+            "empty_transcripts": 0,
+            "fleurs_en_wer_pct": 4.43,
+            "fleurs_ja_cer_pct": 6.21,
+            "fleurs_zh_cer_pct": 6.4,
+            "per_clip_s_max": 2.64,
+            "per_clip_s_min": 1.08,
+            "processing_seconds": 227.1,
+            "rtf": 0.124,
+            "threads": 4
+          },
+          "output_match": null,
+          "peak_mem_mb": 4546.0,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.17.1/2026-10-02/confucius4-r2t2__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-02",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1298,
+          "env": {
+            "device": "Mac Studio (M4 Max)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_WEBGPU) node, yielding 1 partitions for subgraph 0 (prefill_128). (litertlm-convert/confucius4_r2t2_work/gates/r3/r3_rt_ship_ex5_gpu_verbose.log)",
+            "VERBOSE: Replacing 1244 out of 1244 node(s) with delegate (LITERT_WEBGPU) node, yielding 1 partitions for subgraph 1 (decode).",
+            "environment.cc:526 Selected adapter: Apple M4 Max, arch=metal-3, vendor=apple, backend=Metal, adapterType=Integrated GPU",
+            "litertlm-convert/confucius4_r2t2_work/gates/r3/rt/c4r3_30s_C_lt_full155_bundle_gpu.jsonl: 155 rows, errors 0, empty 0; sum(seconds) 96.9 (RTF 0.053), median 0.61 s per clip; /usr/bin/time -l maximum resident set size 2682519552",
+            "audio encoder on the CPU (audio_backend=CPU())"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 610.0,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "audio_seconds": 1836.1,
+            "clips": 155,
+            "empty_transcripts": 0,
+            "fleurs_en_wer_pct": 4.52,
+            "fleurs_ja_cer_pct": 6.06,
+            "fleurs_zh_cer_pct": 6.45,
+            "per_clip_s_max": 1.06,
+            "per_clip_s_min": 0.49,
+            "processing_seconds": 96.9,
+            "raw_equal_to_cpu_run": 116,
+            "rtf": 0.053
+          },
+          "output_match": null,
+          "peak_mem_mb": 2683.0,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 1298,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.17.1/2026-10-02/confucius4-r2t2__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3-asr",
+    "id": "confucius4-r2t2",
+    "license": "other (NetEase Youdao Model Use License Agreement; MODEL_LICENSE + MODEL_LICENSE_zh in the repo, the Chinese text prevails)",
+    "source_url": "https://huggingface.co/mlboydaisuke/Confucius4-R2T2-LiteRT",
+    "task": "automatic-speech-recognition"
+  },
+  "pitfalls": [
+    "One message = one clip of up to 30 s: the runtime zero-fills the window after the clip and the encoder emits 390 audio tokens per window, so encoding and prefill cost the same for a 4 s and a 29 s clip; clips longer than 30 s were not tested (Hub card 'How to send audio').",
+    "The answer is 'language <name><asr_text><transcript>'; split at <asr_text>. To force the language, send the text item 'language Chinese<asr_text>' in the same message (the template puts the user's text at the start of the answer) (Hub card).",
+    "Prompt: the bundle renders the litert-torch Qwen3-ASR prompt (no system turn). With the original repository's prompt (empty system turn) the same file scored Mandarin CER 10.75 % / Japanese CER 9.33 % vs 6.40 / 6.21 — Chinese clips tagged English/None, Chinese numerals, two clips translated into English; the PyTorch model shows the same shift (7.78 / 7.47 vs 6.24 / 6.21). System messages are ignored by the template (Hub card 'Prompt').",
+    "The audio encoder must run on the CPU (audio_backend=CPU()): on the Mac the WebGPU/Metal delegate refuses 'BATCH_MATMUL: Not supported batched mat mul case: non-constant tensor' in the encoder graph and create_conversation fails ('Hint fully delegated to single delegate is set, but the graph is not fully delegated'); the LM runs on the GPU (prefill_128 1298/1298 and decode 1244/1244 nodes delegated on Metal and on OpenCL) (FINDINGS round 3; gates/r3/r3_rt_ex5_vendor_gpu_gpuaudio.log).",
+    "Correctness (FLEURS test, 50 clips per language, greedy, one conversation per clip; scorer: en WER after uppercasing/punctuation removal, zh/ja CER after NFKC+lower with punctuation/whitespace removed): Mac CPU 4.43 / 6.40 / 6.21 %, Mac LM-on-GPU 4.52 / 6.45 / 6.06 %, PyTorch fp32 with the same prompt 4.43 / 6.24 / 6.21 %; no empty transcript (Hub card 'Correctness').",
+    "Quantization chosen on the 155 full clips: int8 LM + int8 embedder + fp16 encoder. All-int8 translated one Mandarin clip into English (zh 9.67 %), an fp16 LM stopped after the language tag on one English clip (en 6.26 %) (Hub card 'Conversion' 3; FINDINGS round 2).",
+    "Stock litert-torch export deviation: the exporter's audio attention attends within 13-token (1 s) chunks while the original attends within 104-token windows, which on 5 s clips moved the transcripts by 1.6 / 5.0 / 9.0 points (en / zh / ja); the constant block-diagonal mask makes the fp32 export match the original (60/60 crops) — litert-torch Draft PR #1295 / issue #1296 (Hub card 'Conversion' 1).",
+    "The released runtime's built-in mel front end (HTK-style filterbank on the magnitude spectrum, natural log, frames not centred) is not the Qwen3-ASR log-mel; the bundle takes raw PCM frames and computes the original log-mel in the graph (max |Δ| 0.028 vs the original on 10 clips) (Hub card 'Conversion' 2; GENERIC_CONTRACT.md).",
+    "The omni/asr engine path (litert_lm_main / asr_runner with the qwen3-asr-0.6b metadata entry) is not a valid route for this file: the metadata is compiled in and LmDecoder feeds token 0 when decodeStartTokenId is unset, which drops the prompt's final newline (LiteRT-LM issue #3827; 44/60 crops empty) — the generic_model bundle is the shipped route (FINDINGS rounds 1-3).",
+    "Streaming: the original r2t2 streaming_transcribe loop (2 s chunks; the accumulated audio plus the previous answer minus its last 5 tokens as a text item, in a new conversation per call) runs through the same Conversation API; about 1 s per call on the Mac CPU, committed text revised 2 times in 211 calls (Hub card 'Streaming').",
+    "Galaxy S26 rows are reference values: the CPU frequency limit fell from 3.63 / 4.74 GHz to 1.79 / 1.75 GHz during the CPU leg and the GPU leg started under it; the CPU leg ran without a weight cache (Hub card 'Performance').",
+    "License: NetEase Youdao Model Use License Agreement — a quantized file is a Derivative Work (1.5); clause 4.1(a) requires the disclaimer statement on the distribution page (present on the card); 2.2 separate license above 100 M MAU or the revenue threshold (EN 'RMB 1 billion', ZH '1亿人民币', Chinese prevails per clause 9); 3.4(c) no use to improve other AI models; 4.2 no high-risk deployment (Hub card 'License'; MODEL_LICENSE / MODEL_LICENSE_zh)."
+  ],
+  "schema_version": "1.2"
+}

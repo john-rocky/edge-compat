@@ -1,0 +1,60 @@
+{
+ "schema_version": "1.0",
+ "model_id": "qwen35-4b",
+ "device": "pixel-8a",
+ "artifact": "Qwen3.5-4B_int8.litertlm",
+ "artifact_sha256": "ce4c2d645edf026567f6d3492c13a2b9ac6af3849480acb45846b06679fd96d5",
+ "quantization": "int8 (dynamic int8 FC + embedding; 48 GatedDeltaNet in_proj_a/in_proj_b float since 2026-10-13; fp32 activations declared)",
+ "notes": "Lane qwen35_work/recheck4b_20261012 (litertlm-convert), 2026-10-13, hold 09:34-09:41 JST, one guarded CPU process of the re-quantized int8 file (Hub commit 5a489c6a). Until this run the card said the int8 file 'is not attempted, and not expected to fit' an 8 GB-class phone; it runs (push 104.5 s). Binary: Google's prebuilt litert_lm_advanced_main (sha256 adac974b…) + its .so kit from gs://litert/binaries/latest/android_arm64/litert_lm/ (object dated 2026-09-18), the kit of the 2026-10-12 records on this axis, sha256-checked on the phone. Protocol: bundle pushed and sha256-read back, compile/weight caches removed, CPU only (the 4B-class int8 GPU leg is not run on this phone: a Galaxy S26 hard-rebooted during the 2026-08-24 GPU gate), bench = --benchmark_prefill_tokens=256 --benchmark_decode_tokens=64 --num_iterations=3 --max_num_tokens=1280 (figures = median of iterations 2-3), prompt processes = one fresh process each, 'What is 17 times 23?'; a 2-second sampler beside each process (MemAvailable guard < 400,000 kB; never fired here). FINDINGS section 5b (device/r1/p8a/s1_cpu_gate).",
+ "results": [
+  {
+   "accelerator": "cpu",
+   "loads": true,
+   "runs": true,
+   "failure_class": null,
+   "error": null,
+   "full_delegation": false,
+   "delegated_ops": 32830,
+   "total_ops": 34373,
+   "output_match": null,
+   "max_abs_diff": null,
+   "max_rel_diff": null,
+   "latency_p50_ms": null,
+   "prefill_tokens_per_s": null,
+   "decode_tokens_per_s": null,
+   "ttft_ms": null,
+   "peak_mem_mb": null,
+   "context_length": null,
+   "metrics": {
+    "processes": 1.0,
+    "passes": 1.0,
+    "max_output_tokens": 400.0,
+    "answer_chars_min": 483.0,
+    "answer_chars_max": 483.0,
+    "wall_s_max": 146.8,
+    "wall_s_min": 146.8,
+    "vmhwm_kib": 5407976.0,
+    "memavail_min_kib": 3542768.0,
+    "push_s": 104.5
+   },
+   "evidence": [
+    "VERBOSE: Replacing 32830 out of 34373 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2993 partitions for subgraph 0 (prefill_1024).",
+    "VERBOSE: Replacing 23638 out of 25157 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2945 partitions for subgraph 1 (prefill_256).",
+    "prompt_1 'What is 17 times 23?' (--max_output_tokens=400) -> 17 times 23 is **391**. (EXIT=0, 483 chars, wall 146.8 s)",
+    "sampler: 52 samples, VmHWM 5,407,976 KiB, MemAvailable 5,120,440 KiB before -> min 3,542,768 KiB; the 400,000 KiB guard never fired",
+    "the wall includes the first-run XNNPACK weight-cache build (caches removed before the leg); no benchmark process was run on this phone (one guarded process only)"
+   ],
+   "env": {
+    "device": "Pixel 8a",
+    "machine_label": "pixel-8a-gpucheck",
+    "os_build": "Android 16",
+    "runtime": "litert-lm",
+    "runtime_version": "prebuilt-adac974b",
+    "soc": "Tensor G3",
+    "vendor_sdk": null
+   },
+   "date": "2026-10-13",
+   "provenance": "measured"
+  }
+ ]
+}

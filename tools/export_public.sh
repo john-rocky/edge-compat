@@ -24,8 +24,9 @@ DATE="$(date -u +%Y-%m-%d)"
 PRIVATE_ONLY=(
   DECISIONS.md PROGRESS.md litert-compat-spec.md RELEASE.md scoreboard.md
   launch handover
-  data/bench_staging data/cards_staging data/matrix_staging data/meta_staging
-  data/transforms_staging
+  data/bench_staging data/cards_staging data/device_runs_staging data/matrix_staging
+  data/meta_staging data/transforms_staging
+  data/regression
   .github/workflows/agentfix.yml .github/workflows/autobump.yml
   .github/workflows/resweep.yml .github/workflows/reminders.yml
   .github/workflows/export-public.yml
@@ -46,6 +47,11 @@ STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT
 git -C "$SRC" archive --format=tar HEAD | tar -x -C "$STAGE"
 for p in "${PRIVATE_ONLY[@]}"; do rm -rf "${STAGE:?}/$p"; done
+# Every data/*_staging directory is private, listed above or not: data/device_runs_staging
+# was created on 2026-09-28, missed the list, and went out with the 2026-10-01 export.
+for d in "${STAGE:?}"/data/*_staging; do
+  if [ -d "$d" ]; then rm -rf "$d"; fi
+done
 
 # Scrub the home directory from every text file; refuse to export if any
 # occurrence survives (a binary would be the only way, and there is none).

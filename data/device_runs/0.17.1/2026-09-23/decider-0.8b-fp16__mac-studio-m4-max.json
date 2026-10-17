@@ -1,0 +1,60 @@
+{
+  "artifact": "decider-0.8b_fp16.litertlm",
+  "artifact_sha256": "477c1dcadbb229833cbcb9613f3436ad7057dcdbc4de2038ca3e8f4ec0485f25",
+  "device": "mac-studio-m4-max",
+  "model_id": "decider-0.8b-fp16",
+  "notes": "decider-0.8b (litert-community/decider-0.8b-LiteRT, Hub main 52dea2d8, read 2026-10-09): Mapika/decider-0.8b (Apache-2.0, fine-tuned from Qwen/Qwen3.5-0.8B-Base; 18 linear-attention + 6 full-attention layers) as a .litertlm bundle with an identity template, no start token, stop token 248044, ExecutorMetadata for 48 state buffers and an fp32 activation preference. Typed decisions are read from the label logits of each row's last token (prefill ids[:-1], decode ids[-1] once); the runtime's generated text has no decision meaning, so decode rates are evidence only. Probabilities were not measured on the phone: these records establish runtime operation, speed and memory, not equality to the Mac probabilities (the Hub card's conversion-agreement table is Mac CPU / Metal). Lane record: litertlm-convert/decider_work (FINDINGS.md, MODEL_CARD.md = the Hub README). Digest from the run's bench record of the file the CLI loaded (results/mac_bench_quiet.json rows[fp16].bundle). The same file's int8 row in that bench is the earlier weight-only int8 build (9363b810…, unpublished): no record.",
+  "quantization": "FP16 weights for fully connected layers and the embedding; float compute; fp32 activation preference",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-09-23",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "Prefill speed:        533.23 tokens/s",
+        "Time to first token:  0.5335 s",
+        "Init time:            42.3812 s",
+        "Decode speed:         18.82 tokens/s (informational, not recorded as decode_tokens_per_s)",
+        "litert-lm benchmark CLI 0.17.1 (PyPI), --backend cpu -p 256 -d 8 --runs 3 --cache no --cpu-thread-count 4; CLI mean of 3 measured iterations after one excluded warmup; init from the first measured iteration",
+        "conditions: quiet machine (no other Codex run; supervisor checked); 2026-09-23",
+        "files: codex-conversions/2026-09-21/decider-08b/logs/mac_bench_fp16_quiet.log"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 8,
+        "init_s": 42.3812,
+        "max_num_tokens": 4096,
+        "measured_runs": 3,
+        "prefill_tokens": 256,
+        "threads": 4,
+        "warmup_runs": 1
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 533.23,
+      "provenance": "measured",
+      "runs": true,
+      "signature": null,
+      "total_ops": null,
+      "ttft_ms": 533.5
+    }
+  ],
+  "schema_version": "1.0"
+}

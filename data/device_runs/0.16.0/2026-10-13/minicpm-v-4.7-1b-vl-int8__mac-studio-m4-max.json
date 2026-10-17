@@ -1,0 +1,48 @@
+{
+  "artifact": "MiniCPM-V-4.7-1B-VL_int8.litertlm",
+  "artifact_sha256": "4c9c30b24a5e9187c36d1a45773dbb2c7f32a8ee8cb5788df97b8d14453bb140",
+  "device": "mac-studio-m4-max",
+  "model_id": "minicpm-v-4.7-1b-vl-int8",
+  "notes": "Hub litert-community/MiniCPM-V-4.7-1B (upload commit 9d7638b2). The shipped bytes on an older PyPI wheel of litert-lm (the manifest's min_runtime_version 0.16.0 rests on these runs): the card's CPU commands with --cache no, one fresh process each, Mac Studio M4 Max, round 9 of litertlm-convert minicpmv47_work (r9/card_cmd_runlog.txt §C / §D). The file's container header is format 1.6.0 (builder 0.17.1 pack, r9/swap_MiniCPM-V-4.7-1B-VL_int8.json); both wheels read it and answered. No benchmark: throughput cells null.",
+  "quantization": "decoder: dynamic-range int8 weights on 151 fully connected layers including the untied output head, the 36 GatedDeltaNet decay/gate projections (in_proj_a, in_proj_b) kept float, fp32 activation preference; token embedding int8 per channel, outside the decoder graph; vision encoder and adapter fp16 weights (FULLY_CONNECTED and CONV_2D), float compute",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-13",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "c0160_vl_cpu_text (litert-lm 0.16.0 CLI, shipped bytes): `litert-lm run ./MiniCPM-V-4.7-1B-VL_int8.litertlm --backend cpu --cache no --prompt \"What is the capital of France? Answer in one sentence.\"` exit 0, stdout begins \"The capital of France is Paris.\"",
+        "c0160_vl_cpu_image (litert-lm 0.16.0 CLI, shipped bytes): `litert-lm run ./MiniCPM-V-4.7-1B-VL_int8.litertlm --backend cpu --cache no --prompt \"What is in this image?\" --attachment ./cats_448.png` exit 0, stdout begins \"This image shows two tabby cats resting on a bright pink couch or blanket.\""
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "card_commands_exit0": 2.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

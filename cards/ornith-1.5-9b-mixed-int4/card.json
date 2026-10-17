@@ -1,0 +1,217 @@
+{
+  "artifacts": [
+    {
+      "file": "Ornith-1.5-9B_mixed_int4.litertlm",
+      "sha256": "e4cad4a90869a2f6589a0f47268016e5ce5ac438ff8b22d68ff9b82b2e0183b4",
+      "size_mb": 5779.607
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "qwen35_work/convert_qwen35_9b.sh (hf-to-litertlm; ornith-ai/Ornith-1.5-9B at 489cb979, the same script bytes as the Qwen3.5-9B and Ornith-1.0-9B runs): text-decoder export (6 prefill signatures 1024..1 + decode, a 4096-position KV budget, 64 state buffers) -> int8 / Mixed INT4 quantization with the 48 in_proj_a / in_proj_b projections float -> fp32 GPU activations declared -> the thinking-off template; then the tokenizer step (tools/tokenizer_parity/swap_tokenizer_section.py: the repo's tokenizer.json as the tokenizer section, the other three sections byte-identical)",
+    "quantization": "Mixed INT4: int4 blockwise-32 min-max on the linear layers, int8 on the lm_head and the embedding, the 48 decay/gate projections float; 216,006,656 block scales, all normal floats (none zero or subnormal); fp32 GPU activations declared (card L32, L107)",
+    "tool": "litert-torch (pinned commit 115a1360 + the Qwen3.5 hybrid patch of hf-to-litertlm, 2026-08-21 version; lightweight export with a 1e8-byte lazy-constant threshold) + post-hoc ai-edge-quantizer; repro = hf-to-litertlm qwen35_work/",
+    "tool_version": "litert-torch 115a1360 + patch, transformers 5.14.1, torch 2.12.1, ai-edge-quantizer 0.8.0; packed and checked with litert-lm 0.18.0"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-15",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.17.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "command (tools_o15/slot_batch.sh, \"$(F $n)\" = cand/Ornith-1.5-9B_mixed_int4.litertlm): uvx --from litert-lm==0.17.1 litert-lm run \"$(F $n)\" --backend cpu --prompt \"What is the capital of France? Answer in one word.\" --cache no",
+            "bundle: cand/Ornith-1.5-9B_mixed_int4.litertlm sha256 e4cad4a90869a2f6589a0f47268016e5ce5ac438ff8b22d68ff9b82b2e0183b4 (inspect/cand_sha256.txt; now a hard link of ship/Ornith-1.5-9B_mixed_int4.litertlm) = the Hugging Face LFS oid of litert-community/Ornith-1.5-9B at main (upload commit 75418dc3), tree API read 2026-10-17 17:48 JST (litertlm-convert aa_mobile_b2_work/ornith15_9b/tools_o15/r5z_hub_tree_20261017.json)",
+            "ramgate: held 3 samples after 120 s (reclaimable 104.3 GB (need 70), window n-a, export slot n-a)",
+            "quiet_turn: turn after 1451 s in line, running: bash /Users/ ...",
+            "stdout: Paris",
+            "EXIT=0",
+            "process footprint (swap guard, 15 s samples): max 27 GB (gate/v0171/run_int4.guard.log); no guard kill",
+            "gate/gate_ship.log: 2026-10-15 11:42:40 JST 0.17.1 run int4 exit 0: Paris EXIT=0",
+            "Engine.tokenize on the litert-lm 0.17.1 wheel (CPU engine, cache_dir ':nocache', gate/tokrt/v0171_cpu_int4.json, 2026-10-15T12:06:37+0900 .. 2026-10-15T12:07:19+0900): ids equal to the tokenizers library on the repo's tokenizer.json for 174 of 174 probes (21 corpus texts + every gate / eval prompt + the 8 rendered 8-question prompts); detokenize round trip 171 of 174 (the 3 others are NFD inputs that tokenizers itself does not return)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "answers_with_expect": 1.0,
+            "detokenize_roundtrip_equal": 171.0,
+            "guard_footprint_max_gb": 27.0,
+            "processes": 2.0,
+            "tokenize_engine_s": 41.12,
+            "tokenize_ids_equal": 174.0,
+            "tokenize_probes": 174.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.17.1/2026-10-15/ornith-1.5-9b-mixed-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-15",
+          "decode_tokens_per_s": 14.78,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "command (both passes): ~/venvs/lt0180run/bin/litert-lm benchmark ~/code/litertlm-convert/aa_mobile_b2_work/ornith15_9b/cand/Ornith-1.5-9B_mixed_int4.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+            "bundle: cand/Ornith-1.5-9B_mixed_int4.litertlm sha256 e4cad4a90869a2f6589a0f47268016e5ce5ac438ff8b22d68ff9b82b2e0183b4 (inspect/cand_sha256.txt; now a hard link of ship/Ornith-1.5-9B_mixed_int4.litertlm) = the Hugging Face LFS oid of litert-community/Ornith-1.5-9B at main (upload commit 75418dc3), tree API read 2026-10-17 17:48 JST (litertlm-convert aa_mobile_b2_work/ornith15_9b/tools_o15/r5z_hub_tree_20261017.json)",
+            "pass 1 (bench/cpu_int4_p1.log): prefill 67.81 / decode 14.6 tok/s, TTFT 15.1837 s, init 49.7268 s",
+            "pass 2 (bench/cpu_int4_p2.log): prefill 68.3 / decode 14.96 tok/s, TTFT 15.061 s, init 52.0137 s",
+            "process footprint (swap guard, 15 s samples): max 28 GB as the guard prints it (bench/cpu_int4_p1.guard.log, _p2.guard.log) = 30.06 GB in bytes / 1e9 (bench/cpu_int4_p1.peak.json, _p2.peak.json: 30.06 / 30.06); no guard kill"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "guard_footprint_max_gb": 28.0,
+            "init_s": 50.8702,
+            "iterations": 3.0,
+            "max_num_tokens": 2048.0,
+            "pass1_decode_tok_s": 14.6,
+            "pass1_init_s": 49.7268,
+            "pass1_prefill_tok_s": 67.81,
+            "pass1_ttft_s": 15.1837,
+            "pass2_decode_tok_s": 14.96,
+            "pass2_init_s": 52.0137,
+            "pass2_prefill_tok_s": 68.3,
+            "pass2_ttft_s": 15.061,
+            "passes": 2.0,
+            "prefill_tokens": 1024.0,
+            "t_1024_256_s": 32.3701
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 68.055,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 15122.4
+        },
+        "source": "data/device_runs/0.18.0/2026-10-15/ornith-1.5-9b-mixed-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-15",
+          "decode_tokens_per_s": 45.58,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "command (both passes): ~/venvs/lt0180run/bin/litert-lm benchmark ~/code/litertlm-convert/aa_mobile_b2_work/ornith15_9b/cand/Ornith-1.5-9B_mixed_int4.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+            "bundle: cand/Ornith-1.5-9B_mixed_int4.litertlm sha256 e4cad4a90869a2f6589a0f47268016e5ce5ac438ff8b22d68ff9b82b2e0183b4 (inspect/cand_sha256.txt; now a hard link of ship/Ornith-1.5-9B_mixed_int4.litertlm) = the Hugging Face LFS oid of litert-community/Ornith-1.5-9B at main (upload commit 75418dc3), tree API read 2026-10-17 17:48 JST (litertlm-convert aa_mobile_b2_work/ornith15_9b/tools_o15/r5z_hub_tree_20261017.json)",
+            "pass 1 (bench/gpu_int4_p1.log): prefill 615.95 / decode 44.81 tok/s, TTFT 1.6849 s, init 89.6042 s",
+            "pass 2 (bench/gpu_int4_p2.log): prefill 615.13 / decode 46.35 tok/s, TTFT 1.6863 s, init 88.9494 s",
+            "delegation from the verbose `run` of the same bytes (gate/int4_gpu_run_verbose.log, 2026-10-15, the round r5 gate, --backend gpu --cache no --verbose): Replacing 34373 out of 34373 node(s) with delegate (LITERT_WEBGPU) node, yielding 1 partitions for subgraph 0 (prefill_1024). .. Replacing 2920 out of 2920 node(s) with delegate (LITERT_WEBGPU) node, yielding 1 partitions for subgraph 6 (decode). (7 decoder signatures, 132963 / 132963 nodes, one partition each, no 'Validation error' / 'Shape mismatch' line); gate/gate_ship.log: 2026-10-15 05:00:57 JST gpu run verbose int4 exit 0 replacing=7 validation_error=0 shape_mismatch=0 | reply \"The capital of France is Paris.\"",
+            "GPU engine footprint of that verbose run (swap guard): 8.38 GB in bytes / 1e9 (gate/warm/int4_gpu.peak.json); the benchmark passes ran without a guard"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "init_s": 89.2768,
+            "iterations": 3.0,
+            "max_num_tokens": 2048.0,
+            "pass1_decode_tok_s": 44.81,
+            "pass1_init_s": 89.6042,
+            "pass1_prefill_tok_s": 615.95,
+            "pass1_ttft_s": 1.6849,
+            "pass2_decode_tok_s": 46.35,
+            "pass2_init_s": 88.9494,
+            "pass2_prefill_tok_s": 615.13,
+            "pass2_ttft_s": 1.6863,
+            "passes": 2.0,
+            "prefill_tokens": 1024.0,
+            "t_1024_256_s": 7.2817
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": 615.54,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 1685.6
+        },
+        "source": "data/device_runs/0.18.0/2026-10-15/ornith-1.5-9b-mixed-int4__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "ornith",
+    "id": "ornith-1.5-9b-mixed-int4",
+    "license": "mit",
+    "source_url": "https://huggingface.co/litert-community/Ornith-1.5-9B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Text only: the decoder of the multimodal release; no vision tower, no MTP head. Only the 8 attention layers keep a growing KV cache (a 4096-token budget); the 24 linear-attention layers carry a constant-size conv and recurrent state (card L25).",
+    "Runtime: tested on litert-lm 0.18.0 (Mac); on litert-lm 0.17.1 the file answered a plain `run` with \"Paris\" (Mac CPU, one run) (card L21).",
+    "Thinking off, no switch: the template writes the empty think block that Ornith's template writes at enable_thinking=False into every assistant turn and the generation prompt; a switch template would drop the think blocks Ornith writes into past turns, so none is shipped (card L27, L77).",
+    "One stop token, <|im_end|> (248046): the repo has no generation config and its model config lists that one end token (card L77).",
+    "Tokenizer: the tokenizer section is the repo's tokenizer.json byte for byte (174 of 174 probes equal the tokenizers library on litert-lm 0.18.0 and 0.17.1) (card L105).",
+    "Galaxy S26 GPU: the engine of this file does not build on a phone of this memory class: on a device-lab Galaxy S26 its benchmark session ended during the engine build after the delegate had taken prefill_1024 / prefill_256 / prefill_64, with an allocator failure and the low-memory killer removing other apps, as the same-recipe Ornith-1.0-9B files did in four sessions; the CPU was not run (12.1 GB by the earlier CPU peak factor against 11.66 GB) (card L38, L98).",
+    "fp32 GPU activations are declared (the int8 sibling answered 0 of 8 with the runtime's fp16 default) (card L47).",
+    "Tool calling: the model writes the call in Qwen3.5's XML form as text only when given Ornith's own tool block; the runtime does not parse or run it (LiteRT-LM issue 3927); a tool result sent back as a `tool` message was not used (card L79).",
+    "One Engine per conversation (LiteRT-LM issue 3165): no carry-over seen in the probe on this file, but the recurrent state is carried all the same (card L81).",
+    "Long outputs: 3 of 8 replies of a 512-token long-output check reached the cap (answers longer than 512 tokens, cut mid-sentence, none repeating); no reply looped (card L51).",
+    "Pixel 8a: not run (no Qwen3.5 Hub file built a GPU engine on this Mali phone under a memory guard). iOS not measured: one 5.64 GiB TFLite section, over the ~2 GiB single-section limit (card L43, L99).",
+    "Accuracy: GSM8K n=100 (thinking off, greedy, at most 2,048 output tokens, Mac GPU): bf16 94 / Mixed INT4 92, agreeing on 92 of 100 questions; the file is 34 % smaller than the int8 file (card L34, L57-L63).",
+    "Mac: the faster file on the GPU (7.28 vs 8.16 s, decode 45.6 vs 39.6 tok/s) and the slower on the CPU (blockwise prefill 68 tok/s against 234); without --cache, the first CPU `run` writes a 4.96 GB compiled-weights cache next to the model; a three-signature variant passed the Mac 8 questions but did not build on the Galaxy S26 either (card L38-L43, L75, L94)."
+  ],
+  "schema_version": "1.2"
+}

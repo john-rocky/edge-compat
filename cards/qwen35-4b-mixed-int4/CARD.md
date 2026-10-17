@@ -27,7 +27,7 @@ task: text-generation
 
 | File | SHA-256 | Size (MB) |
 |---|---|---|
-| `Qwen3.5-4B_mixed_int4.litertlm` | `176b5a2b6c20bde7739fba98e653a04f5d5b4a753a4b9dd0ff529aba7c35be99` | 2626.768 |
+| `Qwen3.5-4B_mixed_int4.litertlm` | `37209c42c4bd8108373305e7f9820a84fd6d8f8a3481549a31c48bd7880b700f` | 2626.768 |
 
 ## Performance
 
@@ -35,15 +35,19 @@ No benchmark data yet.
 
 ## Device runs (NPU / LiteRT-LM)
 
-Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__iphone-17-pro.json`, `data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__mac-studio-m4-max.json`, `data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__pixel-8a.json`, `data/device_runs/0.16.1/2026-09-01/qwen35-4b-mixed-int4__raspberry-pi-5.json`.
+Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__iphone-17-pro.json`, `data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__mac-studio-m4-max.json`, `data/device_runs/0.16.0/2026-08-27/qwen35-4b-mixed-int4__pixel-8a.json`, `data/device_runs/0.16.1/2026-09-01/qwen35-4b-mixed-int4__raspberry-pi-5.json`, `data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-4b-mixed-int4__galaxy-s26.json`, `data/device_runs/prebuilt-adac974b/2026-10-12/qwen35-4b-mixed-int4__pixel-8a.json`, `data/device_runs/selfbuilt-b2f686e2/2026-10-09/qwen35-4b-mixed-int4__galaxy-s26.json`.
 
 | Device | Accelerator | Status | Full delegation | Output match | Prompt (tokens) | Latency p50 (ms) | Prefill tok/s | Decode tok/s | TTFT (ms) | Peak mem (MB) | Environment | Date | Provenance |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| galaxy-s26 | cpu | pass | - | - | 24 | - | - | - | - | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm selfbuilt-b2f686e2 | 2026-10-09 | measured |
+| galaxy-s26 | gpu | pass | yes | - | 256 | - | 67.58 | 5.39 | 4095 | 4089.17 | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-12 | measured |
 | iphone-17-pro | cpu | pass | - | - | - | - | 46.68 | 8.87 | 3124.0 | 1678.757 | iphone-17-pro · A19-Pro · litert-lm 0.16.0 · iOS 27.0 | 2026-08-27 | measured |
 | iphone-17-pro | gpu | pass | - | - | - | - | 88.69 | 11.38 | 1894.0 | 5735.633 | iphone-17-pro · A19-Pro · litert-lm 0.16.0 · iOS 27.0 | 2026-08-27 | measured |
 | mac-studio-m4-max | cpu | pass | - | - | 256 | - | 100.08 | 20.07 | 2607.8 | - | mac-studio-m4-max · Apple M4 Max · litert-lm 0.16.0 | 2026-08-27 | measured |
 | mac-studio-m4-max | gpu | pass | - | - | 256 | - | 669.33 | 68.45 | 397.1 | - | mac-studio-m4-max · Apple M4 Max · litert-lm 0.16.0 | 2026-08-27 | measured |
+| pixel-8a | cpu | fallback | no | - | 256 | - | 28.98 | 5.59 | 9055 | 3986.43 | Pixel 8a · Tensor G3 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-12 | measured |
 | pixel-8a | cpu | fallback | no | - | 260 | - | 22.13 | 6.3 | 11910.0 | - | pixel-8a · Tensor G3 · litert-lm 0.16.0 · Android 16 | 2026-08-27 | measured |
+| pixel-8a | gpu | load_failed | - | - | - | - | - | - | - | - | Pixel 8a · Tensor G3 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-12 | measured |
 | raspberry-pi-5 | cpu | pass | - | - | 256 | - | 17.08 | 2.37 | 15416.4 | 4969.0 | Raspberry Pi 5 Model B Rev 1.1 · Broadcom BCM2712 · litert-lm 0.16.1 · Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41 | 2026-09-01 | measured |
 
 ## Pitfalls
@@ -56,6 +60,7 @@ Model-level on-device results — measured behavior of this exact artifact on th
 - Mac CPU prefill is ~2.4x SLOWER than the int8 sibling (100 vs 243 tok/s; TTFT 2.61 vs 1.11 s) — int4 unpack cost in XNNPACK prefill; decode is equal or faster everywhere. iPhone CPU is the exception (prefill 46.7 vs int8's 24.0 — faster).
 - Pixel 8a (8 GB) CPU: FITS and generates coherently — VmHWM 4.43 GB, prefill 22.1 / decode 6.30 tok/s (260-token prompt / 204 decoded), TTFT 11.9 s, engine init 32-48 s, XNNPACK delegates 32830/34373 nodes (litert_lm_main android_arm64 v0.16.0, warm weight cache). GPU on 8 GB devices NOT attempted — engine creation is the known device-killer (2B lesson).
 - First Android CPU run writes a 2.66 GB XNNPACK weight cache next to the model. The cache key embeds the model file mtime: two runs that see mtimes 1 s apart build TWO 2.66 GB caches — check `ls *.xnnpack_cache | wc -l` after first runs.
+- Metadata-only updates of the published files (README dated notes; TFLite, tokenizer and executor metadata byte-identical each time): 2026-09-21, the chat template accepts the litert-lm 0.18 content-parts form (string form unchanged); 2026-10-09, the template is LiteRT-LM models/qwen3_5/chat_template.jinja at 87ab9334 with a format_content macro that reads content as a string or as parts (text and tool_response) and enable_thinking defaulting to false: with nothing set a single-turn prompt renders byte for byte as before, enable_thinking=true pre-fills <think>\n and the reasoning comes back on the thought channel (<think>\n / \n</think>), supports_thinking is true; llm_model_type stays generic_model, so tool calls come back as text and supports_function_calling is false (README Chat template note).
 
 ---
 

@@ -35,11 +35,19 @@ No benchmark data yet.
 
 ## Device runs (NPU / LiteRT-LM)
 
-Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-24/smollm3-3b-int8__galaxy-s26.json`, `data/device_runs/0.16.1/2026-09-01/smollm3-3b-int8__raspberry-pi-5.json`.
+Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-24/smollm3-3b-int8__galaxy-s26.json`, `data/device_runs/0.16.1/2026-09-01/smollm3-3b-int8__raspberry-pi-5.json`, `data/device_runs/0.17.1/2026-10-05/smollm3-3b-int8__mac-studio-m4-max.json`, `data/device_runs/prebuilt-adac974b/2026-10-05/smollm3-3b-int8__galaxy-s26.json`, `data/device_runs/selfbuilt-3dbb23e1e/2026-10-05/smollm3-3b-int8__galaxy-s26.json`.
 
 | Device | Accelerator | Status | Full delegation | Output match | Prompt (tokens) | Latency p50 (ms) | Prefill tok/s | Decode tok/s | TTFT (ms) | Peak mem (MB) | Environment | Date | Provenance |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| galaxy-s26 | cpu | fallback | no | - | 1024 | - | 165.95 | 9.7 | 6290.0 | 4355.8 | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-05 | measured |
+| galaxy-s26 | gpu | pass | yes | - | 16 | - | 241.56 | 16.73 | 130.0 | 999.0 | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-05 | measured |
 | galaxy-s26 | gpu | pass | yes | - | 211 | - | 312.27 | 14.41 | 750.0 | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm 0.16.0 · Android 16 | 2026-08-24 | measured |
+| galaxy-s26 | gpu | pass | yes | - | 1024 | - | 452.19 | 16.02 | 2330.0 | 999.0 | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm prebuilt-adac974b · Android 16 | 2026-10-05 | measured |
+| galaxy-s26 | npu | load_failed | - | - | - | - | - | - | - | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm selfbuilt-3dbb23e1e · QAIRT 2.47.0.260601114230 (QNN JIT libraries) · Android 16 | 2026-10-05 | measured |
+| mac-studio-m4-max | cpu | fallback | no | - | 16 | - | 230.15 | 11.07 | 1546.2 | - | Mac Studio (M4 Max) · Apple M4 Max · litert-lm 0.17.1 | 2026-10-05 | measured |
+| mac-studio-m4-max | cpu | fallback | no | - | 256 | - | 459.79 | 24.18 | 1995.7 | - | Mac Studio (M4 Max) · Apple M4 Max · litert-lm 0.17.1 | 2026-10-05 | measured |
+| mac-studio-m4-max | gpu | pass | yes | - | 16 | - | 819.21 | 100.22 | 37.6 | - | Mac Studio (M4 Max) · Apple M4 Max · litert-lm 0.17.1 | 2026-10-05 | measured |
+| mac-studio-m4-max | gpu | pass | yes | - | 256 | - | 1640.66 | 105.96 | 168.3 | - | Mac Studio (M4 Max) · Apple M4 Max · litert-lm 0.17.1 | 2026-10-05 | measured |
 | raspberry-pi-5 | cpu | pass | - | - | 256 | - | 19.1 | 1.97 | 14036.7 | 4247.0 | Raspberry Pi 5 Model B Rev 1.1 · Broadcom BCM2712 · litert-lm 0.16.1 · Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41 | 2026-09-01 | measured |
 
 ## Pitfalls
