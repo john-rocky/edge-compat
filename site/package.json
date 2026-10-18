@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@litertjs/core": "^2.5.3",
-    "esbuild": "^0.25.0"
+    "esbuild": "^0.28.2"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
