@@ -19,7 +19,7 @@
     "esbuild": "^0.25.0"
   },
   "devDependencies": {
-    "@types/node": "^24.0.0",
+    "@types/node": "^26.4.1",
     "@webgpu/types": "^0.1.71",
     "eslint": "^9.30.0",
     "playwright": "^1.54.0",
