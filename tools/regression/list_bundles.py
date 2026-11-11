@@ -12,7 +12,7 @@ Rows come from three sources, all read from the real thing:
 (c) the Hugging Face API (read-only): every public repo of the own account
     that holds a `.litertlm`, and every `.litertlm` in a public litert-community
     repo that a commit authored by the own account wrote (file-level, never
-    repo-level: the org's repos mix the team's files and ours).
+    repo-level: the org's repos mix files from several authors).
 
 A token (`HF_TOKEN`, else the `token` file under `$HF_HOME`, default
 `~/.cache/huggingface`) is sent as `Authorization: Bearer` when present, from
