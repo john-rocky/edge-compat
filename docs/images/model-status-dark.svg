@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 312" width="860" height="312" role="img" aria-labelledby="t d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<title id="t">Which models ran where</title>
+<desc id="d">Which models ran where. Browser, WebGPU: 69 loaded and ran with no fallback or mismatch recorded, 61 fell back, gave wrong output, or failed to load or run. Browser, WASM: 108 loaded and ran with no fallback or mismatch recorded, 22 fell back, gave wrong output, or failed to load or run. Galaxy S26, GPU: 56 loaded and ran with no fallback or mismatch recorded, 3 fell back, gave wrong output, or failed to load or run. Galaxy S26, NPU: 55 loaded and ran with no fallback or mismatch recorded, 7 fell back, gave wrong output, or failed to load or run. Raspberry Pi 5, CPU: 87 loaded and ran with no fallback or mismatch recorded, 0 fell back, gave wrong output, or failed to load or run.</desc>
+<text x="0" y="28" font-size="20" font-weight="600" text-anchor="start" fill="#f0efec">Which models ran where</text>
+<text x="0" y="52" font-size="14" font-weight="400" text-anchor="start" fill="#c3c2b7">Number of .tflite models per target. Last updated 2026-10-11. The browser rows ran in headless desktop Chromium.</text>
+<text x="0" y="72" font-size="14" font-weight="400" text-anchor="start" fill="#c3c2b7">Not every model ran on every target, so the rows have different totals.</text>
+<text x="762" y="108" font-size="13" font-weight="600" text-anchor="end" fill="#c3c2b7">Ran</text>
+<text x="838" y="108" font-size="13" font-weight="600" text-anchor="end" fill="#c3c2b7">Other</text>
+<text x="0" y="134" font-size="14" font-weight="400" text-anchor="start" fill="#f0efec">Browser, WebGPU</text>
+<path fill="#3987e5" d="M174 120H444V138H174Q170 138 170 134V124Q170 120 174 120Z"/>
+<path fill="#d95926" d="M446 120H684Q688 120 688 124V134Q688 138 684 138H446V120Z"/>
+<text x="762" y="134" font-size="14" font-weight="600" text-anchor="end" fill="#f0efec">69</text>
+<text x="838" y="134" font-size="14" font-weight="600" text-anchor="end" fill="#f0efec">61</text>
+<text x="0" y="168" font-size="14" font-weight="400" text-anchor="start" fill="#f0efec">Browser, WASM</text>
+<path fill="#3987e5" d="M174 154H600V172H174Q170 172 170 168V158Q170 154 174 154Z"/>
+<path fill="#d95926" d="M602 154H684Q688 154 688 158V168Q688 172 684 172H602V154Z"/>
+<text x="762" y="168" font-size="14" font-weight="600" text-anchor="end" fill="#f0efec">108</text>
+<text x="838" y="168" font-size="14" font-weight="600" text-anchor="end" fill="#f0efec">22</text>
+<text x="0" y="202" font-size="14" font-weight="400" text-anchor="start" fill="#f0efec">Galaxy S26, GPU</text>
+<path fill="#3987e5" d="M174 188H392V206H174Q170 206 170 202V192Q170 188 174 188Z"/>
+<path fill="#d95926" d="M394 188H400Q404 188 404 192V202Q404 206 400 206H394V188Z"/>
+<text x="762" y="202" font-size="14" font-weight="600" text-anchor="end" fill="#f0efec">56</text>
+<text x="838" y="202" font-size="14" font-weight="600" text-anchor="end" fill="#f0efec">3</text>
+<text x="0" y="236" font-size="14" font-weight="400" text-anchor="start" fill="#f0efec">Galaxy S26, NPU</text>
+<path fill="#3987e5" d="M174 222H388V240H174Q170 240 170 236V226Q170 222 174 222Z"/>
+<path fill="#d95926" d="M390 222H412Q416 222 416 226V236Q416 240 412 240H390V222Z"/>
+<text x="762" y="236" font-size="14" font-weight="600" text-anchor="end" fill="#f0efec">55</text>
+<text x="838" y="236" font-size="14" font-weight="600" text-anchor="end" fill="#f0efec">7</text>
+<text x="0" y="270" font-size="14" font-weight="400" text-anchor="start" fill="#f0efec">Raspberry Pi 5, CPU</text>
+<path fill="#3987e5" d="M174 256H512Q516 256 516 260V270Q516 274 512 274H174Q170 274 170 270V260Q170 256 174 256Z"/>
+<text x="762" y="270" font-size="14" font-weight="600" text-anchor="end" fill="#f0efec">87</text>
+<text x="838" y="270" font-size="14" font-weight="600" text-anchor="end" fill="#f0efec">0</text>
+<rect x="0" y="291" width="12" height="12" rx="3" fill="#3987e5"/>
+<text x="18" y="302" font-size="14" font-weight="400" text-anchor="start" fill="#c3c2b7">Loaded and ran, no fallback or mismatch recorded</text>
+<rect x="382" y="291" width="12" height="12" rx="3" fill="#d95926"/>
+<text x="400" y="302" font-size="14" font-weight="400" text-anchor="start" fill="#c3c2b7">Fell back, gave wrong output, or failed to load or run</text>
+</svg>
