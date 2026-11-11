@@ -25,7 +25,7 @@
     "@types/node": "^24.0.0",
     "@webgpu/types": "^0.1.71",
     "esbuild": "^0.25.0",
-    "eslint": "^9.30.0",
+    "eslint": "^10.10.0",
     "typescript": "^5.8.0",
     "typescript-eslint": "^8.35.0"
   }
