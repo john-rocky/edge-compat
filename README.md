@@ -12,7 +12,7 @@ edge-compat is an unofficial project for LiteRT, not an official Google product.
 </picture>
 </p>
 
-A pass means the file loaded and ran, and no fallback or mismatch was recorded. Output was compared for 65 of the 69 WebGPU passes. The WASM, Galaxy S26 and Raspberry Pi passes come from speed runs, which do not compare output.
+A pass means the file loaded and ran, and no fallback or mismatch was recorded. Output was compared for 65 of the 69 WebGPU passes, against the WASM result of the same file. WASM is that reference, and the Galaxy S26 and Raspberry Pi passes come from speed runs, so their output was not compared.
 
 <a name="edge-lint--static-delegate-pre-flight"></a>
 
