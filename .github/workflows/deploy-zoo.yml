@@ -53,7 +53,7 @@ jobs:
       # every surface incl. each generated page, example-provenance banners.
       # Runs on every dispatch so the flip runbook's CI path is always the
       # already-rehearsed one.
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v7
       - name: release-gate
         working-directory: .
         run: |
