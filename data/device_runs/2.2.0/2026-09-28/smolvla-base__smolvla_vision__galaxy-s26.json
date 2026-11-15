@@ -23,7 +23,7 @@
       },
       "error": null,
       "evidence": [
-        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, GpuOptions precision=FP32; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources ~/code/standup/drafts/2026-09-28-samples-344-attachments/s26_report.json (leg smolvla_vision_fp16safe_gpu32) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_vision_fp16safe_gpu32/",
+        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, GpuOptions precision=FP32; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources <work>/s26_report.json (leg smolvla_vision_fp16safe_gpu32) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_vision_fp16safe_gpu32/",
         "comparison vs the same file on ai-edge-litert 2.2.0 CPU (Mac, same inputs), all elements, tolerance |out - ref| <= max(1e-5, 1e-3*|ref|): img_emb: 99.91% of 61440 within, max|d| 0.000221 (ref max |x| 71)",
         "vs the torch float32 module on the same inputs: img_emb: max|d| 0.000217",
         "conditions: thermal NONE->NONE, headroom 0.71999997->0.7266666, screen woken before the run (keyguard showing), test process in the foreground cpuset (cores 0-5)"
@@ -67,7 +67,7 @@
       },
       "error": null,
       "evidence": [
-        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, GpuOptions precision=default; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources ~/code/standup/drafts/2026-09-28-samples-344-attachments/s26_report.json (leg smolvla_vision_fp16safe_gpu) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_vision_fp16safe_gpu/",
+        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, GpuOptions precision=default; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources <work>/s26_report.json (leg smolvla_vision_fp16safe_gpu) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_vision_fp16safe_gpu/",
         "comparison vs the same file on ai-edge-litert 2.2.0 CPU (Mac, same inputs), all elements, tolerance |out - ref| <= max(1e-5, 1e-3*|ref|): img_emb: 2.56% of 61440 within, max|d| 3.61 (ref max |x| 71)",
         "vs the torch float32 module on the same inputs: img_emb: max|d| 3.61",
         "conditions: thermal NONE->NONE, headroom 0.71->0.71666664, screen woken before the run (keyguard showing), test process in the foreground cpuset (cores 0-5)",

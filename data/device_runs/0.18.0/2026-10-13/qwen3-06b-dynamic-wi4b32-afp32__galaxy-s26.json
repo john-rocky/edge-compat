@@ -120,7 +120,7 @@
     "Prefill Turn 1: Processed 1024 tokens in 4.690272706s duration.",
     "process B (cache files kept): 222.0 / 22.33 tok/s, init 430.36 ms, XNNPACK cache loaded (hit)",
     "peak (separate 1-iteration process, --report_peak_memory_footprint=true): Peak system ram usage 1752.12 MB",
-    "CPU rows are sustained values: iteration 1 starts with the clusters uncapped, iterations 2–3 run under the frequency cap that sets in within seconds (memory s26-cpu-bench-throttles-within-seconds); the headline is the binary's own median of 3"
+    "CPU rows are sustained values: iteration 1 starts with the clusters uncapped, iterations 2–3 run under the frequency cap that sets in within seconds; the headline is the binary's own median of 3"
    ],
    "env": {
     "device": "Galaxy S26 (SM-S942Q)",

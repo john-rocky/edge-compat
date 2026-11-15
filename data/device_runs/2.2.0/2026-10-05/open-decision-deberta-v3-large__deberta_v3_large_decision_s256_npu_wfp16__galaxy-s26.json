@@ -3,7 +3,7 @@
   "artifact_sha256": "e4eedb0098a7727196184960c3c5fd47972921c8ded3981832c217f054357da0",
   "device": "galaxy-s26",
   "model_id": "open-decision-deberta-v3-large__deberta_v3_large_decision_s256_npu_wfp16",
-  "notes": "Open Decision DeBERTa-v3-large LiteRT (litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT; deberta_v3_large_decision_s256_npu_wfp16.tflite published at 26a2b642) measured by the typed-decisions lane (rounds 11-21, 2026-10-04 / 2026-10-05): the hfmodels-android SDK device test (family deberta_decision, a request's questions packed into one forward as the author's decide() does) and, where named, the lane's native runner. `signature` names the precision, the harness and (when two runs of one form share a date) the run (DECISIONS #186 / #188). artifact_sha256 = the dev descriptor's sha256 for the graph, asserted equal to the published file's. Lane record: ~/code/standup/handoffs/2026-10-03-typed-decisions-demo.md (§知見 2); generator: ~/code/standup/handoffs/assets/2026-10-03-typed-decisions/r24/litert_compat_records.py.",
+  "notes": "Open Decision DeBERTa-v3-large LiteRT (litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT; deberta_v3_large_decision_s256_npu_wfp16.tflite published at 26a2b642) measured by the typed-decisions lane (rounds 11-21, 2026-10-04 / 2026-10-05): the hfmodels-android SDK device test (family deberta_decision, a request's questions packed into one forward as the author's decide() does) and, where named, the lane's native runner. `signature` names the precision, the harness and (when two runs of one form share a date) the run (DECISIONS #186 / #188). artifact_sha256 = the dev descriptor's sha256 for the graph, asserted equal to the published file's. Lane record: <notes> (§知見 2); generator: <work>/r24/litert_compat_records.py.",
   "quantization": null,
   "results": [
     {
@@ -45,7 +45,7 @@
         "latency_p50_ms = the parity step's forward_ms_median: one LiteRtDecisionModel.scores() call per captured request (host float16 table lookup, input writes, CompiledModel run, output readback on the model thread), after one warm forward (#186(2)).",
         "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs (#186(3)). full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1906 out of 1906 node(s) with delegate (LITERT_CL)').",
         "conditions (the gate's header and footer): thermal status 0 -> 2, battery 37.5 -> 41.2 C, battery level 79 %, display mWakefulness=Dozing at the start.",
-        "source: ~/code/hfmodels-android/litert/results/2026-10-05-1130-RFGL80R6A6H-litert2.2.0-decide-opendecision-fp16acc32-s256_npu_wfp16-gpu.log (main 3e1fcd8); lane record ~/code/standup/handoffs/2026-10-03-typed-decisions-demo.md (§3 / §6c, §知見 2); generator ~/code/standup/handoffs/assets/2026-10-03-typed-decisions/r24/litert_compat_records.py."
+        "source: ~/code/hfmodels-android/litert/results/2026-10-05-1130-RFGL80R6A6H-litert2.2.0-decide-opendecision-fp16acc32-s256_npu_wfp16-gpu.log (main 3e1fcd8); lane record <notes> (§3 / §6c, §知見 2); generator <work>/r24/litert_compat_records.py."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -189,7 +189,7 @@
         "latency_p50_ms = the parity step's forward_ms_median: one LiteRtDecisionModel.scores() call per captured request (host float16 table lookup, input writes, CompiledModel run, output readback on the model thread), after one warm forward (#186(2)).",
         "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs (#186(3)). full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1906 out of 1906 node(s) with delegate (LITERT_CL)').",
         "conditions (the gate's header and footer): thermal status 0 -> 2, battery 37.4 -> 41.1 C, battery level 79 %, display mWakefulness=Dozing at the start.",
-        "source: ~/code/hfmodels-android/litert/results/2026-10-05-1126-RFGL80R6A6H-litert2.2.0-decide-opendecision-s256_npu_wfp16-gpu.log (main 3e1fcd8); lane record ~/code/standup/handoffs/2026-10-03-typed-decisions-demo.md (§3 / §6c, §知見 2); generator ~/code/standup/handoffs/assets/2026-10-03-typed-decisions/r24/litert_compat_records.py."
+        "source: ~/code/hfmodels-android/litert/results/2026-10-05-1126-RFGL80R6A6H-litert2.2.0-decide-opendecision-s256_npu_wfp16-gpu.log (main 3e1fcd8); lane record <notes> (§3 / §6c, §知見 2); generator <work>/r24/litert_compat_records.py."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -334,7 +334,7 @@
         "latency_p50_ms = the parity step's forward_ms_median: one LiteRtDecisionModel.scores() call per captured request (host float16 table lookup, input writes, CompiledModel run, output readback on the model thread), after one warm forward (#186(2)).",
         "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs (#186(3)). full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1 out of 1 node(s) with delegate (DispatchDelegate)').",
         "conditions (the gate's header and footer): thermal status 0 -> 1, battery 37.7 -> 38.8 C, battery level 80 %, display mWakefulness=Dozing at the start.",
-        "source: ~/code/hfmodels-android/litert/results/2026-10-05-1118-RFGL80R6A6H-litert2.2.0-decide-opendecision-s256_npu_wfp16-npu.log (main 3e1fcd8); lane record ~/code/standup/handoffs/2026-10-03-typed-decisions-demo.md (§3 / §6c, §知見 2); generator ~/code/standup/handoffs/assets/2026-10-03-typed-decisions/r24/litert_compat_records.py."
+        "source: ~/code/hfmodels-android/litert/results/2026-10-05-1118-RFGL80R6A6H-litert2.2.0-decide-opendecision-s256_npu_wfp16-npu.log (main 3e1fcd8); lane record <notes> (§3 / §6c, §知見 2); generator <work>/r24/litert_compat_records.py."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -481,7 +481,7 @@
         "latency_p50_ms = the parity step's forward_ms_median: one LiteRtDecisionModel.scores() call per captured request (host float16 table lookup, input writes, CompiledModel run, output readback on the model thread), after one warm forward (#186(2)).",
         "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs (#186(3)). full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1 out of 1 node(s) with delegate (DispatchDelegate)').",
         "conditions (the gate's header and footer): thermal status 0 -> 1, battery 37.5 -> 38.8 C, battery level 80 %, display mWakefulness=Dozing at the start.",
-        "source: ~/code/hfmodels-android/litert/results/2026-10-05-1124-RFGL80R6A6H-litert2.2.0-decide-opendecision-cached-s256_npu_wfp16-npu.log (main 3e1fcd8); lane record ~/code/standup/handoffs/2026-10-03-typed-decisions-demo.md (§3 / §6c, §知見 2); generator ~/code/standup/handoffs/assets/2026-10-03-typed-decisions/r24/litert_compat_records.py."
+        "source: ~/code/hfmodels-android/litert/results/2026-10-05-1124-RFGL80R6A6H-litert2.2.0-decide-opendecision-cached-s256_npu_wfp16-npu.log (main 3e1fcd8); lane record <notes> (§3 / §6c, §知見 2); generator <work>/r24/litert_compat_records.py."
       ],
       "failure_class": null,
       "full_delegation": true,

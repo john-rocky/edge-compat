@@ -51,7 +51,7 @@
     "Time to first token: 15.28 s",
     "Prefill Turn 1: Processed 1024 tokens in 14.848799934s duration.",
     "process B (cache files kept): 72.3 / 2.36 tok/s, init 835.04 ms, cache files present but full init (miss)",
-    "CPU rows are sustained values: iteration 1 starts with the clusters uncapped, iterations 2–3 run under the frequency cap that sets in within seconds (memory s26-cpu-bench-throttles-within-seconds); the headline is the binary's own median of 3",
+    "CPU rows are sustained values: iteration 1 starts with the clusters uncapped, iterations 2–3 run under the frequency cap that sets in within seconds; the headline is the binary's own median of 3",
     "Pixel 8a started every process at thermal status 1 (the phone did not return to 0 after the previous lane; CPU policies uncapped at the start)"
    ],
    "env": {

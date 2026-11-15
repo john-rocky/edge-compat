@@ -23,7 +23,7 @@
       },
       "error": null,
       "evidence": [
-        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, CpuOptions default; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources ~/code/standup/drafts/2026-09-28-samples-344-attachments/s26_report.json (leg smolvla_expert_step_f16_cpu) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_expert_step_f16_cpu/",
+        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, CpuOptions default; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources <work>/s26_report.json (leg smolvla_expert_step_f16_cpu) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_expert_step_f16_cpu/",
         "comparison vs the same file on ai-edge-litert 2.2.0 CPU (Mac, same inputs), all elements, tolerance |out - ref| <= max(1e-5, 1e-3*|ref|): v_t: 100.00% of 1600 within, max|d| 0 (ref max |x| 4)",
         "vs the torch float32 module on the same inputs: v_t: max|d| 0.000576",
         "conditions: thermal NONE->NONE, headroom 0.71666664->0.71666664, screen woken before the run (keyguard showing), test process in the foreground cpuset (cores 0-5)"
@@ -67,7 +67,7 @@
       },
       "error": null,
       "evidence": [
-        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, GpuOptions precision=FP32; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources ~/code/standup/drafts/2026-09-28-samples-344-attachments/s26_report.json (leg smolvla_expert_step_f16_gpu32) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_expert_step_f16_gpu32/",
+        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, GpuOptions precision=FP32; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources <work>/s26_report.json (leg smolvla_expert_step_f16_gpu32) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_expert_step_f16_gpu32/",
         "comparison vs the same file on ai-edge-litert 2.2.0 CPU (Mac, same inputs), all elements, tolerance |out - ref| <= max(1e-5, 1e-3*|ref|): v_t: 100.00% of 1600 within, max|d| 3.1e-06 (ref max |x| 4)",
         "vs the torch float32 module on the same inputs: v_t: max|d| 0.000576",
         "conditions: thermal NONE->NONE, headroom 0.71666664->0.71666664, screen woken before the run (keyguard showing), test process in the foreground cpuset (cores 0-5)",
@@ -112,7 +112,7 @@
       },
       "error": null,
       "evidence": [
-        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, GpuOptions precision=default; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources ~/code/standup/drafts/2026-09-28-samples-344-attachments/s26_report.json (leg smolvla_expert_step_f16_gpu) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_expert_step_f16_gpu/",
+        "npubench parity instrumentation test (zoo klein-sample bdfa02b): one Environment and one CompiledModel per process, GpuOptions precision=default; inputs = the fixture tensors written by smolvla/scripts/verify_reauthored.py (zoo main 977bfe1), fed as raw float32 files; latency = run() + readFloat of every output, median of 10 timed runs after 5 warm-ups; sources <work>/s26_report.json (leg smolvla_expert_step_f16_gpu) and ~/Downloads/depthanything-android/smolvla/out/s26/runs/smolvla_expert_step_f16_gpu/",
         "comparison vs the same file on ai-edge-litert 2.2.0 CPU (Mac, same inputs), all elements, tolerance |out - ref| <= max(1e-5, 1e-3*|ref|): v_t: 12.12% of 1600 within, max|d| 0.0332 (ref max |x| 4)",
         "vs the torch float32 module on the same inputs: v_t: max|d| 0.0333",
         "conditions: thermal NONE->NONE, headroom 0.71666664->0.71666664, screen woken before the run (keyguard showing), test process in the foreground cpuset (cores 0-5)",

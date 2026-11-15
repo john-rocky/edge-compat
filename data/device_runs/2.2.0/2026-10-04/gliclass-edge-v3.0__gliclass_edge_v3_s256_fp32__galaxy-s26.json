@@ -3,7 +3,7 @@
   "artifact_sha256": "aff0ee9795a2ffc2d4d32385e8f804b30bac4282d96d19c1e53cac88dcc97708",
   "device": "galaxy-s26",
   "model_id": "gliclass-edge-v3.0__gliclass_edge_v3_s256_fp32",
-  "notes": "GLiClass-Edge v3.0 LiteRT (litert-community/GLiClass-Edge-v3.0-LiteRT; gliclass_edge_v3_s256_fp32.tflite published at 88c90950) measured by the typed-decisions lane (round 11 / 15, 2026-10-04) through the hfmodels-android SDK device test (family gliclass of hfmodels-litert EncoderDecisions). `signature` names the precision, the harness and (when two runs of one form share a date) the run (DECISIONS #186 / #188). artifact_sha256 = the dev descriptor's sha256 for the graph, asserted equal to the published file's. Lane record: ~/code/standup/handoffs/2026-10-03-typed-decisions-demo.md (§知見 2); generator: ~/code/standup/handoffs/assets/2026-10-03-typed-decisions/r24/litert_compat_records.py.",
+  "notes": "GLiClass-Edge v3.0 LiteRT (litert-community/GLiClass-Edge-v3.0-LiteRT; gliclass_edge_v3_s256_fp32.tflite published at 88c90950) measured by the typed-decisions lane (round 11 / 15, 2026-10-04) through the hfmodels-android SDK device test (family gliclass of hfmodels-litert EncoderDecisions). `signature` names the precision, the harness and (when two runs of one form share a date) the run (DECISIONS #186 / #188). artifact_sha256 = the dev descriptor's sha256 for the graph, asserted equal to the published file's. Lane record: <notes> (§知見 2); generator: <work>/r24/litert_compat_records.py.",
   "quantization": null,
   "results": [
     {
@@ -44,7 +44,7 @@
         "latency_p50_ms = the parity step's forward_ms_median: one LiteRtDecisionModel.scores() call per captured request (host float16 table lookup, input writes, CompiledModel run, output readback on the model thread), after one warm forward (#186(2)).",
         "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs (#186(3)). full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 670 out of 670 node(s) with delegate (TfLiteXNNPackDelegate)').",
         "conditions (the gate's header and footer): thermal status 0 -> 0, battery 36.1 -> 36.0 C, battery level 79 %, display mWakefulness=Dozing at the start.",
-        "source: ~/code/hfmodels-android/litert/results/2026-10-04-1029-RFGL80R6A6H-litert2.2.0-decide-gliclass-s256_fp32-cpu.log (main 3e1fcd8); lane record ~/code/standup/handoffs/2026-10-03-typed-decisions-demo.md (§3 / §6c, §知見 2); generator ~/code/standup/handoffs/assets/2026-10-03-typed-decisions/r24/litert_compat_records.py."
+        "source: ~/code/hfmodels-android/litert/results/2026-10-04-1029-RFGL80R6A6H-litert2.2.0-decide-gliclass-s256_fp32-cpu.log (main 3e1fcd8); lane record <notes> (§3 / §6c, §知見 2); generator <work>/r24/litert_compat_records.py."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -174,7 +174,7 @@
         "latency_p50_ms = the parity step's forward_ms_median: one LiteRtDecisionModel.scores() call per captured request (host float16 table lookup, input writes, CompiledModel run, output readback on the model thread), after one warm forward (#186(2)).",
         "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs (#186(3)). full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 670 out of 670 node(s) with delegate (LITERT_CL)').",
         "conditions (the gate's header and footer): thermal status 0 -> 0, battery 36.1 -> 35.9 C, battery level 79 %, display mWakefulness=Dozing at the start.",
-        "source: ~/code/hfmodels-android/litert/results/2026-10-04-1029-RFGL80R6A6H-litert2.2.0-decide-gliclass-s256_fp32-gpu.log (main 3e1fcd8); lane record ~/code/standup/handoffs/2026-10-03-typed-decisions-demo.md (§3 / §6c, §知見 2); generator ~/code/standup/handoffs/assets/2026-10-03-typed-decisions/r24/litert_compat_records.py."
+        "source: ~/code/hfmodels-android/litert/results/2026-10-04-1029-RFGL80R6A6H-litert2.2.0-decide-gliclass-s256_fp32-gpu.log (main 3e1fcd8); lane record <notes> (§3 / §6c, §知見 2); generator <work>/r24/litert_compat_records.py."
       ],
       "failure_class": null,
       "full_delegation": true,

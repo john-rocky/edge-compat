@@ -133,7 +133,7 @@
   },
   "pitfalls": [
     "The published _int4/_int8 (non-gpu) siblings stall GPU delegation at 536/579 ops on Adreno — litert-torch 0.9.1-era Lfm2ShortConv_conv leaves INT64 ADD/CAST/SUM, GATHER_ND, const-input GREATER_EQUAL/LESS_EQUAL in the graph (s4_gpu_gate/RESULTS.md rows 4/11). This _int8_gpu carries the 0.9.3-lineage ShortConv and delegates 542/542 on the Galaxy S26 (device_runs 2026-08-25).",
-    "Quantizer recipe matters per-finetune: export-time conv-int8 costs JP 9 GSM8K points vs wi8fc (56% vs 65%), while Instruct gains 2 points from export-time — the A/B is per-model, not per-family (build_int8_gpu.sh primary pointers; memory lfm25-12b-shipped).",
+    "Quantizer recipe matters per-finetune: export-time conv-int8 costs JP 9 GSM8K points vs wi8fc (56% vs 65%), while Instruct gains 2 points from export-time — the A/B is per-model, not per-family (build_int8_gpu.sh primary pointers).",
     "add_executor_metadata is required: litert-torch 0.9.3 does not emit ExecutorMetadataProto and quantize_litertlm.py rebuilds the bundle; litert-lm >=0.15 needs it for the hybrid conv/attention state buffers (build_int8_gpu.sh)."
   ],
   "schema_version": "1.2"

@@ -133,7 +133,7 @@
   },
   "pitfalls": [
     "The published _int4/_int8 (non-gpu) siblings stall GPU delegation at 536/579 ops on Adreno (0.9.1-era ShortConv INT64 block; s4_gpu_gate/RESULTS.md rows 5/12). This _int8_gpu delegates 542/542 on the Galaxy S26 (device_runs 2026-08-25).",
-    "Thinking bundle: the runtime needs the think opener prefilled and the bundle's declared thought channel to show reasoning; gate multi-turn behaviour at sizes where the thinking completes (family records; memory thinking-models-need-think-prefill).",
+    "Thinking bundle: the runtime needs the think opener prefilled and the bundle's declared thought channel to show reasoning; gate multi-turn behaviour at sizes where the thinking completes (family records).",
     "add_executor_metadata is required after post-hoc quantization (0.9.3 emits no ExecutorMetadataProto; litert-lm >=0.15 needs it) (build_int8_gpu.sh).",
     "One arm of the 08-25 Mac Metal sieve refused engine creation for a JP/Thinking variant while S26 OpenCL passed the same file — see ship_lfm25_int8gpu_20260825/RESULTS.md before quoting Mac Metal numbers for this family."
   ],

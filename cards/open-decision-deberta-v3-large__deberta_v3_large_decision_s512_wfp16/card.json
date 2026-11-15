@@ -254,7 +254,7 @@
             "latency_p50_ms = the parity step's forward_ms_median: one LiteRtDecisionModel.scores() call per captured request (host float16 table lookup, input writes, CompiledModel run, output readback on the model thread), after one warm forward (#186(2)).",
             "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs (#186(3)). full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1785 out of 1785 node(s) with delegate (LITERT_CL)').",
             "conditions (the gate's header and footer): thermal status 0 -> 2, battery 36.7 -> 41.8 C, battery level 80 %, display mWakefulness=Dozing at the start.",
-            "source: ~/code/hfmodels-android/litert/results/2026-10-04-1037-RFGL80R6A6H-litert2.2.0-decide-opendecision-s512_wfp16-gpu.log (main 3e1fcd8); lane record ~/code/standup/handoffs/2026-10-03-typed-decisions-demo.md (§3 / §6c, §知見 2); generator ~/code/standup/handoffs/assets/2026-10-03-typed-decisions/r24/litert_compat_records.py."
+            "source: ~/code/hfmodels-android/litert/results/2026-10-04-1037-RFGL80R6A6H-litert2.2.0-decide-opendecision-s512_wfp16-gpu.log (main 3e1fcd8); lane record <notes> (§3 / §6c, §知見 2); generator <work>/r24/litert_compat_records.py."
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -388,7 +388,7 @@
             "latency_p50_ms null: the run skipped the parity step (run argument parity=0) so that the demo was the graph's first work after the warm-up; the demo medians are metrics.",
             "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs (#186(3)). full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1785 out of 1785 node(s) with delegate (LITERT_CL)').",
             "conditions (the gate's header and footer): thermal status 0 -> 2, battery 37.5 -> 41.4 C, battery level 79 %, display mWakefulness=Dozing at the start.",
-            "source: ~/code/hfmodels-android/litert/results/2026-10-05-1113-RFGL80R6A6H-litert2.2.0-decide-opendecision-cold-parity0-s512_wfp16-gpu.log (main 3e1fcd8); lane record ~/code/standup/handoffs/2026-10-03-typed-decisions-demo.md (§3 / §6c, §知見 2); generator ~/code/standup/handoffs/assets/2026-10-03-typed-decisions/r24/litert_compat_records.py."
+            "source: ~/code/hfmodels-android/litert/results/2026-10-05-1113-RFGL80R6A6H-litert2.2.0-decide-opendecision-cold-parity0-s512_wfp16-gpu.log (main 3e1fcd8); lane record <notes> (§3 / §6c, §知見 2); generator <work>/r24/litert_compat_records.py."
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -524,7 +524,7 @@
             "latency_p50_ms = the parity step's forward_ms_median: one LiteRtDecisionModel.scores() call per captured request (host float16 table lookup, input writes, CompiledModel run, output readback on the model thread), after one warm forward (#186(2)).",
             "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs (#186(3)). full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1785 out of 1785 node(s) with delegate (LITERT_CL)').",
             "conditions (the gate's header and footer): thermal status 0 -> 2, battery 36.9 -> 41.9 C, battery level 79 %, display mWakefulness=Dozing at the start.",
-            "source: ~/code/hfmodels-android/litert/results/2026-10-04-1557-RFGL80R6A6H-litert2.2.0-decide-opendecision-cold-s512_wfp16-gpu.log (main 3e1fcd8); lane record ~/code/standup/handoffs/2026-10-03-typed-decisions-demo.md (§3 / §6c, §知見 2); generator ~/code/standup/handoffs/assets/2026-10-03-typed-decisions/r24/litert_compat_records.py."
+            "source: ~/code/hfmodels-android/litert/results/2026-10-04-1557-RFGL80R6A6H-litert2.2.0-decide-opendecision-cold-s512_wfp16-gpu.log (main 3e1fcd8); lane record <notes> (§3 / §6c, §知見 2); generator <work>/r24/litert_compat_records.py."
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -650,7 +650,7 @@
           },
           "error": "Scudo ERROR: internal map failure (error desc=Out of memory)",
           "evidence": [
-            "JIT compile of the S512 graph on the Hexagon HTP aborted 93.6 s after 'compiling ... on npu' with SIGABRT inside libQnnHtpPrepare.so GraphPrepare::sequencing_stage -> operator new -> malloc (host-side memory; the GPU compiles the same 1785 ops as one partition). Source: /Users/USER/code/codex-conversions/2026-10-01/openjev-deberta-litert/device/npu_s512_attempt.logcat.txt (excerpt in standup drafts/2026-10-01-opendecision-card-attachments/npu_s512_attempt.crash_excerpt.txt).",
+            "JIT compile of the S512 graph on the Hexagon HTP aborted 93.6 s after 'compiling ... on npu' with SIGABRT inside libQnnHtpPrepare.so GraphPrepare::sequencing_stage -> operator new -> malloc (host-side memory; the GPU compiles the same 1785 ops as one partition). Source: /Users/USER/code/codex-conversions/2026-10-01/openjev-deberta-litert/device/npu_s512_attempt.logcat.txt (excerpt in <work>/npu_s512_attempt.crash_excerpt.txt).",
             "10-02 00:04:36.065  8191  8232 I DecisionGate: compiling deberta_v3_large_decision_s512_wfp16.tflite on npu fp32",
             "10-02 00:04:36.457  8191  8232 I litert  : [compiler_plugin.cc:741] Partitioned subgraph<0>, selected 1785 ops, from a total of 1785 ops. resulted in 1 partitions.",
             "10-02 00:06:09.641  8191  8232 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 8232 (DecisionGate), pid 8191 (m.decision.gate)",

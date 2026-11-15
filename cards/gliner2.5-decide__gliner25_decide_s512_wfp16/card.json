@@ -398,7 +398,7 @@
             "latency_p50_ms = the parity step's forward_ms_median: one LiteRtDecisionModel.scores() call per captured request (host float16 table lookup, input writes, CompiledModel run, output readback on the model thread), after one warm forward (#186(2)).",
             "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs (#186(3)). full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1780 out of 1780 node(s) with delegate (LITERT_CL)').",
             "conditions (the gate's header and footer): thermal status 0 -> 2, battery 36.3 -> 41.1 C, battery level 79 %, display mWakefulness=Dozing at the start.",
-            "source: ~/code/hfmodels-android/litert/results/2026-10-04-1030-RFGL80R6A6H-litert2.2.0-decide-gliner-s512_wfp16-gpu.log (main 3e1fcd8); lane record ~/code/standup/handoffs/2026-10-03-typed-decisions-demo.md (§3 / §6c, §知見 2); generator ~/code/standup/handoffs/assets/2026-10-03-typed-decisions/r24/litert_compat_records.py."
+            "source: ~/code/hfmodels-android/litert/results/2026-10-04-1030-RFGL80R6A6H-litert2.2.0-decide-gliner-s512_wfp16-gpu.log (main 3e1fcd8); lane record <notes> (§3 / §6c, §知見 2); generator <work>/r24/litert_compat_records.py."
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -515,7 +515,7 @@
             "latency_p50_ms = the parity step's forward_ms_median: one LiteRtDecisionModel.scores() call per captured request (host float16 table lookup, input writes, CompiledModel run, output readback on the model thread), after one warm forward (#186(2)).",
             "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs (#186(3)). full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1780 out of 1780 node(s) with delegate (LITERT_CL)').",
             "conditions (the gate's header and footer): thermal status 0 -> 2, battery 35.6 -> 43.8 C, battery level 79 %, display mWakefulness=Awake at the start.",
-            "source: ~/code/hfmodels-android/litert/results/2026-10-04-1550-RFGL80R6A6H-litert2.2.0-decide-gliner-cold-s512_wfp16-gpu.log (main 3e1fcd8); lane record ~/code/standup/handoffs/2026-10-03-typed-decisions-demo.md (§3 / §6c, §知見 2); generator ~/code/standup/handoffs/assets/2026-10-03-typed-decisions/r24/litert_compat_records.py."
+            "source: ~/code/hfmodels-android/litert/results/2026-10-04-1550-RFGL80R6A6H-litert2.2.0-decide-gliner-cold-s512_wfp16-gpu.log (main 3e1fcd8); lane record <notes> (§3 / §6c, §知見 2); generator <work>/r24/litert_compat_records.py."
           ],
           "failure_class": null,
           "full_delegation": true,
