@@ -3,7 +3,7 @@
   "artifact_sha256": "508c3c7e2ea0df9a756d4b42f9751d5aa08db3d60f959ade6bb2c2a2dafebcd4",
   "device": "galaxy-s26",
   "model_id": "fun-asr-nano-2512",
-  "notes": "Kotlin demo app (funasr_nano_work/demo/android, package com.mlboydaisuke.funasrdemo) on the litertlm-android 0.17.1 AAR: Engine(backend CPU, audioBackend CPU) created once, one Conversation per clip, sendMessage(Contents.of(Content.AudioFile(wav))) wall time per official sample; take t9 of the round-5 recording (demo/out/funasr-demo-1790492772.json). Texts of all three clips equal the v0.16.1 CLI gate (demo/check_take.py, 3/3 in every recorded take). Over 9 takes: zh 1.01-1.03 s, en 1.22-1.24 s, ja 1.41-1.43 s. This is the direct per-clip measurement that replaced the retracted process-wall-minus-load-only derivation on the Hub card (2026-09-27).",
+  "notes": "Kotlin demo app (package com.mlboydaisuke.funasrdemo) on the litertlm-android 0.17.1 AAR: Engine(backend CPU, audioBackend CPU) created once, one Conversation per clip, sendMessage(Contents.of(Content.AudioFile(wav))) wall time per official sample; take t9 of the run-5 recording. Texts of all three clips equal the v0.16.1 CLI gate (3/3 in every recorded take). Over 9 takes: zh 1.01-1.03 s, en 1.22-1.24 s, ja 1.41-1.43 s. This is the direct per-clip measurement that replaced the retracted process-wall-minus-load-only derivation on the Hub card (2026-09-27).",
   "quantization": "LM int8 dynamic (int8 embedding table), fp32 activations declared on the prefill/decode section; audio encoder fp16 weights, fp32 compute (30.24 s window)",
   "results": [
     {

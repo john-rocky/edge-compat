@@ -1,0 +1,63 @@
+{
+  "artifact": "parakeet_ctc_0.6b_5s_f32_Qualcomm_SM8850.tflite",
+  "artifact_sha256": "30e431db44f40f7de869776ad37869e0e3847a30717232b3667e9ce4688352fb",
+  "device": "galaxy-s26",
+  "model_id": "parakeet-ctc-0.6b__parakeet_ctc_0.6b_5s_f32_qualcomm_sm8850",
+  "notes": "parakeet-ctc-0.6b 5 s window file compiled ahead of time for SM8850 (litert-community/parakeet-ctc-0.6b @ e3c5b655, sha256 = the Hub LFS oid; tokenizer nvidia/parakeet-ctc-0.6b @ ad09ba1c) through the app's own parakeet-ctc-0.6b entry of the litert-samples speech_recognition Android app (LiteRT 2.2.0 CompiledModel; Kotlin jLibrosa mel; the app's TdtDecoder or CTC decoder and LevenshteinTokenMerger; default options = GPU FP32, NPU HIGH_PERFORMANCE, CPU 4 threads) driven by an androidTest harness with a front activity (cpuset top-app, CPUs 0-7, JIT under instrumentation); LibriSpeech test-clean through the Open ASR Leaderboard normalizer, corpus WER of the app's text (pipeline-level, not the .tflite alone). Metric suffixes: _s4 = every 4th of the 2620 utterances sorted by duration (655, 13,117 words) back to back, WER only (the engine CPUs' clock ceiling fell past the cpu-cap line, so no RTF); _s32 = every 32nd (82 utterances, 626.36 s) one at a time after the CPU clock ceiling recovers, rtf_burst = processing seconds / audio seconds; _per_window = median over the app's input windows; _sum_s = the stage's time summed over the run. The text is wrong, so no timing is given here (the run's times stay in its record only).",
+  "quantization": "fp32, compiled ahead of time for SM8850 (the litert-community parakeet-ctc-0.6b 5 s Qualcomm_SM8850 file)",
+  "results": [
+    {
+      "accelerator": "npu_qnn",
+      "context_length": null,
+      "date": "2026-10-19",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-asr-sample-app",
+        "os_build": "Android 16 (BP4A.251205.006.S942QOPS1AZH9, security patch 2026-08-05; the run header's device block)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850 (Adreno GPU, Hexagon HTP)",
+        "vendor_sdk": "LiteRT 2.2.0 qualcomm_runtime_v81 libLiteRtDispatch_Qualcomm.so + QAIRT 2.47.0 (libQnnHtp, libQnnHtpV81Stub, libQnnHtpV81Skel, libQnnSystem and the other Qualcomm libs listed with their sha256 in the campaign's LOCK.json) in the app's native lib dir"
+      },
+      "error": null,
+      "evidence": [
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-10-19-asr-burst-v1-s26-android/summary/b-l6-litert-npu-ctc-5s-S32.summary.json: {\"tag\": \"b-l6-litert-npu-ctc-5s-S32\", \"rows_counted\": 82, \"rows_excluded\": 0, \"rows_retaken\": 0, \"wer_percent_s16_reference\": 100.0, \"substitutions\": 38, \"deletions\": 1657, \"insertions\": 0, \"reference_words\": 1695, \"empty_hypotheses\": 44, \"vmhwm_kb_max\": 1512804, \"npu_htp_performance_mode\": \"HIGH_PERFORMANCE\", \"litert_version\": \"2.2.0\"}",
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-10-19-asr-burst-v1-s26-android/NOTES.md: RegisterAccelerator name=NpuAccelerator, libLiteRtDispatch_Qualcomm.so loaded from the app's library dir, Replacing 1 out of 1 node(s) with delegate (DispatchDelegate); no QNN or LiteRT error line and no failed row; 44 of 82 hypotheses empty, the other 38 read t (33) or t t (5), every 5 s window decoded to 1-3 tokens, WER 100 %: the text check fails, so the run is not a measurement (methodology/fairness-rules.md section 12); cause not established: the same entry's CPU file was not run through the app, so the AOT file, the NPU execution and the app's CTC path are not separated"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "counted_audio_s_s32": 626.36,
+        "deletions_s32": 1657,
+        "empty_hypotheses_s32": 44,
+        "insertions_s32": 0,
+        "reference_words_s32": 1695,
+        "rows_counted_s32": 82,
+        "rows_excluded_s32": 0,
+        "rows_retaken_s32": 0,
+        "s32_load_warm_ms": 862.6,
+        "single_t_hypotheses_s32": 33,
+        "substitutions_s32": 38,
+        "t_only_hypotheses_s32": 38,
+        "t_t_hypotheses_s32": 5,
+        "vmhwm_kb_max_s32": 1512804,
+        "wer_percent_s32": 100.0
+      },
+      "output_match": false,
+      "peak_mem_mb": 1477.3,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": null,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

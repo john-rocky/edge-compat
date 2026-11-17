@@ -22,8 +22,7 @@
       "error": null,
       "evidence": [
         "maxNumTokens=1024; thinking model \u2014 TTFT includes the thinking phase (554 tokens generated total), final answer coherent; all Metal kernels initialize, zero half4/float4",
-        "device charging during run (functional gate)",
-        "litertlm-convert/minicpm5_work/ship_lfm25_gpu_0160/device_gate_20260825_maxtok/console_thinking_maxtok1024.log"
+        "device charging during run (functional gate)"
       ],
       "failure_class": null,
       "full_delegation": true,

@@ -35,7 +35,7 @@ void test('parseCsv keeps # that is not at line start literal', () => {
 
 void test('parseCatalog accepts the catalog exclusion-block convention', () => {
   const entries = parseCatalog(
-    `${HEADER}\n# litertlm (LLM lane — cards/matrix only, not browser-sweepable)\nm1,model.tflite,1x64:float32,Apache-2.0,\n# Excluded, dynamic input dim: nima\n`,
+    `${HEADER}\n# litertlm (LLM bundles — cards/matrix only, not browser-sweepable)\nm1,model.tflite,1x64:float32,Apache-2.0,\n# Excluded, dynamic input dim: nima\n`,
     '/base',
   );
   assert.equal(entries.length, 1);

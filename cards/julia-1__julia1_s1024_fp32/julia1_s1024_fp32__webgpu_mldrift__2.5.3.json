@@ -30846,7 +30846,7 @@
     "litert_version": "2.5.3"
   },
   "model": {
-    "path": "/Users/USER/code/codex-conversions/2026-09-30/julia1-litert/exports/julia1_s1024_fp32.tflite",
+    "path": "julia1_s1024_fp32.tflite",
     "sha256": "b4f260595776c0a126f0e1aadbefb0c2acc6e0b1ca0cfe9499b4d322d591e632",
     "subgraph_count": 1
   },

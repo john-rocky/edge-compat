@@ -5,7 +5,7 @@
  "artifact_sha256": "6938f236ec25b0a3c2c8d8a2a43bf6c5891b857331e3246f28b9e95140312c5e",
  "quantization": "LM int8 dynamic (int8 embedding table); audio encoder fp16 weights, fp32 compute, in-graph log-mel, 30 s window (390 audio tokens); KV cache 1024; litert-torch Qwen3-ASR prompt in the template (mlboydaisuke/Confucius4-R2T2-LiteRT rev b52ffc6f)",
  "device": "mac-studio-m4-max",
- "notes": "litert-lm-api 0.17.1 (PyPI, Python Conversation API), end to end: engine loaded once, one conversation per clip, greedy (top_k 1), audio encoder on the CPU (4 threads) in every row, 155 clips = FLEURS test en_us / cmn_hans_cn / ja_jp x 50 + 5 example clips (1,836.1 s of audio, 4-29 s per clip, each clip one 30 s window). Scores vs FLEURS raw_transcription with the pinned scorer (en WER after uppercasing / punctuation removal; zh, ja CER after NFKC + lower with punctuation, separators and whitespace removed). CPU row = warm weight caches (the first load wrote 3.0 GB of XNNPACK caches and peaked at 6.62 GB RSS); GPU row = LM on WebGPU over Metal with the caches warm. Audio encoder on the GPU: create_conversation fails ('BATCH_MATMUL: Not supported batched mat mul case: non-constant tensor' -> 'Hint fully delegated to single delegate is set, but the graph is not fully delegated' -> 'Failed to modify graph with delegate'; litertlm-convert/confucius4_r2t2_work/gates/r3/r3_rt_ex5_vendor_gpu_gpuaudio.log). Record: litertlm-convert/confucius4_r2t2_work/FINDINGS.md (round 3).",
+ "notes": "litert-lm-api 0.17.1 (PyPI, Python Conversation API), end to end: engine loaded once, one conversation per clip, greedy (top_k 1), audio encoder on the CPU (4 threads) in every row, 155 clips = FLEURS test en_us / cmn_hans_cn / ja_jp x 50 + 5 example clips (1,836.1 s of audio, 4-29 s per clip, each clip one 30 s window). Scores vs FLEURS raw_transcription with the pinned scorer (en WER after uppercasing / punctuation removal; zh, ja CER after NFKC + lower with punctuation, separators and whitespace removed). CPU row = warm weight caches (the first load wrote 3.0 GB of XNNPACK caches and peaked at 6.62 GB RSS); GPU row = LM on WebGPU over Metal with the caches warm. Audio encoder on the GPU: create_conversation fails ('BATCH_MATMUL: Not supported batched mat mul case: non-constant tensor' -> 'Hint fully delegated to single delegate is set, but the graph is not fully delegated' -> 'Failed to modify graph with delegate').",
  "results": [
   {
    "accelerator": "cpu",
@@ -24,10 +24,10 @@
    },
    "error": null,
    "evidence": [
-    "litertlm-convert/confucius4_r2t2_work/gates/r3/rt/c4r3_30s_C_lt_full155_bundle_cpu.jsonl: 155 rows, errors 0, empty 0; sum(seconds) 227.1 over 1836.1 s of audio (RTF 0.124), median 1.42 s per clip",
-    "/usr/bin/time -l on the warm 155-clip re-run (litertlm-convert/confucius4_r2t2_work/gates/r3/rt/r3_rt_ship_full155_cpu_warm.tail.log): maximum resident set size 4546035712, peak memory footprint 775705208; transcripts = first run 155/155",
-    "scorer (gates/r3/gate6b_r2.json shape): en 51/1150 words, zh 125/1954 chars, ja 167/2689 chars",
-    "audio encoder graph on XNNPACK: 'Replacing 534 out of 588 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 102 partitions for subgraph 0 (main)' (litertlm-convert/confucius4_r2t2_work/gates/r3/r3_rt_ship_ex5_gpu_verbose.log; the encoder ran on the CPU in that run too)"
+    "155 rows, errors 0, empty 0; sum(seconds) 227.1 over 1836.1 s of audio (RTF 0.124), median 1.42 s per clip",
+    "/usr/bin/time -l on the warm 155-clip re-run: maximum resident set size 4546035712, peak memory footprint 775705208; transcripts = first run 155/155",
+    "scorer (shape): en 51/1150 words, zh 125/1954 chars, ja 167/2689 chars",
+    "audio encoder graph on XNNPACK: 'Replacing 534 out of 588 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 102 partitions for subgraph 0 (main)' (the encoder ran on the CPU in that run too)"
    ],
    "failure_class": null,
    "full_delegation": null,
@@ -73,10 +73,10 @@
    },
    "error": null,
    "evidence": [
-    "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_WEBGPU) node, yielding 1 partitions for subgraph 0 (prefill_128). (litertlm-convert/confucius4_r2t2_work/gates/r3/r3_rt_ship_ex5_gpu_verbose.log)",
+    "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_WEBGPU) node, yielding 1 partitions for subgraph 0 (prefill_128).",
     "VERBOSE: Replacing 1244 out of 1244 node(s) with delegate (LITERT_WEBGPU) node, yielding 1 partitions for subgraph 1 (decode).",
     "environment.cc:526 Selected adapter: Apple M4 Max, arch=metal-3, vendor=apple, backend=Metal, adapterType=Integrated GPU",
-    "litertlm-convert/confucius4_r2t2_work/gates/r3/rt/c4r3_30s_C_lt_full155_bundle_gpu.jsonl: 155 rows, errors 0, empty 0; sum(seconds) 96.9 (RTF 0.053), median 0.61 s per clip; /usr/bin/time -l maximum resident set size 2682519552",
+    "155 rows, errors 0, empty 0; sum(seconds) 96.9 (RTF 0.053), median 0.61 s per clip; /usr/bin/time -l maximum resident set size 2682519552",
     "audio encoder on the CPU (audio_backend=CPU())"
    ],
    "failure_class": null,

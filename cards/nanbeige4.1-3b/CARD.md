@@ -47,7 +47,7 @@ Model-level on-device results — measured behavior of this exact artifact on th
 
 - externalize_embedder=True is required for iPhone: the 166k-token vocab makes the weights a >2 GiB single TFLite section, over the ~2 GiB single-section mmap limit on iOS; externalizing drops the main section under 2 GiB so the model loads on iPhone (Metal GPU) as well as Android/desktop; same weights, GSM8K unchanged (HF card Conversion).
 - Added-tokens tokenizer fix: Nanbeige's 10 special tokens (<|im_start|>, <|im_end|>, <think>, </think>, <tool_call>, …) live at ids 166100-166109 above the base SentencePiece vocab; the base SP conversion drops them and the runtime would crash with 'Token id out of range' — the converted tokenizer appends them as USER_DEFINED pieces at their exact ids (HF card Conversion).
-- GSM8K (n=50, greedy, 0-shot CoT, max-tokens 2048): 84% — non-degenerate; passes the local 8-question gate 8/8 with a clean stop at <|im_end|> (HF card Quality).
+- GSM8K (n=50, greedy, 0-shot CoT, max-tokens 2048): 84% — non-degenerate; passes the local 8-question check 8/8 with a clean stop at <|im_end|> (HF card Quality).
 - License Apache-2.0, inherited from Nanbeige/Nanbeige4.1-3B (HF card License).
 - LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/ (Pi 5 / S26 / Pixel 8a / Mac / iPhone as measured).
 

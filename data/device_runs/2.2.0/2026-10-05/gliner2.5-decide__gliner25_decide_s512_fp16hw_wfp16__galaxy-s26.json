@@ -3,7 +3,7 @@
   "artifact_sha256": "4b5558fac2554dbedde8e315200384f17da52729a98d15e287df8297e752fe69",
   "device": "galaxy-s26",
   "model_id": "gliner2.5-decide__gliner25_decide_s512_fp16hw_wfp16",
-  "notes": "GLiNER2.5-Decide LiteRT (litert-community/GLiNER2.5-Decide-LiteRT; gliner25_decide_s512_fp16hw_wfp16.tflite published at 600fe62b) measured by the typed-decisions lane (rounds 11-22, 2026-10-04 / 2026-10-05): the hfmodels-android SDK device test (family gliner2_decide of hfmodels-litert EncoderDecisions, one question = one gliner2 task) and, where named, the lane's native runner. `signature` names the precision, the harness and (when two runs of one form share a date) the run (DECISIONS #186 / #188). artifact_sha256 = the dev descriptor's sha256 for the graph, asserted equal to the published file's. Lane record: <notes> (§知見 2); generator: <work>/r24/litert_compat_records.py.",
+  "notes": "GLiNER2.5-Decide LiteRT (litert-community/GLiNER2.5-Decide-LiteRT; gliner25_decide_s512_fp16hw_wfp16.tflite published at 600fe62b) measured (2026-10-04 / 2026-10-05): the hfmodels-android SDK device test (family gliner2_decide of hfmodels-litert EncoderDecisions, one question = one gliner2 task) and, where named, the native runner. `signature` names the precision, the harness and (when two runs of one form share a date) the run. artifact_sha256 = the dev descriptor's sha256 for the graph, asserted equal to the published file's.",
   "quantization": null,
   "results": [
     {
@@ -23,8 +23,8 @@
       },
       "error": null,
       "evidence": [
-        "hfmodels-android SDK device gate: androidTest GlinerDecideDeviceTest of the litert module (git 009baa2), run by tools/decide_gate.sh on the Galaxy S26, one instrumentation process per run; the SDK (hfmodels-litert EncoderDecisions, family gliner2_decide) resolved litert-community/GLiNER2.5-Decide-LiteRT through the dev descriptor catalog/dev/litert-community__GLiNER2.5-Decide-LiteRT.hfmodels.json at that commit (the log's descriptor sha256 prefix 62f4e66e = `git show 009baa2:catalog/dev/litert-community__GLiNER2.5-Decide-LiteRT.hfmodels.json`); graph gliner25_decide_s512_fp16hw_wfp16.tflite sha256 4b5558fac2554dbedde8e315200384f17da52729a98d15e287df8297e752fe69 = the published gliner25_decide_s512_fp16hw_wfp16.tflite (litert-community/GLiNER2.5-Decide-LiteRT@600fe62b; r23-report.md: the two graphs at 600fe62b, 811,295,824 B 4b5558fa).",
-        "# hfmodels typed-decisions device gate  date=2026-10-05T01:18:36Z serial=RFGL80R6A6H device=SM-S942Q build=BP4A.251205.006.S942QOPS1AZH9 android=16",
+        "hfmodels-android SDK device check: androidTest GlinerDecideDeviceTest of the litert module (git 009baa2), run by tools/decide_gate.sh on the Galaxy S26, one instrumentation process per run; the SDK (hfmodels-litert EncoderDecisions, family gliner2_decide) resolved litert-community/GLiNER2.5-Decide-LiteRT through the dev descriptor catalog/dev/litert-community__GLiNER2.5-Decide-LiteRT.hfmodels.json at that commit (the log's descriptor sha256 prefix 62f4e66e = `git show 009baa2:catalog/dev/litert-community__GLiNER2.5-Decide-LiteRT.hfmodels.json`); graph gliner25_decide_s512_fp16hw_wfp16.tflite sha256 4b5558fac2554dbedde8e315200384f17da52729a98d15e287df8297e752fe69 = the published gliner25_decide_s512_fp16hw_wfp16.tflite (litert-community/GLiNER2.5-Decide-LiteRT@600fe62b; r23-report.md: the two graphs at 600fe62b, 811,295,824 B 4b5558fa).",
+        "# hfmodels typed-decisions device check  date=2026-10-05T01:18:36Z serial=RFGL80R6A6H device=SM-S942Q build=BP4A.251205.006.S942QOPS1AZH9 android=16",
         "# git=009baa2 test=GlinerDecideDeviceTest variant=s512_fp16hw_wfp16 backend=gpu thermal=Thermal Status: 0 battery_level= level: 79 battery_temp_x10C= temperature: 362 screen= mWakefulness=Dozing",
         "# gradle rc=0 end=2026-10-05T01:20:25Z thermal_end=Thermal Status: 2 battery_temp_end_x10C= temperature: 404",
         "resolve litert-community/GLiNER2.5-Decide-LiteRT: commit=f6f6e9c9 via EXPLICIT_REVISION, descriptor=caller@explicit/hfmodels.json sha=62f4e66e",
@@ -42,10 +42,10 @@
         "RESULT step=lookup ok=true variant=s512_fp16hw_wfp16 backend=gpu rows=512 hidden=1024 zoo_style=lut zoo_ms_median=14.999323 zoo_ms_min=14.886667 sdk_ms_median=0.672396 sdk_ms_min=0.671198 repeats=20 outputs_identical=true",
         "RESULT step=release ok=true variant=s512_fp16hw_wfp16 backend=gpu close_ms=68",
         "RESULT ok=true model=litert-community/GLiNER2.5-Decide-LiteRT variant=s512_fp16hw_wfp16 backend=gpu device=SM-S942Q build=BP4A.251205.006.S942QOPS1AZH9 failures=",
-        "latency_p50_ms = the parity step's forward_ms_median: one LiteRtDecisionModel.scores() call per captured request (host float16 table lookup, input writes, CompiledModel run, output readback on the model thread), after one warm forward (#186(2)).",
-        "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs (#186(3)). full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1877 out of 1877 node(s) with delegate (LITERT_CL)').",
+        "latency_p50_ms = the parity step's forward_ms_median: one LiteRtDecisionModel.scores call per captured request (host float16 table lookup, input writes, CompiledModel run, output readback on the model thread), after one warm forward.",
+        "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs. full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1877 out of 1877 node(s) with delegate (LITERT_CL)').",
         "conditions (the gate's header and footer): thermal status 0 -> 2, battery 36.2 -> 40.4 C, battery level 79 %, display mWakefulness=Dozing at the start.",
-        "source: ~/code/hfmodels-android/litert/results/2026-10-05-1018-RFGL80R6A6H-litert2.2.0-decide-gliner-cold-s512_fp16hw_wfp16-gpu.log (main 3e1fcd8); lane record <notes> (§3 / §6c, §知見 2); generator <work>/r24/litert_compat_records.py."
+        "source: hfmodels-android/litert/results/2026-10-05-1018-RFGL80R6A6H-litert2.2.0-decide-gliner-cold-s512_fp16hw_wfp16-gpu.log (main 3e1fcd8)."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -155,8 +155,8 @@
       },
       "error": null,
       "evidence": [
-        "hfmodels-android SDK device gate: androidTest GlinerDecideDeviceTest of the litert module (git 009baa2), run by tools/decide_gate.sh on the Galaxy S26, one instrumentation process per run; the SDK (hfmodels-litert EncoderDecisions, family gliner2_decide) resolved litert-community/GLiNER2.5-Decide-LiteRT through the dev descriptor catalog/dev/litert-community__GLiNER2.5-Decide-LiteRT.hfmodels.json at that commit with the run argument gpu_precision=fp32 written into the variant's handler_config (the log's patched-descriptor prefix 071b5223; the patch changes no file entry); graph gliner25_decide_s512_fp16hw_wfp16.tflite sha256 4b5558fac2554dbedde8e315200384f17da52729a98d15e287df8297e752fe69 = the published gliner25_decide_s512_fp16hw_wfp16.tflite (litert-community/GLiNER2.5-Decide-LiteRT@600fe62b; r23-report.md: the two graphs at 600fe62b, 811,295,824 B 4b5558fa).",
-        "# hfmodels typed-decisions device gate  date=2026-10-05T01:37:35Z serial=RFGL80R6A6H device=SM-S942Q build=BP4A.251205.006.S942QOPS1AZH9 android=16",
+        "hfmodels-android SDK device check: androidTest GlinerDecideDeviceTest of the litert module (git 009baa2), run by tools/decide_gate.sh on the Galaxy S26, one instrumentation process per run; the SDK (hfmodels-litert EncoderDecisions, family gliner2_decide) resolved litert-community/GLiNER2.5-Decide-LiteRT through the dev descriptor catalog/dev/litert-community__GLiNER2.5-Decide-LiteRT.hfmodels.json at that commit with the run argument gpu_precision=fp32 written into the variant's handler_config (the log's patched-descriptor prefix 071b5223; the patch changes no file entry); graph gliner25_decide_s512_fp16hw_wfp16.tflite sha256 4b5558fac2554dbedde8e315200384f17da52729a98d15e287df8297e752fe69 = the published gliner25_decide_s512_fp16hw_wfp16.tflite (litert-community/GLiNER2.5-Decide-LiteRT@600fe62b; r23-report.md: the two graphs at 600fe62b, 811,295,824 B 4b5558fa).",
+        "# hfmodels typed-decisions device check  date=2026-10-05T01:37:35Z serial=RFGL80R6A6H device=SM-S942Q build=BP4A.251205.006.S942QOPS1AZH9 android=16",
         "# git=009baa2 test=GlinerDecideDeviceTest variant=s512_fp16hw_wfp16 backend=gpu thermal=Thermal Status: 0 battery_level= level: 80 battery_temp_x10C= temperature: 366 screen= mWakefulness=Dozing",
         "# gradle rc=0 end=2026-10-05T01:40:00Z thermal_end=Thermal Status: 2 battery_temp_end_x10C= temperature: 414",
         "resolve litert-community/GLiNER2.5-Decide-LiteRT: commit=f6f6e9c9 via EXPLICIT_REVISION, descriptor=caller@explicit/hfmodels.json sha=071b5223",
@@ -174,10 +174,10 @@
         "RESULT step=lookup ok=true variant=s512_fp16hw_wfp16 backend=gpu rows=512 hidden=1024 zoo_style=lut zoo_ms_median=27.66948 zoo_ms_min=27.088177 sdk_ms_median=1.224635 sdk_ms_min=1.223229 repeats=20 outputs_identical=true",
         "RESULT step=release ok=true variant=s512_fp16hw_wfp16 backend=gpu close_ms=161",
         "RESULT ok=true model=litert-community/GLiNER2.5-Decide-LiteRT variant=s512_fp16hw_wfp16 backend=gpu device=SM-S942Q build=BP4A.251205.006.S942QOPS1AZH9 failures=",
-        "latency_p50_ms = the parity step's forward_ms_median: one LiteRtDecisionModel.scores() call per captured request (host float16 table lookup, input writes, CompiledModel run, output readback on the model thread), after one warm forward (#186(2)).",
-        "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs (#186(3)). full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1877 out of 1877 node(s) with delegate (LITERT_CL)').",
+        "latency_p50_ms = the parity step's forward_ms_median: one LiteRtDecisionModel.scores call per captured request (host float16 table lookup, input writes, CompiledModel run, output readback on the model thread), after one warm forward.",
+        "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs. full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1877 out of 1877 node(s) with delegate (LITERT_CL)').",
         "conditions (the gate's header and footer): thermal status 0 -> 2, battery 36.6 -> 41.4 C, battery level 80 %, display mWakefulness=Dozing at the start.",
-        "source: ~/code/hfmodels-android/litert/results/2026-10-05-1037-RFGL80R6A6H-litert2.2.0-decide-gliner-fp32-s512_fp16hw_wfp16-gpu.log (main 3e1fcd8); lane record <notes> (§3 / §6c, §知見 2); generator <work>/r24/litert_compat_records.py."
+        "source: hfmodels-android/litert/results/2026-10-05-1037-RFGL80R6A6H-litert2.2.0-decide-gliner-fp32-s512_fp16hw_wfp16-gpu.log (main 3e1fcd8)."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -287,8 +287,8 @@
       },
       "error": "Abort message: 'Scudo ERROR: internal map failure (error desc=Out of memory)'",
       "evidence": [
-        "hfmodels-android SDK device gate: androidTest GlinerDecideDeviceTest (git 009baa2), one process, with an npu profile added to the variant by the run argument npu_profile=1 (the variant publishes none; K/r22-report.md gate (vi); the log's descriptor prefix 52c33999 is the patched descriptor's); graph gliner25_decide_s512_fp16hw_wfp16.tflite sha256 4b5558fac2554dbedde8e315200384f17da52729a98d15e287df8297e752fe69 = the published gliner25_decide_s512_fp16hw_wfp16.tflite (litert-community/GLiNER2.5-Decide-LiteRT@600fe62b; r23-report.md: the two graphs at 600fe62b, 811,295,824 B 4b5558fa).",
-        "# hfmodels typed-decisions device gate  date=2026-10-05T01:32:59Z serial=RFGL80R6A6H device=SM-S942Q build=BP4A.251205.006.S942QOPS1AZH9 android=16",
+        "hfmodels-android SDK device check: androidTest GlinerDecideDeviceTest (git 009baa2), one process, with an npu profile added to the variant by the run argument npu_profile=1 (the variant publishes none; gate (vi); the log's descriptor prefix 52c33999 is the patched descriptor's); graph gliner25_decide_s512_fp16hw_wfp16.tflite sha256 4b5558fac2554dbedde8e315200384f17da52729a98d15e287df8297e752fe69 = the published gliner25_decide_s512_fp16hw_wfp16.tflite (litert-community/GLiNER2.5-Decide-LiteRT@600fe62b; r23-report.md: the two graphs at 600fe62b, 811,295,824 B 4b5558fa).",
+        "# hfmodels typed-decisions device check  date=2026-10-05T01:32:59Z serial=RFGL80R6A6H device=SM-S942Q build=BP4A.251205.006.S942QOPS1AZH9 android=16",
         "# git=009baa2 test=GlinerDecideDeviceTest variant=s512_fp16hw_wfp16 backend=npu thermal=Thermal Status: 0 battery_level= level: 80 battery_temp_x10C= temperature: 376 screen= mWakefulness=Dozing",
         "# gradle rc=1 end=2026-10-05T01:35:34Z thermal_end=Thermal Status: 0 battery_temp_end_x10C= temperature: 380",
         "litert  : [compiler_plugin.cc:741] Partitioned subgraph<0>, selected 1877 ops, from a total of 1877 ops. resulted in 1 partitions.",
@@ -296,8 +296,8 @@
         "#17 pc 00000000030ec050  /data/app/~~GT5f5egSfIYfUfdVcNHEPg==/io.github.johnrocky.hfmodels.litert.test-723rCcDqrgY7rWpQLtJ21w==/lib/arm64/libQnnHtpPrepare.so (GraphPrepare::sequencing_stage(VtcmCacheInstance&, int&, bool, std::__ndk1::vector<hnnx::tagx<1u>, std::__ndk1::allocator<hnnx::tagx<1u>>>&, GraphPrepare::SequencingStageInfo&, bool)+308) (BuildId: 6d10d2a58977b849)",
         "#18 pc 0000000002eeb7a0  /data/app/~~GT5f5egSfIYfUfdVcNHEPg==/io.github.johnrocky.hfmodels.litert.test-723rCcDqrgY7rWpQLtJ21w==/lib/arm64/libQnnHtpPrepare.so (GraphPrepare::do_prepare2(HexagonNNEnv&, VtcmCacheInstance&, int&, std::__ndk1::unique_ptr<ExternalTimePoint, std::__ndk1::default_delete<ExternalTimePoint>>&, bool)+2680) (BuildId: 6d10d2a58977b849)",
         "#19 pc 0000000002eea20c  /data/app/~~GT5f5egSfIYfUfdVcNHEPg==/io.github.johnrocky.hfmodels.litert.test-723rCcDqrgY7rWpQLtJ21w==/lib/arm64/libQnnHtpPrepare.so (GraphPrepare::do_prepare2_retry_loop(HexagonNNEnv&, VtcmCacheInstance&, std::__ndk1::unique_ptr<ExternalTimePoint, std::__ndk1::default_delete<ExternalTimePoint>>&)+208) (BuildId: 6d10d2a58977b849)",
-        "The process aborted inside the Qualcomm HTP graph prepare of the on-device JIT compile (libQnnHtpPrepare.so), after the compiler plugin had partitioned the whole graph into one NPU partition; no RESULT line was written and the gradle run ended rc=1. Same failure class and message as #179(2)'s S512 Open-Decision row.",
-        "source: ~/code/hfmodels-android/litert/results/2026-10-05-1032-RFGL80R6A6H-litert2.2.0-decide-gliner-jit-s512_fp16hw_wfp16-npu.log (main 3e1fcd8); K/r22/gates/decide-gliner-jit-s512_fp16hw_wfp16-npu/ (tombstone excerpt, MemAvailable samples); lane record <notes> (r22); generator <work>/r24/litert_compat_records.py."
+        "The process aborted inside the Qualcomm HTP graph prepare of the on-device JIT compile (libQnnHtpPrepare.so), after the compiler plugin had partitioned the whole graph into one NPU partition; no RESULT line was written and the gradle run ended rc=1. Same failure class and message as the earlier S512 Open-Decision row.",
+        "source: hfmodels-android/litert/results/2026-10-05-1032-RFGL80R6A6H-litert2.2.0-decide-gliner-jit-s512_fp16hw_wfp16-npu.log (main 3e1fcd8); (tombstone excerpt, MemAvailable samples)."
       ],
       "failure_class": "engine_create_failed",
       "full_delegation": null,

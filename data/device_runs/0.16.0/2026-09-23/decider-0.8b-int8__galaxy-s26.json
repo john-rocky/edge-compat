@@ -3,7 +3,7 @@
   "artifact_sha256": "3e3c03da33034115dade6094c8ae94a90a7169d2a7cb4c6f8145e2dcc49a143b",
   "device": "galaxy-s26",
   "model_id": "decider-0.8b-int8",
-  "notes": "decider-0.8b (litert-community/decider-0.8b-LiteRT, Hub main 52dea2d8, read 2026-10-09): Mapika/decider-0.8b (Apache-2.0, fine-tuned from Qwen/Qwen3.5-0.8B-Base; 18 linear-attention + 6 full-attention layers) as a .litertlm bundle with an identity template, no start token, stop token 248044, ExecutorMetadata for 48 state buffers and an fp32 activation preference. Typed decisions are read from the label logits of each row's last token (prefill ids[:-1], decode ids[-1] once); the runtime's generated text has no decision meaning, so decode rates are evidence only. Probabilities were not measured on the phone: these records establish runtime operation, speed and memory, not equality to the Mac probabilities (the Hub card's conversion-agreement table is Mac CPU / Metal). Lane record: litertlm-convert/decider_work (FINDINGS.md, MODEL_CARD.md = the Hub README). Published as decider-0.8b_int8.litertlm (the lane's name decider-0.8b_int8dyn.litertlm, 963,184,864 B): dynamic int8 fully connected weights + int8 CHANNELWISE embedding (the Qwen3.5-0.8B recipe); the device-side sha256 after the push equals the Hub LFS sha256. S26 runtime: litert_lm_advanced_main of the S4 kit in /data/local/tmp/gputest_s4 (binary sha256 e5de2d90…, the kit the 0.16.0 'S4 kit' records name, #175(2)); CPU sampler, native default thread count; one cold process per row (runtime cache removed), n = 1. Rows: E03/00 (262 source tokens) and F01/01 (503). Source: run dir round 6 (results/s26_r6_rows.jsonl, results/s26_device_r6.json, logs/s26_r6/), 2026-09-23 14:24–14:36 JST. The V7c candidate run in the same round is not published: no record (#174(3)).",
+  "notes": "decider-0.8b (litert-community/decider-0.8b-LiteRT, Hub main 52dea2d8, read 2026-10-09): Mapika/decider-0.8b (Apache-2.0, fine-tuned from Qwen/Qwen3.5-0.8B-Base; 18 linear-attention + 6 full-attention layers) as a .litertlm bundle with an identity template, no start token, stop token 248044, ExecutorMetadata for 48 state buffers and an fp32 activation preference. Typed decisions are read from the label logits of each row's last token (prefill ids[:-1], decode ids[-1] once); the runtime's generated text has no decision meaning, so decode rates are evidence only. Probabilities were not measured on the phone: these records establish runtime operation, speed and memory, not equality to the Mac probabilities (the Hub card's conversion-agreement table is Mac CPU / Metal). Published as decider-0.8b_int8.litertlm (the name decider-0.8b_int8dyn.litertlm, 963,184,864 B): dynamic int8 fully connected weights + int8 CHANNELWISE embedding (the Qwen3.5-0.8B recipe); the device-side sha256 after the push equals the Hub LFS sha256. S26 runtime: litert_lm_advanced_main of the S4 kit in /data/local/tmp/gputest_s4 (binary sha256 e5de2d90…, the kit the 0.16.0 'S4 kit' records name); CPU sampler, native default thread count; one cold process per row (runtime cache removed), n = 1. Rows: E03/00 (262 source tokens) and F01/01 (503). Source: run dir run 6, 2026-09-23 14:24–14:36 JST. The V7c candidate run in the same run is not published: no record.",
   "quantization": "dynamic int8 fully connected weights, int8 channelwise token embedding; convolutions and the delta rule float; fp32 activation preference",
   "results": [
     {
@@ -33,8 +33,7 @@
         "EXIT=0",
         "peak_mem_mb = VmHWM 1987720 kB x 1024 / 10^6 (the probe's 1941.13 MiB); includes init, prefill and the full decode",
         "conditions before the run: thermal status 0, SKIN 37.9 C, cpufreq cpu0/4/7 at max {'0': [3628800, 3628800], '4': [3628800, 3628800], '7': [4742400, 4742400]}; cold (runtime cache removed), one process, n = 1, started 2026-09-23T05:34:27.859040+00:00",
-        "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_int8dyn.litertlm r6_int8dyn_cpu_256 /data/local/tmp/gputest_s4/dec08b_prompt_256.txt cpu 600 > /dev/null 2>&1 < /dev/null &",
-        "files: codex-conversions/2026-09-23/decider-08b-gpu/logs/s26_r6/r6_int8dyn_cpu_256.log; row source codex-conversions/2026-09-23/decider-08b-gpu/results/s26_r6_rows.jsonl"
+        "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_int8dyn.litertlm r6_int8dyn_cpu_256 /data/local/tmp/gputest_s4/dec08b_prompt_256.txt cpu 600 > /dev/null 2>&1 < /dev/null &"
       ],
       "failure_class": null,
       "full_delegation": false,
@@ -87,8 +86,7 @@
         "EXIT=0",
         "peak_mem_mb = VmHWM 4661948 kB x 1024 / 10^6 (the probe's 4552.68 MiB); includes init, prefill and the full decode",
         "conditions before the run: thermal status 0, SKIN 37.9 C, cpufreq cpu0/4/7 at max {'0': [3628800, 3628800], '4': [3628800, 3628800], '7': [4742400, 4742400]}; cold (runtime cache removed), one process, n = 1, started 2026-09-23T05:24:58.429455+00:00",
-        "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_int8dyn.litertlm r6_int8dyn_gpu_256 /data/local/tmp/gputest_s4/dec08b_prompt_256.txt gpu 600 > /dev/null 2>&1 < /dev/null &",
-        "files: codex-conversions/2026-09-23/decider-08b-gpu/logs/s26_r6/r6_int8dyn_gpu_256.log; row source codex-conversions/2026-09-23/decider-08b-gpu/results/s26_r6_rows.jsonl"
+        "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_int8dyn.litertlm r6_int8dyn_gpu_256 /data/local/tmp/gputest_s4/dec08b_prompt_256.txt gpu 600 > /dev/null 2>&1 < /dev/null &"
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -141,8 +139,7 @@
         "EXIT=0",
         "peak_mem_mb = VmHWM 5445084 kB x 1024 / 10^6 (the probe's 5317.46 MiB); includes init, prefill and the full decode",
         "conditions before the run: thermal status 0, SKIN 37.9 C, cpufreq cpu0/4/7 at max {'0': [3628800, 3628800], '4': [3628800, 3628800], '7': [4742400, 4742400]}; cold (runtime cache removed), one process, n = 1, started 2026-09-23T05:30:03.815472+00:00",
-        "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_int8dyn.litertlm r6_int8dyn_gpu_512 /data/local/tmp/gputest_s4/dec08b_prompt_512.txt gpu 600 > /dev/null 2>&1 < /dev/null &",
-        "files: codex-conversions/2026-09-23/decider-08b-gpu/logs/s26_r6/r6_int8dyn_gpu_512.log; row source codex-conversions/2026-09-23/decider-08b-gpu/results/s26_r6_rows.jsonl"
+        "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_int8dyn.litertlm r6_int8dyn_gpu_512 /data/local/tmp/gputest_s4/dec08b_prompt_512.txt gpu 600 > /dev/null 2>&1 < /dev/null &"
       ],
       "failure_class": null,
       "full_delegation": true,

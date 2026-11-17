@@ -1,0 +1,59 @@
+{
+  "backend": "gpu_metal_mac",
+  "entries": [
+    {
+      "conditions": "Mac16,9 (Apple M4 Max), macOS 27.0, ai-edge-litert-nightly 2.4.0.dev20261022 CompiledModel with the GPU accelerator only (Metal), fp32 and fp16 precision: fully_accelerated=True, but after one prefill the written ring slots' K / V values differ from the CPU (XNNPACK) interpreter's (tiny LFM3 decoder: 2 of 8 state tensors differ, kv_cache_k_4 max|d| 5.334 on slots 0-15), the slot choice (SUM, GREATER, SELECT_V2) is right; in the 1.7B ring export the prefill-then-decode logits drop to 639 / 738 top-1 (the full-length KV 727 / 738)",
+      "constraints": {
+        "batch": "broadcast with a one-hot operand",
+        "shapes": "[1,1,S,T] @ [1,H,T,D] and [1,H,D,T] @ [1,1,T,S] (also [1,H*D,T] @ [1,T,S])",
+        "source": "litert-torch f61d0b7 update_kv_cache_with_sliding writing T tokens into an S-slot ring"
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-10-29",
+        "litert_version": "2.4.0.dev20261022",
+        "source_model": "LiquidAI/LFM3-1.7B @40ebe0aa: the ring-buffer exports (5 sliding layers, 256 slots; not published) and a tiny LFM3 decoder"
+      },
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "the state after one prefill equals the CPU's; 1.7B prefill-then-decode top-1 728 / 738; the same rank-3 write is right on the Adreno and Mali GPUs (LiteRT-LM v0.18.1)",
+          "rewrite": "write with the one-hot on the left at rank 3: [1,S,T] @ [1,T,H*D]",
+          "symptom": "a ring-buffer KV written by a broadcast BATCH_MATMUL holds wrong values on the Metal GPU while the delegation counts look whole"
+        }
+      ],
+      "status": "incorrect"
+    },
+    {
+      "conditions": "Mac16,9 (Apple M4 Max), macOS 27.0, ai-edge-litert-nightly 2.4.0.dev20261022 CompiledModel with the GPU accelerator only (Metal), fp32 and default precision: 'Failed to create DelegateKernelLiteRtMetal: INVALID_ARGUMENT: Shape mismatch: {bhwc, {2048, 1, 1, 2048}} vs {bhwc, {1, 1, 2048, 2048}}' (ml_drift/common/gpu_model_util.cc:247, delegate_metal.mm:126), 'Restored original execution plan after delegate application failure', the model is not created; the same graph with those FCs dynamic-range int8 (no DEQUANTIZE) is fully accelerated in all 7 signatures",
+      "constraints": {
+        "weight_only": "DEQUANTIZE->FULLY_CONNECTED (aeq weight_only_wi8_afp32 on 37 decode FCs: the MLP down projection [2048,7680] and the short-conv out projection [2048,2048])"
+      },
+      "dtypes": [
+        "float32",
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-10-28",
+        "litert_version": "2.4.0.dev20261022",
+        "source_model": "LiquidAI/LFM3-1.7B @40ebe0aa: the form q2_mlp_down+conv_out (int8 with the MLP down and short-conv out projections weight-only; not published)"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "the graph builds whole on the GPU (7 / 7 signatures fully accelerated with dynamic int8 and int4 blockwise FCs)",
+          "rewrite": "keep the GPU file's FCs dynamic-range int8 (dynamic_wi8_afp32) or int4 blockwise; weight-only FCs only in a CPU-only file",
+          "symptom": "a weight-only int8 FC (DEQUANTIZE feeding the FC's weights) makes the GPU-only build fail"
+        }
+      ],
+      "status": "fallback"
+    }
+  ],
+  "generated_at": "2026-10-29",
+  "litert_version": "2.4.0.dev20261022",
+  "schema_version": "1.0"
+}

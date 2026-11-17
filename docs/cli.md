@@ -86,8 +86,8 @@ The pre-publication gate (Phase 12): run by the release runbook and
 the `deploy-zoo` CI job before anything goes public. Deterministic; three guards:
 
 1. **Benchmark scope** — no card presents a non-example `cross_runtime` comparison for a
-   model outside the approved public scope in `data/release_scope.json` (owner-editable
-   data; initially Gemma 4 only per the launch plan — widening it is a data change, not a
+   model outside the approved public scope in `data/release_scope.json` (hand-edited
+   data; initially Gemma 4 only — widening it is a data change, not a
    code change).
 2. **Disclosure** — the disclosure line (`src/litert_compat/branding.py`, mirrored in
    `site/src/shared/branding.ts` with test-enforced parity) renders in `README.md`,

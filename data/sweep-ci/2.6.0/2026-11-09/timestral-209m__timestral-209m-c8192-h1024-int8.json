@@ -1,0 +1,69 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "2x256x64:float32;2x32x768:float32;1x1x288x288:float32;1x1x288x64:float32;1x1x288x64:float32",
+  "license": "other",
+  "model_id": "timestral-209m__timestral-209m-c8192-h1024-int8",
+  "notes": "Timestral-209M time-series forecaster, mlboydaisuke/Timestral-209M-LiteRT main 11f5cc35 (uploaded 2026-10-23, own upload; sha256 97bd95c1… = the Hub LFS sha256 = the upload copy, 222,336,912 B): one call of the 24-layer model and its quantile head for a context of up to 8,192 steps and a horizon of up to 1,024 steps (2 rows: the series and its negation); int8 graph for the CPU (dynamic-range int8 on 199 of 217 FULLY_CONNECTED, float16 weights elsewhere); 1,684 operators (18 DEQUANTIZE); inputs patches [2,256,64], dec [2,32,768], bias [1,1,288,288], cos [1,1,288,64], sin [1,1,288,64] (host-built: the patches and missing flags, the decoder token, the additive mask 0 / -3e4, the RoPE rows) -> output_0 [2,32,32,21] (the normalized quantiles); random fills are not meaningful inputs (loads / runs / delegation are the signal); license: the weights' Modified MIT License (Mistral AI; its condition 2 withholds every right from a company, or an employer, whose monthly revenue exceeds $20 million); phone records under data/device_runs/2.2.0/2026-10-22",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-11-09",
+      "delegation_evidence": [],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": false,
+        "litertjs_core_version": "2.6.0",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "7.0.0-1019-azure",
+        "webgpu_adapter": null
+      },
+      "error": "init timed out after 60000ms",
+      "failure_class": "timeout",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-11-09",
+      "delegation_evidence": [],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": false,
+        "litertjs_core_version": "2.6.0",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "7.0.0-1019-azure",
+        "webgpu_adapter": null
+      },
+      "error": "init timed out after 60000ms",
+      "failure_class": "timeout",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/mlboydaisuke/Timestral-209M-LiteRT/resolve/main/timestral-209m-c8192-h1024-int8.tflite"
+}

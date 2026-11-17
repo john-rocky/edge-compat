@@ -47712,7 +47712,7 @@
     "litert_version": "2.5.3"
   },
   "model": {
-    "path": "/Users/USER/code/litertlm-convert/ema_tts_work/out/ship/EMA-Lightning-LiteRT/ema_step_multi_fp32.tflite",
+    "path": "ema_step_multi_fp32.tflite",
     "sha256": "71b98f74248127f25f6bd0f236f5c99cac729595a044be7a14701be76c091a5b",
     "subgraph_count": 5
   },

@@ -5,7 +5,7 @@ public. Three guards:
 
 1. **Benchmark scope** — no card presents a cross-runtime comparison for a
    model outside the approved public scope (`data/release_scope.json`,
-   owner-editable data; initially Gemma 4 only per the launch plan).
+   hand-edited data; initially Gemma 4 only).
    Example-provenance rows are pipeline fixtures governed by the
    example-banner rule, not public comparative claims, so the scope guard
    applies to non-example rows.
@@ -54,7 +54,7 @@ class GateFinding:
 
 
 def load_scope(scope_path: Path) -> dict[str, Any]:
-    """Load and structurally validate the owner-editable scope file."""
+    """Load and structurally validate the hand-edited scope file."""
     try:
         doc = load_json(scope_path)
     except OSError as exc:

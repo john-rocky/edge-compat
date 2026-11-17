@@ -140,15 +140,14 @@
           },
           "error": null,
           "evidence": [
-            "binary: LiteRT-LM v0.18.0 Android kit litert_lm_advanced_main sha256 cf3636070a8e51b0ea13d9a4a8b26fc9a2f9aa38f9e1c7687fe009ce7550f815 + its 7 .so (edge-llm-bench android/bin/v0.18.0, SHA256SUMS = speed/r1/kit_v0.18.0.sha256), pushed to /data/local/tmp/q17_ladder and run through q17_run_r4.sh (memory guard + wall limit), one process per clip, --audio_backend=cpu --sampler_backend=cpu --num_cpu_threads=4 --max_num_tokens=1024 --max_output_tokens=256 --benchmark --report_peak_memory_footprint",
-            "s26_cpu_ship (r4/s26): 4 processes, raw = the expected demo answers 4/4; warm en (fleurs_en_1698, 6.42 s, 23 output tokens): response 2.1083 s = audio_executor 0.5089 s + TTFT 0.74 s + (decode tokens - 1) / decode tok/s 0.8594 s; prefill 570.73 tok/s, decode 25.6 tok/s, peak private 4229.54 MB; CPU capped 0/3 1 s samples",
+            "binary: LiteRT-LM v0.18.0 Android kit litert_lm_advanced_main sha256 cf3636070a8e51b0ea13d9a4a8b26fc9a2f9aa38f9e1c7687fe009ce7550f815 + its 7 .so (edge-llm-bench android/bin/v0.18.0), pushed to /data/local/tmp/q17_ladder and run through q17_run_r4.sh (memory guard + wall limit), one process per clip, --audio_backend=cpu --sampler_backend=cpu --num_cpu_threads=4 --max_num_tokens=1024 --max_output_tokens=256 --benchmark --report_peak_memory_footprint",
+            "s26_cpu_ship: 4 processes, raw = the expected demo answers 4/4; warm en (fleurs_en_1698, 6.42 s, 23 output tokens): response 2.1083 s = audio_executor 0.5089 s + TTFT 0.74 s + (decode tokens - 1) / decode tok/s 0.8594 s; prefill 570.73 tok/s, decode 25.6 tok/s, peak private 4229.54 MB; CPU capped 0/3 1 s samples",
             "Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph prefill_128",
             "Replacing 1070 out of 1244 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph decode",
             "Replacing 1 out of 4 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph main",
             "Replacing 534 out of 588 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph main",
             "Replacing 1896 out of 1958 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph prefill_128",
-            "Replacing 1804 out of 1865 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph decode",
-            "records: qwen3_asr17_work/speed/r4/s26/s26_cpu_ship.json; the per-process stdout/stderr/logcat beside them; SPEED_LADDER.md"
+            "Replacing 1804 out of 1865 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph decode"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -209,14 +208,13 @@
           },
           "error": null,
           "evidence": [
-            "binary: LiteRT-LM v0.18.0 Android kit litert_lm_advanced_main sha256 cf3636070a8e51b0ea13d9a4a8b26fc9a2f9aa38f9e1c7687fe009ce7550f815 + its 7 .so (edge-llm-bench android/bin/v0.18.0, SHA256SUMS = speed/r1/kit_v0.18.0.sha256), pushed to /data/local/tmp/q17_ladder and run through q17_run_r4.sh (memory guard + wall limit), one process per clip, --audio_backend=cpu --sampler_backend=cpu --num_cpu_threads=4 --max_num_tokens=1024 --max_output_tokens=256 --benchmark --report_peak_memory_footprint",
-            "s26_gpu_ship (r4/s26): 3 processes, raw = the expected demo answers 3/3; warm en (fleurs_en_1698, 6.42 s, 23 output tokens): response 2.1124 s = audio_executor 0.5049 s + TTFT 0.72 s + (decode tokens - 1) / decode tok/s 0.8875 s; prefill 587.28 tok/s, decode 24.79 tok/s, peak private 2505.65 MB; CPU capped 2/6 1 s samples",
+            "binary: LiteRT-LM v0.18.0 Android kit litert_lm_advanced_main sha256 cf3636070a8e51b0ea13d9a4a8b26fc9a2f9aa38f9e1c7687fe009ce7550f815 + its 7 .so (edge-llm-bench android/bin/v0.18.0), pushed to /data/local/tmp/q17_ladder and run through q17_run_r4.sh (memory guard + wall limit), one process per clip, --audio_backend=cpu --sampler_backend=cpu --num_cpu_threads=4 --max_num_tokens=1024 --max_output_tokens=256 --benchmark --report_peak_memory_footprint",
+            "s26_gpu_ship: 3 processes, raw = the expected demo answers 3/3; warm en (fleurs_en_1698, 6.42 s, 23 output tokens): response 2.1124 s = audio_executor 0.5049 s + TTFT 0.72 s + (decode tokens - 1) / decode tok/s 0.8875 s; prefill 587.28 tok/s, decode 24.79 tok/s, peak private 2505.65 MB; CPU capped 2/6 1 s samples",
             "Replacing 1298 out of 1298 node(s) with delegate (LITERT_CL) ... subgraph prefill_128",
             "Replacing 1244 out of 1244 node(s) with delegate (LITERT_CL) ... subgraph decode",
             "Replacing 1 out of 4 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph main",
             "Replacing 534 out of 588 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph main",
-            "s26_gpu_ship_ret: the same form later in the hold (after the other forms' GPU legs), warm en response 2.8142 s = audio_executor 1.2024 + TTFT 0.72 + 0.8918 s; prefill 585.79 tok/s, decode 24.67 tok/s",
-            "records: qwen3_asr17_work/speed/r4/s26/s26_gpu_ship.json; qwen3_asr17_work/speed/r4/s26/s26_gpu_ship_ret.json; the per-process stdout/stderr/logcat beside them; SPEED_LADDER.md"
+            "s26_gpu_ship_ret: the same form later in the hold (after the other forms' GPU runs), warm en response 2.8142 s = audio_executor 1.2024 + TTFT 0.72 + 0.8918 s; prefill 585.79 tok/s, decode 24.67 tok/s"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -279,11 +277,11 @@
           },
           "error": null,
           "evidence": [
-            "litertlm-convert/qwen3_asr17_work/gates/rt/q17_30s_C_lt_full155_cpu.jsonl: 155 rows, errors 0, empty 0; sum(seconds) 272.214 over 1836.104 s of audio (RTF 0.1483), median 1.7 s per clip; ru_maxrss 4543479808 B",
-            "scorer (litertlm-convert/qwen3_asr17_work/gates/summary.json): en 51/1150 words, zh 121/1954 chars, ja 154/2689 chars",
-            "load average 4.55 at start, 8.50 at end (litertlm-convert/qwen3_asr17_work/gates/rt/q17_30s_C_lt_full155_cpu.load.txt): other jobs on the machine",
+            "155 rows, errors 0, empty 0; sum(seconds) 272.214 over 1836.104 s of audio (RTF 0.1483), median 1.7 s per clip; ru_maxrss 4543479808 B",
+            "scorer: en 51/1150 words, zh 121/1954 chars, ja 154/2689 chars",
+            "load average 4.55 at start, 8.50 at end: other jobs on the machine",
             "CPU weight caches present (written by render_check.py before the run)",
-            "audio encoder graph on XNNPACK: VERBOSE: Replacing 534 out of 588 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 102 partitions for subgraph 0 (main). (litertlm-convert/qwen3_asr17_work/gates/rt/q17_30s_C_off_ex5_gpu_verbose.log, the same encoder section)"
+            "audio encoder graph on XNNPACK: VERBOSE: Replacing 534 out of 588 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 102 partitions for subgraph 0 (main). (the same encoder section)"
           ],
           "failure_class": null,
           "full_delegation": null,
@@ -333,14 +331,13 @@
           },
           "error": null,
           "evidence": [
-            "runtime: litert-lm-api 0.18.0 (PyPI wheel, venv ~/venvs/lt0180run), Engine(backend=CPU(thread_count=4) | GPU(), audio_backend=CPU(thread_count=4)), SamplerConfig(top_k=1, top_p=1.0, temperature=0.0), one conversation per send",
-            "r4/mac/ship_cpu.json: one process, 3 demo clips x (1 + 5) sends, raw = the expected answers 18/18; response (perf_counter around send_message = audio encoder + prefill + decode) warm medians en 1.1912 s, cmn 1.24306 s, ja 1.49639 s; engine load 0.0986 s with the caches present; ru_maxrss at the end 4518756352 B; the Mac's measurement window held (quiet_hold), 1-min load average 5.19677734375 -> 5.8876953125 (other processes running)",
-            "r3/parity_ship_cpu.json: 155 FLEURS clips (en_us / cmn_hans_cn / ja_jp x 50 + 5 examples), greedy, one conversation per clip: en WER 4.435 % (51/1150), zh CER 6.397 % (125/1954), ja CER 5.987 % (161/2689); verdict PASS against eager fp32 + 1.0 pt",
+            "runtime: litert-lm-api 0.18.0 (PyPI wheel), Engine(backend=CPU(thread_count=4) | GPU(), audio_backend=CPU(thread_count=4)), SamplerConfig(top_k=1, top_p=1.0, temperature=0.0), one conversation per send",
+            "One process, 3 demo clips x (1 + 5) sends, raw = the expected answers 18/18; response (perf_counter around send_message = audio encoder + prefill + decode) warm medians en 1.1912 s, cmn 1.24306 s, ja 1.49639 s; engine load 0.0986 s with the caches present; ru_maxrss at the end 4518756352 B; the Mac's measurement window held, 1-min load average 5.19677734375 -> 5.8876953125 (other processes running)",
+            "155 FLEURS clips (en_us / cmn_hans_cn / ja_jp x 50 + 5 examples), greedy, one conversation per clip: en WER 4.435 % (51/1150), zh CER 6.397 % (125/1954), ja CER 5.987 % (161/2689); verdict PASS against eager fp32 + 1.0 pt",
             "Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph prefill_128",
             "Replacing 1070 out of 1244 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph decode",
             "Replacing 1896 out of 1958 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph prefill_128",
-            "Replacing 1804 out of 1865 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph decode",
-            "records: qwen3_asr17_work/speed/r4/mac/ship_cpu.json; qwen3_asr17_work/speed/r3/parity_ship_cpu.json; SPEED_LADDER.md"
+            "Replacing 1804 out of 1865 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph decode"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -399,10 +396,10 @@
           },
           "error": null,
           "evidence": [
-            "litertlm-convert/qwen3_asr17_work/gates/rt/q17_30s_C_lt_full155_gpu.jsonl: 155 rows, errors 0, empty 0; sum(seconds) 105.15 over 1836.104 s of audio (RTF 0.0573), median 0.66 s per clip; ru_maxrss 4794810368 B",
-            "scorer (litertlm-convert/qwen3_asr17_work/gates/summary.json): en 52/1150 words, zh 121/1954 chars, ja 143/2689 chars",
-            "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_WEBGPU) node, yielding 1 partitions for subgraph 0 (prefill_128). (litertlm-convert/qwen3_asr17_work/gates/rt/q17_30s_C_off_ex5_gpu_verbose.log, the same sections; LlmMetadata differs only)",
-            "VERBOSE: Replacing 1244 out of 1244 node(s) with delegate (LITERT_WEBGPU) node, yielding 1 partitions for subgraph 1 (decode). (litertlm-convert/qwen3_asr17_work/gates/rt/q17_30s_C_off_ex5_gpu_verbose.log, the same sections; LlmMetadata differs only)",
+            "155 rows, errors 0, empty 0; sum(seconds) 105.15 over 1836.104 s of audio (RTF 0.0573), median 0.66 s per clip; ru_maxrss 4794810368 B",
+            "scorer: en 52/1150 words, zh 121/1954 chars, ja 143/2689 chars",
+            "VERBOSE: Replacing 1298 out of 1298 node(s) with delegate (LITERT_WEBGPU) node, yielding 1 partitions for subgraph 0 (prefill_128). (the same sections; LlmMetadata differs only)",
+            "VERBOSE: Replacing 1244 out of 1244 node(s) with delegate (LITERT_WEBGPU) node, yielding 1 partitions for subgraph 1 (decode). (the same sections; LlmMetadata differs only)",
             "Selected adapter: Apple M4 Max, arch=metal-3, vendor=apple, backend=Metal, adapterType=Integrated GPU",
             "first GPU load of this file: the 1,720,475,080 B mldrift weight cache was written during the run",
             "audio encoder on the CPU (audio_backend=CPU())"
@@ -455,12 +452,11 @@
           },
           "error": null,
           "evidence": [
-            "runtime: litert-lm-api 0.18.0 (PyPI wheel, venv ~/venvs/lt0180run), Engine(backend=CPU(thread_count=4) | GPU(), audio_backend=CPU(thread_count=4)), SamplerConfig(top_k=1, top_p=1.0, temperature=0.0), one conversation per send",
-            "r4/mac/ship_gpu_fp16.json: one process, 3 demo clips x (1 + 5) sends, raw = the expected answers 18/18; response (perf_counter around send_message = audio encoder + prefill + decode) warm medians en 0.53835 s, cmn 0.55504 s, ja 0.64979 s; engine load 0.1955 s with the caches present; ru_maxrss at the end 2492465152 B; the Mac's measurement window held (quiet_hold), 1-min load average 10.63525390625 -> 8.9375 (other processes running)",
-            "r3/parity_ship_gpu_fp16.json: 155 FLEURS clips (en_us / cmn_hans_cn / ja_jp x 50 + 5 examples), greedy, one conversation per clip: en WER 4.522 % (52/1150), zh CER 6.192 % (121/1954), ja CER 5.318 % (143/2689); verdict PASS against eager fp32 + 1.0 pt",
+            "runtime: litert-lm-api 0.18.0 (PyPI wheel), Engine(backend=CPU(thread_count=4) | GPU(), audio_backend=CPU(thread_count=4)), SamplerConfig(top_k=1, top_p=1.0, temperature=0.0), one conversation per send",
+            "One process, 3 demo clips x (1 + 5) sends, raw = the expected answers 18/18; response (perf_counter around send_message = audio encoder + prefill + decode) warm medians en 0.53835 s, cmn 0.55504 s, ja 0.64979 s; engine load 0.1955 s with the caches present; ru_maxrss at the end 2492465152 B; the Mac's measurement window held, 1-min load average 10.63525390625 -> 8.9375 (other processes running)",
+            "155 FLEURS clips (en_us / cmn_hans_cn / ja_jp x 50 + 5 examples), greedy, one conversation per clip: en WER 4.522 % (52/1150), zh CER 6.192 % (121/1954), ja CER 5.318 % (143/2689); verdict PASS against eager fp32 + 1.0 pt",
             "Replacing 1298 out of 1298 node(s) with delegate (LITERT_WEBGPU) ... subgraph prefill_128",
-            "Replacing 1244 out of 1244 node(s) with delegate (LITERT_WEBGPU) ... subgraph decode",
-            "records: qwen3_asr17_work/speed/r4/mac/ship_gpu_fp16.json; qwen3_asr17_work/speed/r3/parity_ship_gpu_fp16.json; SPEED_LADDER.md"
+            "Replacing 1244 out of 1244 node(s) with delegate (LITERT_WEBGPU) ... subgraph decode"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -519,15 +515,14 @@
           },
           "error": null,
           "evidence": [
-            "binary: LiteRT-LM v0.18.0 Android kit litert_lm_advanced_main sha256 cf3636070a8e51b0ea13d9a4a8b26fc9a2f9aa38f9e1c7687fe009ce7550f815 + its 7 .so (edge-llm-bench android/bin/v0.18.0, SHA256SUMS = speed/r1/kit_v0.18.0.sha256), pushed to /data/local/tmp/q17_ladder and run through q17_run_r4.sh (memory guard + wall limit), one process per clip, --audio_backend=cpu --sampler_backend=cpu --num_cpu_threads=4 --max_num_tokens=1024 --max_output_tokens=256 --benchmark --report_peak_memory_footprint",
-            "p8a_cpu_ship (r5/p8a): 4 processes, raw = the expected demo answers 4/4; warm en (fleurs_en_1698, 6.42 s, 23 output tokens): response 8.3926 s = audio_executor 3.0698 s + TTFT 3.33 s + (decode tokens - 1) / decode tok/s 1.9928 s; prefill 122.68 tok/s, decode 11.04 tok/s, peak private 4148.64 MB; CPU capped 0/11 1 s samples",
+            "binary: LiteRT-LM v0.18.0 Android kit litert_lm_advanced_main sha256 cf3636070a8e51b0ea13d9a4a8b26fc9a2f9aa38f9e1c7687fe009ce7550f815 + its 7 .so (edge-llm-bench android/bin/v0.18.0), pushed to /data/local/tmp/q17_ladder and run through q17_run_r4.sh (memory guard + wall limit), one process per clip, --audio_backend=cpu --sampler_backend=cpu --num_cpu_threads=4 --max_num_tokens=1024 --max_output_tokens=256 --benchmark --report_peak_memory_footprint",
+            "p8a_cpu_ship: 4 processes, raw = the expected demo answers 4/4; warm en (fleurs_en_1698, 6.42 s, 23 output tokens): response 8.3926 s = audio_executor 3.0698 s + TTFT 3.33 s + (decode tokens - 1) / decode tok/s 1.9928 s; prefill 122.68 tok/s, decode 11.04 tok/s, peak private 4148.64 MB; CPU capped 0/11 1 s samples",
             "Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph prefill_128",
             "Replacing 1070 out of 1244 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph decode",
             "Replacing 1 out of 4 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph main",
             "Replacing 534 out of 588 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph main",
             "Replacing 1896 out of 1958 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph prefill_128",
-            "Replacing 1804 out of 1865 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph decode",
-            "records: qwen3_asr17_work/speed/r5/p8a/p8a_cpu_ship.json; the per-process stdout/stderr/logcat beside them; SPEED_LADDER.md"
+            "Replacing 1804 out of 1865 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph decode"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -588,14 +583,13 @@
           },
           "error": null,
           "evidence": [
-            "binary: LiteRT-LM v0.18.0 Android kit litert_lm_advanced_main sha256 cf3636070a8e51b0ea13d9a4a8b26fc9a2f9aa38f9e1c7687fe009ce7550f815 + its 7 .so (edge-llm-bench android/bin/v0.18.0, SHA256SUMS = speed/r1/kit_v0.18.0.sha256), pushed to /data/local/tmp/q17_ladder and run through q17_run_r4.sh (memory guard + wall limit), one process per clip, --audio_backend=cpu --sampler_backend=cpu --num_cpu_threads=4 --max_num_tokens=1024 --max_output_tokens=256 --benchmark --report_peak_memory_footprint",
-            "p8a_gpu_ship (r5/p8a): 3 processes, raw = the expected demo answers 3/3; warm en (fleurs_en_1698, 6.42 s, 23 output tokens): response 9.8585 s = audio_executor 5.0131 s + TTFT 2.73 s + (decode tokens - 1) / decode tok/s 2.1154 s; prefill 151.32 tok/s, decode 10.4 tok/s, peak private 2702.2 MB; CPU capped 7/21 1 s samples",
+            "binary: LiteRT-LM v0.18.0 Android kit litert_lm_advanced_main sha256 cf3636070a8e51b0ea13d9a4a8b26fc9a2f9aa38f9e1c7687fe009ce7550f815 + its 7 .so (edge-llm-bench android/bin/v0.18.0), pushed to /data/local/tmp/q17_ladder and run through q17_run_r4.sh (memory guard + wall limit), one process per clip, --audio_backend=cpu --sampler_backend=cpu --num_cpu_threads=4 --max_num_tokens=1024 --max_output_tokens=256 --benchmark --report_peak_memory_footprint",
+            "p8a_gpu_ship: 3 processes, raw = the expected demo answers 3/3; warm en (fleurs_en_1698, 6.42 s, 23 output tokens): response 9.8585 s = audio_executor 5.0131 s + TTFT 2.73 s + (decode tokens - 1) / decode tok/s 2.1154 s; prefill 151.32 tok/s, decode 10.4 tok/s, peak private 2702.2 MB; CPU capped 7/21 1 s samples",
             "Replacing 1298 out of 1298 node(s) with delegate (LITERT_CL) ... subgraph prefill_128",
             "Replacing 1244 out of 1244 node(s) with delegate (LITERT_CL) ... subgraph decode",
             "Replacing 1 out of 4 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph main",
             "Replacing 534 out of 588 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph main",
-            "p8a_gpu_ship_ret: the same form later in the hold (after the other forms' GPU legs), warm en response 8.6204 s = audio_executor 3.6858 + TTFT 2.7 + 2.2346 s; prefill 152.75 tok/s, decode 10.74 tok/s",
-            "records: qwen3_asr17_work/speed/r5/p8a/p8a_gpu_ship.json; qwen3_asr17_work/speed/r5/p8a/p8a_gpu_ship_ret.json; the per-process stdout/stderr/logcat beside them; SPEED_LADDER.md"
+            "p8a_gpu_ship_ret: the same form later in the hold (after the other forms' GPU runs), warm en response 8.6204 s = audio_executor 3.6858 + TTFT 2.7 + 2.2346 s; prefill 152.75 tok/s, decode 10.74 tok/s"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -652,13 +646,13 @@
     "One message = one clip of up to 30 s: the runtime zero-fills the window after the clip and the encoder emits 390 audio tokens per window, so encoding and prefill cost the same for a 4 s and a 29 s clip; clips longer than 30 s were not tested (Hub card 'How to send audio').",
     "The answer is 'language <name><asr_text><transcript>'; split at <asr_text>. To force the language, send the text item 'language Chinese<asr_text>' in the same message; the model then writes the transcript only (11 of 11 Mandarin / Japanese clips) (Hub card).",
     "Prompt: the bundle renders the litert-torch Qwen3-ASR prompt (no system turn). With the checkpoint's own chat template (empty system turn) the same weights scored Mandarin CER 6.65 % / Japanese CER 6.06 % vs 6.19 / 5.73 and tagged 8 of 50 Mandarin clips English; the PyTorch model shows the same pattern (6.86 / 5.50 vs 6.04 / 5.24, 9 of 50). System messages are ignored by the template (Hub card 'Prompt').",
-    "The audio encoder must run on the CPU (audio_backend=CPU()): on the Mac the WebGPU/Metal delegate refuses 'BATCH_MATMUL: Not supported batched mat mul case: non-constant tensor' in the encoder graph and create_conversation fails ('Hint fully delegated to single delegate is set, but the graph is not fully delegated'); the LM runs on the GPU (prefill_128 1298/1298 and decode 1244/1244 nodes delegated on Metal) (FINDINGS; gates/rt/q17_30s_C_off_zh_gpu_gpuaudio.log, same encoder section).",
+    "The audio encoder must run on the CPU (audio_backend=CPU()): on the Mac the WebGPU/Metal delegate refuses 'BATCH_MATMUL: Not supported batched mat mul case: non-constant tensor' in the encoder graph and create_conversation fails ('Hint fully delegated to single delegate is set, but the graph is not fully delegated'); the LM runs on the GPU (prefill_128 1298/1298 and decode 1244/1244 nodes delegated on Metal) (same encoder section).",
     "Correctness (FLEURS test, 50 clips per language, greedy, one conversation per clip; scorer: en WER after uppercasing/punctuation removal, zh/ja CER after NFKC+lower with punctuation/whitespace removed): Mac CPU 4.43 / 6.19 / 5.73 %, Mac LM-on-GPU 4.52 / 6.19 / 5.32 %, PyTorch fp32 with the same prompt 4.35 / 6.04 / 5.24 %; no empty transcript (Hub card 'Correctness').",
     "Stock litert-torch export deviation: the exporter's audio attention attends within 13-token (1 s) chunks while the original attends within 104-token windows (encoder output cosine 0.81-0.82 on 5 s, 0.76 on 30 s); the constant block-diagonal mask makes the fp32 encoder match the original exactly — litert-torch Draft PR #1295 / issue #1296 (Hub card 'Conversion' 1).",
     "The released runtime's built-in mel front end is not the Qwen3-ASR log-mel; the bundle takes raw PCM frames and computes the original log-mel in the graph (max |Δ| 0.028 vs the original on 10 clips, from the fp16 weights) (Hub card 'Conversion' 2).",
     "The omni/asr runner in the LiteRT-LM repository was not run with this file; the generic_model bundle is the shipped route (Hub card 'Conversion'; the omni/asr start-token defect is LiteRT-LM issue #3827, measured on confucius4-r2t2).",
     "Mac speed rows were measured while other jobs ran on the machine (load average 4.5-8.5); the GPU run was the file's first GPU load and wrote the 1.72 GB GPU weight cache during the run (Hub card 'Performance').",
-    "Galaxy S26 CPU (v0.16.1 tag CLI, --benchmark): the first process writes the XNNPACK weight caches (prefill 329 tok/s, TTFT 1.25 s), later processes load them (prefill 538-547 tok/s, TTFT 0.77-0.78 s). After adb push the cache key's mtime second can alternate between processes so every process rebuilds the caches (LiteRT-LM #3772; seen on the first build's S26 leg) — touch the bundle on the phone before timing warm runs (FINDINGS 'Shipped file')."
+    "Galaxy S26 CPU (v0.16.1 tag CLI, --benchmark): the first process writes the XNNPACK weight caches (prefill 329 tok/s, TTFT 1.25 s), later processes load them (prefill 538-547 tok/s, TTFT 0.77-0.78 s). After adb push the cache key's mtime second can alternate between processes so every process rebuilds the caches (LiteRT-LM #3772; seen on the first build's S26 run) — touch the bundle on the phone before timing warm runs."
   ],
   "schema_version": "1.2"
 }

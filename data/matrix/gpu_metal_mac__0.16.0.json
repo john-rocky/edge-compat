@@ -2,7 +2,7 @@
  "backend": "gpu_metal_mac",
  "entries": [
   {
-   "conditions": "same rank-0 broadcast defect as the Android OpenCL lane \u2014 reproduced on Metal with the same tensor-diff harness, so it is not delegate-specific",
+   "conditions": "same rank-0 broadcast defect as the Android OpenCL path \u2014 reproduced on Metal with the same tensor-diff harness, so it is not delegate-specific",
    "constraints": {
     "min_operand_rank": 0
    },
@@ -18,7 +18,7 @@
    "provenance": "measured",
    "rewrite_hints": [
     {
-     "expected_effect": "measured: granite-4.0-h-1b goes from 0/8 fully degenerate to 8Q 8/8 on Mac GPU",
+     "expected_effect": "measured: granite-4.0-h-1b goes from 0/8 fully degenerate to 8-question check 8/8 on Mac GPU",
      "rewrite": "keep the batch dimension when reducing: `sum(-1, keepdim=True)`",
      "symptom": "selector built from a rank-0-derived index is all zero; stored conv state is 0.0 in every layer"
     }
@@ -42,7 +42,7 @@
    "provenance": "measured",
    "rewrite_hints": [
     {
-     "expected_effect": "measured: kernel bit-exact against CPU under enforce_f32 (9.8e-08); the model then passes 8Q 8/8 on GPU",
+     "expected_effect": "measured: kernel bit-exact against CPU under enforce_f32 (9.8e-08); the model then passes 8-question check 8/8 on GPU",
      "rewrite": "replace the pad with `torch.cat` against an explicit zero block, or unsqueeze to rank 4 before padding",
      "symptom": "every per-head gate lands on the neighbouring head; fp32 activations drift, fp16 produces NaN in one head slab"
     }
@@ -66,7 +66,7 @@
    "provenance": "measured",
    "rewrite_hints": [
     {
-     "expected_effect": "measured: Qwen3.5-4B goes from GPU engine-create abort to fully delegated \u2014 8Q 8/8 on Mac Metal (0.15.0 + 0.16.0) and iPhone 17 Pro Metal word-for-word vs fp32 reference",
+     "expected_effect": "measured: Qwen3.5-4B goes from GPU engine-create abort to fully delegated \u2014 8-question check 8/8 on Mac Metal (0.15.0 + 0.16.0) and iPhone 17 Pro Metal word-for-word vs fp32 reference",
      "rewrite": "re-express repeat_interleave with rank <= 4 ops only: fold batch (b==1) into the copy axis, materialize the copies with concat, then rank-4 reshape back \u2014 bitwise-identical to the stock op",
      "symptom": "engine creation fails with a rejection list naming RESHAPE ops in every linear-attention layer"
     }
@@ -92,13 +92,13 @@
     {
      "expected_effect": "n/a",
      "rewrite": "none needed for correctness; to silence and get the GPU TopK kernel a vocab pad to a multiple of 4 would be required (not attempted \u2014 not worth a graph change for a log line)",
-     "symptom": "noisy E-log during engine creation that reads like a failure; nothing is actually broken \u2014 loads, runs, 8Q 8/8, bench completes"
+     "symptom": "noisy E-log during engine creation that reads like a failure; nothing is actually broken \u2014 loads, runs, 8-question check 8/8, bench completes"
     }
    ],
    "status": "fallback"
   },
   {
-   "conditions": "engine creation FAILS on the Mac Metal lane (\"BROADCAST_TO: Operation is not supported\" then \"graph is not fully delegated\") when the text decoder's rotary embedding is built with `torch.repeat_interleave(freqs, 2, dim=-1)` \u2014 stock transformers Cohere2RotaryEmbedding. Distinct from the rank-5 BROADCAST_TO row on the 2.1.6 axis (GQA repeat_kv): here the op is rank-4 and still refused, so the refusal is the op itself, not only its rank.",
+   "conditions": "engine creation FAILS on the Mac Metal path (\"BROADCAST_TO: Operation is not supported\" then \"graph is not fully delegated\") when the text decoder's rotary embedding is built with `torch.repeat_interleave(freqs, 2, dim=-1)` \u2014 stock transformers Cohere2RotaryEmbedding. Distinct from the rank-5 BROADCAST_TO row on the 2.1.6 axis (GQA repeat_kv): here the op is rank-4 and still refused, so the refusal is the op itself, not only its rank.",
    "constraints": {
     "rank": "4 (from repeat_interleave along the last axis)"
    },
@@ -116,7 +116,7 @@
     {
      "expected_effect": "measured: North-Micro-Vision decoder (Cohere2 re-host) goes from engine-create failure to full GPU delegation and 80.6 tok/s decode on M4 Max (1380/1380 + 1204/1204 nodes on Pixel 8a OpenCL with the same graph)",
      "rewrite": "build the interleaved rope table as `torch.cat((freqs.unsqueeze(-1), freqs.unsqueeze(-1)), dim=-1).flatten(-2)` (RESHAPE+CONCATENATION), or \u2014 when the checkpoint is Llama-layout anyway \u2014 patch the rope to `torch.cat((freqs, freqs), dim=-1)`; see hf-to-litertlm northmv_work/northmv_rope_patch.py",
-     "symptom": "`Failed to create engine` at first prompt; litert-lm `run --backend gpu` prints `An error occurred`; CPU lane fine"
+     "symptom": "`Failed to create engine` at first prompt; litert-lm `run --backend gpu` prints `An error occurred`; CPU path fine"
     }
    ],
    "status": "fallback"

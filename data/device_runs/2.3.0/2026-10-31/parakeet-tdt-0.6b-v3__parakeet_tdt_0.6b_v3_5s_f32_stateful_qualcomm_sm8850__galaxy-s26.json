@@ -1,0 +1,57 @@
+{
+  "artifact": "parakeet_tdt_0.6b_v3_5s_f32_stateful_Qualcomm_SM8850.tflite",
+  "artifact_sha256": "e9edabe48ffd853ddebac6c83804752edf0e1e567b26954aae0d3e964f72a486",
+  "device": "galaxy-s26",
+  "model_id": "parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_5s_f32_stateful_qualcomm_sm8850",
+  "notes": "litert-community/parakeet-tdt-0.6b-v3 @ 1f78e5eb file compiled ahead of time for SM8850 (sha256 = the Hub LFS oid = the bytes of LiteRT issue #11038 at @3ce205aa), signature `encode` run alone on the HTP on 3 inputs (5 s windows of an 82.335 s LibriSpeech stream; the phone's copy matched); every output value NaN, while the reference (the f32 source file's encode on the Mac CPU) has none. Cause of the failure not established.",
+  "quantization": "fp32, compiled ahead of time (Qualcomm_SM8850)",
+  "results": [
+    {
+      "accelerator": "npu_qnn",
+      "context_length": null,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-l16-rt-runner",
+        "os_build": "Android 16 (BP4A.251205.006.S942QOPS1AZH9; the run's s0_setup device line)",
+        "runtime": "litert",
+        "runtime_version": "2.3.0",
+        "soc": "Qualcomm SM8850 (Adreno GPU, Hexagon HTP)",
+        "vendor_sdk": "LiteRT 2.3.0 Google Maven AARs litert + litert-npu-runtime-qualcomm (libLiteRtDispatch_Qualcomm.so 22e2d581555617c4…) + QAIRT 2.50.0.260828 HTP libraries (libQnnHtp.so 09e930b6af975bae…, libQnnHtpV81Skel.so 9b7266e38aea818a…)"
+      },
+      "error": "NONFINITE_STOP model[0] nonfinite_values=193536 of 193536 in 3 fixtures (the reference has 0)",
+      "evidence": [
+        "the LiteRT C API runner tools/r3_rt_runner.cc (private; binary sha256 7e7539e5…, built against the 2.3.0 libLiteRt.so); link run with --stop-nonfinite 1: the runner stops after the parity pass when output 0 holds a non-finite value",
+        "Status RUNNER_FAILED, verdict NONFINITE, 193536 of 193536 output values NaN over 3 inputs, signature=encode index=0 inputs=1 outputs=1 out0_elems=64512 compile_ms=559.7 fully_accelerated=true",
+        "`Replacing 1 out of 1 node(s) with delegate (DispatchDelegate)`, `Context binary (2.44.0) is older than the current SDK (2.50.0)`",
+        "LiteRT issue #11038 (the same file bytes, LiteRT 2.2.0 + QAIRT 2.47.0: all NaN)"
+      ],
+      "failure_class": "degenerate_output",
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "compile_ms": 559.7,
+        "inputs": 3,
+        "nonfinite_values": 193536,
+        "output_values": 193536,
+        "per_call_ms_parity_input000": 33.438,
+        "per_call_ms_parity_input001": 32.968,
+        "per_call_ms_parity_input002": 33.08
+      },
+      "output_match": false,
+      "peak_mem_mb": 15.5,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "signature": "encode",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

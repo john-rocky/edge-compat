@@ -22,7 +22,7 @@
    "error": null,
    "evidence": [
     "results block: prefill=723.02 decode=140.46 tokens/s, init=20.6611 s",
-    "same-session quality gate: 8Q 0/8 on GPU backend (fp16 act: token-0 spam; fp32 act via prefer_activation_type: prompt-independent derailment) \u2014 litertlm-convert qwen35_work/gate8q_gpu_dev.json + gate8q_gpu_fp32act.json; CPU same bundle 8/8 (gate8q_cpu_v3.json)"
+    "same-session quality check: 8-question check 0/8 on GPU backend (fp16 act: token-0 spam; fp32 act via prefer_activation_type: prompt-independent derailment); CPU same bundle 8/8 (gate8q_cpu_v3.json)"
    ],
    "failure_class": null,
    "full_delegation": null,

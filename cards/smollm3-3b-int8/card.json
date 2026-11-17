@@ -2,16 +2,16 @@
   "artifacts": [
     {
       "file": "SmolLM3-3B.litertlm",
-      "sha256": "f9aa844c27f5ccfae9cb701c7ca63f2faba501ed187aacc85044b6200df15a37",
-      "size_mb": 2965.286
+      "sha256": "c1c6c635194745456d03ba3a851b9ebf3a2714218ce35d930d9eb93f7cf97e20",
+      "size_mb": 2980.427
     }
   ],
   "benchmarks": [],
   "conversion": {
-    "command": "TODO (not stated in the README)",
-    "quantization": "TODO — the README describes this ~3.1 GB file only as 'the repo also carries SmolLM3-3B.litertlm, gated on the Galaxy S26 GPU'; the id suffix -int8 is the device-run lane's, not a README statement",
-    "tool": "litert-torch export_hf (README Conversion, written for the repo's q4 file; SmolLM3ForCausalLM on the existing converter, NoPE attention lowers to generic ops)",
-    "tool_version": "TODO (the README names the converter but not its version)"
+    "command": "TODO for the export (not stated in the card); the 2026-10-06 rewrite of the previous file: tools/gpu_graph/gpu_graph_retrofit.py previous.litertlm retrofit.litertlm --decomp exporter --mask add_bcast, then tools/gpu_graph/prefill_bucket_clone.py build retrofit.litertlm new.litertlm --lengths 16 --source prefill_256 --report bucket.json (card L195-L199)",
+    "quantization": "int8 (card L38 names the second file int8 and gives no recipe beyond that)",
+    "tool": "litert-torch export_hf (card L183-L190, written for the repo's int4 file; SmolLM3ForCausalLM on the existing converter, NoPE attention lowers to generic ops); rebuilt on 2026-10-06 with hf-to-litertlm tools/gpu_graph/ (card L192-L199)",
+    "tool_version": "TODO (the card names the converter but not its version)"
   },
   "cross_runtime": [],
   "delegation": null,
@@ -47,9 +47,8 @@
             "iteration 2: Time to first token 6.60 s; Prefill Speed 157.60 tokens/sec; Decode Speed 9.56 tokens/sec",
             "Init Total: 7038.14 ms (cold: the init writes the XNNPACK weight cache)",
             "VmHWM 4253728 kB (max of the 1 s samples in therm.txt; peak_mem_mb = kB x 1024 / 10^6; GPU memory is outside the process high-water mark)",
-            "state before the leg: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 372 memavail_kb=7819808 uptime=264414.50 mWakefulness=Dozing (waited 0 s after the 120 s rest)",
-            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 29 of 29, 753 / 29 of 29",
-            "source: litertlm-convert gpu_reship_work/device/r20/logs/T1/out_s3i8v2_cpu_c1024/ and device/r20/results/s26_r20_compact.json"
+            "state before the run: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 372 memavail_kb=7819808 uptime=264414.50 mWakefulness=Dozing (waited 0 s after the 120 s rest)",
+            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 29 of 29, 753 / 29 of 29"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -112,9 +111,8 @@
             "iteration 3: Time to first token 0.13 s; Prefill Speed 241.56 tokens/sec; Decode Speed 16.73 tokens/sec",
             "Init Total: 7000.46 ms (cold: --disable_cache=true)",
             "VmHWM 975592 kB (max of the 1 s samples in therm.txt; peak_mem_mb = kB x 1024 / 10^6; GPU memory is outside the process high-water mark)",
-            "state before the leg: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 360 memavail_kb=7774488 uptime=264040.55 mWakefulness=Dozing (waited 0 s after the 120 s rest)",
-            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 2 of 2, 1300 / 1 of 1, 1300 / 1 of 1",
-            "source: litertlm-convert gpu_reship_work/device/r20/logs/T1/out_s3i8v2_gpu_g16/ and device/r20/results/s26_r20_compact.json"
+            "state before the run: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 360 memavail_kb=7774488 uptime=264040.55 mWakefulness=Dozing (waited 0 s after the 120 s rest)",
+            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 2 of 2, 1300 / 1 of 1, 1300 / 1 of 1"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -221,9 +219,8 @@
             "iteration 3: Time to first token 4.71 s; Prefill Speed 221.32 tokens/sec; Decode Speed 12.48 tokens/sec",
             "Init Total: 6928.93 ms (cold: --disable_cache=true)",
             "VmHWM 975568 kB (max of the 1 s samples in therm.txt; peak_mem_mb = kB x 1024 / 10^6; GPU memory is outside the process high-water mark)",
-            "state before the leg: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 361 memavail_kb=7462724 uptime=264218.99 mWakefulness=Dozing (waited 30 s after the 45 s rest)",
-            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 8 of 8, 1090 / 8 of 8, 510 / 12 of 12",
-            "source: litertlm-convert gpu_reship_work/device/r20/logs/T1/out_s3i8v2_gpu_g1024/ and device/r20/results/s26_r20_compact.json"
+            "state before the run: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 361 memavail_kb=7462724 uptime=264218.99 mWakefulness=Dozing (waited 30 s after the 45 s rest)",
+            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 8 of 8, 1090 / 8 of 8, 510 / 12 of 12"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -275,7 +272,7 @@
             "soc": "Qualcomm SM8850",
             "vendor_sdk": "QAIRT 2.47.0.260601114230 (QNN JIT libraries)"
           },
-          "error": "killed by the lane's guard: VmRSS_above_6000000KiB (VmHWM 6548084 kB) during the QNN compile",
+          "error": "killed by the guard: VmRSS_above_6000000KiB (VmHWM 6548084 kB) during the QNN compile",
           "evidence": [
             "W0000 00:00:1791203212.668494   26951 llm_litert_compiled_model_executor_factory.cc:221] NPU backend requested, but TF_LITE_AUX is not packaged in the model. Using the generic LiteRT compiler-plugin path.",
             "INFO: [compiler_plugin.cc:948] Applying plugin with SDK version: v2.47.0.260601114230",
@@ -285,7 +282,7 @@
             "INFO: [compiler_plugin.cc:742] Partitioned subgraph<360>, selected 1511 ops, from a total of 1584 ops. resulted in 73 partitions.",
             "the 1 s memory samples (npu.mem) rose from 267732 -> 1706856 -> 4037412 -> 6529780 kB before the guard's stop; no Replacing line for the NPU was printed = no evidence that anything ran on the NPU",
             "bundle pushed 3125204208 B, device sha256 c1c6c6351947... = the shipped file; NPU kit: litert_lm_advanced_main built from LiteRT-LM main 3dbb23e1e (sha256 b27172b1ad8e...) with the same build's dispatch / compiler-plugin libraries rebuilt from LiteRT 86112a32 and the QAIRT 2.47 JIT libraries",
-            "command: --backend=npu --use_session=true --async=false --disable_cache=true, one gate prompt, guard = 60 s / VmRSS 6.0e6 kB / MemAvailable 1.2e6 kB; source: litertlm-convert gpu_reship_work/device/r20/logs/T1/npu_s3i8v2/"
+            "command: --backend=npu --use_session=true --async=false --disable_cache=true, one test prompt, guard = 60 s / VmRSS 6.0e6 kB / MemAvailable 1.2e6 kB"
           ],
           "failure_class": "memory_cap_exceeded",
           "full_delegation": null,
@@ -335,7 +332,7 @@
             "process 2026-10-05T21:06:10+09:00: Prefill speed:        231.16 tokens/s; Decode speed:         11.03 tokens/s; Init time:            9.3864 s; Time to first token:  1.5525 s (load averages before: 3.32 3.68 3.68)",
             "process 2026-10-05T21:06:45+09:00: Prefill speed:        229.14 tokens/s; Decode speed:         11.11 tokens/s; Init time:            9.4104 s; Time to first token:  1.5399 s (load averages before: 2.70 3.49 3.61)",
             "command: litert-lm benchmark SmolLM3-3B.litertlm --backend cpu -p 16 -d 32 --cache no --verbose (one process per run, 2 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -394,7 +391,7 @@
             "process 2026-10-05T21:04:08+09:00: Prefill speed:        460.09 tokens/s; Decode speed:         24.12 tokens/s; Init time:            9.4230 s; Time to first token:  2.0008 s (load averages before: 3.65 3.89 3.75)",
             "process 2026-10-05T21:05:17+09:00: Prefill speed:        459.50 tokens/s; Decode speed:         24.23 tokens/s; Init time:            9.4280 s; Time to first token:  1.9906 s (load averages before: 3.43 3.77 3.72)",
             "command: litert-lm benchmark SmolLM3-3B.litertlm --backend cpu -p 256 -d 256 --cache no --verbose (one process per run, 2 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -451,7 +448,7 @@
             "process 2026-10-05T21:03:25+09:00: Prefill speed:        810.99 tokens/s; Decode speed:         100.22 tokens/s; Init time:            2.1081 s; Time to first token:  0.0376 s (load averages before: 4.27 4.02 3.79)",
             "process 2026-10-05T21:03:32+09:00: Prefill speed:        819.21 tokens/s; Decode speed:         100.62 tokens/s; Init time:            2.1171 s; Time to first token:  0.0371 s (load averages before: 4.00 3.97 3.78)",
             "command: litert-lm benchmark SmolLM3-3B.litertlm --backend gpu -p 16 -d 32 --cache no --verbose --activation-data-type fp16 (one process per run, 3 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -508,7 +505,7 @@
             "process 2026-10-05T21:02:49+09:00: Prefill speed:        1646.52 tokens/s; Decode speed:         106.20 tokens/s; Init time:            2.1274 s; Time to first token:  0.1690 s (load averages before: 4.05 3.94 3.76)",
             "process 2026-10-05T21:03:06+09:00: Prefill speed:        1640.66 tokens/s; Decode speed:         105.86 tokens/s; Init time:            2.1136 s; Time to first token:  0.1683 s (load averages before: 4.60 4.08 3.81)",
             "command: litert-lm benchmark SmolLM3-3B.litertlm --backend gpu -p 256 -d 256 --cache no --verbose --activation-data-type fp16 (one process per run, 3 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -558,7 +555,7 @@
           },
           "error": null,
           "evidence": [
-            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation check (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
             "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
             "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
             "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 209.8 s, output head \"[thought] Okay, let's see. I need to add 17 and 26 together. Hmm, where do I sta\"",
@@ -608,9 +605,14 @@
     "task": "text-generation"
   },
   "pitfalls": [
-    "Galaxy S26 GPU per the README: runs, 2930/2930 ops across 2 subgraphs on LiteRT GPU (704 MB); Raspberry Pi 5 CPU 19.1 tok/s prefill / 2.0 decode (README tables); this repo's Pi 5 row is the wave-2 journal (device runs).",
-    "The tokenizer in SmolLM3-3B.litertlm was a SentencePiece conversion of the model's BPE tokenizer that lost byte-level semantics for standalone accented letters/symbols, and both bundles later received a metadata-only repair declaring the reasoning channel (thought, <think>…</think>) and a default-system-turn change (every section except LlmMetadata byte-identical, sha256 per section) — read the README's 'Metadata-only change' notes for the exact state of the file you download (README).",
-    "License Apache-2.0, inherited from HuggingFaceTB/SmolLM3-3B (README License).",
+    "GPU graph rewrite of 2026-10-06 (weights unchanged): the two KV-cache writes per layer became one odml.cache_update composite, the attention products odml.runtime_bmm composites, a param_tensor input (INT32[1,1,1,7]) was added and a 16-token prefill signature copied from prefill_256 (it shares every weight buffer); the file is now 3,125,204,208 bytes (previous 3,109,328,112, f9aa844c…); on the Mac with litert-lm 0.17.1 its GPU decode went 77.0 → 106.0 tok/s and its CPU init 6.7 → 9.4 s (the CLI's printed Init time, which counts engine creation twice: LiteRT-LM #4057, card L127); with the default fp16 activations on the Mac GPU it gets 7 of the 8 questions right and passes the long prompt, with and without the new signature (card L41-L50).",
+    "Galaxy S26 GPU: every transformer signature of this file is fully delegated, one partition each on LITERT_CL (prefill_256 1512/1512 nodes, prefill_16 1512/1512, decode 1346/1346), and it answered 5 of 5 test prompts (litert_lm_advanced_main from a LiteRT-LM main build of 2026-09-18, bundle default fp16 activations) (card L168-L177).",
+    "CPU memory with the extra signature: --cache no runs the CPU without the XNNPACK weight cache, and then this file repacks its weights for the 16-token signature: init 6.62 → 9.62 s and peak footprint 6.86 → 9.48 GB on a 16-token prompt (without → with the signature); with the disk weight cache (the app default) init goes 0.41 → 0.56 s, footprint 1.01 → 0.87 GB and the 16-token TTFT 0.7 → 0.17 s (card L129).",
+    "Raspberry Pi 5 CPU: 19.1 tok/s prefill / 2.0 decode, measured on the previous file (f9aa844c…) before the 2026-10-06 rewrite and not re-measured (card L236-L244); this repo's Pi 5 row is the wave-2 journal (device runs).",
+    "The tokenizer in SmolLM3-3B.litertlm was a SentencePiece conversion of the model's BPE tokenizer that lost byte-level semantics for standalone accented letters/symbols, and both bundles later received a metadata-only repair declaring the reasoning channel (thought, <think>…</think>) and a default-system-turn change (every section except LlmMetadata byte-identical, sha256 per section) — read the card's 'Metadata-only change' notes for the exact state of the file you download (card L212-L234).",
+    "Template: on 2026-09-21 the chat template was updated to accept the 0.18 content-parts form (the string form unchanged); weights, tokenizer and executor metadata byte-identical (card L52).",
+    "Conversation preface with tools and no messages: LiteRT-LM renders the chat template with an empty message list, and the template reads messages[0] without checking that the list is non-empty, so the render fails with 'Failed to apply template: undefined value' when the preface is prefilled at creation (prefillPrefaceOnInit, default false; creating the conversation fails) and in the preface render (renderPrefaceIntoString and its C++ and C API forms); the same with extra context (such as enable_thinking) and no messages, and in the preface render with an empty preface (run in the runtime on one Qwen3 template; the other templates rendered with minijinja 2.14 and jinja2); read in the source of LiteRT-LM 0.17.0, 0.18.1 and main, measured with the 0.18.1 PyPI package through its C API on these files' template texts; the default path, where the first message is rendered with the preface, is not affected (the 0.18.1 Python API and CLI expose neither the flag nor the preface render); a system message or any initial message in the conversation config avoids it (card L249).",
+    "License Apache-2.0, inherited from HuggingFaceTB/SmolLM3-3B (card L253-L254).",
     "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/."
   ],
   "schema_version": "1.2"

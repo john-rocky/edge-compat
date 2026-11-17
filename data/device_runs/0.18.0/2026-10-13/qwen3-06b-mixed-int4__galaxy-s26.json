@@ -5,7 +5,7 @@
  "artifact": "qwen3_0_6b_mixed_int4.litertlm",
  "artifact_sha256": "7900eb4e7362d88c58782c6f9999bb7a129e03544aa98b8f338ea0cc5d8c22c1",
  "quantization": "INT4 block-32 linears with fp16 scales + INT8 per-row embedding (team recipe, 2026-09-19); prefill 256, cache 2048; odml.rope only",
- "notes": "Lane qwen3_gpuopt_work/reexport_20261013 (litertlm-convert, T1 2026-10-13; LANE.md §5, device/RESULTS.md, r2/GSM8K.md, r2/speed/table.md): the two published bundles as the controls of the lane, same sitting, Galaxy S26 holds 12:10–13:09 JST (A = GPU timing, B = CPU + text gate + peak, C = 8Q + peak), every process started at thermal status 0 with the CPU policies uncapped; cold = cache files beside the bundle removed. 8Q through the Session API (ChatML-rendered prompts; the kit has no greedy flag) was run on the lane's own files, not on these two. Unpublished re-exports measured in the same holds (notes only): litert-torch head 0a81bf6f3 with --apply_gpu_composites=True (qkv_norm_rope + sdpa composites) builds no GPU engine on this kit on either phone (OpenCL program build failure, `unexpected type name 'float4'`, fp16 and --force_f32); the sdpa-only variant builds but emits '!' x 512 (every sampled token cast to 0); the head export with both composites off (E3, 344,279,136 B, sha256 ad6ee294…) matches this file's rows (S26 GPU 2,285.9 / 71.6 cold vs 2,364.7 / 71.1; GSM8K 87 = 87 / 200 on the Mac GPU). No Hub change came out of the lane.",
+ "notes": "The two published bundles as the controls, same measurement run, Galaxy S26 holds 12:10–13:09 JST (A = GPU timing, B = CPU + text check + peak, C = 8Q + peak), every process started at thermal status 0 with the CPU policies uncapped; cold = cache files beside the bundle removed. 8Q through the Session API (ChatML-rendered prompts; the kit has no greedy flag) was run on its own files, not on these two. No Hub change came.",
  "results": [
   {
    "accelerator": "gpu",
@@ -55,7 +55,7 @@
     "Prefill Turn 1: Processed 1024 tokens in 520.599636ms duration.",
     "process B (cache files kept): 1949.92 / 62.91 tok/s, init 2647.2 ms, cache files present but full init (miss)",
     "process C (cache files kept): 1923.04 / 66.32 tok/s, init 1925.95 ms, cache hit (InferenceContext from serialized data)",
-    "dashboard-condition row void: the prompt did not reach the model (prefill N = 9; the bundle's string-only chat template drops the user turn on 0.18.0, see handoff 2026-10-12-sfdoc-A §6)",
+    "dashboard-condition row void: the prompt did not reach the model (prefill N = 9; the bundle's string-only chat template drops the user turn on 0.18.0)",
     "peak (separate 1-iteration process, --report_peak_memory_footprint=true): Peak system ram usage 553.043 MB"
    ],
    "env": {

@@ -1,0 +1,68 @@
+{
+  "artifact": "d1-2b_decide_L256_fp16fc.tflite",
+  "artifact_sha256": "175147ab5e366a693525a235d70a53551f6653604a276f606c31d269620a0a84",
+  "device": "galaxy-s26",
+  "model_id": "d1-2b__d1-2b_decide_l256_fp16fc",
+  "notes": "d1-2B (litert-community/d1-2B-LiteRT main df449772, created 2026-11-02; card license other (lfm1.0), base model LiquidAI/d1-2B; anonymous Hub API read 2026-11-03T02:46:35+0900): the `decide` graph, bucket `L256`, form `fp16fc` (the fp16-FC). Hub file `d1-2b_decide_L256_fp16fc.tflite` 2,935,382,112 B; artifact_sha256 = its LFS oid = the phone's read-back in each run's hold. Signature `decide`; its I/O as the app read it: inputs embeds float32 [1,256,2048], sees_q float32 [1,256,66], sees_k float32 [1,256,66] -> outputs hidden float32 [1,256,2048]. Measured on the Galaxy S26 (SM-S942Q) (device holds of runs r6): one result per run, and per timing set in a timing run. output_match is null on every result: the work compares each row with its own Mac Metal fp32 run of the same rows (metrics.vs_mac_metal_fp32_*: max |d| and the smallest cosine over the rows with the same input bytes), not with a CPU reference of the same bytes under the element rule.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-11-02",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 2062,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-d1-gate-app",
+        "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "the gate app r10 (com.mlboydaisuke.d1omni.gate, Kotlin CompiledModel on LiteRT 2.2.0 from Maven; APK sha256 0b6d6f70ac0cf4c7…, the APK its run config installs), one app process per run; per call = write every input + CompiledModel.run() + read every output (the app's write_run_read_ms; the GPU's run() returns before the compute ends and the read waits for it)",
+        "file measured: d1-2b_decide_L256_fp16fc.tflite = litert-community/d1-2B-LiteRT `d1-2b_decide_L256_fp16fc.tflite` (2,935,382,112 B), LFS oid 175147ab5e366a693525a235d70a53551f6653604a276f606c31d269620a0a84 (Hub tree read 2026-11-03T02:46:35+0900); the phone's copy read back equal (MATCH)",
+        "(app pid 25462): `11-02 09:18:52.573 25462 25486 I tflite  : Replacing 2062 out of 2062 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).`",
+        "Run s1t_tmL256 started 2026-11-02 09:18:51 JST, ready check `clean; rested 120s since 09:16:50`; build Android 16 BP4A.251205.006.S942QOPS1AZH9",
+        "timing mode, set 384px (single, 1 row(s) of tmL256.json per request): latency_p50_ms = the median of 10 timed calls after 2 warm-up call(s); finite outputs"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 645.7442965,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "app_guard_max_anon_plus_swap_kb": 226244.0,
+        "app_guard_min_mem_available_kb": 1784772.0,
+        "app_mem_guard_kb": 1500000.0,
+        "app_vmhwm_kb_after_compile": 7115492.0,
+        "app_vmhwm_kb_at_end": 7115492.0,
+        "battery_temp_tenths_c_end": 380.0,
+        "battery_temp_tenths_c_start": 359.0,
+        "compile_ms": 20945.706867,
+        "mem_available_kb_after_compile": 1828316.0,
+        "per_call_ms_max": 684.784166,
+        "per_call_ms_min": 627.079791,
+        "per_call_run_only_median_ms": 0.4374475,
+        "rows_per_request": 1.0,
+        "thermal_status_end": 1.0,
+        "thermal_status_start": 0.0,
+        "timed_calls": 10.0,
+        "warmup_calls": 2.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GPU (ML Drift OpenCL) precision FP32, constant tensor sharing on; gate app r10; timing mode, set 384px (single, 1 row(s) per request); run r6 hold s6b run s1t_tmL256",
+      "total_ops": 2062,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

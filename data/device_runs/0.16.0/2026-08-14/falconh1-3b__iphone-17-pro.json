@@ -22,7 +22,7 @@
       "error": null,
       "evidence": [
         "quality autorun JSON: promptTokensPerSecond=48.71 decodeTokensPerSecond=7.85 firstTokenLatencyMS=3141 memoryPeakDuringDecodeMB=1455.5 (litert-lm_litert-local_falconh1-3b-int8_quality_2026-08-14T03-59-18Z.json)",
-        "composite 8-question probe 8/8, answers identical to the GPU run"
+        "composite 8-question test 8/8, answers identical to the GPU run"
       ],
       "failure_class": null,
       "full_delegation": null,
@@ -61,7 +61,7 @@
       "error": null,
       "evidence": [
         "quality autorun JSON: promptTokensPerSecond=111.48 decodeTokensPerSecond=14.04 firstTokenLatencyMS=1494 memoryPeakDuringDecodeMB=3033.8 loadTimeSeconds=27.55 (litert-lm_litert-local_falconh1-3b-int8_quality_2026-08-14T03-58-56Z.json)",
-        "composite 8-question probe 8/8; full 12-signature prefill ladder loads on the 12 GB phone with no memory pressure (falcon vocab 65537 keeps the per-signature RAM tax light)"
+        "composite 8-question test 8/8; full set of 12 prefill signatures loads on the 12 GB phone with no memory pressure (falcon vocab 65537 keeps the per-signature RAM tax light)"
       ],
       "failure_class": null,
       "full_delegation": null,

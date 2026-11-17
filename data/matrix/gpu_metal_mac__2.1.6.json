@@ -91,7 +91,7 @@
       "evidence": {
         "date": "2026-10-01",
         "litert_version": "ai-edge-litert 2.1.6 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
-        "source_model": "LiteRT #10231 repro graphs add_rank2_input_const_rank3.tflite (ADD runtime [85,16] + constant [1,85,16], sha256 c64a285a…) and fc_add_const_rank3.tflite (FULLY_CONNECTED then ADD runtime [1024,768] + constant [1,1024,768], sha256 ac940c58…), with their RESHAPE-fronted (add_reshape3_const_rank3, prefix2-reshape3) and rank-3-input (add_rank3_input_const_rank3) controls — edge-llm-bench releases add-rank-repro-shapes-2026-09-29 and metal-add-repro-2026-09-24; tools/rank3_prelint_measure_metal_add.py, deterministic input pattern, CPU accelerator as the reference; litertlm-convert tools/rank3_prelint_measure_metal_add_20261001.log"
+        "source_model": "LiteRT #10231 repro graphs add_rank2_input_const_rank3.tflite (ADD runtime [85,16] + constant [1,85,16], sha256 c64a285a…) and fc_add_const_rank3.tflite (FULLY_CONNECTED then ADD runtime [1024,768] + constant [1,1024,768], sha256 ac940c58…), with their RESHAPE-fronted (add_reshape3_const_rank3, prefix2-reshape3) and rank-3-input (add_rank3_input_const_rank3) controls — edge-llm-bench releases add-rank-repro-shapes-2026-09-29 and metal-add-repro-2026-09-24; tools/rank3_prelint_measure_metal_add.py, deterministic input pattern, CPU accelerator as the reference; tools/rank3_prelint_measure_metal_add_20261001.log"
       },
       "op": "ADD",
       "provenance": "measured",
@@ -120,7 +120,7 @@
       "evidence": {
         "date": "2026-10-01",
         "litert_version": "ai-edge-litert 2.1.6 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
-        "source_model": "LiteRT #10231 repro graphs add_rank2_input_const_rank3.tflite (ADD runtime [85,16] + constant [1,85,16], sha256 c64a285a…) and fc_add_const_rank3.tflite (FULLY_CONNECTED then ADD runtime [1024,768] + constant [1,1024,768], sha256 ac940c58…), with their RESHAPE-fronted (add_reshape3_const_rank3, prefix2-reshape3) and rank-3-input (add_rank3_input_const_rank3) controls — edge-llm-bench releases add-rank-repro-shapes-2026-09-29 and metal-add-repro-2026-09-24; tools/rank3_prelint_measure_metal_add.py, deterministic input pattern, CPU accelerator as the reference; litertlm-convert tools/rank3_prelint_measure_metal_add_20261001.log"
+        "source_model": "LiteRT #10231 repro graphs add_rank2_input_const_rank3.tflite (ADD runtime [85,16] + constant [1,85,16], sha256 c64a285a…) and fc_add_const_rank3.tflite (FULLY_CONNECTED then ADD runtime [1024,768] + constant [1,1024,768], sha256 ac940c58…), with their RESHAPE-fronted (add_reshape3_const_rank3, prefix2-reshape3) and rank-3-input (add_rank3_input_const_rank3) controls — edge-llm-bench releases add-rank-repro-shapes-2026-09-29 and metal-add-repro-2026-09-24; tools/rank3_prelint_measure_metal_add.py, deterministic input pattern, CPU accelerator as the reference; tools/rank3_prelint_measure_metal_add_20261001.log"
       },
       "op": "ADD",
       "provenance": "measured",
@@ -137,7 +137,7 @@
       "evidence": {
         "date": "2026-10-01",
         "litert_version": "ai-edge-litert 2.1.6 CompiledModel Metal (macOS 27.0, Apple M4 Max)",
-        "source_model": "LiteRT #10231 repro graphs add_rank2_input_const_rank3.tflite (ADD runtime [85,16] + constant [1,85,16], sha256 c64a285a…) and fc_add_const_rank3.tflite (FULLY_CONNECTED then ADD runtime [1024,768] + constant [1,1024,768], sha256 ac940c58…), with their RESHAPE-fronted (add_reshape3_const_rank3, prefix2-reshape3) and rank-3-input (add_rank3_input_const_rank3) controls — edge-llm-bench releases add-rank-repro-shapes-2026-09-29 and metal-add-repro-2026-09-24; tools/rank3_prelint_measure_metal_add.py, deterministic input pattern, CPU accelerator as the reference; litertlm-convert tools/rank3_prelint_measure_metal_add_20261001.log"
+        "source_model": "LiteRT #10231 repro graphs add_rank2_input_const_rank3.tflite (ADD runtime [85,16] + constant [1,85,16], sha256 c64a285a…) and fc_add_const_rank3.tflite (FULLY_CONNECTED then ADD runtime [1024,768] + constant [1,1024,768], sha256 ac940c58…), with their RESHAPE-fronted (add_reshape3_const_rank3, prefix2-reshape3) and rank-3-input (add_rank3_input_const_rank3) controls — edge-llm-bench releases add-rank-repro-shapes-2026-09-29 and metal-add-repro-2026-09-24; tools/rank3_prelint_measure_metal_add.py, deterministic input pattern, CPU accelerator as the reference; tools/rank3_prelint_measure_metal_add_20261001.log"
       },
       "op": "RESHAPE",
       "provenance": "measured",

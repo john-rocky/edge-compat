@@ -19,8 +19,8 @@ task: text-generation
 
 | | |
 |---|---|
-| **Tool** | litert-torch (via litertlm-convert bitcpm_work/convert_bitcpm.sh — export_static_longrope.py + quantize_minicpm5.py + litert-lm-builder) 0.9.1 (lane venv ~/venvs/minicpm5 per SESSION_STATE.md 2026-07-21) |
-| **Command** | `zsh bitcpm_work/convert_bitcpm.sh` |
+| **Tool** | litert-torch (export_static_longrope.py + quantize_minicpm5.py + litert-lm-builder) 0.9.1 |
+| **Command** | `zsh convert_bitcpm.sh` |
 | **Quantization** | int4 blockwise-32 symmetric min-max linears + int8 channelwise embedding/lm_head (wi4b32_wi8, algo minmax) |
 
 ## Artifacts

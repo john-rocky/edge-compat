@@ -19,8 +19,8 @@ task: text-generation
 
 | | |
 |---|---|
-| **Tool** | litert-torch, pinned base + granite hybrid patch, selective scan folded to batched matmuls (all tensors rank <= 4, no giant broadcast intermediates) — hf-to-litertlm granite_work/convert_granite4h.py via gpu_ship_20260813/build_1b_final.sh editable checkout 115a136 + granite_hybrid_litert_torch.patch (hf-to-litertlm granite_work/README.md; folded-scan revision of 2026-08-13) |
-| **Command** | `PATH=$REPO/.venv-092/bin:$PATH PYTHONPATH=$HOME/code/litert-torch .venv-092/bin/python $HOME/code/hf-to-litertlm/granite_work/convert_granite4h.py ibm-granite/granite-4.0-h-1b <outdir>  # gpu_ship_20260813/build_1b_final.sh verbatim` |
+| **Tool** | litert-torch, pinned base + granite hybrid patch, selective scan folded to batched matmuls (all tensors rank <= 4, no giant broadcast intermediates) — hf-to-litertlm granite_work/convert_granite4h.py editable checkout 115a136 + granite_hybrid_litert_torch.patch (folded-scan revision of 2026-08-13) |
+| **Command** | `PATH=$REPO/.venv-092/bin:$PATH PYTHONPATH=litert-torch .venv-092/bin/python hf-to-litertlm/granite_work/convert_granite4h.py ibm-granite/granite-4.0-h-1b <outdir>` |
 | **Quantization** | int8 dynamic on linears + embedding; convs and the selective scan stay float; fp32 activations declared (GPU requirement — HF card update note) |
 
 ## Artifacts
@@ -45,7 +45,7 @@ Model-level on-device results — measured behavior of this exact artifact on th
 ## Pitfalls
 
 - GPU execution requires fp32 activations (declared in this bundle) — the memory cost is stated on the HF card's honest notes; CPU decode is ~3.5x the previous file (11.4 -> 39.2 tok/s) from the folded scan alone (HF card update, measured).
-- Full GPU delegation on Android OpenCL, one partition per subgraph, zero rejections (4628/4628, 2240/2240, 2271/2271) — litertlm-convert commit 2cd79bf; end-to-end GPU verified on macOS, iPhone 17 Pro (Metal) and Pixel 8a per the HF card update.
+- Full GPU delegation on Android OpenCL, one partition per subgraph, zero rejections (4628/4628, 2240/2240, 2271/2271) — commit 2cd79bf; end-to-end GPU verified on macOS, iPhone 17 Pro (Metal) and Pixel 8a per the HF card update.
 - First Mamba2-hybrid selective scan on a mobile GPU (HF card claim of record).
 - Family BOS trap unchanged from the 08-04 lineage: the 350m sibling's greedy flips with BOS (LlmMetadata start_token); the 1b is BOS-robust (commit 5f3176d).
 

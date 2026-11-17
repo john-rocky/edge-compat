@@ -1,0 +1,71 @@
+{
+  "artifact": "lfm3_audio_depth_proj_r4b.tflite",
+  "artifact_sha256": "66789aa754112d69fcc7bb857d317466af52af8b1686c1b327fa9fa11217476d",
+  "device": "galaxy-s26",
+  "model_id": "lfm3-audio-2b__lfm3_audio_depth_proj_r4b",
+  "notes": "lfm3_audio_depth_proj_r4b.tflite of litert-community/LFM3-Audio-2B-LiteRT (LiquidAI/LFM3-Audio-2B at revision 9d49701c, LFM Open License v1.0): speech output: projects the decoder's last hidden state for the depth decoder, once per 80 ms frame. Published files of litert-community/LFM3-Audio-2B-LiteRT at main 32c07192 (anonymous Hub read 2026-10-31T23:58:40+0900: each LFS oid and size = artifact_sha256; each hold's inputs.sha256 and the chain's read-back lines name the same digests). App rows (Galaxy S26 RFGL80R6A6H, Android 16, hold s2a 2026-10-31 17:39:51-18:03:42): the Android app (rebuilt from the same source commit as the 2026-10-29 rows, other APK bytes) reads the bundle and the graphs with LiteRT 2.3.0's Kotlin CompiledModel, not through LiteRT-LM; os_build: the app runs do not record it.",
+  "quantization": "float32",
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-lfm3audio-app",
+        "os_build": null,
+        "runtime": "litert",
+        "runtime_version": "2.3.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "harness: the app (app/kotlin_cpu_gpu at commit 5bd24fb4e) with APK sha256 5ccfa2b14945bc62b1b358b02742ce2abdc8e6b6c72edeadb5ce305cfa230d13 (LiteRT 2.3.0 from Maven: litert, litert-gpu, litert-npu-runtime-qualcomm + the QAIRT 2.50.0.260828 QNN libraries); the read-back lines = the published digests",
+        "work line of this arm (Whisper large-v3 corpus WER, UTMOS22 mean, the 8 questions' answers, 30 sentences x seeds 0-2 + 8 questions x seeds 0-2 = 114 utterances in this phone's runs): (the reference side)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "b_faster_in_both_orders": 0.0,
+        "b_vs_a_pct": 3.25,
+        "codec_ms_per_call": 18.299,
+        "first_audio_ms": 712.845,
+        "frame_ms_per_frame": 0.06,
+        "legs": 2.0,
+        "lm_ms_per_step": 20.597,
+        "loop_ms_per_frame": 30.601,
+        "pass_ms_per_pass": 2.319,
+        "proj_ms_per_frame": 1.704,
+        "same_hold_arm_b_speech_out_1s_ms": 394.947,
+        "sample_ms_per_frame": 0.84,
+        "speech_out_1s_ms": 382.514,
+        "speech_out_1s_ms_leg1": 382.598,
+        "speech_out_1s_ms_leg2": 382.431,
+        "this_graph_ms_per_call_mean": 1.704,
+        "work_qa_correct": 18.0,
+        "work_qa_of": 24.0,
+        "work_utmos22_mean": 4.4271,
+        "work_utterances": 114.0,
+        "work_wer_errors": 1.0,
+        "work_wer_large_v3": 0.00117,
+        "work_wer_words": 852.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "Android app (the Kotlin host loop, LiteRT 2.3.0 CompiledModel; APK sha256 5ccfa2b14945), speech out at the app's default (decoder CPU 4 threads with the state in place and the text head only before text slots, depth projection CPU, depth pass HTP AOT in burst mode, frame embed CPU, codec GPU fp32 on its own thread); one English sentence of about 10 s, warm-up 1 + 3 measured answers per run, hold s2a runs t2a1 / t2a2 = the A side of an A B B A pair with the int8 depth pass",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

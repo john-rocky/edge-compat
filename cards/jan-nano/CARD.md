@@ -19,7 +19,7 @@ task: text-generation
 
 | | |
 |---|---|
-| **Tool** | litert-torch via litertlm-convert scripts/export_simple_template.py (reproduce_llm.sh key jan-nano), then the 2026-08-22 metadata-only thought-channel re-ship (qa/add_thought_channel.py through the litert-lm 0.16.0 CLI; every tflite section byte-identical) TODO (owner to fill — searched 2026-08-25 four ways: no convert log, reproduce_llm.sh pins no version, the bundle header carries no converter version, the tflite sections carry only 'MLIR Converted.'; the RE-SHIP step is pinned to the litert-lm 0.16.0 CLI) |
+| **Tool** | litert-torch scripts/export_simple_template.py (reproduce_llm.sh key jan-nano), then the 2026-08-22 metadata-only thought-channel re-upload (qa/add_thought_channel.py through the litert-lm 0.16.0 CLI; every tflite section byte-identical) TODO (to fill — searched 2026-08-25 four ways: no convert log, reproduce_llm.sh pins no version, the bundle header carries no converter version, the tflite sections carry only 'MLIR Converted.'; the re-upload step is pinned to the litert-lm 0.16.0 CLI) |
 | **Command** | `EXTERNALIZE_EMBEDDER=1 CACHE=4096 python scripts/export_simple_template.py Menlo/Jan-nano out/jan-nano templates/qwen3_think.jinja BOCTAV4_128 ; python qa/add_thought_channel.py in.litertlm out.litertlm --start '<think>' --end '</think>' (2026-08-25 staged meta, from the conversion record)` |
 | **Quantization** | int4 (symmetric) + OCTAV, blockwise block 128; embeddings INT8 (externalized section) (HF card Conversion) |
 

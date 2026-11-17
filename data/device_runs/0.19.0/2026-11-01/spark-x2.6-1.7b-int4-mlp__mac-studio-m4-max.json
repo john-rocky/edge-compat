@@ -1,0 +1,58 @@
+{
+  "artifact": "Spark-X2.6-1.7B_int4-mlp.litertlm",
+  "artifact_sha256": "0911f7ebc4ef98ae5dadcbd5a35214ca1aaf63dffd58bcf5128032c3ab859cd5",
+  "device": "mac-studio-m4-max",
+  "model_id": "spark-x2.6-1.7b-int4-mlp",
+  "notes": "Spark-X2.6-1.7B_int4-mlp.litertlm of litert-community/Spark-X2.6-1.7B: the mixed INT4 / INT8 file of the 1.7B, the faster 1.7B file on the Galaxy S26 GPU. XHToken/Spark-X2.6-1.7B (Apache-2.0) converted to LiteRT-LM; the bundle carries templates/spark26_think.jinja (the vendor template's plain-chat part, thinking on by default, reasoning_effort high or low through extra_context), a `thought` channel and the repo's tokenizer.json byte for byte. Published 2026-10-31 (Hub main 587d8d94 at the read). Measured 2026-11-01 in the run r6.",
+  "quantization": "mixed INT4 / INT8 (dynamic, FP32 activations declared): attention FULLY_CONNECTED INT8 per channel, MLP gate / up INT4 blockwise-32 with OCTAV scales floored at 2^-14, MLP down and lm_head INT8, the embedding INT8 in its own TFLite section; litert-torch 0.9.3 export, GPU graph rewrite (KV writes -> odml.cache_update, attention products -> odml.runtime_bmm, weights byte-equal), prefer_activation_type fp32 on the decoder section, 11 prefill signatures, KV cache 4,096",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": 2048,
+      "date": "2026-11-01",
+      "decode_tokens_per_s": 37.95,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Spark-X2.6-1.7B `Spark-X2.6-1.7B_int4-mlp.litertlm` at main 587d8d94: LFS sha256 0911f7ebc4ef98ae5dadcbd5a35214ca1aaf63dffd58bcf5128032c3ab859cd5, 1705807792 B (anonymous Hub API tree read 2026-11-01 12:17 JST)",
+        "the Mac runs ran model.litertlm: sha256 = the Hub digest (hashed 2026-11-01), last written 2026-10-31 12:05:39 JST, before r6's first measurement window (W1)",
+        "runtime: litert-lm 0.19.0 CLI from PyPI, `litert-lm benchmark <file> -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --backend cpu --cache no` (each log's header: backend cpu, 1,024 / 256 / 2,048, cache no; one warm-up then the mean of 3 runs per process), XNNPACK",
+        "cell = the mean of two processes in r6's measurement window W2, set RC2 04:20–04:26 JST, an A B B A set against Spark-X2.6-1.7B_int8.litertlm (Spark-X2.6-1.7B_int8.litertlm, Spark-X2.6-1.7B_int4-mlp.litertlm twice, then the first file again); the other file's two processes in the same set: 40.96 / 36.62 tok/s decode",
+        "init_time_s_summed_*: the CLI's `Init time`, which counts engine creation twice (LiteRT-LM #4057)",
+        "in this set the later two cells read 11-12 % under the first two for both files (cause not read)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "decode_tokens_per_s_p1": 40.46,
+        "decode_tokens_per_s_p2": 35.44,
+        "init_time_s_summed_p1": 15.2562,
+        "init_time_s_summed_p2": 15.1413,
+        "prefill_tokens": 1024.0,
+        "processes": 2.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 414.6,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 2497.2
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,72 @@
+{
+  "artifact": "NVIDIA-Nemotron-Labs-Dory1.0-4B_int8.litertlm",
+  "artifact_sha256": "25632f91399cf7408d546c1c0531290d1c9ca1b7d4e9b75826600bfc2f9f6083",
+  "device": "mac-studio-m4-max",
+  "model_id": "nemotron-labs-dory1.0-4b-int8",
+  "notes": "Hub litert-community/NVIDIA-Nemotron-Labs-Dory1.0-4B main 61cb6bbe (read 2026-10-22 16:13:35 JST); NVIDIA-Nemotron-Labs-Dory1.0-4B_int8.litertlm = commit ecba25c6 ('int8 (the CPU file)', 2026-10-22 03:09 UTC), the Hub tree's LFS sha256 / size = the sha256 of the measured file, which is the uploaded file (same inode); the card = the Hub README byte for byte (18444 B, sha256 033b83a0…). The Hub card's Mac table: litert-lm 0.18.0 CLI (PyPI) `litert-lm benchmark <file> --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no` under /usr/bin/time -l, one warm-up and 3 runs per process (the CLI prints the mean of the 3 runs); the two processes are A1 and A2 of one A B B A (s1_cpu_a1 s1_cpu_b1 s1_cpu_b2 s1_cpu_a2) against F4 (model_t.litertlm, 2,403,130,688 B: the int4 weights without the GPU composites, never shipped), in one measurement window, each started after the settle check found no other engine or export job; the cell = the mean of the two processes (= their median; the card's rule), each process's values in metrics (run<n>_*); peak_mem_mb = the median of the two processes' peak memory footprint / 10^6 (max resident set size per process in metrics). CPU = XNNPACK at the CLI's default thread count. Delegation cells null (the benchmark logs state none). Not entered: the comparison arm's two processes (other bytes, never shipped); the Usage commands re-run for the card (the card quotes them); the 8-question and GSM8K checks (correctness checks the card quotes: 8/8, GSM8K thinking off 93 / 100); every earlier form's Mac rows (other bytes).",
+  "quantization": "int8 dynamic (channelwise int8 weights, float activations) on the linear layers; int8 embedding in its own section",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-22",
+      "decode_tokens_per_s": 15.7,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "Settle: quiet after 0 s; warm-up + 3 runs; prefill 282.74 / decode 15.69 tok/s, TTFT 3.8055 s, init 23.7475 s (the CLI prints the mean of the 3 runs); maximum resident set size 26379124736 B, peak memory footprint 22525172056 B; 0 'Validation error' lines",
+        "2026-10-22 00:16:30 [w3] START s1_cpu_a1 cap 420s (disk 368 GB free) / 2026-10-22 00:18:39 [w3] DONE s1_cpu_a1 rc=0 129s",
+        "Settle: quiet after 0 s; warm-up + 3 runs; prefill 321.33 / decode 15.71 tok/s, TTFT 3.251 s, init 26.9076 s (the CLI prints the mean of the 3 runs); maximum resident set size 26400964608 B, peak memory footprint 22541015216 B; 0 'Validation error' lines",
+        "2026-10-22 00:23:08 [w3] START s1_cpu_a2 cap 337s (disk 365 GB free) / 2026-10-22 00:25:17 [w3] DONE s1_cpu_a2 rc=0 129s",
+        "R8_C s1: r8_s1_cpu_a1.log 282.74 / 15.69 tok/s; r8_s1_cpu_b1.log 82.25 / 15.7 tok/s; r8_s1_cpu_b2.log 79.11 / 15.73 tok/s; r8_s1_cpu_a2.log 321.33 / 15.71 tok/s; r8_s1_g16.log 1011.2 / 43.29 tok/s; r8_s1_g32.log 875.56 / 40.73 tok/s; r8_s1_t512_g16.log 968.55 / 44.69 tok/s; r8_s1_t512_cpu.log 310.6 / 15.75 tok/s"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 25.3275,
+        "iterations": 3.0,
+        "max_num_tokens": 2048.0,
+        "prefill_tokens": 1024.0,
+        "run1_decode_tok_s": 15.69,
+        "run1_init_s": 23.7475,
+        "run1_max_rss_mb": 26379.125,
+        "run1_peak_footprint_mb": 22525.172,
+        "run1_prefill_tok_s": 282.74,
+        "run1_t_s": 19.9378,
+        "run1_ttft_s": 3.8055,
+        "run2_decode_tok_s": 15.71,
+        "run2_init_s": 26.9076,
+        "run2_max_rss_mb": 26400.965,
+        "run2_peak_footprint_mb": 22541.015,
+        "run2_prefill_tok_s": 321.33,
+        "run2_t_s": 19.4821,
+        "run2_ttft_s": 3.251,
+        "runs": 2.0,
+        "t_1024_256_s": 19.6961,
+        "warmup_runs": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 22533.094,
+      "prefill_tokens_per_s": 302.035,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 3528.2
+    }
+  ],
+  "schema_version": "1.0"
+}

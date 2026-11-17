@@ -20,7 +20,7 @@ task: image-segmentation
 | | |
 |---|---|
 | **Tool** | litert-torch 0.10.0 (editable dev checkout 115a136 + local patches) |
-| **Command** | `~/clipconv/bin/python build_clipseg.py` |
+| **Command** | `python build_clipseg.py` |
 | **Quantization** | fp16 |
 
 ## Artifacts

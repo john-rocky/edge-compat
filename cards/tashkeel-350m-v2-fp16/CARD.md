@@ -19,9 +19,9 @@ task: text-generation
 
 | | |
 |---|---|
-| **Tool** | hf-to-litertlm, family recipe granite_work/convert_granite4h.py (2026-08-25) (README Conversion & verification) TODO (the README names the converter but not its version) |
-| **Command** | `granite_work/convert_granite4h.py (hf-to-litertlm, 2026-08-25; invocation not stated in the README)` |
-| **Quantization** | fp16 weights (convs/SSM fp32) (README file table) |
+| **Tool** | hf-to-litertlm, family recipe (2026-08-25) (card L49-L50) TODO (the card names the converter but not its version) |
+| **Command** | `convert_granite4h.py (hf-to-litertlm, 2026-08-25; invocation not stated in the card) (card L50)` |
+| **Quantization** | fp16 weights (convs/SSM fp32) (card L37) |
 
 ## Artifacts
 
@@ -45,10 +45,12 @@ Model-level on-device results — measured behavior of this exact artifact on th
 
 ## Pitfalls
 
-- Arabic diacritization (tashkeel) fine-tune of ibm-granite/granite-4.0-h-350m trained on Misraj/Sadeed_Tashkeela; the checkpoint's chat template (byte-equal to the granite base's, 6418/6418) is embedded and applied at runtime (README intro + Conversion).
-- The metadata start token is dropped — granite's template has no leading BOS, and at 350M scale a prepended <|end_of_text|> flips correct diacritization into garbage (measured on this checkpoint) (README Conversion).
-- Task gate: the model card's worked example plus nine undiacritized MSA probes, bundle vs HF fp32 greedy on identical rendered strings (granite_work/gate_tashkeel.py): fp16 10/10 byte-identical, int8 8/10 (the README carries a note on the two int8 misses) (README file table).
-- License Apache-2.0, inherited from the source model and its granite base (README License).
+- Arabic diacritization (tashkeel) fine-tune of ibm-granite/granite-4.0-h-350m trained on Misraj/Sadeed_Tashkeela; the checkpoint's chat template (byte-equal to the granite base's, 6418/6418) is embedded and applied at runtime (card L19-L22, L52-L53).
+- The metadata start token is dropped — granite's template has no leading BOS, and at 350M scale a prepended <|end_of_text|> flips correct diacritization into garbage (measured on this checkpoint) (card L54-L56).
+- Task gate: the model card's worked example plus nine undiacritized MSA probes, bundle vs HF fp32 greedy on identical rendered strings: fp16 10/10 byte-identical, int8 8/10 (the card carries a note on the two int8 misses) (card L35-L45, L57-L58).
+- One Engine per conversation: on litert-lm 0.18.0 a new Conversation on an Engine that already ran another conversation starts from the earlier conversation's recurrent state (it reuses the prompt tokens the two share and does not reset the state; LiteRT-LM issue #3165); in the card's probe (three questions in a pirate-persona conversation, then in one told to answer in one word, the same Engine against a fresh Engine in a new process; CPU, litert-lm 0.18.0 on a Mac) the _fp16 file gave all three expected answers on both Engines in its one run, but answered the capital question with a sentence ('The capital of France is Paris.') on the same Engine against the one word 'Paris' on a fresh one; the test's questions are outside this model's task (Arabic diacritization), so it shows the Engine's behaviour, not the model's quality; create a new Engine for each conversation, the first conversation on an Engine is unaffected (card L59).
+- Conversation preface with tools and no messages: LiteRT-LM renders the chat template with an empty message list, and the template reads messages[0] without checking that the list is non-empty, so the render fails with 'Failed to apply template: undefined value' when the preface is prefilled at creation (prefillPrefaceOnInit, default false; creating the conversation fails) and in the preface render (renderPrefaceIntoString and its C++ and C API forms); the same with extra context (such as enable_thinking) and no messages, and in the preface render with an empty preface (run in the runtime on one Qwen3 template; the other templates rendered with minijinja 2.14 and jinja2); read in the source of LiteRT-LM 0.17.0, 0.18.1 and main, measured with the 0.18.1 PyPI package through its C API on these files' template text; the default path, where the first message is rendered with the preface, is not affected (the 0.18.1 Python API and CLI expose neither the flag nor the preface render); a system message or any initial message in the conversation config avoids it (card L97).
+- License Apache-2.0, inherited from the source model and its granite base (card L101).
 - LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/.
 
 ---

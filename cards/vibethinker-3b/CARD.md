@@ -53,8 +53,8 @@ Model-level on-device results — measured behavior of this exact artifact on th
 ## Pitfalls
 
 - Block 32 ONLY. This is a precision-sensitive math model: block-128 int4 (a quarter of the dequant scales) collapsed to 64% on GSM8K, −33 points, while block 32 holds at 90%. Only the block-32 build is published — and the opposite holds for general-purpose 4B reasoning models (HF card).
-- Math-specialised: on general-knowledge prompts it reasons at length and can settle on a wrong answer. Measured 2026-08-17, its CPU and GPU legs are wrong in the same shape with different hallucinated content, which is how the behaviour is attributable to the model rather than the backend (CATALOG_REGATE.md).
-- Measured on an 8 GB phone 2026-08-17: fully delegated on Mali OpenCL — 1603/1603 prefill nodes, 1452/1452 decode, zero rejections. Neither leg printed BenchmarkInfo because the model generated to the token cap, so speed figures for this model need a prompt it will actually finish.
+- Math-specialised: on general-knowledge prompts it reasons at length and can settle on a wrong answer. Measured 2026-08-17, its CPU and GPU runs are wrong in the same shape with different hallucinated content, which is how the behaviour is attributable to the model rather than the backend.
+- Measured on an 8 GB phone 2026-08-17: fully delegated on Mali OpenCL — 1603/1603 prefill nodes, 1452/1452 decode, zero rejections. Neither run printed BenchmarkInfo because the model generated to the token cap, so speed figures for this model need a prompt it will actually finish.
 
 ---
 

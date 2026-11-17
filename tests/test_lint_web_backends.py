@@ -51,7 +51,7 @@ def test_lint_web_backend_runs_and_reports_unknown(backend: str) -> None:
     assert all(f["status"] == "unknown" for f in report["findings"])
     assert report["summary"]["coverage_ops_pct"] == 0.0
     assert report["summary"]["claimed_ops"] == 0
-    # honest unknowns become probe-ready signatures (anti-staleness §G.3):
+    # honest unknowns become probe-ready signatures (anti-staleness):
     assert report["needs_probe"]
     assert all(sig["backend"] == backend for sig in report["needs_probe"])
 

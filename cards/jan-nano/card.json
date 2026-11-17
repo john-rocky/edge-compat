@@ -10,8 +10,8 @@
   "conversion": {
     "command": "EXTERNALIZE_EMBEDDER=1 CACHE=4096 python scripts/export_simple_template.py Menlo/Jan-nano out/jan-nano templates/qwen3_think.jinja BOCTAV4_128 ; python qa/add_thought_channel.py in.litertlm out.litertlm --start '<think>' --end '</think>' (2026-08-25 staged meta, from the conversion record)",
     "quantization": "int4 (symmetric) + OCTAV, blockwise block 128; embeddings INT8 (externalized section) (HF card Conversion)",
-    "tool": "litert-torch via litertlm-convert scripts/export_simple_template.py (reproduce_llm.sh key jan-nano), then the 2026-08-22 metadata-only thought-channel re-ship (qa/add_thought_channel.py through the litert-lm 0.16.0 CLI; every tflite section byte-identical)",
-    "tool_version": "TODO (owner to fill — searched 2026-08-25 four ways: no convert log, reproduce_llm.sh pins no version, the bundle header carries no converter version, the tflite sections carry only 'MLIR Converted.'; the RE-SHIP step is pinned to the litert-lm 0.16.0 CLI)"
+    "tool": "litert-torch scripts/export_simple_template.py (reproduce_llm.sh key jan-nano), then the 2026-08-22 metadata-only thought-channel re-upload (qa/add_thought_channel.py through the litert-lm 0.16.0 CLI; every tflite section byte-identical)",
+    "tool_version": "TODO (to fill — searched 2026-08-25 four ways: no convert log, reproduce_llm.sh pins no version, the bundle header carries no converter version, the tflite sections carry only 'MLIR Converted.'; the re-upload step is pinned to the litert-lm 0.16.0 CLI)"
   },
   "cross_runtime": [],
   "delegation": null,
@@ -79,7 +79,7 @@
           },
           "error": null,
           "evidence": [
-            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation check (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
             "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
             "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
             "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 213.0 s, output head '[thought] Okay, so the user is asking for the sum of 17 and 26. Let me think. I '",

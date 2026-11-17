@@ -2,7 +2,7 @@
   "artifact": "model_clean_example.tflite",
   "device": "example-phone",
   "model_id": "example-tiny-clean",
-  "notes": "Example fixture for the .tflite-on-NPU lane — pipeline data, not a real device measurement.",
+  "notes": "Example fixture for the .tflite-on-NPU path — pipeline data, not a real device measurement.",
   "quantization": null,
   "results": [
     {

@@ -15,7 +15,7 @@
     "test": "node --test --experimental-strip-types 'tests/*.test.ts'"
   },
   "dependencies": {
-    "@litertjs/core": "^2.5.3",
+    "@litertjs/core": "^2.6.0",
     "esbuild": "^0.25.0"
   },
   "devDependencies": {

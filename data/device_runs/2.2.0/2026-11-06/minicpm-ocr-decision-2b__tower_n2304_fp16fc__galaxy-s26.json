@@ -1,0 +1,72 @@
+{
+  "artifact": "tower_N2304_fp16fc.tflite",
+  "artifact_sha256": "e6d27ae15aacef61c638506e6a5cb030acd91d1a23238cd7ac2a4528c771675e",
+  "device": "galaxy-s26",
+  "model_id": "minicpm-ocr-decision-2b__tower_n2304_fp16fc",
+  "notes": "MiniCPM-OCR-Decision-2B (litert-community/MiniCPM-OCR-Decision-2B-LiteRT main 7f589bb7, created 2026-11-06; card license apache-2.0, base model openbmb/MiniCPM-OCR-Jev; anonymous Hub API read 2026-11-07 12:54:30 JST): the `tower` graph, bucket `N2304`, form `fp16fc`. Hub file `tower_N2304_fp16fc.tflite` 658,758,848 B at Hub commit(s) be1043e2, 4105cd32, 672db2e3, 7f589bb7; artifact_sha256 = its LFS oid = the phone's read-back in each run's hold. Signature `tower`; its I/O as the app read it: inputs patches float32 [1,2304,1536], valid float32 [1,2304], pos float32 [1,2304,1024], cos float32 [1,2304,64], sin float32 [1,2304,64] -> outputs rows float32 [1,576,2048]. Measured on the Galaxy S26 (SM-S942Q) (device holds of runs r6): one result per run, and per timing set in a timing run. output_match is null on every result: the work compares each row with its own Mac Metal fp32 run of the same rows (metrics.vs_mac_metal_fp32_*: max |d| and the smallest cosine over the rows with the same input bytes), not with a CPU reference of the same bytes under the element rule.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-11-06",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 1732,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-ocrdec-gate-app",
+        "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "the d1 gate app (com.mlboydaisuke.d1omni.gate, Kotlin CompiledModel on LiteRT 2.2.0 from Maven; APK sha256 0b6d6f70ac0cf4c7…, the APK the run config installs), one app process per run; per call = write every input + CompiledModel.run() + read every output (the app's write_run_read_ms; the GPU's run() returns before the compute ends and the read waits for it)",
+        "file measured: tower_N2304_fp16fc.tflite = litert-community/MiniCPM-OCR-Decision-2B-LiteRT `tower_N2304_fp16fc.tflite` (658,758,848 B) at Hub commit(s) be1043e2, 4105cd32, 672db2e3, 7f589bb7, LFS oid e6d27ae15aacef61c638506e6a5cb030acd91d1a23238cd7ac2a4528c771675e (Hub tree read 2026-11-07 12:54:30 JST); the phone's copy read back equal (MATCH)",
+        "(app pid 25304): `11-06 11:10:11.744 25304 25326 I tflite  : Replacing 1732 out of 1732 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).`",
+        "Run sb_tN2304 started 2026-11-06 11:10:10 JST, ready check `clean; rested 170s since 11:07:20`; build Android 16 BP4A.251205.006.S942QOPS1AZH9 (`ro.build.fingerprint = samsung/m1qjpnx/m1q:16/BP4A.251205.006/S942QOPS1AZH9_SJP1AZH9:user/release-keys`)",
+        "timing mode, set best_of_2 (request, 2 row(s) of tmN2304b9.json per request): latency_p50_ms = the median of 40 timed calls after 5 warm-up call(s); finite outputs"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 2932.5267695000002,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "app_guard_max_anon_plus_swap_kb": 226208.0,
+        "app_guard_min_mem_available_kb": 4764112.0,
+        "app_mem_guard_kb": 1500000.0,
+        "app_vmhwm_kb_after_compile": 2159256.0,
+        "app_vmhwm_kb_at_end": 2292112.0,
+        "battery_temp_tenths_c_end": 450.0,
+        "battery_temp_tenths_c_start": 373.0,
+        "compile_ms": 4738.036144,
+        "mem_available_kb_after_compile": 4982364.0,
+        "per_call_ms_max": 4261.36479,
+        "per_call_ms_min": 2545.489895,
+        "per_call_run_only_median_ms": 0.731484,
+        "request_max_ms": 8412.153486,
+        "request_median_ms": 5910.1275239999995,
+        "request_min_ms": 5268.317654,
+        "requests_timed": 20.0,
+        "rows_per_request": 2.0,
+        "thermal_status_end": 3.0,
+        "thermal_status_start": 0.0,
+        "timed_calls": 40.0,
+        "warmup_calls": 5.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GPU (ML Drift OpenCL) precision FP32, constant tensor sharing on; gate app r10; timing mode, set best_of_2 (request, 2 row(s) per request); run r6 hold s6l run sb_tN2304",
+      "total_ops": 1732,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

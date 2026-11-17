@@ -19,7 +19,7 @@ task: image-feature-extraction
 
 | | |
 |---|---|
-| **Tool** | litert-torch (litertlm-convert scripts/convert_siglip2.py; timm image tower) 0.10.0 (editable dev checkout 115a136 + local patches) |
+| **Tool** | litert-torch (scripts/convert_siglip2.py; timm image tower) 0.10.0 (editable dev checkout 115a136 + local patches) |
 | **Command** | `python scripts/convert_siglip2.py` |
 | **Quantization** | fp16 (float_casting weight quantization; single-graph 185 MB file) |
 

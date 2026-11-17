@@ -1,0 +1,53 @@
+{
+  "artifact": "G9v3-3B_int8.litertlm",
+  "artifact_sha256": "8d9f5e8522e553458ab3fb7f4a461359367934d0741c5e82cd777da55ce69dc5",
+  "device": "mac-studio-m4-max",
+  "model_id": "g9v3-3b-int8",
+  "notes": "Hub litert-community/G9v3-3B (re-upload commit ba12e87c, 2026-10-18 11:37 JST, which replaced the int8 file of the first upload ff998a44; main 450142f1; the Hub tree's LFS sha256 = the records of the bytes). A 0.17.1 run of the re-uploaded int8 file (2026-10-18): `litert-lm run ./G9v3-3B_int8.litertlm --prompt \"What is the capital of France? Answer in one sentence.\" --cache no` on litert-lm 0.17.1 (no --backend = CPU), one fresh process, APFS clone of G9v3-3B_int8_rf.litertlm (sha256 = the Hub file) = the Hub card's first paragraph ('the re-uploaded int8 file re-run on 2026-10-18'). Throughput null. The 2026-10-13 int8 file's 0.17.1 run is the earlier record. The manifest's min_runtime_version is 0.18.0.",
+  "quantization": "int8 dynamic on linears, float activations; embedding table in its own section; GPU activations declared fp32; GPU-composite graph",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-18",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.17.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "### CMD: litert-lm 0.17.1 run ./G9v3-3B_int8.litertlm --prompt \"What is the capital of France? Answer in one sentence.\" --cache no (CPU)",
+        "### PATH: G9v3-3B_int8.litertlm (= G9v3-3B_int8_rf.litertlm)",
+        "2026-10-18 00:11:29 clone G9v3-3B_int8.litertlm sha256 8d9f5e8522e553458ab3fb7f4a461359367934d0741c5e82cd777da55ce69dc5 (3103656288 B)",
+        "### start: 2026-10-18 00:16:08 JST",
+        "stdout: The capital of France is Paris.",
+        "### EXIT: 0 2026-10-18 00:16:30 JST"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "answers_with_expect": 1.0,
+        "processes": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

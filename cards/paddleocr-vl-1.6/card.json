@@ -34,15 +34,15 @@
             "soc": "Qualcomm SM8850",
             "vendor_sdk": null
           },
-          "error": "generation gate FAIL: exit 0 but no answer text (journal generated=false); output tail …'𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦'",
+          "error": "generation check FAIL: exit 0 but no answer text (journal generated=false); output tail …'𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦'",
           "evidence": [
             "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 0 (prefill_128).",
             "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 1 (prefill_512).",
             "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 2 (prefill_1024).",
             "VERBOSE: Replacing 780 out of 859 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 110 partitions for subgraph 3 (decode).",
-            "community_accel_work/s7_manifest_backfill/logs/PaddleOCR-VL-1.6__PaddleOCR-VL-1.6.gatecpu.log: generation gate verdict FAIL (journal rows.jsonl, fail_class=None, exit=0, generated=False, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+            "Generation check verdict FAIL (journal rows.jsonl, fail_class=None, exit=0, generated=False, timeout=False); the same journal's --benchmark numbers for this run are withheld because the gate output is not a real answer",
             "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
-            "gate process peak 3435 MB (journal gate_peak_mb)"
+            "check process peak 3435 MB (journal gate_peak_mb)"
           ],
           "failure_class": "degenerate_output",
           "full_delegation": false,
@@ -65,7 +65,7 @@
         "run": {
           "accelerator": "gpu",
           "context_length": null,
-          "date": "2026-08-24",
+          "date": "2026-08-25",
           "decode_tokens_per_s": 35.59,
           "delegated_ops": 914,
           "env": {
@@ -104,7 +104,7 @@
           "total_ops": 914,
           "ttft_ms": 190.0
         },
-        "source": "data/device_runs/0.16.0/2026-08-24/paddleocr-vl-1.6__galaxy-s26.json"
+        "source": "data/device_runs/0.16.0/2026-08-25/paddleocr-vl-1.6__galaxy-s26.json"
       },
       {
         "device": "pixel-8a",
@@ -123,15 +123,15 @@
             "soc": "Tensor G3",
             "vendor_sdk": null
           },
-          "error": "generation gate FAIL: exit 0 but no answer text (journal generated=false); output tail …'𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦'",
+          "error": "generation check FAIL: exit 0 but no answer text (journal generated=false); output tail …'𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦'",
           "evidence": [
             "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 0 (prefill_128).",
             "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 1 (prefill_512).",
             "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 2 (prefill_1024).",
             "VERBOSE: Replacing 780 out of 859 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 110 partitions for subgraph 3 (decode).",
-            "community_accel_work/s7_manifest_backfill/logs_p8a/PaddleOCR-VL-1.6__PaddleOCR-VL-1.6.gatecpu.log: generation gate verdict FAIL (journal rows_p8a.jsonl, fail_class=None, exit=0, generated=False, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+            "Generation check verdict FAIL (journal rows_p8a.jsonl, fail_class=None, exit=0, generated=False, timeout=False); the same journal's --benchmark numbers for this run are withheld because the gate output is not a real answer",
             "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
-            "gate process peak 3386 MB (journal gate_peak_mb)"
+            "check process peak 3386 MB (journal gate_peak_mb)"
           ],
           "failure_class": "degenerate_output",
           "full_delegation": false,
@@ -164,7 +164,7 @@
     "Decoder: bit-exact fp32 logits vs the original as a standalone Llama-layout model; shipped fp16 weights are teacher-forced-parity corr 1.0000, top-1 10/10 (HF card Quality).",
     "M-RoPE note: the base decoder uses Qwen2-VL-style 3-D M-RoPE while the fast_vlm contract supplies plain sequential positions — identical for text tokens, and an A/B eager test (true M-RoPE vs 1-D) showed no quality loss on OCR/table tasks (HF card).",
     "Tokenizer: the base SP model lacks the 1,019 added tokens (<|IMAGE_START|>, <|LOC_0|>…<|LOC_1000|>, <fcel>/<nl> table tokens) — appended as USER_DEFINED pieces at their exact ids (vocab padded to 103,424) so table/spotting output detokenizes on device; prompt template baked in: <|begin_of_sentence|>User: <image>PROMPT\\nAssistant:\\n, stop </s> (HF card Conversion notes).",
-    "On the Galaxy S26 and Pixel 8a CPU generation gates (S7 backfill, 2026-09-05) the text-only gate prompt produced a repeated-character flood (degenerate_output rows in data/device_runs/) — an OCR-prompt model asked a plain question; not a card-quality claim either way (device runs).",
+    "On the Galaxy S26 and Pixel 8a CPU generation checks (S7 backfill, 2026-09-05) the text-only test prompt produced a repeated-character flood (degenerate_output rows in data/device_runs/) — an OCR-prompt model asked a plain question; not a card-quality claim either way (device runs).",
     "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/ (Pi 5 / S26 / Pixel 8a / Mac / iPhone as measured)."
   ],
   "schema_version": "1.2"

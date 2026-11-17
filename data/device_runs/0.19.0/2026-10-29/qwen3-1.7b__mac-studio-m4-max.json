@@ -1,0 +1,109 @@
+{
+  "artifact": "Qwen3_1.7B.litertlm",
+  "artifact_sha256": "362ec1c906a49bbe1e68b118fdb789b70a713063b00ac914043cbda03bcf3d9a",
+  "device": "mac-studio-m4-max",
+  "model_id": "qwen3-1.7b",
+  "notes": "The control of Qwen3-1.7B_dynamic_wi8_afp32_gpu_composites.litertlm (ce21f7cd…) in the same windows; replaced on main on 2026-10-31.",
+  "quantization": "int8 channelwise FC weights (the card's recipe dynamic_wi8_afp32), fp32 activations; prefill_128 + decode signatures with the embedder in its own TFLite section, KV cache 4096, odml.rms_norm composites only; LiteRT-LM's official qwen3 metadata since the metadata-only re-pack of 2026-10-11",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": 2048,
+      "date": "2026-10-29",
+      "decode_tokens_per_s": 26.69,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Qwen3-1.7B `Qwen3_1.7B.litertlm` at revision d6678881da6181864bbc893c80e10aa1ee0d3731 (2026-10-28; on main until the commit ebb4eef4 of 2026-10-31 put new bytes under this name): LFS sha256 362ec1c906a49bbe1e68b118fdb789b70a713063b00ac914043cbda03bcf3d9a, 2056729520 B (anonymous Hub API tree read 2026-10-31 14:20 JST)",
+        "input: \"input I17B Qwen3_1.7B.litertlm 2056729520 B sha256 362ec1c906a49bbe = the Hub's LFS record\" (the local copy downloaded and checked, deleted at the close)",
+        "runtime: litert-lm 0.19.0 + litert-lm-api 0.19.0 from PyPI (liblitert-lm.dylib 0e1eba3a…; CPU = XNNPACK)",
+        "benchmark: `litert-lm benchmark <Qwen3_1.7B.litertlm> --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 1 --cache no`, 1 fresh process, one run each; cell = its run; in its own Mac measurement window",
+        "(2026-10-29 12:58:25 JST): Prefill speed 597.02 tokens/s, Decode speed 26.69 tokens/s, Time to first token 1.7527 s, rc 0",
+        "short prompt (`litert-lm run … --backend cpu --thinking false --top-k 1 --cache no --max-num-tokens 1024`, \"What is the capital of Japan? Answer briefly.\"): rc 0, 'The capital of Japan is Tokyo.', 0 error lines"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tok_s_p1": 26.69,
+        "decode_tokens": 256.0,
+        "max_num_tokens": 2048.0,
+        "prefill_tok_s_p1": 597.02,
+        "prefill_tokens": 1024.0,
+        "processes": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 597.02,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 1752.7
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": 2048,
+      "date": "2026-10-29",
+      "decode_tokens_per_s": 101.13,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Qwen3-1.7B `Qwen3_1.7B.litertlm` at revision d6678881da6181864bbc893c80e10aa1ee0d3731 (2026-10-28; on main until the commit ebb4eef4 of 2026-10-31 put new bytes under this name): LFS sha256 362ec1c906a49bbe1e68b118fdb789b70a713063b00ac914043cbda03bcf3d9a, 2056729520 B (anonymous Hub API tree read 2026-10-31 14:20 JST)",
+        "input: \"input I17B Qwen3_1.7B.litertlm 2056729520 B sha256 362ec1c906a49bbe = the Hub's LFS record\" (the local copy downloaded and checked, deleted at the close)",
+        "runtime: litert-lm 0.19.0 + litert-lm-api 0.19.0 from PyPI (liblitert-lm.dylib 0e1eba3a…; GPU = WebGPU)",
+        "benchmark: `litert-lm benchmark <Qwen3_1.7B.litertlm> --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 1 --cache no`, 3 fresh processes, one run each; cell = the median over the processes; in its own Mac measurement window",
+        "(2026-10-29 12:54:28 JST): Prefill speed 2199.96 tokens/s, Decode speed 100.7 tokens/s, Time to first token 0.4754 s, rc 0",
+        "(2026-10-29 12:55:13 JST): Prefill speed 2194.5 tokens/s, Decode speed 101.13 tokens/s, Time to first token 0.4765 s, rc 0",
+        "(2026-10-29 12:55:56 JST): Prefill speed 2195.87 tokens/s, Decode speed 101.51 tokens/s, Time to first token 0.4762 s, rc 0",
+        "short prompt (`litert-lm run … --backend gpu --thinking false --top-k 1 --cache no --max-num-tokens 1024`, \"What is the capital of Japan? Answer briefly.\"): rc 0, 'The capital of Japan is Tokyo.', 0 error lines"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tok_s_p1": 100.7,
+        "decode_tok_s_p2": 101.13,
+        "decode_tok_s_p3": 101.51,
+        "decode_tokens": 256.0,
+        "max_num_tokens": 2048.0,
+        "prefill_tok_s_p1": 2199.96,
+        "prefill_tok_s_p2": 2194.5,
+        "prefill_tok_s_p3": 2195.87,
+        "prefill_tokens": 1024.0,
+        "processes": 3.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 2195.87,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 476.2
+    }
+  ],
+  "schema_version": "1.0"
+}

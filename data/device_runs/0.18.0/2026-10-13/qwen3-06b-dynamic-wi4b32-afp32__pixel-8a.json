@@ -5,7 +5,7 @@
  "artifact": "Qwen3-0.6B_dynamic_wi4b32_afp32.litertlm",
  "artifact_sha256": "03e7da1eb1108b50dffaa9bb52cc7bcbad2eb0c66ca990267f480c1e545d2856",
  "quantization": "dynamic int4 block-32 FC (dynamic_wi4b32_afp32), fp32 activations declared; prefill 128 + 1024 signatures, cache 32768; litert-torch 731ef0a export of 2026-09-20 with odml.rope / swiglu / cache_update / runtime_bmm composites (no qkv_norm_rope, no sdpa composite)",
- "notes": "Lane qwen3_gpuopt_work/reexport_20261013 (litertlm-convert, T1 2026-10-13; LANE.md §5, device/RESULTS.md, r2/GSM8K.md, r2/speed/table.md): Pixel 8a holds 12:47–13:47 JST, same binary and legs as the S26; the phone never returned to thermal status 0 after the previous lane (rows are sustained values). Unpublished re-exports measured in the same holds (notes only): litert-torch head 0a81bf6f3 with --apply_gpu_composites=True (qkv_norm_rope + sdpa composites) builds no GPU engine on this kit on either phone (OpenCL program build failure, `unexpected type name 'float4'`, fp16 and --force_f32); the sdpa-only variant builds but emits '!' x 512 (every sampled token cast to 0); the head export with both composites off (E3, 344,279,136 B, sha256 ad6ee294…) matches this file's rows (S26 GPU 2,285.9 / 71.6 cold vs 2,364.7 / 71.1; GSM8K 87 = 87 / 200 on the Mac GPU). No Hub change came out of the lane.",
+ "notes": "Pixel 8a holds 12:47–13:47 JST, same binary and runs as the S26; the phone never returned to thermal status 0 after the previous run (rows are sustained values). No Hub change came.",
  "results": [
   {
    "accelerator": "gpu",
@@ -47,7 +47,7 @@
     "- Init Total: 5822.57 ms",
     "Time to first token: 1.60 s",
     "Prefill Turn 1: Processed 1024 tokens in 1.562681967s duration.",
-    "Pixel 8a started every process at thermal status 1 (the phone did not return to 0 after the previous lane; CPU policies uncapped at the start)"
+    "Pixel 8a started every process at thermal status 1 (the phone did not return to 0 after the previous run; CPU policies uncapped at the start)"
    ],
    "env": {
     "device": "Pixel 8a",
@@ -106,7 +106,7 @@
     "Prefill Turn 1: Processed 1024 tokens in 11.074877895s duration.",
     "process B (cache files kept): 93.46 / 11.66 tok/s, init 954.3 ms, cache files present but full init (miss)",
     "CPU rows are sustained values: iteration 1 starts with the clusters uncapped, iterations 2–3 run under the frequency cap that sets in within seconds; the headline is the binary's own median of 3",
-    "Pixel 8a started every process at thermal status 1 (the phone did not return to 0 after the previous lane; CPU policies uncapped at the start)"
+    "Pixel 8a started every process at thermal status 1 (the phone did not return to 0 after the previous run; CPU policies uncapped at the start)"
    ],
    "env": {
     "device": "Pixel 8a",

@@ -1,0 +1,222 @@
+{
+  "artifacts": [
+    {
+      "file": "mnn-pocket-0.3b-dec_L64_fp16w_tensor.tflite",
+      "sha256": "649e80b81cb07bad6f0f4cf209bddaefea3d305597d0926a9ab8450da861fd47",
+      "size_mb": 466.323
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "the repository's conversion/ (conversion/README.md) holds the scripts and REPRODUCE.md every check (README L150); the card names the tools, not a command line",
+    "quantization": "float16 linear-layer weights, the LoRA adapter folded into the weights first; each norm computed on its input divided by 4 times its mean absolute value (README L20, L131)",
+    "tool": "litert-torch",
+    "tool_version": "0.10.0 (for LiteRT 2.3.0)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-11-08",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert",
+            "runtime_version": "2.3.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Name mnn_pocket_dec_anorm4_L64_w16, arm cpu4, child rc 0",
+            "Runtime: api CompiledModel.from_file, accelerator CPU (XNNPACK), threads 4, is_fully_accelerated False (the API states no node count), compile 0.17 s",
+            "date: the record's first commit, author date 2026-11-08 01:57:35 +0900, after the run's START 01:51:23 (the run log has times only and is not in git)",
+            "line PASS: 71 questions, same winner 68/68 (not near ties), near ties kept 3/3, max |Δp| 0.000782659, mean |Δp| 0.000193064, control n/a (the file holds no request of the control pair), non-finite read-outs 0"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "arm_files_passed": 20.0,
+            "arm_files_run": 20.0,
+            "compile_s": 0.17,
+            "line_bar_control_abs_dp": 0.02,
+            "line_bar_max_abs_dp": 0.02,
+            "line_bar_mean_abs_dp": 0.002,
+            "line_bar_near_tie_gap": 0.02,
+            "line_max_abs_dp": 0.0007826590544796619,
+            "line_mean_abs_dp": 0.0001930639619352029,
+            "line_near_tie": 3.0,
+            "line_non_near_tie": 68.0,
+            "line_nonfinite_questions": 0.0,
+            "line_pass": 1.0,
+            "line_questions": 71.0,
+            "line_winner_equal_near_tie": 3.0,
+            "line_winner_equal_non_near_tie": 68.0,
+            "threads": 4.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "the line: 71 questions (the requests that fit L64) against the source model's reference; Python CompiledModel (ai-edge-litert 2.3.0), CPU XNNPACK, 4 threads",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.3.0/2026-11-08/mnn-pocket-0.3b-dec__mnn-pocket-0.3b-dec_l64_fp16w_tensor__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu_metal_mac",
+          "context_length": null,
+          "date": "2026-11-08",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert",
+            "runtime_version": "2.3.0",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Name mnn_pocket_dec_anorm4_L64_w16, arm gpu_f32, child rc 0",
+            "Runtime: api CompiledModel.from_file, accelerator GPU (Metal), gpu_options {\"enforce_f32\": true}, is_fully_accelerated True (the API states no node count), compile 1.79 s",
+            "date: the record's first commit, author date 2026-11-08 01:57:35 +0900, after the run's START 01:51:28 (the run log has times only and is not in git)",
+            "line PASS: 71 questions, same winner 68/68 (not near ties), near ties kept 3/3, max |Δp| 0.000784244, mean |Δp| 0.000193139, control n/a (the file holds no request of the control pair), non-finite read-outs 0"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "arm_files_passed": 20.0,
+            "arm_files_run": 20.0,
+            "compile_s": 1.79,
+            "line_bar_control_abs_dp": 0.02,
+            "line_bar_max_abs_dp": 0.02,
+            "line_bar_mean_abs_dp": 0.002,
+            "line_bar_near_tie_gap": 0.02,
+            "line_max_abs_dp": 0.0007842438675688679,
+            "line_mean_abs_dp": 0.00019313894904848586,
+            "line_near_tie": 3.0,
+            "line_non_near_tie": 68.0,
+            "line_nonfinite_questions": 0.0,
+            "line_pass": 1.0,
+            "line_questions": 71.0,
+            "line_winner_equal_near_tie": 3.0,
+            "line_winner_equal_non_near_tie": 68.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "the line: 71 questions (the requests that fit L64) against the source model's reference; Python CompiledModel (ai-edge-litert 2.3.0), GPU Metal, GpuOptions(enforce_f32=True)",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.3.0/2026-11-08/mnn-pocket-0.3b-dec__mnn-pocket-0.3b-dec_l64_fp16w_tensor__mac-studio-m4-max.json"
+      },
+      {
+        "device": "pixel-11-pro",
+        "run": {
+          "accelerator": "npu_google_tensor",
+          "context_length": null,
+          "date": "2026-11-08",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 3065,
+          "env": {
+            "device": "Pixel 11 Pro",
+            "machine_label": "pixel-11-pro-mnnpocketdec-capi-runner",
+            "os_build": "Android 17 (CD1A.260905.001.B1)",
+            "runtime": "litert",
+            "runtime_version": "2.3.0",
+            "soc": "Google Tensor G6",
+            "vendor_sdk": "LiteRT Google Tensor NPU runtime 2.3.0 (Maven litert-npu-runtime-google-tensor:2.3.0; compiler plugin 6b1432e7…, dispatch e3814400…)"
+          },
+          "error": null,
+          "evidence": [
+            "(tag p11p_n_L64, run r6): run DONE rc 0, start 2026-11-08 02:03:28, 71 questions",
+            "Push mnn_pocket_dec_anorm4_L64_w16.tflite rc=0 bytes 488975184/488975184 sha256 phone=649e80b81cb07bad6f0f4cf209bddaefea3d305597d0926a9ab8450da861fd47 = mac = the Hub LFS sha256",
+            "Runner 7e7539e5bd0c73ed… and libs: 3/3 OK; runner args (every run): --npu-vendor google_tensor",
+            "Device: Pixel 11 Pro 17 CD1A.260905.001.B1",
+            "runner.partitioned: INFO: [compiler_plugin.cc:742] Partitioned subgraph<0>, selected 3065 ops, from a total of 3065 ops. resulted in 1 partitions.; runner.replacing: VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (main).",
+            "line PASS: 71 questions, same winner 68/68 (not near ties), near ties kept 3/3, max |Δp| 0.0110337, mean |Δp| 0.00153977, control n/a (the file holds no request of the control pair), non-finite read-outs 0, winner = the Mac CPU's on the same file 68/68"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "arm_files_passed": 4.0,
+            "arm_files_run": 4.0,
+            "line_bar_control_abs_dp": 0.02,
+            "line_bar_max_abs_dp": 0.02,
+            "line_bar_mean_abs_dp": 0.002,
+            "line_bar_near_tie_gap": 0.02,
+            "line_mac_same_file_non_near_tie": 68.0,
+            "line_max_abs_dp": 0.011033737300317759,
+            "line_mean_abs_dp": 0.0015397671939298555,
+            "line_near_tie": 3.0,
+            "line_non_near_tie": 68.0,
+            "line_nonfinite_questions": 0.0,
+            "line_pass": 1.0,
+            "line_questions": 71.0,
+            "line_winner_equal_mac_non_near_tie": 68.0,
+            "line_winner_equal_near_tie": 3.0,
+            "line_winner_equal_non_near_tie": 68.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "the line: 71 questions of the L64 set against the source model's reference; the C-API runner build 7e7539e5 (LiteRT 2.3.0) with --npu-vendor google_tensor, Google Tensor NPU, the graph compiled on the phone",
+          "total_ops": 3065,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.3.0/2026-11-08/mnn-pocket-0.3b-dec__mnn-pocket-0.3b-dec_l64_fp16w_tensor__pixel-11-pro.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "mnn-pocket",
+    "id": "mnn-pocket-0.3b-dec__mnn-pocket-0.3b-dec_l64_fp16w_tensor",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/MNN-Pocket-0.3B-Dec-LiteRT",
+    "task": "text-classification"
+  },
+  "pitfalls": [
+    "A decision model, not a chat model: it takes a `state` and typed `questions` (`choice`, `noul`, `score`) and returns the probability of every candidate in one forward pass; it never generates text (README L18).",
+    "The graph is the model body only: it takes the embeddings of the request's tokens, the rotary tables and the attention mask and returns the hidden states after the final norm; the Python host in `host/` builds the request, takes the embeddings from `embedding.safetensors` (the source model's token table) and reads the answers with the source model's head and temperature, as the source model's `inference.py` does (README L20, L147-L148).",
+    "Each file is a static window: `<n>` in the name is the longest request it takes; run the smallest file that holds the request. A request longer than 2,048 tokens raises `ValueError` in the host, which never cuts it; the source model's own limit is 32,768 tokens (README L71, L84).",
+    "The checks measure agreement with the source model's `inference.py`, unchanged, on its own files (float32, CPU, one thread): 2,409 questions on the Mac, a fixed subset of 16 to 322 questions per file on the phones; the bar is the same winner on every question whose two most likely options are more than 0.02 apart, a largest |dp| of at most 0.02 and a mean of at most 0.002 (README L88, L102).",
+    "The repository has no Android host yet: an Android app has to port `host/pocket_dec_litert.py`; the phones ran LiteRT 2.3.0 through its C API with inputs the Mac computed with the host's code (README L137).",
+    "Runs through LiteRT's Google Tensor NPU runtime (Maven `litert-npu-runtime-google-tensor` 2.3.0) on the Pixel 11 Pro (Google Tensor G6), each file in one partition with all its ops on the NPU; LiteRT compiles it on the phone at the first load (README L82, L131).",
+    "Each norm is computed on its input divided by 4 times its mean absolute value, which gives the same result in exact arithmetic: this NPU ran the graphs in FP16, where values below 2^-14 became 0, and in the other files the squares of small values in the norms were lost (README L131).",
+    "64 to 256 tokens only: no 512-token Tensor file was compiled; longer requests run on the Pixel 11 Pro's GPU at FP32 (README L82, L131).",
+    "Passes the bar on all four files (the same winner on every question, near ties included; largest |dp| 0.0110, mean at most 0.0017) and answers the source model's default example `shipping`, as the source model does (README L100, L104)."
+  ],
+  "schema_version": "1.2"
+}

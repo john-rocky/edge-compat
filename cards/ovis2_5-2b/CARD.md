@@ -19,7 +19,7 @@ task: image-text-to-text
 
 | | |
 |---|---|
-| **Tool** | litert-torch (litertlm-convert fast_vlm pipeline, scripts/ship_ovis_2b.sh) 0.10.0 (editable dev checkout 115a136 + local patches) |
+| **Tool** | litert-torch (fast_vlm pipeline, scripts/ship_ovis_2b.sh) 0.10.0 (editable dev checkout 115a136 + local patches) |
 | **Command** | `bash scripts/ship_ovis_2b.sh` |
 | **Quantization** | vision tower int8; Qwen3-1.7B decoder int4 blockwise-32 symmetric + OCTAV; input embedding int8 (externalized section) |
 
@@ -35,11 +35,11 @@ No benchmark data yet.
 
 ## Device runs (NPU / LiteRT-LM)
 
-Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-24/ovis2_5-2b__galaxy-s26.json`.
+Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-25/ovis2_5-2b__galaxy-s26.json`.
 
 | Device | Accelerator | Status | Full delegation | Output match | Prompt (tokens) | Latency p50 (ms) | Prefill tok/s | Decode tok/s | TTFT (ms) | Peak mem (MB) | Environment | Date | Provenance |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| galaxy-s26 | gpu | pass | yes | - | 203 | - | 461.75 | 26.83 | 480.0 | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm 0.16.0 · Android 16 | 2026-08-24 | measured |
+| galaxy-s26 | gpu | pass | yes | - | 203 | - | 461.75 | 26.83 | 480.0 | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm 0.16.0 · Android 16 | 2026-08-25 | measured |
 
 ## Pitfalls
 

@@ -12,7 +12,7 @@
       "evidence": {
         "date": "2026-09-03",
         "litert_version": "litert-lm 0.16.1 (Mac WebGPU/Metal delegate)",
-        "source_model": "VibeVoice-ASR-BitNet audio encoder v1 (rank-0 statistics build; vibevoice_asr_work/mac_gate_cpu_gpu30.log)"
+        "source_model": "VibeVoice-ASR-BitNet audio encoder v1 (rank-0 statistics build)"
       },
       "op": "DIV",
       "provenance": "measured",
@@ -36,7 +36,7 @@
       "evidence": {
         "date": "2026-09-03",
         "litert_version": "litert-lm 0.16.1 (Mac WebGPU/Metal delegate)",
-        "source_model": "VibeVoice-ASR-BitNet audio encoder v1 (vibevoice_asr_work/mac_gate_cpu_gpu30.log)"
+        "source_model": "VibeVoice-ASR-BitNet audio encoder v1"
       },
       "op": "MUL",
       "provenance": "measured",

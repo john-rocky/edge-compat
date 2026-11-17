@@ -21,7 +21,7 @@
       },
       "error": null,
       "evidence": [
-        "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.16.0/bin/litert-lm 0.16.0); fixed-question answer: 'We are asked: \"What is 17 + 25? Answer briefly.\" This is a simple arithmetic question. The answer is 42. Need to answer briefly. So final answer: 42.\\n</think>\\n\\n42'"
+        "compat_check status ok (runtime 0.16.0); fixed-question answer: 'We are asked: \"What is 17 + 25? Answer briefly.\" This is a simple arithmetic question. The answer is 42. Need to answer briefly. So final answer: 42.\\n</think>\\n\\n42'"
       ],
       "failure_class": null,
       "full_delegation": null,

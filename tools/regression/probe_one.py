@@ -478,7 +478,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--part", choices=("shared", "control"), default=None)
     ap.add_argument("--work", default=".")
     ap.add_argument("--cache-dir", default=None,
-                    help="engine cache_dir (default <work>/engine_cache)")
+                    help="engine cache_dir (default <workdir>/engine_cache)")
     args = ap.parse_args(argv)
     args.backend = args.backend or CHECKS[args.check]["backend"] or "cpu"
     out_path = Path(args.out)

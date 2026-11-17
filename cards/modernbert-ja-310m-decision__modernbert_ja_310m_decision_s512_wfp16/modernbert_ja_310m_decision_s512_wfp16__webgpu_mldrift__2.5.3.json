@@ -35307,7 +35307,7 @@
     "litert_version": "2.5.3"
   },
   "model": {
-    "path": "/Users/USER/code/codex-conversions/2026-10-02/modernbert-ja-decision-litert/exports/modernbert_ja_310m_decision_s512_wfp16.tflite",
+    "path": "modernbert_ja_310m_decision_s512_wfp16.tflite",
     "sha256": "f87cda7c513d0b02ee2a98c76885cf048879e4c7e3d7e09e3ecde13e73cc61ec",
     "subgraph_count": 1
   },

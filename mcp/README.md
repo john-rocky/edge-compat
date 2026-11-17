@@ -2,7 +2,7 @@
 
 Status: **implemented** — the Phase 4 scaffold's tool surface, wired through
 the official MCP Python SDK (`MCPServer`, the renamed FastMCP class) and
-served over **stdio, local-first** (no hosting, no auth — spec Phase 14 Out).
+served over **stdio, local-first** (no hosting, no auth).
 Every tool is a thin pass-through into `litert_compat`; no logic lives here.
 
 ## Quickstart
@@ -12,7 +12,7 @@ Every tool is a thin pass-through into `litert_compat`; no logic lives here.
 uv run --extra mcp python mcp/server.py [--matrix-dir DIR] [--cards-dir DIR]
 ```
 
-`data/matrix/` (the default `--matrix-dir`) is empty until the owner's first
+`data/matrix/` (the default `--matrix-dir`) is empty until the first
 real curation slice lands, so matrix-backed tools refuse honestly. To try the
 tools against the example-provenance snapshot (example data stays out of
 `data/matrix/` by design):
@@ -40,16 +40,16 @@ Add `--matrix-dir`/`--cards-dir` after `mcp/server.py` to serve other data.
 | `get_card(model_id)` | Return the model's card | `schemas/card.schema.json` (`cards/<model_id>/card.json`, unchanged) |
 | `get_browser_status(model_id)` | Return the model's browser sweep statuses | `{model_id, browser}`; `browser` is the model's `cards/index.json` field, verbatim (per-backend statuses + `sweep_source`; `null` when never swept) |
 
-Contract (spec Phases 4 + 14): tool outputs are the schema-validated JSON
+Contract: tool outputs are the schema-validated JSON
 objects produced by the earlier phases, **unchanged** — no reformatting, no
 summarization (byte-equality is test-enforced). Matrix-backed responses embed
-the resolved snapshot's `backend` + `litert_version` (Integration Rules §D),
+the resolved snapshot's `backend` + `litert_version`,
 so no output can present one backend's result as another's. `unknown` means
 unmeasured — never a guess. Errors (unresolvable backend, unknown model id,
 unreadable model) are structured MCP tool errors with precise reasons, not
 prose results.
 
-## Snapshot resolution (spec 14.1)
+## Snapshot resolution
 
 `litert_compat.matrix.resolve_snapshot` over `--matrix-dir`:
 
@@ -73,5 +73,5 @@ and drive the served process through a real `mcp.ClientSession` over stdio
 (`tests/test_mcp_server.py`; they skip when the `mcp` extra is absent, and
 fail loudly if the SDK import is ever shadowed).
 
-Deferred: `get_npu_status(model_id)` (Phase 14 Ask-the-owner 2), hosting/
+Deferred: `get_npu_status(model_id)`, hosting/
 deployment/auth, telemetry (post-launch, opt-in per the proposal).

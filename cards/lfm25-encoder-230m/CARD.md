@@ -19,7 +19,7 @@ task: feature-extraction
 
 | | |
 |---|---|
-| **Tool** | litert-torch (litertlm-convert scripts/convert_lfm25_encoder.py, litert_torch.signature multi-signature trace) 0.9.2 (stock release; .venv-092 per lfm25_encoder_work/FINDINGS.md) |
+| **Tool** | litert-torch (scripts/convert_lfm25_encoder.py, litert_torch.signature multi-signature trace) 0.9.2 (stock release) |
 | **Command** | `python scripts/convert_lfm25_encoder.py LiquidAI/LFM2.5-Encoder-230M out/lfm25_encoder_230m` |
 | **Quantization** | int8 dynamic-range (linears + embedding; convs float) — wi8fc variant |
 

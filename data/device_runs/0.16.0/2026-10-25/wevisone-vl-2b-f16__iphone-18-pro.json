@@ -1,0 +1,102 @@
+{
+  "artifact": "WeVisOne-VL-2B_f16.litertlm",
+  "artifact_sha256": "97f29a6a1b672ad09afe33ee8c41589f62bac19a46092458bc4c96ef3f26adcb",
+  "device": "iphone-18-pro",
+  "model_id": "wevisone-vl-2b-f16",
+  "notes": "litert-community/WeVisOne-VL-2B: WeVisOne-VL-2B_f16.litertlm, a LiteRT-LM fast_vlm conversion of tencent/WeVisOne-VL-2B at revision 3dad9ce8 (apache-2.0; WeChat Vision, Tencent; built on Qwen3-VL) — detection, referring, pointing, counting and OCR answers as <0>…<1000> coordinate tokens; the pixel decoder (segmentation / matting) is not in the file. Pictures are stretched to 512 x 512 with PIL BICUBIC before they are sent. LiteRT-LM 0.18.1 feeds the previous answer's stop token with a zero embedding from a conversation's second message on (files with an EMBEDDER section; the two_turn text row shows it), so every row here is a one-question conversation. iPhone 18 Pro rows: run r3 (2026-10-25 00:3x JST), the dmbench app with LiteRT-LM's v0.16.0 iOS framework (the picture question as a failure record); the text benchmark of the same file ran. Landed 2026-10-25: the file is on the Hub at litert-community/WeVisOne-VL-2B (upload commit 98625fccc3ce3991fe110331832254e29b5d0f3b, 2026-10-25 04:52:16 UTC = 2026-10-25 13:52 JST; main 1ed0c890b03bce7419697e01cbd7fabe74f6aa82 at the read, the file unchanged there); its LFS oid equals artifact_sha256 and its size 4899179008 B (anonymous API read 2026-10-25 15:08 JST).",
+  "quantization": "float16 weights in every graph (28-layer decoder, embedder, vision encoder, vision adapter), no PREFILL_DECODE activation type declared (the GPU runs it at its float16 default); fast_vlm at 512 x 512 (256 image tokens), 8,196-wide image rows (Qwen3-VL DeepStack), KV cache 2048",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 2048,
+      "date": "2026-10-25",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 18 Pro (iPhone19,2)",
+        "machine_label": "iphone-18-pro-dmbench",
+        "os_build": "iOS 27.2 (24B5099f)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": "iOS ended the app at its per-process memory limit (JetsamEvent: 393469 pages x 16384 B), 3 of 3 launches, during engine creation",
+      "evidence": [
+        "bundle: WeVisOne-VL-2B_f16.litertlm = wv2b_f16_e16a16_actnone.litertlm, 4899179008 B, sha256 97f29a6a1b672ad09afe33ee8c41589f62bac19a46092458bc4c96ef3f26adcb (the upload set's public manifest); copied into the app's container and its size read back on the phone: \"[00:35:24] bundle on the device: 4899179008 B\"",
+        "app: BenchmarkApp (dmbench) build_r3 of apple-silicon-llm-bench eb089fc with CLiteRTLM.xcframework.zip@v0.16.0 sha256:4e0f683da07566ee79c143d2d58d387f77052b0e6a41562c969e5d2728fc9f4b; com.apple.developer.kernel.increased-memory-limit and extended-virtual-addressing in the signed app; paths below are relative",
+        "Each ends \"App terminated due to signal 9.\" after the decoder's Metal signatures and the vision encoder's Metal residency, before any answer",
+        "(2026-10-25 00:35:46.00 +0900): largestProcess BenchmarkApp, reason per-process-limit, lifetimeMax 393469 pages x 16384 B = 6,446,596,096 B"
+      ],
+      "failure_class": "memory_cap_exceeded",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "jetsam_lifetime_max_pages": 393469.0,
+        "killed": 3.0,
+        "launches": 3.0,
+        "page_size_bytes": 16384.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "signature": "the picture question vl_syn_a (syn_a 512 x 512 PNG + the detection question), the app's VL path, one launch per run",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": 2048,
+      "date": "2026-10-25",
+      "decode_tokens_per_s": 23.05,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 18 Pro (iPhone19,2)",
+        "machine_label": "iphone-18-pro-dmbench",
+        "os_build": "iOS 27.2 (24B5099f)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.16.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "bundle: WeVisOne-VL-2B_f16.litertlm = wv2b_f16_e16a16_actnone.litertlm, 4899179008 B, sha256 97f29a6a1b672ad09afe33ee8c41589f62bac19a46092458bc4c96ef3f26adcb (the upload set's public manifest); copied into the app's container and its size read back on the phone: \"[00:35:24] bundle on the device: 4899179008 B\"",
+        "app: BenchmarkApp (dmbench) build_r3 of apple-silicon-llm-bench eb089fc with CLiteRTLM.xcframework.zip@v0.16.0 sha256:4e0f683da07566ee79c143d2d58d387f77052b0e6a41562c969e5d2728fc9f4b; com.apple.developer.kernel.increased-memory-limit and extended-virtual-addressing in the signed app; paths below are relative",
+        "the app's native benchmark (LiteRT-LM's benchmark: forced 1,024 prefill, 256 decoded, context 2048; text only, the vision graphs not run; bt1)",
+        "\"YARDSTICK_NATIVE_OK prefill_tokens=1024 prefill_tok_s=619.84 decode_tokens=256 decode_tok_s=23.05 ttft_ms=1695.4 init_s=24.31 context_tokens=2048 peak_mb=5732 median_mb=5544 median_resident_mb=2773 samples=240 teardown_footprint_mb=2904 harness=2026-07-30-agreed-protocol-r4\"; the app exited with code 0",
+        "app_peak_mb / app_median_mb are the app's own readings; peak_mem_mb is left empty (unit not stated)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "app_median_mb": 5544.0,
+        "app_median_resident_mb": 2773.0,
+        "app_peak_mb": 5732.0,
+        "decode_tokens": 256.0,
+        "init_s": 24.31,
+        "max_num_tokens": 2048.0,
+        "prefill_tokens": 1024.0,
+        "processes": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 619.84,
+      "provenance": "measured",
+      "runs": true,
+      "signature": null,
+      "total_ops": null,
+      "ttft_ms": 1695.4
+    }
+  ],
+  "schema_version": "1.0"
+}

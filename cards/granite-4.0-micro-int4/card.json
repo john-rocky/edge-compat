@@ -36,13 +36,13 @@
           },
           "error": null,
           "evidence": [
-            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…; kit = litertlm-convert team_repack_20261009/r9/binary/prebuilt)",
-            "run 1 r9/hold_1 hold 2026-10-15 17:09:29-17:27:05 JST: [17:16:56] bundle on device: b931889ac060fb563f5ae20b3f4ebc772297f15f77cdb9b0f55b1b25a160b325 (2198475104 B, push 0 s) = Mac",
+            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…)",
+            "run 1 hold 2026-10-15 17:09:29-17:27:05 JST: [17:16:56] bundle on device: b931889ac060fb563f5ae20b3f4ebc772297f15f77cdb9b0f55b1b25a160b325 (2198475104 B, push 0 s) = Mac",
             "[17:19:47] parsed: i4_rf_gpu_A gpu: gate PASS 1/1 | bench prefill 239.65 decode 20.64 init 8433.48 cold 11747.75 peak 1474.07 capped 23/28 | answers: 'The capital of France is Paris.'",
-            "run 1 prompt process (device/r9/s26/i4_rf_gpu_A/gpu_leg.json): \"The capital of France is Paris.\"",
-            "run 2 r9/hold_2 hold 2026-10-15 20:14:34-20:32:36 JST: [20:24:22] bundle on device: b931889ac060fb563f5ae20b3f4ebc772297f15f77cdb9b0f55b1b25a160b325 (2198475104 B, push 0 s) = Mac",
+            "run 1 prompt process: \"The capital of France is Paris.\"",
+            "run 2 hold 2026-10-15 20:14:34-20:32:36 JST: [20:24:22] bundle on device: b931889ac060fb563f5ae20b3f4ebc772297f15f77cdb9b0f55b1b25a160b325 (2198475104 B, push 0 s) = Mac",
             "[20:27:44] parsed: i4_rf_gpu_B gpu: gate PASS 1/1 | bench prefill 231.515 decode 19.845 init 8552.92 cold 11543.6 peak 1401.45 capped 25/29 | answers: 'The capital of France is Paris.'",
-            "run 2 prompt process (device/r9/s26/i4_rf_gpu_B/gpu_leg.json): \"The capital of France is Paris.\"",
+            "run 2 prompt process: \"The capital of France is Paris.\"",
             "bench args: --backend=gpu --model_path=/data/local/tmp/aa6_g40micro/granite-4.0-micro_int4_rf.litertlm --benchmark=true --benchmark_prefill_tokens=1024 --benchmark_decode_tokens=256 --max_num_tokens=2048 --num_iterations=3 --report_peak_memory_footprint=true --metric_proto_file_path=/data/local/tmp/aa6_g40micro/metrics.pb",
             "VERBOSE: Replacing 1821 out of 1821 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
             "VERBOSE: Replacing 1821 out of 1821 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256).",
@@ -121,12 +121,12 @@
           },
           "error": null,
           "evidence": [
-            "bench/cpu_int4_rf_r6e_p1.log: prefill 103.8 / decode 23.94 tok/s, TTFT 9.9073 s, init 6.9756 s",
-            "bench/cpu_int4_rf_r6e_p2.log: prefill 101.04 / decode 23.29 tok/s, TTFT 10.1951 s, init 6.8752 s",
-            "settle_run: quiet after 0 s; run: /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_work/granite40_micro/cand/granite-4.0-micro_int4_rf.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+            "Prefill 103.8 / decode 23.94 tok/s, TTFT 9.9073 s, init 6.9756 s",
+            "Prefill 101.04 / decode 23.29 tok/s, TTFT 10.1951 s, init 6.8752 s",
+            "settle_run: quiet after 0 s; run: litert-lm benchmark granite-4.0-micro_int4_rf.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
             "2026-10-14 21:16:31 JST cpu int4_rf p1 exit 0",
             "2026-10-14 21:33:48 JST cpu int4_rf p2 exit 0",
-            "bench/compare_int4_r6e.json cpu/int4_rf: median prefill 102.42 / decode 23.615 tok/s"
+            "cpu/int4_rf: median prefill 102.42 / decode 23.615 tok/s"
           ],
           "failure_class": null,
           "full_delegation": null,
@@ -180,12 +180,12 @@
           },
           "error": null,
           "evidence": [
-            "bench/gpu_int4_rf_r6e_p1.log: prefill 1395.29 / decode 111.71 tok/s, TTFT 0.7428 s, init 4.2758 s",
-            "bench/gpu_int4_rf_r6e_p2.log: prefill 1386.91 / decode 110.79 tok/s, TTFT 0.7474 s, init 4.6728 s",
-            "settle_run: quiet after 0 s; run: /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_work/granite40_micro/cand/granite-4.0-micro_int4_rf.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+            "Prefill 1395.29 / decode 111.71 tok/s, TTFT 0.7428 s, init 4.2758 s",
+            "Prefill 1386.91 / decode 110.79 tok/s, TTFT 0.7474 s, init 4.6728 s",
+            "settle_run: quiet after 0 s; run: litert-lm benchmark granite-4.0-micro_int4_rf.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
             "2026-10-14 21:25:51 JST gpu int4_rf p1 exit 0",
             "2026-10-14 21:39:39 JST gpu int4_rf p2 exit 0",
-            "bench/compare_int4_r6e.json gpu/int4_rf: median prefill 1391.1 / decode 111.25 tok/s"
+            "gpu/int4_rf: median prefill 1391.1 / decode 111.25 tok/s"
           ],
           "failure_class": null,
           "full_delegation": null,
@@ -239,16 +239,16 @@
           },
           "error": null,
           "evidence": [
-            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…; kit = litertlm-convert team_repack_20261009/r9/binary/prebuilt)",
-            "r10/hold_4 hold 2026-10-15 23:27:41-23:46:54 JST: [23:32:53] bundle on device: b931889ac060fb563f5ae20b3f4ebc772297f15f77cdb9b0f55b1b25a160b325 (2198475104 B, push 0 s) = Mac",
+            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…)",
+            "Hold 2026-10-15 23:27:41-23:46:54 JST: [23:32:53] bundle on device: b931889ac060fb563f5ae20b3f4ebc772297f15f77cdb9b0f55b1b25a160b325 (2198475104 B, push 0 s) = Mac",
             "[23:46:51] parsed: i4_rf_cpu_timing cpu: gate PASS 1/1 | bench prefill 12.2 decode 3.085 init 7979.38 cold 10940.91 peak 3658.71 capped 159/159 | answers: 'The capital of France is Paris.'",
-            "prompt process (device/r10/p8a/i4_rf_cpu_timing/cpu_leg.json): \"The capital of France is Paris.\"",
+            "prompt process: \"The capital of France is Paris.\"",
             "bench args: --backend=cpu --model_path=/data/local/tmp/aa6_g40micro/granite-4.0-micro_int4_rf.litertlm --benchmark=true --benchmark_prefill_tokens=1024 --benchmark_decode_tokens=256 --max_num_tokens=2048 --num_iterations=3 --report_peak_memory_footprint=true --metric_proto_file_path=/data/local/tmp/aa6_g40micro/metrics.pb",
             "VERBOSE: Replacing 1618 out of 1821 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 316 partitions for subgraph 0 (prefill_1024).",
             "VERBOSE: Replacing 1447 out of 1653 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 323 partitions for subgraph 6 (decode).",
             "VERBOSE: Replacing 2289 out of 2375 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 82 partitions for subgraph 0 (prefill_1024).",
             "VERBOSE: Replacing 2053 out of 2138 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 83 partitions for subgraph 6 (decode).",
-            "gate leg (device/r10/p8a/i4_rf_cpu_gate/cpu_leg.json, hold_8 hold 2026-10-16 00:42:29-00:48:07 JST): 1 of 1 prompt processes answered with the expected word (\"The capital of France is Paris.\")"
+            "check run (hold_8 hold 2026-10-16 00:42:29-00:48:07 JST): 1 of 1 prompt processes answered with the expected word (\"The capital of France is Paris.\")"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -310,10 +310,10 @@
           },
           "error": null,
           "evidence": [
-            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…; kit = litertlm-convert team_repack_20261009/r9/binary/prebuilt)",
-            "r10/hold_7 hold 2026-10-16 00:23:17-00:37:27 JST: [00:28:29] bundle on device: b931889ac060fb563f5ae20b3f4ebc772297f15f77cdb9b0f55b1b25a160b325 (2198475104 B, push 0 s) = Mac",
+            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…)",
+            "Hold 2026-10-16 00:23:17-00:37:27 JST: [00:28:29] bundle on device: b931889ac060fb563f5ae20b3f4ebc772297f15f77cdb9b0f55b1b25a160b325 (2198475104 B, push 0 s) = Mac",
             "[00:34:18] parsed: i4_rf_gpu_timing gpu: gate PASS 1/1 | bench prefill 91.47 decode 6.975 init 14548.48 cold 25281.78 peak 2210.24 capped 0/58 | answers: 'The capital of France is Paris.'",
-            "prompt process (device/r10/p8a/i4_rf_gpu_timing/gpu_leg.json): \"The capital of France is Paris.\"",
+            "prompt process: \"The capital of France is Paris.\"",
             "bench args: --backend=gpu --model_path=/data/local/tmp/aa6_g40micro/granite-4.0-micro_int4_rf.litertlm --benchmark=true --benchmark_prefill_tokens=1024 --benchmark_decode_tokens=256 --max_num_tokens=2048 --num_iterations=3 --report_peak_memory_footprint=true --metric_proto_file_path=/data/local/tmp/aa6_g40micro/metrics.pb",
             "VERBOSE: Replacing 1821 out of 1821 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
             "VERBOSE: Replacing 1821 out of 1821 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256).",
@@ -322,7 +322,7 @@
             "VERBOSE: Replacing 1821 out of 1821 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 4 (prefill_4).",
             "VERBOSE: Replacing 1622 out of 1622 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 5 (prefill_1).",
             "VERBOSE: Replacing 1653 out of 1653 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 6 (decode).",
-            "gate leg (device/r10/p8a/i4_rf_gpu_gate/gpu_leg.json, hold_7 hold 2026-10-16 00:23:17-00:37:27 JST): 2 of 2 prompt processes answered with the expected word (\"The capital of France is Paris.\")"
+            "check run (hold_7 hold 2026-10-16 00:23:17-00:37:27 JST): 2 of 2 prompt processes answered with the expected word (\"The capital of France is Paris.\")"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -375,11 +375,13 @@
     "task": "text-generation"
   },
   "pitfalls": [
-    "Re-ship: since 2026-10-16 the file carries the GPU-composite graph, the retrofit of the 2026-10-13 file with the same weights; against that file the Mac GPU takes 17 % less time for the 1024 / 256 workload and the Galaxy S26 GPU 13 % less (two holds on the own phone, both orders) with the first token about 1.2 s later (prefill 335.6 -> 235.6 tok/s, decode 15.7 -> 20.2); on the Pixel 8a GPU about the same (two same-hold pairs within 2 % on their mean) (card L36, L93).",
+    "Re-upload: since 2026-10-16 the file carries the GPU-composite graph, the retrofit of the 2026-10-13 file with the same weights; against that file the Mac GPU takes 17 % less time for the 1024 / 256 workload and the Galaxy S26 GPU 13 % less (two holds on the own phone, both orders) with the first token about 1.2 s later (prefill 335.6 -> 235.6 tok/s, decode 15.7 -> 20.2); on the Pixel 8a GPU about the same (two same-hold pairs within 2 % on their mean) (card L36, L93).",
     "Galaxy S26: the card's rows come from Google's Developer Device Platform (device m1q-36, one session per row, the litert CLI); the own Galaxy S26 (SM-S942Q) measured this file's GPU row within 3 % of them (two holds, both orders, the same binary) (card L84).",
     "The bool-mask form of the retrofit ran the Mac GPU 3 % and the Galaxy S26 GPU 10 % faster still but cost the CPU 8 % (Mac) to 9-23 % (Galaxy S26) and 1.2 GB of RSS, so it was not shipped (card L109).",
     "Tool calling: with a get_weather tool the file writes <tool_call>{...} </tool_call> as text, which the app has to parse (the bundle's generic model type has no tool-call parser); a tool result passed as a Python-API content part renders empty, passed as the tool message's text it was used (card L69, L71).",
     "Template: IBM's chat_template.jinja byte for byte with its default system message (replaced when you pass one); no start token, the only stop token <|end_of_text|> (id 100257), no thinking declared (card L69).",
+    "Second turn of a conversation: from the second turn on, LiteRT-LM puts the previous answer's stop token into the KV cache with a zero embedding, because the files hold the embedding table in its own section and the decoder takes embeddings, so later answers can differ from the answer to the same messages in one prompt (read in the source of LiteRT-LM 0.16.0 to 0.18.1; measured with 0.18.1 on WeVisOne-VL-2B and Qwen2.5-Coder-1.5B-Instruct, not on these files); one question per conversation, or a new conversation that starts with the earlier messages and the new question, avoids it (card L116).",
+    "Conversation preface with tools and no messages: LiteRT-LM renders the chat template with an empty message list, and the template reads messages[0] without checking that the list is non-empty, so the render fails with 'Failed to apply template: undefined value' when the preface is prefilled at creation (prefillPrefaceOnInit, default false; creating the conversation fails) and in the preface render (renderPrefaceIntoString and its C++ and C API forms); the same with extra context (such as enable_thinking) and no messages, and in the preface render with an empty preface (run in the runtime on one Qwen3 template; the other templates rendered with minijinja 2.14 and jinja2); read in the source of LiteRT-LM 0.17.0, 0.18.1 and main, measured with the 0.18.1 PyPI package through its C API on these files' template text; the default path, where the first message is rendered with the preface, is not affected (the 0.18.1 Python API and CLI expose neither the flag nor the preface render); a system message or any initial message in the conversation config avoids it (card L118).",
     "Sampler: the bundle sets no sampler; `run` passes one only with --top-k, --top-p, --temperature or --seed (card L67).",
     "Cache: without --cache, `run` writes a compiled-weights cache next to the model (1.92 GB for this file); without --backend, `run` uses the CPU (card L67).",
     "Speed: this file is the faster one on every GPU (Mac 3.04 vs 3.61 s, Galaxy S26 16.70 vs 21.83 s, Pixel 8a 47.92 s with no int8 GPU row) and the slower on every CPU; 41.7 % smaller than the int8 file; not measured on iOS, not run on the NPU (card L27-L36, L104).",

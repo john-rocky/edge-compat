@@ -1,12 +1,12 @@
 """Catalog regression: one litert-lm wheel x own `.litertlm` bundles x suite v1.
 
     uv run python tools/regression/run_regression.py --wheel 0.18.0 \\
-        --python ~/venvs/lt0180run/bin/python --bundles data/regression/bundles.json \\
+        --python <venv with that wheel>/bin/python --bundles data/regression/bundles.json \\
         [--only <bundle_id> ...] [--checks <check_id> ...] \\
         [--order-first <regex>] [--retry-fails] \\
         --out data/regression/0.18.0/<YYYY-MM-DD> --work <scratch dir> \\
         [--extra-local <dir> ...] [--keep]
-    uv run python tools/regression/run_regression.py --rejudge <out dir> --raw <work>/run \\
+    uv run python tools/regression/run_regression.py --rejudge <out dir> --raw <workdir>/run \\
         [--previous-judge r2]
 
 Stdlib only. For each bundle: find the file (HF cache blob, then an
@@ -22,7 +22,7 @@ result is `<out>/<bundle_id>.json` (schemas/regression_result.schema.json),
 canonical JSON dated by the `<out>` directory (a run that crosses midnight
 keeps writing there; the wall-clock times are in `notes`); `SUMMARY.md` there
 is regenerated after every bundle. Logs go to
-`<work>/logs/<bundle_id>/<check_id>.log`.
+`<workdir>/logs/<bundle_id>/<check_id>.log`.
 
 `--retry-fails` runs every FAIL check (not describe, not cpu_gpu_match) once
 more right after the bundle's checks, under the same conditions: the new
@@ -36,7 +36,7 @@ Two timeouts in a bundle record its remaining checks as NA and the run moves
 on. The run stops with an exit code when 10 bundles in a row created no
 engine (3), the free disk would fall under the file's size + 30 GB (4),
 5 bundles in a row failed to download (5), or quiet_wait gave up on 3 checks
-(6). Without `--only`, `<work>/logs/full_run.done` receives the exit code.
+(6). Without `--only`, `<workdir>/logs/full_run.done` receives the exit code.
 
 Downloads and engine caches are deleted after the bundle unless `--keep`;
 HF cache blobs and `--extra-local` files are only ever read. A Hub token
@@ -44,7 +44,7 @@ HF cache blobs and `--extra-local` files are only ever read. A Hub token
 from a header file, never on a command line or in a log.
 
 `--rejudge` runs no model: it re-judges every record of `<out dir>` from the
-probe JSONs the run left in `<work>/run/<bundle_id>/` with the judge as it is
+probe JSONs the run left in `<workdir>/run/<bundle_id>/` with the judge as it is
 now. A record whose status or reason changes gets them replaced and keeps the
 old pair in `details.previous_judge`; `cpu_gpu_match` is derived again, the
 summary recounted, the file's notes say how many records changed, and
@@ -84,7 +84,12 @@ SUITE_V1 = probe_one.SUITE_V1
 CHECKS = probe_one.CHECKS
 PROBE = HERE / "probe_one.py"
 HUB = "https://huggingface.co"
-QUIET_WAIT = os.environ.get("QUIET_WAIT", "~/code/standup/tools/quiet/quiet_wait.py")
+# The quiet_wait.py every probe runs under: env QUIET_WAIT, else the one-line path in
+# quiet_wait.path next to this script (a machine-local file, not in the public export);
+# with neither, a run stops before its first probe (--quiet-wait sets it per run).
+_QUIET_WAIT_FILE = HERE / "quiet_wait.path"
+QUIET_WAIT = os.environ.get("QUIET_WAIT") or (
+    _QUIET_WAIT_FILE.read_text(encoding="utf-8").strip() if _QUIET_WAIT_FILE.is_file() else "")
 QUIET_MAX_WAIT_S = 3600
 TIMEOUT_S = {"cpu": 900, "gpu": 1800}
 MIN_FREE_BYTES = 30 * 10**9
@@ -1236,7 +1241,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--machine-label", default="mac-studio-m4-max")
     ap.add_argument("--rejudge", metavar="OUT_DIR", help="re-judge a run directory from "
                     "--raw with the current judge; runs no model")
-    ap.add_argument("--raw", metavar="DIR", help="the <work>/run directory of that run")
+    ap.add_argument("--raw", metavar="DIR", help="the <workdir>/run directory of that run")
     ap.add_argument("--previous-judge", default="r2",
                     help="label of the judge the records were written with")
     args = ap.parse_args(argv)
@@ -1249,6 +1254,9 @@ def main(argv: list[str] | None = None) -> int:
                if getattr(args, name) is None]
     if missing:
         ap.error("the following arguments are required: " + ", ".join(missing))
+    if not args.quiet_wait:
+        ap.error("--quiet-wait (or env QUIET_WAIT) is required: the quiet_wait.py "
+                 "every probe runs under")
 
     runner = Runner(args)
     signal.signal(signal.SIGTERM, runner.stop_child)

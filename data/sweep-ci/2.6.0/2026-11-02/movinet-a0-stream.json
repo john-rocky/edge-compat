@@ -1,0 +1,85 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x3x172x172:float32;1x80x22x22:float32;1x80x22x22:float32;1x80x22x22:float32;1x80x22x22:float32;1x80x22x22:float32;1x80x22x22:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x112x11x11:float32;1x112x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x184x11x11:float32;1x384x6x6:float32;1x384x6x6:float32;1x384x6x6:float32;1x384x6x6:float32;1x24x1x1:float32;1x80x1x1:float32;1x80x1x1:float32;1x80x1x1:float32;1x184x1x1:float32;1x112x1x1:float32;1x184x1x1:float32;1x184x1x1:float32;1x184x1x1:float32;1x184x1x1:float32;1x184x1x1:float32;1x384x1x1:float32;1x280x1x1:float32;1x280x1x1:float32;1x344x1x1:float32;1x480x1x1:float32;1x1x1x1:float32;1x1x1x1:float32",
+  "license": "apache-2.0",
+  "model_id": "movinet-a0-stream",
+  "notes": "",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-11-02",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorNotFound.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorNotFound."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.6.0",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "7.0.0-1017-azure",
+        "webgpu_adapter": {
+          "architecture": "swiftshader",
+          "description": "",
+          "device": "",
+          "vendor": "google"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 20.865,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-11-02",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorNotFound.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorNotFound."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.6.0",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "7.0.0-1017-azure",
+        "webgpu_adapter": {
+          "architecture": "swiftshader",
+          "description": "",
+          "device": "",
+          "vendor": "google"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 304.688,
+      "loads": true,
+      "max_abs_diff": 10708.115539550781,
+      "max_rel_diff": 1326160522460.9375,
+      "output_match": false,
+      "provenance": "measured",
+      "runs": true
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/MoViNet-A0-Stream-LiteRT/resolve/main/movinet_a0_stream.tflite"
+}

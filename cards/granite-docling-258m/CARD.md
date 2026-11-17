@@ -19,8 +19,8 @@ task: image-text-to-text
 
 | | |
 |---|---|
-| **Tool** | litert-torch fast_vlm rail (SmolVLM2 vision scripts, docling_work/); LiteRT-LM bundle: SigLIP-base p16 512x512 vision encoder int8 (64 image tokens after pixel-shuffle x4) + granite Llama-architecture 576-dim/30-layer decoder hf-to-litertlm docling_work @ d18f276 (SmolVLM2 rail, 512-BILINEAR contract) |
-| **Command** | `docling_work/ship_granite_docling.sh (see hf-to-litertlm REPRODUCE.md VLM table row granite-docling-258m)` |
+| **Tool** | litert-torch fast_vlm rail (SmolVLM2 vision scripts); LiteRT-LM bundle: SigLIP-base p16 512x512 vision encoder int8 (64 image tokens after pixel-shuffle x4) + granite Llama-architecture 576-dim/30-layer decoder hf-to-litertlm docling_work @ d18f276 (SmolVLM2 rail, 512-BILINEAR contract) |
+| **Command** | `ship_granite_docling.sh (see hf-to-litertlm REPRODUCE.md VLM table row granite-docling-258m)` |
 | **Quantization** | decoder int8 weights with FLOAT compute (integer-compute int8/int4 corrupt DocTags structure — measured, int4 rejected); vision tower int8 (corr 0.98 vs fp32, structurally identical output); cache 4096 |
 
 ## Artifacts

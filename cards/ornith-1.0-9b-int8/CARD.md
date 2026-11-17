@@ -20,7 +20,7 @@ task: text-generation
 | | |
 |---|---|
 | **Tool** | litert-torch (pinned commit 115a1360 + the Qwen3.5 hybrid patch of hf-to-litertlm, 2026-08-21 version; lightweight export, constants of 1e8 bytes and more stay lazy) + post-hoc ai-edge-quantizer; repro = hf-to-litertlm qwen35_work/ litert-torch 115a1360 + patch, transformers 5.14.1, torch 2.12.1, ai-edge-quantizer 0.8.0; packed and checked with litert-lm 0.18.0 |
-| **Command** | `qwen35_work/convert_qwen35_9b.sh (hf-to-litertlm; ornith-ai/Ornith-1.0-9B at 83dc1f5e = the Qwen3.5-9B recipe run with this repo's id and revision): text-decoder export (6 prefill signatures 1024..1 + decode, a 4096-position KV budget, 64 state buffers) -> int8 / Mixed INT4 quantization with the 48 in_proj_a / in_proj_b projections float -> fp32 GPU activations declared -> the thinking-off template (the only metadata field changed); run as published on 2026-10-16 it rebuilt all four sections of both files byte for byte` |
+| **Command** | `convert_qwen35_9b.sh (hf-to-litertlm; ornith-ai/Ornith-1.0-9B at 83dc1f5e = the Qwen3.5-9B recipe run with this repo's id and revision): text-decoder export (6 prefill signatures 1024..1 + decode, a 4096-position KV budget, 64 state buffers) -> int8 / Mixed INT4 quantization with the 48 in_proj_a / in_proj_b projections float -> fp32 GPU activations declared -> the thinking-off template (the only metadata field changed); run as published on 2026-10-16 it rebuilt all four sections of both files byte for byte` |
 | **Quantization** | dynamic int8 on every FULLY_CONNECTED + int8 embedding; the convs, the delta rule and the 48 GatedDeltaNet decay/gate projections (in_proj_a / in_proj_b) float; fp32 GPU activations declared (card L31, L106) |
 
 ## Artifacts

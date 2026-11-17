@@ -74,7 +74,7 @@ def test_registry_names_and_claims(monkeypatch: pytest.MonkeyPatch) -> None:
     assert registry["npu_adb"].claims("npu_neuropilot")
     assert not registry["npu_adb"].claims("gpu_mldrift")
     assert not registry["gpu_mldrift_adb"].claims("npu_qnn")
-    # Distinct default helpers: the NPU helper is a separate owner-side build.
+    # Distinct default helpers: the NPU helper is a separate build.
     assert registry["gpu_mldrift_adb"].helper == DEFAULT_ADB_HELPER  # type: ignore[attr-defined]
     assert registry["npu_adb"].helper == DEFAULT_NPU_ADB_HELPER  # type: ignore[attr-defined]
 

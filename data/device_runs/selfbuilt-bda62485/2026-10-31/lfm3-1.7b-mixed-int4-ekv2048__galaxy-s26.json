@@ -1,0 +1,72 @@
+{
+  "artifact": "LFM3-1.7B_mixed_int4_ekv2048.litertlm",
+  "artifact_sha256": "0400d8ffdb00e4bbe1209120e2c7baf05322a8c900839b0a94cc28f599011196",
+  "device": "galaxy-s26",
+  "model_id": "lfm3-1.7b-mixed-int4-ekv2048",
+  "notes": "litert-community/LFM3-1.7B-LiteRT: LFM3-1.7B_mixed_int4_ekv2048.litertlm, a LiteRT-LM generic_model conversion of LiquidAI/LFM3-1.7B at revision 40ebe0aa (LFM Open License v1.0). Galaxy S26 (phone RFGL80R6A6H) rows: run r2b (hold s4, 2026-10-31 08:57–09:03 JST): the published file was the A side of an A B B A pair against an unpublished block-16 build (which failed the 8 questions on this phone and gets no record); the A runs re-measure the 2026-10-29 benchmark of this file. Landed 2026-10-31: the file is on the Hub at litert-community/LFM3-1.7B-LiteRT (main 9bbda264c623f30c905b9c247761ee7463f2b00d at the read); its LFS oid equals artifact_sha256 and its size 1441620928 B (anonymous API read 2026-10-31 12:17:57 JST).",
+  "quantization": "MLP gate and up projections (w1 / w3) int4 blockwise-32 (min-max, block scales floored at 2^-14); every other fully connected weight, the tied lm_head and the embedding table int8 channelwise (dynamic_wi8_afp32: the CPU quantizes activations to int8 at run time); no activation type declared (the GPU runs float16 activations by default); sampler TOP_P k 50 / p 1 / temperature 0.1; KV cache 2,048 tokens",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 2048,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": 32.44,
+      "delegated_ops": 1145,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-lfm3-devicebench",
+        "os_build": "Android 16 (BP4A.251205.006)",
+        "runtime": "litert-lm",
+        "runtime_version": "selfbuilt-bda62485",
+        "soc": "Qualcomm SM8850 (Adreno GPU)",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "binary: LiteRT-LM v0.18.1 (tag v0.18.1 = bda624851d74; LITERT_REF ca21dc99de51) android_arm64 litert_lm_advanced_main sha256 ff136a28e0ffcb32 + the tag's 7 .so (the kit v0181-bda62485); \"litert_lm_advanced_main = the recorded ff136a28e0ffcb3245a225eb105bf7e53a3a420d43363592eb148f65c9733c41\"",
+        "LFM3-1.7B_mixed_int4_ekv2048.litertlm: 1441620928 B, sha256 0400d8ffdb00e4bbe1209120e2c7baf05322a8c900839b0a94cc28f599011196 (an APFS clone of the Hub file); \"q1b: 1441620928 B (sha256 read back on the phone after the push)\"",
+        "protocol: a priming run per file (128 / 4), then the published file (A) and an unpublished block-16 build (B) as A1 B1 B2 A2 in one hold; only the A runs are this file's",
+        "command: 300 ./litert_lm_advanced_main --backend=gpu --model_path=/data/local/tmp/sl_r2b_lfm3/q1b.litertlm --input_prompt_file=/data/local/tmp/sl_r2b_lfm3/prompts/bench.txt --max_num_tokens=2048 --max_output_tokens=256 --async=false --benchmark --benchmark_prefill_tokens=0 --benchmark_decode_tokens=0 --use_session=false --report_peak_memory_footprint=true --benchmark_prefill_tokens=1024 --benchmark_decode_tokens=256",
+        "the runtime's benchmark (1,024 prompt tokens, 256 decoded); prefill / decode tok/s = the stderr's 'Prefill Speed' / 'Decode Speed', ttft = its 'Time to first token', peak = 'Peak system ram usage' (the runtime's MB = MiB); figures = the medians of the runs below",
+        "{\"status\": \"DONE\", \"rc\": 0, \"killed_by\": null, \"cache\": \"keep\", \"prompt\": \"bench\", \"device_start_jst\": \"2026-10-31 08:59:07\", \"ready\": \"uncapped (thermal 1, no CPU cap, kgsl_pwrlevel 0); rested 62s since 08:58:05\", \"prefill\": [1024, 1304.84], \"decode\": [256, 32.42], \"ttft_s\": 0.82, \"vision_ms\": null, \"init_total_ms\": 3556.25, \"peak_mb\": 902.91, \"memory\": \"VmHWM_max_kB 924580 VmSwap_max_kB 0 MemAvailable_min_kB 5158156 kgsl_page_alloc_max_B 2482843648\"}",
+        "{\"status\": \"DONE\", \"rc\": 0, \"killed_by\": null, \"cache\": \"keep\", \"prompt\": \"bench\", \"device_start_jst\": \"2026-10-31 09:03:26\", \"ready\": \"uncapped (thermal 1, no CPU cap, kgsl_pwrlevel 0); rested 63s since 09:02:23\", \"prefill\": [1024, 1305.12], \"decode\": [256, 32.45], \"ttft_s\": 0.82, \"vision_ms\": null, \"init_total_ms\": 3542.35, \"peak_mb\": 903.742, \"memory\": \"VmHWM_max_kB 925432 VmSwap_max_kB 0 MemAvailable_min_kB 5017560 kgsl_page_alloc_max_B 2487832576\"}",
+        "{\"status\": \"DONE\", \"rc\": 0, \"killed_by\": null, \"cache\": \"cold\", \"prompt\": \"bench\", \"device_start_jst\": \"2026-10-31 08:57:02\", \"ready\": \"check run, not waited for clean (thermal 1, cap none, kgsl_pwrlevel 0); rested 58s since 08:56:04\", \"prefill\": [128, 497.36], \"decode\": [4, 8.0], \"ttft_s\": 0.38, \"vision_ms\": null, \"init_total_ms\": 6240.51, \"peak_mb\": 904.973, \"memory\": \"VmHWM_max_kB 926692 VmSwap_max_kB 0 MemAvailable_min_kB 4895616 kgsl_page_alloc_max_B 2474954752\"}",
+        "delegation: Replacing 1145 out of 1145 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024). | Replacing 1145 out of 1145 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 1 (prefill_256). | Replacing 1145 out of 1145 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_64). | Replacing 1145 out of 1145 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_16). | Replacing 1145 out of 1145 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 4 (prefill_4). | Replacing 882 out of 882 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 5 (prefill_1). | Replacing 900 out of 900 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 6 (decode)."
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tok_s_leg1": 32.42,
+        "decode_tok_s_leg2": 32.45,
+        "decode_tokens": 256.0,
+        "init_total_ms_leg1": 3556.25,
+        "init_total_ms_leg2": 3542.35,
+        "kv_cache_tokens": 2048.0,
+        "max_num_tokens": 2048.0,
+        "memavailable_min_kb_leg1": 5158156.0,
+        "memavailable_min_kb_leg2": 5017560.0,
+        "peak_mem_mb_leg1": 902.91,
+        "peak_mem_mb_leg2": 903.742,
+        "prefill_tok_s_leg1": 1304.84,
+        "prefill_tok_s_leg2": 1305.12,
+        "prefill_tokens": 1024.0,
+        "processes": 2.0,
+        "vmhwm_max_kb_leg1": 924580.0,
+        "vmhwm_max_kb_leg2": 925432.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 903.33,
+      "prefill_tokens_per_s": 1304.98,
+      "provenance": "measured",
+      "runs": true,
+      "signature": null,
+      "total_ops": 1145,
+      "ttft_ms": 820.0
+    }
+  ],
+  "schema_version": "1.0"
+}

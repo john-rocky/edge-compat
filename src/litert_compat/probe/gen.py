@@ -6,7 +6,7 @@ re-classified to prove it exercises exactly the requested (op, dtypes,
 shape_meta) — so a probe can never silently measure a different signature
 than the one it upgrades.
 
-Micrograph honesty rule (spec §8.1): a probe measures the op in isolation;
+Micrograph honesty rule: a probe measures the op in isolation;
 full-graph behavior can differ. Probe-derived entries therefore record
 `evidence.source_model: "probe:<fixture-id>"`, keeping them distinguishable
 from full-model measurements.
@@ -160,7 +160,7 @@ _SELECT_OPTIONS = BuiltinOptionsSpec(type_code=47)
 _SLICE_OPTIONS = BuiltinOptionsSpec(type_code=48)
 _EQUAL_OPTIONS = BuiltinOptionsSpec(type_code=53)
 # The three codes below were corrected 2026-08-12 against real converter
-# output (zoo census, DECISIONS #155): the old values (71/95/98) sat on
+# output (zoo census): the old values (71/95/98) sat on
 # other union members. All three tables are emitted empty, and the runtime's
 # checked union accessor fell back to identical defaults, so prior probe
 # measurements were semantically as-declared.

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "benchmark_result.schema.json",
   "title": "Benchmark results file",
-  "description": "Measured benchmark results for one model artifact, ingested by `edge-card build --bench`. Public, versioned API: stable names, no breaking renames after commit. This toolkit never executes benchmarks — every record is owner-measured data, and every record carries `provenance`. The record shape is designed as a field superset of the frozen litert-community perf-table columns (Device / Variant / stage latencies / derived metrics / harness footnote), and existing exports (devicemark leaderboard JSONL, bench-harness exports, gpu_audit outputs) map onto it via adapters in `src/litert_compat/cards/adapters/` — first-class fields for the common columns, the open `metrics` map for harness-specific ones.",
+  "description": "Measured benchmark results for one model artifact, ingested by `edge-card build --bench`. Public, versioned API: stable names, no breaking renames after commit. This toolkit never executes benchmarks — every record is measured data, and every record carries `provenance`. The record shape is designed as a field superset of the frozen litert-community perf-table columns (Device / Variant / stage latencies / derived metrics / harness footnote), and existing exports (devicemark leaderboard JSONL, bench-harness exports, gpu_audit outputs) map onto it via adapters in `src/litert_compat/cards/adapters/` — first-class fields for the common columns, the open `metrics` map for harness-specific ones.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "model_id", "results"],

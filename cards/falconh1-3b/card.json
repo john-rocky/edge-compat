@@ -11,7 +11,7 @@
     "command": "hf-to-litertlm falcon_h1_work/ reproduction script + patch",
     "quantization": "post-hoc dynamic int8 over linears + embedding only; convs and the scan stay float; fp32 activations declared for GPU",
     "tool": "litert-torch + hybrid-cache patch (repro = hf-to-litertlm falcon_h1_work/)",
-    "tool_version": "TODO(owner): patched-checkout version not pinned in the HF card"
+    "tool_version": "TODO: patched-checkout version not pinned in the HF card"
   },
   "cross_runtime": [],
   "delegation": null,
@@ -83,7 +83,7 @@
           "error": null,
           "evidence": [
             "quality autorun JSON: promptTokensPerSecond=48.71 decodeTokensPerSecond=7.85 firstTokenLatencyMS=3141 memoryPeakDuringDecodeMB=1455.5 (litert-lm_litert-local_falconh1-3b-int8_quality_2026-08-14T03-59-18Z.json)",
-            "composite 8-question probe 8/8, answers identical to the GPU run"
+            "composite 8-question test 8/8, answers identical to the GPU run"
           ],
           "failure_class": null,
           "full_delegation": null,
@@ -126,7 +126,7 @@
           "error": null,
           "evidence": [
             "quality autorun JSON: promptTokensPerSecond=111.48 decodeTokensPerSecond=14.04 firstTokenLatencyMS=1494 memoryPeakDuringDecodeMB=3033.8 loadTimeSeconds=27.55 (litert-lm_litert-local_falconh1-3b-int8_quality_2026-08-14T03-58-56Z.json)",
-            "composite 8-question probe 8/8; full 12-signature prefill ladder loads on the 12 GB phone with no memory pressure (falcon vocab 65537 keeps the per-signature RAM tax light)"
+            "composite 8-question test 8/8; full set of 12 prefill signatures loads on the 12 GB phone with no memory pressure (falcon vocab 65537 keeps the per-signature RAM tax light)"
           ],
           "failure_class": null,
           "full_delegation": null,
@@ -168,7 +168,7 @@
           },
           "error": null,
           "evidence": [
-            "results block: prefill=120.70 decode=20.88 tokens/s (falcon_h1_work/bench_3b.log, quiet window, --cache no, runs 3)"
+            "results block: prefill=120.70 decode=20.88 tokens/s (quiet window, --cache no, runs 3)"
           ],
           "failure_class": null,
           "full_delegation": null,
@@ -210,7 +210,7 @@
           },
           "error": null,
           "evidence": [
-            "results block: prefill=979.31 decode=65.32 tokens/s (falcon_h1_work/bench_3b.log, quiet window, --cache no, runs 3)",
+            "results block: prefill=979.31 decode=65.32 tokens/s (quiet window, --cache no, runs 3)",
             "E0000 gpu_model_builder.cc:4039] TopK requires src tensor C dimension to be divisible by 4. (vocab 65537; family-normal — shipped 1.5B logs the identical line; generation and 8Q unaffected)"
           ],
           "failure_class": null,
@@ -253,7 +253,7 @@
           },
           "error": null,
           "evidence": [
-            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation check (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
             "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
             "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
             "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 118.1 s, output head '**33**'",

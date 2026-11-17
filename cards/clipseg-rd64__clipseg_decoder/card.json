@@ -68,7 +68,7 @@
     "sweep_source": "data/sweep/2.5.3/2026-08-11/clipseg-rd64__clipseg_decoder.json"
   },
   "conversion": {
-    "command": "~/clipconv/bin/python build_clipseg.py",
+    "command": "python build_clipseg.py",
     "quantization": "none — fp32 (artifact tensors: 271 float32, no float16/int8)",
     "tool": "litert-torch",
     "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"

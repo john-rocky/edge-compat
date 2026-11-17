@@ -1,0 +1,88 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x250x512:float32;1x250:float32",
+  "license": "apache-2.0",
+  "model_id": "embeddinggemma-2-transcribe__reader_w10",
+  "notes": "EmbeddingGemma 2 Transcribe (English speech to words), mlboydaisuke/EmbeddingGemma-2-Transcribe-LiteRT main af9fe50c (reader v2 uploaded 2026-10-15 13:32:32 UTC); source verified 2026-10-15 by HTTP HEAD (302 LFS redirect; x-linked-etag = the LFS sha256 12811944…, x-linked-size 386470384 B); reader v2 (a 6-layer transformer of 19.6 M parameters trained with CTC on LibriSpeech 960 h), the 200,000-word table (float16 as released, read through 1 DEQUANTIZE into 1 FULLY_CONNECTED) and ARG_MAX (1) + REDUCE_MAX (1) in one graph of 436 operators; reader_10s_soft float32 [1,250,512], reader_10s_mask float32 [1,250] -> reader_10s_ids_output int32 [1,250], reader_10s_best_output float32 [1,250], reader_10s_blank_output float32 [1,250]; the reader itself is float32; random fills are not meaningful inputs (loads / runs / delegation are the signal); reader v1 (4 layers, 13.3 M) is the file at revision 80106e1f",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-11-09",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorNotFound.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorNotFound.",
+        "error: ERROR: failed to create XNNPACK runtime",
+        "error: ERROR: Node number 436 (TfLiteXNNPackDelegate) failed to prepare."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.6.0",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "7.0.0-1019-azure",
+        "webgpu_adapter": {
+          "architecture": "swiftshader",
+          "description": "",
+          "device": "",
+          "vendor": "google"
+        }
+      },
+      "error": "Error: ERROR: [./third_party/odml/litert/litert/cc/litert_compiled_model.h:2226]\n└ ERROR: [./third_party/odml/litert/litert/cc/litert_compiled_model.h:2190]\n└ ERROR: [./third_party/odml/litert/litert/cc/litert_compiled_model.h:578]\n└ Failed to allocate tensors",
+      "failure_class": "run_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-11-09",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorNotFound.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorNotFound.",
+        "error: Aborted()"
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.6.0",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "7.0.0-1019-azure",
+        "webgpu_adapter": {
+          "architecture": "swiftshader",
+          "description": "",
+          "device": "",
+          "vendor": "google"
+        }
+      },
+      "error": "RuntimeError: Aborted(). Build with -sASSERTIONS for more info.",
+      "failure_class": "compile_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/mlboydaisuke/EmbeddingGemma-2-Transcribe-LiteRT/resolve/main/reader_w10.tflite"
+}

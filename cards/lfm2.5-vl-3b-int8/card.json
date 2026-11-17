@@ -8,7 +8,7 @@
   ],
   "benchmarks": [],
   "conversion": {
-    "command": "lfm_work/convert_lfm25_vl.py --task image_text_to_text (hf-to-litertlm; HF card Conversion)",
+    "command": "convert_lfm25_vl.py --task image_text_to_text (hf-to-litertlm; HF card Conversion)",
     "quantization": "int8 dynamic on text linears + convs + embedding, vision tower int8 (HF card file table)",
     "tool": "hf-to-litertlm lfm_work/convert_lfm25_vl.py (litert-torch 0.9.3, --task image_text_to_text) — exact recipe, int4 post-processing and executor metadata all in the open pipeline (HF card Conversion)",
     "tool_version": "0.9.3 (HF card Conversion)"
@@ -68,7 +68,7 @@
         "run": {
           "accelerator": "gpu",
           "context_length": null,
-          "date": "2026-08-24",
+          "date": "2026-08-25",
           "decode_tokens_per_s": 20.15,
           "delegated_ops": 937,
           "env": {
@@ -107,7 +107,7 @@
           "total_ops": 937,
           "ttft_ms": 330.0
         },
-        "source": "data/device_runs/0.16.0/2026-08-24/lfm2.5-vl-3b-int8__galaxy-s26.json"
+        "source": "data/device_runs/0.16.0/2026-08-25/lfm2.5-vl-3b-int8__galaxy-s26.json"
       }
     ]
   },

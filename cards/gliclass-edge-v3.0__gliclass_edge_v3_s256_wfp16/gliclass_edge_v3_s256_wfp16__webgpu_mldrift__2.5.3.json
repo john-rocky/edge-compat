@@ -14107,7 +14107,7 @@
     "litert_version": "2.5.3"
   },
   "model": {
-    "path": "/Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/exports/shipment/gliclass_edge_v3_s256_wfp16.tflite",
+    "path": "gliclass_edge_v3_s256_wfp16.tflite",
     "sha256": "109c6c9e75f646b6341e4baf816f5f98b473254fcff580312791bd314a226f25",
     "subgraph_count": 1
   },

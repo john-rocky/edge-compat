@@ -1,0 +1,80 @@
+{
+  "backend": "gpu_metal_mac",
+  "entries": [
+    {
+      "conditions": "Same backend and probe as the MUL row: a rank-2 runtime tensor [N,C] plus a rank-2 constant [N,C] (a position-embedding table interpolated to the 448x448 grid) uses the constant's row 0 for every token: Muse-Glimmer-30B's first vision layer, op 2, relative L2 4.5e-2 against the CPU at fp32. The same layout rule as the MUL row (runtime rank-2 [a,b] -> BHWC(a,1,1,b), a rank-2 constant right-aligned).",
+      "constraints": {
+        "operand_a": "activation",
+        "operand_b": "constant",
+        "operand_b_rank": 2,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-10-30",
+        "litert_version": "2.3.0",
+        "source_model": "Muse-Glimmer-30B vision encoder (448x448, fp32)"
+      },
+      "op": "ADD",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "the probe's 87 outputs of the first layer within relative L2 3.8e-6 of the CPU at fp32 after the rewrite",
+          "rewrite": "lift the add to rank 4 as in the MUL row (tfl_rank4.py rewrite)",
+          "symptom": "the encoder output drifts from the first op on, every node delegated, no error"
+        }
+      ],
+      "status": "incorrect"
+    },
+    {
+      "conditions": "Mac16,9 (Apple M4 Max), macOS 27.0, ai-edge-litert 2.3.0 CompiledModel with the GPU accelerator only (Metal), litert-torch 0.10.0 / litert-converter 0.5.0 export: a 4-op module (ADD, FLOOR, MUL, SUB) builds and runs at fp32 precision (max |d| 5.96e-8 against the fused torch op) and at fp16 precision (2.43e-4); the 694-op vision encoder with the same FLOOR (LFM3-VL-2B's, 512 x 512) builds GPU-only at both precisions",
+      "constraints": {
+        "formula": "floor(x*255+0.5) on the runtime's u8*(1/255)",
+        "placement": "input_step_first_op"
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-10-28",
+        "litert_version": "2.3.0",
+        "source_model": "LiquidAI/LFM3-VL-2B @f83d2b0a: the published file's vision encoder (LFM3-VL-2B_f16.litertlm of litert-community/LFM3-VL-2B-LiteRT) and the 4-op check module"
+      },
+      "op": "FLOOR",
+      "provenance": "measured",
+      "status": "delegated"
+    },
+    {
+      "conditions": "Mac Studio M4 Max, macOS 27.0, ai-edge-litert 2.3.0 CompiledModel with the wheel's Metal GPU accelerator, at the default precision and with enforce_f32: a rank-3 runtime tensor [N,h,d] times a rank-3 constant [N,1,d] (a 2D rotary table of a vision transformer) uses the constant's first row for every token. The delegate lays out a rank-3 runtime tensor batch-first (ExtractTensorShape: [a,b,c] -> BHWC(a,1,b,c)) but a rank-2 or rank-3 constant right-aligned (ParseInputsWithConstTensorImpl). First vision layer of each model with every op output as a graph output, fp32: the rotary MUL is where the output leaves the CPU's (relative L2 0.49 to 1.06 on Muse-Glimmer-30B, 0.78 on Qwen2.5-VL-72B-Instruct); whole encoder against Transformers on one picture: cosine 0.358 / 0.582 (Muse, default precision / fp32) and 0.247 / 0.315 (72B). No error or warning is printed.",
+      "constraints": {
+        "operand_a": "activation",
+        "operand_b": "constant",
+        "operand_b_rank": 3,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-10-30",
+        "litert_version": "2.3.0",
+        "source_model": "Muse-Glimmer-30B and Qwen2.5-VL-72B-Instruct vision encoders (448x448, fp32)"
+      },
+      "op": "MUL",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "GPU fp32 output of both encoders at cosine 1.00000 against Transformers on two pictures; the CPU output of the rewritten graph equals the original bit for bit",
+          "rewrite": "lift the op to rank 4: the runtime operand reshaped to [1,...], the constant expanded to its full rank-4 shape, the output reshaped back (hf-to-litertlm tools/gpu_graph/tfl_rank4.py rewrite)",
+          "symptom": "the vision encoder's GPU output is far from the CPU's (cosine 0.25 to 0.58) while every node is delegated"
+        }
+      ],
+      "status": "incorrect"
+    }
+  ],
+  "generated_at": "2026-10-31",
+  "litert_version": "2.3.0",
+  "schema_version": "1.0"
+}

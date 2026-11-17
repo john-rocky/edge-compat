@@ -1,0 +1,153 @@
+{
+  "artifact": "Spark-X2.6-4B_int8.litertlm",
+  "artifact_sha256": "3fae1eca71a67a03e597240e802c3ea17574a9f22499e38cfa9a7d76cebb7565",
+  "device": "galaxy-s26",
+  "model_id": "spark-x2.6-4b-int8",
+  "notes": "Spark-X2.6-4B_int8.litertlm of litert-community/Spark-X2.6-4B: the INT8 file of the 4B = the 4B CPU file. XHToken/Spark-X2.6-4B (Apache-2.0) converted to LiteRT-LM; the bundle carries templates/spark26_think.jinja (the vendor template's plain-chat part, thinking on by default, reasoning_effort high or low through extra_context), a `thought` channel, 15 stop entries and the repo's tokenizer.json byte for byte. Published 2026-10-31 (Hub main 6510fc46).",
+  "quantization": "dynamic INT8 (per-channel INT8 weights on every linear and the embedding, FP32 activations declared): litert-torch 0.9.3 export (dynamic_wi8_afp32), the exported graph (no GPU rewrite), prefer_activation_type fp32, 6 prefill signatures, KV cache 4,096",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": 4096,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-spark26-devicebench",
+        "os_build": "Android 16 (BP4A.251205.006)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Qualcomm SM8850 (Adreno GPU)",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Spark-X2.6-4B `Spark-X2.6-4B_int8.litertlm` at main 6510fc46 (published 2026-10-31): LFS sha256 3fae1eca71a67a03e597240e802c3ea17574a9f22499e38cfa9a7d76cebb7565, 4238081840 B (anonymous Hub API tree read 2026-10-31 23:55 JST); the same digest as",
+        "runtime: PyPI litert-lm-api 0.19.0 Android wheel (liblitert-lm.so sha256 28fa8433febc49a99f4bd3ef8cb82c2912457cfe274d97944debeabdeb97fc78), the Python API on the phone: one process per question, greedy, thinking on, max_output_tokens 2,048, context 4,096",
+        "output_match = every question right with its thought closed and the rendered prompt equal byte for byte to the Mac's render (sha256): right 8 / 8, closed 8 / 8, render 8 / 8",
+        "runs: (s26e) q1='42' q2='Tokyo' q3='cold' q4='7 days' q5='Merci' q6='56' q7='0.9' q8='blue'",
+        "delegation (l4i8-cpu-q1): prefill_1024 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_256 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_64 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_16 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_4 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_1 1937 / 2022 on TfLiteXNNPackDelegate (73 partition(s)); decode 1982 / 2067 on TfLiteXNNPackDelegate (74 partition(s))"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "exact": 8.0,
+        "questions": 8.0,
+        "render_equal_mac": 8.0,
+        "right": 8.0,
+        "thought_closed": 8.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "the 8 check questions on the phone (2,048-token cap), greedy, thinking on",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "cpu",
+      "context_length": 2048,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": 5.28,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-spark26-devicebench",
+        "os_build": "Android 16 (BP4A.251205.006)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Qualcomm SM8850 (Adreno GPU)",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Spark-X2.6-4B `Spark-X2.6-4B_int8.litertlm` at main 6510fc46 (published 2026-10-31): LFS sha256 3fae1eca71a67a03e597240e802c3ea17574a9f22499e38cfa9a7d76cebb7565, 4238081840 B (anonymous Hub API tree read 2026-10-31 23:55 JST); the same digest as",
+        "runtime: PyPI litert-lm-api 0.19.0 Android wheel (liblitert-lm.so sha256 28fa8433febc49a99f4bd3ef8cb82c2912457cfe274d97944debeabdeb97fc78) on CPython 3.14.8, `Benchmark(model, cpu, prefill_tokens=1024, decode_tokens=256, max_num_tokens=2048)`, 3 runs on one engine per process; a process's value = the mean of runs 2-3, the cell = the mean over processes",
+        "protocol: a benchmark script, one process per run, a ready check (thermal, CPU cap, rest) before each run, MemAvailable read every 0.25 s with the process stopped under 1,000,000 kB",
+        "runs: l4i8-cpu-t1 (s26c, model_sha256 = the artifact), l4i8-cpu-t2 (s26e, model_sha256 = the artifact), l4i8-cpu-t3 (s26f, model_sha256 = the artifact), l4i8-cpu-t4 (s26f, model_sha256 = the artifact)",
+        "delegation (l4i8-cpu-t1): prefill_1024 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_256 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_64 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_16 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_4 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_1 1937 / 2022 on TfLiteXNNPackDelegate (73 partition(s)); decode 1982 / 2067 on TfLiteXNNPackDelegate (74 partition(s))",
+        "peak_mem_mb = the highest VmHWM of the processes (2 s phone-side samples); CPU runs from an uncapped start"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "decode_tokens_per_s_p1": 5.273,
+        "decode_tokens_per_s_p2": 5.251,
+        "decode_tokens_per_s_p3": 5.456,
+        "decode_tokens_per_s_p4": 5.148,
+        "init_ms_run1_p1": 10020.9,
+        "init_ms_run1_p2": 789.37,
+        "init_ms_run1_p3": 10920.19,
+        "init_ms_run1_p4": 1605.13,
+        "kgsl_page_alloc_max_b": 302981120.0,
+        "memavailable_min_kb": 4807952.0,
+        "prefill_tokens": 1024.0,
+        "processes": 4.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 6270.7,
+      "prefill_tokens_per_s": 88.7,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 11815.5
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": 2048,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-spark26-devicebench",
+        "os_build": "Android 16 (BP4A.251205.006)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Qualcomm SM8850 (Adreno GPU)",
+        "vendor_sdk": null
+      },
+      "error": "PGUARD: MemAvailable 959672 kB < 1000000 kB at uptime 1327159.57: kill -9 29410",
+      "evidence": [
+        "artifact: litert-community/Spark-X2.6-4B `Spark-X2.6-4B_int8.litertlm` at main 6510fc46 (published 2026-10-31): LFS sha256 3fae1eca71a67a03e597240e802c3ea17574a9f22499e38cfa9a7d76cebb7565, 4238081840 B (anonymous Hub API tree read 2026-10-31 23:55 JST); the same digest as",
+        "runtime: PyPI litert-lm-api 0.19.0 Android wheel (liblitert-lm.so sha256 28fa8433febc49a99f4bd3ef8cb82c2912457cfe274d97944debeabdeb97fc78 (in kit.tar 613afeefa295, pushed and checked on the phone in the run's setup)), `Benchmark(model, gpu, prefill_tokens=1024, decode_tokens=256, max_num_tokens=2048)`",
+        "the memory guard (phone side, MemAvailable every 0.25 s, the process stopped below 1,000,000 kB, fixed before the run on this 12 GB phone) stopped both attempts while the GPU engine was being built: \"PGUARD: MemAvailable 987700 kB < 1000000 kB at uptime 1321690.44: kill -9 21093\"; \"PGUARD: MemAvailable 959672 kB < 1000000 kB at uptime 1327159.57: kill -9 29410\"",
+        "l4i8-gpu-t1: status OOM_GUARD, killed_by guard, 11 s, the Adreno page pool (kgsl page_alloc) up to 5826875392 B; delegation lines printed before the stop: prefill_1024 2236 / 2236 on LITERT_CL (1 partition(s)); prefill_256 2236 / 2236 on LITERT_CL (1 partition(s)); prefill_64 2236 / 2236 on LITERT_CL (1 partition(s)); prefill_16 2236 / 2236 on LITERT_CL (1 partition(s)); prefill_4 2236 / 2236 on LITERT_CL (1 partition(s)); prefill_1 2022 / 2022 on LITERT_CL (1 partition(s)); decode 2067 / 2067 on LITERT_CL (1 partition(s))",
+        "the 4B GPU file of the release is the INT4 file (not run on this phone); the card recommends this phone's CPU for the INT8 file"
+      ],
+      "failure_class": "memory_cap_exceeded",
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "attempts": 2.0,
+        "kgsl_page_alloc_max_b": 5826875392.0,
+        "memavailable_at_stop_kb_attempt1": 987700.0,
+        "memavailable_at_stop_kb_attempt2": 959672.0,
+        "seconds_to_stop": 11.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

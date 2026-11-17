@@ -8,10 +8,10 @@
   ],
   "benchmarks": [],
   "conversion": {
-    "command": "zsh bitcpm_work/convert_bitcpm.sh",
+    "command": "zsh convert_bitcpm.sh",
     "quantization": "int4 blockwise-32 symmetric min-max linears + int8 channelwise embedding/lm_head (wi4b32_wi8, algo minmax)",
-    "tool": "litert-torch (via litertlm-convert bitcpm_work/convert_bitcpm.sh — export_static_longrope.py + quantize_minicpm5.py + litert-lm-builder)",
-    "tool_version": "0.9.1 (lane venv ~/venvs/minicpm5 per SESSION_STATE.md 2026-07-21)"
+    "tool": "litert-torch (export_static_longrope.py + quantize_minicpm5.py + litert-lm-builder)",
+    "tool_version": "0.9.1"
   },
   "cross_runtime": [],
   "delegation": null,
@@ -79,7 +79,7 @@
           },
           "error": null,
           "evidence": [
-            "hand-recorded device phase: litertlm-convert reports/gpu_audit/MATRIX.md 実機フェーズ table (committed 0559ad3, 2026-07-23; Gallery 1.0.15 official Benchmark, ML Drift GPU, p256/d256 x3 runs; runtime version axis = the Gallery app version — the embedded litert-lm version is not recorded)",
+            "hand-recorded device phase: device-phase table (committed 0559ad3, 2026-07-23; Gallery 1.0.15 official Benchmark, ML Drift GPU, p256/d256 x3 runs; runtime version axis = the Gallery app version — the embedded litert-lm version is not recorded)",
             "row: '✅ 合格 | 136.6 / 7.84 (TTFT 2.0s, 初回 init 48.8s)' — model-specific slowness on real ML Drift"
           ],
           "failure_class": null,

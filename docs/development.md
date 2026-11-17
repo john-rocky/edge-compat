@@ -1,7 +1,5 @@
 # Repository layout and development
 
-`DECISIONS` and `PROGRESS` citations on this page refer to the logs of the private lab repository.
-
 ## MCP server (Phase 14)
 
 The dataset, served to AI agents: five tools over **stdio, local-first** —
@@ -32,18 +30,18 @@ data/device_runs/   # real device-run snapshots; Phase 13 layout:
                     #   append-only, one runtime per snapshot directory
 data/releases.json  # latest-known-release registry (staleness reference; autobump-maintained)
 data/regression/    # catalog regression: bundles.json (own-bundle list) +
-                    #   <runtime_version>/<YYYY-MM-DD>/<bundle_id>.json + SUMMARY.md (DECISIONS #205)
+                    #   <runtime_version>/<YYYY-MM-DD>/<bundle_id>.json + SUMMARY.md
 data/examples/      # example-provenance fixtures only; what tests run against
                     #   *.tflite fixtures are synthetic, built by
                     #   `python -m litert_compat.parser.fixtures` (byte-pinned in tests)
                     #   sweep/ holds example sweep results (schema-validated in tests)
                     #   device_runs/ holds example device-run snapshots
                     #   llm_samples/ holds REAL staged adapter-mapping samples
-                    #     (read-only reference; never ingested — see its README)
+                    #     (read-only reference; never ingested)
 data/probes/        # generated probe fixtures (probe gen default output; not committed)
-data/transforms/    # owner-authored transform rules (examples live in
+data/transforms/    # hand-written transform rules (examples live in
                     #   data/examples/transforms/ — agent-authored rules are
-                    #   example-provenance only, spec §10.1)
+                    #   example-provenance only)
 src/litert_compat/  # library + CLIs
   matrix/           #   load / validate / query / import / diff / carry-forward
   parser/           #   .tflite flatbuffer reader + synthetic fixture builder
@@ -63,7 +61,7 @@ cards/              # generated cards (committed example output; byte-pinned in 
 mcp/                # MCP server (Phase 14; stdio, `mcp` extra — see mcp/README.md)
 llms.txt            # generated discovery entry point (byte-pinned in tests)
 DELTA_LOG.md        # generated per-release observed-changes log (Phase 11; never hand-edited)
-MAINTENANCE.md      # manual-verify register (Phase 11; owner-maintained dates)
+MAINTENANCE.md      # manual-verify register (Phase 11; dates maintained by hand)
 .github/workflows/  # deploy-zoo (7) + resweep / autobump / agentfix / reminders (11)
 tests/              # incl. golden report files under tests/golden/
 ```
@@ -78,11 +76,11 @@ uv run pytest        # all tests run against example-provenance data
                      #    auto-skip when the hardware is absent)
 uv run ruff check .
 
-cd web/sweep         # the browser-sweep lane (Node >= 20)
+cd web/sweep         # the browser sweep harness (Node >= 20)
 npm test             # build + unit tests
 npm run typecheck && npm run lint
 
-cd site              # the demo-zoo lane (Node >= 20)
+cd site              # the demo-zoo site (Node >= 20)
 npm test             # generator units + headless Playwright smoke
 npm run typecheck && npm run lint
 ```

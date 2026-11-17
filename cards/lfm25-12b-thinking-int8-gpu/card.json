@@ -8,10 +8,10 @@
   ],
   "benchmarks": [],
   "conversion": {
-    "command": "minicpm5_work/ship_lfm25_int8gpu_20260825/build_int8_gpu.sh",
+    "command": "build_int8_gpu.sh",
     "quantization": "int8 dynamic (linears + embedding via wi8fc; convs float) — GSM8K 77% vs 76% for export-time conv-int8 on this finetune (build_int8_gpu.sh primary pointers)",
     "tool": "litert-torch 0.9.3 lineage export + post-hoc ai-edge-quantizer (wi8fc recipe), per build_int8_gpu.sh",
-    "tool_version": "same toolchain as ship_lfm25_gpu_variant_20260812/build_gpu_variants.sh (0.9.3-lineage GPU-safe ShortConv); quantizer recipe wi8fc"
+    "tool_version": "same toolchain as the GPU-variant build (0.9.3-lineage GPU-safe ShortConv); quantizer recipe wi8fc"
   },
   "cross_runtime": [],
   "delegation": null,
@@ -82,7 +82,7 @@
           },
           "error": null,
           "evidence": [
-            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation check (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
             "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
             "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
             "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 98.5 s, output head '[thought]  Okay, let me see. The question is asking \"What is 17 plus 26? Answer '",
@@ -132,10 +132,10 @@
     "task": "text-generation"
   },
   "pitfalls": [
-    "The published _int4/_int8 (non-gpu) siblings stall GPU delegation at 536/579 ops on Adreno (0.9.1-era ShortConv INT64 block; s4_gpu_gate/RESULTS.md rows 5/12). This _int8_gpu delegates 542/542 on the Galaxy S26 (device_runs 2026-08-25).",
+    "The published _int4/_int8 (non-gpu) siblings stall GPU delegation at 536/579 ops on Adreno (0.9.1-era ShortConv INT64 block; 5/12). This _int8_gpu delegates 542/542 on the Galaxy S26 (device_runs 2026-08-25).",
     "Thinking bundle: the runtime needs the think opener prefilled and the bundle's declared thought channel to show reasoning; gate multi-turn behaviour at sizes where the thinking completes (family records).",
     "add_executor_metadata is required after post-hoc quantization (0.9.3 emits no ExecutorMetadataProto; litert-lm >=0.15 needs it) (build_int8_gpu.sh).",
-    "One arm of the 08-25 Mac Metal sieve refused engine creation for a JP/Thinking variant while S26 OpenCL passed the same file — see ship_lfm25_int8gpu_20260825/RESULTS.md before quoting Mac Metal numbers for this family."
+    "One arm of the 08-25 Mac Metal sieve refused engine creation for a JP/Thinking variant while S26 OpenCL passed the same file — see before quoting Mac Metal numbers for this family."
   ],
   "schema_version": "1.2"
 }

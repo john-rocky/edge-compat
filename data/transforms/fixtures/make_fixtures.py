@@ -1,4 +1,4 @@
-"""Synthetic fixtures for the STAGED (draft, owner-review-pending) transform
+"""Synthetic fixtures for the STAGED (draft, review-pending) transform
 rules in data/transforms_staging/.
 
 Same machinery as data/examples/ (litert_compat.parser.fixtures /

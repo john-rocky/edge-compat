@@ -1,8 +1,8 @@
 """Ingestion adapters: existing measurement-tool outputs -> device-run records.
 
-Three lanes, mapped against the REAL samples staged in
+Three sources, mapped against the REAL samples staged in
 `data/examples/llm_samples/` (never guessed — the Phase 3 adapter rule), with
-the owner decisions recorded in that directory's README encoded here:
+the rules below encoded here:
 
 - gpu_audit (`gpu_gate_mac.sh` logs): the verdict comes from the LOG BODY
   only — the CLI exits 0 even when engine creation fails, and `summary.txt`
@@ -10,13 +10,12 @@ the owner decisions recorded in that directory's README encoded here:
   neither is an adapter input. A printed results block with zero throughput
   is a FAILURE (`zero_throughput`), never a measurement. The 2026-07-22
   batch's speed figures are import-blocked (`speeds_contaminated=True`)
-  while their PASS/FAIL verdicts remain usable (owner decision #5).
-- devicemark leaderboard rows: only `*__litertlm` artifacts are this lane
+  while their PASS/FAIL verdicts remain usable.
+- devicemark leaderboard rows: only `*__litertlm` artifacts are ingested
   (`coreai` rows belong in a card's cross_runtime list); `mem_measured:
   false` memory is carried as the explicitly-estimated
-  `metrics.peak_mem_est_mb`, never as a measured `peak_mem_mb` (owner
-  decision #4).
-- compat_check reports: refuse-until-sampled (owner decision #3) — only the
+  `metrics.peak_mem_est_mb`, never as a measured `peak_mem_mb`.
+- compat_check reports: refuse-until-sampled — only the
   `ok` status branch has a staged real sample, so any other status (and any
   lane other than `llm`) is refused with a precise reason instead of built
   against invented strings.
@@ -48,7 +47,7 @@ _OP_LINE_RE = re.compile(r"^([A-Z][A-Z0-9_]*): (.*)$")
 
 CONTAMINATED_NOTE = (
     "speed figures withheld: this measurement batch was retracted as contaminated "
-    "(parallel GPU load; owner correction in gpu_audit MATRIX.md, 2026-07-23) — "
+    "(parallel GPU load; corrected in the gpu_audit matrix, 2026-07-23) — "
     "the PASS/FAIL verdict is load-independent and stands"
 )
 
@@ -114,7 +113,7 @@ def _base_record(accelerator: str, env: dict[str, Any], date: str) -> dict[str, 
     }
 
 
-# --- lane 1: gpu_audit -------------------------------------------------------
+# --- source 1: gpu_audit -------------------------------------------------------
 
 
 @dataclass
@@ -298,22 +297,22 @@ def gpu_audit_record(
     return record
 
 
-# --- lane 1b: litert_lm_main / litert-lm benchmark console logs --------------
+# --- source 1b: litert_lm_main / litert-lm benchmark console logs --------------
 #
 # `gpu_gate_mac.sh` wraps the runtime and prints its own header, which the
-# parser above keys on. The Android lane has no wrapper: `litert_lm_main` is
+# parser above keys on. Android has no wrapper: `litert_lm_main` is
 # invoked directly over adb and prints only the runtime's own output, and
 # `litert-lm benchmark` on the Mac prints a results block with no header
 # either. Those logs therefore state neither the artifact nor the accelerator,
 # so BOTH are supplied by the caller instead of being recovered from a file
 # name — the same rule the rest of this module follows.
 #
-# Two rules on what to hand this parser (DECISIONS #163). It is
+# Two rules on what to hand this parser. It is
 # last-occurrence-wins on every field, so a file holding several runs is
 # recorded as its LAST block under whatever identity the caller names, with no
 # error: ingest one slice per (accelerator x condition), never a whole file.
 # And only `litert-lm benchmark` output belongs here — the `litert-lm run`
-# sections of a shell-trace log are generation-gate output, and gate figures are
+# sections of a shell-trace log are generation-check output, and check figures are
 # not bench figures.
 
 _CONSOLE_DELEGATE_RE = re.compile(
@@ -548,7 +547,7 @@ def console_record(
     return record
 
 
-# --- lane 2: devicemark ------------------------------------------------------
+# --- source 2: devicemark ------------------------------------------------------
 
 #: Harness identity from the devicemark dataset card — documented there, not
 #: in the row, so the adapter takes it from the card rather than inventing it.
@@ -584,7 +583,7 @@ def devicemark_records(
     machine_label: str | None = None,
 ) -> tuple[list[DevicemarkResult], list[str]]:
     """(ingestible results, skip notes). Non-litertlm rows are skipped — they
-    belong in a card's cross_runtime lane — and malformed rows are errors."""
+    belong in a card's cross_runtime block — and malformed rows are errors."""
     results: list[DevicemarkResult] = []
     skipped: list[str] = []
     for i, line in enumerate(text.splitlines()):
@@ -605,7 +604,7 @@ def devicemark_records(
         if fmt != "litertlm" or row.get("runtime") != "litertlm":
             skipped.append(
                 f"{artifact_id} on {row.get('device')}: runtime {row.get('runtime')!r} — "
-                "not the LiteRT-LM lane (cross-runtime rows belong in a card's "
+                "not a LiteRT-LM row (cross-runtime rows belong in a card's "
                 "cross_runtime list)"
             )
             continue
@@ -651,7 +650,7 @@ def devicemark_records(
     return results, skipped
 
 
-# --- lane 3: compat_check ----------------------------------------------------
+# --- source 3: compat_check ----------------------------------------------------
 
 
 @dataclass(frozen=True)
@@ -677,14 +676,14 @@ def compat_check_records(
     """-> (runtime_version, ingestible results, refusal notes).
 
     `model_id_for` maps "<repo tail>/<file>" or "<file>" to the id a result is filed
-    under, overriding the mechanical id. Added 2026-09-08 (DECISIONS #168): the
+    under, overriding the mechanical id. Added 2026-09-08: the
     per-artifact suffix rule below is applied per REPORT, so a repo that ships int4 +
     int8 gets suffixed ids in one report and the bare id in a report that carried
     only one of them — continuity across snapshots needs the caller to say so.
 
-    Refuse-until-sampled (owner decision #3): only `status: "ok"` on the
+    Refuse-until-sampled: only `status: "ok"` on the
     `llm` lane has a staged real sample. Every other status or lane is
-    refused by name — the owner supplies a real sample when one occurs,
+    refused by name — a real sample is supplied when one occurs,
     which unblocks that branch against real strings instead of invented ones.
     """
     runtime_version = doc.get("runtime_version")
@@ -702,20 +701,20 @@ def compat_check_records(
         if lane != "llm":
             refused.append(
                 f"{label}: lane {lane!r} has no staged sample — refused "
-                "(supply one real sample to unblock this branch; owner decision #3)"
+                "(supply one real sample to unblock this branch)"
             )
             continue
         if status != "ok":
             refused.append(
                 f"{label}: status {status!r} has no staged sample — refused "
                 "(supply one real BROKEN/SUSPECT sample to unblock this branch; "
-                "owner decision #3)"
+                "refuse-until-sampled)"
             )
             continue
         # Mechanical lowercasing only (HF repo names are typically cased:
         # LFM2.5-1.2B-Instruct -> lfm2.5-1.2b-instruct); no other renaming.
-        # Legacy hand-chosen ids from the console-log lane (lfm25-12b-*) are
-        # NOT aliased here — joins across lanes are a rendering concern.
+        # Legacy hand-chosen ids from the console-log source (lfm25-12b-*) are
+        # NOT aliased here — joins across sources are a rendering concern.
         model_id = repo.split("/")[-1].lower()
         if not re.match(r"^[a-z0-9][a-z0-9._-]*$", model_id):
             refused.append(f"{label}: cannot derive a model id from repo {repo!r}")
@@ -759,7 +758,7 @@ def _disambiguate_artifacts(
     Real sample: compat_0.16.0.json ships granite-4.0-h-350m fp16 AND int8 —
     one record file holds one artifact, so the bare repo id collides. The
     suffix is the artifact stem's remainder after the repo id (fp16 / int8),
-    matching the console-log lane's quant-suffixed ids (lfm25-vl-450m-int4 /
+    matching the console-log source's quant-suffixed ids (lfm25-vl-450m-int4 /
     -int8). Single-artifact repos keep the bare id for continuity with
     earlier snapshots. Suffixes that cannot be derived, or still collide,
     are refused — never invented.
@@ -793,10 +792,10 @@ def _disambiguate_artifacts(
     return out
 
 
-# --- lane 5: iOS bench-app "yardstick" result JSON -----------------------------
+# --- source 5: iOS bench-app "yardstick" result JSON -----------------------------
 #
 # Mapped against the real samples staged under data/examples/llm_samples/yardstick/
-# (owner's iOS BenchmarkApp, `--yardstick-autorun`, 2026-08-19). What the JSON
+# (the iOS BenchmarkApp, `--yardstick-autorun`, 2026-08-19). What the JSON
 # carries and what it does not:
 #   carries : timestamp (UTC ISO), task id, outputSample, parameters, runtime name,
 #             device.modelIdentifier/systemVersion/physicalMemoryMB,
@@ -846,7 +845,7 @@ def parse_yardstick(doc: dict[str, Any]) -> YardstickRun:
         raise AdapterError(f"not a yardstick result: missing {', '.join(missing)}")
     if doc.get("runtime") != "litert-lm":
         raise AdapterError(
-            f"runtime {doc.get('runtime')!r} is not the litert-lm lane "
+            f"runtime {doc.get('runtime')!r} is not litert-lm "
             "(other runtimes belong in a card's cross_runtime list)"
         )
     m = doc["metrics"]
@@ -902,7 +901,7 @@ def yardstick_record(
     # process: run 1 cold, runs >= 2 warm, headline = the warm median (the
     # vendor-card convention). Several runs of one task therefore AGGREGATE
     # into that task's figures — every raw run stays in the evidence, the cold
-    # figure and the warm spread stay in metrics. (Owner-approved 2026-08-27;
+    # figure and the warm spread stay in metrics. (Since 2026-08-27;
     # before that, duplicate task ids were refused.)
     groups: dict[str, list[YardstickRun]] = {}
     for r in runs:
@@ -1009,7 +1008,7 @@ def yardstick_record(
     return record
 
 
-# --- lane 6: npubench classic sweep (S26 NPU/GPU, JIT + AOT) -----------------
+# --- source 6: npubench classic sweep (S26 NPU/GPU, JIT + AOT) -----------------
 
 
 #: The measurement-acceptance contract the sweep driver enforced; carried on
@@ -1043,7 +1042,7 @@ class NpubenchResult:
 
 
 def _npubench_slug(repo: str, file: str, multi_file: bool) -> str:
-    """The cards-lane id convention: repo name lowercased with `-LiteRT`
+    """The cards' id convention: repo name lowercased with `-LiteRT`
     dropped; repos shipping several .tflite files append `__<stem>` so one
     record file names one artifact (the devicemark collision decision)."""
     base = re.sub(r"-litert$", "", repo.split("/", 1)[-1].lower())
@@ -1274,7 +1273,7 @@ def npubench_records(
     return results, skipped
 
 
-# --- lane 7: Raspberry Pi 5 classic sweep (benchmark_model, CPU/XNNPACK) ------
+# --- source 7: Raspberry Pi 5 classic sweep (benchmark_model, CPU/XNNPACK) ------
 
 
 _PI5_CONDITIONS_NOTE = (
@@ -1419,14 +1418,14 @@ def pi5_benchmark_records(
     return results, skipped
 
 
-# --- lane 8: npubench parity gate (keyed JSON report, on-device parity) --------
+# --- source 8: npubench parity check (keyed JSON report, on-device parity) -------
 
 
 _PARITY_KEY_RE = re.compile(r"^(?P<variant>.+?)_(?P<dur>\d+s)_(?P<accel>cpu|gpu)$")
 _PARITY_CONDITIONS_NOTE = (
-    "npubench parity gate row: N=20 median in one process per accelerator, "
+    "npubench parity check row: N=20 median in one process per accelerator, "
     "real audio input, output tensors dumped and diffed against the Mac tflite "
-    "run and the fp32 eager transcript; verdict per leg = transcript == eager "
+    "run and the fp32 eager transcript; verdict per run = transcript == eager "
     "AND thermal NONE->NONE"
 )
 
@@ -1533,7 +1532,7 @@ def npubench_parity_records(
     return results, skipped
 
 
-# --- lane 9: Raspberry Pi 5 LLM sweep (`litert-lm benchmark`, wave 2) -----------
+# --- source 9: Raspberry Pi 5 LLM sweep (`litert-lm benchmark`, wave 2) -----------
 
 _PI5_LLM_CONDITIONS_NOTE = (
     "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 "
@@ -1624,7 +1623,7 @@ def pi5_llm_records(
             continue
         if gate.get("status") != "pass" or gate.get("exit") != 0:
             skipped.append(
-                f"{label}: generation gate not passed (status={gate.get('status')!r}, "
+                f"{label}: generation check not passed (status={gate.get('status')!r}, "
                 f"exit={gate.get('exit')!r}) — no record"
             )
             continue

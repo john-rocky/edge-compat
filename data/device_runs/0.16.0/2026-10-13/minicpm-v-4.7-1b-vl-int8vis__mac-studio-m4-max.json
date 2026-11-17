@@ -3,7 +3,7 @@
   "artifact_sha256": "20c73b5a1e48a315974cff1853535ff5d017100b6420d5ef221b9dd1b955dd7c",
   "device": "mac-studio-m4-max",
   "model_id": "minicpm-v-4.7-1b-vl-int8vis",
-  "notes": "Hub litert-community/MiniCPM-V-4.7-1B (upload commit 9d7638b2). The shipped bytes on an older PyPI wheel of litert-lm (the manifest's min_runtime_version 0.16.0 rests on these runs): the card's CPU commands with --cache no, one fresh process each, Mac Studio M4 Max, round 9 of litertlm-convert minicpmv47_work (r9/card_cmd_runlog.txt §C / §D). The file's container header is format 1.6.0 (builder 0.17.1 pack, r9/swap_MiniCPM-V-4.7-1B-VL_int8vis.json); both wheels read it and answered. No benchmark: throughput cells null.",
+  "notes": "Hub litert-community/MiniCPM-V-4.7-1B (upload commit 9d7638b2). The shipped bytes on an older PyPI wheel of litert-lm (the manifest's min_runtime_version 0.16.0 rests on these runs): the card's CPU commands with --cache no, one fresh process each, Mac Studio M4 Max, run 9 (§C / §D). The file's container header is format 1.6.0 (builder 0.17.1 pack); both wheels read it and answered. No benchmark: throughput cells null.",
   "quantization": "decoder and token embedding as in MiniCPM-V-4.7-1B-VL_int8.litertlm (same bytes); vision encoder dynamic-range int8 weights (FULLY_CONNECTED and CONV_2D), vision adapter fp16 weights",
   "results": [
     {

@@ -1,0 +1,70 @@
+{
+  "artifact": "decide_L3072_f16sfc.tflite",
+  "artifact_sha256": "088772270e2fb447e2cc292464b30e32f3983c3b34c70c2570f2b54626b9a419",
+  "device": "pixel-11-pro",
+  "model_id": "minicpm-ocr-decision-2b__decide_l3072_f16sfc",
+  "notes": "MiniCPM-OCR-Decision-2B (litert-community/MiniCPM-OCR-Decision-2B-LiteRT main 7f589bb7, created 2026-11-06; card license apache-2.0, base model openbmb/MiniCPM-OCR-Jev; anonymous Hub API read 2026-11-07 12:54:30 JST): the `decide` graph, bucket `L3072`, form `f16sfc`. Hub file `decide_L3072_f16sfc.tflite` 2,791,091,504 B at Hub commit(s) 672db2e3, 7f589bb7; artifact_sha256 = its LFS oid = the phone's read-back in each run's hold. Signature `decide`; its I/O as the app read it: inputs embeds float32 [1,3072,2048], valid float32 [1,3072], cos float32 [1,3072,64], sin float32 [1,3072,64] -> outputs hidden float32 [1,3072,2048]. Measured on the Pixel 11 Pro (device holds of runs r6): one result per run, and per timing set in a timing run. output_match is null on every result: the work compares each row with its own Mac Metal fp32 run of the same rows (metrics.vs_mac_metal_fp32_*: max |d| and the smallest cosine over the rows with the same input bytes), not with a CPU reference of the same bytes under the element rule. The bytes this name held at Hub commit(s) 4105cd32 (LFS oid a70c84635fa7c5dd2ffb2da77578e4b4b8d84877bf01aeded8e48fd6a43ecc3b) ran on this phone the same day in 1 run(s) of the same harness; they are not rows (one digest per file, the newer published bytes are the row): gate mode, 7 row(s) of h9dL3072.json: latency_p50_ms 8775.3.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-11-06",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 15401,
+      "env": {
+        "device": "Pixel 11 Pro",
+        "machine_label": "pixel-11-pro-ocrdec-gate-app",
+        "os_build": "Android 17 (build CD1A.260905.001.B1)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Google Tensor G6",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "the d1 gate app (com.mlboydaisuke.d1omni.gate, Kotlin CompiledModel on LiteRT 2.2.0 from Maven; APK sha256 0b6d6f70ac0cf4c7…, the APK the run config installs), one app process per run; per call = write every input + CompiledModel.run() + read every output (the app's write_run_read_ms; the GPU's run() returns before the compute ends and the read waits for it)",
+        "file measured: decide_L3072_btcv_f16sfc.tflite = litert-community/MiniCPM-OCR-Decision-2B-LiteRT `decide_L3072_f16sfc.tflite` (2,791,091,504 B) at Hub commit(s) 672db2e3, 7f589bb7, LFS oid 088772270e2fb447e2cc292464b30e32f3983c3b34c70c2570f2b54626b9a419 (Hub tree read 2026-11-07 12:54:30 JST); the phone's copy read back equal (MATCH)",
+        "(app pid 10643): `11-06 09:50:58.319 10643 10670 I tflite  : Replacing 15401 out of 15401 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).`",
+        "Run hx_dL3072 started 2026-11-06 09:50:54 JST, ready check `check run, not waited for clean (thermal 1, cap thermal-uclamp-2=13 thermal-uclamp-6=19 thermal-uclamp-0=14 , gpu_cooling 0 (budget 4614000 of 4614000)); rested 89s since 09:49:24`; build Android 17 CD1A.260905.001.B1 (`ro.build.fingerprint = google/grizzly/grizzly:17/CD1A.260905.001.B1/16238327:user/release-keys`)",
+        "no run check file (absent): no comparison in metrics",
+        "latency_p50_ms = the check pass's warm median per call (the rows after the first call; the rows differ in content, not in shape); a check run, not a timing-mode measurement"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 7938.3831924999995,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "app_guard_max_anon_plus_swap_kb": 1241848.0,
+        "app_guard_min_mem_available_kb": 5391008.0,
+        "app_mem_guard_kb": 400000.0,
+        "app_vmhwm_kb_after_compile": 3919984.0,
+        "app_vmhwm_kb_at_end": 4096028.0,
+        "battery_temp_tenths_c_end": 402.0,
+        "battery_temp_tenths_c_start": 393.0,
+        "compile_ms": 52663.958988,
+        "finite_rows": 7.0,
+        "first_call_ms": 6880.989834,
+        "mem_available_kb_after_compile": 5669680.0,
+        "rows": 7.0,
+        "thermal_status_end": 3.0,
+        "thermal_status_start": 1.0,
+        "warm_max_ms": 8123.086354,
+        "warm_median_run_only_ms": 11.686034,
+        "warm_min_ms": 7753.680031,
+        "warm_rows": 2.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GPU (ML Drift OpenCL) precision default, constant tensor sharing on; gate app r10; gate mode, 7 row(s) of h9dL3072.json; run r6 hold p6l run hx_dL3072",
+      "total_ops": 15401,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,94 @@
+{
+  "artifact": "qwen3_coder_30b_a3b_mixed_int4_ekv2048.litertlm",
+  "artifact_sha256": "41c79c2008af7c4c0fb01c2267d3d83a8a8d8327418b6e5fd974b0a015e1e765",
+  "device": "mac-studio-m4-max",
+  "model_id": "qwen3-coder-30b-a3b-mixed-int4-ekv2048",
+  "notes": "litert-community/Qwen3-Coder-30B-A3B-Instruct: qwen3_coder_30b_a3b_mixed_int4_ekv2048.litertlm, a LiteRT-LM conversion of Qwen/Qwen3-Coder-30B-A3B-Instruct at revision b2cff646 (Apache-2.0), Qwen's coding model with tool calling (48 layers of 128 SiLU experts, 8 per token; non-thinking only), text in, text out; written with the LiteRT Tensor API (LiteRT dcb657e8 with a small patch in the conversion scripts): each layer's experts one TFLite custom op moe with SiLU and int4 blockwise-32 weights, attention and lm_head int8 per channel, fp32 activations declared, KV cache 2,048 tokens; packed with litert-lm-builder 0.19.0; the source's chat template rewritten for typed content parts, the checkpoint's tokenizer.json byte for byte, generic_model with a tool_call_config. The moe op with SiLU is in two open LiteRT pull requests (#11192 GPU, #11188 XNNPACK); LiteRT-LM 0.19.1 from PyPI refuses it on both backends, as these two records show; the numbers of the LiteRT-LM built from source with LiteRT #11192 and #11188 (the repo card's Performance and Accuracy tables) are not records: that build has no frame here. Mac Studio rows only: the file is 20.65 GB and no phone was tried. Landed 2026-11-09: litert-community/Qwen3-Coder-30B-A3B-Instruct is public and ungated (license apache-2.0, base_model Qwen/Qwen3-Coder-30B-A3B-Instruct quantized, library_name litert-lm), upload commit a8f3776a (2026-11-09 06:26 JST, both files), main 55d1e40d06 (the card commit, 2026-11-09T08:59:48.000Z) at the read; the tree's LFS oid and size of qwen3_coder_30b_a3b_mixed_int4_ekv2048.litertlm = artifact_sha256 and 20650152640 B.",
+  "quantization": "decoder written with the LiteRT Tensor API from the bf16 checkpoint: each layer's 128 experts in one custom op moe with int4 blockwise-32 weights (fp32 block scales, floored at 2^-14; the form LiteRT #11309's quantizer writes for this op, made with ai-edge-quantizer 0.10.0's functions), attention q / k / v / o and the output layer int8 per channel, router, norms and token table fp32; declared fp32 activations; fp32 KV cache of 2,048 tokens; signatures prefill_128, prefill_1024 and decode",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-11-09",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 3323,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": "ERROR: Node number 85 (moe) failed to invoke.",
+      "evidence": [
+        "bytes: both runs read (each run's meta names that path) at 05:52:01 and 05:55:09 JST on 2026-11-09; the file was written at 05:07:42 JST with sha256 41c79c20... (REBASE_DONE) and hashed again by the upload at 05:46:15 JST (sha256 41c79c2008af7c4c0fb01c2267d3d83a8a8d8327418b6e5fd974b0a015e1e765, 20650152640 B), = the Hub's LFS oid at upload commit a8f3776a and at main 55d1e40d (anonymous, read 2026-11-09 19:24:29 JST); no hash of the local copy after the runs (it was deleted at 06:36:05 JST, after the upload)",
+        "runtime: the PyPI litert-lm 0.19.1 macOS arm64 wheel (Python 3.13), liblitert-lm.dylib sha256 c61e0faa..., its own CLI: `litert-lm run <file> --backend cpu --top-k 1 --cache no --verbose --prompt 'What is 17 + 25? Answer briefly.'` (started 05:52:01, ended 05:52:03 JST, rc 0; stdout 'An error occurred', the CLI's message for a failed run, exit status 0)",
+        "The XNNPACK delegate was created and took 3323 out of 3566 nodes (285 partitions) of subgraph 0; 3323 out of 3566 nodes (285 partitions) of subgraph 1; 3375 out of 3621 nodes (290 partitions) of subgraph 2; the moe custom op was left out of it, one line per moe node: 142 lines 'ERROR: moe node #85 unsupported activation='silu'' (node #85 first)",
+        "The first invoke: 'ERROR: Stub operation invoked. This function should not be called.' / 'ERROR: Node number 85 (moe) failed to invoke.' / 'RuntimeError: INTERNAL: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor.cc:936]' / '└ Failed to invoke the compiled model'"
+      ],
+      "failure_class": "run_error",
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "moe_unsupported_activation_lines": 142.0,
+        "questions": 1.0,
+        "rc": 0.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "signature": "one fixed question ('What is 17 + 25? Answer briefly.') through the PyPI litert-lm 0.19.1 CLI (`litert-lm run`, top-k 1), the released runtime's loadability check",
+      "total_ops": 3566,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-11-09",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 85,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": "E0000 00:00:1794171310.914968 331808235 engine.cc:1124] Failed to create engine: UNKNOWN: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor_factory.cc:287]",
+      "evidence": [
+        "bytes: both runs read (each run's meta names that path) at 05:52:01 and 05:55:09 JST on 2026-11-09; the file was written at 05:07:42 JST with sha256 41c79c20... (REBASE_DONE) and hashed again by the upload at 05:46:15 JST (sha256 41c79c2008af7c4c0fb01c2267d3d83a8a8d8327418b6e5fd974b0a015e1e765, 20650152640 B), = the Hub's LFS oid at upload commit a8f3776a and at main 55d1e40d (anonymous, read 2026-11-09 19:24:29 JST); no hash of the local copy after the runs (it was deleted at 06:36:05 JST, after the upload)",
+        "runtime: the PyPI litert-lm 0.19.1 macOS arm64 wheel (Python 3.13), liblitert-lm.dylib sha256 c61e0faa..., its own CLI: `litert-lm run <file> --backend gpu --top-k 1 --cache no --verbose --prompt 'What is 17 + 25? Answer briefly.'` (started 05:55:09, ended 05:55:10 JST, rc 0; stdout 'An error occurred', the CLI's message for a failed run, exit status 0)",
+        "'ERROR: Following operations are not supported by GPU delegate:' / 'CUSTOM moe: moe only supports activation='gelu_tanh' (or its legacy spelling 'gelu').' / '85 operations will run on the GPU, and the remaining 3481 operations will run on the CPU.' / 'VERBOSE: Replacing 85 out of 3566 node(s) with delegate (LITERT_WEBGPU) node, yielding 2 partitions for subgraph 0.' (WebGPU on Metal, the runtime stopped at subgraph 0)",
+        "'ERROR: Hint fully delegated to single delegate is set, but the graph is not fully delegated.' / 'E0000 00:00:1794171310.914968 331808235 engine.cc:1124] Failed to create engine: UNKNOWN: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor_factory.cc:287]' ... '└ Failed to modify graph with delegate'"
+      ],
+      "failure_class": "engine_create_failed",
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "questions": 1.0,
+        "rc": 0.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "signature": "one fixed question ('What is 17 + 25? Answer briefly.') through the PyPI litert-lm 0.19.1 CLI (`litert-lm run`, top-k 1), the released runtime's loadability check",
+      "total_ops": 3566,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,15 +1,14 @@
 # perf_factors
 
-**Status: promoted 2026-08-28** (owner delegated the decision — "任せる"): the
+**Status: promoted 2026-08-28**: the
 schema is registered as `schemas/perf_factor.schema.json` at version 1.0, all
-rows validate in CI (`tests/test_perf_factors.py`), and the lane is reference
-data like the matrix snapshots. This lane extends the dataset with a third dimension the
-matrix and transforms lanes do not carry: *both graph forms delegate, but one
-is N× faster*. The transforms lane answers "how do I make this op run at all";
-this lane answers "which mathematically-equivalent form should I ship".
+rows validate in CI (`tests/test_perf_factors.py`), and the dataset is reference
+data like the matrix snapshots. It adds a third dimension the
+matrix and the transforms do not carry: *both graph forms delegate, but one
+is N× faster*. The transforms answer "how do I make this op run at all";
+this dataset answers "which mathematically-equivalent form should I ship".
 
-Origin: the 2026-08-24 S26 Hexagon factor experiments (zoo repo
-`NPU_OP_FACTOR_REPORT.md`, scripts in `npubench/factors/`). Headline result:
+Origin: the 2026-08-24 S26 Hexagon factor experiments. Headline result:
 swapping DINOv2-S's tanh-GELU decomposition for the builtin GELU op flipped it
 from losing 0.63× to winning 1.32× against the Adreno GPU, at feature corr
 0.999992 — one op choice decided the accelerator.

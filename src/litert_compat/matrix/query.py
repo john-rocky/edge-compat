@@ -2,8 +2,13 @@
 
 Precedence: most-specific match wins — dtypes AND constraints (3) beat
 dtype-only (2) beat constraints-only (1) beat op-only (0). No match returns
-status "unknown" — never a guess, never a default to "delegated". Ties at equal
-specificity with contradictory statuses raise; `matrix validate` flags them.
+status "unknown" — never a guess, never a default to "delegated". At equal
+specificity, contradictory statuses resolve only when exactly one matched entry
+is `measured` and every entry it contradicts is `inferred` (a carry-forward
+beside a re-measurement): the measured entry wins and the reason names the
+entries it overrules. Every other contradictory tie raises
+`MatrixLookupTieError`. `matrix validate` flags contradictions between entries
+of the same signature only; ties between different signatures surface here.
 """
 
 from __future__ import annotations
@@ -12,7 +17,12 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from litert_compat.matrix.canonical import entry_sort_key, load_json
+from litert_compat.matrix.canonical import (
+    entry_sort_key,
+    format_signature,
+    load_json,
+    signature,
+)
 from litert_compat.matrix.validate import MatrixValidationError, validate_document
 
 
@@ -29,7 +39,8 @@ class Verdict:
 
 
 class MatrixLookupTieError(ValueError):
-    """Two entries matched at equal specificity with contradictory statuses.
+    """Entries matched at equal specificity with contradictory statuses, and
+    the tie is not one `measured` entry against `inferred` entries.
 
     This is a data defect: run `edge-compat matrix validate` on the file.
     """
@@ -78,6 +89,31 @@ _REASONS = {
     1: "matched entry specific to op and constraints",
     0: "matched op-level entry",
 }
+
+
+def _measured_over_inferred(
+    tied: list[dict[str, Any]],
+) -> tuple[dict[str, Any], list[dict[str, Any]]] | None:
+    """The one contradictory tie a lookup resolves -> (the single `measured`
+    entry, the `inferred` entries whose status it overrules). None when the
+    tie holds no measured entry, two or more, or contradicts the measured
+    entry with an entry of any other provenance: those stay errors."""
+    measured = [e for e in tied if e.get("provenance") == "measured"]
+    if len(measured) != 1:
+        return None
+    winner = measured[0]
+    overruled = [e for e in tied if e["status"] != winner["status"]]
+    if any(e.get("provenance") != "inferred" for e in overruled):
+        return None
+    return winner, overruled
+
+
+def _overruled_summary(entry: dict[str, Any]) -> str:
+    text = f"{entry['status']}: {format_signature(signature(entry))}"
+    derived = (entry.get("evidence") or {}).get("derived_from")
+    if derived:
+        text += f", derived from {derived['litert_version']} of {derived['date']}"
+    return text
 
 
 class Matrix:
@@ -141,17 +177,25 @@ class Matrix:
 
         top = max(score for score, _ in matches)
         best = [entry for score, entry in matches if score == top]
+        reason = _REASONS[top]
         if len({entry["status"] for entry in best}) > 1:
-            raise MatrixLookupTieError(
-                f"contradictory entries tie at equal specificity for op {op} "
-                f"(dtypes={dtypes}, shape_meta={shape_meta}); "
-                "run `edge-compat matrix validate` on this file"
+            resolved = _measured_over_inferred(best)
+            if resolved is None:
+                raise MatrixLookupTieError(
+                    f"contradictory entries tie at equal specificity for op {op} "
+                    f"(dtypes={dtypes}, shape_meta={shape_meta}); "
+                    "run `edge-compat matrix validate` on this file"
+                )
+            chosen, overruled = resolved
+            reason += "; tie resolved: measured over inferred ({})".format(
+                "; ".join(_overruled_summary(e) for e in overruled)
             )
-        chosen = best[0]  # candidates are pre-sorted canonically; first is deterministic
+        else:
+            chosen = best[0]  # candidates are pre-sorted canonically; first is deterministic
         return Verdict(
             status=chosen["status"],
             matched_entry=chosen,
-            reason=_REASONS[top],
+            reason=reason,
             backend=self.backend,
             litert_version=self.litert_version,
         )

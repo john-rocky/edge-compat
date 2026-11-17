@@ -8,10 +8,10 @@
   ],
   "benchmarks": [],
   "conversion": {
-    "command": "python scripts/convert.py nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16 (hf-to-litertlm)",
-    "quantization": "int8 dynamic on linears + embedding (convs and the selective scan stay float, which keeps the hybrid state numerically sane); fp32 activations declared (README file table + Honest notes)",
-    "tool": "litert-torch plus a hybrid-cache patch, one command via hf-to-litertlm (python scripts/convert.py nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16; 1645 s on an M4 Max) (README Conversion notes)",
-    "tool_version": "TODO (the README names the converter but not its version)"
+    "command": "python scripts/convert.py nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16 (hf-to-litertlm) (card L83)",
+    "quantization": "int8 dynamic on linears + embedding (convs and the selective scan stay float, which keeps the hybrid state numerically sane); fp32 activations declared (card L31, L74)",
+    "tool": "litert-torch plus a hybrid-cache patch, one command via hf-to-litertlm (python scripts/convert.py nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16; 1645 s on an M4 Max) (card L80-L91)",
+    "tool_version": "TODO (the card names the converter but not its version)"
   },
   "cross_runtime": [],
   "delegation": null,
@@ -302,12 +302,12 @@
             "soc": "Qualcomm SM8850",
             "vendor_sdk": null
           },
-          "error": "exit 139 during the gpu generation gate; log tail: local_attention_mask_policy: Not set | sliding_window_size: Not set | advanced_settings: Not set",
+          "error": "exit 139 during the gpu generation check; log tail: local_attention_mask_policy: Not set | sliding_window_size: Not set | advanced_settings: Not set",
           "evidence": [
             "VERBOSE: Replacing 2827 out of 2827 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
-            "community_accel_work/s7_manifest_backfill/logs/Nemotron-3-Nano-4B__Nemotron-3-Nano-4B_int8.gate.log: generation gate verdict FAIL (journal rows.jsonl, fail_class=run_error, exit=139, generated=True, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+            "Generation check verdict FAIL (journal rows.jsonl, fail_class=run_error, exit=139, generated=True, timeout=False); the same journal's --benchmark numbers for this run are withheld because the gate output is not a real answer",
             "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
-            "gate process peak 1280 MB (journal gate_peak_mb)"
+            "check process peak 1280 MB (journal gate_peak_mb)"
           ],
           "failure_class": "run_error",
           "full_delegation": true,
@@ -365,7 +365,7 @@
           "prefill_tokens_per_s": null,
           "provenance": "measured",
           "runs": true,
-          "signature": "8-question gate (CLI run --cache no)",
+          "signature": "8-question check (CLI run --cache no)",
           "total_ops": null,
           "ttft_ms": null
         },
@@ -622,7 +622,7 @@
           "prefill_tokens_per_s": null,
           "provenance": "measured",
           "runs": true,
-          "signature": "8-question gate (CLI run --backend gpu --cache no)",
+          "signature": "8-question check (CLI run --backend gpu --cache no)",
           "total_ops": 2909,
           "ttft_ms": null
         },
@@ -688,7 +688,7 @@
           },
           "error": null,
           "evidence": [
-            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation check (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
             "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
             "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
             "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 144.5 s, output head '[thought] The user asks: \"What is 17 plus 26? Answer with the number only.\" So a'",
@@ -738,13 +738,15 @@
     "task": "text-generation"
   },
   "pitfalls": [
-    "Requires litert-lm >= 0.15 (README intro).",
-    "GPU requires --cache no on this bundle: with the compiled-graph cache enabled, litert-lm run --backend gpu fails with WebGPU 'Invalid BindGroup' validation errors and the 8-question sweep returns token soup (0/8); the same file with --cache no answers 8/8 (README Honest notes).",
-    "8-question gate 7/8 on CPU, 8/8 on GPU (litert-lm 0.16.0, M4 Max); the single CPU miss is the rhyme item ('violets are purple'); chat template byte-equal to the source (10,504/10,504 bytes — the source tokenizer_config.json carries a different 10,497-byte copy); stops <|im_end|> (id 11) + id 2; no spurious start token (README Correctness).",
-    "Reasoning model — answers arrive after a <think> block, so give it a token budget that fits the thought (the gate used 3200); >=3B exports use a reduced 7-signature prefill ladder because every signature costs engine RAM (README Honest + Conversion notes).",
-    "Phones: one Galaxy S26, CPU only — the CPU backend runs this file (litert_lm_advanced_main v0.16.0, 2026-09-05), the GPU backend crashes with SIGSEGV (exit 139) while the OpenCL delegate initializes its kernels for prefill_1024 after accepting all 2,827 ops; no Mali phone has run it and no 8 GB phone has been tried (the sibling Nemotron-H-4B did not fit one: an expectation, not a measurement of this file) (README Honest notes).",
-    "Since 2026-10-13 (file sha256 e9274fb2…, metadata only, weights unchanged) the chat template renders every assistant history turn as <think></think> plus its answer; the earlier file (feefdcd5…) kept the think block only on the latest assistant turn, so on litert-lm 0.18.0 the second message of a conversation with thinking on failed with INTERNAL: The new rendered template string does not start with the previous rendered template string (LiteRT-LM#3166) — re-download a file fetched before 2026-10-13. One Engine per conversation still (a second Conversation on the same Engine starts from the earlier recurrent state, LiteRT-LM#3165). On the litert-lm 0.18.0 CLI the GPU path still needs --cache no (README Honest notes + 2026-10-13 dated note).",
-    "auto_map in the config is not proof of remote code: transformers registers nemotron_h natively, so the library implementation loads without trust_remote_code (README Conversion notes).",
+    "Requires litert-lm >= 0.15 (card L25).",
+    "GPU requires --cache no on this bundle: with the compiled-graph cache enabled, litert-lm run --backend gpu fails with WebGPU 'Invalid BindGroup' validation errors and the 8-question sweep returns token soup (0/8); the same file with --cache no answers 8/8 (card L71).",
+    "8-question check 7/8 on CPU, 8/8 on GPU (litert-lm 0.16.0, M4 Max); the single CPU miss is the rhyme item ('violets are purple'); chat template byte-equal to the source (10,504/10,504 bytes — the source tokenizer_config.json carries a different 10,497-byte copy); stops <|im_end|> (id 11) + id 2; no spurious start token (card L41-L44).",
+    "Reasoning model — answers arrive after a <think> block, so give it a token budget that fits the thought (the gate used 3200); >=3B exports use a reduced set of 7 prefill signatures because every signature costs engine RAM (card L73, L89).",
+    "Phones: one Galaxy S26, CPU only — the CPU backend runs this file (litert_lm_advanced_main v0.16.0, 2026-09-05), the GPU backend crashes with SIGSEGV (exit 139) while the OpenCL delegate initializes its kernels for prefill_1024 after accepting all 2,827 ops; no Mali phone has run it and no 8 GB phone has been tried (the sibling Nemotron-H-4B did not fit one: an expectation, not a measurement of this file) (card L72).",
+    "Since 2026-10-13 (file sha256 e9274fb2…, metadata only, weights unchanged) the chat template renders every assistant history turn as <think></think> plus its answer; the earlier file (feefdcd5…, whose template had been updated on 2026-09-21 to accept the 0.18 content-parts form) kept the think block only on the latest assistant turn, so on litert-lm 0.18.0 the second message of a conversation with thinking on failed with INTERNAL: The new rendered template string does not start with the previous rendered template string (LiteRT-LM#3166) — re-download a file fetched before 2026-10-13. One Engine per conversation still (a second Conversation on the same Engine starts from the earlier recurrent state, LiteRT-LM#3165). On the litert-lm 0.18.0 CLI the GPU path still needs --cache no (card L33, L75, L98-L104).",
+    "Tool calls come back as text: given a tool definition the model answers in its own XML form (a <tool_call> block with <function=…> and <parameter=…> tags), and litert-lm 0.18.0 returns it as the message text with tool_calls empty — the runtime has no parser for this form (the bundle is generic_model; LiteRT-LM issue #3927 reports the shape for another model family, draft PR #3931 proposes a parser); measured on 0.18.0, CPU backend, one tool (get_weather), two identical runs; read the call out of the text in your app (card L76).",
+    "auto_map in the config is not proof of remote code: transformers registers nemotron_h natively, so the library implementation loads without trust_remote_code (card L88).",
+    "Conversation preface with tools and no messages: LiteRT-LM renders the chat template with an empty message list, and the template reads messages[0] without checking that the list is non-empty, so the render fails with 'Failed to apply template: undefined value' when the preface is prefilled at creation (prefillPrefaceOnInit, default false; creating the conversation fails) and in the preface render (renderPrefaceIntoString and its C++ and C API forms); the same with extra context (such as enable_thinking) and no messages, and in the preface render with an empty preface (run in the runtime on one Qwen3 template; the other templates rendered with minijinja 2.14 and jinja2); read in the source of LiteRT-LM 0.17.0, 0.18.1 and main, measured with the 0.18.1 PyPI package through its C API on this file's template text; the default path, where the first message is rendered with the preface, is not affected (the 0.18.1 Python API and CLI expose neither the flag nor the preface render); a system message or any initial message in the conversation config avoids it (card L118).",
     "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/."
   ],
   "schema_version": "1.2"

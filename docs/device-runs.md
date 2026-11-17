@@ -1,12 +1,10 @@
 # Device runs
 
-`DECISIONS` and `PROGRESS` citations on this page refer to the logs of the private lab repository.
-
 ## Device-run results (Phase 13): the NPU list and the LLM table
 
 Matrix schema `1.3` registers the NPU backend IDs — `npu_qnn` (Qualcomm Hexagon
 via QNN), `npu_neuropilot` (MediaTek) — with **zero entries** (the Phase 6
-pattern; final ID set pending the owner's device fleet). NPU behavior varies
+pattern; the final ID set follows the devices measured). NPU behavior varies
 per SoC and vendor SDK, so `target` (`device`, `soc`, `driver` — the driver
 field carries the vendor SDK version) is **mandatory on NPU snapshots**,
 enforced by `matrix validate`. `edge-lint --backend npu_qnn` runs fine and
@@ -19,36 +17,36 @@ signals (with delegated-op counts when the runtime log states them) /
 output-match vs the CPU reference / CV latency / LLM metrics
 (`prefill_tokens_per_s`, `decode_tokens_per_s`, `ttft_ms`, `peak_mem_mb`,
 context length) — each with verbatim log evidence and a mandatory `env` block
-(`runtime` is `litert` for the .tflite-on-NPU lane or `litert-lm` for the
-.litertlm lane; that choice also selects the staleness axis in
+(`runtime` is `litert` for .tflite models on an NPU or `litert-lm` for
+.litertlm bundles; that choice also selects the staleness axis in
 `data/releases.json`, where Phase 13 added the `litertlm` axis watched by
 autobump). Snapshots are append-only:
 `data/device_runs/<runtime_version>/<date>/<model_id>__<device>.json`, one
 runtime per snapshot directory, verified at discovery.
 
 **The trap rule, device edition:** op-level matrix entries are **never derived
-from model-level device-run results** — in either lane. Op-level entries
+from model-level device-run results** — in either runtime. Op-level entries
 require a runtime log naming the specific op (captured as `evidence` — the
 gpu_audit logs contain exactly such extractions) or an `npu_adb` probe result.
-Enforced by the same zero-matrix-writes tests as the web lane.
+Enforced by the same zero-matrix-writes tests as the browser sweep.
 
-Ingestion adapters wrap the owner's EXISTING measurement instruments — those
+Ingestion adapters wrap EXISTING measurement instruments — those
 tools remain the instruments; this repo is the structured home of their
 results. Mappings were built against real staged samples
-(`data/examples/llm_samples/`, owner decisions recorded in its README):
+(`data/examples/llm_samples/`):
 
 ```sh
-# gpu_gate_mac.sh logs (LiteRT-LM Mac GPU gate). Verdict comes from the LOG
+# gpu_gate_mac.sh logs (LiteRT-LM Mac GPU check). Verdict comes from the LOG
 # BODY only — the CLI exits 0 even on failure, and a results block with
 # 0.00 tokens/s is a zero_throughput FAILURE, not a measurement. Fields the
-# log does not carry (runtime version, date, host) are owner-supplied options;
+# log does not carry (runtime version, date, host) are options the caller supplies;
 # --speeds-contaminated ingests a retracted batch's verdict while withholding
 # every speed figure.
 edge-compat device-run ingest-gpu-audit model.gpu.log \
   --model-id gemma3-1b --device mac-m4-max --device-name "M4 Max" \
   --runtime-version 0.15.0 --date 2026-07-23 --out data/device_runs
 
-# devicemark leaderboard rows: only *__litertlm rows are this lane (coreai
+# devicemark leaderboard rows: only *__litertlm rows are ingested (coreai
 # rows belong in a card's cross_runtime list and are skipped with a note);
 # mem_measured:false memory is carried as metrics.peak_mem_est_mb, never as a
 # measured peak_mem_mb.
@@ -63,14 +61,14 @@ edge-compat device-run ingest-compat-check compat_0.15.0.json \
 
 edge-compat device-run validate data/device_runs   # schema + layout, exit 0/1/2
 edge-compat device-run validate data/device_runs --cards cards   # + every card is the
-                                                     # newest measurement per cell (#165)
+                                                     # newest measurement per cell
 ```
 
 `edge-card enrich --device-runs-root data/device_runs` merges records into
 cards as the additive schema-1.2 `device` block (accelerator records embedded
 verbatim): every snapshot under the root is read and each (device x
 accelerator x prompt-length) cell takes its newest measurement, so no snapshot
-is hand-picked (DECISIONS #165). `--device-runs <snapshot-dir>` (repeatable)
+is hand-picked. `--device-runs <snapshot-dir>` (repeatable)
 enriches from exactly those snapshots instead — and because a card's device
 block is rebuilt from what is passed, a run that would drop a cell a card
 carries today is refused with nothing written unless `--allow-drop` states the
@@ -84,7 +82,7 @@ delta` diffs the two most recent device-run snapshots **per runtime** into
 
 ## Catalog regression (own `.litertlm` bundles × runtime wheel)
 
-A ship gate runs once per file, on the day of the ship. `tools/regression/`
+A release check runs once per file, on the day of the upload. `tools/regression/`
 re-runs one functional suite over **every** own `.litertlm` chat bundle on one
 litert-lm wheel, so a check learned later (a thinking-off digit loop, a chat
 template that drops the user turn, a shared Engine that carries recurrent state
@@ -105,4 +103,4 @@ runs; they never become matrix rows (`tests/test_regression.py` enforces it).
 - `tools/regression/README.md` — the suite table, the new-wheel procedure and
   the `--only … --checks …` re-run used when a hazard row is added.
 
-Decided in DECISIONS #205 (2026-10-12); first full run on litert-lm 0.18.0.
+Added 2026-10-12; first full run on litert-lm 0.18.0.

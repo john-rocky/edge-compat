@@ -19,7 +19,7 @@ task: text-generation
 
 | | |
 |---|---|
-| **Tool** | litert-torch (pristine released stack; repro = hf-to-litertlm granite41_work/) 0.9.3 (litert-converter 0.3.1, ai-edge-quantizer 0.8.0, litert-lm-builder 0.16.0 — FINDINGS.md .venv-vl093) |
+| **Tool** | litert-torch (pristine released stack; repro = hf-to-litertlm granite41_work/) 0.9.3 (litert-converter 0.3.1, ai-edge-quantizer 0.8.0, litert-lm-builder 0.16.0) |
 | **Command** | `hf-to-litertlm granite41_work/ reproduction script (pip-only stack, no PYTHONPATH patches)` |
 | **Quantization** | int8 dynamic per-channel on linears + embedding |
 
@@ -48,8 +48,8 @@ Model-level on-device results — measured behavior of this exact artifact on th
 ## Pitfalls
 
 - Requires litert-lm >= 0.16 (HF card header).
-- No start_token in the metadata, on purpose: Granite sets add_bos_token False and its BOS is its EOS (<|end_of_text|>); with the converter-written start_token the runtime prepends end-of-text and the model echoes the question back — 5/8 vs 8/8 on the sanity gate. Reproduces on bf16 PyTorch with the token prepended by hand (HF card conversion notes).
-- Prefill ladder trimmed to six signatures (1024/256/64/16/4/1): every exported signature is charged engine memory whether or not called; the eleven-signature build was killed by iOS during Metal init unless context was capped at 1024 (HF card conversion notes).
+- No start_token in the metadata, on purpose: Granite sets add_bos_token False and its BOS is its EOS (<|end_of_text|>); with the converter-written start_token the runtime prepends end-of-text and the model echoes the question back — 5/8 vs 8/8 on the sanity check. Reproduces on bf16 PyTorch with the token prepended by hand (HF card conversion notes).
+- Set of prefill graphs trimmed to six signatures (1024/256/64/16/4/1): every exported signature is charged engine memory whether or not called; the eleven-signature build was killed by iOS during Metal init unless context was capped at 1024 (HF card conversion notes).
 - Embedder externalised so the tied 100352x2560 vocab table sits in its own section, clear of the ~2 GiB single-section mmap ceiling on iOS (HF card).
 - GSM8K 0-shot CoT n=100: bf16 88.0 / int8 87.0 / int4 84.0 — int4 costs 4 points for 1.7x smaller bytes (HF card quality table).
 

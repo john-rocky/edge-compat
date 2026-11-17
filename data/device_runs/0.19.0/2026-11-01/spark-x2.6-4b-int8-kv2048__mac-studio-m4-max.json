@@ -1,0 +1,109 @@
+{
+  "artifact": "Spark-X2.6-4B_int8-kv2048.litertlm",
+  "artifact_sha256": "31cfba13efe48eeacf8bf13af1debd469d11b4dc3cf4dd19ff2905c7ddaf6a71",
+  "device": "mac-studio-m4-max",
+  "model_id": "spark-x2.6-4b-int8-kv2048",
+  "notes": "Spark-X2.6-4B_int8-kv2048.litertlm of litert-community/Spark-X2.6-4B: the INT8 file with its KV cache cut to 2,048 tokens = the 4B file for a CPU at reasoning_effort low (its 2,048 tokens must hold prompt, thought and answer, so it is not for the default effort's 3,584-token budget). XHToken/Spark-X2.6-4B (Apache-2.0) converted to LiteRT-LM; the bundle carries templates/spark26_think.jinja (the vendor template's plain-chat part, thinking on by default, reasoning_effort high or low through extra_context), a `thought` channel and the repo's tokenizer.json byte for byte. Uploaded 2026-11-01 (Hub main f8da7265 at the read). Measured 2026-11-01 in the run r6; its build check: max_num_tokens 2048, llm_model_type generic_model, tokenizer bytes equal to the repo's.",
+  "quantization": "the weights of Spark-X2.6-4B_int8.litertlm unchanged (dynamic INT8, per-channel INT8 weights on every linear and the embedding, FP32 activations declared; every weight buffer byte-checked) and its exported graph with the KV cache of every signature cut from 4,096 to 2,048 tokens without a re-export (LiteRT-LM 0.19.0 unpack, the KV-cache variant tool, LlmMetadata max_num_tokens 2,048, packed with the 0.19.0 CLI), prefer_activation_type fp32, 6 prefill signatures, KV cache 2,048",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": 2048,
+      "date": "2026-11-01",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Spark-X2.6-4B `Spark-X2.6-4B_int8-kv2048.litertlm` at main f8da7265: LFS sha256 31cfba13efe48eeacf8bf13af1debd469d11b4dc3cf4dd19ff2905c7ddaf6a71, 4238098224 B (anonymous Hub API tree read 2026-11-01 12:17 JST)",
+        "the Mac runs ran model.litertlm: sha256 = the Hub digest (hashed 2026-11-01), last written 2026-11-01 00:42:43 JST, before r6's first measurement window (W1)",
+        "runtime: litert-lm 0.19.0 Python API from PyPI, backend cpu, max_num_tokens 2,048, greedy, thinking on, reasoning_effort low through extra_context (the bundle's template templates/spark26_think.jinja (the vendor template's plain-chat part, thinking on by default, reasoning_effort high or low through extra_context))",
+        "8 check questions at low (max_output_tokens 1,792, every thought closed, the answer right): 8 / 8, unfinished 0, verdict PASS",
+        "3-turn conversation at low (plant a fact, 23 + 19, recall; 1,792 tokens per turn), two conversations in one process, both with the runtime's default channel filtering (the gate's arms: the argument not passed, then filter_channel_content_from_kv_cache=True): 2 / 2 pass, verdict PASS",
+        "task line: GSM8K test first 100, greedy, thinking on, reasoning_effort low, 1,792 output tokens for every question (the longest of the 100 prompts renders to 232 tokens, so prompt and output fit 2,048), the bundle's correct count >= Transformers bf16's - 5 under the same settings; this file 93 / 100 (unfinished 4) against bf16 92 (unfinished 4), line 87 -> PASS",
+        "the default effort's line (3,584 output tokens) does not fit this file's 2,048-token KV cache: the record is the reasoning_effort low line only"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "gsm8k_bf16_right": 92.0,
+        "gsm8k_line": 87.0,
+        "gsm8k_questions": 100.0,
+        "gsm8k_right": 93.0,
+        "gsm8k_unfinished": 4.0,
+        "multiturn_arm_runs": 2.0,
+        "multiturn_arm_runs_pass": 2.0,
+        "questions": 8.0,
+        "right": 8.0,
+        "unfinished": 0.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "at reasoning_effort low: the 8 check questions (1,792-token cap) and the 3-turn conversation, greedy, thinking on; GSM8K test first 100 at 1,792 output tokens",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "cpu",
+      "context_length": 2048,
+      "date": "2026-11-01",
+      "decode_tokens_per_s": 25.46,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Spark-X2.6-4B `Spark-X2.6-4B_int8-kv2048.litertlm` at main f8da7265: LFS sha256 31cfba13efe48eeacf8bf13af1debd469d11b4dc3cf4dd19ff2905c7ddaf6a71, 4238098224 B (anonymous Hub API tree read 2026-11-01 12:17 JST)",
+        "the Mac runs ran model.litertlm: sha256 = the Hub digest (hashed 2026-11-01), last written 2026-11-01 00:42:43 JST, before r6's first measurement window (W1)",
+        "runtime: litert-lm 0.19.0 CLI from PyPI, `litert-lm benchmark <file> -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --backend cpu --cache no` (each log's header: backend cpu, 1,024 / 256 / 2,048, cache no; one warm-up then the mean of 3 runs per process), XNNPACK",
+        "cell = the mean of two processes in r6's measurement window W2, set K8 04:27–04:35 JST, an A B B A set against Spark-X2.6-4B_int8.litertlm (Spark-X2.6-4B_int8.litertlm, Spark-X2.6-4B_int8-kv2048.litertlm twice, then the first file again); the other file's two processes in the same set: 17.57 / 18.70 tok/s decode",
+        "init_time_s_summed_*: the CLI's `Init time`, which counts engine creation twice (LiteRT-LM #4057)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "decode_tokens_per_s_p1": 25.62,
+        "decode_tokens_per_s_p2": 25.3,
+        "init_time_s_summed_p1": 36.2659,
+        "init_time_s_summed_p2": 36.263,
+        "prefill_tokens": 1024.0,
+        "processes": 2.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 508.5,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 2053.0
+    }
+  ],
+  "schema_version": "1.0"
+}

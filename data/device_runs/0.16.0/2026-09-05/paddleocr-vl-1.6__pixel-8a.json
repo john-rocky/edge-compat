@@ -20,15 +20,15 @@
         "soc": "Tensor G3",
         "vendor_sdk": null
       },
-      "error": "generation gate FAIL: exit 0 but no answer text (journal generated=false); output tail …'𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦'",
+      "error": "generation check FAIL: exit 0 but no answer text (journal generated=false); output tail …'𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦𣸦'",
       "evidence": [
         "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 0 (prefill_128).",
         "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 1 (prefill_512).",
         "VERBOSE: Replacing 836 out of 914 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 105 partitions for subgraph 2 (prefill_1024).",
         "VERBOSE: Replacing 780 out of 859 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 110 partitions for subgraph 3 (decode).",
-        "community_accel_work/s7_manifest_backfill/logs_p8a/PaddleOCR-VL-1.6__PaddleOCR-VL-1.6.gatecpu.log: generation gate verdict FAIL (journal rows_p8a.jsonl, fail_class=None, exit=0, generated=False, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+        "Generation check verdict FAIL (journal rows_p8a.jsonl, fail_class=None, exit=0, generated=False, timeout=False); the same journal's --benchmark numbers for this run are withheld because the gate output is not a real answer",
         "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
-        "gate process peak 3386 MB (journal gate_peak_mb)"
+        "check process peak 3386 MB (journal gate_peak_mb)"
       ],
       "failure_class": "degenerate_output",
       "full_delegation": false,

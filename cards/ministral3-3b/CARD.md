@@ -60,8 +60,8 @@ Model-level on-device results — measured behavior of this exact artifact on th
 
 - Text-only conversion: the Ministral-3 text decoder, with the Pixtral vision tower dropped (HF card).
 - Embedding externalized so every section stays under 2 GiB, which is what lets it load on iOS (HF card).
-- The bundle carries a start_token (<s>), and here that is CORRECT rather than the Granite defect: upstream bos is <s> and eos is </s>, different tokens, so prepending BOS is the Mistral convention. The Granite trap needs bos == eos (or add_bos_token False) to bite (CATALOG_REGATE.md).
-- Two true statements that must not be collapsed: the Gallery only OFFERS GPU on ~12 GB+ devices, because its accelerator choice is fixed at import time from device RAM; the MODEL itself runs fully delegated on an 8 GB Pixel 8a GPU when litert_lm_main drives it directly — 1187/1187 prefill, 1087/1087 decode, zero rejections, correct output, measured 2026-08-17. The first is a property of the app, the second of the runtime (HF card + CATALOG_REGATE.md).
+- The bundle carries a start_token (<s>), and here that is CORRECT rather than the Granite defect: upstream bos is <s> and eos is </s>, different tokens, so prepending BOS is the Mistral convention. The Granite trap needs bos == eos (or add_bos_token False) to bite.
+- Two true statements that must not be collapsed: the Gallery only OFFERS GPU on ~12 GB+ devices, because its accelerator choice is fixed at import time from device RAM; the MODEL itself runs fully delegated on an 8 GB Pixel 8a GPU when litert_lm_main drives it directly — 1187/1187 prefill, 1087/1087 decode, zero rejections, correct output, measured 2026-08-17. The first is a property of the app, the second of the runtime (HF card).
 
 ---
 

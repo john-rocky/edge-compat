@@ -53,7 +53,7 @@ Model-level on-device results — measured behavior of this exact artifact on th
 
 ## Pitfalls
 
-- Translation model, not open chat: use the source card's default translation prompt verbatim; the 8-question sanity gate reads 6/8 on CPU and 6/8 on GPU with the same two misses on both backends ('Cool' for the opposite of hot, 'pink' for the rhyme) — a property of this translation-tuned 1.8B, not of a backend; arithmetic, factual and translation items are correct (HF card Correctness, litert-lm 0.16.0, M4 Max).
+- Translation model, not open chat: use the source card's default translation prompt verbatim; the 8-question sanity check reads 6/8 on CPU and 6/8 on GPU with the same two misses on both backends ('Cool' for the opposite of hot, 'pink' for the rhyme) — a property of this translation-tuned 1.8B, not of a backend; arithmetic, factual and translation items are correct (HF card Correctness, litert-lm 0.16.0, M4 Max).
 - Chat template byte-equal to the source repo's chat_template.jinja (654/654 bytes); stop token <|hy_place_holder_no_2|> (id 120020) as the source declares (HF card Correctness).
 - No duplicate start token: the source template renders <|hy_begin_of_sentence|> itself and the engine also prepends the metadata start_token; measured inside the runtime, [start_token]+prompt and [template BOS]+prompt generate byte-identical greedy output (HF card Correctness + Conversion notes).
 - The 'dynamic'-with-'alpha' rope resolves statically: transformers computes base = rope_theta * alpha^(dim/(dim-2)) once at init and never rescales below max_position_embeddings; only the data-dependent cache-growth branch kills torch.export, and the converter bakes the resolved base (HF card Conversion notes).

@@ -50,9 +50,8 @@
             "iteration 3: Time to first token 0.43 s; Prefill Speed 52.75 tokens/sec; Decode Speed 7.66 tokens/sec",
             "Init Total: 2824.28 ms (cold: the init writes the XNNPACK weight cache)",
             "VmHWM 3586308 kB (max of the 1 s samples in therm.txt; peak_mem_mb = kB x 1024 / 10^6; GPU memory is outside the process high-water mark)",
-            "state before the leg: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=80 377 memavail_kb=7680820 uptime=244227.97 mWakefulness=Dozing (waited 15 s after the 120 s rest)",
-            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 5 of 5, 1300 / 5 of 5, 1300 / 4 of 4",
-            "source: litertlm-convert gpu_reship_work/device/r16/logs/T2/out_q3tv2_cpu_c16/ and device/r16/results/s26_r16_compact.json"
+            "state before the run: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=80 377 memavail_kb=7680820 uptime=244227.97 mWakefulness=Dozing (waited 15 s after the 120 s rest)",
+            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 5 of 5, 1300 / 5 of 5, 1300 / 4 of 4"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -165,9 +164,8 @@
             "iteration 2: Time to first token 22.13 s; Prefill Speed 46.57 tokens/sec; Decode Speed 7.20 tokens/sec",
             "Init Total: 2811.13 ms (cold: the init writes the XNNPACK weight cache)",
             "VmHWM 3987056 kB (max of the 1 s samples in therm.txt; peak_mem_mb = kB x 1024 / 10^6; GPU memory is outside the process high-water mark)",
-            "state before the leg: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 376 memavail_kb=7887108 uptime=244429.09 mWakefulness=Dozing (waited 30 s after the 45 s rest)",
-            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1167 / 44 of 44, 462 / 51 of 51",
-            "source: litertlm-convert gpu_reship_work/device/r16/logs/T2/out_q3tv2_cpu_c1024/ and device/r16/results/s26_r16_compact.json"
+            "state before the run: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 376 memavail_kb=7887108 uptime=244429.09 mWakefulness=Dozing (waited 30 s after the 45 s rest)",
+            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1167 / 44 of 44, 462 / 51 of 51"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -232,9 +230,8 @@
             "iteration 3: Time to first token 0.14 s; Prefill Speed 175.45 tokens/sec; Decode Speed 20.72 tokens/sec",
             "Init Total: 7880.14 ms (cold: --disable_cache=true)",
             "VmHWM 1142272 kB (max of the 1 s samples in therm.txt; peak_mem_mb = kB x 1024 / 10^6; GPU memory is outside the process high-water mark)",
-            "state before the leg: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 377 memavail_kb=7546664 uptime=243796.82 mWakefulness=Dozing (waited 15 s after the 120 s rest)",
-            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 2 of 2, 1300 / 2 of 2, 1300 / 1 of 1",
-            "source: litertlm-convert gpu_reship_work/device/r16/logs/T2/out_q3tv2_gpu_g16/ and device/r16/results/s26_r16_compact.json"
+            "state before the run: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 377 memavail_kb=7546664 uptime=243796.82 mWakefulness=Dozing (waited 15 s after the 120 s rest)",
+            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 2 of 2, 1300 / 2 of 2, 1300 / 1 of 1"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -299,9 +296,8 @@
             "iteration 3: Time to first token 7.95 s; Prefill Speed 129.95 tokens/sec; Decode Speed 13.87 tokens/sec",
             "Init Total: 7920.27 ms (cold: --disable_cache=true)",
             "VmHWM 1145544 kB (max of the 1 s samples in therm.txt; peak_mem_mb = kB x 1024 / 10^6; GPU memory is outside the process high-water mark)",
-            "state before the leg: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 364 memavail_kb=7744420 uptime=244017.33 mWakefulness=Dozing (waited 31 s after the 45 s rest)",
-            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 8 of 8, 1020 / 9 of 9, 536 / 13 of 13",
-            "source: litertlm-convert gpu_reship_work/device/r16/logs/T2/out_q3tv2_gpu_g1024/ and device/r16/results/s26_r16_compact.json"
+            "state before the run: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 364 memavail_kb=7744420 uptime=244017.33 mWakefulness=Dozing (waited 31 s after the 45 s rest)",
+            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 8 of 8, 1020 / 9 of 9, 536 / 13 of 13"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -364,7 +360,7 @@
             "process 2026-10-05T21:01:54+09:00: Prefill speed:        96.35 tokens/s; Decode speed:         15.99 tokens/s; Init time:            2.0929 s; Time to first token:  0.4791 s (load averages before: 4.27 3.94 3.74)",
             "process 2026-10-05T21:02:12+09:00: Prefill speed:        96.13 tokens/s; Decode speed:         16.00 tokens/s; Init time:            2.0966 s; Time to first token:  0.4777 s (load averages before: 4.36 3.99 3.77)",
             "command: litert-lm benchmark model.litertlm --backend cpu -p 16 -d 32 --cache no --verbose (one process per run, 2 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -423,7 +419,7 @@
             "process 2026-10-05T20:59:45+09:00: Prefill speed:        113.18 tokens/s; Decode speed:         18.32 tokens/s; Init time:            2.0982 s; Time to first token:  2.5671 s (load averages before: 3.31 3.77 3.67)",
             "process 2026-10-05T21:01:03+09:00: Prefill speed:        113.40 tokens/s; Decode speed:         18.51 tokens/s; Init time:            2.1151 s; Time to first token:  2.5674 s (load averages before: 4.31 3.90 3.72)",
             "command: litert-lm benchmark model.litertlm --backend cpu -p 256 -d 256 --cache no --verbose (one process per run, 2 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -482,7 +478,7 @@
             "process 2026-10-05T20:58:56+09:00: Prefill speed:        691.92 tokens/s; Decode speed:         89.65 tokens/s; Init time:            2.1746 s; Time to first token:  0.0371 s (load averages before: 3.15 3.81 3.67)",
             "process 2026-10-05T20:59:02+09:00: Prefill speed:        704.19 tokens/s; Decode speed:         90.21 tokens/s; Init time:            2.1563 s; Time to first token:  0.0374 s (load averages before: 3.46 3.86 3.69)",
             "command: litert-lm benchmark model.litertlm --backend gpu -p 16 -d 32 --cache no --verbose --activation-data-type fp16 (one process per run, 3 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -541,7 +537,7 @@
             "process 2026-10-05T20:58:17+09:00: Prefill speed:        1099.84 tokens/s; Decode speed:         92.09 tokens/s; Init time:            2.1747 s; Time to first token:  0.2445 s (load averages before: 3.62 3.98 3.73)",
             "process 2026-10-05T20:58:36+09:00: Prefill speed:        1104.77 tokens/s; Decode speed:         91.88 tokens/s; Init time:            2.1768 s; Time to first token:  0.2435 s (load averages before: 3.45 3.91 3.71)",
             "command: litert-lm benchmark model.litertlm --backend gpu -p 256 -d 256 --cache no --verbose --activation-data-type fp16 (one process per run, 3 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -591,7 +587,7 @@
           },
           "error": null,
           "evidence": [
-            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation check (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
             "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
             "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
             "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 214.5 s, output head '[thought] Okay, the user is asking \"What is 17 plus 26? Answer with the number o'",

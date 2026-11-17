@@ -38,7 +38,7 @@ def test_committed_example_sweep_results_validate(name: str) -> None:
 @pytest.mark.parametrize("name", EXPECTED_FILES)
 def test_example_sweep_results_are_example_provenance_with_env(name: str) -> None:
     """Data integrity: fixture sweeps must never masquerade as real model data,
-    and no record is valid without its env block (honesty rule, spec 5.1)."""
+    and no record is valid without its env block (honesty rule)."""
     doc = json.loads((SWEEP_DIR / name).read_text())
     assert doc["model_id"] == Path(name).stem
     assert len(doc["results"]) >= 1

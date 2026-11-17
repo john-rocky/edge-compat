@@ -8,7 +8,7 @@
 
 /**
  * Measurement hook: CTA copies only. Deliberately a no-op — the counter
- * choice is the owner's (DECISIONS #69: repo-stats only until an analytics
+ * choice is open (repo-stats only until an analytics
  * stance is picked). No cookies, no PII, ever.
  */
 function measure(_event: string): void {

@@ -8,9 +8,9 @@
   ],
   "benchmarks": [],
   "conversion": {
-    "command": "python minicpm5_work/convert_lfm25_patchless_092.py LiquidAI/LFM2.5-1.2B-Instruct <outdir> && python minicpm5_work/quantize_minicpm5.py apply <in>.litertlm <out>.litertlm --recipe wi4b32_wi8 --algo <unrecorded: minmax or octav; not recoverable, owner does not recall> && python scripts/add_executor_metadata.py <out>.litertlm   # export 2026-07-29; metadata retrofit 2026-08-11",
+    "command": "python convert_lfm25_patchless_092.py LiquidAI/LFM2.5-1.2B-Instruct <outdir> && python quantize_minicpm5.py apply <in>.litertlm <out>.litertlm --recipe wi4b32_wi8 --algo <unrecorded: minmax or octav; not recoverable> && python scripts/add_executor_metadata.py <out>.litertlm   # export 2026-07-29; metadata retrofit 2026-08-11",
     "quantization": "int4 blockwise-32 weights (fp16 per-block scales) + int8 embedding/lm_head; convs float — artifact tensor census; algorithm unrecorded",
-    "tool": "litert-torch (via litertlm-convert minicpm5_work/convert_lfm25_patchless_092.py + quantize_minicpm5.py + litert-lm-builder)",
+    "tool": "litert-torch (via litert-lm-builder)",
     "tool_version": "0.9.2 (stock release, per convert_lfm25_patchless_092.py docstring + .venv-092 dist-info)"
   },
   "cross_runtime": [],
@@ -176,9 +176,9 @@
     "task": "text-generation"
   },
   "pitfalls": [
-    "The raw 0.9.2 export lacks the ExecutorMetadata section and dies at executor.cc:708 on litert-lm >=0.15; this artifact is the execmeta-retrofitted copy (2026-08-11) of the 2026-07-29 export (ship_lfm25_gpu_variant_20260812/RESULTS.md; file naming *_execmeta).",
+    "The raw 0.9.2 export lacks the ExecutorMetadata section and dies at executor.cc:708 on litert-lm >=0.15; this artifact is the execmeta-retrofitted copy (2026-08-11) of the 2026-07-29 export (file naming *_execmeta).",
     "iPhone Metal fails engine creation on this file family (v0.14: DUS updated_slice>operand at delegate-resolved shapes; the static graph is clean across all 530 subgraphs — delegate-side) while Mac WebGPU compiles and passes the same file at maxtok 1024 AND 2048 (DEVICE_GATE_iphone17pro_20260729.md).",
-    "Superseded on HF: litert-community's LFM2.5-1.2B-Instruct_int4_gpu.litertlm is a 2026-08-12 re-export (litert-torch 0.9.3 + converter 0.3.1) with different bytes; this card's sha256 identifies the 07-29 0.9.2 canary file that the recorded device runs measured (ship_lfm25_gpu_variant_20260812/RESULTS.md).",
+    "Superseded on HF: litert-community's LFM2.5-1.2B-Instruct_int4_gpu.litertlm is a 2026-08-12 re-export (litert-torch 0.9.3 + converter 0.3.1) with different bytes; this card's sha256 identifies the 07-29 0.9.2 canary file that the recorded device runs measured.",
     "Artifact identity is contradicted in this repo: cards lfm25-12b-int4-gpu and lfm25-12b-instruct-int4-gpu-093 both record sha256 36f7f0221bcc… (702.115 MB, same filename) while recording different conversion lineages — a 2026-07-29 convert_lfm25_patchless_092.py export with an unrecorded --algo, versus a 2026-08-12 convert_lfm25.py build on litert-torch 0.9.3 with converter 0.3.1. At most one can be true. The 07-29 artifact is no longer on disk, so which sha is wrong is UNMEASURED. Do not cite either conversion.command as settled until that export is reproduced and hashed; the published litert-community file hashes to this sha."
   ],
   "schema_version": "1.2"

@@ -21,7 +21,7 @@
       },
       "error": null,
       "evidence": [
-        "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.17.0/bin/litert-lm 0.17.0); fixed-question answer: \"[thought] Okay, let's see. I need to calculate 17 plus 25. Hmm, adding two numbers. Let me start by adding the units place first. 7 plus 5 is 12, right? So I write down 2 and carry over 1. Now, moving to the tens place. 1 (from 17) plus 2 (from 25) is 3, but I have to add the carried-over 1, so 3 + 1 equals 4. So putting it all together, it should be 42. Wait, let me check again. 17 is 10 + 7, and 25 is 20 + 5. Adding 10 + 20 gives 30, and 7 + 5 is 12. So 30 + 12 is 42. Yeah, that's correct. I think 42 is the right answer here. [/thought]\\n\\n\\n42\""
+        "compat_check status ok (runtime 0.17.0); fixed-question answer: \"[thought] Okay, let's see. I need to calculate 17 plus 25. Hmm, adding two numbers. Let me start by adding the units place first. 7 plus 5 is 12, right? So I write down 2 and carry over 1. Now, moving to the tens place. 1 (from 17) plus 2 (from 25) is 3, but I have to add the carried-over 1, so 3 + 1 equals 4. So putting it all together, it should be 42. Wait, let me check again. 17 is 10 + 7, and 25 is 20 + 5. Adding 10 + 20 gives 30, and 7 + 5 is 12. So 30 + 12 is 42. Yeah, that's correct. I think 42 is the right answer here. [/thought]\\n\\n\\n42\""
       ],
       "failure_class": null,
       "full_delegation": null,

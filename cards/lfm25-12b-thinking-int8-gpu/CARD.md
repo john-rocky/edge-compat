@@ -19,8 +19,8 @@ task: text-generation
 
 | | |
 |---|---|
-| **Tool** | litert-torch 0.9.3 lineage export + post-hoc ai-edge-quantizer (wi8fc recipe), per build_int8_gpu.sh same toolchain as ship_lfm25_gpu_variant_20260812/build_gpu_variants.sh (0.9.3-lineage GPU-safe ShortConv); quantizer recipe wi8fc |
-| **Command** | `minicpm5_work/ship_lfm25_int8gpu_20260825/build_int8_gpu.sh` |
+| **Tool** | litert-torch 0.9.3 lineage export + post-hoc ai-edge-quantizer (wi8fc recipe), per build_int8_gpu.sh same toolchain as the GPU-variant build (0.9.3-lineage GPU-safe ShortConv); quantizer recipe wi8fc |
+| **Command** | `build_int8_gpu.sh` |
 | **Quantization** | int8 dynamic (linears + embedding via wi8fc; convs float) — GSM8K 77% vs 76% for export-time conv-int8 on this finetune (build_int8_gpu.sh primary pointers) |
 
 ## Artifacts
@@ -44,10 +44,10 @@ Model-level on-device results — measured behavior of this exact artifact on th
 
 ## Pitfalls
 
-- The published _int4/_int8 (non-gpu) siblings stall GPU delegation at 536/579 ops on Adreno (0.9.1-era ShortConv INT64 block; s4_gpu_gate/RESULTS.md rows 5/12). This _int8_gpu delegates 542/542 on the Galaxy S26 (device_runs 2026-08-25).
+- The published _int4/_int8 (non-gpu) siblings stall GPU delegation at 536/579 ops on Adreno (0.9.1-era ShortConv INT64 block; 5/12). This _int8_gpu delegates 542/542 on the Galaxy S26 (device_runs 2026-08-25).
 - Thinking bundle: the runtime needs the think opener prefilled and the bundle's declared thought channel to show reasoning; gate multi-turn behaviour at sizes where the thinking completes (family records).
 - add_executor_metadata is required after post-hoc quantization (0.9.3 emits no ExecutorMetadataProto; litert-lm >=0.15 needs it) (build_int8_gpu.sh).
-- One arm of the 08-25 Mac Metal sieve refused engine creation for a JP/Thinking variant while S26 OpenCL passed the same file — see ship_lfm25_int8gpu_20260825/RESULTS.md before quoting Mac Metal numbers for this family.
+- One arm of the 08-25 Mac Metal sieve refused engine creation for a JP/Thinking variant while S26 OpenCL passed the same file — see before quoting Mac Metal numbers for this family.
 
 ---
 

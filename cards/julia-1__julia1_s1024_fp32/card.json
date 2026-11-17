@@ -109,10 +109,10 @@
           },
           "error": null,
           "evidence": [
-            "Debug gate app com.julia.gate (android_gate/, Kotlin CompiledModel 2.2.0), one cold process per run, fixture ids + markers pushed as JSON, host token-table lookup outside the timed interval; timed interval = input writes + run + output readback per row. Source: /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s1024_fp32_fp16table.json, logcat /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s1024_fp32_fp16table.logcat.txt, state /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s1024_fp32_fp16table.state_before.txt / .state_after.txt.",
+            "Debug gate app com.julia.gate (android_gate/, Kotlin CompiledModel 2.2.0), one cold process per run, fixture ids + markers pushed as JSON, host token-table lookup outside the timed interval; timed interval = input writes + run + output readback per row.",
             "conditions: before thermal status None, battery 41.3 C; after thermal status None, battery 41.9 C; screen on, USB powered, no cool-start wait.",
-            "parity vs the author's implementation (oracle /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/fixtures/oracle_typed.json + oracle_parity.json, scripts/device_compare.py): same winning option on 100/100 rows (18 boundary = reference top-1 < 0.9); max |dprob| 0.00767; rows over 0.01: 0.",
-            "output_match null: no Mac CPU gate of these graph bytes holds per-row logits for these ids (results/host_e2e_julia1_s1024_* keep aggregates only); the argmax / |dprob| metrics against the author's implementation are the lane's own criterion.",
+            "parity vs the author's implementation (scripts/device_compare.py): same winning option on 100/100 rows (18 boundary = reference top-1 < 0.9); max |dprob| 0.00767; rows over 0.01: 0.",
+            "output_match null: no Mac CPU check of these graph bytes holds per-row logits for these ids (keep aggregates only); the argmax / |dprob| metrics against the author's implementation are its own criterion.",
             "09-30 09:51:09.888 30986 31015 I litert  : [compiled_model.cc:1250] 0 compiler plugins were applied successfully:",
             "09-30 09:51:09.994 30986 31015 I tflite  : Replacing 1704 out of 1704 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main)."
           ],

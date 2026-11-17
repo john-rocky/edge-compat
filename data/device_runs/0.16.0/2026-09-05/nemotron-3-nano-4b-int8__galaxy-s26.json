@@ -62,12 +62,12 @@
         "soc": "Qualcomm SM8850",
         "vendor_sdk": null
       },
-      "error": "exit 139 during the gpu generation gate; log tail: local_attention_mask_policy: Not set | sliding_window_size: Not set | advanced_settings: Not set",
+      "error": "exit 139 during the gpu generation check; log tail: local_attention_mask_policy: Not set | sliding_window_size: Not set | advanced_settings: Not set",
       "evidence": [
         "VERBOSE: Replacing 2827 out of 2827 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
-        "community_accel_work/s7_manifest_backfill/logs/Nemotron-3-Nano-4B__Nemotron-3-Nano-4B_int8.gate.log: generation gate verdict FAIL (journal rows.jsonl, fail_class=run_error, exit=139, generated=True, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+        "Generation check verdict FAIL (journal rows.jsonl, fail_class=run_error, exit=139, generated=True, timeout=False); the same journal's --benchmark numbers for this run are withheld because the gate output is not a real answer",
         "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
-        "gate process peak 1280 MB (journal gate_peak_mb)"
+        "check process peak 1280 MB (journal gate_peak_mb)"
       ],
       "failure_class": "run_error",
       "full_delegation": true,

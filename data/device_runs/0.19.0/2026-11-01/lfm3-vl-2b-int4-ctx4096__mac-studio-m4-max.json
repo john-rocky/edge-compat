@@ -1,0 +1,69 @@
+{
+  "artifact": "LFM3-VL-2B_int4_ctx4096.litertlm",
+  "artifact_sha256": "64d89b858df4cea27fea4ebcb3bc468e0bc6af2c2cc87db69ac9776332c451e4",
+  "device": "mac-studio-m4-max",
+  "model_id": "lfm3-vl-2b-int4-ctx4096",
+  "notes": "litert-community/LFM3-VL-2B-LiteRT: LFM3-VL-2B_int4_ctx4096.litertlm, a LiteRT-LM fast_vlm conversion of LiquidAI/LFM3-VL-2B at revision f83d2b0a (LFM Open License v1.0): a picture (stretched to 512 x 512 by the runtime) and text in, text out; thinks in a <think> block by default (enable_thinking switches it off). The int4 file with a 4,096-token context instead of 2,048 (the KV cache of the text decoder; max_num_tokens 4096 in LlmMetadata), for thoughts longer than 2,048 tokens. Mac row: the placement scene of run r5a, the reason the file exists: with thinking on, the 2,048-token file's thought reached the end of the context on 7 of the 30 requests. Landed 2026-11-01: LFM3-VL-2B_int4_ctx4096.litertlm is on the Hub at litert-community/LFM3-VL-2B-LiteRT (added by commit 58085927 at 2026-11-01T03:21:56.000Z; main 58085927 at the read); its LFS oid equals artifact_sha256 and its size 2071611643 B (anonymous API read 2026-11-01 12:32:52 JST).",
+  "quantization": "text decoder: fully connected weights int4 blockwise-32, no activation type declared (the GPU runs float16 activations by default), exported over a 4,096-token KV cache; token embedding table int8 (dynamic_wi8_afp32, externalized); vision encoder fp32 + adapter fp16 weights, both declared fp32 activations; fast_vlm, pictures 512 x 512 (256 tokens), KV cache 4096; against LFM3-VL-2B_int4.litertlm the embedder, vision encoder, adapter and tokenizer sections are the same bytes, LlmMetadataProto differs only in max_num_tokens (2048 -> 4096; the chat template the same), and the text decoder and ExecutorMetadataProto differ (the cache length)",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 4096,
+      "date": "2026-11-01",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "bytes: LFM3-VL-2B_int4_ctx4096.litertlm = LFM3-VL-2B_int4_ctx4096.litertlm, 2071611643 B, sha256 64d89b858df4cea27fea4ebcb3bc468e0bc6af2c2cc87db69ac9776332c451e4 (the runner's own record bundle_sha256; the file's mtime 01:39:16 JST precedes the runs, which started at 01:40:52)",
+        "runtime: litert-lm 0.19.0 (PyPI) Python API (Python 3.12.11), the GPU = WebGPU on Metal; scripts/r14a_bundle.py: one fresh process per request, cache ':nocache', greedy (the bundle has no sampler; the engine default is top-k 1), thinking on (extra_context enable_thinking True), max_output_tokens = 4,096 - the HF model's input token count of the same request; one user message = [the 512 x 512 PNG, the pointing request]",
+        "the scene: 30 requests to put an object in a free spot of 10 photos (left / right, between, in front / behind, on a surface), each with the region where a point counts as right drawn by hand before any model ran (scripts/r11b_items.py, r11b_regions.py); the point read by the registered reader (scripts/r11b_score.py)",
+        "output_match = the line γ1'' (registered before the runs): right >= 20 of 30 -> PASS with 21 (runs 2026-11-01 01:40:52-01:52:54 JST)",
+        "Row 'bundle i4k4_gpu_on': {\"label\": \"bundle i4k4_gpu_on\", \"q_type\": \"place\", \"n\": 30, \"right\": 21, \"right_fav\": 21, \"no_point\": 0, \"no_answer\": 0, \"by_rel\": {\"lr\": [7, 7, 8], \"between\": [5, 5, 6], \"fb\": [4, 4, 10], \"surface\": [5, 5, 6]}, \"new_tokens_median\": 611.5, \"new_tokens_max\": 3746}",
+        "the same requests, the source model in Transformers at the same 512 x 512 input with thinking on (row 'lfm3 S512 on std'): 21 right, longest reply 2332 tokens; LFM3-VL-2B_int4.litertlm (2,048 tokens, row 'bundle i4_gpu_on'): 17 right, 7 replies reached the end of the context before an answer"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "line_right_at_least": 20.0,
+        "new_tokens_max": 3746.0,
+        "new_tokens_median": 611.5,
+        "no_answer_context_end": 0.0,
+        "no_point": 0.0,
+        "requests": 30.0,
+        "requests_between": 6.0,
+        "requests_fb": 10.0,
+        "requests_lr": 8.0,
+        "requests_surface": 6.0,
+        "right": 21.0,
+        "right_between": 5.0,
+        "right_fb": 4.0,
+        "right_lr": 7.0,
+        "right_surface": 5.0,
+        "source_model_new_tokens_max": 2332.0,
+        "source_model_right": 21.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "30 placement requests over 10 photos (a free spot for a named object, 512 x 512), thinking on, one process per request, greedy; the hand-drawn region of each request is the reference",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

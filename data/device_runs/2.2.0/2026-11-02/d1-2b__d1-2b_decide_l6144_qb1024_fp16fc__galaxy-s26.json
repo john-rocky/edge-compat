@@ -1,0 +1,59 @@
+{
+  "artifact": "d1-2b_decide_L6144_qb1024_fp16fc.tflite",
+  "artifact_sha256": "5743963438e4b5090f500540bf345fdd641d90e9305cd0aabab135182062a10d",
+  "device": "galaxy-s26",
+  "model_id": "d1-2b__d1-2b_decide_l6144_qb1024_fp16fc",
+  "notes": "d1-2B (litert-community/d1-2B-LiteRT main df449772, created 2026-11-02; card license other (lfm1.0), base model LiquidAI/d1-2B; anonymous Hub API read 2026-11-03T02:46:35+0900): the `decide` graph, bucket `L6144_qb1024`, form `fp16fc` (the fp16-FC). Hub file `d1-2b_decide_L6144_qb1024_fp16fc.tflite` 2,961,934,864 B; artifact_sha256 = its LFS oid = the phone's read-back in each run's hold. Signature `decide`; its I/O as the app read it: inputs embeds float32 [1,6144,2048], sees_q float32 [1,6144,66], sees_k float32 [1,6144,66] -> outputs hidden float32 [1,6144,2048]. Measured on the Galaxy S26 (SM-S942Q) (device holds of runs r6): one result per run, and per timing set in a timing run. output_match is null on every result: the work compares each row with its own Mac Metal fp32 run of the same rows (metrics.vs_mac_metal_fp32_*: max |d| and the smallest cosine over the rows with the same input bytes), not with a CPU reference of the same bytes under the element rule.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-11-02",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 2456,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-d1-gate-app",
+        "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "app memory guard: MemAvailable 1405316 kB < mem_guard_kb 1500000 at stage compile",
+      "evidence": [
+        "the gate app r10 (com.mlboydaisuke.d1omni.gate, Kotlin CompiledModel on LiteRT 2.2.0 from Maven; APK sha256 0b6d6f70ac0cf4c7…, the APK its run config installs), one app process per run; per call = write every input + CompiledModel.run() + read every output (the app's write_run_read_ms; the GPU's run() returns before the compute ends and the read waits for it)",
+        "file measured: d1-2b_decide_L6144_qb1024_fp16fc.tflite = litert-community/d1-2B-LiteRT `d1-2b_decide_L6144_qb1024_fp16fc.tflite` (2,961,934,864 B), LFS oid 5743963438e4b5090f500540bf345fdd641d90e9305cd0aabab135182062a10d (Hub tree read 2026-11-03T02:46:35+0900); the phone's copy read back equal (MATCH)",
+        "(app pid 23174): `11-02 09:14:38.200 23174 23199 I tflite  : Replacing 2456 out of 2456 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).`",
+        "Run s1t_tmL6144 started 2026-11-02 09:14:36 JST, ready check `clean; rested 119s since 09:12:37`; build Android 16 BP4A.251205.006.S942QOPS1AZH9",
+        "Status APPGUARD, `app memory guard: MemAvailable 1405316 kB < mem_guard_kb 1500000 at stage compile`"
+      ],
+      "failure_class": "memory_guard_stop_during_compile",
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "app_guard_max_anon_plus_swap_kb": 499700.0,
+        "app_guard_min_mem_available_kb": 1405316.0,
+        "app_guard_stop_t_ms": 21349.0,
+        "app_mem_guard_kb": 1500000.0,
+        "battery_temp_tenths_c_end": 373.0,
+        "battery_temp_tenths_c_start": 353.0,
+        "thermal_status_end": 1.0,
+        "thermal_status_start": 0.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "signature": "GPU (ML Drift OpenCL) precision FP32, constant tensor sharing on; gate app r10; timing mode, rows tmL6144.json; run r6 hold s6b run s1t_tmL6144",
+      "total_ops": 2456,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -66,7 +66,7 @@ export function loadWebMatrixSnapshots(matrixDir: string): WebMatrixSnapshot[] {
     const duplicate = snapshots.find((s) => s.backend === backend);
     if (duplicate !== undefined) {
       // Which snapshot a backend's verdicts should come from when several
-      // versions exist is a version-selection policy the owner has not set
+      // versions exist is a version-selection policy not set yet
       // yet (Phase 4 deferred backend→snapshot resolver). Refuse rather than
       // silently pick one.
       throw new SiteDataError(

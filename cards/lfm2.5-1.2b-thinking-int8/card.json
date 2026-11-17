@@ -8,7 +8,7 @@
   ],
   "benchmarks": [],
   "conversion": {
-    "command": "python convert_lfm25.py LiquidAI/LFM2.5-1.2B-Thinking out_lfm25_12b_fp --fp && python ../minicpm_work/quantize_litertlm.py apply out_lfm25_12b_fp/model.litertlm lfm25_int8.litertlm --recipe wi8fc",
+    "command": "python convert_lfm25.py LiquidAI/LFM2.5-1.2B-Thinking out_lfm25_12b_fp --fp && python quantize_litertlm.py apply out_lfm25_12b_fp/model.litertlm lfm25_int8.litertlm --recipe wi8fc",
     "quantization": "int8 dynamic, post-hoc linears + embedding (wi8fc); convs stay float",
     "tool": "litert-torch",
     "tool_version": "0.9.1"
@@ -129,7 +129,7 @@
           },
           "error": null,
           "evidence": [
-            "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.16.0/bin/litert-lm 0.16.0); fixed-question answer: '[thought]  Okay, let\\'s see. The user asked \"What is 17 + 25? Answer briefly.\" Hmm, I need to make sure I answer correctly but keep it short. First, 17 plus 25. Well, 17 plus 20 is 37, then plus 5 more is 42. Wait, no, wait: 17 +25. 17 + 25 is 42? Wait, 17+25: 10+20=30, 7+5=12, so 30+12=42. Yeah, that\\'s right. But the user wants it brief. So maybe just say 42? Or maybe they expect a calculation step? But the instruction says answer briefly. So just the answer. Since they said \"answer briefly,\" probably just 42. Let me confirm: 17 +25 equals 42. Yep. So I should just put 42. I don\\'t need any extra explanation. Alright, I\\'ll go with 42.\\n [/thought]\\n\\n\\n42  \\n**Answer:** \\\\boxed{42}'"
+            "compat_check status ok (runtime 0.16.0); fixed-question answer: '[thought]  Okay, let\\'s see. The user asked \"What is 17 + 25? Answer briefly.\" Hmm, I need to make sure I answer correctly but keep it short. First, 17 plus 25. Well, 17 plus 20 is 37, then plus 5 more is 42. Wait, no, wait: 17 +25. 17 + 25 is 42? Wait, 17+25: 10+20=30, 7+5=12, so 30+12=42. Yeah, that\\'s right. But the user wants it brief. So maybe just say 42? Or maybe they expect a calculation step? But the instruction says answer briefly. So just the answer. Since they said \"answer briefly,\" probably just 42. Let me confirm: 17 +25 equals 42. Yep. So I should just put 42. I don\\'t need any extra explanation. Alright, I\\'ll go with 42.\\n [/thought]\\n\\n\\n42  \\n**Answer:** \\\\boxed{42}'"
           ],
           "failure_class": null,
           "full_delegation": null,
@@ -166,7 +166,7 @@
           },
           "error": null,
           "evidence": [
-            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation check (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
             "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
             "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
             "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 71.9 s, output head '[thought]  Okay, let me see. The question is asking \"What is 17 plus 26? Answer '",

@@ -3,7 +3,7 @@
  *
  * Holds at most one compiled model at a time. Tensors are manually managed in
  * LiteRT.js: every tensor created here is deleted before the function returns,
- * so leaks cannot skew latency across runs (spec 5.2).
+ * so leaks cannot skew latency across runs.
  */
 import {
   type CompiledModel,

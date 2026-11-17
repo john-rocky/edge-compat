@@ -2,13 +2,13 @@
  * Playground headless smoke (Phase 9 DoD).
  *
  * Builds the site with a matrix dir containing one example-provenance
- * webgpu_mldrift snapshot (3 entries — the known-status path, DECISIONS #91)
+ * webgpu_mldrift snapshot (3 entries — the known-status path)
  * plus the honest-empty wasm_xnnpack snapshot, serves it Pages-like (no
  * COOP/COEP), and drives the drop → results flow for:
  *   - both example web models on BOTH backends (wasm_xnnpack + webgpu_mldrift),
  *   - the deliberately broken fixture (failure path),
  * asserting on every check that no network request after the model is
- * dropped could carry model-derived bytes (spec 9.1 privacy rule).
+ * dropped could carry model-derived bytes (the privacy rule).
  */
 import * as assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';

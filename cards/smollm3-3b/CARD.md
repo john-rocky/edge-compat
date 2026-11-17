@@ -60,7 +60,7 @@ Model-level on-device results — measured behavior of this exact artifact on th
 
 - Thinking model: the bundle carries the SmolLM3 template with its /think and /no_think controls, not plain ChatML (HF card).
 - Gallery import: only v1.0.16+ accepts .litertlm directly from Hugging Face; older 1.0.x builds (package com.google.aiedge.gallery) do not (HF card).
-- Measured on an 8 GB phone 2026-08-17: fully delegated on Mali OpenCL — 1476/1476 prefill nodes, 1308/1308 decode, zero rejections — and answers correctly. This refutes the earlier standing assumption that a ~2B-and-up dense model cannot use the Pixel 8a GPU at all (CATALOG_REGATE.md).
+- Measured on an 8 GB phone 2026-08-17: fully delegated on Mali OpenCL — 1476/1476 prefill nodes, 1308/1308 decode, zero rejections — and answers correctly. This refutes the earlier standing assumption that a ~2B-and-up dense model cannot use the Pixel 8a GPU at all.
 
 ---
 

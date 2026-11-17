@@ -1,0 +1,73 @@
+{
+  "artifact": "d1-2b_decide_L2048_fp16fc.tflite",
+  "artifact_sha256": "d5a3a5a1c49c1c0b9e780a816513d4f8d8a820961d2b6769dd9fe593522af04d",
+  "device": "pixel-11-pro",
+  "model_id": "d1-2b__d1-2b_decide_l2048_fp16fc",
+  "notes": "d1-2B (litert-community/d1-2B-LiteRT main df449772, created 2026-11-02; card license other (lfm1.0), base model LiquidAI/d1-2B; anonymous Hub API read 2026-11-03T02:46:35+0900): the `decide` graph, bucket `L2048`, form `fp16fc` (the fp16-FC). Hub file `d1-2b_decide_L2048_fp16fc.tflite` 2,945,091,616 B; artifact_sha256 = its LFS oid = the phone's read-back in each run's hold. Signature `decide`; its I/O as the app read it: inputs embeds float32 [1,2048,2048], sees_q float32 [1,2048,66], sees_k float32 [1,2048,66] -> outputs hidden float32 [1,2048,2048]. Measured on the Pixel 11 Pro (device holds of runs r2): one result per run, and per timing set in a timing run. output_match is null on every result: the work compares each row with its own Mac Metal fp32 run of the same rows (metrics.vs_mac_metal_fp32_*: max |d| and the smallest cosine over the rows with the same input bytes), not with a CPU reference of the same bytes under the element rule.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-11-02",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 2122,
+      "env": {
+        "device": "Pixel 11 Pro",
+        "machine_label": "pixel-11-pro-d1-gate-app",
+        "os_build": "Android 17 (build CD1A.260618.001.A7)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Google Tensor G6",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "the gate app r9 (com.mlboydaisuke.d1omni.gate, Kotlin CompiledModel on LiteRT 2.2.0 from Maven; APK sha256 2d89d57a9db64e7c…, the APK its run config installs), one app process per run; per call = write every input + CompiledModel.run() + read every output (the app's write_run_read_ms; the GPU's run() returns before the compute ends and the read waits for it)",
+        "file measured: d1-2b_decide_L2048_fp16fc.tflite = litert-community/d1-2B-LiteRT `d1-2b_decide_L2048_fp16fc.tflite` (2,945,091,616 B), LFS oid d5a3a5a1c49c1c0b9e780a816513d4f8d8a820961d2b6769dd9fe593522af04d (Hub tree read 2026-11-03T02:46:35+0900); the phone's copy read back equal (MATCH)",
+        "(app pid 28593): `11-02 03:21:48.862 28593 28623 I tflite  : Replacing 2122 out of 2123 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 3 partitions for subgraph 0 (main).`",
+        "Run c4_picL2048 started 2026-11-02 03:21:46 JST, ready check `check run, not waited for clean (thermal 1, cap none, gpu_cooling 0 (budget 4614000 of 4614000)); rested 101s since 03:20:05; front com.android.systemui (a system app: left alone)`; build Android 17 CD1A.260618.001.A7: `Last checkin fingerprint=google/grizzly/grizzly:17/CD1A.260618.001.A7/15768489:user/release-keys`",
+        "Verdict PASS (PASS = every output finite and no kill line for the app's pid (the run-check rule; the answers are scored over the whole pass by the replay)); each row's output against the Mac Metal fp32 run of the same rows (by key; rows whose input bytes equal the Mac's: metrics.vs_mac_metal_fp32_same_input_rows)",
+        "latency_p50_ms = the check pass's warm median per call (the rows after the first call; the rows differ in content, not in shape); a check run, not a timing-mode measurement"
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": 18218.340405,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "app_vmhwm_kb_after_compile": 325896.0,
+        "app_vmhwm_kb_at_end": 7060556.0,
+        "battery_temp_tenths_c_end": 369.0,
+        "battery_temp_tenths_c_start": 356.0,
+        "compile_ms": 7472.615217,
+        "finite_rows": 2.0,
+        "first_call_ms": 18287.620052,
+        "kill_lines": 0.0,
+        "memory_high_lines": 0.0,
+        "nonfinite_values": 0.0,
+        "rows": 2.0,
+        "thermal_status_end": 1.0,
+        "thermal_status_start": 0.0,
+        "vs_mac_metal_fp32_cos_min_same_input": 0.9999999986305089,
+        "vs_mac_metal_fp32_max_abs_same_input": 0.00038295984268188477,
+        "vs_mac_metal_fp32_rows": 2.0,
+        "vs_mac_metal_fp32_same_input_rows": 1.0,
+        "warm_max_ms": 18287.620052,
+        "warm_median_run_only_ms": 18210.600293,
+        "warm_min_ms": 18149.060758,
+        "warm_rows": 2.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "CPU XNNPACK 4 threads, weight cache file; gate app r9; gate mode, 2 row(s) of c4picL2048.json; run r2 hold p11 run c4_picL2048",
+      "total_ops": 2123,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -19,9 +19,9 @@ task: image-text-to-text
 
 | | |
 |---|---|
-| **Tool** | litert-torch export (decoder re-export, composite-free) + bundle rebuild (build_shieldstral_bundle.py) decoder re-export on ~/venvs/ltconv040dev, py3.10.13: litert-torch 0.9.3 / litert-converter 0.3.1 / ai-edge-quantizer 0.8.0 — the converter is the lever, not the torch bump (0.3.1 lowers odml.softmax natively where 0.3.0 cannot). Bundle repack: TODO(owner) — build_shieldstral_bundle.py imports only litert_lm_builder, but the interpreter that ran it is unrecorded, so no builder version is establishable. |
-| **Command** | `shieldstral_work/vision_gpu_20260827/build_decoder_gpu.sh -> build_shieldstral_bundle.py` |
-| **Quantization** | int4 decoder + int8 vision adapter/tower (per bundle inputs in s5_gate/ARTIFACTS.md) |
+| **Tool** | litert-torch export (decoder re-export, composite-free) + bundle rebuild (build_shieldstral_bundle.py) decoder re-export, py3.10.13: litert-torch 0.9.3 / litert-converter 0.3.1 / ai-edge-quantizer 0.8.0 — the converter is the lever, not the torch bump (0.3.1 lowers odml.softmax natively where 0.3.0 cannot). Bundle repack: TODO — build_shieldstral_bundle.py imports only litert_lm_builder, but the interpreter that ran it is unrecorded, so no builder version is establishable. |
+| **Command** | `build_decoder_gpu.sh -> build_shieldstral_bundle.py` |
+| **Quantization** | int4 decoder + int8 vision adapter/tower |
 
 ## Artifacts
 
@@ -44,8 +44,8 @@ Model-level on-device results — measured behavior of this exact artifact on th
 
 ## Pitfalls
 
-- The pre-rebundle published file refused GPU engine creation outright: STABLEHLO_COMPOSITE odml.softmax at 52/1187 ops on the first subgraph (S4 idx 034). The rebundled decoder is composite-free and delegates 1187/1187 x13 subgraphs on the Galaxy S26 — the text sibling's numbers exactly (s5_gate results, device_runs 2026-08-28).
-- The card's claim 'the vision bundle can replace the text one' was false on GPU for the old file and true again only after this rebundle — the sentence is true only of the _int4_gpu file; the old _int4 stays CPU-only (CARD_ADDITIONS.md §1).
+- The pre-rebundle published file refused GPU engine creation outright: STABLEHLO_COMPOSITE odml.softmax at 52/1187 ops on the first subgraph (S4 idx 034). The rebundled decoder is composite-free and delegates 1187/1187 x13 subgraphs on the Galaxy S26 — the text sibling's numbers exactly (device_runs 2026-08-28).
+- The card's claim 'the vision bundle can replace the text one' was false on GPU for the old file and true again only after this rebundle — the sentence is true only of the _int4_gpu file; the old _int4 stays CPU-only.
 - Safety classifier usage: the model scores via a single-token output contract — use the scoring API pattern, not free generation, and letterboxing beats naive resize for image inputs (published HF card).
 
 ---

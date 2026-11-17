@@ -1,8 +1,8 @@
 """`release-check`: carry-forward → probe → re-measure → upgrade → diff → report.
 
-One command per runtime release (spec §8.3). No new schema: probe output is
+One command per runtime release. No new schema: probe output is
 matrix entries, the report embeds `matrix diff` output, and the exit-code
-contract (0 nothing changed / 1 semantic changes / 2 error) lets the owner's
+contract (0 nothing changed / 1 semantic changes / 2 error) lets an
 existing release watcher trigger on it.
 
 Upgrade rules (Data Integrity + micrograph honesty, spelled out):

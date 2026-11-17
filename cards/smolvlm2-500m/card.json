@@ -8,10 +8,10 @@
   ],
   "benchmarks": [],
   "conversion": {
-    "command": "TODO (owner) — not recorded in the source card",
+    "command": "TODO — not recorded in the source card",
     "quantization": "vision: SigLIP encoder + pixel-shuffle x4 + Linear connector int8 -> 64 image tokens; decoder SmolLM2-360M int4 weights (blockwise-32 + OCTAV); tied embedding INT8 (externalized); integer compute; KV cache 2048. File SmolVLM2-500M.litertlm, ~361 MB",
-    "tool": "TODO (owner) — the card describes the fast_vlm bundle layout and graph edits but does not name the converter tool",
-    "tool_version": "TODO (owner) — not recorded in the source card"
+    "tool": "TODO — the card describes the fast_vlm bundle layout and graph edits but does not name the converter tool",
+    "tool_version": "TODO — not recorded in the source card"
   },
   "cross_runtime": [],
   "delegation": null,
@@ -38,7 +38,7 @@
           "evidence": [
             "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-26-vl-response-v1-s26-android/NOTES.md — the table row for SmolVLM2-500M litert-lm-cpu (median of 3 launches, range in brackets)",
             "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-26-vl-response-v1-s26-android/litert-lm_litert-community_SmolVLM2-500M_vl-describe-catcouch-gen64_cpu.jsonl — 3 launch records; medians here are computed over the 3 passing launches",
-            "session anchor right before the sitting: llama.cpp b8999 unsloth/Qwen3-0.6B-GGUF short-chat decode 108.0 / 107.0 / 110.7 tok/s, median 108.0, ratio 1.016 vs the 2026-09-24 reference (106.3, n=6) — ADMITTED under the dashboard rule (SESSION.json)",
+            "session anchor right before the measurement run: llama.cpp b8999 unsloth/Qwen3-0.6B-GGUF short-chat decode 108.0 / 107.0 / 110.7 tok/s, median 108.0, ratio 1.016 vs the 2026-09-24 reference (106.3, n=6) — ADMITTED under the dashboard rule (SESSION.json)",
             "screen off in every launch (provenance.deviceBefore.wakefulness = Dozing, stay_on_while_plugged_in = 0); thermal status nominal before and after all 36 launches; battery 30.9–35.0 °C; 45 s between launches, 60–90 s between cells; no CPU frequency cap before any launch (capped after 11 of them, flag only)",
             "litert-lm_litert-community_SmolVLM2-500M_vl-describe-catcouch-gen64_cpu_run1.stderr.log: VERBOSE: Replacing 1290 out of 1423 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 189 partitions for subgraph 0 (prefill_128). (first partition line; the bundle has several graphs — vision, prefill, decode)",
             "peak_mem_mb = VmHWM (Android) / ps rss (Mac) of the CLI process, host memory only — a GPU arm's device heap is outside it",
@@ -140,7 +140,7 @@
           "evidence": [
             "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-26-vl-response-v1-s26-android/NOTES.md — the table row for SmolVLM2-500M litert-lm-gpu (median of 3 launches, range in brackets)",
             "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-09-26-vl-response-v1-s26-android/litert-lm_litert-community_SmolVLM2-500M_vl-describe-catcouch-gen64_gpu.jsonl — 3 launch records; medians here are computed over the 3 passing launches",
-            "session anchor right before the sitting: llama.cpp b8999 unsloth/Qwen3-0.6B-GGUF short-chat decode 108.0 / 107.0 / 110.7 tok/s, median 108.0, ratio 1.016 vs the 2026-09-24 reference (106.3, n=6) — ADMITTED under the dashboard rule (SESSION.json)",
+            "session anchor right before the measurement run: llama.cpp b8999 unsloth/Qwen3-0.6B-GGUF short-chat decode 108.0 / 107.0 / 110.7 tok/s, median 108.0, ratio 1.016 vs the 2026-09-24 reference (106.3, n=6) — ADMITTED under the dashboard rule (SESSION.json)",
             "screen off in every launch (provenance.deviceBefore.wakefulness = Dozing, stay_on_while_plugged_in = 0); thermal status nominal before and after all 36 launches; battery 30.9–35.0 °C; 45 s between launches, 60–90 s between cells; no CPU frequency cap before any launch (capped after 11 of them, flag only)",
             "litert-lm_litert-community_SmolVLM2-500M_vl-describe-catcouch-gen64_gpu_run1.stderr.log: Dynamically loaded GPU accelerator(libLiteRtGpuAccelerator.so) registered. — accelerator that computed: LiteRT GPU (libLiteRtGpuAccelerator.so, ML Drift OpenCL; LiteRT-LM prebuilt/android_arm64 at 1dadd00c, sha256 88e716f4ff79970b377597fb4207e930dc4905bc23ddb08479cc3f317627274a)",
             "litert-lm_litert-community_SmolVLM2-500M_vl-describe-catcouch-gen64_gpu_run1.stderr.log: VERBOSE: Replacing 1423 out of 1423 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128). (first partition line; the bundle has several graphs — vision, prefill, decode)",
@@ -181,7 +181,7 @@
         "run": {
           "accelerator": "gpu",
           "context_length": null,
-          "date": "2026-08-24",
+          "date": "2026-08-25",
           "decode_tokens_per_s": 76.73,
           "delegated_ops": 1423,
           "env": {
@@ -219,7 +219,7 @@
           "total_ops": 1423,
           "ttft_ms": 160.0
         },
-        "source": "data/device_runs/0.16.0/2026-08-24/smolvlm2-500m__galaxy-s26.json"
+        "source": "data/device_runs/0.16.0/2026-08-25/smolvlm2-500m__galaxy-s26.json"
       },
       {
         "device": "mac-studio-m4-max",

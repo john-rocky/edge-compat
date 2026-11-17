@@ -1,0 +1,69 @@
+{
+  "artifact": "mnn-pocket-0.3b-dec_L256_fp16w_tensor.tflite",
+  "artifact_sha256": "10a2f75325ea645a26cca863cb88e7f132b36b976ce3bd71c6271d9f8804fcdc",
+  "device": "pixel-11-pro",
+  "model_id": "mnn-pocket-0.3b-dec__mnn-pocket-0.3b-dec_l256_fp16w_tensor",
+  "notes": "mnn-pocket-0.3b-dec_L256_fp16w_tensor.tflite of litert-community/MNN-Pocket-0.3B-Dec-LiteRT (taobao-mnn/MNN-Pocket-0.3B-Dec, Apache-2.0; the source model's LoRA folded in, linear-layer weights stored as float16): the Google Tensor NPU form (each norm on its input divided by 4 times its mean absolute value), requests of up to 256 tokens; takes the token embeddings [1,256,896], the rotary tables and the attention mask, returns the hidden states after the final norm (the host reads the answers). Hub main 92110e85 (the tree at that commit): LFS sha256 and size = artifact_sha256 (488,975,376 B), the bytes every record's run read back. Phone rows: the C++ runner on LiteRT 2.3.0's C API (one process per run; the host's inputs computed on the Mac), the run records with their run directories (input list, read-back, setup, clock samples). The line (pre-registered): against the reference (the source model's inference.py, float32 CPU, one thread), the winner equal on every question whose reference top two are more than 0.02 apart, max |Δp| <= 0.02, mean |Δp| <= 0.002, the control above 0.02 where the file holds it, the hidden state finite; on a phone the winner also equals the same file's on the Mac CPU, on an NPU one partition holds every op; a runtime passes on a device only when it passes on every file it ran (metrics arm_files_run / arm_files_passed). output_match stays null: the line is against that reference, not the shared element tolerance against a CPU run of the same bytes. The Google Tensor NPU rows carry the line only.",
+  "quantization": "fp16 linear-layer weights",
+  "results": [
+    {
+      "accelerator": "npu_google_tensor",
+      "context_length": null,
+      "date": "2026-11-08",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 3065,
+      "env": {
+        "device": "Pixel 11 Pro",
+        "machine_label": "pixel-11-pro-mnnpocketdec-capi-runner",
+        "os_build": "Android 17 (CD1A.260905.001.B1)",
+        "runtime": "litert",
+        "runtime_version": "2.3.0",
+        "soc": "Google Tensor G6",
+        "vendor_sdk": "LiteRT Google Tensor NPU runtime 2.3.0 (Maven litert-npu-runtime-google-tensor:2.3.0; compiler plugin 6b1432e7…, dispatch e3814400…)"
+      },
+      "error": null,
+      "evidence": [
+        "(tag p11p_n_L256, run r6): run DONE rc 0, start 2026-11-08 02:48:02, 61 questions",
+        "Push mnn_pocket_dec_anorm4_L256_w16.tflite rc=0 bytes 488975376/488975376 sha256 phone=10a2f75325ea645a26cca863cb88e7f132b36b976ce3bd71c6271d9f8804fcdc = mac = the Hub LFS sha256",
+        "Runner 7e7539e5bd0c73ed… and libs: 3/3 OK; runner args (every run): --npu-vendor google_tensor",
+        "Device: Pixel 11 Pro 17 CD1A.260905.001.B1",
+        "runner.partitioned: INFO: [compiler_plugin.cc:742] Partitioned subgraph<0>, selected 3065 ops, from a total of 3065 ops. resulted in 1 partitions.; runner.replacing: VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (main).",
+        "line PASS: 61 questions, same winner 54/54 (not near ties), near ties kept 7/7, max |Δp| 0.00551672, mean |Δp| 0.00129413, control n/a (the file holds no request of the control pair), non-finite read-outs 0, winner = the Mac CPU's on the same file 54/54"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "arm_files_passed": 4.0,
+        "arm_files_run": 4.0,
+        "line_bar_control_abs_dp": 0.02,
+        "line_bar_max_abs_dp": 0.02,
+        "line_bar_mean_abs_dp": 0.002,
+        "line_bar_near_tie_gap": 0.02,
+        "line_mac_same_file_non_near_tie": 54.0,
+        "line_max_abs_dp": 0.005516720545282128,
+        "line_mean_abs_dp": 0.0012941264423078644,
+        "line_near_tie": 7.0,
+        "line_non_near_tie": 54.0,
+        "line_nonfinite_questions": 0.0,
+        "line_pass": 1.0,
+        "line_questions": 61.0,
+        "line_winner_equal_mac_non_near_tie": 54.0,
+        "line_winner_equal_near_tie": 7.0,
+        "line_winner_equal_non_near_tie": 54.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "the line: 61 questions of the L256 set against the source model's reference; the C-API runner build 7e7539e5 (LiteRT 2.3.0) with --npu-vendor google_tensor, Google Tensor NPU, the graph compiled on the phone",
+      "total_ops": 3065,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

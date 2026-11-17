@@ -177,7 +177,7 @@ class UnknownOptionsOpError(ValueError):
 # convolution/pool strides, CONCATENATION's axis — cannot be canonically
 # defaulted and stay outside: extending them needs per-node option params in
 # the rule schema, not a registry entry. (Extended 2026-08-12 from the
-# original CAST/RESHAPE/binary set — DECISIONS #158.)
+# original CAST/RESHAPE/binary set.)
 _EMPTY_TABLE_EMISSION: dict[str, int] = {
     "PAD": 22,
     "PADV2": 43,

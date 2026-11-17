@@ -1,0 +1,137 @@
+{
+  "artifacts": [
+    {
+      "file": "timestral-209m-c2048-h1024-int8.tflite",
+      "sha256": "790935a69c9f1a4cd41f5678d59cda0e2dfde73ef139f0e76d2d2d3cba637264",
+      "size_mb": 212.037
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "python scripts/r4_export.py --bucket 64x32 --rows 2 --norm pow2 --norm-k scripts/normk_fixture.json --attn-k 4 --attn-clamp --dec-only-last --fp16 && python scripts/r4_quant.py drq --src out/tflite/timestral209m_r2_l64_h32_pow2knormk_fixture_att4c_dl_fp32.tflite --sel blocks --rest-fp16  # in timestral/ of github.com/john-rocky/LiteRT-Models, the zoo sample the card links (github.com/john-rocky/LiteRT-Models timestral/README.md at main ceb8299 ('Rebuilding the graphs')), after hf download mistralai/Timestral-209M config.json model.safetensors --revision 9874d252ab0aae16f7f7c999f98f98d6ad7d8365; the output timestral209m_r2_l64_h32_pow2knormk_fixture_att4c_dl_blocksint8w16.tflite is published as timestral-209m-c2048-h1024-int8.tflite",
+    "quantization": "dynamic-range int8 from ai-edge-quantizer 0.9.0 (int8 weights per channel, inputs quantized at run time) on 199 of the 217 fully connected layers, 91.6 % of their weights: all those of the first 23 of the 24 transformer blocks; the other 18 keep float16 weights (3 in the patch embedding, 11 in the last block, 4 in the quantile head); inputs and output float32 (card 'How the graphs were made')",
+    "tool": "litert-torch",
+    "tool_version": "0.9.4 (ai-edge-quantizer 0.9.0 for the weights; torch 2.13.0; ai-edge-litert 2.2.0 for the desktop checks)"
+  },
+  "cross_runtime": [],
+  "delegation": {
+    "backend": "gpu_mldrift",
+    "blocking_ops": [
+      "LOGISTIC",
+      "DEQUANTIZE",
+      "EXP",
+      "LOG"
+    ],
+    "coverage_ops_pct": 95.5,
+    "lint_report_version": "1.1",
+    "litert_version": "2.2.0",
+    "matched_provenance_counts": {
+      "measured": 1626,
+      "unmatched": 58
+    },
+    "partitions": 77
+  },
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu_xnnpack",
+          "context_length": null,
+          "date": "2026-10-22",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 1684,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-timestral-gate",
+            "os_build": "Android 16 BP4A.251205.006.S942QOPS1AZH9",
+            "runtime": "litert",
+            "runtime_version": "2.2.0",
+            "soc": "Qualcomm SM8850 (Adreno GPU, Hexagon HTP)",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "gate app com.mlboydaisuke.d1omni.gate in generic mode (Kotlin CompiledModel, LiteRT 2.2.0; debug build r9), one cold process per run, the fixture rows pushed as raw float32 tensors (the host steps done on the Mac); measured interval = the five input writes + run + the output read-back per call. Holds s4 and s4 of 2026-10-22.",
+            "forecast check vs the official TimestralForecaster.forecast() (PyTorch, float32, CPU, every default) on the 71 fixture windows of this size (contexts of up to 2,048 steps, every horizon; 18 groups): MASE 1.394870 vs 1.393860 (ratio x1.000725), CRPS 0.171800 vs 0.172875 (ratio x0.993782); NaN / inf 0, quantile order broken 0, graph inputs equal to the host's 71 / 71; the bar (both ratios <= 1.01, no NaN / inf, the 21 quantiles in order at every step): PASS.",
+            "output_match = the shared element rule (|out - ref| <= max(1e-05, 0.001 * |ref|) per element, litert_compat.probe.runners.Tolerance) against the same file on the Mac CPU on the same rows (ai-edge-litert 2.2.0 XNNPACK, 8 threads; the vs_mac.cpu block): every one of the 71 rows is bit-equal (max |d| 0) -> True.",
+            "latency_p50_ms = the timing run (ready: clean; rested 63s since 20:46:49; thermal before the run: Thermal Status: 0; 5 warm-ups then 20 calls on one window, tsl_l64h32_r2_att_one): median 39.2987 ms (min 37.3592, max 44.4750; run() alone 39.1928); one call is one forecast (the two rows, the series and its negation, in one graph call; the host steps around it not included); compile 247 ms. The 71-window check run's warm median was 41.3090 ms (thermal before it: Thermal Status: 1).",
+            "peak_mem_mb = the app process's VmHWM at the end of the timing run (642848 kB, read by the gate app from /proc/self/status); the check run's 680684 kB.",
+            "os_build = the device line of hold n5's npu_chain log (2026-10-22 21:03 JST); holds t4 and s4 ran on the same phone the same evening without a reboot (its uptime grew by the wall-clock gap); the gate app reads Build.VERSION.SDK_INT 36, Build.MODEL SM-S942Q.",
+            "sha256 timestral209m_r2_l64_h32_pow2knormk_fixture_att4c_dl_blocksint8w16.tflite phone=790935a69c9f1a4cd41f5678d59cda0e2dfde73ef139f0e76d2d2d3cba637264 mac=790935a69c9f1a4cd41f5678d59cda0e2dfde73ef139f0e76d2d2d3cba637264 MATCH",
+            "10-22 20:47:53.944  2878  2918 I tflite  : Replacing 1684 out of 1684 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 0 (main).",
+            "10-22 20:42:00.028 29855 29879 I tflite  : Replacing 1684 out of 1684 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 0 (main)."
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 39.298698,
+          "loads": true,
+          "max_abs_diff": 0.0,
+          "max_rel_diff": 0.0,
+          "metrics": {
+            "bar_pass": 1,
+            "crps": 0.17180032072754958,
+            "crps_ratio_vs_reference": 0.9937819162094873,
+            "crps_reference": 0.17287527366450328,
+            "gate_leg_compile_ms": 241.222239,
+            "gate_leg_rows": 71,
+            "gate_leg_vmhwm_kb": 680684,
+            "gate_leg_warm_median_write_run_read_ms": 41.3090105,
+            "gate_leg_warm_min_write_run_read_ms": 37.750573,
+            "gate_leg_warm_rows": 66,
+            "inputs_equal": 71,
+            "mac_same_graph_bit_equal_rows": 71,
+            "mac_same_graph_max_abs": 0.0,
+            "mac_same_graph_median_ch_max_abs": 0.0,
+            "mac_same_graph_ratio_crps": 0.9937819162094873,
+            "mac_same_graph_ratio_mase": 1.0007246274173442,
+            "mac_same_graph_rows": 71,
+            "mase": 1.3948698302289717,
+            "mase_ratio_vs_reference": 1.0007246274173442,
+            "mase_reference": 1.3938598012010874,
+            "nonfinite": 0,
+            "partitions": 1,
+            "q_max_rel_vs_reference": 0.20954746089600548,
+            "quantile_order_broken": 0,
+            "threads": 4,
+            "timing_leg_compile_ms": 247.139427,
+            "timing_leg_max_ms": 44.475,
+            "timing_leg_median_ms": 39.298698,
+            "timing_leg_min_ms": 37.359167,
+            "timing_leg_n": 20,
+            "timing_leg_run_only_median_ms": 39.1928385,
+            "timing_leg_vmhwm_kb": 642848,
+            "timing_leg_warmups": 5,
+            "window_groups": 18,
+            "windows": 71
+          },
+          "output_match": true,
+          "peak_mem_mb": 627.781,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "CPU XNNPACK 4 threads; gate app com.mlboydaisuke.d1omni.gate (generic mode)",
+          "total_ops": 1684,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.2.0/2026-10-22/timestral-209m__timestral-209m-c2048-h1024-int8__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "timestral-209m",
+    "id": "timestral-209m__timestral-209m-c2048-h1024-int8",
+    "license": "other (modified-mit)",
+    "source_url": "https://huggingface.co/mlboydaisuke/Timestral-209M-LiteRT",
+    "task": "time-series-forecasting"
+  },
+  "pitfalls": [
+    "Timestral-209M's attention logits (up to 242,875) and RMSNorm sums of squares (up to 164,602,176) leave the float16 range (65,504): each RMSNorm input is pre-scaled by a power of two, the logits are computed at 1/16 with the row maximum subtracted before the scale is restored, the softmax input is clamped at -3*10^4 and the mask value is -3*10^4; in float32 these rewrites leave the results unchanged (card 'How the graphs were made').",
+    "Five float32 inputs, one signature `serving_default`: `patches` [2,64,64] (per patch 32 normalized values then 32 missing flags), `dec` [2,32,768] (`forecast_query.f32` for every decoder token), `bias` [1,1,96,96] (additive mask: 0 or -3*10^4), `cos` / `sin` [1,1,96,64] (rows cut from `rope_cos.f32` / `rope_sin.f32`) -> `output_0` [2,32,32,21], the normalized quantiles; the two rows are the series and its negation (card 'Inputs and output').",
+    "The graph is one step of the forecast: the host builds the inputs and finishes the forecast the way the official forecaster does (causal float64 scaling and asinh, the attention mask, the inverse map and the advancing refine frame, the caps at the context's range widened by 10^4 times the scale, symmetric averaging with the negation, clipping at 0 for non-negative series); the repository's `host_forecast.py` and `android/TimestralHost.kt` do it (card 'Inputs and output').",
+    "A file holds a context of up to 2,048 steps and a horizon of up to 1,024 steps (patches of 32): the host pads a shorter series in front with missing steps and keeps the requested steps; the smallest file that holds the series and the horizon takes the least time (card 'Files').",
+    "One series per forecast without covariates; a horizon of up to 1,024 steps (the Python class and the Kotlin host stop there; no result covers the official block-by-block decoding of longer horizons); of a series longer than 8,192 steps the last 8,192 are read (the official forecaster with max_context = 8192; its default is 32,768); the Python class refuses fewer than 16 values (card 'Limits').",
+    "The `-int8` files are the CPU files; the CPU runs the float16 files too, more slowly: on the Galaxy S26 CPU (4 threads) `timestral-209m-c2048-h1024-int8.tflite` takes 39.3 ms per forecast and `timestral-209m-c2048-h1024.tflite` 93.8 ms; most of their fully connected layers compute in int8, so their quantiles differ slightly from float32 (card 'Files', 'Speed on phones', 'Limits')."
+  ],
+  "schema_version": "1.2"
+}

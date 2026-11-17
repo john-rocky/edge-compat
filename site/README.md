@@ -31,7 +31,7 @@ dist/
 
 Inputs: `cards/index.json` + per-model `card.json` (+ each card's linked
 `sweep_source` file for sample-input specs and sweep config). Statuses are
-recomputed with the DECISIONS #62 vocabulary and cross-checked against
+recomputed with the index's status vocabulary and cross-checked against
 `cards/index.json` — the site can never disagree with the committed catalog.
 
 ## Honesty rules
@@ -51,7 +51,7 @@ recomputed with the DECISIONS #62 vocabulary and cross-checked against
 
 ## The playground (`check/`, Phase 9)
 
-- **Hard privacy rule (spec 9.1): the visitor's model never leaves the
+- **Hard privacy rule: the visitor's model never leaves the
   browser.** The dropped `.tflite` is read, parsed, and run locally; no
   upload, no beacon containing model bytes or hashes of them. The smoke test
   asserts that after a model is dropped, every network request is a bodyless
@@ -71,12 +71,12 @@ recomputed with the DECISIONS #62 vocabulary and cross-checked against
   web-backend matrix snapshots exported at build time. Verdicts come ONLY
   from that exported matrix JSON — matching entries verbatim (status,
   dtypes, conditions, rewrite hints), `unknown` otherwise. No linter logic
-  is reimplemented in TS (parity note, spec 9.2).
+  is reimplemented in TS (parity note).
 - **Matrix export**: `--matrix-dir` (default `data/matrix/`) is scanned for
   snapshots whose `backend` is a web ID (`wasm_xnnpack`, `webgpu_mldrift`,
   `webnn`); each is copied byte-verbatim to `dist/matrix/<backend>.json`.
   Two snapshots for one backend fail the build (version-selection policy is
-  an open owner decision). Zero snapshots — today's reality — is the honest
+  not decided yet). Zero snapshots — today's reality — is the honest
   default: the page says so and every op reads `unknown`.
 
 ## Flags
@@ -100,8 +100,8 @@ skips. The default build is unchanged.
 
 Every page footer renders the disclosure line and the affiliation
 notice from `src/shared/branding.ts`, which a test holds in exact
-parity with `src/litert_compat/branding.py` — the post-approval rename and
-the final disclosure wording are one edit per lane. Each page also carries a
+parity with `src/litert_compat/branding.py` — a rename and
+the final disclosure wording are one edit per side. Each page also carries a
 "Reproduce this with an agent" copy-button (index → sweep the example
 catalog; demo page → one-row catalog for that model; playground →
 `edge-lint` locally); prompts name real commands only, and
@@ -129,4 +129,4 @@ come from the data itself.
 
 Repo-stats only for now: no client-side counter, no cookies, no PII. The
 `measure()` no-op in `src/page/demo.ts` marks the three event points (page
-load, backend used, CTA copy) for a future owner-chosen counter.
+load, backend used, CTA copy) for a future counter.

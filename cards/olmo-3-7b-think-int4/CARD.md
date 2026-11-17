@@ -20,7 +20,7 @@ task: text-generation
 | | |
 |---|---|
 | **Tool** | litert-torch (stock export_hf path, lightweight conversion, embedding table as its own section) with the int4 block scales floored at 2^-14 before rounding; repro = hf-to-litertlm olmo3_work/ litert-torch 0.9.4 (litert-converter 0.4.0, ai-edge-quantizer 0.9.0, transformers 5.14.1, torch 2.13.0); packed and checked with litert-lm 0.18.0 |
-| **Command** | `olmo3_work/convert_olmo3_7b_think.sh (hf-to-litertlm): allenai/Olmo-3-7B-Think at d97e442d -> export with the 2^-14 block-scale floor (6 prefill signatures 1024..1 + decode, KV cache 4096, embedder externalized, the bundle template embedded) -> int4 block-scale scan -> metadata edit (no start token, stop ids 100265 / 100257, the thought channel, max_num_tokens 4096) -> the repo's tokenizer.json as the tokenizer section` |
+| **Command** | `convert_olmo3_7b_think.sh (hf-to-litertlm): allenai/Olmo-3-7B-Think at d97e442d -> export with the 2^-14 block-scale floor (6 prefill signatures 1024..1 + decode, KV cache 4096, embedder externalized, the bundle template embedded) -> int4 block-scale scan -> metadata edit (no start token, stop ids 100265 / 100257, the thought channel, max_num_tokens 4096) -> the repo's tokenizer.json as the tokenizer section` |
 | **Quantization** | int4 blockwise-32 (OCTAV) on every linear layer, block scales floored at 2^-14 (3,606,703 scales in 55 tensors; every scale normal after), int8 embedding table; activations float (card L32, L108) |
 
 ## Artifacts
@@ -52,7 +52,7 @@ Model-level on-device results — measured behavior of this exact artifact on th
 - Tool calling is not wired: tools= is not rendered and the generic model type has no tool-call parser; with Ai2's `functions` form this file (GPU) announced the get_weather call and then wrote a made-up result (22 °C, sunny) as if the call had happened, with no call parsed (card L83).
 - Chat template: Ai2's chat_template.jinja with three edits for the runtime's template engine; Ai2's default system message from the template file, which differs from the README's "Default System Message" section; no start token; stop ids 100265 / 100257; no sampler in the bundle (card L79, L81).
 - GPU sampler: every GPU run logs `TopK requires src tensor C dimension to be divisible by 4.` (vocabulary 100,278); the last two ids can never be sampled on the GPU (card L51).
-- Galaxy S26 (12 GB class): this 4,096-token-cache file did not build its GPU engine on a platform device-lab unit (all 7 signatures delegated, then free memory fell from 2.59 to 0.67 GB and the system server restarted); the 2,048-token-cache file of the same weights is the form that runs there (card L100).
+- Galaxy S26 (12 GB class): this 4,096-token-cache file did not build its GPU engine on a remote device lab unit (all 7 signatures delegated, then free memory fell from 2.59 to 0.67 GB and the system server restarted); the 2,048-token-cache file of the same weights is the form that runs there (card L100).
 - Pixel 8a not run: the file plus a 1-2 GiB KV cache is more than the phone's free memory at a session start; not run on an NPU (card L101-L102).
 - iOS not measured: the decoder graph is one 3.62 GiB TFLite section, over the ~2 GiB single-section limit (card L45).
 - Mac: the faster file on the GPU (8.59 vs 9.64 s, decode 34.8 vs 30.4 tok/s) and the slower on the CPU (blockwise prefill 64 vs 131 tok/s); without --cache, the first CPU `run` writes a 3.89 GB compiled-weights cache next to the model (card L45, L79).

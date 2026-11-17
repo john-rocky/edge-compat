@@ -43,11 +43,11 @@ Model-level on-device results — measured behavior of this exact artifact on th
 
 ## Pitfalls
 
-- iPhone 17 Pro: the 8-item composite probe answers 8/8 on the CPU backend; the Metal backend does not run this size on a 12 GB phone (README Correctness + honest note).
+- iPhone 17 Pro: the 8-item composite test answers 8/8 on the CPU backend; the Metal backend does not run this size on a 12 GB phone (README Correctness + honest note).
 - Galaxy S26 GPU per the README: does not run — engine creation rebooted the phone (README S26 table); this repo carries the Pi 5 CPU row (device runs).
 - Conversion-side note: current transformers (5.14.x and main as of 2026-08-14) cannot load ANY two-block Zamba2 checkpoint (2.7B/7B) — Zamba2Model.get_layers assigns block_id by global layer index while the checkpoint layout and its weight-tie cycle follow hybrid occurrence order; the conversion assigns block_id by hybrid occurrence order (README Correctness + Conversion notes).
 - Requires litert-lm >= 0.15 (README intro).
-- Correctness (README): float export matches the HF model teacher-forced across 48 decode positions (top-1/top-5 identical, corr 1.0000, KL ≈ 0); 8-question gate 8/8 on every lane (GPU and CPU, litert-lm 0.15.0 and 0.16.0), no degeneration, no greedy flips; hermetic prefill-chunk sweep clean (CPU fills 12-51, GPU 12-31).
+- Correctness (README): float export matches the HF model teacher-forced across 48 decode positions (top-1/top-5 identical, corr 1.0000, KL ≈ 0); 8-question check 8/8 on every path (GPU and CPU, litert-lm 0.15.0 and 0.16.0), no degeneration, no greedy flips; hermetic prefill-chunk sweep clean (CPU fills 12-51, GPU 12-31).
 - Hybrid packaging: folded selective scan (batched matmuls, all tensors rank <= 4 — what makes the graph fully delegable on GPU), min-only dt clamp handling (padded prefill positions forced to exact identity steps AFTER the clamp), shared block + adapters traced once per position with tied weights stored once, composite hybrid cache layer, prefill-pad guard (README Conversion notes).
 - Streaming detokenization: the tokenizer's Strip decoder is removed from the bundle — Zamba2's metaspace (SP-BPE) tokenizer otherwise loses every interior space under the runtime's per-token streaming decode; the only behavior change is a sequence-initial space, which the runtime trims (README Conversion notes).
 - License Apache-2.0, inherited from the Zyphra base (README front matter).

@@ -1,0 +1,67 @@
+{
+  "artifact": "LFM3-Omni-2B_depth_frame2_f32.tflite",
+  "artifact_sha256": "19646b570f453711a60add2523febb4884e3214e8c3b7f5ca898dc29dae3d60a",
+  "device": "galaxy-s26",
+  "model_id": "lfm3-omni-2b__lfm3-omni-2b_depth_frame2_f32",
+  "notes": "LFM3-Omni-2B_depth_frame2_f32.tflite, published 2026-11-01 in the speech/ folder of litert-community/LFM3-Omni-2B-LiteRT (LiquidAI/LFM3-Omni-2B at revision ce2458cb, LFM Open License v1.0): speech output: the depth decoder for a whole frame in one call (the projection, the 3 passes and the sampler inside the graph, the codes as the only output, each draw scaled by its codebook's cdf total). App rows: the photo voice chat sample (a litert-samples app; the builds of its tree, the APK in each signature) opens the bundle's sections and the speech graphs with LiteRT 2.3.0's Kotlin CompiledModel, not through LiteRT-LM; its engine also held the hold's other depth graphs open, and only the graphs named in a signature ran in those answers or readings; airplane mode, a heat gate before each answer or reading (the gate lines in the score files and run.log); the holds' logcat and delegate files hold the delegation lines, which these records do not parse; os_build = the Android version in the app's report (no build id). LANDED: speech/LFM3-Omni-2B_depth_frame2_f32.tflite is in the Hub tree of litert-community/LFM3-Omni-2B-LiteRT from upload commit 6fcfc2e9aade88c5fb1ac76e6967b5470672710b (2026-11-01T03:03:54Z); the anonymous tree read at 2026-11-01T12:09:49+09:00 (main a287b6e6) gives LFS oid 19646b570f453711a60add2523febb4884e3214e8c3b7f5ca898dc29dae3d60a and 435,046,636 B = artifact_sha256 (the omni_depth_frame2_f32.tflite).",
+  "quantization": "float32",
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-11-01",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-lfm3omni-sample",
+        "os_build": "Android 16",
+        "runtime": "litert",
+        "runtime_version": "2.3.0",
+        "soc": "QTI SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "Harness: the APK 10ee357db8fd5e7e01a0b7132ad90dbab5198ce15a093797f47a9eaf8627a52b (the installed base.apk's sha256)",
+        "output_match = line 3: Whisper base.en's transcript of each spoken answer names the right picture under the rule, at least 2 of 3 per video, and 0 underruns in the 6: Video 1 PASS / PASS / PASS; Video 2 PASS / PASS / READ",
+        "speech_out_1s_ms = the generation loop's ms per second of speech (the app's report); the per-part figures are means over the answers' steps / frames / calls, so latency_p50_ms stays null"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "answers": 6.0,
+        "audio_s_total": 76.96,
+        "first_sound_ms_max": 2427.239999,
+        "first_sound_ms_mean": 2057.749939,
+        "first_sound_ms_min": 1926.994947,
+        "line1_of": 6.0,
+        "line1_prompt_ids_equal": 6.0,
+        "line3_read": 1.0,
+        "line3_video1_pass": 3.0,
+        "line3_video2_pass": 2.0,
+        "speech_out_1s_ms": 801.958375,
+        "speech_out_1s_ms_answer1": 807.607224,
+        "speech_out_1s_ms_answer2": 792.057835,
+        "speech_out_1s_ms_answer3": 797.49826,
+        "speech_out_1s_ms_answer4": 817.650789,
+        "speech_out_1s_ms_answer5": 816.983548,
+        "speech_out_1s_ms_answer6": 779.952596,
+        "underruns_total": 0.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "photo voice chat sample (Kotlin host loop, LiteRT 2.3.0 CompiledModel; APK sha256 10ee357db8fd): the spoken answer to each example video's question after its read (the vision encoder + adapter on the GPU at fp32, the GPU program cache), speech out with LFM3-Omni-2B_depth_frame2_f32.tflite once per frame on the GPU at fp16, the LM and the other parts on the CPU (4 threads); Video 1 and Video 2 x seeds 0 / 1 / 2 (2026-11-01 02:49:38 to 03:02:23)",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

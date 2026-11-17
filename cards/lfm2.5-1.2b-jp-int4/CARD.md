@@ -20,7 +20,7 @@ task: text-generation
 | | |
 |---|---|
 | **Tool** | litert-torch 0.9.1 |
-| **Command** | `python convert_lfm25.py LiquidAI/LFM2.5-1.2B-JP out_lfm25_12b_fp --fp && python ../minicpm_work/quantize_litertlm.py apply out_lfm25_12b_fp/model.litertlm lfm25_int4.litertlm --recipe wi4b32_wi8 --algo octav` |
+| **Command** | `python convert_lfm25.py LiquidAI/LFM2.5-1.2B-JP out_lfm25_12b_fp --fp && python quantize_litertlm.py apply out_lfm25_12b_fp/model.litertlm lfm25_int4.litertlm --recipe wi4b32_wi8 --algo octav` |
 | **Quantization** | int4 blockwise-32 + OCTAV linears, int8 embedding, convs float |
 
 ## Artifacts

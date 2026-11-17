@@ -20,15 +20,15 @@
         "soc": "Tensor G3",
         "vendor_sdk": null
       },
-      "error": "generation gate FAIL: exit 0 but no answer text (journal generated=false); output tail …'France? The capital of France? The capital of France? The capital of France? The capital of France? The capital of France? The capital of France? The capital of'",
+      "error": "generation check FAIL: exit 0 but no answer text (journal generated=false); output tail …'France? The capital of France? The capital of France? The capital of France? The capital of France? The capital of France? The capital of France? The capital of'",
       "evidence": [
         "VERBOSE: Replacing 24542 out of 25703 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2245 partitions for subgraph 0 (prefill_1024).",
         "VERBOSE: Replacing 17648 out of 18791 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2209 partitions for subgraph 1 (prefill_256).",
         "VERBOSE: Replacing 15632 out of 16775 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2209 partitions for subgraph 2 (prefill_64).",
         "VERBOSE: Replacing 15722 out of 16865 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2209 partitions for subgraph 3 (prefill_16).",
-        "community_accel_work/s7_manifest_backfill/logs_p8a/OvisOCR2-LiteRT__OvisOCR2_int8.gatecpu.log: generation gate verdict FAIL (journal rows_p8a.jsonl, fail_class=None, exit=0, generated=False, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+        "Generation check verdict FAIL (journal rows_p8a.jsonl, fail_class=None, exit=0, generated=False, timeout=False); the same journal's --benchmark numbers for this run are withheld because the gate output is not a real answer",
         "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
-        "gate process peak 1723 MB (journal gate_peak_mb)"
+        "check process peak 1723 MB (journal gate_peak_mb)"
       ],
       "failure_class": "degenerate_output",
       "full_delegation": false,

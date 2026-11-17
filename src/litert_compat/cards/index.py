@@ -93,7 +93,7 @@ def collect_cards(cards_dir: Path) -> list[tuple[str, dict[str, Any]]]:
 def _index_device(device: dict[str, Any] | None) -> dict[str, Any] | None:
     """The index's per-model device field: one status row per device record
     — keyed by `label` (accelerator plus the prompt-length condition, e.g.
-    'gpu@13tok', DECISIONS #162), since a device x accelerator pair can carry
+    'gpu@13tok'), since a device x accelerator pair can carry
     one row per condition — with the env facts the site needs for stale
     flags, plus the snapshot files behind them."""
     if device is None:
@@ -233,7 +233,7 @@ def render_llms_txt(index_doc: dict[str, Any], matrix_files: list[str]) -> str:
             f"- [{Path(f).stem}]({f}): op-level delegate support snapshot" for f in matrix_files
         )
     else:
-        lines.append("- (none yet — see PROGRESS.md; example data under data/examples/)")
+        lines.append("- (none yet — example data under data/examples/)")
     lines += ["", "## Browser sweep results", ""]
     sweep_sources = sorted(
         {m["browser"]["sweep_source"] for m in index_doc["models"] if m["browser"] is not None}
@@ -258,7 +258,7 @@ def render_llms_txt(index_doc: dict[str, Any], matrix_files: list[str]) -> str:
     if device_sources:
         lines.extend(
             f"- [{Path(f).stem}]({f}): model-level device-run record — NPU / LiteRT-LM "
-            "lanes (device_run_result.schema.json)"
+            "records (device_run_result.schema.json)"
             for f in device_sources
         )
     else:

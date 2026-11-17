@@ -8,10 +8,10 @@
   ],
   "benchmarks": [],
   "conversion": {
-    "command": "TODO (owner) — not recorded in the source card",
+    "command": "TODO — not recorded in the source card",
     "quantization": "int4 weights — blockwise (block 32) + OCTAV optimal clipping, symmetric; embedding INT8; integer compute; KV cache 4096. File model.litertlm, ~1.0 GB",
     "tool": "official upstream litert-torch export_hf (clean worktree at upstream/main, no fork); Qwen2ForCausalLM rides the stock converter, no custom code",
-    "tool_version": "TODO (owner) — the card pins the tree ('upstream/main'), not a version number"
+    "tool_version": "TODO — the card pins the tree ('upstream/main'), not a version number"
   },
   "cross_runtime": [],
   "delegation": null,
@@ -36,7 +36,7 @@
           },
           "error": null,
           "evidence": [
-            "speed figures withheld: this measurement batch was retracted as contaminated (parallel GPU load; owner correction in gpu_audit MATRIX.md, 2026-07-23) — the PASS/FAIL verdict is load-independent and stands"
+            "speed figures withheld: this measurement batch was retracted as contaminated (parallel GPU load; corrected in the gpu_audit matrix, 2026-07-23) — the PASS/FAIL verdict is load-independent and stands"
           ],
           "failure_class": null,
           "full_delegation": null,

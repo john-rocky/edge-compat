@@ -1,0 +1,85 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x512x768:float32;1x512:float32",
+  "license": "apache-2.0",
+  "model_id": "vela-1.0-encoder-307m-embedding__vela_l512_embeds_fp16",
+  "notes": "ModernBERT sentence embedder (22 layers, 768-d; mean pooling + L2 normalization in the graph), litert-community/Vela-1.0-Encoder-307M-Embedding-LiteRT main f92189a9 (uploaded 2026-10-18; sha256 fbb052ef… = the Hub LFS sha256 = the staged file, 223,192,608 B): host-lookup encoder (inputs_embeds form; fp16 FULLY_CONNECTED weights read through 88 DEQUANTIZE; the host feeds the fp16 token table tok_embeddings_fp16.bin), window 512; 1,690 operators; a random fill of inputs_embeds / attention_mask is not a meaningful input (loads / runs / delegation are the signal); on the phones the GPU runs at FP32 precision (float16 arithmetic misses the per-row cosine floor, see the device records); the one-file vela_L*_fp16.tflite graphs (614-616 MB) are not catalogued",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-10-18",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": 1789.8,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-10-18",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorInvalidArgument."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.5.3",
+        "machine_label": "mac-studio-m4-max",
+        "os": "macOS",
+        "os_version": "27.0.0",
+        "webgpu_adapter": {
+          "architecture": "metal-3",
+          "description": "",
+          "device": "",
+          "vendor": "apple"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 38.43,
+      "loads": true,
+      "max_abs_diff": 6.966292858123779e-7,
+      "max_rel_diff": 0.008672780672525941,
+      "output_match": true,
+      "provenance": "measured",
+      "runs": true
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/Vela-1.0-Encoder-307M-Embedding-LiteRT/resolve/main/vela_L512_embeds_fp16.tflite"
+}

@@ -62,12 +62,12 @@
         "soc": "Tensor G3",
         "vendor_sdk": null
       },
-      "error": "exit 2 during the gpu generation gate; log tail: local_attention_mask_policy: Not set | sliding_window_size: Not set | advanced_settings: Not set",
+      "error": "exit 2 during the gpu generation check; log tail: local_attention_mask_policy: Not set | sliding_window_size: Not set | advanced_settings: Not set",
       "evidence": [
         "VERBOSE: Replacing 1538 out of 1538 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_128).",
-        "community_accel_work/s7_manifest_backfill/logs_p8a/granite-docling-258M__granite-docling-258M.gate.log: generation gate verdict FAIL (journal rows_p8a.jsonl, fail_class=run_error, exit=2, generated=True, timeout=False); the same journal's --benchmark numbers for this leg are withheld because the gate output is not a real answer",
+        "Generation check verdict FAIL (journal rows_p8a.jsonl, fail_class=run_error, exit=2, generated=True, timeout=False); the same journal's --benchmark numbers for this run are withheld because the gate output is not a real answer",
         "protocol: each bench run cold (caches deleted between runs), device cooled <42 C before every run; runtime litert_lm_advanced_main v0.16.0 (S4 kit)",
-        "gate process peak 677 MB (journal gate_peak_mb)"
+        "check process peak 677 MB (journal gate_peak_mb)"
       ],
       "failure_class": "run_error",
       "full_delegation": true,

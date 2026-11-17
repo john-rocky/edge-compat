@@ -1,0 +1,113 @@
+{
+  "artifact": "lfm3_audio_depth_pass_r4b.tflite",
+  "artifact_sha256": "5f684777daf8c73dc4a95b314fe559cb329f8a7976791ed7ecfdfa78ae93dfe7",
+  "device": "galaxy-s26",
+  "model_id": "lfm3-audio-2b__lfm3_audio_depth_pass_r4b",
+  "notes": "lfm3_audio_depth_pass_r4b.tflite of litert-community/LFM3-Audio-2B-LiteRT (LiquidAI/LFM3-Audio-2B at revision 9d49701c, LFM Open License v1.0): speech output: one depth-decoder pass (three passes reveal the 12 codes of a frame). Published as litert-community/LFM3-Audio-2B-LiteRT (upload commit 976325ac, main 32c07192; anonymous Hub read 2026-10-30T21:51:09+09:00, each LFS oid and size = artifact_sha256). Runner rows (Galaxy S26 RFGL80R6A6H): the C-API runner, one process per run, the graph alone with the fixtures (runs r5b n5, r6b h1 / h2, r7 h7). The repo's speech path runs these graphs in the app's loop (the app rows on 2.3.0 / 2026-10-29). The Mac timing rows and the Pixel 8a text decode on the card ran earlier builds with the same decoder bytes that were not published, so they have no record.",
+  "quantization": "float32",
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-10-29",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 354,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-lfm3audio-runner",
+        "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.3.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "harness: runner 2cf45694ed3c3a6a… 3254040 B and libs: 12/12 OK; one process per run; one call = write the inputs + run + read the outputs back (latency_p50_ms = that median; run_ms = the run alone)",
+        "Replacing [354, 360, 'TfLiteXNNPackDelegate', 4], ready 'clean; rested 23s since 12:16:46', memory 'VmHWM_max_kB 252924 VmSwap_max_kB 0 MemAvailable_min_kB 6802048 kgsl_page_alloc_max_B 188526592'",
+        "output_match = the part line R7: masked argmax 48 / 48 equal and cos min 1.00000000 >= 0.9999 against the same graph on the Mac CPU"
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": 4.4455,
+      "loads": true,
+      "max_abs_diff": 4.1961669921875e-05,
+      "max_rel_diff": null,
+      "metrics": {
+        "argmax_masked_equal": 48.0,
+        "argmax_masked_total": 48.0,
+        "call_ms_max": 4.492,
+        "call_ms_median": 4.4455,
+        "call_ms_min": 4.413,
+        "compile_ms": 77.3,
+        "cos_min_vs_mac_cpu": 0.999999999999421,
+        "max_abs_vs_mac_cpu": 4.1961669921875e-05,
+        "parity_fixtures": 6.0,
+        "run_ms_median": 4.425,
+        "snr_db_min_vs_mac_cpu": 119.32349004109354,
+        "timed_calls": 30.0,
+        "vmhwm_max_kb": 252924.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "C-API runner, CPU (XNNPACK, the runner's default threads), 30 timed calls after the parity pass (run r6b hold h2, run H2_cpu_dpass)",
+      "total_ops": 360,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-10-29",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 360,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-lfm3audio-runner",
+        "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.3.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "harness: runner 2cf45694ed3c3a6a… 3254040 B and libs: 12/12 OK; one process per run; one call = write the inputs + run + read the outputs back (latency_p50_ms = that median; run_ms = the run alone)",
+        "Replacing [360, 360, 'LITERT_CL', 1], ready 'clean; rested 13s since 12:15:24', memory 'VmHWM_max_kB 129008 VmSwap_max_kB 0 MemAvailable_min_kB 6826408 kgsl_page_alloc_max_B 206397440'",
+        "output_match = the part line R7: masked argmax 48 / 48 equal and cos min 1.00000000 >= 0.9999 against the same graph on the Mac CPU"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 5.673,
+      "loads": true,
+      "max_abs_diff": 4.76837158203125e-05,
+      "max_rel_diff": null,
+      "metrics": {
+        "argmax_masked_equal": 48.0,
+        "argmax_masked_total": 48.0,
+        "call_ms_max": 5.998,
+        "call_ms_median": 5.673,
+        "call_ms_min": 5.269,
+        "compile_ms": 1365.0,
+        "cos_min_vs_mac_cpu": 0.9999999999993467,
+        "max_abs_vs_mac_cpu": 4.76837158203125e-05,
+        "parity_fixtures": 6.0,
+        "run_ms_median": 0.396,
+        "snr_db_min_vs_mac_cpu": 118.69340236848585,
+        "timed_calls": 30.0,
+        "vmhwm_max_kb": 129008.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "C-API runner, GPU accelerator at fp32 precision, 30 timed calls after the parity pass (run r6b hold h2, run H2_g32_dpass)",
+      "total_ops": 360,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

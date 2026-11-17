@@ -1,0 +1,70 @@
+{
+  "artifact": "tower_N784_fp16fc.tflite",
+  "artifact_sha256": "4d6cdc7130641db90a9036b8ec18187703de2218e631ca95db1a43ce080e6642",
+  "device": "pixel-11-pro",
+  "model_id": "minicpm-ocr-decision-2b__tower_n784_fp16fc",
+  "notes": "MiniCPM-OCR-Decision-2B (litert-community/MiniCPM-OCR-Decision-2B-LiteRT main 7f589bb7, created 2026-11-06; card license apache-2.0, base model openbmb/MiniCPM-OCR-Jev; anonymous Hub API read 2026-11-07 12:54:30 JST): the `tower` graph, bucket `N784`, form `fp16fc`. Hub file `tower_N784_fp16fc.tflite` 658,758,848 B at Hub commit(s) 4105cd32, 672db2e3, 7f589bb7; artifact_sha256 = its LFS oid = the phone's read-back in each run's hold. Signature `tower`; its I/O as the app read it: inputs patches float32 [1,784,1536], valid float32 [1,784], pos float32 [1,784,1024], cos float32 [1,784,64], sin float32 [1,784,64] -> outputs rows float32 [1,196,2048]. Measured on the Pixel 11 Pro (device holds of runs r6): one result per run, and per timing set in a timing run. output_match is null on every result: the work compares each row with its own Mac Metal fp32 run of the same rows (metrics.vs_mac_metal_fp32_*: max |d| and the smallest cosine over the rows with the same input bytes), not with a CPU reference of the same bytes under the element rule.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-11-06",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 1732,
+      "env": {
+        "device": "Pixel 11 Pro",
+        "machine_label": "pixel-11-pro-ocrdec-gate-app",
+        "os_build": "Android 17 (build CD1A.260905.001.B1)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Google Tensor G6",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "the d1 gate app (com.mlboydaisuke.d1omni.gate, Kotlin CompiledModel on LiteRT 2.2.0 from Maven; APK sha256 0b6d6f70ac0cf4c7…, the APK the run config installs), one app process per run; per call = write every input + CompiledModel.run() + read every output (the app's write_run_read_ms; the GPU's run() returns before the compute ends and the read waits for it)",
+        "file measured: tower_N784_fp16fc.tflite = litert-community/MiniCPM-OCR-Decision-2B-LiteRT `tower_N784_fp16fc.tflite` (658,758,848 B) at Hub commit(s) 4105cd32, 672db2e3, 7f589bb7, LFS oid 4d6cdc7130641db90a9036b8ec18187703de2218e631ca95db1a43ce080e6642 (Hub tree read 2026-11-07 12:54:30 JST); the phone's copy read back equal (MATCH)",
+        "(app pid 7591): `11-06 07:46:40.386  7591  7616 I tflite  : Replacing 1732 out of 1732 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).`",
+        "Run h32_twN784 started 2026-11-06 07:46:37 JST, ready check `check run, not waited for clean (thermal 1, cap thermal-uclamp-2=16 thermal-uclamp-6=19 thermal-uclamp-0=19 , gpu_cooling 0 (budget 4614000 of 4614000)); rested 19s since 07:46:17`; build Android 17 CD1A.260905.001.B1 (`ro.build.fingerprint = google/grizzly/grizzly:17/CD1A.260905.001.B1/16238327:user/release-keys`)",
+        "no run check file (absent): no comparison in metrics",
+        "latency_p50_ms = the check pass's warm median per call (the rows after the first call; the rows differ in content, not in shape); a check run, not a timing-mode measurement"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 848.733452,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "app_guard_max_anon_plus_swap_kb": 282048.0,
+        "app_guard_min_mem_available_kb": 8104912.0,
+        "app_mem_guard_kb": 400000.0,
+        "app_vmhwm_kb_after_compile": 897348.0,
+        "app_vmhwm_kb_at_end": 1032676.0,
+        "battery_temp_tenths_c_end": 384.0,
+        "battery_temp_tenths_c_start": 384.0,
+        "compile_ms": 15152.831369,
+        "finite_rows": 12.0,
+        "first_call_ms": 863.573895,
+        "mem_available_kb_after_compile": 8259052.0,
+        "rows": 12.0,
+        "thermal_status_end": 1.0,
+        "thermal_status_start": 1.0,
+        "warm_max_ms": 862.78202,
+        "warm_median_run_only_ms": 0.803672,
+        "warm_min_ms": 840.494962,
+        "warm_rows": 7.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GPU (ML Drift OpenCL) precision FP32, constant tensor sharing on; gate app r10; gate mode, 12 row(s) of twN784h.json; run r6 hold p6h run h32_twN784",
+      "total_ops": 1732,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

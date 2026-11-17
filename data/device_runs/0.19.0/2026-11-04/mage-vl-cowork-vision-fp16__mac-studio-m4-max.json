@@ -1,0 +1,108 @@
+{
+  "artifact": "Mage-VL-Cowork_vision-fp16.litertlm",
+  "artifact_sha256": "1e977695d8f46222653233143e95431ccf6e46bfabe2c77073abf2e8ba75c5df",
+  "device": "mac-studio-m4-max",
+  "model_id": "mage-vl-cowork-vision-fp16",
+  "notes": "Mage-VL-Cowork_vision-fp16.litertlm of litert-community/Mage-VL-Cowork: microsoft/Mage-VL-Cowork (Apache-2.0; a 4B computer-use agent: a 24-layer vision encoder and a Qwen3-4B text decoder) converted to LiteRT-LM as a fast_vlm bundle that reads one 1920 x 1088 screenshot per request and writes the agent's next action. Published 2026-11-05 (Hub main 38bf428b at the read). Measured 2026-11-04 in the runs r7 and r9 (the published bytes).",
+  "quantization": "the same decoder, embedding table and adapter as Mage-VL-Cowork.litertlm (INT4 decoder, 4,096-token KV cache, FP16 on the GPU); a vision encoder with FP16 fully connected weights and biases and the model metadata reduced_precision_support = fp16accfp16 for XNNPACK's FP16 path on the CPU; one 1920 x 1088 screenshot per request (2,040 image tokens)",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 4096,
+      "date": "2026-11-04",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Mage-VL-Cowork `Mage-VL-Cowork_vision-fp16.litertlm` at main 38bf428b: LFS sha256 1e977695d8f46222653233143e95431ccf6e46bfabe2c77073abf2e8ba75c5df, 3199591888 B (anonymous Hub API tree read 2026-11-05 03:21 JST)",
+        "runtime: the PyPI litert-lm 0.19.0 wheel on Python 3.14.6 (GPU = WebGPU on Metal, adapter Apple M4 Max), sampling: the bundle declares no sampler, so the runtime's CPU / GPU default applies (top-k 1 = greedy); one process per request",
+        "Verdict: VERDICT vf16bw_k4 PASS both 12 in_box 8 (D16r Mac GPU 8) clause_fail 0 eos_rows 12 equal_to_gpu 0 same_point_gpu 2 peak_max 3161280448",
+        "this file's speed of record is on the Galaxy S26 (its own record); peak_mem_mb = the highest /usr/bin/time -l peak memory footprint / 10^6"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "bar_in_box": 6.0,
+        "ended_at_stop_token": 12.0,
+        "form_failures": 0.0,
+        "in_box": 8.0,
+        "items": 12.0,
+        "n_gen_max": 306.0,
+        "n_gen_min": 235.0
+      },
+      "output_match": true,
+      "peak_mem_mb": 3161.3,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "12 of the line's screenshots with the decoder on the GPU and the vision encoder on the CPU (vision_backend=CPU, the section's FP16 metadata), one fresh process each; bar = 6 clicks in the box",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": 4096,
+      "date": "2026-11-04",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Mage-VL-Cowork `Mage-VL-Cowork_vision-fp16.litertlm` at main 38bf428b: LFS sha256 1e977695d8f46222653233143e95431ccf6e46bfabe2c77073abf2e8ba75c5df, 3199591888 B (anonymous Hub API tree read 2026-11-05 03:21 JST)",
+        "runtime: the PyPI litert-lm 0.19.0 wheel on Python 3.14.6 (GPU = WebGPU on Metal, adapter Apple M4 Max), sampling: the bundle declares no sampler, so the runtime's CPU / GPU default applies (top-k 1 = greedy); one process per request",
+        "On screens the work drew, the expected tool, target and command patterns written before any reply was read",
+        "output_match = the line for these requests: the right tool on at least 80 %, a click inside the target on at least 60 %, every tool call parses and every reply ends by itself; the command patterns (2 of 5) are not in the line. The card's row: | Mac M4 Max | 10 of 11 | 4 of 6 | 11 of 11 | 11 of 11 | 2 of 5 |",
+        "a first reply that calls bash is the step; after a `screenshot` reply a new conversation holds the reply and the screenshot (the vendor's two steps, the card's How to use). The same 11 through the Android app on the Galaxy S26 are the sample app's runs, not in this batch",
+        "peak_mem_mb = the highest /usr/bin/time -l peak memory footprint / 10^6; full_delegation null: this path's stderr prints no delegate split"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "clicks_in_box_bar_pct": 60.0,
+        "clicks_in_box_of_6": 4.0,
+        "command_patterns_of_5": 2.0,
+        "ended_at_stop_token": 11.0,
+        "inferences": 20.0,
+        "largest_position": 3737.0,
+        "requests": 11.0,
+        "right_tool": 10.0,
+        "right_tool_bar_pct": 80.0,
+        "tool_call_parses": 11.0
+      },
+      "output_match": true,
+      "peak_mem_mb": 3233.1,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "the hybrid prompt's two steps on 11 held-out requests (6 GUI, 5 shell) with the decoder on the GPU and the vision encoder on the CPU; the reply of the last inference judged",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

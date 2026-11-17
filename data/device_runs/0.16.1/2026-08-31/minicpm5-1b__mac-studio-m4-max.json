@@ -21,7 +21,7 @@
       },
       "error": null,
       "evidence": [
-        "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.16.1/bin/litert-lm 0.16.1); fixed-question answer: '[thought] \\nFirst, the question is \"What is 17 + 25?\" I need to answer briefly.\\n\\nI recall that addition is straightforward: 17 plus 25 equals 42.\\n\\nSo, my answer should be 42.\\n\\nI\\'ll just provide that.\\n [/thought]\\n\\n\\n42'"
+        "compat_check status ok (runtime 0.16.1); fixed-question answer: '[thought] \\nFirst, the question is \"What is 17 + 25?\" I need to answer briefly.\\n\\nI recall that addition is straightforward: 17 plus 25 equals 42.\\n\\nSo, my answer should be 42.\\n\\nI\\'ll just provide that.\\n [/thought]\\n\\n\\n42'"
       ],
       "failure_class": null,
       "full_delegation": null,

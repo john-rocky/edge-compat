@@ -45,7 +45,7 @@ Model-level on-device results — measured behavior of this exact artifact on th
 
 - Requires litert-lm >= 0.15 (conv/SSM recurrent state binds through the ExecutorMetadata section).
 - Three-kind hybrid (24 Mamba2 + 24 MLP + 4 attention layers): only the 4 attention layers keep KV, so memory stays nearly flat with context length.
-- On the composite 8-question probe one arithmetic near-miss appears identically on CPU and GPU — a quantization-level composite-prompt effect, not a backend bug (individual questions are 8/8 on both).
+- On the composite 8-question test one arithmetic near-miss appears identically on CPU and GPU — a quantization-level composite-prompt effect, not a backend bug (individual questions are 8/8 on both).
 
 ---
 

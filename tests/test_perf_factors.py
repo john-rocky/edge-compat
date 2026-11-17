@@ -1,4 +1,4 @@
-"""perf_factors lane: every row validates against the registered schema."""
+"""perf_factors: every row validates against the registered schema."""
 
 from __future__ import annotations
 

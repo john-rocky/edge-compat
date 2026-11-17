@@ -69,9 +69,9 @@
         "VERBOSE: Replacing 2236 out of 2236 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 2 (prefill_64).",
         "VERBOSE: Replacing 2236 out of 2236 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 3 (prefill_16).",
         "7 LITERT_CL 'Replacing' lines, every subgraph fully delegated (largest 2236/2236); zero TfLiteXNNPackDelegate lines",
-        "spark_work/s26/spark_s4b_int8_gate_gpu.log (absl epoch 1788775064 = 2026-09-07 09:57 UTC); gate prompt 'What is 17 + 25? Answer briefly.' through the bundle's jinja, answered 42 through the thought channel (spark_work/FINDINGS.md S26 section; spark_work/s26/rows.json gate_ok=true)",
-        "peak_mem_mb 1674 = VmHWM of the gate process polled by s26_gate.py (rows.json spark_s4b_int8_gate_gpu peak_vmhwm_mb); this is the gate run, not a --benchmark run",
-        "no throughput cell: both --benchmark turns (spark_s4b_int8_bench_gpu1.log / _gpu2.log) exceeded the driver's 1200 s leg cap mid-decode - a ~3,900-token thinking response at ~5 tok/s - so prefill/decode/TTFT stay null; a harness wall-clock cap measures the harness, not the model (DECISIONS #164(e)); the same file's CPU cell and the int4 sibling's GPU cell are measured in this snapshot"
+        "Test prompt 'What is 17 + 25? Answer briefly.' through the bundle's jinja, answered 42 through the thought channel (S26 section; gate_ok=true)",
+        "peak_mem_mb 1674 = VmHWM of the check process polled by s26_gate.py (rows.json spark_s4b_int8_gate_gpu peak_vmhwm_mb); this is the check run, not a --benchmark run",
+        "no throughput cell: both --benchmark turns (spark_s4b_int8_bench_gpu1.log / _gpu2.log) exceeded the driver's 1200 s run cap mid-decode - a ~3,900-token thinking response at ~5 tok/s - so prefill/decode/TTFT stay null; a harness wall-clock cap measures the harness, not the model; the same file's CPU cell and the int4 sibling's GPU cell are measured in this snapshot"
       ],
       "failure_class": null,
       "full_delegation": true,

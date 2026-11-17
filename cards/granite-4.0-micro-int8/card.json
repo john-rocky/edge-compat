@@ -36,12 +36,12 @@
           },
           "error": null,
           "evidence": [
-            "bench/cpu_int8_rf_r6e_p1.log: prefill 193.38 / decode 21.36 tok/s, TTFT 5.3421 s, init 25.6103 s",
-            "bench/cpu_int8_rf_r6e_p2.log: prefill 191.99 / decode 21.35 tok/s, TTFT 5.3809 s, init 25.2661 s",
-            "settle_run: quiet after 0 s; run: /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_work/granite40_micro/cand/granite-4.0-micro_int8_rf.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+            "Prefill 193.38 / decode 21.36 tok/s, TTFT 5.3421 s, init 25.6103 s",
+            "Prefill 191.99 / decode 21.35 tok/s, TTFT 5.3809 s, init 25.2661 s",
+            "settle_run: quiet after 0 s; run: litert-lm benchmark granite-4.0-micro_int8_rf.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
             "2026-10-14 21:48:09 JST cpu int8_rf p1 exit 0",
             "2026-10-14 21:56:13 JST cpu int8_rf p2 exit 0",
-            "bench/compare_int8_r6e.json cpu/int8_rf: median prefill 192.685 / decode 21.355 tok/s"
+            "cpu/int8_rf: median prefill 192.685 / decode 21.355 tok/s"
           ],
           "failure_class": null,
           "full_delegation": null,
@@ -95,12 +95,12 @@
           },
           "error": null,
           "evidence": [
-            "bench/gpu_int8_rf_r6e_p1.log: prefill 1372.07 / decode 88.65 tok/s, TTFT 0.7576 s, init 3.4065 s",
-            "bench/gpu_int8_rf_r6e_p2.log: prefill 1389.82 / decode 90.02 tok/s, TTFT 0.7479 s, init 3.4174 s",
-            "settle_run: quiet after 0 s; run: /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_work/granite40_micro/cand/granite-4.0-micro_int8_rf.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+            "Prefill 1372.07 / decode 88.65 tok/s, TTFT 0.7576 s, init 3.4065 s",
+            "Prefill 1389.82 / decode 90.02 tok/s, TTFT 0.7479 s, init 3.4174 s",
+            "settle_run: quiet after 0 s; run: litert-lm benchmark granite-4.0-micro_int8_rf.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
             "2026-10-14 21:54:04 JST gpu int8_rf p1 exit 0",
             "2026-10-14 22:03:42 JST gpu int8_rf p2 exit 0",
-            "bench/compare_int8_r6e.json gpu/int8_rf: median prefill 1380.945 / decode 89.335 tok/s"
+            "gpu/int8_rf: median prefill 1380.945 / decode 89.335 tok/s"
           ],
           "failure_class": null,
           "full_delegation": null,
@@ -154,16 +154,16 @@
           },
           "error": null,
           "evidence": [
-            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…; kit = litertlm-convert team_repack_20261009/r9/binary/prebuilt)",
-            "r10/hold_1 hold 2026-10-15 20:59:33-21:17:18 JST: [21:04:49] bundle on device: 04ee6ad9e905448f02fa58ad3757cd3a32a773ce7b908fafb73cf8d9b5d84df5 (3769241952 B, push 0 s) = Mac",
+            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…)",
+            "Hold 2026-10-15 20:59:33-21:17:18 JST: [21:04:49] bundle on device: 04ee6ad9e905448f02fa58ad3757cd3a32a773ce7b908fafb73cf8d9b5d84df5 (3769241952 B, push 0 s) = Mac",
             "[21:17:14] parsed: i8f_cpu_timing cpu: gate PASS 1/1 | bench prefill 18.17 decode 2.5300000000000002 init 1255.09 cold 12986.87 peak 4983.01 capped 138/142 | answers: 'The capital of France is Paris.'",
-            "prompt process (device/r10/p8a/i8f_cpu_timing/cpu_leg.json): \"The capital of France is Paris.\"",
+            "prompt process: \"The capital of France is Paris.\"",
             "bench args: --backend=cpu --model_path=/data/local/tmp/aa6_g40micro/granite-4.0-micro_int8_rf.litertlm --benchmark=true --benchmark_prefill_tokens=1024 --benchmark_decode_tokens=256 --max_num_tokens=2048 --num_iterations=3 --report_peak_memory_footprint=true --metric_proto_file_path=/data/local/tmp/aa6_g40micro/metrics.pb",
             "VERBOSE: Replacing 1618 out of 1821 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 316 partitions for subgraph 0 (prefill_1024).",
             "VERBOSE: Replacing 1447 out of 1653 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 323 partitions for subgraph 6 (decode).",
             "VERBOSE: Replacing 2289 out of 2375 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 82 partitions for subgraph 0 (prefill_1024).",
             "VERBOSE: Replacing 2053 out of 2138 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 83 partitions for subgraph 6 (decode).",
-            "gate leg (device/r10/p8a/i8f_cpu_gate/cpu_leg.json, hold_2 hold 2026-10-15 22:53:01-22:58:42 JST): 1 of 1 prompt processes answered with the expected word (\"The capital of France is Paris.\")"
+            "check run (hold_2 hold 2026-10-15 22:53:01-22:58:42 JST): 1 of 1 prompt processes answered with the expected word (\"The capital of France is Paris.\")"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -216,11 +216,13 @@
     "task": "text-generation"
   },
   "pitfalls": [
-    "Re-ship: since 2026-10-16 the file carries the GPU-composite graph, the retrofit of the 2026-10-13 file with the same weights; against the 2026-10-13 file the Mac GPU takes 16 % less time for a 1024-token prefill plus 256 decoded tokens (card L18, L36, L109).",
-    "Pixel 8a GPU: no row - the harness stops a process when MemAvailable falls below 400,000 kB and did so in every process of the 2026-10-13 int8 file's one try (307,820 / 381,800 / 106,656 kB); the re-shipped file has the same weights and 884,736 bytes more, and the try was not repeated (card L32, L104).",
+    "Re-upload: since 2026-10-16 the file carries the GPU-composite graph, the retrofit of the 2026-10-13 file with the same weights; against the 2026-10-13 file the Mac GPU takes 16 % less time for a 1024-token prefill plus 256 decoded tokens (card L18, L36, L109).",
+    "Pixel 8a GPU: no row - the harness stops a process when MemAvailable falls below 400,000 kB and did so in every process of the 2026-10-13 int8 file's one try (307,820 / 381,800 / 106,656 kB); the re-uploaded file has the same weights and 884,736 bytes more, and the try was not repeated (card L32, L104).",
     "Galaxy S26: the card's rows come from Google's Developer Device Platform (device m1q-36, one session per row, the litert CLI), not the own phone (card L18, L84).",
     "Tool calling: with a get_weather tool the file writes <tool_call>{...} </tool_call> as text, which the app has to parse (the bundle's generic model type has no tool-call parser); a tool result passed as a Python-API content part renders empty (the model then invented a weather report), passed as the tool message's text it was used (card L69, L71).",
     "Template: IBM's chat_template.jinja byte for byte with its default system message (replaced when you pass one); no start token, the only stop token <|end_of_text|> (id 100257), no thinking declared; the runtime renders nine of ten conversation shapes exactly as transformers does (card L69).",
+    "Second turn of a conversation: from the second turn on, LiteRT-LM puts the previous answer's stop token into the KV cache with a zero embedding, because the files hold the embedding table in its own section and the decoder takes embeddings, so later answers can differ from the answer to the same messages in one prompt (read in the source of LiteRT-LM 0.16.0 to 0.18.1; measured with 0.18.1 on WeVisOne-VL-2B and Qwen2.5-Coder-1.5B-Instruct, not on these files); one question per conversation, or a new conversation that starts with the earlier messages and the new question, avoids it (card L116).",
+    "Conversation preface with tools and no messages: LiteRT-LM renders the chat template with an empty message list, and the template reads messages[0] without checking that the list is non-empty, so the render fails with 'Failed to apply template: undefined value' when the preface is prefilled at creation (prefillPrefaceOnInit, default false; creating the conversation fails) and in the preface render (renderPrefaceIntoString and its C++ and C API forms); the same with extra context (such as enable_thinking) and no messages, and in the preface render with an empty preface (run in the runtime on one Qwen3 template; the other templates rendered with minijinja 2.14 and jinja2); read in the source of LiteRT-LM 0.17.0, 0.18.1 and main, measured with the 0.18.1 PyPI package through its C API on these files' template text; the default path, where the first message is rendered with the preface, is not affected (the 0.18.1 Python API and CLI expose neither the flag nor the preface render); a system message or any initial message in the conversation config avoids it (card L118).",
     "Sampler: the bundle sets no sampler; `run` passes one only with --top-k, --top-p, --temperature or --seed (card L67).",
     "Cache: without --cache, `run` writes a compiled-weights cache next to the model (3.42 GB for this file); without --backend, `run` uses the CPU (card L67).",
     "Speed: int4 is the faster file on every GPU, this file on every CPU (Mac 17.30 vs 20.84 s, Pixel 8a 157.45 vs 167.05 s for the 1024 / 256 workload); not measured on iOS (the main weights section is over 2 GiB), not run on the NPU (card L29-L36, L104).",

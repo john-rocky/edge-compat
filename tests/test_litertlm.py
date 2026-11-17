@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -30,7 +31,7 @@ from litert_compat.parser.litertlm import (
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = REPO_ROOT / "data" / "examples"
 BUNDLE = EXAMPLES / "model_bundle_example.litertlm"
-REAL_BUNDLE = Path.home() / "code/litertlm-convert/out/qwen3_1_7b_int8/model.litertlm"
+REAL_BUNDLE = Path(os.environ.get("LITERT_COMPAT_REAL_BUNDLE", "/nonexistent/model.litertlm"))
 
 runner = CliRunner()
 

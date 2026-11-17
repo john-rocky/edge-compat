@@ -33508,7 +33508,7 @@
     "litert_version": "2.2.0"
   },
   "model": {
-    "path": "/Users/USER/code/codex-conversions/2026-10-01/openjev-deberta-litert/exports/deberta_v3_large_decision_s512_wfp16.tflite",
+    "path": "deberta_v3_large_decision_s512_wfp16.tflite",
     "sha256": "238f0cc4dca7b6f18677950e9261d07401a3de9857d76f2a7450fada7f97a5d9",
     "subgraph_count": 1
   },
@@ -36886,7 +36886,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -36898,7 +36898,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -36910,7 +36910,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -36922,7 +36922,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -36934,7 +36934,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -36946,7 +36946,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -36958,7 +36958,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -36970,7 +36970,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -36982,7 +36982,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -36994,7 +36994,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37006,7 +37006,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37018,7 +37018,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37030,7 +37030,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37042,7 +37042,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37054,7 +37054,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37066,7 +37066,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37078,7 +37078,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37090,7 +37090,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37102,7 +37102,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37114,7 +37114,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37126,7 +37126,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37138,7 +37138,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37150,7 +37150,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37162,7 +37162,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37174,7 +37174,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37186,7 +37186,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37198,7 +37198,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37210,7 +37210,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37222,7 +37222,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37234,7 +37234,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37246,7 +37246,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37258,7 +37258,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37270,7 +37270,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37282,7 +37282,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37294,7 +37294,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37306,7 +37306,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37318,7 +37318,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37330,7 +37330,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37342,7 +37342,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37354,7 +37354,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37366,7 +37366,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37378,7 +37378,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37390,7 +37390,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37402,7 +37402,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37414,7 +37414,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37426,7 +37426,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37438,7 +37438,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37450,7 +37450,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37462,7 +37462,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37474,7 +37474,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37486,7 +37486,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37498,7 +37498,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37510,7 +37510,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37522,7 +37522,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37534,7 +37534,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37546,7 +37546,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37558,7 +37558,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37570,7 +37570,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37582,7 +37582,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37594,7 +37594,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37606,7 +37606,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37618,7 +37618,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37630,7 +37630,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37642,7 +37642,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37654,7 +37654,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37666,7 +37666,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37678,7 +37678,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37690,7 +37690,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37702,7 +37702,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37714,7 +37714,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37726,7 +37726,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37738,7 +37738,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37750,7 +37750,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37762,7 +37762,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37774,7 +37774,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37786,7 +37786,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37798,7 +37798,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37810,7 +37810,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37822,7 +37822,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37834,7 +37834,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37846,7 +37846,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37858,7 +37858,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37870,7 +37870,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37882,7 +37882,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37894,7 +37894,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37906,7 +37906,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37918,7 +37918,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37930,7 +37930,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37942,7 +37942,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37954,7 +37954,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37966,7 +37966,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37978,7 +37978,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -37990,7 +37990,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38002,7 +38002,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38014,7 +38014,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38026,7 +38026,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38038,7 +38038,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38050,7 +38050,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38062,7 +38062,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38074,7 +38074,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38086,7 +38086,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38098,7 +38098,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38110,7 +38110,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38122,7 +38122,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38134,7 +38134,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38146,7 +38146,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38158,7 +38158,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38170,7 +38170,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38182,7 +38182,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38194,7 +38194,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38206,7 +38206,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38218,7 +38218,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38230,7 +38230,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38242,7 +38242,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38254,7 +38254,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38266,7 +38266,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38278,7 +38278,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38290,7 +38290,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38302,7 +38302,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38314,7 +38314,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38326,7 +38326,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38338,7 +38338,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38350,7 +38350,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38362,7 +38362,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38374,7 +38374,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38386,7 +38386,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38398,7 +38398,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38410,7 +38410,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38422,7 +38422,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38434,7 +38434,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38446,7 +38446,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38458,7 +38458,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38470,7 +38470,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38482,7 +38482,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38494,7 +38494,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38506,7 +38506,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38518,7 +38518,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38530,7 +38530,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38542,7 +38542,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38554,7 +38554,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38566,7 +38566,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38578,7 +38578,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38590,7 +38590,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38602,7 +38602,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38614,7 +38614,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],
@@ -38626,7 +38626,7 @@
       "hints": [
         {
           "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+          "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
           "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
         }
       ],

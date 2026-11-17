@@ -49,7 +49,7 @@ conversion:
   quantization: none                # e.g. "none", "int8-dynamic", "int4-block32"
 
 pitfalls:                           # optional; surfaced verbatim — never generated
-  - Free-text pitfall the owner wants next to the numbers.
+  - Free-text pitfall to show next to the numbers.
 ```
 
 Unknown keys are warned and ignored; missing required fields are collected and
@@ -77,7 +77,7 @@ Required per record: `device`, `backend`, `harness`, `date`, `provenance`.
 `metrics` is the open map for harness-specific values (stage latencies, `rtf`,
 `prefill_tok_s`, `ttft_s`, `power_w`, …) so existing exports — devicemark
 leaderboard JSONL, bench-harness exports, gpu_audit outputs — map on via
-adapters (`src/litert_compat/cards/adapters/`; stubs until the owner supplies
+adapters (`src/litert_compat/cards/adapters/`; stubs until someone supplies
 sample exports — the mapping is never guessed).
 
 ### `edge-card build-all`
@@ -119,7 +119,7 @@ to tool output by tests.
 
 ```sh
 edge-card enrich --sweep data/sweep/ [cards/]
-edge-card enrich --device-runs-root data/device_runs [cards/]   # device lane, see Phase 13
+edge-card enrich --device-runs-root data/device_runs [cards/]   # device-run records, see Phase 13
 ```
 
 Merges browser sweep results (Phase 5 harness output, one

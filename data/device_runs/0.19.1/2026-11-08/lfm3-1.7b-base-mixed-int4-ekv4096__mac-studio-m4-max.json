@@ -1,0 +1,97 @@
+{
+  "artifact": "LFM3-1.7B-Base_mixed_int4_ekv4096.litertlm",
+  "artifact_sha256": "d1210afc80f1b6d32e8539493ebf394fe4f3813dcfdb2f3d7521b1cadc15a783",
+  "device": "mac-studio-m4-max",
+  "model_id": "lfm3-1.7b-base-mixed-int4-ekv4096",
+  "notes": "litert-community/LFM3-1.7B-Base-LiteRT: LFM3-1.7B-Base_mixed_int4_ekv4096.litertlm, a LiteRT-LM conversion of LiquidAI/LFM3-1.7B-Base at revision 7bca5038 (LFM Open License v1.0), the pre-trained base checkpoint of a hybrid decoder (13 short-convolution, 6 global-attention and 5 sliding-window layers), text in, text out. Raw text goes in on the Session path (no chat template; LiteRT-LM puts the start token in front) and the model continues it, rarely ending it, so the caller limits the new tokens. One text or conversation per Engine (a new session on a used Engine continues from the last one's convolution state). Mac rows: the published bytes, part C of run r1 (2026-11-08 JST, litert-lm 0.19.1 from PyPI, outside a measurement window = no speed figure; the work took no Mac timing). These replies are also the line-5 reference of the Pixel 11 Pro's 8 questions. Landed 2026-11-08: litert-community/LFM3-1.7B-Base-LiteRT is public, upload commit 36a0291c7a (2026-11-08T07:51:19+00:00), main 829c1f608e (the card commit, 2026-11-08T08:03:41+00:00) at the read; the tree's LFS oid and size of LFM3-1.7B-Base_mixed_int4_ekv4096.litertlm = artifact_sha256 and 1442509824 B (anonymous, read 2026-11-08T18:09:16+09:00).",
+  "quantization": "MLP gate and up projections int4 blockwise-32 (block scales floored at 2^-14), every other weight int8 per channel (attention, short convolutions, MLP down projection, the tied embedding / output table); ai-edge-quantizer 0.10.0.dev20261023; the file declares no sampler (LiteRT-LM decodes greedily) and no activation type (the GPU runs float16 activations by default); KV cache 4,096 tokens",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": 4096,
+      "date": "2026-11-08",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "bytes: LFM3-1.7B-Base_mixed_int4_ekv4096.litertlm = LFM3-1.7B-Base_mixed_int4_ekv4096.litertlm (the run files' bundle path; the conversion chain that wrote it ended at 14:27:12 JST, before these runs; the upload stage linked the same path), 1442509824 B, sha256 d1210afc80f1b6d32e8539493ebf394fe4f3813dcfdb2f3d7521b1cadc15a783",
+        "runtime: litert-lm 0.19.1 (PyPI) Python API, tools/session_gate.py set (tools/r1_part.sh part C) on the CPU = XNNPACK, Backend.CPU(thread_count=4) (session_gate.py --threads default 4)",
+        "output_match = the line 3a question part (written before any converted number): every verdict equals HF bfloat16's (8 / 8 right); first-line equality with HF bfloat16 is recorded, not part of the line",
+        "Judged and re-judged here: right 8 / 8, verdicts = HF bfloat16 8 / 8, first line = HF bfloat16 5 / 8, misses [], first lines that differ [('q2', 'Tokyo.'), ('q5', 'Merci!'), ('q7', '0.9 is larger than 0.11.')]; 2026-11-08 JST, outside a measurement window (no speed figure)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "first_line_equal_hf_bf16": 5.0,
+        "questions": 8.0,
+        "right": 8.0,
+        "verdicts_equal_hf_bf16": 8.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "the 8 check questions (scripts/verify_quality.py), raw text on the Session path (create_session(apply_prompt_template=False)), one process per question, greedy (the file declares no sampler), 64 new tokens; the verdict = the question's regex on the first non-empty line; verdicts against HF bfloat16's",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": 4096,
+      "date": "2026-11-08",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "bytes: LFM3-1.7B-Base_mixed_int4_ekv4096.litertlm = LFM3-1.7B-Base_mixed_int4_ekv4096.litertlm (the run files' bundle path; the conversion chain that wrote it ended at 14:27:12 JST, before these runs; the upload stage linked the same path), 1442509824 B, sha256 d1210afc80f1b6d32e8539493ebf394fe4f3813dcfdb2f3d7521b1cadc15a783",
+        "runtime: litert-lm 0.19.1 (PyPI) Python API, tools/session_gate.py set (tools/r1_part.sh part C) on the GPU = WebGPU on Metal (the wheel registers 'GPU WebGPU'; the log selects the Apple M4 Max adapter, backend Metal)",
+        "output_match = the line 3a question part (written before any converted number): every verdict equals HF bfloat16's (8 / 8 right); first-line equality with HF bfloat16 is recorded, not part of the line",
+        "Judged and re-judged here: right 8 / 8, verdicts = HF bfloat16 8 / 8, first line = HF bfloat16 6 / 8, misses [], first lines that differ [('q5', '\"Merci\" is the most common way to say \"thank you\" in French.'), ('q7', '0.9 is larger than 0.11.')]; 2026-11-08 JST, outside a measurement window (no speed figure)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "first_line_equal_hf_bf16": 6.0,
+        "questions": 8.0,
+        "right": 8.0,
+        "verdicts_equal_hf_bf16": 8.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "the 8 check questions (scripts/verify_quality.py), raw text on the Session path (create_session(apply_prompt_template=False)), one process per question, greedy (the file declares no sampler), 64 new tokens; the verdict = the question's regex on the first non-empty line; verdicts against HF bfloat16's",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

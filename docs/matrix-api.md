@@ -20,8 +20,11 @@ Precedence, most-specific match wins: **dtypes AND constraints** beat **dtype-on
 **constraints-only** beat **op-only**. No match returns `status: "unknown"` — never a
 guess, never a default to `delegated`. Constraint keys `max_rank`/`min_rank` compare
 numerically against `shape_meta["rank"]`; other keys match by equality; missing
-`shape_meta` information never satisfies a constraint. Ties at equal specificity with
-contradictory statuses raise an error and are reported by `matrix validate`.
+`shape_meta` information never satisfies a constraint. At equal specificity, a single
+`measured` entry wins over contradictory `inferred` entries (rows carried forward from an
+earlier snapshot) and the verdict's `reason` names them; every other tie with
+contradictory statuses raises `MatrixLookupTieError`. `matrix validate` reports
+contradictions between entries of the same (op, dtypes, constraints) signature.
 
 ## CSV column contract
 

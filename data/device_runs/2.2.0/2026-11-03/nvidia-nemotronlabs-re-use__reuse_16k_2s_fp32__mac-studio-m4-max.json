@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0",
+  "model_id": "nvidia-nemotronlabs-re-use__reuse_16k_2s_fp32",
+  "device": "mac-studio-m4-max",
+  "artifact": "reuse_16k_2s_fp32.tflite",
+  "artifact_sha256": "e413bbd992ed1fbb44d5206abdc040f14da6458ad5ffaa16810079395be68281",
+  "quantization": "none: float32 weights and activations (the GPU computes at its default precision unless the record's signature says FP32)",
+  "notes": "NVIDIA-NemotronLabs-RE-USE-LiteRT (litert-community/NVIDIA-NemotronLabs-RE-USE-LiteRT): nvidia/NVIDIA-NemotronLabs-RE-USE (revision 31f82f2e, openmdw-1.1), universal speech enhancement (an encoder, 30 blocks of bidirectional Mamba over time and over frequency, magnitude and phase decoders), written again as plain PyTorch for the GPU and exported with litert-torch 0.9.4 (torch 2.11.0) as fixed 2 s graphs at 16 kHz: input [1, 2, 401, 321] (the log1p magnitude and the phase of the STFT), output [1, 3, 401, 321]; the host runs the STFT, the inverse STFT and a Hann overlap-add of 2 s chunks every 1.75 s. Quality bar: the 10-clip mean UTMOS22 >= 3.861 and DNSMOS OVRL >= 3.213; SI-SDR vs PyTorch float32 in the same chunks >= 20 dB at the GPU's default precision, >= 30 dB in float32. This file: reuse_16k_2s_fp32.tflite (54,155,412 B, 91,014 ops; main: F2x/F1pq8 (the time scan step by step, the frequency scan in blocks of 8), the faster chunk on the GPU). artifact_sha256 = = the work graph (its export record). LANDED: reuse_16k_2s_fp32.tflite (sha256 e413bbd992ed1fbb44d5206abdc040f14da6458ad5ffaa16810079395be68281, 54,155,412 B) is in litert-community/NVIDIA-NemotronLabs-RE-USE-LiteRT from commit 98ee12ea047939af4068c50e0362585569ca9f51 (uploaded 2026-11-03 12:37 JST); the Hub tree read at 2026-11-03T13:10:30+09:00 (main 98ee12ea) gives this LFS oid and size. Records: the runs behind the card's numbers on this device (cpu_xnnpack: 1; gpu_metal_mac: 2), one per run that loaded this file. Not records: the timing window's second pass, the 1 s and unfixed 2 s graphs, the CPU parity instruments, and the card's usage-block runs (ai-edge-litert 2.3.0 in a fresh venv). Records written.",
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "loads": true,
+      "runs": true,
+      "failure_class": null,
+      "error": null,
+      "full_delegation": true,
+      "delegated_ops": null,
+      "total_ops": null,
+      "output_match": null,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "latency_p50_ms": 5244.2,
+      "prefill_tokens_per_s": null,
+      "decode_tokens_per_s": null,
+      "ttft_ms": null,
+      "peak_mem_mb": null,
+      "context_length": null,
+      "signature": "(ai-edge-litert 2.2.0 CompiledModel, Python): CPU (XNNPACK, 4 threads); one 2 s chunk, 2 warm-up + 7 timed runs, the timing window's pass 1",
+      "metrics": {
+        "latency_min_ms": 5159.8,
+        "latency_max_ms": 9564.4,
+        "timed_runs": 7.0,
+        "host_ms": 1.85,
+        "per_audio_second_s": 2.9978,
+        "load_ms": 109750.0,
+        "disturbed": 1.0
+      },
+      "evidence": [
+        "Mac: Mac Studio (M4 Max), Apple M4 Max, macOS 27.0 (26A428); ai-edge-litert 2.2.0. The timing window (a quiet window from 2026-11-03T06:09:59+0900; the Mac is shared, other jobs could still run) wrote this row at 2026-11-03 06:29:10.",
+        "Warm runs (ms): 5169.5, 5159.8, 5445.5, 5671.1, 5244.2, 9564.4, 5233.5; median 5244.2, min 5159.8; the row is marked disturbed (a run 1.1-1.9x the minimum).",
+        "full_delegation true: CompiledModel is_fully_accelerated = true (fully_accelerated); the API states no node count. load_ms = creating the CompiledModel (109.75 s). host_ms = the STFT, the inverse STFT and the windowed overlap-add in PyTorch; per_audio_second_s = (graph + host) x 0.571 / 1000."
+      ],
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "soc": "Apple M4 Max",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "vendor_sdk": null,
+        "os_build": "macOS 27.0 (26A428)",
+        "machine_label": "mac-studio-m4-max"
+      },
+      "date": "2026-11-03",
+      "provenance": "measured"
+    },
+    {
+      "accelerator": "gpu_metal_mac",
+      "loads": true,
+      "runs": true,
+      "failure_class": null,
+      "error": null,
+      "full_delegation": true,
+      "delegated_ops": null,
+      "total_ops": null,
+      "output_match": null,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "latency_p50_ms": null,
+      "prefill_tokens_per_s": null,
+      "decode_tokens_per_s": null,
+      "ttft_ms": null,
+      "peak_mem_mb": null,
+      "context_length": null,
+      "signature": "(ai-edge-litert 2.2.0 CompiledModel, Python): Metal GPU only, default precision; the 10 work-line clips in 2 s chunks every 1.75 s (hop 0.875), Hann overlap-add",
+      "metrics": {
+        "clips": 10.0,
+        "si_sdr_db_min_vs_torch_fp32": 36.12,
+        "si_sdr_db_max_vs_torch_fp32": 46.95,
+        "utmos22_mean": 3.880574,
+        "dnsmos_ovrl_mean": 3.3098739999999998,
+        "load_ms": 486580.0
+      },
+      "evidence": [
+        "Mac: Mac Studio (M4 Max), Apple M4 Max, macOS 27.0 (26A428); ai-edge-litert 2.2.0. The run (started 06:57:46; the log carries clock times only, the date is that, the same as r6's timing window) wrote (10 wav + run.json: graph sha256 e413bbd992ed1fbb…, fully accelerated, compile 486.58 s on a shared Mac).",
+        "SI-SDR of each clip vs the PyTorch float32 reference in the same chunks and hop: 36.12-46.95 dB, bar 20 dB -> PASS.",
+        "Work line (UTMOS22 and DNSMOS P.835 OVRL over the 10 clips): 3.880574 / 3.309874, line 3.860555 / 3.213185 -> PASS.",
+        "latency_p50_ms null: a quality run on a shared Mac (its per-chunk times are not a timing measurement; the timing rows of this file are the other gpu_metal_mac / cpu_xnnpack records). output_match null: scored by SI-SDR and the work line, not output by output."
+      ],
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "soc": "Apple M4 Max",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "vendor_sdk": null,
+        "os_build": "macOS 27.0 (26A428)",
+        "machine_label": "mac-studio-m4-max"
+      },
+      "date": "2026-11-03",
+      "provenance": "measured"
+    },
+    {
+      "accelerator": "gpu_metal_mac",
+      "loads": true,
+      "runs": true,
+      "failure_class": null,
+      "error": null,
+      "full_delegation": true,
+      "delegated_ops": null,
+      "total_ops": null,
+      "output_match": null,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "latency_p50_ms": 779.8,
+      "prefill_tokens_per_s": null,
+      "decode_tokens_per_s": null,
+      "ttft_ms": null,
+      "peak_mem_mb": null,
+      "context_length": null,
+      "signature": "(ai-edge-litert 2.2.0 CompiledModel, Python): Metal GPU only, default precision; one 2 s chunk, 2 warm-up + 7 timed runs, the timing window's pass 1",
+      "metrics": {
+        "latency_min_ms": 777.6,
+        "latency_max_ms": 786.8,
+        "timed_runs": 7.0,
+        "host_ms": 2.21,
+        "per_audio_second_s": 0.4468,
+        "load_ms": 137270.0,
+        "disturbed": 0.0
+      },
+      "evidence": [
+        "Mac: Mac Studio (M4 Max), Apple M4 Max, macOS 27.0 (26A428); ai-edge-litert 2.2.0. The timing window (a quiet window from 2026-11-03T06:09:59+0900; the Mac is shared, other jobs could still run) wrote this row at 2026-11-03 06:15:28.",
+        "Warm runs (ms): 777.6, 777.6, 780.2, 779.8, 779.1, 782.9, 786.8; median 779.8, min 777.6. A second pass in the same window (not a record, not on the card): median 775.9 ms.",
+        "full_delegation true: CompiledModel is_fully_accelerated = true (fully_accelerated); the API states no node count. load_ms = creating the CompiledModel (137.27 s). host_ms = the STFT, the inverse STFT and the windowed overlap-add in PyTorch; per_audio_second_s = (graph + host) x 0.571 / 1000."
+      ],
+      "env": {
+        "device": "Mac Studio (M4 Max)",
+        "soc": "Apple M4 Max",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "vendor_sdk": null,
+        "os_build": "macOS 27.0 (26A428)",
+        "machine_label": "mac-studio-m4-max"
+      },
+      "date": "2026-11-03",
+      "provenance": "measured"
+    }
+  ]
+}

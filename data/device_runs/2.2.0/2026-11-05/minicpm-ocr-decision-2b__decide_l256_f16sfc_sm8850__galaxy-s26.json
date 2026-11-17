@@ -1,0 +1,73 @@
+{
+  "artifact": "decide_L256_f16sfc_SM8850.tflite",
+  "artifact_sha256": "646be785d0f7e26c89d85259d875df608b15e535fa13fa642666741bb35c04ed",
+  "device": "galaxy-s26",
+  "model_id": "minicpm-ocr-decision-2b__decide_l256_f16sfc_sm8850",
+  "notes": "MiniCPM-OCR-Decision-2B (litert-community/MiniCPM-OCR-Decision-2B-LiteRT main 7f589bb7, created 2026-11-06; card license apache-2.0, base model openbmb/MiniCPM-OCR-Jev; anonymous Hub API read 2026-11-07 12:54:30 JST): the `decide` graph, bucket `L256`, form `f16sfc`, compiled ahead of time for the Snapdragon SM8850 HTP (`_SM8850`). Hub file `npu/sm8850/decide_L256_f16sfc_SM8850.tflite` 2,783,922,048 B at Hub commit(s) be1043e2; artifact_sha256 = its LFS oid = the phone's read-back in each run's hold. The runner's inputs: embeds (524,288 float32 elements), valid (256 float32 elements), cos (16,384 float32 elements), sin (16,384 float32 elements); output 524,288 float32 elements. Measured on the Galaxy S26 (SM-S942Q) (device holds of runs r4): one result per run, and per timing set in a timing run. output_match is null on every result: the work compares each row with its own Mac Metal fp32 run of the same rows (metrics.vs_mac_metal_fp32_*: max |d| and the smallest cosine over the rows with the same input bytes), not with a CPU reference of the same bytes under the element rule.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "npu_qnn",
+      "context_length": null,
+      "date": "2026-11-05",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 1,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-ocrdec-npu-runner",
+        "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": "QAIRT 2.47.0.260601114230"
+      },
+      "error": null,
+      "evidence": [
+        "the LiteRT C API runner d1c_npu_runner (binary sha256 102a0f0a815df1a2…, read back MATCH) with the LiteRT 2.2.0 runtime and the QAIRT 2.47.0.260601114230 HTP libraries (every library sha256 MATCH in s0_setup.txt), one runner process per run, --accel npu+cpu --burst 1: the file's compiled HTP context runs through the LiteRT Qualcomm dispatch library; per call = write every input + run + read back the output (the runner's write+run+readback_ms)",
+        "file measured: decide_L256_f16sfc_SM8850.tflite = litert-community/MiniCPM-OCR-Decision-2B-LiteRT `npu/sm8850/decide_L256_f16sfc_SM8850.tflite` (2,783,922,048 B) at Hub commit(s) be1043e2, LFS oid 646be785d0f7e26c89d85259d875df608b15e535fa13fa642666741bb35c04ed (Hub tree read 2026-11-07 12:54:30 JST); the phone's copy read back equal (MATCH)",
+        "Verdict PASS (every output finite; the runner exited DONE, killed_by null); each row's output against the Mac Metal fp32 run of the same rows (by key)",
+        "latency_p50_ms = the runner's latency phase: the median of 5 calls on fixture 000 after 2 warm-up calls (--rounds 5)",
+        "(the runner's logcat): `11-05 20:46:15.503  8191  8191 I tflite  : Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (main).`",
+        "Run N4s_L256 2026-11-05 20:46:15 – 2026-11-05 20:46:19 JST, ready check `clean; rested 77s since 20:44:57`, runner memory `VmHWM_max_kB 2776904 VmSwap_max_kB 0 MemAvailable_min_kB 4899608 kgsl_page_alloc_max_B 250163200`; build Android 16 BP4A.251205.006.S942QOPS1AZH9 (`device: SM-S942Q 16 BP4A.251205.006.S942QOPS1AZH9`)"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 157.921,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "battery_temp_tenths_c_end": 296.0,
+        "battery_temp_tenths_c_start": 296.0,
+        "compile_ms": 983.9,
+        "first_call_ms": 147.7,
+        "fixtures": 12.0,
+        "kgsl_page_alloc_bytes_max": 250163200.0,
+        "latency_calls": 5.0,
+        "latency_max_ms": 159.368,
+        "latency_min_ms": 155.4,
+        "lmkd_lines": 18.0,
+        "mem_available_kb_min_during": 4899608.0,
+        "nonfinite_values": 0.0,
+        "parity_pass_mean_ms": 152.16,
+        "runner_vmhwm_kb_max": 2776904.0,
+        "runner_vmswap_kb_max": 0.0,
+        "thermal_status_end": 0.0,
+        "thermal_status_start": 0.0,
+        "vs_mac_metal_fp32_cos_min_same_input": 0.9954827316042865,
+        "vs_mac_metal_fp32_max_abs_same_input": 1.6163678169250488,
+        "vs_mac_metal_fp32_rows": 12.0,
+        "vs_mac_metal_fp32_same_input_rows": 12.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "NPU (HTP, the file compiled ahead of time for SM8850) with CPU; the C API runner; gate mode, 12 fixture(s) = the rows of mdL256.json; run r4 hold n4a run N4s_L256",
+      "total_ops": 1,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

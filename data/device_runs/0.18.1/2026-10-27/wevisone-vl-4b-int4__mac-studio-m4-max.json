@@ -1,0 +1,62 @@
+{
+  "artifact": "WeVisOne-VL-4B_int4.litertlm",
+  "artifact_sha256": "1c14c17a7e8bd688d888300a68e2f7512b255a275a444a3f22bde395cad4b12f",
+  "device": "mac-studio-m4-max",
+  "model_id": "wevisone-vl-4b-int4",
+  "notes": "litert-community/WeVisOne-VL-4B: WeVisOne-VL-4B_int4.litertlm, a LiteRT-LM fast_vlm conversion of tencent/WeVisOne-VL-4B (apache-2.0; WeChat Vision, Tencent; built on Qwen3-VL; converted from the float32 release at revision 4a7bed92, whose weights the current bfloat16 release 6b44a458 holds) — detection, referring, pointing, counting and OCR answers as <0>…<1000> coordinate tokens; to the segmentation and matting templates the file answers with a box and no mask (the pixel decoder is not in the file). Pictures are stretched to 512 x 512 before they are sent. Text-only conversations past 271 tokens shift the text positions (the first 271 tokens are exact). LiteRT-LM 0.18.1 and 0.19.1 feed the previous answer's stop token with a zero embedding from a conversation's second message on (files with an EMBEDDER section), so every row here is a one-question conversation except the suite's two_turn text row. Mac row: run r3's Mac GPU suite of the file (2026-10-27 evening JST). Landed 2026-11-10: the file is on the Hub at litert-community/WeVisOne-VL-4B (upload commit cfe3cff01ca34625b017ab3e274f96cc87b18e5f, 2026-11-10 08:23:15 UTC = 2026-11-10 17:23:15 JST; main 2fcc2c196105741be5ea88ad7121b3fcc3c9dee8 at the read, the file unchanged there); its LFS oid equals artifact_sha256 and its size 3507874304 B (anonymous API read 2026-11-10 18:27:05 JST).",
+  "quantization": "int4 blockwise-32 decoder weights (the output layer included) with one scale per block, every block scale at or above 2^-14 (ai-edge-quantizer 0.10.0); int8 token embedder (one scale per output channel); float16 vision encoder; float32 activations declared for the decoder; the decoder's KV-cache writes and attention products as GPU composites (odml.cache_update, odml.runtime_bmm); fast_vlm at 512 x 512 (256 image tokens), 10,244-wide image rows (Qwen3-VL DeepStack), KV cache 2048",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 2048,
+      "date": "2026-10-27",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "bundle: WeVisOne-VL-4B_int4.litertlm = the wv4b_i4b32_act32_rg.litertlm (R-G, built 2026-10-27 20:14), 3507874304 B, sha256 1c14c17a7e8bd688d888300a68e2f7512b255a275a444a3f22bde395cad4b12f (the Hub tree's LFS oid at the read below); built at 20:14 (\"- **R-G** 20:14:00〜14:11(retrofit 11 s、footprint 0.41 GB)= `wv4b_i4b32_act32_rg.litertlm` 3,507,874,304 B …\"), the suite's answer files from 20:19 on; the same path read back on the phone at 22:0x and 10-28 with this sha256",
+        "litert-lm 0.18.1 from PyPI; Mac Studio M4 Max (Mac16,9, macOS 27.0; the build 26A428 read 2026-11-10, the same as of 2026-10-25); paths below are relative",
+        "command per question: run wv4b_i4b32_act32_rg.litertlm --prompt <question> --backend gpu --cache no --temperature 0 --seed 0 --attachment --vision-backend gpu --verbose (the answer files' cmd)",
+        "reference = the source package Tencent/WeVisOne-VL @ 40f735b8 in float32 on the CPU, greedy, the same 512 x 512 pictures (arm B); output_match = the bar: image on the bf16 bar (box 0.9, count 0.6667, point 0.9, cer 0.05) and the text check (pass / fail = the float32 reference on all 10)",
+        "forms.i4b32_act32_rg_gpu: {\"counts\": {\"box_matched\": 57, \"box_ref\": 58, \"count_equal\": 6, \"count_rows\": 6, \"point_matched\": 13, \"point_ref\": 14, \"exact_rows\": 3}, \"rates\": {\"box\": 0.9827586206896551, \"count\": 1.0, \"point\": 0.9285714285714286, \"cer\": 0.01639344262295082}, \"bf16\": {\"per_metric\": {\"box\": true, \"count\": true, \"point\": true, \"cer\": true}, \"pass_image\": true}, \"text_gate\": true}"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "box_matched": 57.0,
+        "box_ref": 58.0,
+        "count_equal": 6.0,
+        "count_rows": 6.0,
+        "ocr_cer": 0.01639344262295082,
+        "point_matched": 13.0,
+        "point_ref": 14.0,
+        "rows_token_identical": 3.0,
+        "text_pass_fail_same": 10.0,
+        "text_rows": 10.0,
+        "text_same_as_reference": 6.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "the suite: 29 picture questions (17 pictures, 512 x 512 PNG) + 10 text questions, one process per question, greedy",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

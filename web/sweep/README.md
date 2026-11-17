@@ -60,17 +60,34 @@ end-to-end cost a web app pays.
 
 ### Batches (what CI runs)
 
-    npm run sweep:batches -- --catalog <csv> --out <dir> [--batch <n>] -- <harness flags...>
+    npm run sweep:batches -- --catalog <csv> --out <dir> [--batch <n>] \
+      [--history <dir>] [--budget-minutes <m>] [--dry-run [--minutes-per-model <x>]] \
+      -- <harness flags...>
 
 Runs the harness in a **fresh process per `--batch` models** (default 8),
 because the runner accumulates memory across the models of one run (Traps,
 below). A batch whose process dies is re-run one model at a time; a model that
 kills the process even alone is printed as `UNMEASURED` and the driver exits
 `1` — the output directory keeps every model that was measured, and a re-run
-skips them. Flags after `--` go to every harness run. The weekly resweep uses
-`--batch 8 -- --cache-dir /tmp/model-cache --cache-max-bytes 0` into `data/sweep-ci/`
-(DECISIONS #166). Measured 2026-08-28 on `ubuntu-latest`: 157 models in 5 h 06 min, 159/159
-with results, disk steady at 13 GB free.
+skips them. Flags after `--` go to every harness run.
+
+`--history <dir>` names the version root that holds earlier dated snapshots
+(`<dir>/<YYYY-MM-DD>/<id>.json`). Pending models then run stalest first: those
+with no result there, then by the date of their newest snapshot, oldest first,
+catalog order among equals. `--budget-minutes <m>` starts no new batch or retry
+after `m` minutes; the models not reached are printed as `DEFERRED` and do not
+change the exit status. With both flags, a catalog too large for one run is
+covered over several runs: the next run takes the models this one did not reach
+before the ones it measured.
+`--dry-run` prints the plan (counts, order, first batch and, with
+`--minutes-per-model`, the expected minutes) without running the harness.
+
+The weekly resweep uses `--batch 8 --history data/sweep-ci/<version>
+--budget-minutes 240 -- --cache-dir /tmp/model-cache --cache-max-bytes 0` into
+`data/sweep-ci/`. Measured 2026-08-28 on `ubuntu-latest`: 157
+models in 5 h 06 min, 159/159 with results, disk steady at 13 GB free. From
+2026-09-28 the catalog (255 models, 301 by 2026-11-02) no longer fit the CI
+step's 300-minute timeout, hence the budget.
 
 Exit codes: `0` all result files schema-valid, `1` at least one failed
 validation, `2` usage / manifest error. A model that fails to load, run, or
@@ -134,7 +151,7 @@ INFO-level log lines (which carry pointer addresses) are filtered out of
 |---|---|---|
 | `wasm_xnnpack` | `wasm` | CPU reference for output match |
 | `webgpu_mldrift` | `webgpu` | JSPI-enabled load; `full_delegation` from `CompiledModel.isFullyAccelerated`; Chromium launched with `--enable-unsafe-webgpu --use-angle=metal` so headless uses the real GPU (SwiftShader otherwise — check `env.webgpu_adapter`) |
-| `webnn` | `webnn` | behind `--experimental`; public inclusion is an owner decision |
+| `webnn` | `webnn` | behind `--experimental`; public inclusion is not decided |
 
 ## Traps (measured)
 

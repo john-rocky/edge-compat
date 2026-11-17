@@ -197,7 +197,7 @@ def device_cells_dropped(
     card: dict[str, Any], enriched: dict[str, Any]
 ) -> list[tuple[str, str, str]]:
     """Cells the card carries that `enriched` would not, as sorted (device,
-    label, source) — the replace-trap check (DECISIONS #161/#165). `enrich`
+    label, source) — the replace-trap check. `enrich`
     rebuilds a device block from exactly the snapshots it was given, so a
     snapshot left off the command line removes the rows it contributed with
     no signal but the diff; the CLI refuses to write such a card unless the
@@ -214,7 +214,7 @@ def device_coverage_findings(
     cards: list[tuple[str, dict[str, Any]]], roots: list[Path], repo_root: Path
 ) -> list[str]:
     """Every way the cards' device blocks differ from the cell-wise newest
-    selection over the snapshot roots (DECISIONS #165): a measured cell a
+    selection over the snapshot roots: a measured cell a
     card lacks, a card cell a newer snapshot supersedes, a card record that
     no longer matches the file it cites, a cited file that does not exist.
     Card rows citing a file outside `roots` are checked for existence only —

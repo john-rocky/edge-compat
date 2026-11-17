@@ -1,0 +1,64 @@
+{
+  "artifact": "codec_decoder_fp16_T128.tflite",
+  "artifact_sha256": "c2b326927b20ac1efe98f2736bfd1fff613c248e7dfe3ba9b678c6a82db1bab4",
+  "device": "galaxy-s26",
+  "model_id": "audio8-tts-preview-0.6b__codec_decoder_fp16_t128",
+  "notes": "Audio8-TTS-Preview-0.6b (litert-community/Audio8-TTS-Preview-0.6b main 56fcb491, created 2026-09-28): the codec decoder, float16 weights, one call = 128 frames of codes -> 5.94 s of 44.1 kHz audio. Measured on the Galaxy S26 (SM-S942Q) with the LiteRT C API runner: one result per run, one runner process per run, on the fixtures of real codes and of silence (all-zero codes; the count is metrics.fixtures). On the GPU (ML Drift) this file computes wrong audio at the default precision and at FP32, on LiteRT 2.2.0 and 2.3.2 alike, with no error line; the cause was traced to the graph (a MUL of a runtime rank-2 operand with a [1,1,1024] constant that the GPU lays out differently from its rank-3 output, wrong at FP32 too; RMSNorm sums of squares above the float16 range; in T192 also the -1e9 attention mask) and fixed it in a rewrite whose CPU output is byte-identical to this file's; the rewrite is not this file and has no record here.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-11-02",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 936,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-audio8-codec-runner",
+        "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "the GPU output does not depend on the codes: corr with the same run's all-zero-codes output 1.0000, corr with the Mac CPU output min -0.0066; no error line",
+      "evidence": [
+        "the LiteRT C API runner a8c_runner (private; binary sha256 8356e891610fd34d…, the same bytes built against the LiteRT v2.2.0 and v2.3.2 headers) driven by a benchmark script, one runner process per run; per call = input write + run + read back of output 0; --cpu-threads 4 on every run and --cpu-fallback 1 on the GPU runs (the Preview Android app's Options(GPU, CPU))",
+        "file measured: codec_decoder_fp16_T128.tflite (261602768 B, sha256 c2b326927b20ac1efe98f2736bfd1fff613c248e7dfe3ba9b678c6a82db1bab4 = the Hub LFS oid of litert-community/Audio8-TTS-Preview-0.6b main 56fcb491 (tree read 2026-11-02 14:15:32 JST); the phone's copy read back MATCH",
+        "`Replacing 936 out of 1069 node(s) with delegate (LITERT_CL) node, yielding 2 partitions for subgraph 0 (main).` / `Replacing 88 out of 134 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2 partitions for subgraph 0 (main).`",
+        "Run s1-g-pc1: verdict FAIL; (c) FAIL (the program-cache run has no timed rounds and was not ASR / UTMOS22-scored)",
+        "The program-cache route (--cache-dir + serialize_program_cache=true) left an empty cache dir on both phones with this runner, so the cached run was skipped",
+        "Run s1-g-pc1 2026-11-02 00:24:14 – 2026-11-02 00:24:21, ready check `check run, not waited for clean (thermal 2, cap none, kgsl_pwrlevel 4); rested 25s since 00:23:48`",
+        "thread count corrected 2026-11-08: this runner build passed --cpu-threads under the CPU option name \"cpu_options\"; LiteRT 2.2.0 and 2.3.2 read the name \"xnnpack\" and drop an option under another name without an error, so the CPU work of this run ran on one thread. Read on 2026-11-08: the same runner binaries with the same library (libLiteRt.so 97355a36…) ran one thread on the same two phones (/proc/<pid>/task, CPU time over wall time 0.99), and the fixed runner on four threads gave the same outputs."
+      ],
+      "failure_class": "silent-miscompute",
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": 0.872086226940155,
+      "max_rel_diff": null,
+      "metrics": {
+        "cache_dir_kb_after": 4.0,
+        "compile_ms": 1802.1,
+        "corr_vs_mac_cpu_min": -0.0066474697013558124,
+        "corr_vs_zero_codes_output_max": 1.0000000000000002,
+        "first_run_ms": 1098.7,
+        "fixtures": 3.0,
+        "kgsl_page_alloc_bytes_max": 697655296.0,
+        "largest_group_of_byte_identical_outputs": 3.0,
+        "mem_available_kb_min_during": 6131152.0,
+        "nonfinite_values": 0.0,
+        "runner_vmhwm_kb_max": 1183984.0
+      },
+      "output_match": false,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GPU with CPU fallback, default precision (no precision key: the Preview app's setting), --cache-dir + serialize_program_cache=true, cold run",
+      "total_ops": 1069,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

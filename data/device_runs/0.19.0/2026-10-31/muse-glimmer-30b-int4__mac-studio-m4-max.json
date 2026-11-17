@@ -1,0 +1,62 @@
+{
+  "artifact": "Muse-Glimmer-30B_q4_ekv2048.litertlm",
+  "artifact_sha256": "4f7e2690ae5d7d366c2eba682d2b30b83118b1ec4e9a24e7318dbf40ea967656",
+  "device": "mac-studio-m4-max",
+  "model_id": "muse-glimmer-30b-int4",
+  "notes": "Muse-Glimmer-30B_q4_ekv2048.litertlm of litert-community/Muse-Glimmer-30B-LiteRT: the LiteRT-LM bundle of meta-models/Muse-Glimmer-30B at revision cec94fcf (Apache-2.0) — one picture at 448x448 (256 image tokens) and text in, text out, context 2,048. Published 2026-10-31 (upload commit ba6ae2f3); the Mac row ran the published bytes in the run-3 speed window. The CPU rows on the card ran an earlier build with a 4,096-token cache that was not published, so they have no record.",
+  "quantization": "text decoder: fully connected weights int4 blockwise-128 (ai-edge-quantizer 0.10.0, block scales floored at 2^-14), output layer int8 per channel, declared fp32 activations; signatures prefill 32 / 128 / 1024 and decode over a 2048-token KV cache (the cache length rewritten from 4096 and the prefill_32 signature cloned from prefill_128 in the int4 file); token embedding table int8 outside the decoder (EMBEDDER section); vision encoder and adapter fp32 weights, declared fp32 activations",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 2048,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": 18.33,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Muse-Glimmer-30B-LiteRT commit ba6ae2f3, LFS sha256 4f7e2690ae5d7d366c2eba682d2b30b83118b1ec4e9a24e7318dbf40ea967656 and 23393996524 bytes read back from the Hub on 2026-10-31 = the bytes of the speed window",
+        "runtime: litert-lm 0.19.0 (PyPI) Python API, backend GPU (WebGPU) and vision_backend GPU, cache_dir ':nocache', max_num_images 1",
+        "muses2_p32c2048_cats_q1, muses2_p32c2048_cats_q1_t2, muses2_p32c2048_cats_q2, muses2_p32c2048_kitchen_q3 (one process; BenchmarkInfo per question)",
+        "output_match = the run-3 task line: MMStar-20 at 448x448, greedy, 'Reasoning strength: low.': this file 10 right, Transformers 11 (needs 10 or more), the same letter on 19 of 20",
+        "peak_mem_mb = 26 GiB x 1024: the highest macOS phys_footprint sample (every 15 s, whole GiB)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens_per_s_max": 18.37,
+        "decode_tokens_per_s_min": 12.29,
+        "engine_create_s": 23.4,
+        "first_text_s_q2": 2.573,
+        "first_text_s_q3": 2.568,
+        "follow_up_first_text_s": 0.411,
+        "follow_up_prompt_tokens": 16.0,
+        "image_size_px": 448.0,
+        "image_tokens": 256.0,
+        "prefill_tokens": 293.0,
+        "questions": 3.0
+      },
+      "output_match": true,
+      "peak_mem_mb": 26624,
+      "prefill_tokens_per_s": 147.97,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "one 448x448 picture + a short question, greedy, system 'Reasoning strength: low.'; one process, three questions in fresh conversations (medians) and one follow-up question on the same picture",
+      "total_ops": null,
+      "ttft_ms": 2034.6
+    }
+  ],
+  "schema_version": "1.0"
+}

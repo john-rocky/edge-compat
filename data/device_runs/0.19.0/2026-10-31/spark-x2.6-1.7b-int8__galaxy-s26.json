@@ -1,0 +1,109 @@
+{
+  "artifact": "Spark-X2.6-1.7B_int8.litertlm",
+  "artifact_sha256": "e81b8821826bbb67aae7d6666b69ca4e5869513b9c490ef9bebece6e6d29a863",
+  "device": "galaxy-s26",
+  "model_id": "spark-x2.6-1.7b-int8",
+  "notes": "Spark-X2.6-1.7B_int8.litertlm of litert-community/Spark-X2.6-1.7B: the INT8 file of the 1.7B, the faster 1.7B file on the Mac GPU. XHToken/Spark-X2.6-1.7B (Apache-2.0) converted to LiteRT-LM; the bundle carries templates/spark26_think.jinja (the vendor template's plain-chat part, thinking on by default, reasoning_effort high or low through extra_context), a `thought` channel, 15 stop entries and the repo's tokenizer.json byte for byte. Published 2026-10-31 (Hub main 9b9bd0f4).",
+  "quantization": "dynamic INT8 (per-channel INT8 weights on every linear and the embedding, FP32 activations declared): litert-torch 0.9.3 export (dynamic_wi8_afp32), GPU graph rewrite (odml.cache_update / odml.runtime_bmm, weights byte-equal), prefer_activation_type fp32, 11 prefill signatures, KV cache 4,096",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 4096,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-spark26-devicebench",
+        "os_build": "Android 16 (BP4A.251205.006)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Qualcomm SM8850 (Adreno GPU)",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Spark-X2.6-1.7B `Spark-X2.6-1.7B_int8.litertlm` at main 9b9bd0f4 (published 2026-10-31): LFS sha256 e81b8821826bbb67aae7d6666b69ca4e5869513b9c490ef9bebece6e6d29a863, 1835670688 B (anonymous Hub API tree read 2026-10-31 23:55 JST); the same digest as",
+        "runtime: PyPI litert-lm-api 0.19.0 Android wheel (liblitert-lm.so sha256 28fa8433febc49a99f4bd3ef8cb82c2912457cfe274d97944debeabdeb97fc78), the Python API on the phone: one process per question, greedy, thinking on, max_output_tokens 2,048, context 4,096",
+        "output_match = every question right with its thought closed and the rendered prompt equal byte for byte to the Mac's render (sha256): right 8 / 8, closed 8 / 8, render 8 / 8",
+        "runs: (s26r4c) q1='42' q2='Tokyo' q3='Cold' q4='7' q5='Merci (or \"Merci beaucoup\" for a more formal expression).' q6='56' q7='0.9 is larger' q8='blue'",
+        "delegation (r17f-gpu-q1): prefill_1024 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_512 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_256 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_128 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_64 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_32 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_16 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_8 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_4 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_2 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_1 1594 / 1594 on LITERT_CL (1 partition(s)); decode 1641 / 1641 on LITERT_CL (1 partition(s));  1 / 1 on LITERT_CL (1 partition(s))"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "exact": 8.0,
+        "questions": 8.0,
+        "render_equal_mac": 8.0,
+        "right": 8.0,
+        "thought_closed": 8.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "the 8 check questions on the phone (2,048-token cap), greedy, thinking on",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": 2048,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": 25.79,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-spark26-devicebench",
+        "os_build": "Android 16 (BP4A.251205.006)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Qualcomm SM8850 (Adreno GPU)",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Spark-X2.6-1.7B `Spark-X2.6-1.7B_int8.litertlm` at main 9b9bd0f4 (published 2026-10-31): LFS sha256 e81b8821826bbb67aae7d6666b69ca4e5869513b9c490ef9bebece6e6d29a863, 1835670688 B (anonymous Hub API tree read 2026-10-31 23:55 JST); the same digest as",
+        "runtime: PyPI litert-lm-api 0.19.0 Android wheel (liblitert-lm.so sha256 28fa8433febc49a99f4bd3ef8cb82c2912457cfe274d97944debeabdeb97fc78) on CPython 3.14.8, `Benchmark(model, gpu, prefill_tokens=1024, decode_tokens=256, max_num_tokens=2048)`, 3 runs on one engine per process; a process's value = the mean of runs 2-3, the cell = the mean over processes",
+        "protocol: a benchmark script, one process per run, a ready check (thermal, CPU cap, rest) before each run, MemAvailable read every 0.25 s with the process stopped under 1,000,000 kB",
+        "runs: r17f-gpu-t1 (s26r4a, model_sha256 = the artifact), r17f-gpu-t2 (s26r4a, model_sha256 = the artifact), r17f-gpu-t3 (s26r4b, model_sha256 = the artifact), r17f-gpu-t4 (s26r4c, model_sha256 = the artifact)",
+        "delegation (r17f-gpu-t1): prefill_1024 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_512 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_256 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_128 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_64 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_32 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_16 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_8 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_4 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_2 1760 / 1760 on LITERT_CL (1 partition(s)); prefill_1 1594 / 1594 on LITERT_CL (1 partition(s)); decode 1641 / 1641 on LITERT_CL (1 partition(s))",
+        "peak_mem_mb = the highest VmHWM of the processes (2 s phone-side samples); the Adreno page pool is not in VmHWM (kgsl_page_alloc_max_b)"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "decode_tokens_per_s_p1": 25.742,
+        "decode_tokens_per_s_p2": 26.029,
+        "decode_tokens_per_s_p3": 25.788,
+        "decode_tokens_per_s_p4": 25.589,
+        "init_ms_run1_p1": 14735.86,
+        "init_ms_run1_p2": 7517.45,
+        "init_ms_run1_p3": 15107.43,
+        "init_ms_run1_p4": 16033.21,
+        "kgsl_page_alloc_max_b": 4078104576.0,
+        "memavailable_min_kb": 3543344.0,
+        "prefill_tokens": 1024.0,
+        "processes": 4.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 1382.9,
+      "prefill_tokens_per_s": 294.7,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 3521.5
+    }
+  ],
+  "schema_version": "1.0"
+}

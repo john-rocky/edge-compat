@@ -2,7 +2,7 @@
   "artifact": "model_mixed_example.litertlm",
   "device": "example-workstation",
   "model_id": "example-tiny-mixed",
-  "notes": "Example fixture for the .litertlm-on-litert-lm lane — pipeline data, not a real device measurement.",
+  "notes": "Example fixture for the .litertlm-on-litert-lm path — pipeline data, not a real device measurement.",
   "quantization": "int4",
   "results": [
     {

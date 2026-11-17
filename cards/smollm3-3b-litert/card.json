@@ -2,16 +2,16 @@
   "artifacts": [
     {
       "file": "model.litertlm",
-      "sha256": "8eaf512bc608151ad0e4ccdf968443cb842a41d087ec7741dab8a95faff32b1c",
+      "sha256": "f9d25b1177c908041b67ea249ecb80cfc23b401810c735713035db73453ae757",
       "size_mb": 1909.502
     }
   ],
   "benchmarks": [],
   "conversion": {
-    "command": "TODO (not stated in the README)",
-    "quantization": "int4 blockwise (block 32) + OCTAV optimal-clipping, embedding INT8 externalized into its own section so the main weights section stays under the iOS ~2 GiB single-mmap limit; KV cache 4096 (README Conversion)",
-    "tool": "litert-torch export_hf (generic path; SmolLM3ForCausalLM on the existing converter, the NoPE attention schedule — rotary disabled on every 4th layer — lowers to generic ops with no custom kernel) (README Conversion)",
-    "tool_version": "TODO (the README names the converter but not its version)"
+    "command": "TODO (not stated in the card)",
+    "quantization": "int4 blockwise (block 32) + OCTAV optimal-clipping, embedding INT8 externalized into its own section so the main weights section stays under the iOS ~2 GiB single-mmap limit; KV cache 4096 (card L29, L31, L115-L119)",
+    "tool": "litert-torch export_hf (generic path; SmolLM3ForCausalLM on the existing converter, the NoPE attention schedule — rotary disabled on every 4th layer — lowers to generic ops with no custom kernel) (card L112-L115)",
+    "tool_version": "TODO (the card names the converter but not its version)"
   },
   "cross_runtime": [],
   "delegation": null,
@@ -36,7 +36,7 @@
           },
           "error": null,
           "evidence": [
-            "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.17.0/bin/litert-lm 0.17.0); fixed-question answer: \"[thought] Okay, let's see. I need to calculate 17 plus 25. Hmm, adding two numbers. Let me start by adding the units place first. 7 plus 5 is 12, right? So I write down 2 and carry over 1. Now, moving to the tens place. 1 (from 17) plus 2 (from 25) is 3, but I have to add the carried-over 1, so 3 + 1 equals 4. So putting it all together, it should be 42. Wait, let me check again. 17 is 10 + 7, and 25 is 20 + 5. Adding 10 + 20 gives 30, and 7 + 5 is 12. So 30 + 12 is 42. Yeah, that's correct. I think 42 is the right answer here. [/thought]\\n\\n\\n42\""
+            "compat_check status ok (runtime 0.17.0); fixed-question answer: \"[thought] Okay, let's see. I need to calculate 17 plus 25. Hmm, adding two numbers. Let me start by adding the units place first. 7 plus 5 is 12, right? So I write down 2 and carry over 1. Now, moving to the tens place. 1 (from 17) plus 2 (from 25) is 3, but I have to add the carried-over 1, so 3 + 1 equals 4. So putting it all together, it should be 42. Wait, let me check again. 17 is 10 + 7, and 25 is 20 + 5. Adding 10 + 20 gives 30, and 7 + 5 is 12. So 30 + 12 is 42. Yeah, that's correct. I think 42 is the right answer here. [/thought]\\n\\n\\n42\""
           ],
           "failure_class": null,
           "full_delegation": null,
@@ -64,9 +64,12 @@
     "task": "text-generation"
   },
   "pitfalls": [
-    "GSM8K (n=100, greedy, 0-shot CoT asking for '#### <n>', identical prompt and extraction): bf16 81.0% / LiteRT int4 (BOCTAV4) 81.0% — fully at parity; visible step-by-step chain-of-thought, clean stop at <|im_end|> (README Quality).",
-    "Blockwise (not channelwise) int4 plus OCTAV is what holds reasoning accuracy at parity (README Conversion).",
-    "License Apache-2.0, inherited from HuggingFaceTB/SmolLM3-3B (README License).",
+    "GSM8K (n=100, greedy, 0-shot CoT asking for '#### <n>', identical prompt and extraction): bf16 81.0% / LiteRT int4 (BOCTAV4) 81.0% — fully at parity; visible step-by-step chain-of-thought, clean stop at <|im_end|> (card L97-L108).",
+    "Blockwise (not channelwise) int4 plus OCTAV is what holds reasoning accuracy at parity (card L118-L119).",
+    "Template: on 2026-09-21 the file's chat template was updated to accept the 0.18 content-parts form (the string form unchanged); weights, tokenizer and executor metadata byte-identical (card L35).",
+    "Thinking cannot be switched off: on litert-lm 0.18.0 ThinkingConfig(enable_thinking=False) has no effect on this file: with a 400-token cap the thought channel uses the whole cap and no answer text appears (measured 2026-10-13); set thinking_token_budget (300 answered 17 × 23 under a 700-token cap) and a cap above it (card L53).",
+    "Conversation preface with tools and no messages: LiteRT-LM renders the chat template with an empty message list, and the template reads messages[0] without checking that the list is non-empty, so the render fails with 'Failed to apply template: undefined value' when the preface is prefilled at creation (prefillPrefaceOnInit, default false; creating the conversation fails) and in the preface render (renderPrefaceIntoString and its C++ and C API forms); the same with extra context (such as enable_thinking) and no messages, and in the preface render with an empty preface (run in the runtime on one Qwen3 template; the other templates rendered with minijinja 2.14 and jinja2); read in the source of LiteRT-LM 0.17.0, 0.18.1 and main, measured with the 0.18.1 PyPI package through its C API on this file's template text; the default path, where the first message is rendered with the preface, is not affected (the 0.18.1 Python API and CLI expose neither the flag nor the preface render); a system message or any initial message in the conversation config avoids it (card L129).",
+    "License Apache-2.0, inherited from HuggingFaceTB/SmolLM3-3B (card L133-L134).",
     "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/."
   ],
   "schema_version": "1.2"

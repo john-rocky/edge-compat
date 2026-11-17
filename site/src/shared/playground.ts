@@ -3,7 +3,7 @@
  * boundary, the op × matrix cross-reference, the output comparator, and the
  * failure-class vocabulary — all pure and Node-testable.
  *
- * Verdict rule (spec 9.2, tested): every status the cross-reference emits is
+ * Verdict rule (tested): every status the cross-reference emits is
  * either copied verbatim from an exported matrix snapshot entry or the literal
  * 'unknown'. Nothing here computes, infers, or defaults a verdict — that is
  * the Python linter's job, and reimplementing it is out of scope until a
@@ -90,7 +90,7 @@ export interface CrossRefRow {
  * Cross-reference an operator inventory against exported matrix snapshots.
  * Op-name lookup only (the page knows op names, not per-node dtypes/shapes):
  * ALL entries for the op are surfaced verbatim so dtype/constraint context
- * stays visible; no entry-precedence logic runs client-side (DECISIONS #94).
+ * stays visible; no entry-precedence logic runs client-side.
  */
 export function crossReference(
   inventory: readonly { op: string; customCode: string | null; count: number }[],
@@ -228,7 +228,7 @@ export function playgroundCtaPrompt(fileName: string): string {
   );
 }
 
-/** The local full-analysis command the results page links to (spec 9.3). */
+/** The local full-analysis command the results page links to. */
 export function lintCommand(fileName: string, backend: string, snapshot: MatrixSnapshotRef | null): string {
   const matrixArg = snapshot === null ? 'data/matrix/<snapshot>.json' : `data/matrix/${backend}__${snapshot.litertVersion}.json`;
   return `edge-lint ${fileName} --backend ${backend} --matrix ${matrixArg} --md`;

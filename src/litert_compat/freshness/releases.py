@@ -1,7 +1,7 @@
 """Latest-known-release registry (`data/releases.json`).
 
 The registry records the newest UPSTREAM release of each runtime that this
-repo knows about — maintained by `autobump.yml` (CI) or the owner, never by
+repo knows about — maintained by `autobump.yml` (CI) or by hand, never by
 measurement tools. It is what staleness is measured against: a matrix
 snapshot, sweep record, or site row whose verified-against version lags the
 registry's version is flagged stale (decay is shown, never hidden), while
@@ -29,7 +29,7 @@ LITERTJS_KEY = "litertjs_core"
 LITERTLM_KEY = "litertlm"
 
 #: Device-run env.runtime value -> registry axis (Phase 13). The .tflite-on-NPU
-#: lane runs on native LiteRT; the .litertlm lane on LiteRT-LM.
+#: records run on native LiteRT; .litertlm records on LiteRT-LM.
 RUNTIME_AXES = {"litert": LITERT_KEY, "litert-lm": LITERTLM_KEY}
 
 
@@ -111,7 +111,7 @@ def staleness_warning(
 ) -> str | None:
     """The soft-warning text for a matrix snapshot that lags the latest known
     release of its version axis; None when current, unknown, or unparsable.
-    Warning only — verdicts are never changed by staleness (spec 11.3).
+    Warning only — verdicts are never changed by staleness.
 
     Only strictly numeric snapshot versions can lag: placeholder versions
     ('0.0.0-example') make no claim about a real runtime, so comparing them

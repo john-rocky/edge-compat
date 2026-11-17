@@ -3,7 +3,7 @@
   "artifact_sha256": "3dda920ce47e5ef2597c1a43732daeecc5d4b9b91fe29599cb9eaafb874b29e8",
   "device": "mac-studio-m4-max",
   "model_id": "lfm2-2.6b-int8",
-  "notes": "Hub litert-community/LFM2-2.6B (upload commit 8920b7b9, 2026-10-13 11:19 JST; main 8e6c817a; the Hub tree's LFS sha256 = the lane's ship/SHA256SUMS). Lane litertlm-convert aa_mobile_work/lfm2_26b: the Mac bench of 2026-10-12 (bench/bench_mac.log: CPU block 18:57:01-19:03:34 JST, rest 300 s before GPU, GPU block 19:08:34-19:10:24 JST; every process under quiet_hold + tools/settle_run.sh, which waits for other lanes' engine / export jobs that were already running; SPEED_LADDER.md rows 1 (CPU) / 6 (GPU: 'int8 (wi8fc), GPU fp16 activations (runtime default)')) = the Hub card's Mac table: CPU = one process (bench/cpu_int8.log); GPU = one process (bench/gpu_int8.log). litert-lm 0.18.0 CLI benchmark, --cache no, 1024-token prefill / 256 decode / max number of tokens 2048, a warmup then the mean of 3 iterations. The file is cand/LFM2-2.6B_int8.litertlm, which repack wrote with the ship sha256 (repack/int8.json new_sha256 = ship) and which round r3c found still equal to ship (ROUND3c.md); deleted 2026-10-13 (aa_mobile_work/deleted_paths_20261013.txt). GPU = WebGPU on Metal with the runtime's default fp16 activations; the verbose benchmark run of the same bytes (bench/gpu_int8_verbose.log) replaced every node of all 12 decoder signatures with LITERT_WEBGPU (prefill_1024 978, prefill_1 877, decode 895 nodes) - not printed in the timed runs, so the delegation cells are null here. Not entered: the export-time conv-int8 arm (wi8, rows 3 / 8) and the fp32-activation arm (row 11) - bytes that never shipped (#174(3)); the 6-signature files (rows 4, 5, 9, 10); the 8-question, GSM8K and IFEval-lite gates (correctness checks quoted in the card).",
+  "notes": "Hub litert-community/LFM2-2.6B (upload commit 8920b7b9, 2026-10-13 11:19 JST; main 8e6c817a; the Hub tree's LFS sha256). The Mac bench of 2026-10-12 (CPU block 18:57:01-19:03:34 JST, rest 300 s before GPU, GPU block 19:08:34-19:10:24 JST; every process started with no other engine or export job running; GPU form 'int8 (wi8fc), GPU fp16 activations (runtime default)') = the Hub card's Mac table: CPU = one process; GPU = one process. litert-lm 0.18.0 CLI benchmark, --cache no, 1024-token prefill / 256 decode / max number of tokens 2048, a warmup then the mean of 3 iterations. The file is LFM2-2.6B_int8.litertlm, which repack wrote with the published sha256 (new_sha256 = the published one) and which run r3c found still equal to the published file; deleted 2026-10-13. GPU = WebGPU on Metal with the runtime's default fp16 activations; the verbose benchmark run of the same bytes replaced every node of all 12 decoder signatures with LITERT_WEBGPU (prefill_1024 978, prefill_1 877, decode 895 nodes) - not printed in the timed runs, so the delegation cells are null here. Not entered: the export-time conv-int8 arm (wi8) and the fp32-activation arm - bytes that never shipped; the 6-signature files; the 8-question, GSM8K and IFEval-lite checks (correctness checks quoted in the card).",
   "quantization": "int8 dynamic on linears + int8 embedding, convs float",
   "results": [
     {
@@ -23,8 +23,8 @@
       },
       "error": null,
       "evidence": [
-        "bench/cpu_int8.log: prefill 399.41 / decode 39.18 tok/s, TTFT 2.5896 s, init 30.2006 s (quiet_hold: window taken after 0 s wait: aa3-26b-bench-cpu timing pid 97856 since 2026-10-12T18:57:02+0900)",
-        "settle_run: quiet after 9 s; run: /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_work/lfm2_26b/cand/LFM2-2.6B_int8.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+        "Prefill 399.41 / decode 39.18 tok/s, TTFT 2.5896 s, init 30.2006 s",
+        "settle_run: quiet after 9 s; run: litert-lm benchmark LFM2-2.6B_int8.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
         "2026-10-12 18:58:51 JST cpu int8 exit 0"
       ],
       "failure_class": null,
@@ -67,8 +67,8 @@
       },
       "error": null,
       "evidence": [
-        "bench/gpu_int8.log: prefill 2466.0 / decode 125.63 tok/s, TTFT 0.4232 s, init 2.6537 s (quiet_hold: window taken after 0 s wait: aa3-26b-bench-gpu timing pid 23592 since 2026-10-12T19:08:34+0900)",
-        "settle_run: quiet after 37 s; run: /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_work/lfm2_26b/cand/LFM2-2.6B_int8.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+        "Prefill 2466.0 / decode 125.63 tok/s, TTFT 0.4232 s, init 2.6537 s",
+        "settle_run: quiet after 37 s; run: litert-lm benchmark LFM2-2.6B_int8.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
         "2026-10-12 19:10:32 JST gpu int8 verbose exit 0 validation_error=0 shape_mismatch=0 replacing=24",
         "2026-10-12 19:09:26 JST gpu int8 exit 0"
       ],

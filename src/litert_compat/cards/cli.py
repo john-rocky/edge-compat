@@ -357,8 +357,8 @@ def enrich(
             file_okay=False,
             help="Device-run snapshot ROOT (<root>/<version>/<date>/ below it); repeatable. "
             "Every snapshot under it is read and each (device x accelerator x prompt-length) "
-            "cell takes its newest measurement, so no snapshot is hand-picked (DECISIONS "
-            "#165). Mutually exclusive with --device-runs.",
+            "cell takes its newest measurement, so no snapshot is hand-picked. "
+            "Mutually exclusive with --device-runs.",
         ),
     ] = None,
     allow_drop: Annotated[
@@ -366,8 +366,7 @@ def enrich(
         typer.Option(
             "--allow-drop",
             help="Write even where a card would lose a device cell it carries today. Without "
-            "it such a drop is refused with nothing written — the replace trap (DECISIONS "
-            "#161).",
+            "it such a drop is refused with nothing written — the replace trap.",
         ),
     ] = False,
     cards_dir: Annotated[

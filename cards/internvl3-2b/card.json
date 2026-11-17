@@ -68,7 +68,7 @@
         "run": {
           "accelerator": "gpu",
           "context_length": null,
-          "date": "2026-08-24",
+          "date": "2026-08-25",
           "decode_tokens_per_s": 34.4,
           "delegated_ops": 1243,
           "env": {
@@ -106,7 +106,7 @@
           "total_ops": 1243,
           "ttft_ms": 380.0
         },
-        "source": "data/device_runs/0.16.0/2026-08-24/internvl3-2b__galaxy-s26.json"
+        "source": "data/device_runs/0.16.0/2026-08-25/internvl3-2b__galaxy-s26.json"
       }
     ]
   },

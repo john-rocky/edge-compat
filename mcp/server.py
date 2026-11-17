@@ -6,13 +6,13 @@ Gemini CLI first) over stdio. Five tools: `check_model`, `check_op`,
 pass-through into `litert_compat` — no logic is reimplemented here (Phase 4
 rule) — and outputs are the schema-validated JSON objects from earlier phases,
 unchanged: no reformatting, no summarization. Matrix-backed responses embed the
-resolved snapshot's `backend` + `litert_version` (Integration Rules §D), so no
+resolved snapshot's `backend` + `litert_version`, so no
 output can present one backend's result as another's.
 
 Backend -> snapshot resolution follows `litert_compat.matrix.resolve_snapshot`
-(spec 14.1): one snapshot per backend -> that one; multiple versions -> the
+— one snapshot per backend -> that one; multiple versions -> the
 highest numeric version unless the call pins `litert_version`; ambiguity is a
-structured error, never a coin flip. `data/matrix/` is empty until the owner's
+structured error, never a coin flip. `data/matrix/` is empty until the
 first real curation slice lands, so a default-directory server refuses matrix
 lookups honestly; point `--matrix-dir` at example snapshots to try the tools.
 

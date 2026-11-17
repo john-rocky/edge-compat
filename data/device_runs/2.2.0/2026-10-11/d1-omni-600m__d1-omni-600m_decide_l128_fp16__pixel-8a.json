@@ -5,7 +5,7 @@
  "artifact": "d1-omni-600M_decide_L128_fp16.tflite",
  "artifact_sha256": "69720aa44d60a7feb0bd3056b55c7a038e67761b5d810cd5d5b0496ec61273f3",
  "quantization": null,
- "notes": "d1-omni-600M decision graph, L128 bucket (the shipped file d1-omni-600M_decide_L128_fp16.tflite, 896250176 B = the lane's d1_omni_work/out/d1omni_decide_L128_f16safe_fp16.tflite; see the galaxy-s26 record of 2026-10-08 for the model and the file), on a Pixel 8a (Tensor G3, Mali-G715, 8 GB) through the same gate app as the Galaxy S26 records. CPU (XNNPACK 4 threads): the 101 gate rows pass the lane bar. GPU (OpenCL, Mali): the delegate accepted every node, but the compile of this 896 MB graph does not fit the phone's memory at harness guards of 1.5 GB and 1.0 GB (the second attempt had lowmemorykiller killing background apps while the app stayed alive) = no GPU result on this phone; the same file compiles and runs on the 12 GB Galaxy S26 (its record). The same rounds also ran the vision tower, the projector and the audio T1001 graphs on this phone (GPU and CPU, finite outputs, same order as the Galaxy S26 legs; d1_omni_work/results/pixel8a/, ROUND2.md of community_accel_work/devicebench) without a scored parity gate = no records for them here. A Pixel result does not stand in for a Galaxy S26 result: GPU op support and fp16 behaviour differ between Mali and Adreno.",
+ "notes": "d1-omni-600M decision graph, L128 bucket (the shipped file d1-omni-600M_decide_L128_fp16.tflite, 896250176 B; see the galaxy-s26 record of 2026-10-08 for the model and the file), on a Pixel 8a (Tensor G3, Mali-G715, 8 GB) through the same gate app as the Galaxy S26 records. CPU (XNNPACK 4 threads): the 101 test rows pass the pass bar. GPU (OpenCL, Mali): the delegate accepted every node, but the compile of this 896 MB graph does not fit the phone's memory at harness guards of 1.5 GB and 1.0 GB (the second attempt had lowmemorykiller killing background apps while the app stayed alive) = no GPU result on this phone; the same file compiles and runs on the 12 GB Galaxy S26 (its record). The same passes also ran the vision tower, the projector and the audio T1001 graphs on this phone (GPU and CPU, finite outputs, same order as the Galaxy S26 runs) without a scored parity check = no records for them here. A Pixel result does not stand in for a Galaxy S26 result: GPU op support and fp16 behaviour differ between Mali and Adreno.",
  "results": [
   {
    "accelerator": "cpu_xnnpack",
@@ -25,7 +25,7 @@
    "ttft_ms": null,
    "peak_mem_mb": null,
    "context_length": null,
-   "signature": "CpuOptions 4 threads; gate app, parity mode over the 101 gate rows of rows_L128_sub (round p8a1, leg P1_cpu4_f16s_L128); no timed set",
+   "signature": "CpuOptions 4 threads; gate app, parity mode over the 101 test rows of rows_L128_sub (run p8a1, part P1_cpu4_f16s_L128); no timed set",
    "metrics": {
     "load_compile_ms": 1236.527873,
     "rows": 101.0,
@@ -56,13 +56,13 @@
     "mem_total_kb": 7754700.0
    },
    "evidence": [
-    "Harness: the lane's debug gate app com.mlboydaisuke.d1omni.gate (d1_omni_work/android/d1omni_gate/; APK d1_omni_work/device/app-debug.r9.apk, sha256 2d89d57a9db64e7c..., the same APK as the Galaxy S26 round 9 records) driven by the shared device harness litertlm-convert/community_accel_work/devicebench (chain.sh run p8a1, hold 2026-10-11 13:59:30 to release 14:05:43; chain.sh run p8a2, hold 15:10:38 to 15:12:43; d1_omni_work/device/p8a1/chain_1359.log, device/p8a2/chain.log); the 101 gate rows of d1_omni_work/device/rows_L128_sub.json, each row one call of the decide_128 signature; parity scored on the host by d1_omni_work/scripts/s26_score.py (results/pixel8a/).",
+    "Harness: the debug gate app com.mlboydaisuke.d1omni.gate (sha256 2d89d57a9db64e7c..., the same APK as the Galaxy S26 run 9 records) driven by a benchmark script (run p8a1, 2026-10-11 13:59:30 to 14:05:43; run p8a2, 15:10:38 to 15:12:43); the 101 test rows, each row one call of the decide_128 signature; parity scored on the host.",
     "10-11 14:01:44.287  3747  3776 I tflite  : Replacing 1171 out of 1173 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2 partitions for subgraph 0 (main).",
     "10-11 14:01:45.534  3747  3776 I D1OMNI_GATE: D1OMNI_GATE compiled d1omni_decide_L128_f16safe_fp16.tflite cpu - in 1236.527873 ms",
-    "parity vs the provider's float32 reference (near-tie = reference top-2 gap <= 0.02; lane bar = argmax equal outside near-ties, max |dp| <= 0.02, mean |dp| <= 0.002, no non-finite value): 101 gate rows: argmax 99/99 outside near-ties, near-tie 2/2, max |dp| 0.00158712, p95 0.000516694, mean 0.000116363, crossings of 0.5 / 0.9: 0 / 0, non-finite rows 0, red arm 0.06632 -> lane bar PASS (d1_omni_work/results/pixel8a/p8a_parity_P1_cpu4_f16s_L128_p8a1.json summary).",
-    "same bytes on the Mac CPU (ai-edge-litert 2.2.0, XNNPACK 8 threads, the same rows; d1_omni_work/device/p8a1/mac/mac_d1omni_decide_L128_f16safe_fp16__rows_L128_sub.json): rows compared 101, argmax agree 101/101, bit-equal rows 0, max |dp| 1.609e-06, max |d| of the read-out scores 1.812e-05 = output_match true on the probabilities (max_abs_diff is that max |dp|; no element rule over raw scores was computed for this record, max_rel_diff null).",
-    "latency_p50_ms = the median of the 101 gate-row calls (write + run + read back, warm, 4 threads) from the app's report d1_omni_work/device/p8a1/P1_cpu4_f16s_L128.json: 699.9 ms (min 586.9, max 783.9); these are parity-mode calls, not a rested timed set.",
-    "memory (d1_omni_work/device/p8a1/P1_cpu4_f16s_L128.memory.txt): VmHWM_max_kB 2100972 VmSwap_max_kB 18520 MemAvailable_min_kB 2255096 mali_total_gpu_mem_max_B 355811328; MemTotal 7754700 kB on this phone; the phone's state at the start: Thermal Status 0, no CPU cap (device/p8a1/P1_cpu4_f16s_L128.state_before.txt)."
+    "parity vs the provider's float32 reference (near-tie = reference top-2 gap <= 0.02; pass bar = argmax equal outside near-ties, max |dp| <= 0.02, mean |dp| <= 0.002, no non-finite value): 101 test rows: argmax 99/99 outside near-ties, near-tie 2/2, max |dp| 0.00158712, p95 0.000516694, mean 0.000116363, crossings of 0.5 / 0.9: 0 / 0, non-finite rows 0, red arm 0.06632 -> pass bar PASS.",
+    "same bytes on the Mac CPU (ai-edge-litert 2.2.0, XNNPACK 8 threads, the same rows): rows compared 101, argmax agree 101/101, bit-equal rows 0, max |dp| 1.609e-06, max |d| of the read-out scores 1.812e-05 = output_match true on the probabilities (max_abs_diff is that max |dp|; no element rule over raw scores was computed for this record, max_rel_diff null).",
+    "latency_p50_ms = the median of the 101 gate-row calls (write + run + read back, warm, 4 threads) from the app's report: 699.9 ms (min 586.9, max 783.9); these are parity-mode calls, not a rested timed set.",
+    "memory: VmHWM_max_kB 2100972 VmSwap_max_kB 18520 MemAvailable_min_kB 2255096 mali_total_gpu_mem_max_B 355811328; MemTotal 7754700 kB on this phone; the phone's state at the start: Thermal Status 0, no CPU cap."
    ],
    "env": {
     "device": "Pixel 8a",
@@ -81,7 +81,7 @@
    "loads": true,
    "runs": false,
    "failure_class": "memory_guard_stop_during_compile",
-   "error": "MEMGUARD_STOPPED: the harness force-stopped the app when MemAvailable fell below the memory guard during the GPU compile (MemAvailable min 1450336 kB, app VmHWM 3254684 kB; memory guard 1,500,000 kB; retried on 2026-10-11 15:12 with the guard at 1,000,000 kB (round p8a2, leg P2_gpu_fp32_f16s_L128): MEMGUARD_STOPPED, MemAvailable min 838800 kB, app VmHWM 4011432 kB, lowmemorykiller lines in logcat during the leg 26 (none naming this app: 0 lines))",
+   "error": "MEMGUARD_STOPPED: the harness force-stopped the app when MemAvailable fell below the memory guard during the GPU compile (MemAvailable min 1450336 kB, app VmHWM 3254684 kB; memory guard 1,500,000 kB; retried on 2026-10-11 15:12 with the guard at 1,000,000 kB (run p8a2, part P2_gpu_fp32_f16s_L128): MEMGUARD_STOPPED, MemAvailable min 838800 kB, app VmHWM 4011432 kB, lowmemorykiller lines in logcat during the run 26 (none naming this app: 0 lines))",
    "full_delegation": true,
    "delegated_ops": 1173,
    "total_ops": 1173,
@@ -94,7 +94,7 @@
    "ttft_ms": null,
    "peak_mem_mb": null,
    "context_length": null,
-   "signature": "GpuOptions precision=FP32; gate app (round p8a1, leg P1_gpu_fp32_f16s_L128); the compile never finished",
+   "signature": "GpuOptions precision=FP32; gate app (run p8a1, part P1_gpu_fp32_f16s_L128); the compile never finished",
    "metrics": {
     "app_vmhwm_kb_max": 3254684.0,
     "mem_available_kb_min_during": 1450336.0,
@@ -102,11 +102,11 @@
     "mem_total_kb": 7754700.0
    },
    "evidence": [
-    "Harness: the lane's debug gate app com.mlboydaisuke.d1omni.gate (d1_omni_work/android/d1omni_gate/; APK d1_omni_work/device/app-debug.r9.apk, sha256 2d89d57a9db64e7c..., the same APK as the Galaxy S26 round 9 records) driven by the shared device harness litertlm-convert/community_accel_work/devicebench (chain.sh run p8a1, hold 2026-10-11 13:59:30 to release 14:05:43; chain.sh run p8a2, hold 15:10:38 to 15:12:43; d1_omni_work/device/p8a1/chain_1359.log, device/p8a2/chain.log); the 101 gate rows of d1_omni_work/device/rows_L128_sub.json, each row one call of the decide_128 signature; parity scored on the host by d1_omni_work/scripts/s26_score.py (results/pixel8a/).",
+    "Harness: the debug gate app com.mlboydaisuke.d1omni.gate (sha256 2d89d57a9db64e7c..., the same APK as the Galaxy S26 run 9 records) driven by a benchmark script (run p8a1, 2026-10-11 13:59:30 to 14:05:43; run p8a2, 15:10:38 to 15:12:43); the 101 test rows, each row one call of the decide_128 signature; parity scored on the host.",
     "10-11 14:01:01.684  1663  1727 I tflite  : Replacing 1173 out of 1173 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
-    "d1_omni_work/device/p8a1/P1_gpu_fp32_f16s_L128.memory.txt: VmHWM_max_kB 3254684 VmSwap_max_kB 18320 MemAvailable_min_kB 1450336 mali_total_gpu_mem_max_B 358637568",
-    "d1_omni_work/device/p8a1/P1_gpu_fp32_f16s_L128.leg_status: MEMGUARD_STOPPED; the app's report was never written (device/p8a1/P1_gpu_fp32_f16s_L128.report_pull.txt in p8a2 holds the phone's cat error for the missing file).",
-    "d1_omni_work/device/p8a2/P2_gpu_fp32_f16s_L128.memory.txt: VmHWM_max_kB 4011432 VmSwap_max_kB 51148 MemAvailable_min_kB 838800 mali_total_gpu_mem_max_B 295182336; lowmemorykiller lines in device/p8a2/P2_gpu_fp32_f16s_L128.logcat_all_since_start.txt: 26; lines naming this app (lmkd_app_lines.txt): 0."
+    "VmHWM_max_kB 3254684 VmSwap_max_kB 18320 MemAvailable_min_kB 1450336 mali_total_gpu_mem_max_B 358637568",
+    "MEMGUARD_STOPPED; the app's report was never written (in p8a2 holds the phone's cat error for the missing file).",
+    "VmHWM_max_kB 4011432 VmSwap_max_kB 51148 MemAvailable_min_kB 838800 mali_total_gpu_mem_max_B 295182336; lowmemorykiller lines: 26; lines naming this app (lmkd_app_lines.txt): 0."
    ],
    "env": {
     "device": "Pixel 8a",
@@ -125,7 +125,7 @@
    "loads": true,
    "runs": false,
    "failure_class": "memory_guard_stop_during_compile",
-   "error": "MEMGUARD_STOPPED: the harness force-stopped the app when MemAvailable fell below the memory guard during the GPU compile (MemAvailable min 1281308 kB, app VmHWM 3487620 kB; memory guard 1,500,000 kB; not retried (the p8a2 plan skipped it with needs= after the FP32 leg stopped))",
+   "error": "MEMGUARD_STOPPED: the harness force-stopped the app when MemAvailable fell below the memory guard during the GPU compile (MemAvailable min 1281308 kB, app VmHWM 3487620 kB; memory guard 1,500,000 kB; not retried (the p8a2 plan skipped it with needs= after the FP32 run stopped))",
    "full_delegation": true,
    "delegated_ops": 1173,
    "total_ops": 1173,
@@ -138,7 +138,7 @@
    "ttft_ms": null,
    "peak_mem_mb": null,
    "context_length": null,
-   "signature": "GpuOptions precision=FP16_WITH_FP32_ACCUM; gate app (round p8a1, leg P1_gpu_fp16acc32_f16s_L128); the compile never finished",
+   "signature": "GpuOptions precision=FP16_WITH_FP32_ACCUM; gate app (run p8a1, part P1_gpu_fp16acc32_f16s_L128); the compile never finished",
    "metrics": {
     "app_vmhwm_kb_max": 3487620.0,
     "mem_available_kb_min_during": 1281308.0,
@@ -146,10 +146,10 @@
     "mem_total_kb": 7754700.0
    },
    "evidence": [
-    "Harness: the lane's debug gate app com.mlboydaisuke.d1omni.gate (d1_omni_work/android/d1omni_gate/; APK d1_omni_work/device/app-debug.r9.apk, sha256 2d89d57a9db64e7c..., the same APK as the Galaxy S26 round 9 records) driven by the shared device harness litertlm-convert/community_accel_work/devicebench (chain.sh run p8a1, hold 2026-10-11 13:59:30 to release 14:05:43; chain.sh run p8a2, hold 15:10:38 to 15:12:43; d1_omni_work/device/p8a1/chain_1359.log, device/p8a2/chain.log); the 101 gate rows of d1_omni_work/device/rows_L128_sub.json, each row one call of the decide_128 signature; parity scored on the host by d1_omni_work/scripts/s26_score.py (results/pixel8a/).",
+    "Harness: the debug gate app com.mlboydaisuke.d1omni.gate (sha256 2d89d57a9db64e7c..., the same APK as the Galaxy S26 run 9 records) driven by a benchmark script (run p8a1, 2026-10-11 13:59:30 to 14:05:43; run p8a2, 15:10:38 to 15:12:43); the 101 test rows, each row one call of the decide_128 signature; parity scored on the host.",
     "10-11 14:01:22.636  3097  3131 I tflite  : Replacing 1173 out of 1173 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
-    "d1_omni_work/device/p8a1/P1_gpu_fp16acc32_f16s_L128.memory.txt: VmHWM_max_kB 3487620 VmSwap_max_kB 41560 MemAvailable_min_kB 1281308 mali_total_gpu_mem_max_B 492109824",
-    "d1_omni_work/device/p8a1/P1_gpu_fp16acc32_f16s_L128.leg_status: MEMGUARD_STOPPED; the app's report was never written (device/p8a1/P1_gpu_fp16acc32_f16s_L128.report_pull.txt in p8a2 holds the phone's cat error for the missing file)."
+    "VmHWM_max_kB 3487620 VmSwap_max_kB 41560 MemAvailable_min_kB 1281308 mali_total_gpu_mem_max_B 492109824",
+    "MEMGUARD_STOPPED; the app's report was never written (in p8a2 holds the phone's cat error for the missing file)."
    ],
    "env": {
     "device": "Pixel 8a",

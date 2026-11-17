@@ -60,7 +60,7 @@ def test_classify_split_fixture(example_matrix_path: Path) -> None:
         ("FULLY_CONNECTED", "delegated", True),
         ("SOFTMAX", "unknown", False),
     ]
-    # every verdict carries the snapshot identity (spec §D)
+    # every verdict carries the snapshot identity
     assert all(c.verdict.backend == "gpu_mldrift" for c in classified)
     assert all(c.verdict.litert_version == "0.0.0-example" for c in classified)
 

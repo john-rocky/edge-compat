@@ -1,4 +1,4 @@
-"""Resolver policy (spec 14.1) and the rewrite-hints query (Phase 14).
+"""Resolver policy and the rewrite-hints query (Phase 14).
 
 Policy under test: exactly one snapshot per backend -> that one; multiple
 versions -> highest numeric version unless pinned; ambiguity -> error, never

@@ -1,0 +1,72 @@
+{
+  "artifact": "d1-2b_decide_b8_L128_fp16fc.tflite",
+  "artifact_sha256": "85e108da8d07683b92c39d0ee1020c4b643d605df9b019a2a4c80983bdbdbdd6",
+  "device": "galaxy-s26",
+  "model_id": "d1-2b__d1-2b_decide_b8_l128_fp16fc",
+  "notes": "d1-2B (litert-community/d1-2B-LiteRT main df449772, created 2026-11-02; card license other (lfm1.0), base model LiquidAI/d1-2B; anonymous Hub API read 2026-11-03T02:46:35+0900): the `decide` graph, bucket `b8_L128`, form `fp16fc` (the fp16-FC). Hub file `d1-2b_decide_b8_L128_fp16fc.tflite` 2,934,942,096 B; artifact_sha256 = its LFS oid = the phone's read-back in each run's hold. Signature `decide_b8_L128`; its I/O as the app read it: inputs embeds float32 [8,128,2048], sees_q float32 [8,128,66], sees_k float32 [8,128,66] -> outputs hidden float32 [8,128,2048]. Measured on the Galaxy S26 (SM-S942Q) (device holds of runs r6): one result per run, and per timing set in a timing run. output_match is null on every result: the work compares each row with its own Mac Metal fp32 run of the same rows (metrics.vs_mac_metal_fp32_*: max |d| and the smallest cosine over the rows with the same input bytes), not with a CPU reference of the same bytes under the element rule.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-11-02",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 2104,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-d1-gate-app",
+        "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "the gate app r10 (com.mlboydaisuke.d1omni.gate, Kotlin CompiledModel on LiteRT 2.2.0 from Maven; APK sha256 0b6d6f70ac0cf4c7…, the APK its run config installs), one app process per run; per call = write every input + CompiledModel.run() + read every output (the app's write_run_read_ms; the GPU's run() returns before the compute ends and the read waits for it)",
+        "file measured: d1-2b_decide_b8_L128_fp16fc.tflite = litert-community/d1-2B-LiteRT `d1-2b_decide_b8_L128_fp16fc.tflite` (2,934,942,096 B), LFS oid 85e108da8d07683b92c39d0ee1020c4b643d605df9b019a2a4c80983bdbdbdd6 (Hub tree read 2026-11-03T02:46:35+0900); the phone's copy read back equal (MATCH)",
+        "(app pid 30605): `11-02 09:30:41.160 30605 30638 I tflite  : Replacing 2104 out of 2104 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).`",
+        "Run s1t_tm64s started 2026-11-02 09:30:39 JST, ready check `clean; rested 227s since 09:26:52`; build Android 16 BP4A.251205.006.S942QOPS1AZH9",
+        "timing mode, set 64_states (request, 8 row(s) of b8s64.json per request): latency_p50_ms = the median of 16 timed calls after 1 warm-up call(s); finite outputs"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 3313.675442,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "app_guard_max_anon_plus_swap_kb": 253108.0,
+        "app_guard_min_mem_available_kb": 1595768.0,
+        "app_mem_guard_kb": 1500000.0,
+        "app_vmhwm_kb_after_compile": 7051228.0,
+        "app_vmhwm_kb_at_end": 7051228.0,
+        "battery_temp_tenths_c_end": 434.0,
+        "battery_temp_tenths_c_start": 374.0,
+        "compile_ms": 29985.087593,
+        "mem_available_kb_after_compile": 1671420.0,
+        "per_call_ms_max": 4114.412394,
+        "per_call_ms_min": 2996.923176,
+        "per_call_run_only_median_ms": 0.44986950000000003,
+        "request_max_ms": 27868.440041999995,
+        "request_median_ms": 27316.529051499994,
+        "request_min_ms": 26764.618060999997,
+        "requests_timed": 2.0,
+        "rows_per_request": 8.0,
+        "thermal_status_end": 2.0,
+        "thermal_status_start": 0.0,
+        "timed_calls": 16.0,
+        "warmup_calls": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GPU (ML Drift OpenCL) precision FP32, constant tensor sharing on; gate app r10; timing mode, set 64_states (request, 8 row(s) per request) on signature decide_b8_L128; run r6 hold s6b run s1t_tm64s",
+      "total_ops": 2104,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -33340,7 +33340,7 @@
     "litert_version": "2.5.3"
   },
   "model": {
-    "path": "/Users/USER/code/codex-conversions/2026-10-01/openjev-deberta-litert/exports/deberta_v3_large_decision_s256_wfp16.tflite",
+    "path": "deberta_v3_large_decision_s256_wfp16.tflite",
     "sha256": "4514cd45d4ee6bf1025818bbecd140d4f744fa78d8309e22a17b89448c176e45",
     "subgraph_count": 1
   },

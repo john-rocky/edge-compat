@@ -20,7 +20,7 @@ task: token-classification
 | | |
 |---|---|
 | **Tool** | litert-torch 0.9.3 (ai-edge-litert 2.1.6; torch 2.12.1; transformers 4.57.6; gliner2 2.0.0; ai-edge-quantizer 0.8.0 for the float16 weight storage) |
-| **Command** | `export_round3.py --seq 128 (unified dense-prefix recipe with --mask-neg -1e4 --ln-shift 3) then quantize_shipment.py --seq 128 (ai-edge-quantizer 0.8.0 FLOAT_CASTING, FULLY_CONNECTED weights only); REPRODUCE.md of the lane, graph contract graph_contract_s128.json` |
+| **Command** | `export_round3.py --seq 128 (unified dense-prefix recipe with --mask-neg -1e4 --ln-shift 3) then quantize_shipment.py --seq 128 (ai-edge-quantizer 0.8.0 FLOAT_CASTING, FULLY_CONNECTED weights only); REPRODUCE.md, graph contract graph_contract_s128.json` |
 | **Quantization** | float16 weight storage (ai-edge-quantizer 0.8.0 FLOAT_CASTING, weight-only 16-bit): the 96 FULLY_CONNECTED weight tensors stored as float16 with a DEQUANTIZE to float32; inputs, outputs, activations and every other constant stay float32 (card 'Files and supported configuration'). |
 
 ## Artifacts

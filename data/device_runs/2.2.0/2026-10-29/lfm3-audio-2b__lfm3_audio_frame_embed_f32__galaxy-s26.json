@@ -1,0 +1,59 @@
+{
+  "artifact": "lfm3_audio_frame_embed_f32.tflite",
+  "artifact_sha256": "d042be62b439630e55feed86bc9ae630db70674ba924d4752c4d5dfc3a44472d",
+  "device": "galaxy-s26",
+  "model_id": "lfm3-audio-2b__lfm3_audio_frame_embed_f32",
+  "notes": "lfm3_audio_frame_embed_f32.tflite of litert-community/LFM3-Audio-2B-LiteRT (LiquidAI/LFM3-Audio-2B at revision 9d49701c, LFM Open License v1.0): speech output: a frame's 12 codes -> the decoder's next input (the 12 codebook rows summed). Published as litert-community/LFM3-Audio-2B-LiteRT (upload commit 976325ac, main 32c07192; anonymous Hub read 2026-10-30T21:51:09+09:00, each LFS oid and size = artifact_sha256). Runner rows (Galaxy S26 RFGL80R6A6H): the C-API runner, one process per run, the graph alone with the fixtures (runs r5b n5, r6b h1 / h2, r7 h7). The repo's speech path runs these graphs in the app's loop (the app rows on 2.3.0 / 2026-10-29). The Mac timing rows and the Pixel 8a text decode on the card ran earlier builds with the same decoder bytes that were not published, so they have no record.",
+  "quantization": "float32",
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-10-29",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 2,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-lfm3audio-runner",
+        "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "harness: runner 2cf45694ed3c3a6a… 3254040 B and libs: 12/12 OK; one process per run; one call = write the inputs + run + read the outputs back (latency_p50_ms = that median; run_ms = the run alone)",
+        "Replacing [2, 7, 'TfLiteXNNPackDelegate', 2], ready 'clean; rested 22s since 12:10:37', memory 'VmHWM_max_kB 56028 VmSwap_max_kB 0 MemAvailable_min_kB 6781732 kgsl_page_alloc_max_B 188526592'",
+        "output_match = the part line R7: max |d| 0.0 <= 1e-5 against the same graph on the Mac CPU"
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": 0.046,
+      "loads": true,
+      "max_abs_diff": 0.0,
+      "max_rel_diff": null,
+      "metrics": {
+        "call_ms_max": 0.07,
+        "call_ms_median": 0.046,
+        "call_ms_min": 0.044,
+        "compile_ms": 138.5,
+        "cos_min_vs_mac_cpu": 0.9999999999999998,
+        "max_abs_vs_mac_cpu": 0.0,
+        "parity_fixtures": 6.0,
+        "run_ms_median": 0.043,
+        "timed_calls": 30.0,
+        "vmhwm_max_kb": 56028.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "C-API runner, CPU (XNNPACK, the runner's default threads), 30 timed calls after the parity pass (run r6b hold h1, run H1_cpu_frame)",
+      "total_ops": 7,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

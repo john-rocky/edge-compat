@@ -134,8 +134,8 @@ def test_load_releases_committed_registry() -> None:
 
 
 def test_axis_for_runtime_maps_device_run_lanes() -> None:
-    """Phase 13: the .tflite-on-NPU lane stales against litert, the .litertlm
-    lane against the new litertlm axis."""
+    """Phase 13: .tflite-on-NPU records stale against litert, .litertlm
+    records against the new litertlm axis."""
     from litert_compat.freshness.releases import axis_for_runtime
 
     assert axis_for_runtime("litert") == "litert"

@@ -1,5 +1,5 @@
 """release-check: the carry-forward → probe → re-measure → upgrade → diff →
-report cycle, driven by a deterministic fake runner (spec §8.4)."""
+report cycle, driven by a deterministic fake runner."""
 
 from __future__ import annotations
 
@@ -91,7 +91,7 @@ def base_doc(entries: list[dict]) -> dict:
 def test_cycle_probe_confirms_and_upgrades(tmp_path: Path) -> None:
     """measured → (carry-forward) inferred → (probe) measured again. When the
     new runtime behaves identically, release-check honestly reports NOTHING
-    changed — the §G loop closing cleanly."""
+    changed — the anti-staleness loop closing cleanly."""
     doc = base_doc(
         [
             entry(

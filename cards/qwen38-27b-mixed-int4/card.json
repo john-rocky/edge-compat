@@ -1,0 +1,311 @@
+{
+  "artifacts": [
+    {
+      "file": "Qwen3.8-27B_mixed_int4.litertlm",
+      "sha256": "7396292ecec0741f166fb57ed65198c34a3f854b40e01951310e0b94f79d449f",
+      "size_mb": 14666.987
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "convert_qwen38_27b.sh (hf-to-litertlm; Qwen/Qwen3.8-27B at 1d4bf0f2): text-decoder export through litert-torch's lightweight conversion from an exact F32 copy of the checkpoint read through a memory map (6 prefill signatures 1024 / 256 / 64 / 16 / 4 / 1 + decode, a 4096-position KV budget, 128 state buffers) -> int4 blockwise-128 / int8 quantization with the 96 in_proj_a / in_proj_b projections float -> the thinking-off template, the repo's tokenizer.json, stop ids 248044 / 248046, fp32 GPU activations and max_num_tokens 4096; the script run from the download to the checks on Qwen/Qwen3.5-2B (2026-10-22 / 10-23) finished with exit 0 and gave this file's metadata section byte for byte",
+    "quantization": "Mixed INT4: int4 blockwise-128 min-max on the 400 linear layers of the 64 blocks, int8 channelwise on the lm_head and the embedding, the 96 decay/gate projections of the 48 linear-attention layers float; 694 of the 190,054,400 block scales raised to a floor of 2^-14, every scale a normal float (none zero or subnormal); fp32 GPU activations declared (card L30, L92)",
+    "tool": "litert-torch (commit 115a1360 + the Qwen3.5 hybrid patch of hf-to-litertlm; lightweight export, constants of 1e8 bytes and more stay lazy) + post-hoc ai-edge-quantizer; repro = hf-to-litertlm qwen35_work/convert_qwen38_27b.sh",
+    "tool_version": "litert-torch 115a1360 + patch, transformers 5.14.1, torch 2.12.1, ai-edge-quantizer 0.8.0; packed and checked with litert-lm 0.18.1"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-10-23",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "command (the Hub card's Usage block, line 2, run as written; cwd = a hard link of the ship file under its published name, litert-lm 0.18.1 first on PATH, stdin /dev/null): litert-lm run ./Qwen3.8-27B_mixed_int4.litertlm --prompt \"What is 17 + 25? Answer briefly.\" --backend cpu --cache disk",
+            "bundle: Qwen3.8-27B_mixed_int4.litertlm sha256 7396292ecec0741f166fb57ed65198c34a3f854b40e01951310e0b94f79d449f = the Hugging Face LFS oid of litert-community/Qwen3.8-27B at main (upload commit 5fd97207), tree API read 2026-10-23 17:46 JST = the upload set's sha256 (the uploaded copy is a hard link of the measured Qwen3.8-27B_mixed_int4.litertlm)",
+            "### cmd 2 (2026-10-23 06:11:19 JST, cwd = a hard link of the ship file under its published name, litert-lm 0.18.1 = first on PATH, stdin /dev/null)",
+            "Exit 0, 126 s, WebGPU Validation error / Shape mismatch lines: 0",
+            "stdout: 42",
+            "/usr/bin/time -l 119.59 s real, maximum resident set size 32300630016 B, peak memory footprint 4156038688 B",
+            "the run wrote the XNNPACK weight cache next to the model (a directory without a cache before it): 14047805808 B (deleted after the record by tools/step5.sh)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "max_rss_mb": 32300.63,
+            "process_wall_s": 119.59,
+            "processes": 1.0,
+            "validation_error_lines": 0.0,
+            "weight_cache_written_mb": 14047.806
+          },
+          "output_match": null,
+          "peak_mem_mb": 4156.039,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "one prompt (CLI run --backend cpu --cache disk; the card's usage command 2)",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.18.1/2026-10-23/qwen38-27b-mixed-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-23",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "harness: 8 fixed questions (scripts/verify_quality.py's checks) each with an ' Answer briefly.' suffix, one `litert-lm run <file> --prompt <question> --backend gpu --cache no --temperature 0 --seed 0` process per question (litert-lm 0.18.1 CLI, via tools/step5.sh nsq1), judged by a regex per question and a degeneracy rule (repeated words, an empty reply or a run of one character); a process with a WebGPU 'Validation error' / 'Shape mismatch' line in its whole stderr is invalid and retaken (none was); the bar = 8 of 8",
+            "bundle: Qwen3.8-27B_mixed_int4.litertlm sha256 7396292ecec0741f166fb57ed65198c34a3f854b40e01951310e0b94f79d449f = the Hugging Face LFS oid of litert-community/Qwen3.8-27B at main (upload commit 5fd97207), tree API read 2026-10-23 17:46 JST = the upload set's sha256 (the uploaded copy is a hard link of the measured Qwen3.8-27B_mixed_int4.litertlm); read as Qwen3.8-27B_mixed_int4.litertlm",
+            "answers: 17+25=42 \"42\" / capital=Tokyo \"Tokyo\" / opp(hot)=cold \"Cold\" / days/week=7 \"7\" / thanks(fr)=merci \"Merci\" / 8*7=56 \"56\" / 0.9>0.11 \"0.9\" / rhyme=blue \"blue\"",
+            "8 / 8 right, degenerate 0, 0 WebGPU 'Validation error' / 'Shape mismatch' lines in each of the 8 processes; process wall 208.8-216.0 s (engine build + one short answer)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "gate_rows_passed": 8.0,
+            "gate_rows_run": 8.0,
+            "lane_bar_rows": 8.0,
+            "process_wall_max_s": 216.0,
+            "process_wall_min_s": 208.8,
+            "processes": 8.0,
+            "validation_error_lines": 0.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "8-question check (CLI run --backend gpu --cache no, one process per question)",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.18.1/2026-10-23/qwen38-27b-mixed-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-23",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "command (the Hub card's Usage block, line 1, run as written; cwd = a hard link of the ship file under its published name, litert-lm 0.18.1 first on PATH, stdin /dev/null): litert-lm run ./Qwen3.8-27B_mixed_int4.litertlm --prompt \"What is 17 + 25? Answer briefly.\" --backend gpu --cache no",
+            "bundle: Qwen3.8-27B_mixed_int4.litertlm sha256 7396292ecec0741f166fb57ed65198c34a3f854b40e01951310e0b94f79d449f = the Hugging Face LFS oid of litert-community/Qwen3.8-27B at main (upload commit 5fd97207), tree API read 2026-10-23 17:46 JST = the upload set's sha256 (the uploaded copy is a hard link of the measured Qwen3.8-27B_mixed_int4.litertlm)",
+            "### cmd 1 (2026-10-23 06:09:12 JST, cwd = a hard link of the ship file under its published name, litert-lm 0.18.1 = first on PATH, stdin /dev/null)",
+            "Exit 0, 220 s, WebGPU Validation error / Shape mismatch lines: 0",
+            "stdout: 42",
+            "/usr/bin/time -l 217.37 s real, maximum resident set size 21959688192 B, peak memory footprint 24494096848 B"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "max_rss_mb": 21959.688,
+            "process_wall_s": 217.37,
+            "processes": 1.0,
+            "validation_error_lines": 0.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 24494.097,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "one prompt (CLI run --backend gpu --cache no; the card's usage command 1)",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.18.1/2026-10-23/qwen38-27b-mixed-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-23",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "harness: gate_multiturn_r4.py run <file> <json> gpu off on the litert-lm 0.18.1 wheel's Engine / Conversation API, one process = one Engine = one Conversation, SamplerConfig(top_k=1, seed=0), max_num_tokens 4096, GPU, cache_dir ':nocache'; no ThinkingConfig (the file has no thinking switch), 256 output tokens per turn: \"Give me one word that means 'very big'.\" / \"Use it in a short sentence.\" / \"Now make that sentence a question.\"; PASS = every reply non-empty with no chat marker and the token count growing (tools/step5.sh nsmt)",
+            "bundle: Qwen3.8-27B_mixed_int4.litertlm sha256 7396292ecec0741f166fb57ed65198c34a3f854b40e01951310e0b94f79d449f = the Hugging Face LFS oid of litert-community/Qwen3.8-27B at main (upload commit 5fd97207), tree API read 2026-10-23 17:46 JST = the upload set's sha256 (the uploaded copy is a hard link of the measured Qwen3.8-27B_mixed_int4.litertlm); read as Qwen3.8-27B_mixed_int4.litertlm",
+            "turn 1: reply \"Enormous\", token_count -> 26",
+            "turn 2: reply \"The elephant was enormous.\", token_count -> 51",
+            "turn 3: reply \"Was the elephant enormous?\", token_count -> 76",
+            "mt_off_gpu.json: kv t1 kv 22 render 22 (+0) prefills [22]; t2 kv 45 render 46 (-1) prefills [22, 19]; t3 kv 70 render 72 (-2) prefills [22, 19, 19] -> PASS"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "engine_s": 210.5,
+            "max_num_tokens": 4096.0,
+            "max_output_tokens": 256.0,
+            "turn1_elapsed_s": 1.4,
+            "turn1_token_count": 26.0,
+            "turn2_elapsed_s": 1.3,
+            "turn2_token_count": 51.0,
+            "turn3_elapsed_s": 1.4,
+            "turn3_token_count": 76.0,
+            "turns_passed": 3.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "three-turn conversation, thinking off (Python API)",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.18.1/2026-10-23/qwen38-27b-mixed-int4__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-10-23",
+          "decode_tokens_per_s": 18.42,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.18.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "command (the Hub card's Usage block, line 3, run as written; cwd = a hard link of the ship file under its published name, litert-lm 0.18.1 first on PATH, stdin /dev/null, inside its own Mac measurement window): litert-lm benchmark ./Qwen3.8-27B_mixed_int4.litertlm -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no --backend gpu",
+            "bundle: Qwen3.8-27B_mixed_int4.litertlm sha256 7396292ecec0741f166fb57ed65198c34a3f854b40e01951310e0b94f79d449f = the Hugging Face LFS oid of litert-community/Qwen3.8-27B at main (upload commit 5fd97207), tree API read 2026-10-23 17:46 JST = the upload set's sha256 (the uploaded copy is a hard link of the measured Qwen3.8-27B_mixed_int4.litertlm)",
+            "### cmd 3 (2026-10-23 06:38:23 JST, cwd = a hard link of the ship file under its published name, litert-lm 0.18.1 = first on PATH, stdin /dev/null)",
+            "Exit 0, 945 s, WebGPU Validation error / Shape mismatch lines: 0",
+            "2026-10-23 06:22:38 step cmd_3 start (estimate 1600 s, 3600 s left) / 2026-10-23 06:38:23 step cmd_3 done in 945 s",
+            "Prefill speed 176.99 tokens/s, Decode speed 18.42 tokens/s, Init time 423.4998 s, Time to first token 5.8406 s (warm-up + 3 runs; litert-lm 0.18.1's Benchmark.run() builds a fresh Engine for every run, the warm-up included = 4 engines in the process)",
+            "/usr/bin/time -l 934.14 s real, maximum resident set size 22224322560 B, peak memory footprint 24896160136 B",
+            "t = 1024 / 176.99 + 256 / 18.42 = 19.68 s; engine build = (real - 4 t) / 4 = 213.9 s (header: the CLI's printed Init sums overlapping init phases, LiteRT-LM #4057)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "engine_build_s": 213.9,
+            "engines_in_process": 4.0,
+            "init_s_printed": 423.4998,
+            "iterations": 3.0,
+            "max_num_tokens": 2048.0,
+            "max_rss_mb": 22224.323,
+            "prefill_tokens": 1024.0,
+            "process_wall_s": 934.14,
+            "processes": 1.0,
+            "t_1024_256_s": 19.68,
+            "validation_error_lines": 0.0,
+            "warmup_runs": 1.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 24896.16,
+          "prefill_tokens_per_s": 176.99,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "benchmark 1024 / 256, context 2048 (CLI benchmark --cache no; the card's usage command 3)",
+          "total_ops": null,
+          "ttft_ms": 5840.6
+        },
+        "source": "data/device_runs/0.18.1/2026-10-23/qwen38-27b-mixed-int4__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3.8",
+    "id": "qwen38-27b-mixed-int4",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Qwen3.8-27B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Text only: the text decoder of the multimodal release (26,895,998,464 of its 27,781,427,952 parameters); no image or video input and no multi-token prediction. Only the 16 attention layers keep a growing KV cache (a 4,096-token budget); the 48 linear-attention layers carry a constant-size conv and recurrent state (card L24, L94).",
+    "Thinking off only: the template writes an empty think block at every generation prompt and does not read enable_thinking or reasoning_effort; no thought channel, supports_thinking false. With a thinking switch in the same file (thinking on, thinking_token_budget 300, Mac GPU) the third turn of a three-turn conversation came back empty in 3 of 3 runs at litert-lm 0.18.1's default settings; with filter_channel_content_from_kv_cache off it answered (one run) (card L26).",
+    "Desktop only: one 15.38 GB file, measured on a Mac only; it does not fit in the memory of the phones tested (MemTotal 11,389,756 kB on a Galaxy S26, 7,754,700 kB on a Pixel 8a); not run on iOS, and LiteRT has no NPU accelerator on macOS (card L20, L85, L86).",
+    "The GPU engine takes 3½ to 4 minutes to build on the Mac M4 Max (the first usage command took 217 s from start to answer; a benchmark process spends 214–247 s per engine); the CLI prints about twice that as its init time (LiteRT-LM issue 4057). Build it once and keep it for the conversation (card L67).",
+    "The CPU needs the weight cache: without it (--cache no) the CPU engine packs the int4 weights once for each of the 7 signatures, and on the block-32 file of the same export the benchmark's memory footprint grew from 5.8 GB to 91 GB in 48 s and the run was stopped. With --cache disk the first CPU run writes a 14.0 GB XNNPACK weight cache next to the model (120 s at a 4.2 GB peak footprint); with the cache in place the benchmark's peak was 4.1 GB and its engine build 122–125 s (card L68).",
+    "fp32 GPU activations are declared: with the runtime's fp16 default the same weights answered the first of the 8 check questions with a run of `!` to the token cap (one run, 2026-10-22), while running the benchmark workload in 17.32 s against 19.87 s (card L32, L38, L83).",
+    "One Engine per conversation (LiteRT-LM issue 3165, open): a new Conversation on an Engine that ran another one can continue from its recurrent state; the probe on this file (litert-lm 0.18.1, CPU) did not show the effect in 3 shared-Engine runs, so create a new Engine for each conversation all the same (card L69).",
+    "One Engine per process on the Mac GPU: across 11 benchmark processes (4 engines each) on this file and variants of it, WebGPU validation errors appeared in 2 of the 44 engines, each the third engine of its process, on the block-32 file and on a copy without the fp32 declaration; none in this file's 12 benchmark engines or its 115 single-engine processes (card L70).",
+    "Sampling: without --backend, run uses the bundle's default backend, the CPU; the bundle sets no sampler and the card's checks ran greedy. To sample as Qwen recommends for the non-thinking mode, pass --top-k 20 --top-p 0.8 --temperature 0.7 together (card L71).",
+    "Tool calling: the template renders a tool list and tool responses in Qwen's format, but supports_function_calling is false and litert-lm 0.18.1's generic_model type has no parser for Qwen's XML tool call: a call comes back as text (the regex tool-call configuration of LiteRT-LM main, 2026-10-20, the fix for issue 3927, is not in 0.18.1 and this file carries none); not tried on this file (card L72).",
+    "Tokenizer: the tokenizer section is the repo's tokenizer.json byte for byte (the exporter's own form tokenized Hindi, Thai, Tamil and Arabic with harakat differently); the runtime's tokenizer matches the tokenizers library on it in 292 of 292 strings (card L93).",
+    "Which bytes the card's numbers ran on: unless a line names the published file, the checks and benchmarks ran on an earlier build with a thinking switch that differs only in the LlmMetadata section (TFLite, tokenizer and executor sections byte for byte the same; the published template renders the same thinking-off prompts in 216 of 216 renders). On the published file: the 8 questions 8/8 and the three-turn conversation with thinking off on the Mac GPU, and the three usage commands as printed (`42`, `42`, prefill 176.99 / decode 18.42 tok/s) (card L36, L65).",
+    "Accuracy: GSM8K questions 0–99 (thinking off, greedy, at most 2,048 output tokens, Mac GPU, on the earlier file): bf16 96 / Mixed INT4 97; question 12 is counted right only in this file and its reply reached the 2,048-token cap without a final line; the two give the same answer on 98 of 100 (card L32, L48-L55).",
+    "Mac speed (litert-lm 0.18.1, 1024-token prefill + 256 decoded tokens at context 2048, the mean of two benchmark processes on the earlier file): GPU prefill 175.50 / decode 18.24 tok/s at a 24.9 GB peak; CPU with the weight cache 21.82 / 5.59 tok/s at 4.1 GB; the block-32 file of the same export was slower on both (21.31 s / 103.34 s against 19.87 s / 92.74 s for the workload) (card L32, L80-L83)."
+  ],
+  "schema_version": "1.2"
+}

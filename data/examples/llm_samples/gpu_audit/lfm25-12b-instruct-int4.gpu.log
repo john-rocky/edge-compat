@@ -1,4 +1,4 @@
-Benchmarking model: LFM2.5-1.2B-Instruct_int4.litertlm (~/code/litertlm-convert/minicpm5_work/ship_lfm25/LFM2.5-1.2B-Instruct_int4.litertlm)
+Benchmarking model: LFM2.5-1.2B-Instruct_int4.litertlm (/path/to/LFM2.5-1.2B-Instruct_int4.litertlm)
 Backend                    : gpu
 Number of tokens in prefill: 256
 Number of tokens in decode : 256
@@ -34,8 +34,8 @@ third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor_f
 third_party/odml/litert_lm/runtime/core/engine_advanced_impl.cc:317
 An error occurred during benchmarking
 Traceback (most recent call last):
-  File "~/venvs/minicpm5/lib/python3.10/site-packages/litert_lm_cli/commands/benchmark.py", line 111, in run_benchmark
+  File "/path/to/venv/lib/python3.10/site-packages/litert_lm_cli/commands/benchmark.py", line 111, in run_benchmark
     result = benchmark_obj.run()
-  File "~/venvs/minicpm5/lib/python3.10/site-packages/litert_lm/benchmark.py", line 76, in run
+  File "/path/to/venv/lib/python3.10/site-packages/litert_lm/benchmark.py", line 76, in run
     raise RuntimeError(
-RuntimeError: Failed to create engine for benchmark (model_path=~/code/litertlm-convert/minicpm5_work/ship_lfm25/LFM2.5-1.2B-Instruct_int4.litertlm, backend=gpu)
+RuntimeError: Failed to create engine for benchmark (model_path=/path/to/LFM2.5-1.2B-Instruct_int4.litertlm, backend=gpu)

@@ -102,7 +102,7 @@ def test_scope_allows_listed_family(tmp_path: Path) -> None:
 
 def test_example_rows_are_exempt_from_scope(tmp_path: Path) -> None:
     """Example-provenance fixtures are governed by the banner rule, not the
-    public-comparison scope (DECISIONS: Phase 12)."""
+    public-comparison scope (Phase 12)."""
     root = _mini_repo(tmp_path)  # committed rows are provenance example
     result = _gate(root)
     assert result.exit_code == 0, result.output

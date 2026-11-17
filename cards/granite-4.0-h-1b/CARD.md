@@ -19,7 +19,7 @@ task: text-generation
 
 | | |
 |---|---|
-| **Tool** | litert-torch, pinned base + granite hybrid patch (hf-to-litertlm granite_work/convert_granite4h.py; patch adds export-cache layers for linear_attention, state-continuation tracing, prefill-pad guard) editable checkout 115a136 + granite_hybrid_litert_torch.patch (hf-to-litertlm granite_work/README.md) |
+| **Tool** | litert-torch, pinned base + granite hybrid patch (hf-to-litertlm granite_work/convert_granite4h.py; patch adds export-cache layers for linear_attention, state-continuation tracing, prefill-pad guard) editable checkout 115a136 + granite_hybrid_litert_torch.patch |
 | **Command** | `git -C litert-torch-granite checkout 115a136 && git -C litert-torch-granite apply granite_hybrid_litert_torch.patch && PYTHONPATH=litert-torch-granite python convert_granite4h.py ibm-granite/granite-4.0-h-1b out_granite_1b` |
 | **Quantization** | int8 dynamic on linears + embedding; convs and the selective scan stay float (ship commit ea409da; HF card recipe table) |
 
@@ -47,10 +47,10 @@ Model-level on-device results — measured behavior of this exact artifact on th
 ## Pitfalls
 
 - Mamba2 conv/SSM state buffers bind through litert-lm >= 0.15's generalized state binding (ExecutorMetadata) — the 0.14 engine cannot bind them (HF card; 350m draft card wording).
-- This 2026-08-04 artifact runs the selective scan as generic float ops on CPU only (stated plainly on the card of record); the GPU story belongs to the 2026-08-13 folded-scan re-ship, a different file (see header note).
+- This 2026-08-04 artifact runs the selective scan as generic float ops on CPU only (stated plainly on the card of record); the GPU story belongs to the 2026-08-13 folded-scan re-upload, a different file (see header note).
 - Correctness of record: FP parity corr 1.000000 at all 8 checked decode positions vs HF; 8Q sanity 8/8 == the HF reference; first-token sweep clean at prompt lengths 12-60 against the engine's real chunk plans (ship commit ea409da).
 - Family BOS trap: the 350m sibling's greedy decoding flips with a BOS token (LlmMetadata start_token root cause, commit 5f3176d) — the 1b is BOS-robust, but verify start_token when reusing metadata across granite sizes.
-- The 2026-08-12 compat_check loadability record on this card measured exactly these bytes (sha-verified against HF revision history); records dated after 2026-08-13 measure the re-shipped file instead.
+- The 2026-08-12 compat_check loadability record on this card measured exactly these bytes (sha-verified against HF revision history); records dated after 2026-08-13 measure the re-uploaded file instead.
 
 ---
 

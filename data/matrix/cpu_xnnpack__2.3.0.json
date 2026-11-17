@@ -1,0 +1,3273 @@
+{
+  "backend": "cpu_xnnpack",
+  "entries": [
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:ABS__float32__eb9e96e4"
+      },
+      "op": "ABS",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:ABS__float32__2f80e252"
+      },
+      "op": "ABS",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:ABS__int32__c7a37486"
+      },
+      "op": "ABS",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:ADD__float32__c7a37486"
+      },
+      "op": "ADD",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:ADD__float32__eb9e96e4"
+      },
+      "op": "ADD",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:ADD__float32__2f80e252"
+      },
+      "op": "ADD",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:ADD__float32__c383a423"
+      },
+      "op": "ADD",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:ADD__int32__c7a37486"
+      },
+      "op": "ADD",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:ADD__int64__c7a37486"
+      },
+      "op": "ADD",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:ADD__int8__c383a423"
+      },
+      "op": "ADD",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:AVERAGE_POOL_2D__float32__c383a423"
+      },
+      "op": "AVERAGE_POOL_2D",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:AVERAGE_POOL_2D__int8__c383a423"
+      },
+      "op": "AVERAGE_POOL_2D",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:BATCH_MATMUL__float32__eb9e96e4"
+      },
+      "op": "BATCH_MATMUL",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:BATCH_MATMUL__float32__2f80e252"
+      },
+      "op": "BATCH_MATMUL",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:BATCH_MATMUL__float32__c383a423"
+      },
+      "op": "BATCH_MATMUL",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "conditions": "LiteRT 2.3.0 CompiledModel on the CPU through the C API of the ai-edge-litert 2.3.0 wheel (Mac Studio M4 Max), XNNPACK options flags = 7 (the default 3 plus FP16 = 4, set through the CPU options' TOML), a one-op graph y = x @ C with C a constant table: 'failed to delegate BATCH_MATMUL node #0', 'Node number 1 (TfLiteXNNPackDelegate) failed to prepare.', 'Failed to allocate tensors', then LiteRtRunCompiledModel status 3 (kLiteRtStatusErrorRuntimeFailure); the CPU fallback does not rescue it. The same graph with flags 3 delegates (kernel tag 'Batch Matrix Multiply (NC, PF32)'); the same op with the second input as a graph input delegates under flags 7 ('Batch Matrix Multiply (NC, PF16)'). The full conformers of the model fail the same way at their first constant-table BATCH_MATMUL (float32 graph node #51, float16-weight graph node #58).",
+      "constraints": {
+        "lhs_shape": "8x4x128",
+        "rhs_shape": "8x128x119",
+        "second_input": "constant",
+        "xnnpack_flags": 7
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-11-02",
+        "litert_version": "2.3.0",
+        "source_model": "nvidia/nemotron-3.5-asr-streaming-0.6b @ea30d66d: the one-op control bmm_constB.tflite (scripts/r3_bmm_ctl.py), the shape of the conformer's relative-position BATCH_MATMUL"
+      },
+      "op": "BATCH_MATMUL",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: the rewritten conformer runs under flags 7 with 4,090 of its 4,093 nodes in one XNNPACK partition and every XNNPACK kernel tag float16 (PF16 316, X16 576, F16 48); on the phones the same graph without flags 7 takes 102.84 % (Galaxy S26) and 109.93 % (Pixel 11 Pro) longer per chunk",
+          "rewrite": "write each matmul with a constant table as FULLY_CONNECTED (the table as its weights, a bias as a separate ADD)",
+          "symptom": "the model does not run when XNNPACK is asked for float16 arithmetic"
+        }
+      ],
+      "status": "crash"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "bool"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:CAST__bool__eb9e96e4"
+      },
+      "op": "CAST",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:CAST__float32__c7a37486"
+      },
+      "op": "CAST",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:CAST__float32__eb9e96e4"
+      },
+      "op": "CAST",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:CAST__float32__2f80e252"
+      },
+      "op": "CAST",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:CAST__int32__c7a37486"
+      },
+      "op": "CAST",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:CAST__int32__eb9e96e4"
+      },
+      "op": "CAST",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:CAST__int64__eb9e96e4"
+      },
+      "op": "CAST",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:CONCATENATION__float32__c7a37486"
+      },
+      "op": "CONCATENATION",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:CONCATENATION__float32__eb9e96e4"
+      },
+      "op": "CONCATENATION",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:CONCATENATION__float32__2f80e252"
+      },
+      "op": "CONCATENATION",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:CONCATENATION__float32__c383a423"
+      },
+      "op": "CONCATENATION",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "conditions": "ai-edge-litert 2.3.0 Interpreter with its default XNNPACK delegate (Mac Studio M4 Max), the model's conformer graphs (float32, float16-weight, int8- and int4-weight forms): the graph's last three nodes, CONCATENATION with 24 FLOAT32 inputs each (the 24 layers' k / v / conv caches stacked into the outputs k_out and v_out [24, 8, 56, 128] and conv_out [24, 1024, 8]), stay outside the single XNNPACK partition (3,870 of 3,873 nodes delegated in the float32 graph) and run on LiteRT's built-in kernel; the model runs. The same three nodes stay outside on the phones' CPU (LiteRT 2.3.0 C API runner on the Galaxy S26 and the Pixel 11 Pro: 4,090 of 4,093 for the FULLY_CONNECTED-rewritten float16 graph).",
+      "constraints": {
+        "inputs": 24,
+        "output_shape": "24x8x56x128|24x1024x8"
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-11-02",
+        "litert_version": "2.3.0",
+        "source_model": "nvidia/nemotron-3.5-asr-streaming-0.6b @ea30d66d, the conformer graphs (published as nemotron_asr_conformer_f32.tflite and its float16-weight forms)"
+      },
+      "op": "CONCATENATION",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "not measured",
+          "rewrite": "none measured",
+          "symptom": "3 nodes run outside the XNNPACK partition"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:CONV_2D__float32__c383a423"
+      },
+      "op": "CONV_2D",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:CONV_2D__int8__c383a423"
+      },
+      "op": "CONV_2D",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:COS__float32__eb9e96e4"
+      },
+      "op": "COS",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:COS__float32__2f80e252"
+      },
+      "op": "COS",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:DEPTHWISE_CONV_2D__float32__c383a423"
+      },
+      "op": "DEPTHWISE_CONV_2D",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:DEPTHWISE_CONV_2D__int8__c383a423"
+      },
+      "op": "DEPTHWISE_CONV_2D",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:DEQUANTIZE__float32__c7a37486"
+      },
+      "op": "DEQUANTIZE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:DEQUANTIZE__float32__eb9e96e4"
+      },
+      "op": "DEQUANTIZE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:DEQUANTIZE__float32__c383a423"
+      },
+      "op": "DEQUANTIZE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:DIV__float32__eb9e96e4"
+      },
+      "op": "DIV",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:DIV__float32__2f80e252"
+      },
+      "op": "DIV",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:DIV__float32__c383a423"
+      },
+      "op": "DIV",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:EMBEDDING_LOOKUP__float32__eb9e96e4"
+      },
+      "op": "EMBEDDING_LOOKUP",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "bool"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:EQUAL__bool__c7a37486"
+      },
+      "op": "EQUAL",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "bool"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:EQUAL__bool__eb9e96e4"
+      },
+      "op": "EQUAL",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "bool"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:EQUAL__bool__2f80e252"
+      },
+      "op": "EQUAL",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:EXP__float32__eb9e96e4"
+      },
+      "op": "EXP",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:EXP__float32__2f80e252"
+      },
+      "op": "EXP",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:EXP__float32__c383a423"
+      },
+      "op": "EXP",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:FLOOR_MOD__float32__2f80e252"
+      },
+      "op": "FLOOR_MOD",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:FULLY_CONNECTED__float32__eb9e96e4"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:FULLY_CONNECTED__float32__2f80e252"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:FULLY_CONNECTED__float32__c383a423"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:FULLY_CONNECTED__int8__eb9e96e4"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "bool"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:GREATER__bool__2f80e252"
+      },
+      "op": "GREATER",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "bool"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:GREATER__bool__c383a423"
+      },
+      "op": "GREATER",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:HARD_SWISH__float32__eb9e96e4"
+      },
+      "op": "HARD_SWISH",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:HARD_SWISH__float32__c383a423"
+      },
+      "op": "HARD_SWISH",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:HARD_SWISH__int8__eb9e96e4"
+      },
+      "op": "HARD_SWISH",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:HARD_SWISH__int8__c383a423"
+      },
+      "op": "HARD_SWISH",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:LEAKY_RELU__float32__2f80e252"
+      },
+      "op": "LEAKY_RELU",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:LEAKY_RELU__float32__c383a423"
+      },
+      "op": "LEAKY_RELU",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:LOG__float32__eb9e96e4"
+      },
+      "op": "LOG",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:LOG__float32__2f80e252"
+      },
+      "op": "LOG",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:LOG__float32__c383a423"
+      },
+      "op": "LOG",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:LOGISTIC__float32__eb9e96e4"
+      },
+      "op": "LOGISTIC",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:LOGISTIC__float32__2f80e252"
+      },
+      "op": "LOGISTIC",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:LOGISTIC__float32__c383a423"
+      },
+      "op": "LOGISTIC",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MAXIMUM__float32__eb9e96e4"
+      },
+      "op": "MAXIMUM",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MAXIMUM__float32__2f80e252"
+      },
+      "op": "MAXIMUM",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MAXIMUM__float32__c383a423"
+      },
+      "op": "MAXIMUM",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MAX_POOL_2D__float32__c383a423"
+      },
+      "op": "MAX_POOL_2D",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MAX_POOL_2D__int8__c383a423"
+      },
+      "op": "MAX_POOL_2D",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MEAN__float32__c7a37486"
+      },
+      "op": "MEAN",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MEAN__float32__eb9e96e4"
+      },
+      "op": "MEAN",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MEAN__float32__2f80e252"
+      },
+      "op": "MEAN",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MINIMUM__float32__eb9e96e4"
+      },
+      "op": "MINIMUM",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MINIMUM__float32__2f80e252"
+      },
+      "op": "MINIMUM",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MINIMUM__float32__c383a423"
+      },
+      "op": "MINIMUM",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 0
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MUL__float32__b741efeb"
+      },
+      "op": "MUL",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MUL__float32__c7a37486"
+      },
+      "op": "MUL",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MUL__float32__eb9e96e4"
+      },
+      "op": "MUL",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MUL__float32__2f80e252"
+      },
+      "op": "MUL",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MUL__float32__c383a423"
+      },
+      "op": "MUL",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:MUL__int8__c383a423"
+      },
+      "op": "MUL",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:PAD__float32__2f80e252"
+      },
+      "op": "PAD",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:PAD__float32__c383a423"
+      },
+      "op": "PAD",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:PAD__int8__c383a423"
+      },
+      "op": "PAD",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:REDUCE_MAX__float32__eb9e96e4"
+      },
+      "op": "REDUCE_MAX",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:REDUCE_MAX__float32__2f80e252"
+      },
+      "op": "REDUCE_MAX",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:REDUCE_MAX__float32__c383a423"
+      },
+      "op": "REDUCE_MAX",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:REDUCE_MIN__float32__2f80e252"
+      },
+      "op": "REDUCE_MIN",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:REDUCE_MIN__float32__c383a423"
+      },
+      "op": "REDUCE_MIN",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RELU__float32__2f80e252"
+      },
+      "op": "RELU",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RELU__float32__c383a423"
+      },
+      "op": "RELU",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RELU_0_TO_1__float32__c7a37486"
+      },
+      "op": "RELU_0_TO_1",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RELU_0_TO_1__float32__c383a423"
+      },
+      "op": "RELU_0_TO_1",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RELU_N1_TO_1__float32__c383a423"
+      },
+      "op": "RELU_N1_TO_1",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "bool"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESHAPE__bool__eb9e96e4"
+      },
+      "op": "RESHAPE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "bool"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESHAPE__bool__2f80e252"
+      },
+      "op": "RESHAPE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESHAPE__float32__c7a37486"
+      },
+      "op": "RESHAPE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESHAPE__float32__eb9e96e4"
+      },
+      "op": "RESHAPE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESHAPE__float32__2f80e252"
+      },
+      "op": "RESHAPE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESHAPE__float32__c383a423"
+      },
+      "op": "RESHAPE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESHAPE__float32__bcc4ed3a"
+      },
+      "op": "RESHAPE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 0
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESHAPE__int32__b741efeb"
+      },
+      "op": "RESHAPE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESHAPE__int32__c7a37486"
+      },
+      "op": "RESHAPE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESHAPE__int32__eb9e96e4"
+      },
+      "op": "RESHAPE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESHAPE__int32__2f80e252"
+      },
+      "op": "RESHAPE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESHAPE__int64__c7a37486"
+      },
+      "op": "RESHAPE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESHAPE__int64__eb9e96e4"
+      },
+      "op": "RESHAPE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESHAPE__int8__eb9e96e4"
+      },
+      "op": "RESHAPE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESIZE_BILINEAR__float32__c383a423"
+      },
+      "op": "RESIZE_BILINEAR",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RESIZE_NEAREST_NEIGHBOR__float32__c383a423"
+      },
+      "op": "RESIZE_NEAREST_NEIGHBOR",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:ROUND__float32__eb9e96e4"
+      },
+      "op": "ROUND",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RSQRT__float32__c7a37486"
+      },
+      "op": "RSQRT",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RSQRT__float32__eb9e96e4"
+      },
+      "op": "RSQRT",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RSQRT__float32__2f80e252"
+      },
+      "op": "RSQRT",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:RSQRT__float32__c383a423"
+      },
+      "op": "RSQRT",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SELECT__float32__c383a423"
+      },
+      "op": "SELECT",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SELECT__int32__c7a37486"
+      },
+      "op": "SELECT",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SELECT_V2__float32__eb9e96e4"
+      },
+      "op": "SELECT_V2",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SELECT_V2__float32__2f80e252"
+      },
+      "op": "SELECT_V2",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SELECT_V2__float32__c383a423"
+      },
+      "op": "SELECT_V2",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SIN__float32__eb9e96e4"
+      },
+      "op": "SIN",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SIN__float32__2f80e252"
+      },
+      "op": "SIN",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SLICE__float32__eb9e96e4"
+      },
+      "op": "SLICE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SLICE__float32__2f80e252"
+      },
+      "op": "SLICE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SLICE__float32__c383a423"
+      },
+      "op": "SLICE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SLICE__float32__bcc4ed3a"
+      },
+      "op": "SLICE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SOFTMAX__float32__eb9e96e4"
+      },
+      "op": "SOFTMAX",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SOFTMAX__float32__2f80e252"
+      },
+      "op": "SOFTMAX",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SOFTMAX__float32__c383a423"
+      },
+      "op": "SOFTMAX",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": true,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SOFTMAX__float32__9871754d"
+      },
+      "op": "SOFTMAX",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SQRT__float32__c7a37486"
+      },
+      "op": "SQRT",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SQRT__float32__eb9e96e4"
+      },
+      "op": "SQRT",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SQRT__float32__2f80e252"
+      },
+      "op": "SQRT",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SQRT__float32__c383a423"
+      },
+      "op": "SQRT",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SQUARED_DIFFERENCE__float32__2f80e252"
+      },
+      "op": "SQUARED_DIFFERENCE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SUB__float32__c7a37486"
+      },
+      "op": "SUB",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SUB__float32__eb9e96e4"
+      },
+      "op": "SUB",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SUB__float32__2f80e252"
+      },
+      "op": "SUB",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SUB__float32__c383a423"
+      },
+      "op": "SUB",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SUB__int32__c7a37486"
+      },
+      "op": "SUB",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "int64"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SUB__int64__c7a37486"
+      },
+      "op": "SUB",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 1
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SUM__float32__c7a37486"
+      },
+      "op": "SUM",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SUM__float32__eb9e96e4"
+      },
+      "op": "SUM",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SUM__float32__2f80e252"
+      },
+      "op": "SUM",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:SUM__float32__c383a423"
+      },
+      "op": "SUM",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 2
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:TANH__float32__eb9e96e4"
+      },
+      "op": "TANH",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:TANH__float32__2f80e252"
+      },
+      "op": "TANH",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:TANH__float32__c383a423"
+      },
+      "op": "TANH",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 3
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:TRANSPOSE__float32__2f80e252"
+      },
+      "op": "TRANSPOSE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:TRANSPOSE__float32__c383a423"
+      },
+      "op": "TRANSPOSE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 5
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:TRANSPOSE__float32__bcc4ed3a"
+      },
+      "op": "TRANSPOSE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:TRANSPOSE__int8__c383a423"
+      },
+      "op": "TRANSPOSE",
+      "provenance": "inferred",
+      "status": "delegated"
+    },
+    {
+      "constraints": {
+        "dynamic_shape": false,
+        "rank": 4
+      },
+      "dtypes": [
+        "float32"
+      ],
+      "evidence": {
+        "date": "2026-08-12",
+        "derived_from": {
+          "date": "2026-08-12",
+          "litert_version": "2.1.6"
+        },
+        "litert_version": "2.1.6",
+        "source_model": "probe:TRANSPOSE_CONV__float32__c383a423"
+      },
+      "op": "TRANSPOSE_CONV",
+      "provenance": "inferred",
+      "status": "delegated"
+    }
+  ],
+  "generated_at": "2026-11-03",
+  "litert_version": "2.3.0",
+  "schema_version": "1.3"
+}

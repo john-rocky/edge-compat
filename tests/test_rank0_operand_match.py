@@ -1,4 +1,4 @@
-"""The rank-0 operand class made matchable (DECISIONS #236):
+"""The rank-0 operand class made matchable:
 
 - a reduction without `keepdim` puts a rank-0 tensor into broadcast arithmetic;
   ML Drift accepts the ADD and computes it wrong (granite-4.0-h-1b, 2026-08-13,

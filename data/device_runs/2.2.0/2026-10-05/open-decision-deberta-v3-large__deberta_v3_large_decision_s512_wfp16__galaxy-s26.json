@@ -3,7 +3,7 @@
   "artifact_sha256": "238f0cc4dca7b6f18677950e9261d07401a3de9857d76f2a7450fada7f97a5d9",
   "device": "galaxy-s26",
   "model_id": "open-decision-deberta-v3-large__deberta_v3_large_decision_s512_wfp16",
-  "notes": "Open Decision DeBERTa-v3-large LiteRT (litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT; deberta_v3_large_decision_s512_wfp16.tflite published at 7a276235) measured by the typed-decisions lane (rounds 11-21, 2026-10-04 / 2026-10-05): the hfmodels-android SDK device test (family deberta_decision, a request's questions packed into one forward as the author's decide() does) and, where named, the lane's native runner. `signature` names the precision, the harness and (when two runs of one form share a date) the run (DECISIONS #186 / #188). artifact_sha256 = the dev descriptor's sha256 for the graph, asserted equal to the published file's. Lane record: <notes> (§知見 2); generator: <work>/r24/litert_compat_records.py.",
+  "notes": "Open Decision DeBERTa-v3-large LiteRT (litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT; deberta_v3_large_decision_s512_wfp16.tflite published at 7a276235) measured (2026-10-04 / 2026-10-05): the hfmodels-android SDK device test (family deberta_decision, a request's questions packed into one forward as the author's decide() does) and, where named, the native runner. `signature` names the precision, the harness and (when two runs of one form share a date) the run. artifact_sha256 = the dev descriptor's sha256 for the graph, asserted equal to the published file's.",
   "quantization": null,
   "results": [
     {
@@ -23,8 +23,8 @@
       },
       "error": null,
       "evidence": [
-        "hfmodels-android SDK device gate: androidTest DebertaDecisionDeviceTest of the litert module (git 4706851), run by tools/decide_gate.sh on the Galaxy S26, one instrumentation process per run; the SDK (hfmodels-litert EncoderDecisions, family deberta_decision) resolved litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT through the dev descriptor catalog/dev/litert-community__Open-Decision-DeBERTa-v3-Large-LiteRT.hfmodels.json at that commit (the log's descriptor sha256 prefix b9226bd1 = `git show 4706851:catalog/dev/litert-community__Open-Decision-DeBERTa-v3-Large-LiteRT.hfmodels.json`); graph deberta_v3_large_decision_s512_wfp16.tflite sha256 238f0cc4dca7b6f18677950e9261d07401a3de9857d76f2a7450fada7f97a5d9 = the published deberta_v3_large_decision_s512_wfp16.tflite (litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT@7a276235; #179 rows of the same name and digest).",
-        "# hfmodels typed-decisions device gate  date=2026-10-05T02:13:57Z serial=RFGL80R6A6H device=SM-S942Q build=BP4A.251205.006.S942QOPS1AZH9 android=16",
+        "hfmodels-android SDK device check: androidTest DebertaDecisionDeviceTest of the litert module (git 4706851), run by tools/decide_gate.sh on the Galaxy S26, one instrumentation process per run; the SDK (hfmodels-litert EncoderDecisions, family deberta_decision) resolved litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT through the dev descriptor catalog/dev/litert-community__Open-Decision-DeBERTa-v3-Large-LiteRT.hfmodels.json at that commit (the log's descriptor sha256 prefix b9226bd1 = `git show 4706851:catalog/dev/litert-community__Open-Decision-DeBERTa-v3-Large-LiteRT.hfmodels.json`); graph deberta_v3_large_decision_s512_wfp16.tflite sha256 238f0cc4dca7b6f18677950e9261d07401a3de9857d76f2a7450fada7f97a5d9 = the published deberta_v3_large_decision_s512_wfp16.tflite (litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT@7a276235; other records hold rows of the same name and digest).",
+        "# hfmodels typed-decisions device check  date=2026-10-05T02:13:57Z serial=RFGL80R6A6H device=SM-S942Q build=BP4A.251205.006.S942QOPS1AZH9 android=16",
         "# git=4706851 test=DebertaDecisionDeviceTest variant=s512_wfp16 backend=gpu thermal=Thermal Status: 0 battery_level= level: 79 battery_temp_x10C= temperature: 375 screen= mWakefulness=Dozing",
         "# gradle rc=0 end=2026-10-05T02:15:50Z thermal_end=Thermal Status: 2 battery_temp_end_x10C= temperature: 414",
         "resolve litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT: commit=7a276235 via EXPLICIT_REVISION, descriptor=caller@explicit/hfmodels.json sha=b9226bd1",
@@ -43,9 +43,9 @@
         "RESULT step=release ok=true variant=s512_wfp16 backend=gpu close_ms=81",
         "RESULT ok=true model=litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT variant=s512_wfp16 backend=gpu device=SM-S942Q build=BP4A.251205.006.S942QOPS1AZH9 failures=",
         "latency_p50_ms null: the run skipped the parity step (run argument parity=0) so that the demo was the graph's first work after the warm-up; the demo medians are metrics.",
-        "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs (#186(3)). full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1785 out of 1785 node(s) with delegate (LITERT_CL)').",
+        "output_match null: the gate compares with the publisher's outputs under its own criterion (argmax and max |dp| <= 0.01, in metrics) and keeps no raw per-element outputs. full_delegation from the delegate line the gate's logcat filter now keeps ('Replacing 1785 out of 1785 node(s) with delegate (LITERT_CL)').",
         "conditions (the gate's header and footer): thermal status 0 -> 2, battery 37.5 -> 41.4 C, battery level 79 %, display mWakefulness=Dozing at the start.",
-        "source: ~/code/hfmodels-android/litert/results/2026-10-05-1113-RFGL80R6A6H-litert2.2.0-decide-opendecision-cold-parity0-s512_wfp16-gpu.log (main 3e1fcd8); lane record <notes> (§3 / §6c, §知見 2); generator <work>/r24/litert_compat_records.py."
+        "source: hfmodels-android/litert/results/2026-10-05-1113-RFGL80R6A6H-litert2.2.0-decide-opendecision-cold-parity0-s512_wfp16-gpu.log (main 3e1fcd8)."
       ],
       "failure_class": null,
       "full_delegation": true,

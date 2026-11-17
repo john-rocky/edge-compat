@@ -3,7 +3,7 @@
   "artifact_sha256": "13c47bcbaf305e4337f280b27c991168b0c624a6d60e00df10f0f23ebd28ad83",
   "device": "mac-studio-m4-max",
   "model_id": "ministral3-3b",
-  "notes": "Ministral-3-3B-Instruct-2512_q4_block32_ekv4096.litertlm as uploaded to litert-community/Ministral-3-3B-Instruct-2512 on 2026-10-06 (Hub commit 85b1913e): graph rewrite of the previous Hub file (KV-cache writes -> odml.cache_update, attention products -> odml.runtime_bmm, param_tensor input, broadcast mask add) plus one copied 16-token prefill signature; the weights are byte-identical to the previous file (sha256 57daeeb4d712...), which this upload replaced. Built and measured by the litertlm-convert GPU graph re-ship lane (rounds 1-21). Mac gate of this file (round 19, litertlm-convert gpu_reship_work/results/ship_verify): 6/6 points — weights and every other section byte-identical to the previous file, tflite CPU outputs bit-identical, litert-lm CPU answers 9/9 byte-identical, GPU (WebGPU) fully delegated with fp32 activations 9/9 byte-identical; GPU fp16 (the default) final answers 8/8 against 8/8 without the 16-token signature. Galaxy S26 GPU gate (round 16, Session path, greedy): 4/4 questions, long prompt correct, the same points as the file without the 16-token signature on the same phone (that gate ran the earlier subgraph order of the same graph; the shipped order answers byte-identically on the Mac, round 19). Previous file on the same Mac in the same lock window (litert-lm 0.17.1, same flags): gpu p256 d256: decode 92.4 tok/s, prefill 1215.31 tok/s, TTFT 0.226 s; gpu p16 d32: decode 88.78 tok/s, prefill 151.36 tok/s, TTFT 0.1213 s; cpu p256 d256: decode 22.14 tok/s, prefill 119.97 tok/s, TTFT 2.5182 s; cpu p16 d32: decode 17.34 tok/s, prefill 15.38 tok/s, TTFT 1.4782 s. iPhone 18 Pro: CPU answers of this file 9/9 byte-identical to the file without the 16-token signature on the same phone (round 21, 8 questions + a long prompt); the Metal gate of this file ran in round 15.",
+  "notes": "Ministral-3-3B-Instruct-2512_q4_block32_ekv4096.litertlm as uploaded to litert-community/Ministral-3-3B-Instruct-2512 on 2026-10-06 (Hub commit 85b1913e): graph rewrite of the previous Hub file (KV-cache writes -> odml.cache_update, attention products -> odml.runtime_bmm, param_tensor input, broadcast mask add) plus one copied 16-token prefill signature; the weights are byte-identical to the previous file (sha256 57daeeb4d712...), which this upload replaced. Built and measured. Mac check of this file: 6/6 points — weights and every other section byte-identical to the previous file, tflite CPU outputs bit-identical, litert-lm CPU answers 9/9 byte-identical, GPU (WebGPU) fully delegated with fp32 activations 9/9 byte-identical; GPU fp16 (the default) final answers 8/8 against 8/8 without the 16-token signature. Galaxy S26 GPU check (Session path, greedy): 4/4 questions, long prompt correct, the same points as the file without the 16-token signature on the same phone (that gate ran the earlier subgraph order of the same graph; the shipped order answers byte-identically on the Mac, run 19). Previous file on the same Mac in the same lock window (litert-lm 0.17.1, same flags): gpu p256 d256: decode 92.4 tok/s, prefill 1215.31 tok/s, TTFT 0.226 s; gpu p16 d32: decode 88.78 tok/s, prefill 151.36 tok/s, TTFT 0.1213 s; cpu p256 d256: decode 22.14 tok/s, prefill 119.97 tok/s, TTFT 2.5182 s; cpu p16 d32: decode 17.34 tok/s, prefill 15.38 tok/s, TTFT 1.4782 s. iPhone 18 Pro: CPU answers of this file 9/9 byte-identical to the file without the 16-token signature on the same phone (8 questions + a long prompt); the Metal check of this file ran in run 15.",
   "quantization": "int4 weights - blockwise (block 32), symmetric, OCTAV clipping; tied embedding/lm_head at INT8",
   "results": [
     {
@@ -32,7 +32,7 @@
         "process 2026-10-05T20:45:50+09:00: Prefill speed:        112.43 tokens/s; Decode speed:         17.78 tokens/s; Init time:            3.2266 s; Time to first token:  0.5853 s (load averages before: 4.13 3.68 3.35)",
         "process 2026-10-05T20:46:09+09:00: Prefill speed:        112.26 tokens/s; Decode speed:         17.76 tokens/s; Init time:            3.1120 s; Time to first token:  0.5918 s (load averages before: 4.39 3.76 3.38)",
         "command: litert-lm benchmark Ministral-3-3B-Instruct-2512_q4_block32_ekv4096.litertlm --backend cpu -p 16 -d 32 --cache no --verbose (one process per run, 2 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-        "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+        "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
       ],
       "failure_class": null,
       "full_delegation": false,
@@ -87,7 +87,7 @@
         "process 2026-10-05T20:43:55+09:00: Prefill speed:        124.00 tokens/s; Decode speed:         22.44 tokens/s; Init time:            3.0500 s; Time to first token:  2.4963 s (load averages before: 3.75 3.45 3.23)",
         "process 2026-10-05T20:45:04+09:00: Prefill speed:        125.25 tokens/s; Decode speed:         22.47 tokens/s; Init time:            3.1078 s; Time to first token:  2.5169 s (load averages before: 3.75 3.55 3.28)",
         "command: litert-lm benchmark Ministral-3-3B-Instruct-2512_q4_block32_ekv4096.litertlm --backend cpu -p 256 -d 256 --cache no --verbose (one process per run, 2 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-        "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+        "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
       ],
       "failure_class": null,
       "full_delegation": false,
@@ -142,7 +142,7 @@
         "process 2026-10-05T20:43:09+09:00: Prefill speed:        918.37 tokens/s; Decode speed:         122.09 tokens/s; Init time:            2.7988 s; Time to first token:  0.0367 s (load averages before: 3.73 3.42 3.21)",
         "process 2026-10-05T20:43:17+09:00: Prefill speed:        892.38 tokens/s; Decode speed:         122.96 tokens/s; Init time:            2.8439 s; Time to first token:  0.0411 s (load averages before: 3.68 3.43 3.21)",
         "command: litert-lm benchmark Ministral-3-3B-Instruct-2512_q4_block32_ekv4096.litertlm --backend gpu -p 16 -d 32 --cache no --verbose --activation-data-type fp16 (one process per run, 3 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-        "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+        "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -197,7 +197,7 @@
         "process 2026-10-05T20:42:33+09:00: Prefill speed:        1339.78 tokens/s; Decode speed:         128.56 tokens/s; Init time:            2.7544 s; Time to first token:  0.2013 s (load averages before: 3.75 3.40 3.20)",
         "process 2026-10-05T20:42:50+09:00: Prefill speed:        1340.49 tokens/s; Decode speed:         131.06 tokens/s; Init time:            2.8115 s; Time to first token:  0.1984 s (load averages before: 3.47 3.36 3.19)",
         "command: litert-lm benchmark Ministral-3-3B-Instruct-2512_q4_block32_ekv4096.litertlm --backend gpu -p 256 -d 256 --cache no --verbose --activation-data-type fp16 (one process per run, 3 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-        "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+        "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
       ],
       "failure_class": null,
       "full_delegation": true,

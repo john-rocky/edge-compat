@@ -1,0 +1,66 @@
+{
+  "artifact": "parakeet_tdt_0.6b_v3_5s_f32_stateful_Google_Tensor_G6.tflite",
+  "artifact_sha256": "815710739575332c188d484bc77106c9abeb953dc0cf572548aa9c7400611475",
+  "device": "pixel-11-pro",
+  "model_id": "parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_5s_f32_stateful_google_tensor_g6",
+  "notes": "litert-community/parakeet-tdt-0.6b-v3 @ 1f78e5eb file compiled ahead of time for Google Tensor G6 (sha256 = the Hub LFS oid, the phone's copy matched), signature `encode` run alone on the NPU on 3 inputs (5 s windows of an 82.335 s LibriSpeech stream, [1,128,500] mel); output compared with the f32 stateful source file's encode on the Mac CPU (cosine per input in metrics; input ids 000-002). Not the omni pipeline: the mel and the TDT decoder are outside this record.",
+  "quantization": "fp32, compiled ahead of time (Google_Tensor_G6)",
+  "results": [
+    {
+      "accelerator": "npu_google_tensor",
+      "context_length": null,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 11 Pro",
+        "machine_label": "pixel-11-pro-l16-rt-runner",
+        "os_build": "Android 17 (CD1A.260618.001.A7; the run's s0_setup device line)",
+        "runtime": "litert",
+        "runtime_version": "2.3.0",
+        "soc": "Tensor G6, Imagination PowerVR GPU",
+        "vendor_sdk": "LiteRT 2.3.0 Google Maven AARs litert + litert-npu-runtime-google-tensor (libLiteRt.so e5b7e3413a8b428b…, libLiteRtDispatch_GoogleTensor.so e38144002de11a15…) + the phone's libedgetpu_litert.so"
+      },
+      "error": null,
+      "evidence": [
+        "the LiteRT C API runner tools/r3_rt_runner.cc (private; binary sha256 7e7539e5…, built against the 2.3.0 libLiteRt.so); per call = input write + run + read back, the median of 20 rounds after 2 warm-up calls, profiler off; runs alternated with the CPU arm in one hold, each started clean",
+        "Status DONE, verdict PASS, per-call median 91.516 ms, signature=encode index=0 inputs=1 outputs=1 out0_elems=64512 compile_ms=423.5 fully_accelerated=true",
+        "Status DONE, verdict PASS, per-call median 89.1785 ms, signature=encode index=0 inputs=1 outputs=1 out0_elems=64512 compile_ms=429.7 fully_accelerated=true",
+        "Status DONE, verdict PASS, per-call median 89.923 ms, signature=encode index=0 inputs=1 outputs=1 out0_elems=64512 compile_ms=452.8 fully_accelerated=true",
+        "`Replacing 1 out of 1 node(s) with delegate (DispatchDelegate)`"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 89.923,
+      "loads": true,
+      "max_abs_diff": 0.040073,
+      "max_rel_diff": null,
+      "metrics": {
+        "compile_ms_leg1": 423.5,
+        "compile_ms_leg2": 429.7,
+        "compile_ms_leg3": 452.8,
+        "cos_vs_f32_cpu_input000": 0.9952,
+        "cos_vs_f32_cpu_input001": 0.9998,
+        "cos_vs_f32_cpu_input002": 0.9997,
+        "inputs": 3,
+        "nonfinite_values": 0,
+        "per_call_ms_median_leg1": 91.516,
+        "per_call_ms_median_leg2": 89.1785,
+        "per_call_ms_median_leg3": 89.923,
+        "per_call_rounds_per_leg": 20,
+        "rel_l2_vs_f32_cpu_input000": 0.0977,
+        "rel_l2_vs_f32_cpu_input001": 0.02,
+        "rel_l2_vs_f32_cpu_input002": 0.0236
+      },
+      "output_match": true,
+      "peak_mem_mb": 47.7,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "encode",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

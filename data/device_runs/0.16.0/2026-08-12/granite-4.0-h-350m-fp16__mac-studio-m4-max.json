@@ -21,7 +21,7 @@
       },
       "error": null,
       "evidence": [
-        "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.16.0/bin/litert-lm 0.16.0); fixed-question answer: 'The answer to 17 + 25 is 42.'"
+        "compat_check status ok (runtime 0.16.0); fixed-question answer: 'The answer to 17 + 25 is 42.'"
       ],
       "failure_class": null,
       "full_delegation": null,

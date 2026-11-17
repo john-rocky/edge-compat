@@ -1,6 +1,6 @@
 """edge-compat command line interface.
 
-Exit-code contract (stable, consumed by CI and the owner's release watcher):
+Exit-code contract (stable, consumed by CI and release watchers):
 
 - `matrix validate`:       0 pass · 1 findings · 2 usage error
 - `matrix import`:         0 ok · 1 CSV data errors / invalid result · 2 usage error
@@ -118,7 +118,7 @@ def import_cmd(
         typer.Option(help="YYYY-MM-DD; defaults to today. Pass it for reproducible output."),
     ] = None,
 ) -> None:
-    """Import the owner's CSV op table into a valid matrix snapshot."""
+    """Import a curated CSV op table into a valid matrix snapshot."""
     target = {"device": device, "soc": soc, "driver": driver}
     try:
         result = import_csv(
@@ -399,7 +399,7 @@ def release_gate_cmd(
         Path | None,
         typer.Option(
             "--scope",
-            help="Approved public benchmark scope (owner-editable data). "
+            help="Approved public benchmark scope (hand-edited data). "
                  "Default: <repo-root>/data/release_scope.json.",
         ),
     ] = None,

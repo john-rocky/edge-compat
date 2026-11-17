@@ -1,0 +1,113 @@
+{
+  "artifact": "lfm3_audio_depth_pass_r5b_aot.tflite",
+  "artifact_sha256": "e3bdb0ed185190ba7b0881af250e585385e04360c6a614e712801287a8f1bfd4",
+  "device": "galaxy-s26",
+  "model_id": "lfm3-audio-2b__lfm3_audio_depth_pass_r5b_aot",
+  "notes": "lfm3_audio_depth_pass_r5b_aot.tflite of litert-community/LFM3-Audio-2B-LiteRT (LiquidAI/LFM3-Audio-2B at revision 9d49701c, LFM Open License v1.0): speech output: the depth-decoder pass compiled ahead of time for the Snapdragon SM8850 NPU. Published as litert-community/LFM3-Audio-2B-LiteRT (upload commit 976325ac, main 32c07192; anonymous Hub read 2026-10-30T21:51:09+09:00, each LFS oid and size = artifact_sha256). Runner rows (Galaxy S26 RFGL80R6A6H): the C-API runner, one process per run, the graph alone with the fixtures (runs r5b n5, r6b h1 / h2, r7 h7). The repo's speech path runs these graphs in the app's loop (the app rows on 2.3.0 / 2026-10-29). The Mac timing rows and the Pixel 8a text decode on the card ran earlier builds with the same decoder bytes that were not published, so they have no record.",
+  "quantization": "float32 graph compiled ahead of time for the SM8850 HTP (QAIRT 2.47 context; the HTP computes it in fp16)",
+  "results": [
+    {
+      "accelerator": "npu_qnn",
+      "context_length": null,
+      "date": "2026-10-29",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 1,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-lfm3audio-runner",
+        "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": "QAIRT 2.47.0 (QNN libraries next to the runner)"
+      },
+      "error": null,
+      "evidence": [
+        "harness: runner 102a0f0a815df1a2… 3247448 B and libs: 12/12 OK; one process per run; one call = write the inputs + run + read the outputs back (latency_p50_ms = that median; run_ms = the run alone)",
+        "Replacing [1, 1, 'DispatchDelegate', 1], ready 'clean; rested 12s since 01:16:45', memory 'VmHWM_max_kB 50404 VmSwap_max_kB 0 MemAvailable_min_kB 7849356 kgsl_page_alloc_max_B 187961344'",
+        "output_match = the part line R7: masked argmax 48 / 48 equal and cos min 0.99999937 >= 0.9999 against the same graph on the Mac CPU"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 2.1515,
+      "loads": true,
+      "max_abs_diff": 0.04245758056640625,
+      "max_rel_diff": null,
+      "metrics": {
+        "argmax_masked_equal": 48.0,
+        "argmax_masked_total": 48.0,
+        "call_ms_max": 2.241,
+        "call_ms_median": 2.1515,
+        "call_ms_min": 2.119,
+        "compile_ms": 194.1,
+        "cos_min_vs_mac_cpu": 0.9999993725680058,
+        "max_abs_vs_mac_cpu": 0.04245758056640625,
+        "parity_fixtures": 6.0,
+        "run_ms_median": 2.1395,
+        "snr_db_min_vs_mac_cpu": 57.86433150482736,
+        "timed_calls": 30.0,
+        "vmhwm_max_kb": 50404.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "C-API runner, Hexagon HTP through the dispatch delegate (the AOT context), burst, 30 timed calls after the parity pass (run r5b hold n5, run N5_aot_dpass)",
+      "total_ops": 1,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "npu_qnn",
+      "context_length": null,
+      "date": "2026-10-29",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 1,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-lfm3audio-runner",
+        "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": "QAIRT 2.47.0 (QNN libraries next to the runner)"
+      },
+      "error": null,
+      "evidence": [
+        "harness: runner 2cf45694ed3c3a6a… 3254040 B and libs: 12/12 OK; one process per run; one call = write the inputs + run + read the outputs back (latency_p50_ms = that median; run_ms = the run alone)",
+        "Replacing [1, 1, 'DispatchDelegate', 1], ready 'clean; rested 11s since 12:08:49', memory 'VmHWM_max_kB 54036 VmSwap_max_kB 0 MemAvailable_min_kB 6877080 kgsl_page_alloc_max_B 189050880'",
+        "output_match = the part line R7: masked argmax 48 / 48 equal and cos min 0.99999937 >= 0.9999 against the same graph on the Mac CPU"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 2.2215,
+      "loads": true,
+      "max_abs_diff": 0.04242897033691406,
+      "max_rel_diff": null,
+      "metrics": {
+        "argmax_masked_equal": 48.0,
+        "argmax_masked_total": 48.0,
+        "call_ms_max": 2.281,
+        "call_ms_median": 2.2215,
+        "call_ms_min": 2.198,
+        "compile_ms": 179.9,
+        "cos_min_vs_mac_cpu": 0.9999993725003257,
+        "max_abs_vs_mac_cpu": 0.04242897033691406,
+        "parity_fixtures": 6.0,
+        "run_ms_median": 2.203,
+        "snr_db_min_vs_mac_cpu": 57.864054571961354,
+        "timed_calls": 30.0,
+        "vmhwm_max_kb": 54036.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "C-API runner, Hexagon HTP through the dispatch delegate (the AOT context), burst, 30 timed calls after the parity pass (run r6b hold h1, run H1_aot_dpass)",
+      "total_ops": 1,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

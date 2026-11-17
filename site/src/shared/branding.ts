@@ -2,7 +2,7 @@
  * Single-source naming + disclosure line (Phase 12) — mirrors
  * src/litert_compat/branding.py. A site test parses the Python source and
  * asserts exact parity, so a rename or a disclosure-wording change is one
- * edit per lane and nothing can drift. Edit the Python side first.
+ * edit per side and nothing can drift. Edit the Python side first.
  */
 
 export const PROJECT_NAME = 'edge-compat';

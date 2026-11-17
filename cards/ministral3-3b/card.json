@@ -50,9 +50,8 @@
             "iteration 3: Time to first token 0.33 s; Prefill Speed 69.60 tokens/sec; Decode Speed 10.15 tokens/sec",
             "Init Total: 4575.96 ms (cold: the init writes the XNNPACK weight cache)",
             "VmHWM 3568668 kB (max of the 1 s samples in therm.txt; peak_mem_mb = kB x 1024 / 10^6; GPU memory is outside the process high-water mark)",
-            "state before the leg: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 348 memavail_kb=7552164 uptime=243360.19 mWakefulness=Dozing (waited 1 s after the 120 s rest)",
-            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 5 of 5, 1300 / 3 of 3, 1300 / 4 of 4",
-            "source: litertlm-convert gpu_reship_work/device/r16/logs/T2/out_minv2_cpu_c16/ and device/r16/results/s26_r16_compact.json"
+            "state before the run: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 348 memavail_kb=7552164 uptime=243360.19 mWakefulness=Dozing (waited 1 s after the 120 s rest)",
+            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 5 of 5, 1300 / 3 of 3, 1300 / 4 of 4"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -119,9 +118,8 @@
             "iteration 2: Time to first token 23.55 s; Prefill Speed 43.72 tokens/sec; Decode Speed 8.24 tokens/sec",
             "Init Total: 4246.00 ms (cold: the init writes the XNNPACK weight cache)",
             "VmHWM 3597192 kB (max of the 1 s samples in therm.txt; peak_mem_mb = kB x 1024 / 10^6; GPU memory is outside the process high-water mark)",
-            "state before the leg: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 377 memavail_kb=7027960 uptime=265578.74 mWakefulness=Awake (waited 137 s after the 120 s rest)",
-            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1239 / 41 of 41, 478 / 47 of 47",
-            "source: litertlm-convert gpu_reship_work/device/r20/logs/T2/out_minv2_cpu_c1024/ and device/r20/results/s26_r20_compact.json"
+            "state before the run: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 377 memavail_kb=7027960 uptime=265578.74 mWakefulness=Awake (waited 137 s after the 120 s rest)",
+            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1239 / 41 of 41, 478 / 47 of 47"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -186,9 +184,8 @@
             "iteration 3: Time to first token 0.11 s; Prefill Speed 230.99 tokens/sec; Decode Speed 22.09 tokens/sec",
             "Init Total: 14320.78 ms (cold: --disable_cache=true)",
             "VmHWM 1356376 kB (max of the 1 s samples in therm.txt; peak_mem_mb = kB x 1024 / 10^6; GPU memory is outside the process high-water mark)",
-            "state before the leg: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 346 memavail_kb=7364708 uptime=245686.82 mWakefulness=Dozing (waited 0 s after the 120 s rest)",
-            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 1 of 1, 1300 / 1 of 1",
-            "source: litertlm-convert gpu_reship_work/device/r16/logs/T3/out_minv2_gpu_g16/ and device/r16/results/s26_r16_compact.json"
+            "state before the run: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=79 346 memavail_kb=7364708 uptime=245686.82 mWakefulness=Dozing (waited 0 s after the 120 s rest)",
+            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1300 / 1 of 1, 1300 / 1 of 1"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -297,9 +294,8 @@
             "iteration 3: Time to first token 3.29 s; Prefill Speed 315.61 tokens/sec; Decode Speed 21.85 tokens/sec",
             "Init Total: 10637.75 ms (cold: --disable_cache=true)",
             "VmHWM 1368960 kB (max of the 1 s samples in therm.txt; peak_mem_mb = kB x 1024 / 10^6; GPU memory is outside the process high-water mark)",
-            "state before the leg: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=80 376 memavail_kb=7181400 uptime=265261.52 mWakefulness=Awake (waited 15 s after the 120 s rest)",
-            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1288 / 4 of 8, 1100 / 7 of 7, 965 / 7 of 7",
-            "source: litertlm-convert gpu_reship_work/device/r20/logs/T2/out_minv2_gpu_g1024/ and device/r20/results/s26_r20_compact.json"
+            "state before the run: thermal=0 freq= 3628800/3628800 4742400/4742400 kgsl_max/lvl/cur=1300/0/222 skin_mValue=37.9 battery(level,temp)=80 376 memavail_kb=7181400 uptime=265261.52 mWakefulness=Awake (waited 15 s after the 120 s rest)",
+            "per-iteration GPU clock ceiling mean (MHz) / CPU-capped samples: 1288 / 4 of 8, 1100 / 7 of 7, 965 / 7 of 7"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -358,11 +354,11 @@
             "VERBOSE: Replacing 1075 out of 1210 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 203 partitions for subgraph 260 (prefill_16).",
             "VERBOSE: Replacing 1 out of 4 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2 partitions for subgraph 0 (decode_embedder).",
             "VERBOSE: Replacing 1 out of 4 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2 partitions for subgraph 1 (prefill_embedder_128).",
-            "these timing launches log at INFO, so only the engine-creation XNNPACK lines appear; the VERBOSE gate run of the same file shows the inline step: prefill_128 1508/1568 (53 partitions, TfLiteXNNPackDelegate), prefill_16 1508/1568 (53 partitions, TfLiteXNNPackDelegate), decode 1370/1429 (54 partitions, TfLiteXNNPackDelegate) (device_ios/logs/r21/r21m_gate_B2v2_cpu.console.log)",
+            "these timing launches log at INFO, so only the engine-creation XNNPACK lines appear; the VERBOSE check run of the same file shows the inline step: prefill_128 1508/1568 (53 partitions, TfLiteXNNPackDelegate), prefill_16 1508/1568 (53 partitions, TfLiteXNNPackDelegate), decode 1370/1429 (54 partitions, TfLiteXNNPackDelegate)",
             "r21m_bench_cpu_5_B2v2_p16: GR_BENCH timed decode 15.89 tok/s, prefill 82.49 tok/s (2 prefill turns), ttft 0.5851 s, init 2.214 s, thermal nominal->nominal, available-memory floor 2322 MB",
             "r21m_bench_cpu_6_B2v2_p16: GR_BENCH timed decode 15.15 tok/s, prefill 80.57 tok/s (2 prefill turns), ttft 0.6136 s, init 2.342 s, thermal nominal->nominal, available-memory floor 2323 MB",
             "each run: a 6-minute rest, thermalState nominal at start and end, warmup 1 + timed 1 in new engines; XNNPACK with the disk weight cache (loaded from); peak_mem_mb stays null: the harness records the device's available-memory floor (os_proc_available_memory, default entitlement 3,369 MB), not a process peak",
-            "bundle digested on the phone: GR_HASH sha256=13c47bcbaf30... (device_ios/logs/r21/r21m_hash_1.console.log); engine = CLiteRTLM.xcframework.zip of the v0.17.0 release (sha256 c94fc12a..., the asset the v0.17.1 Package.swift checksums), Mach-O UUID 85AD4B05-2D23-314B-9D84-3F11246BC1F0"
+            "bundle digested on the phone: GR_HASH sha256=13c47bcbaf30...; engine = CLiteRTLM.xcframework.zip of the v0.17.0 release (sha256 c94fc12a..., the asset the v0.17.1 Package.swift checksums), Mach-O UUID 85AD4B05-2D23-314B-9D84-3F11246BC1F0"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -417,11 +413,11 @@
             "VERBOSE: Replacing 1075 out of 1210 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 203 partitions for subgraph 260 (prefill_16).",
             "VERBOSE: Replacing 1 out of 4 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2 partitions for subgraph 0 (decode_embedder).",
             "VERBOSE: Replacing 1 out of 4 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2 partitions for subgraph 1 (prefill_embedder_128).",
-            "these timing launches log at INFO, so only the engine-creation XNNPACK lines appear; the VERBOSE gate run of the same file shows the inline step: prefill_128 1508/1568 (53 partitions, TfLiteXNNPackDelegate), prefill_16 1508/1568 (53 partitions, TfLiteXNNPackDelegate), decode 1370/1429 (54 partitions, TfLiteXNNPackDelegate) (device_ios/logs/r21/r21m_gate_B2v2_cpu.console.log)",
+            "these timing launches log at INFO, so only the engine-creation XNNPACK lines appear; the VERBOSE check run of the same file shows the inline step: prefill_128 1508/1568 (53 partitions, TfLiteXNNPackDelegate), prefill_16 1508/1568 (53 partitions, TfLiteXNNPackDelegate), decode 1370/1429 (54 partitions, TfLiteXNNPackDelegate)",
             "r21m_bench_cpu_5_B2v2_p128: GR_BENCH timed decode 18.73 tok/s, prefill 101.61 tok/s (2 prefill turns), ttft 2.3575 s, init 2.282 s, thermal nominal->nominal, available-memory floor 2177 MB",
             "r21m_bench_cpu_6_B2v2_p128: GR_BENCH timed decode 17.42 tok/s, prefill 96.38 tok/s (2 prefill turns), ttft 2.5194 s, init 2.197 s, thermal nominal->nominal, available-memory floor 2175 MB",
             "each run: a 6-minute rest, thermalState nominal at start and end, warmup 1 + timed 1 in new engines; XNNPACK with the disk weight cache (loaded from); peak_mem_mb stays null: the harness records the device's available-memory floor (os_proc_available_memory, default entitlement 3,369 MB), not a process peak",
-            "bundle digested on the phone: GR_HASH sha256=13c47bcbaf30... (device_ios/logs/r21/r21m_hash_1.console.log); engine = CLiteRTLM.xcframework.zip of the v0.17.0 release (sha256 c94fc12a..., the asset the v0.17.1 Package.swift checksums), Mach-O UUID 85AD4B05-2D23-314B-9D84-3F11246BC1F0"
+            "bundle digested on the phone: GR_HASH sha256=13c47bcbaf30...; engine = CLiteRTLM.xcframework.zip of the v0.17.0 release (sha256 c94fc12a..., the asset the v0.17.1 Package.swift checksums), Mach-O UUID 85AD4B05-2D23-314B-9D84-3F11246BC1F0"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -479,7 +475,7 @@
             "r21m_bench_gpu_1_B2v2_p16: GR_BENCH timed decode 43.72 tok/s, prefill 337.31 tok/s (2 prefill turns), ttft 0.0733 s, init 6.642 s, thermal nominal->nominal, available-memory floor 447 MB",
             "r21m_bench_gpu_2_B2v2_p16: GR_BENCH timed decode 43.64 tok/s, prefill 336.91 tok/s (2 prefill turns), ttft 0.0737 s, init 6.697 s, thermal nominal->nominal, available-memory floor 435 MB",
             "each run: a 6-minute rest, thermalState nominal at start and end, warmup 1 + timed 1 in new engines; Metal ':nocache'; peak_mem_mb stays null: the harness records the device's available-memory floor (os_proc_available_memory, default entitlement 3,369 MB), not a process peak",
-            "bundle digested on the phone: GR_HASH sha256=13c47bcbaf30... (device_ios/logs/r21/r21m_hash_1.console.log); engine = CLiteRTLM.xcframework.zip of the v0.17.0 release (sha256 c94fc12a..., the asset the v0.17.1 Package.swift checksums), Mach-O UUID 85AD4B05-2D23-314B-9D84-3F11246BC1F0"
+            "bundle digested on the phone: GR_HASH sha256=13c47bcbaf30...; engine = CLiteRTLM.xcframework.zip of the v0.17.0 release (sha256 c94fc12a..., the asset the v0.17.1 Package.swift checksums), Mach-O UUID 85AD4B05-2D23-314B-9D84-3F11246BC1F0"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -537,7 +533,7 @@
             "r21m_bench_gpu_1_B2v2_p128: GR_BENCH timed decode 44.06 tok/s, prefill 277.55 tok/s (2 prefill turns), ttft 0.4809 s, init 6.532 s, thermal nominal->nominal, available-memory floor 338 MB",
             "r21m_bench_gpu_2_B2v2_p128: GR_BENCH timed decode 43.92 tok/s, prefill 277.75 tok/s (2 prefill turns), ttft 0.4804 s, init 6.550 s, thermal nominal->nominal, available-memory floor 337 MB",
             "each run: a 6-minute rest, thermalState nominal at start and end, warmup 1 + timed 1 in new engines; Metal ':nocache'; peak_mem_mb stays null: the harness records the device's available-memory floor (os_proc_available_memory, default entitlement 3,369 MB), not a process peak",
-            "bundle digested on the phone: GR_HASH sha256=13c47bcbaf30... (device_ios/logs/r21/r21m_hash_1.console.log); engine = CLiteRTLM.xcframework.zip of the v0.17.0 release (sha256 c94fc12a..., the asset the v0.17.1 Package.swift checksums), Mach-O UUID 85AD4B05-2D23-314B-9D84-3F11246BC1F0"
+            "bundle digested on the phone: GR_HASH sha256=13c47bcbaf30...; engine = CLiteRTLM.xcframework.zip of the v0.17.0 release (sha256 c94fc12a..., the asset the v0.17.1 Package.swift checksums), Mach-O UUID 85AD4B05-2D23-314B-9D84-3F11246BC1F0"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -596,7 +592,7 @@
             "process 2026-10-05T20:45:50+09:00: Prefill speed:        112.43 tokens/s; Decode speed:         17.78 tokens/s; Init time:            3.2266 s; Time to first token:  0.5853 s (load averages before: 4.13 3.68 3.35)",
             "process 2026-10-05T20:46:09+09:00: Prefill speed:        112.26 tokens/s; Decode speed:         17.76 tokens/s; Init time:            3.1120 s; Time to first token:  0.5918 s (load averages before: 4.39 3.76 3.38)",
             "command: litert-lm benchmark Ministral-3-3B-Instruct-2512_q4_block32_ekv4096.litertlm --backend cpu -p 16 -d 32 --cache no --verbose (one process per run, 2 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -655,7 +651,7 @@
             "process 2026-10-05T20:43:55+09:00: Prefill speed:        124.00 tokens/s; Decode speed:         22.44 tokens/s; Init time:            3.0500 s; Time to first token:  2.4963 s (load averages before: 3.75 3.45 3.23)",
             "process 2026-10-05T20:45:04+09:00: Prefill speed:        125.25 tokens/s; Decode speed:         22.47 tokens/s; Init time:            3.1078 s; Time to first token:  2.5169 s (load averages before: 3.75 3.55 3.28)",
             "command: litert-lm benchmark Ministral-3-3B-Instruct-2512_q4_block32_ekv4096.litertlm --backend cpu -p 256 -d 256 --cache no --verbose (one process per run, 2 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -714,7 +710,7 @@
             "process 2026-10-05T20:43:09+09:00: Prefill speed:        918.37 tokens/s; Decode speed:         122.09 tokens/s; Init time:            2.7988 s; Time to first token:  0.0367 s (load averages before: 3.73 3.42 3.21)",
             "process 2026-10-05T20:43:17+09:00: Prefill speed:        892.38 tokens/s; Decode speed:         122.96 tokens/s; Init time:            2.8439 s; Time to first token:  0.0411 s (load averages before: 3.68 3.43 3.21)",
             "command: litert-lm benchmark Ministral-3-3B-Instruct-2512_q4_block32_ekv4096.litertlm --backend gpu -p 16 -d 32 --cache no --verbose --activation-data-type fp16 (one process per run, 3 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -773,7 +769,7 @@
             "process 2026-10-05T20:42:33+09:00: Prefill speed:        1339.78 tokens/s; Decode speed:         128.56 tokens/s; Init time:            2.7544 s; Time to first token:  0.2013 s (load averages before: 3.75 3.40 3.20)",
             "process 2026-10-05T20:42:50+09:00: Prefill speed:        1340.49 tokens/s; Decode speed:         131.06 tokens/s; Init time:            2.8115 s; Time to first token:  0.1984 s (load averages before: 3.47 3.36 3.19)",
             "command: litert-lm benchmark Ministral-3-3B-Instruct-2512_q4_block32_ekv4096.litertlm --backend gpu -p 256 -d 256 --cache no --verbose --activation-data-type fp16 (one process per run, 3 runs, median taken; harness sup_cardbench_mac.sh, GPU runs inside the shared _GPU_LOCK window)",
-            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (round 9, v0.17.1 runtime/core/session_advanced.cc)"
+            "litert-lm benchmark runs the prefill twice: 'Time to first token' is the first prefill plus one decode step, 'Prefill speed' is the second (v0.17.1 runtime/core/session_advanced.cc)"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -823,7 +819,7 @@
           },
           "error": "app process died ~90 s into the benchmark (no Java exception) — suspected 3B-class GPU memory exhaustion on Pixel 8a",
           "evidence": [
-            "hand-recorded device phase: litertlm-convert reports/gpu_audit/MATRIX.md 実機フェーズ table (committed 0559ad3, 2026-07-23; Gallery 1.0.15 official Benchmark, ML Drift GPU, p256/d256 x3 runs; runtime version axis = the Gallery app version — the embedded litert-lm version is not recorded)",
+            "hand-recorded device phase: device-phase table (committed 0559ad3, 2026-07-23; Gallery 1.0.15 official Benchmark, ML Drift GPU, p256/d256 x3 runs; runtime version axis = the Gallery app version — the embedded litert-lm version is not recorded)",
             "row: '❌ アプリごと native 死 — ベンチ~90秒でプロセス死 = 3B 級 GPU メモリ枯渇の疑い'"
           ],
           "failure_class": "process_crash",
@@ -906,7 +902,7 @@
           },
           "error": null,
           "evidence": [
-            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation check (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
             "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
             "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
             "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 102.5 s, output head '43'",
@@ -958,8 +954,8 @@
   "pitfalls": [
     "Text-only conversion: the Ministral-3 text decoder, with the Pixtral vision tower dropped (HF card).",
     "Embedding externalized so every section stays under 2 GiB, which is what lets it load on iOS (HF card).",
-    "The bundle carries a start_token (<s>), and here that is CORRECT rather than the Granite defect: upstream bos is <s> and eos is </s>, different tokens, so prepending BOS is the Mistral convention. The Granite trap needs bos == eos (or add_bos_token False) to bite (CATALOG_REGATE.md).",
-    "Two true statements that must not be collapsed: the Gallery only OFFERS GPU on ~12 GB+ devices, because its accelerator choice is fixed at import time from device RAM; the MODEL itself runs fully delegated on an 8 GB Pixel 8a GPU when litert_lm_main drives it directly — 1187/1187 prefill, 1087/1087 decode, zero rejections, correct output, measured 2026-08-17. The first is a property of the app, the second of the runtime (HF card + CATALOG_REGATE.md)."
+    "The bundle carries a start_token (<s>), and here that is CORRECT rather than the Granite defect: upstream bos is <s> and eos is </s>, different tokens, so prepending BOS is the Mistral convention. The Granite trap needs bos == eos (or add_bos_token False) to bite.",
+    "Two true statements that must not be collapsed: the Gallery only OFFERS GPU on ~12 GB+ devices, because its accelerator choice is fixed at import time from device RAM; the MODEL itself runs fully delegated on an 8 GB Pixel 8a GPU when litert_lm_main drives it directly — 1187/1187 prefill, 1087/1087 decode, zero rejections, correct output, measured 2026-08-17. The first is a property of the app, the second of the runtime (HF card)."
   ],
   "schema_version": "1.2"
 }

@@ -1,6 +1,6 @@
 """Pluggable backend runners: `run(fixture, backend) -> {status, max_abs_diff}`.
 
-Five runners ship (spec §8.2 + Phase 13 + the graduated web runner): `cpu`
+Five runners ship (Phase 8 + Phase 13 + the graduated web runner): `cpu`
 (ai-edge-litert interpreter — the numeric reference), `webgpu_mac`
 (CompiledModel GPU on the host Mac, the `gpu_gate_mac.sh` pattern),
 `gpu_mldrift_adb` (Android device over adb, gracefully "unavailable" without
@@ -53,7 +53,7 @@ _ADB_REMOTE_DIR = "/data/local/tmp/edge-compat-probes"
 class Tolerance:
     """Numeric pass bound vs the CPU reference: |out - ref| <= max(absolute,
     relative * |ref|), per element — the Phase 5 sweep's formula. Per-backend /
-    per-dtype policy is an open Ask-the-owner item; these are the proposed
+    per-dtype policy is still open; these are the proposed
     defaults."""
 
     absolute: float = 1e-5
@@ -410,7 +410,7 @@ class AdbMlDriftRunner(Runner):
 class NpuAdbRunner(AdbMlDriftRunner):
     """NPU accelerators over adb (Phase 13) — the same one-JSON-line helper
     contract as `gpu_mldrift_adb`, pointed at an NPU-capable on-device helper
-    (vendor SDK linkage is the owner's build; this runner never guesses).
+    (vendor SDK linkage is the helper build's job; this runner never guesses).
     Claims the NPU backend IDs registered in matrix.schema.json 1.3. NPU
     probes may require per-SoC AOT compilation: signatures the helper cannot
     compile come back as a RunnerError (surfaced as unprobeable-with-reason

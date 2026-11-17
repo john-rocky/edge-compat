@@ -1,0 +1,61 @@
+{
+  "artifact": "Spark-X2.6-4B_int8-kv2048.litertlm",
+  "artifact_sha256": "31cfba13efe48eeacf8bf13af1debd469d11b4dc3cf4dd19ff2905c7ddaf6a71",
+  "device": "galaxy-s26",
+  "model_id": "spark-x2.6-4b-int8-kv2048",
+  "notes": "Spark-X2.6-4B_int8-kv2048.litertlm of litert-community/Spark-X2.6-4B: the INT8 file with its KV cache cut to 2,048 tokens = the 4B file for a CPU at reasoning_effort low (its 2,048 tokens must hold prompt, thought and answer, so it is not for the default effort's 3,584-token budget). XHToken/Spark-X2.6-4B (Apache-2.0) converted to LiteRT-LM; the bundle carries templates/spark26_think.jinja (the vendor template's plain-chat part, thinking on by default, reasoning_effort high or low through extra_context), a `thought` channel and the repo's tokenizer.json byte for byte. Uploaded 2026-11-01 (Hub main f8da7265 at the read). Measured 2026-11-01 in the run r6; its build check: max_num_tokens 2048, llm_model_type generic_model, tokenizer bytes equal to the repo's.",
+  "quantization": "the weights of Spark-X2.6-4B_int8.litertlm unchanged (dynamic INT8, per-channel INT8 weights on every linear and the embedding, FP32 activations declared; every weight buffer byte-checked) and its exported graph with the KV cache of every signature cut from 4,096 to 2,048 tokens without a re-export (LiteRT-LM 0.19.0 unpack, the KV-cache variant tool, LlmMetadata max_num_tokens 2,048, packed with the 0.19.0 CLI), prefer_activation_type fp32, 6 prefill signatures, KV cache 2,048",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": 2048,
+      "date": "2026-11-01",
+      "decode_tokens_per_s": 8.21,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-spark26-devicebench",
+        "os_build": "Android 16 (BP4A.251205.006)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Qualcomm SM8850 (Adreno GPU)",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Spark-X2.6-4B `Spark-X2.6-4B_int8-kv2048.litertlm` at main f8da7265: LFS sha256 31cfba13efe48eeacf8bf13af1debd469d11b4dc3cf4dd19ff2905c7ddaf6a71, 4238098224 B (anonymous Hub API tree read 2026-11-01 12:17 JST)",
+        "runtime: PyPI litert-lm-api 0.19.0 Android wheel (liblitert-lm.so sha256 28fa8433febc49a99f4bd3ef8cb82c2912457cfe274d97944debeabdeb97fc78) on CPython 3.14.8, `Benchmark(model, cpu, prefill_tokens=1024, decode_tokens=256, max_num_tokens=2048); 3 x run() on one engine`; a process's value = the mean of runs 2-3, the cell = the mean over processes",
+        "protocol: a benchmark script, one process per run, a ready check (thermal, CPU cap, rest) before each run, the process stopped under 1,000,000 kB MemAvailable",
+        "an A B B A set of the two 4B int8 files in one hold (runs in order l4i8-cpu-t1, k4-cpu-t1, k4-cpu-t2, l4i8-cpu-t2): k4-cpu-t1 (s26r6t, model_sha256 = the artifact, thermal 0 before, clean; rested 124s since 06:15:21), k4-cpu-t2 (s26r6t, model_sha256 = the artifact, thermal 1 before, uncapped (thermal 1, no CPU cap, kgsl_pwrlevel 0); rested 62s since 06:19:24); the other file's runs l4i8-cpu-t1, l4i8-cpu-t2: 5.761 / 5.233 tok/s decode",
+        "delegation (k4-cpu-t1): prefill_1024 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_256 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_64 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_16 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_4 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_1 1937 / 2022 on TfLiteXNNPackDelegate (73 partition(s)); decode 1982 / 2067 on TfLiteXNNPackDelegate (74 partition(s))",
+        "peak_mem_mb = the highest VmHWM of the processes (phone-side samples); CPU runs"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "decode_tokens_per_s_p1": 8.57,
+        "decode_tokens_per_s_p2": 7.855,
+        "init_ms_run1_p1": 14235.01,
+        "init_ms_run1_p2": 999.16,
+        "memavailable_min_kb": 6064156.0,
+        "prefill_tokens": 1024.0,
+        "processes": 2.0,
+        "thermal_before_p1": 0.0,
+        "thermal_before_p2": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 5358.7,
+      "prefill_tokens_per_s": 145.1,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 7208.5
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,59 @@
+{
+  "artifact": "eg2_audio_f16safe_fp16w_w10.tflite",
+  "artifact_sha256": "1405986b353c3152e4a677d9446a5694a0f8fd0b13b794d26c892ef85295188c",
+  "device": "galaxy-s26",
+  "model_id": "embeddinggemma-2-transcribe__eg2_audio_f16safe_fp16w_w10",
+  "notes": "EmbeddingGemma 2 Transcribe, LiteRT form: the audio encoder of google/embeddinggemma-2 (rev 914f7f89) exported to raw LiteRT graphs with an fp16-safe rewrite of its RMSNorm sites, fp16 weights, one signature per file; the published reader v2 turns the soft tokens into words. This file: eg2_audio_f16safe_fp16w_w10.tflite (589015376 B). Rows: run r2c (Galaxy S26, hold t1 of 2026-10-31), the float32-precision timing runs of the 10 s window. Landed 2026-10-31: the file is on the Hub at mlboydaisuke/EmbeddingGemma-2-Transcribe-LiteRT (main 188811419ecee5b4c3c593141193f6be2b4811cb at the read); its LFS oid equals artifact_sha256 and its size 589015376 B (anonymous API read 2026-10-31 12:17:57 JST).",
+  "quantization": "fp16 weights (FLOAT_CASTING on FC / CONV_2D / DEPTHWISE_CONV_2D), float32 activations",
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 2767,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-eg2stt-gate",
+        "os_build": "Android SDK 36 (Build.VERSION.SDK_INT read by the gate app; Build.MODEL SM-S942Q)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "Harness: the gate app (LiteRT 2.2.0 Kotlin CompiledModel) driven by a benchmark script in generic mode (one call = write the mel + mask inputs, run, read the soft-token output)",
+        "\"sha256 eg2_audio_f16safe_fp16w_w10.tflite phone=1405986b353c3152… MATCH\"",
+        "run: A1, precision fp32, 10 timed calls after 2 warm-up (one call = write + run + read), median 117.797 ms, ready clean; rested 110s since 04:08:47",
+        "run: A2, precision fp32, 10 timed calls after 2 warm-up (one call = write + run + read), median 115.914 ms, ready clean; rested 31s since 04:12:53",
+        "A B B A in one hold (window 10s): A 116.86 / B 66.22 ms, verdict MOVE_TO_B, every run on a clean phone (True)",
+        "delegation (T10_A1_gpu32.logcat.txt): Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main)."
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 116.756,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "abba_gain": 0.4333,
+        "abba_side_mean_of_leg_medians_ms": 116.856,
+        "leg1_compile_ms": 2298.0,
+        "leg1_median_ms": 117.797,
+        "leg2_compile_ms": 2260.7,
+        "leg2_median_ms": 115.914,
+        "timed_calls": 20.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "GpuOptions precision=FP32; gate app (generic mode), one 10 s window timed (the A runs of an A B B A pair whose B side ran an unpublished float32-weight file)",
+      "total_ops": 2767,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,5 +1,5 @@
 {
- "runtime": "~/code/litertlm-convert/blog_gif_work/venv/bin/litert-lm",
+ "runtime": "litert-lm",
  "runtime_version": "0.15.0",
  "checked": 1,
  "broken": 0,

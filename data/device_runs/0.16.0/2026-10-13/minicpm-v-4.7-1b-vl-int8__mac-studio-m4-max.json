@@ -3,7 +3,7 @@
   "artifact_sha256": "4c9c30b24a5e9187c36d1a45773dbb2c7f32a8ee8cb5788df97b8d14453bb140",
   "device": "mac-studio-m4-max",
   "model_id": "minicpm-v-4.7-1b-vl-int8",
-  "notes": "Hub litert-community/MiniCPM-V-4.7-1B (upload commit 9d7638b2). The shipped bytes on an older PyPI wheel of litert-lm (the manifest's min_runtime_version 0.16.0 rests on these runs): the card's CPU commands with --cache no, one fresh process each, Mac Studio M4 Max, round 9 of litertlm-convert minicpmv47_work (r9/card_cmd_runlog.txt §C / §D). The file's container header is format 1.6.0 (builder 0.17.1 pack, r9/swap_MiniCPM-V-4.7-1B-VL_int8.json); both wheels read it and answered. No benchmark: throughput cells null.",
+  "notes": "Hub litert-community/MiniCPM-V-4.7-1B (upload commit 9d7638b2). The shipped bytes on an older PyPI wheel of litert-lm (the manifest's min_runtime_version 0.16.0 rests on these runs): the card's CPU commands with --cache no, one fresh process each, Mac Studio M4 Max, run 9 (§C / §D). The file's container header is format 1.6.0 (builder 0.17.1 pack); both wheels read it and answered. No benchmark: throughput cells null.",
   "quantization": "decoder: dynamic-range int8 weights on 151 fully connected layers including the untied output head, the 36 GatedDeltaNet decay/gate projections (in_proj_a, in_proj_b) kept float, fp32 activation preference; token embedding int8 per channel, outside the decoder graph; vision encoder and adapter fp16 weights (FULLY_CONNECTED and CONV_2D), float compute",
   "results": [
     {

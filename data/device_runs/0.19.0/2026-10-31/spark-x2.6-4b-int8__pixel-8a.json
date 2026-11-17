@@ -1,0 +1,52 @@
+{
+  "artifact": "Spark-X2.6-4B_int8.litertlm",
+  "artifact_sha256": "3fae1eca71a67a03e597240e802c3ea17574a9f22499e38cfa9a7d76cebb7565",
+  "device": "pixel-8a",
+  "model_id": "spark-x2.6-4b-int8",
+  "notes": "Spark-X2.6-4B_int8.litertlm of litert-community/Spark-X2.6-4B: the INT8 file of the 4B = the 4B CPU file. XHToken/Spark-X2.6-4B (Apache-2.0) converted to LiteRT-LM; the bundle carries templates/spark26_think.jinja (the vendor template's plain-chat part, thinking on by default, reasoning_effort high or low through extra_context), a `thought` channel, 15 stop entries and the repo's tokenizer.json byte for byte. Published 2026-10-31 (Hub main 6510fc46).",
+  "quantization": "dynamic INT8 (per-channel INT8 weights on every linear and the embedding, FP32 activations declared): litert-torch 0.9.3 export (dynamic_wi8_afp32), the exported graph (no GPU rewrite), prefer_activation_type fp32, 6 prefill signatures, KV cache 4,096",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": 2048,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-spark26-devicebench",
+        "os_build": "Android 16 (CP1A.260505.005)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Google Tensor G3 (Mali-G715 GPU)",
+        "vendor_sdk": null
+      },
+      "error": "E0000 00:00:1793381772.306923   25993 engine.cc:1351] Failed to generate content: DEADLINE_EXCEEDED: Task 1 did not complete within the timeout of 10m.",
+      "evidence": [
+        "artifact: litert-community/Spark-X2.6-4B `Spark-X2.6-4B_int8.litertlm` at main 6510fc46 (published 2026-10-31): LFS sha256 3fae1eca71a67a03e597240e802c3ea17574a9f22499e38cfa9a7d76cebb7565, 4238081840 B (anonymous Hub API tree read 2026-10-31 23:55 JST); the same digest as",
+        "runtime: PyPI litert-lm-api 0.19.0 Android wheel (liblitert-lm.so sha256 28fa8433febc49a99f4bd3ef8cb82c2912457cfe274d97944debeabdeb97fc78 (in kit.tar 613afeefa295, pushed and checked on the phone in the run's setup)), `Benchmark(model, cpu, prefill_tokens=1024, decode_tokens=256, max_num_tokens=2048)`",
+        "the engine was created (XNNPACK: prefill_1024 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_256 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_64 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_16 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_4 2150 / 2236 on TfLiteXNNPackDelegate (73 partition(s)); prefill_1 1937 / 2022 on TfLiteXNNPackDelegate (73 partition(s)); decode 1982 / 2067 on TfLiteXNNPackDelegate (74 partition(s))) and the first benchmark run passed the runtime's fixed 10-minute wait of a blocking generate call (no setting in 0.19.0)",
+        "l4i8-cpu-t1: status TIMEOUT (the run's 1,200 s limit after the runtime's error), VmHWM 4437020 kB, MemAvailable floor 1934564 kB"
+      ],
+      "failure_class": "timeout",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "prefill_tokens": 1024.0,
+        "vmhwm_max_kb": 4437020.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

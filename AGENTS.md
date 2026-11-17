@@ -40,6 +40,9 @@ cd site && npm ci && npm test && npm run build   # the demo-zoo site (Node >= 22
 4. One snapshot file per (backend × runtime version); carry-forward downgrades
    `measured` to `inferred` with `evidence.derived_from` — never edit in place.
 5. Exact TFLite builtin op names everywhere (`GATHER_ND`, `TRANSPOSE_CONV`).
+6. At equal lookup specificity, a single `measured` entry wins over contradictory
+   `inferred` entries and the verdict's reason names them; every other
+   contradictory tie raises `MatrixLookupTieError`.
 
 The public repository is an export of a private lab repository (`EXPORT.md`);
 open issues here, and pull requests against code, schemas or docs are welcome.

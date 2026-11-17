@@ -1,0 +1,77 @@
+{
+  "config": {
+    "input_seed": 42,
+    "timed_runs": 10,
+    "tolerance_abs": 0.00001,
+    "tolerance_rel": 0.001,
+    "warmup_runs": 3
+  },
+  "input_spec": "1x32:int32;1x32:float32",
+  "license": "apache-2.0",
+  "model_id": "ema-lightning__ema_text_multi_fp32",
+  "notes": "EMA Lightning Turkish TTS (48 kHz), litert-community/EMA-Lightning-LiteRT main 9d7633c7 (files 2a39d46c, 2026-10-11); source verified 2026-10-11 by HTTP HEAD (x-linked-etag = config.json sha256); multi-signature model (4 subgraphs: ema_text_L{32,64,128,256}); harness runs subgraph 0 (ema_text_L32): ids int32 [1,32] (the 0..15 dimension-spec fill = valid ids of the 49-symbol vocabulary) + mask float32 [1,32] (a 0/1 letter mask in use; the random float fill makes the masked GroupNorm statistics meaningless, so numerics are not a quality signal here — loads / runs / delegation are) -> h [1,32,224], dur [1,32]; fp32 weights (the fp16-weight variant did not compile on the Galaxy S26 GPU delegate and does not ship)",
+  "results": [
+    {
+      "backend": "wasm_xnnpack",
+      "date": "2026-11-09",
+      "delegation_evidence": [],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": false,
+        "litertjs_core_version": "2.6.0",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "7.0.0-1019-azure",
+        "webgpu_adapter": null
+      },
+      "error": "init timed out after 60000ms",
+      "failure_class": "timeout",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": false
+    },
+    {
+      "backend": "webgpu_mldrift",
+      "date": "2026-11-09",
+      "delegation_evidence": [
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorNotFound.",
+        "error: WARNING: [npu_registry.cc:34] NPU accelerator could not be loaded and registered: kLiteRtStatusErrorNotFound."
+      ],
+      "env": {
+        "browser": "chromium",
+        "browser_version": "151.0.7922.34",
+        "headless": true,
+        "jspi": true,
+        "litertjs_core_version": "2.6.0",
+        "machine_label": "ci-ubuntu-x64",
+        "os": "Linux",
+        "os_version": "7.0.0-1019-azure",
+        "webgpu_adapter": {
+          "architecture": "swiftshader",
+          "description": "",
+          "device": "",
+          "vendor": "google"
+        }
+      },
+      "error": null,
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 94.85,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "output_match": null,
+      "provenance": "measured",
+      "runs": true
+    }
+  ],
+  "schema_version": "1.0",
+  "source": "https://huggingface.co/litert-community/EMA-Lightning-LiteRT/resolve/main/ema_text_multi_fp32.tflite"
+}

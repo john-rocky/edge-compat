@@ -2,7 +2,7 @@
   "artifact": "Mordant-3B-Think_int8.litertlm",
   "device": "mac-studio-m4-max",
   "model_id": "mordant-3b-think-int8",
-  "quantization": "dynamic int8 (linears + embedding), externalized int8 embedder, reduced 7-signature prefill ladder",
+  "quantization": "dynamic int8 (linears + embedding), externalized int8 embedder, reduced set of 7 prefill signatures",
   "results": [
     {
       "accelerator": "cpu",

@@ -1,0 +1,67 @@
+{
+  "artifact": "Qwen2.5-VL-72B-Instruct_q4_ekv2048.litertlm",
+  "artifact_sha256": "8a37fff5fddad64e214b0b491a4a07d011a6a628e500f35b2c1f69dded1fe90a",
+  "device": "mac-studio-m4-max",
+  "model_id": "qwen2.5-vl-72b-instruct-int4-vision-int8",
+  "notes": "Qwen2.5-VL-72B-Instruct_tapi_wi4b128_p32c2048_vi8r4_g448.litertlm (the measured name; published 2026-11-01 in litert-community/Qwen2.5-VL-72B-Instruct-LiteRT under the name Qwen2.5-VL-72B-Instruct_q4_ekv2048.litertlm): the bytes that name held before (sha256 6feca205…, upload commit 9ac47fea) with the vision encoder and adapter sections replaced by int8-weight copies of the same graphs (42,684,876,864 bytes vs 44,789,536,688). One picture at 448x448 (256 image tokens) and text in, text out, context 2,048. Measured in one A B B A + C window with the published bytes: arms A (the published file, vision on the GPU) vision 285.2 ms (283.5-292.2), first text 4.744 s, decode 8.55 tok/s, peak 46 GiB; arms B (this record) vision 276.4 ms, first text 4.740 s, peak 44 GiB = the registered speed line (vision more than 3 % faster, first text not slower) passed; arm C (this file, vision on the CPU) vision 561.4 ms, first text 5.020 s = a slower form, no record. Arms A re-measured bytes that have a 2026-10-31 record (qwen2.5-vl-72b-instruct-int4, the run-3 window: decode 8.31 tok/s), so they are a sentence here, not a row. The published file's vision encoder section is 2,553,783,680 bytes, over the 2 GiB limit of LiteRT-LM 0.19.0's file-information call (refused there; the engine runs it, arms A); this file's is 653,432,240 and is accepted. LANDED: uploaded to litert-community/Qwen2.5-VL-72B-Instruct-LiteRT as Qwen2.5-VL-72B-Instruct_q4_ekv2048.litertlm, replacing the bytes of that name, in commit 7205693fe89ce48a293ec69e2232d1451d95297f (2026-11-01 13:53 JST, with the card, NOTICE and manifest); the Hub tree read at 2026-11-01T13:56:30+09:00 (main 7205693f) gives this LFS oid and size. The earlier record stays the record of the bytes the name held before.",
+  "quantization": "text decoder written with the LiteRT Tensor API from the bf16 checkpoint: fully connected weights int4 blockwise-128 (ai-edge-quantizer 0.10.0's functions, block scales floored at 2^-14), output layer int8 per channel, norms and biases fp32, declared fp32 activations; signatures prefill 32 / 128 / 1024 and decode over a 2048-token KV cache; token embedding table int8 per channel outside the decoder (EMBEDDER section); vision encoder and adapter int8 weights per channel (ai-edge-quantizer 0.10.0 dynamic-range recipe on the FULLY_CONNECTED and CONV_2D weights), fp32 activations on the GPU, declared fp32 activations",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 2048,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": 8.55,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: Qwen2.5-VL-72B-Instruct_tapi_wi4b128_p32c2048_vi8r4_g448.litertlm (sha256 8a37fff5fddad64e214b0b491a4a07d011a6a628e500f35b2c1f69dded1fe90a, 42684876864 bytes; the measured internal-disk copy and the kept copy have the same sha256); the published file's LlmMetadata, tokenizer, embedder and prefill_decode sections unchanged, the two vision sections replaced",
+        "runtime: litert-lm 0.19.0 (PyPI) Python API, backend GPU (WebGPU) and vision_backend GPU, cache_dir ':nocache', max_num_images 1",
+        "q72-b1_warmup, q72-b1_cats_q1, q72-b1_cats_q2, q72-b1_kitchen_q3, q72-b1_cats_q1_t2, q72-b2_warmup, q72-b2_cats_q1, q72-b2_cats_q2, q72-b2_kitchen_q3, q72-b2_cats_q1_t2 (two processes, arms B of an A B B A + C window; BenchmarkInfo per question)",
+        "output_match = the run-5a line for the 72B: the replies to the 3 picture questions and MMStar-20 word for word the same as the published file's (23 of 23)",
+        "peak_mem_mb = 44 GiB x 1024: the highest macOS phys_footprint sample",
+        "LiteRT-LM 0.19.0 C API litert_lm_loaded_file_create: this file accepted (status 0); the published file refused with status 13 'INTERNAL: Vision model section size exceeds maximum allowed limit.'"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens_per_s_max": 8.56,
+        "decode_tokens_per_s_min": 8.53,
+        "engine_create_s": 59.66,
+        "first_picture_first_text_s": 8.396,
+        "first_text_s": 4.74,
+        "follow_up_first_text_s": 0.922,
+        "follow_up_prompt_tokens": 18.0,
+        "image_size_px": 448.0,
+        "image_tokens": 256.0,
+        "prefill_tokens": 285.0,
+        "processes": 2.0,
+        "questions": 6.0,
+        "vision_ms": 276.4,
+        "vision_ms_max": 284.8,
+        "vision_ms_min": 273.2
+      },
+      "output_match": true,
+      "peak_mem_mb": 45056,
+      "prefill_tokens_per_s": 65.46,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "one 448x448 picture + a short question, greedy, no system message; two processes, each a warm-up picture, three questions in fresh conversations and one follow-up question on the same picture (medians over the six questions)",
+      "total_ops": null,
+      "ttft_ms": 4455.6
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,94 @@
+{
+  "artifact": "kimi_linear_48b_a3b_int8_ekv4096.litertlm",
+  "artifact_sha256": "2864c33e41bbfd501c576f49e273579e63efb6815539248a5ff00f169baaa7f3",
+  "device": "mac-studio-m4-max",
+  "model_id": "kimi-linear-48b-a3b-int8-ekv4096",
+  "notes": "litert-community/Kimi-Linear-48B-A3B-Instruct: kimi_linear_48b_a3b_int8_ekv4096.litertlm, a LiteRT-LM conversion of moonshotai/Kimi-Linear-48B-A3B-Instruct at revision e1df551a (MIT; a 27-layer hybrid decoder: 20 Kimi Delta Attention layers and 7 MLA layers, a dense first layer and 26 mixture-of-experts layers of 256 SiLU experts, 8 per token, plus one shared expert; no thinking mode), text in, text out; written in plain TFLite ops plus LiteRT's moe custom op (one per MoE layer, activation silu) by a graph writer for litert-torch (main 67f11e8): the routed experts (one scale per output row and expert) and every other fully connected layer with a constant weight int8 per channel, the token table fp32; the repo publishes it for the CPU and the GPU (WebGPU); fp32 activations declared; context 4,096 tokens; signatures prefill_128, prefill_1024 and decode; a tokenizer.json converted from the source's tiktoken tokenizer. The moe op with SiLU is in two open LiteRT pull requests (#11192 GPU, #11188 XNNPACK); LiteRT-LM 0.19.1 from PyPI refuses it on both backends, as these two records show; the numbers of the LiteRT-LM built from source with LiteRT #11192 and #11188 (the repo card's Performance and Accuracy tables) are not records: that build has no frame here. Mac Studio rows only: the file is 50.50 GB and no phone was tried. Landed 2026-11-16: litert-community/Kimi-Linear-48B-A3B-Instruct is public and ungated (license mit, base_model moonshotai/Kimi-Linear-48B-A3B-Instruct quantized, library_name litert-lm), upload commit bc471ba2 (2026-11-15 01:45 JST), main b1a6fc381e (the card commit, 2026-11-15T20:14:29.000Z) at the read; the tree's LFS oid and size of kimi_linear_48b_a3b_int8_ekv4096.litertlm = artifact_sha256 and 50498913264 B.",
+  "quantization": "a graph writer for litert-torch from the bf16 checkpoint (revision e1df551a): each MoE layer's 256 routed experts in one custom op moe with int8 weights per channel (one scale per output row and expert), and every other fully connected layer with a constant weight int8 per channel too (symmetric, min-max: the KDA q, k, v and o projections and its gate and beta projections, the MLA q, compressed key-value input and o projections, the shared experts, the dense first layer, the routers and the output layer; litert-quantizer-nightly 0.12.0.dev20261109); fp32 stay the token table, the norms and the 16 x 16 masks of KDA's chunked prefill; declared fp32 activations; fp32 MLA cache of 4,096 tokens and fp32 delta-rule and convolution states; signatures prefill_128, prefill_1024 and decode",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-11-15",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": "ERROR: Node number 708 (moe) failed to invoke.",
+      "evidence": [
+        "bytes: the CPU run 01:32:26-01:32:58 and the GPU run 01:32:58-01:33:31 JST on 2026-11-15 each read the external-disk copy, the file published as kimi_linear_48b_a3b_int8_ekv4096.litertlm, through a symlink made by tools/rel_check.sh in the run's directory (the command that started the runs gave that copy's path; prints the command cut at its display width); that copy was written on 2026-11-14 from the file built at 06:34:27 JST (sha256 2864c33e41bbfd501c576f49e273579e63efb6815539248a5ff00f169baaa7f3, 50498913264 B), with the copy stream's sha256 and the read-back from the disk both 2864c33e... (08:14:27 and 08:18:56 JST), and was read whole again at 20:30-20:53 JST (the stream's sha256 2864c33e...); no hash of it after the runs. The SSD copy that read made was hashed by the upload's pre-upload step (2026-11-15 00:01:56 JST, preupload_kimi_linear_48b_a3b_int8_ekv4096.litertlm.json: 2864c33e...) = the Hub's LFS oid at upload commit bc471ba2, whose Hub bytes read back to the same sha256 (stream_sha_kimi_linear_48b_a3b_int8_ekv4096.litertlm.json, 2026-11-15 08:07:58 JST), and at main b1a6fc38 (50498913264 B; anonymous, read 2026-11-16 06:32:13 JST)",
+        "runtime: the PyPI litert-lm 0.19.1 macOS arm64 wheel (Python 3.13.13; litert-lm and litert-lm-api 0.19.1, installed before the runs), liblitert-lm.dylib sha256 c61e0faa... (50,610,272 B), its own CLI: `litert-lm run <file> --prompt 'What is 17 + 25? Answer briefly.' --backend cpu --top-k 1 --cache no` (the root of every path in this record: tools/rel_check.sh; started 01:32:26, ended 01:32:58 JST on 2026-11-15, rc 0; stdout 'An error occurred', the CLI's message for a failed run, exit status 0)",
+        "76 lines 'ERROR: moe node #708 unsupported activation='silu'' (node #708 first, then one line per moe node, 76 distinct); the CLI ran without --verbose, so the log prints no delegate partition counts",
+        "The first invoke: 'ERROR: Stub operation invoked. This function should not be called.' / 'ERROR: Node number 708 (moe) failed to invoke.' / 'ERROR: [litert_compiled_model.cc:164] Failed to invoke' / 'RuntimeError: INTERNAL: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor.cc:936]' / '└ Failed to invoke the compiled model'"
+      ],
+      "failure_class": "run_error",
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "moe_unsupported_activation_lines": 76.0,
+        "questions": 1.0,
+        "rc": 0.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "signature": "one fixed question ('What is 17 + 25? Answer briefly.') through the PyPI litert-lm 0.19.1 CLI (`litert-lm run`, top-k 1), the released runtime's loadability check",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-11-15",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 734,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": "E0000 00:00:1794673995.156551 811240872 engine.cc:1124] Failed to create engine: UNKNOWN: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor_factory.cc:287]",
+      "evidence": [
+        "bytes: the CPU run 01:32:26-01:32:58 and the GPU run 01:32:58-01:33:31 JST on 2026-11-15 each read the external-disk copy, the file published as kimi_linear_48b_a3b_int8_ekv4096.litertlm, through a symlink made by tools/rel_check.sh in the run's directory (the command that started the runs gave that copy's path; prints the command cut at its display width); that copy was written on 2026-11-14 from the file built at 06:34:27 JST (sha256 2864c33e41bbfd501c576f49e273579e63efb6815539248a5ff00f169baaa7f3, 50498913264 B), with the copy stream's sha256 and the read-back from the disk both 2864c33e... (08:14:27 and 08:18:56 JST), and was read whole again at 20:30-20:53 JST (the stream's sha256 2864c33e...); no hash of it after the runs. The SSD copy that read made was hashed by the upload's pre-upload step (2026-11-15 00:01:56 JST, preupload_kimi_linear_48b_a3b_int8_ekv4096.litertlm.json: 2864c33e...) = the Hub's LFS oid at upload commit bc471ba2, whose Hub bytes read back to the same sha256 (stream_sha_kimi_linear_48b_a3b_int8_ekv4096.litertlm.json, 2026-11-15 08:07:58 JST), and at main b1a6fc38 (50498913264 B; anonymous, read 2026-11-16 06:32:13 JST)",
+        "runtime: the PyPI litert-lm 0.19.1 macOS arm64 wheel (Python 3.13.13; litert-lm and litert-lm-api 0.19.1, installed before the runs), liblitert-lm.dylib sha256 c61e0faa... (50,610,272 B), its own CLI: `litert-lm run <file> --prompt 'What is 17 + 25? Answer briefly.' --backend gpu --top-k 1 --cache no` (the root of every path in this record: tools/rel_check.sh; started 01:32:58, ended 01:33:31 JST on 2026-11-15, rc 0; stdout 'An error occurred', the CLI's message for a failed run, exit status 0)",
+        "'ERROR: Following operations are not supported by GPU delegate:' / 'CUSTOM moe: moe only supports activation='gelu_tanh' (or its legacy spelling 'gelu').' / '734 operations will run on the GPU, and the remaining 7082 operations will run on the CPU.' (delegated_ops 734, total_ops 734 + 7082 = 7816)",
+        "'ERROR: Hint fully delegated to single delegate is set, but the graph is not fully delegated.' / 'E0000 00:00:1794673995.156551 811240872 engine.cc:1124] Failed to create engine: UNKNOWN: ERROR: [third_party/odml/litert_lm/runtime/executor/llm_litert_compiled_model_executor_factory.cc:287]' ... '└ Failed to modify graph with delegate'"
+      ],
+      "failure_class": "engine_create_failed",
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "questions": 1.0,
+        "rc": 0.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "signature": "one fixed question ('What is 17 + 25? Answer briefly.') through the PyPI litert-lm 0.19.1 CLI (`litert-lm run`, top-k 1), the released runtime's loadability check",
+      "total_ops": 7816,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

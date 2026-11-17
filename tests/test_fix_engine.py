@@ -97,7 +97,7 @@ def test_action_fixes_its_example_fixture(action: str, matrix: Matrix, rules: li
     assert report["output"]["sha256"] is not None
     assert result.fixed_bytes is not None
     assert schema_errors(report, "fix_report.schema.json") == []
-    # Every applied change traces to a rule id with its evidence (spec §10.1).
+    # Every applied change traces to a rule id with its evidence.
     for item in report["plan"]:
         assert item["rule_id"] in report["rules_loaded"]
         assert item["evidence"] is not None

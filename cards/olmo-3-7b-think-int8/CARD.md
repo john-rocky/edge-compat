@@ -20,7 +20,7 @@ task: text-generation
 | | |
 |---|---|
 | **Tool** | litert-torch (stock export_hf path, lightweight conversion, embedding table as its own section); repro = hf-to-litertlm olmo3_work/ litert-torch 0.9.4 (litert-converter 0.4.0, ai-edge-quantizer 0.9.0, transformers 5.14.1, torch 2.13.0); packed and checked with litert-lm 0.18.0 |
-| **Command** | `olmo3_work/convert_olmo3_7b_think.sh (hf-to-litertlm): allenai/Olmo-3-7B-Think at d97e442d -> export (6 prefill signatures 1024..1 + decode, KV cache 4096, embedder externalized, the bundle template embedded) -> metadata edit (no start token, stop ids 100265 / 100257, the thought channel, max_num_tokens 4096) -> the repo's tokenizer.json as the tokenizer section` |
+| **Command** | `convert_olmo3_7b_think.sh (hf-to-litertlm): allenai/Olmo-3-7B-Think at d97e442d -> export (6 prefill signatures 1024..1 + decode, KV cache 4096, embedder externalized, the bundle template embedded) -> metadata edit (no start token, stop ids 100265 / 100257, the thought channel, max_num_tokens 4096) -> the repo's tokenizer.json as the tokenizer section` |
 | **Quantization** | int8 dynamic on every linear layer (219 FULLY_CONNECTED per prefill signature, 225 in decode), int8 embedding table; activations float, the runtime's default fp16 on the GPU (card L31, L108) |
 
 ## Artifacts

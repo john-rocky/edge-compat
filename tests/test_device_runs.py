@@ -1,7 +1,7 @@
-"""Phase 13 device-run lane: schema + example fixtures, strict snapshot
+"""Phase 13 device runs: schema + example fixtures, strict snapshot
 discovery, append-only writes, the three ingestion adapters (built against
-the REAL staged samples in data/examples/llm_samples/ with the recorded owner
-decisions enforced), the device-run CLI, card enrichment, and the per-runtime
+the REAL staged samples in data/examples/llm_samples/ with the recorded
+rules enforced), the device-run CLI, card enrichment, and the per-runtime
 freshness delta.
 
 Committed fixtures are example-provenance; adapter tests parse the staged
@@ -179,7 +179,7 @@ def test_write_device_run_deterministic(tmp_path: Path) -> None:
 
 
 def test_write_device_run_prompt_length_is_part_of_record_identity(tmp_path: Path) -> None:
-    """DECISIONS #162: the same accelerator under a different prompt length is
+    """The same accelerator under a different prompt length is
     a different fact — it merges in instead of tripping the append-only guard,
     and the file orders records accelerator-first, condition ascending."""
     root = tmp_path / "runs"
@@ -209,7 +209,7 @@ def test_write_device_run_prompt_length_is_part_of_record_identity(tmp_path: Pat
     assert target.read_bytes() == before
 
 
-# --- gpu_audit adapter (lane 1, staged real samples) -------------------------
+# --- gpu_audit adapter (source 1, staged real samples) -------------------------
 
 
 def test_gpu_audit_pass_shape() -> None:
@@ -248,7 +248,7 @@ def test_gpu_audit_engine_create_failed_shape() -> None:
     assert record["full_delegation"] is False
     assert record["delegated_ops"] == 536
     assert record["total_ops"] == 579
-    # The op-level evidence the owner will curate matrix rows from later:
+    # The op-level evidence matrix rows can be curated from later:
     assert sorted(set(log.unsupported_ops)) == [
         "ADD", "CAST", "GATHER_ND", "GREATER_EQUAL", "LESS_EQUAL", "SUM",
     ]
@@ -273,7 +273,7 @@ def test_gpu_audit_zero_throughput_is_a_failure() -> None:
 
 
 def test_gpu_audit_contaminated_batch_withholds_speeds() -> None:
-    """Owner decision #5: 2026-07-22 batch speeds are import-blocked; the
+    """2026-07-22 batch speeds are import-blocked; the
     PASS/FAIL verdict stands."""
     log = parse_gpu_audit_log(
         (LLM_SAMPLES / "gpu_audit" / "gemma3-1b-official.gpu.log").read_text()
@@ -292,7 +292,7 @@ def test_gpu_audit_rejects_non_log_input() -> None:
         parse_gpu_audit_log("not a log\n")
 
 
-# --- devicemark adapter (lane 2) ---------------------------------------------
+# --- devicemark adapter (source 2) ---------------------------------------------
 
 
 def test_devicemark_rows_split_lanes_and_memory_honestly() -> None:
@@ -300,7 +300,7 @@ def test_devicemark_rows_split_lanes_and_memory_honestly() -> None:
     results, skipped = devicemark_records(
         text, runtime_version="0.15.0", date="2026-07-22", accelerator="cpu"
     )
-    # Only the *__litertlm rows are this lane; coreai rows are cross_runtime.
+    # Only the *__litertlm rows are ingested; coreai rows are cross_runtime.
     assert [(r.model_id, r.device) for r in results] == [
         ("gemma-4-e2b", "m4-max"),
         ("gemma-4-e2b", "iphone-17-pro"),
@@ -320,7 +320,7 @@ def test_devicemark_rows_split_lanes_and_memory_honestly() -> None:
 
 
 def test_devicemark_estimated_memory_never_measured() -> None:
-    """Owner decision #4: mem_measured false -> metrics.peak_mem_est_mb, never
+    """mem_measured false -> metrics.peak_mem_est_mb, never
     peak_mem_mb."""
     row = {
         "artifact_id": "some-model__int8__litertlm",
@@ -366,7 +366,7 @@ def test_device_slug() -> None:
     assert device_slug("Pixel 8a") == "pixel-8a"
 
 
-# --- compat_check adapter (lane 3) -------------------------------------------
+# --- compat_check adapter (source 3) -------------------------------------------
 
 
 def test_compat_check_ok_branch_ingests() -> None:
@@ -390,7 +390,7 @@ def test_compat_check_multi_artifact_repo_gets_suffixed_ids() -> None:
     """Real sample (compat_0.16.0.json): granite-4.0-h-350m ships fp16 AND
     int8 — the bare repo id collides on one record file per (model, device),
     so multi-artifact repos get per-artifact ids suffixed with the artifact
-    stem remainder, like the console-log lane's quant-suffixed ids."""
+    stem remainder, like the console-log source's quant-suffixed ids."""
     doc = {
         "runtime": "litert-lm", "runtime_version": "0.16.0",
         "results": [
@@ -451,7 +451,7 @@ def test_compat_check_lowercases_cased_repo_names() -> None:
 
 
 def test_compat_check_refuses_unsampled_branches() -> None:
-    """Owner decision #3: refuse-until-sampled — no invented BROKEN/SUSPECT
+    """Refuse-until-sampled — no invented BROKEN/SUSPECT
     strings, no invented vlm/tflite lanes."""
     doc = {
         "runtime": "litert-lm", "runtime_version": "0.15.0",
@@ -635,7 +635,7 @@ def test_enrich_device_runs_conflicting_snapshots_refused(tmp_path: Path) -> Non
 
 def test_load_device_runs_same_accelerator_new_prompt_length_coexists(tmp_path: Path) -> None:
     """A 205-token re-measurement of an accelerator that already has a
-    19-token row is a new fact, not a duplicate (DECISIONS #162) — both
+    19-token row is a new fact, not a duplicate — both
     snapshots load, so both rows reach the card."""
     root = tmp_path / "runs"
     write_snapshot(
@@ -675,7 +675,7 @@ def test_index_device_column_and_llms_txt() -> None:
     assert "device_runs/0.0.0-example/2026-01-01/example-tiny-clean__example-phone" in llms
 
 
-# --- freshness delta, device lane --------------------------------------------
+# --- freshness delta, device runs --------------------------------------------
 
 
 def _two_device_snapshots(root: Path) -> None:
@@ -743,7 +743,7 @@ def test_compute_device_delta_reports_all_change_kinds(tmp_path: Path) -> None:
 def test_compute_device_delta_condition_change_is_not_a_metric_shift(tmp_path: Path) -> None:
     """A prompt-length change between snapshots (19tok floor -> 205tok) must
     read as record added/removed, never as a throughput shift — the two
-    conditions are different measurements (DECISIONS #162)."""
+    conditions are different measurements."""
     root = tmp_path / "device_runs"
     write_snapshot(
         root, "0.14.0", "2026-01-01",
@@ -831,7 +831,7 @@ def test_delta_cli_diffs_per_runtime_never_across(tmp_path: Path) -> None:
     assert not (tmp_path / "x.md").exists()
 
 
-# --- lane 1b: litert_lm_main / litert-lm benchmark console logs -------------
+# --- source 1b: litert_lm_main / litert-lm benchmark console logs -------------
 #
 # Built against the real staged excerpts in data/examples/llm_samples/console_log/
 # (Pixel 8a, litert-lm 0.16.0 tag build, 2026-08-12): one fully delegated PASS
@@ -1002,7 +1002,7 @@ def test_console_log_counts_only_the_named_delegate() -> None:
     assert (xnn.delegated_ops, xnn.total_ops) == (32, 43)
 
 
-# --- lane 5: iOS BenchmarkApp yardstick JSON ---------------------------------
+# --- source 5: iOS BenchmarkApp yardstick JSON ---------------------------------
 
 
 def _yardstick_runs():
@@ -1092,7 +1092,7 @@ def test_yardstick_aggregates_bench_protocol_runs() -> None:
     assert device_run_errors(doc) == []
 
 
-# --- lane 6: npubench classic sweep ------------------------------------------
+# --- source 6: npubench classic sweep ------------------------------------------
 
 NPUBENCH_SAMPLE = (LLM_SAMPLES / "npubench" / "results_sample.jsonl").read_text()
 
@@ -1390,7 +1390,7 @@ def test_pi5_llm_unaccepted_rows_are_skipped_not_guessed() -> None:
     row = json.loads(first)
     row["gate"]["status"] = "degenerate"
     results, skipped = pi5_llm_records(json.dumps(row), device="raspberry-pi-5")
-    assert results == [] and any("gate not passed" in s for s in skipped)
+    assert results == [] and any("check not passed" in s for s in skipped)
     row = json.loads(first)
     row["invocations"][2]["throttled_after"] = "0x50000"
     results, skipped = pi5_llm_records(json.dumps(row), device="raspberry-pi-5")

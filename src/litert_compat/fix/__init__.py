@@ -1,12 +1,12 @@
 """edge-fix: diagnosis → repair (Phase 10).
 
 The matrix's `rewrite_hints` are human prose; this package promotes them to
-executable, deterministic graph surgery. Pipeline: lint → match owner-authored
+executable, deterministic graph surgery. Pipeline: lint → match hand-written
 transform rules to findings → plan (ordered, conflict-checked) → apply on a
 copy → re-lint (the metric must improve, else automatic rollback) → numerical
 verification on the LiteRT CPU interpreter (the Phase 8 `runners` extra).
 
-Data Integrity extension (spec §10.1): the agent builds the ENGINE; the owner
+Data Integrity extension: the agent builds the ENGINE; a person
 authors the RULES. Example-provenance rules exist only to exercise the engine
 on synthetic fixtures.
 """

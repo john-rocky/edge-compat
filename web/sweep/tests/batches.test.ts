@@ -78,4 +78,63 @@ void describe('batch driver', () => {
     assert.equal(outcome.invalidRuns, 1);
     fs.rmSync(outDir, { recursive: true, force: true });
   });
+
+  void test('with history: never measured first, then the oldest newest-snapshot', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'litert-batches-'));
+    const history = path.join(root, 'version');
+    const outDir = path.join(history, '2026-11-09');
+    const seeds: [string, string][] = [
+      ['2026-09-01', 'example-web-a'],
+      ['2026-10-26', 'example-web-a'], // newest snapshot of web-a
+      ['2026-10-19', 'example-web-b'],
+    ];
+    for (const [date, id] of seeds) {
+      fs.mkdirSync(path.join(history, date), { recursive: true });
+      fs.writeFileSync(path.join(history, date, `${id}.json`), '{}');
+    }
+    fs.mkdirSync(outDir, { recursive: true });
+    const calls: string[][] = [];
+    const write = resultWriter(outDir);
+    const run = (ids: readonly string[]): number | null => {
+      calls.push([...ids]);
+      ids.forEach(write);
+      return 0;
+    };
+    const outcome = runBatches(
+      { catalogPath: EXAMPLE_CATALOG, outDir, batchSize: 8, historyDir: history },
+      run,
+      () => {
+        /* quiet */
+      },
+    );
+    assert.deepEqual(calls, [['example-broken', 'example-web-b', 'example-web-a']]);
+    assert.deepEqual(outcome.deferred, []);
+    fs.rmSync(root, { recursive: true, force: true });
+  });
+
+  void test('the time budget stops new harness runs; the rest are deferred, not unmeasured', () => {
+    const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'litert-batches-'));
+    const write = resultWriter(outDir);
+    let clock = 0;
+    const calls: string[][] = [];
+    const run = (ids: readonly string[]): number | null => {
+      calls.push([...ids]);
+      ids.forEach(write);
+      clock += 10 * 60_000; // each harness run takes ten minutes
+      return 0;
+    };
+    const lines: string[] = [];
+    const outcome = runBatches(
+      { catalogPath: EXAMPLE_CATALOG, outDir, batchSize: 1, budgetMinutes: 15 },
+      run,
+      (l) => lines.push(l),
+      () => clock,
+    );
+    assert.deepEqual(calls, [['example-web-a'], ['example-broken']]);
+    assert.deepEqual(outcome.deferred, ['example-web-b']);
+    assert.deepEqual(outcome.unmeasured, []);
+    assert.deepEqual(outcome.measured, ['example-web-a', 'example-broken']);
+    assert.ok(lines.some((line) => line.includes('1 model(s) deferred to the next run')));
+    fs.rmSync(outDir, { recursive: true, force: true });
+  });
 });

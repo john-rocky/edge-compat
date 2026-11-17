@@ -3,7 +3,7 @@
   "artifact_sha256": "1405986b353c3152e4a677d9446a5694a0f8fd0b13b794d26c892ef85295188c",
   "device": "galaxy-s26",
   "model_id": "embeddinggemma-2-transcribe__eg2_audio_f16safe_fp16w_w10",
-  "notes": "EmbeddingGemma 2 Transcribe, LiteRT form: the audio encoder of google/embeddinggemma-2 (rev 914f7f89; Gemma 4 audio tower + embed_audio) exported to raw LiteRT graphs with an fp16-safe rewrite of its RMSNorm sites (per-site 2^-k rescale, eps x 4^-k, rsqrt clamp, attention mask -30000; bit-identical to the float32 model in fp32), fp16 weights (FLOAT_CASTING on FC / CONV_2D / DEPTHWISE_CONV_2D), one signature per file (audio_30s / audio_10s: mel float32 [1, F, 128] + mask -> soft tokens [1, F/4, 512] + mask), plus reader v1 (a 4-layer transformer over the soft tokens with the 200,000-word table FC and ARG_MAX in-graph) = speech to words on the phone. This file: eg2_audio_f16safe_fp16w_w10.tflite (589015376 B), sha256 = hf_stage FILES.sha256 of the upload set; every phone leg below ran these bytes (sha256 lines in the evidence). Galaxy S26 HTP: the Qualcomm plugin takes the whole graph (one partition); the HTP computes in fp16: a 9-fixture subset passes, the 54 min recording misses the bar at 37 quiet, non-silent tokens (none silent) = the NPU is a measured option, the app's default stays GPU FP32. The 30 s and 20 s windows do not compile within the phone's memory on the JIT (lane record). Lane record: litertlm-convert eg2_stt_work (LANE.md, ROUND1–11, SPEED_LADDER.md lint PASS with user-stop 2026-10-14). Landed 2026-10-15 (DECISIONS #216): the file is on the Hub at mlboydaisuke/EmbeddingGemma-2-Transcribe-LiteRT (upload commit 54d0e902cd50bd6f04958a81ab93e02bf5c77b9d = main, 2026-10-14 18:00:44 UTC = 2026-10-15 03:00 JST); its LFS oid equals artifact_sha256 (anonymous API read 2026-10-15 03:08 JST).",
+  "notes": "EmbeddingGemma 2 Transcribe, LiteRT form: the audio encoder of google/embeddinggemma-2 (rev 914f7f89; Gemma 4 audio tower + embed_audio) exported to raw LiteRT graphs with an fp16-safe rewrite of its RMSNorm sites (per-site 2^-k rescale, eps x 4^-k, rsqrt clamp, attention mask -30000; bit-identical to the float32 model in fp32), fp16 weights (FLOAT_CASTING on FC / CONV_2D / DEPTHWISE_CONV_2D), one signature per file (audio_30s / audio_10s: mel float32 [1, F, 128] + mask -> soft tokens [1, F/4, 512] + mask), plus reader v1 (a 4-layer transformer over the soft tokens with the 200,000-word table FC and ARG_MAX in-graph) = speech to words on the phone. This file: eg2_audio_f16safe_fp16w_w10.tflite (589015376 B), sha256 = hf_stage FILES.sha256 of the upload set; every phone run below ran these bytes (sha256 lines in the evidence). Galaxy S26 HTP: the Qualcomm plugin takes the whole graph (one partition); the HTP computes in fp16: a 9-fixture subset passes, the 54 min recording misses the bar at 37 quiet, non-silent tokens (none silent) = the NPU is a measured option, the app's default stays GPU FP32. The 30 s and 20 s windows do not compile within the phone's memory on the JIT (record). Landed 2026-10-15: the file is on the Hub at mlboydaisuke/EmbeddingGemma-2-Transcribe-LiteRT (upload commit 54d0e902cd50bd6f04958a81ab93e02bf5c77b9d = main, 2026-10-14 18:00:44 UTC = 2026-10-15 03:00 JST); its LFS oid equals artifact_sha256 (anonymous API read 2026-10-15 03:08 JST).",
   "quantization": null,
   "results": [
     {
@@ -23,11 +23,11 @@
       },
       "error": null,
       "evidence": [
-        "Harness: the sample app eg2-transcribe (github.com/john-rocky/eg2-transcribe android/, debug APK app-debug-r7.apk sha256 4e909490…, LiteRT 2.2.0 Kotlin CompiledModel, build 14 = commit 28f4dd2) driven by eg2_stt_work/app/device_check.sh (round 7, S26 hold 2026-10-13 23:05:16–23:12:48); input f30.wav = the first 30 s of the 54 min clip, 5 windows of 10 s; the reader is the placeholder stub (this build predates reader v1), so only the encoder is measured; the app pushed the pair eg2_audio_f16safe_fp16w_w30 + _w10 (sizes checked).",
+        "Harness: the sample app eg2-transcribe (github.com/john-rocky/eg2-transcribe android/, debug APK app-debug-r7.apk sha256 4e909490…, LiteRT 2.2.0 Kotlin CompiledModel, build 14 = commit 28f4dd2) driven (S26 hold 2026-10-13 23:05:16–23:12:48); input f30.wav = the first 30 s of the 54 min clip, 5 windows of 10 s; the reader is the placeholder stub (this build predates reader v1), so only the encoder is measured; the app pushed the pair eg2_audio_f16safe_fp16w_w30 + _w10 (sizes checked).",
         "10-13 23:07:51.116 I/tflite  (32467): Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (main).",
-        "soft tokens vs the continuous float32 reference (soft_tokens_continuous[:T]): mean 0.9999958490 min 0.999769, tokens under 0.99 0 (digital silence 0) -> lane bar PASS (the lane's bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa); eg2_stt_work/app/device/20261013-230516/check_all.json).",
-        "latency_p50_ms = the median encoder call (write + run + read) over the run's 5 windows: 94.719531 ms (eg2_stt_work/app/device/20261013-230516/r7_npu.json).",
-        "output_match = the lane's bar; max_abs_diff = max |d| vs the reference.",
+        "soft tokens vs the continuous float32 reference (soft_tokens_continuous[:T]): mean 0.9999958490 min 0.999769, tokens under 0.99 0 (digital silence 0) -> pass bar PASS (the bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa)).",
+        "latency_p50_ms = the median encoder call (write + run + read) over the run's 5 windows: 94.719531 ms.",
+        "output_match = the bar; max_abs_diff = max |d| vs the reference.",
         "the app hashed the file on the phone before the NPU compile: sha256 1405986b353c3152e4a677d9446a5694a0f8fd0b13b794d26c892ef85295188c (report backend.npu.sha256) = the staged digest."
       ],
       "failure_class": null,
@@ -80,11 +80,11 @@
       },
       "error": null,
       "evidence": [
-        "Harness: the sample app eg2-transcribe (github.com/john-rocky/eg2-transcribe android/, debug APK app-debug-r7.apk sha256 4e909490…, LiteRT 2.2.0 Kotlin CompiledModel, build 14 = commit 28f4dd2) driven by eg2_stt_work/app/device_check.sh (round 7, S26 hold 2026-10-13 23:05:16–23:12:48); input the 54 min 17 s LibriVox clip (FLAC), 529 windows of 10 s, from the JIT cache; the reader is the placeholder stub (this build predates reader v1), so only the encoder is measured; the app pushed the pair eg2_audio_f16safe_fp16w_w30 + _w10 (sizes checked).",
+        "Harness: the sample app eg2-transcribe (github.com/john-rocky/eg2-transcribe android/, debug APK app-debug-r7.apk sha256 4e909490…, LiteRT 2.2.0 Kotlin CompiledModel, build 14 = commit 28f4dd2) driven (S26 hold 2026-10-13 23:05:16–23:12:48); input the 54 min 17 s LibriVox clip (FLAC), 529 windows of 10 s, from the JIT cache; the reader is the placeholder stub (this build predates reader v1), so only the encoder is measured; the app pushed the pair eg2_audio_f16safe_fp16w_w30 + _w10 (sizes checked).",
         "10-13 23:08:33.494 I/tflite  ( 3487): Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (main).",
-        "soft tokens vs the continuous float32 reference (soft_tokens_continuous[:T]): mean 0.9999599254 min 0.454732, tokens under 0.99 37 (digital silence 0) -> lane bar FAIL (the lane's bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa); eg2_stt_work/app/device/20261013-230516/check_all.json).",
-        "latency_p50_ms = the median encoder call (write + run + read) over the run's 529 windows: 98.559166 ms (eg2_stt_work/app/device/20261013-230516/r7_long.json).",
-        "output_match = the lane's bar; max_abs_diff = max |d| vs the reference.",
+        "soft tokens vs the continuous float32 reference (soft_tokens_continuous[:T]): mean 0.9999599254 min 0.454732, tokens under 0.99 37 (digital silence 0) -> pass bar FAIL (the bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa)).",
+        "latency_p50_ms = the median encoder call (write + run + read) over the run's 529 windows: 98.559166 ms.",
+        "output_match = the bar; max_abs_diff = max |d| vs the reference.",
         "the app hashed the file on the phone before the NPU compile: sha256 1405986b353c3152e4a677d9446a5694a0f8fd0b13b794d26c892ef85295188c (report backend.npu.sha256) = the staged digest."
       ],
       "failure_class": null,
@@ -137,15 +137,14 @@
       },
       "error": null,
       "evidence": [
-        "Harness: the C-API runner r17_npu_runner (sha256 102a0f0a…, LiteRT 2.2.0 + the Qualcomm JIT compiler plugin / dispatch library and the HTP V81 libraries of QAIRT 2.47; kev_work/npu/libs, 12/12 sha256 MATCH at setup) through devicebench npu_chain.sh, one process per leg under /data/local/tmp; fixtures written by the lane's Mac host; round 5 leg N2_npu_fp16w_w10, 9 fixtures + 10 timed calls.",
+        "Harness: the C-API runner r17_npu_runner (sha256 102a0f0a…, LiteRT 2.2.0 + the Qualcomm JIT compiler plugin / dispatch library and the HTP V81 libraries of QAIRT 2.47; 12/12 sha256 MATCH at setup) through a benchmark script, one process per run under /data/local/tmp; fixtures written by the Mac host; run 5 run N2_npu_fp16w_w10, 9 fixtures + 10 timed calls.",
         "push eg2_audio_f16safe_fp16w_w10.tflite rc=0 bytes 589015376/589015376 sha256 phone=1405986b353c3152e4a677d9446a5694a0f8fd0b13b794d26c892ef85295188c mac=1405986b353c3152e4a677d9446a5694a0f8fd0b13b794d26c892ef85295188c MATCH in 7s",
         "INFO: [compiler_plugin.cc:741] Partitioned subgraph<0>, selected 2767 ops, from a total of 2767 ops. resulted in 1 partitions.",
         "INFO: [qnn_compiler_plugin.cc:729] Generating context binary",
         "VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (main).",
-        "parity PASS: 9 fixtures, 1806 valid tokens, cos mean 0.9999936 min 0.99748 (the lane's bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa); eg2_stt_work/results/s26_npu_parity_N2_npu_fp16w_w10_n2.json). The 9 fixtures are a subset without the long recording's windows; the whole set (90 windows, round 6) failed this bar on the fp32-weight 10 s file of the same rewrite, and the 54 min app run on these bytes misses it at quiet passages (the app record below).",
-        "latency_p50_ms = median of 10 timed calls after the JIT compile in the same process: 94.6095 ms (eg2_stt_work/results/s26_npu_timing_N2_npu_fp16w_w10_n2.json).",
-        "output_match = the lane's bar on this subset; max_abs_diff null (the runner's scorer pools cos only).",
-        "tokens under 0.99: eg2_stt_work/results/s26_npu_bartokens_N2_npu_fp16w_w10_n2.json."
+        "parity PASS: 9 fixtures, 1806 valid tokens, cos mean 0.9999936 min 0.99748 (the bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa)). The 9 fixtures are a subset without the long recording's windows; the whole set (90 windows, run 6) failed this bar on the fp32-weight 10 s file of the same rewrite, and the 54 min app run on these bytes misses it at quiet passages (the app record below).",
+        "latency_p50_ms = median of 10 timed calls after the JIT compile in the same process: 94.6095 ms.",
+        "output_match = the bar on this subset; max_abs_diff null (the runner's scorer pools cos only)."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -179,7 +178,7 @@
       "prefill_tokens_per_s": null,
       "provenance": "measured",
       "runs": true,
-      "signature": "NPU + CPU (Qualcomm JIT, HtpPerformanceMode Burst), JIT first compile; C-API runner, round 5 leg N2_npu_fp16w_w10, 9 fixtures + 10 timed calls",
+      "signature": "NPU + CPU (Qualcomm JIT, HtpPerformanceMode Burst), JIT first compile; C-API runner, run 5 run N2_npu_fp16w_w10, 9 fixtures + 10 timed calls",
       "total_ops": 1,
       "ttft_ms": null
     }

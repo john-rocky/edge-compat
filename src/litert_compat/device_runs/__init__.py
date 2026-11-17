@@ -1,4 +1,4 @@
-"""Device-run results (Phase 13): the NPU 対応可否 and LLM 対応表 lanes.
+"""Device-run results (Phase 13): the NPU support list and the LLM table.
 
 Model-level facts per (model x device x accelerator), schema
 device_run_result.schema.json, stored as append-only snapshots under

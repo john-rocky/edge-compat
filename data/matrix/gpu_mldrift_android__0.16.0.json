@@ -18,7 +18,7 @@
       "provenance": "measured",
       "rewrite_hints": [
         {
-          "expected_effect": "measured: index, selector and gather all match CPU exactly afterwards; granite-4.0-h-1b then answers correctly on device (8Q 8/8 on Mac GPU)",
+          "expected_effect": "measured: index, selector and gather all match CPU exactly afterwards; granite-4.0-h-1b then answers correctly on device (8-question check 8/8 on Mac GPU)",
           "rewrite": "keep the batch dimension when reducing: `sum(-1, keepdim=True)` -> (B,1), then broadcast at rank >= 1",
           "symptom": "full delegation, coherent-looking graph, but every stored conv state is exactly 0.0 and the model emits token 0 forever"
         }

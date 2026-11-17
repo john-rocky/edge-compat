@@ -8,10 +8,10 @@
   ],
   "benchmarks": [],
   "conversion": {
-    "command": "python convert_lfm25.py LiquidAI/LFM2.5-1.2B-Thinking out_thinking_fp --fp && python quantize_litertlm.py apply out_thinking_fp/model.litertlm LFM2.5-1.2B-Thinking_int4_gpu.litertlm --recipe wi4b32_wi8 --algo octav && python scripts/add_executor_metadata.py  # RESULTS.md pipeline; upstream ShortConv fix, composite lowered by converter 0.3.1",
+    "command": "python convert_lfm25.py LiquidAI/LFM2.5-1.2B-Thinking out_thinking_fp --fp && python quantize_litertlm.py apply out_thinking_fp/model.litertlm LFM2.5-1.2B-Thinking_int4_gpu.litertlm --recipe wi4b32_wi8 --algo octav && python scripts/add_executor_metadata.py  # upstream ShortConv fix, composite lowered by converter 0.3.1",
     "quantization": "int4 blockwise-32 + OCTAV linears, int8 embedding, convs float (same recipe as the CPU int4 file, re-exported so it runs on the GPU — HF card)",
-    "tool": "litert-torch (via litertlm-convert minicpm5_work convert_lfm25.py + quantize_litertlm.py + add_executor_metadata.py)",
-    "tool_version": "0.9.3 (~/venvs/ltconv040dev: litert-converter 0.3.1, ai-edge-quantizer 0.8.0, litert-lm 0.15.0 builder; ship_lfm25_gpu_variant_20260812/RESULTS.md)"
+    "tool": "litert-torch (via convert_lfm25.py + quantize_litertlm.py + add_executor_metadata.py)",
+    "tool_version": "0.9.3 (litert-converter 0.3.1, ai-edge-quantizer 0.8.0, litert-lm 0.15.0 builder)"
   },
   "cross_runtime": [],
   "delegation": null,
@@ -129,8 +129,7 @@
           "error": null,
           "evidence": [
             "maxNumTokens=1024; thinking model — TTFT includes the thinking phase (554 tokens generated total), final answer coherent; all Metal kernels initialize, zero half4/float4",
-            "device charging during run (functional gate)",
-            "litertlm-convert/minicpm5_work/ship_lfm25_gpu_0160/device_gate_20260825_maxtok/console_thinking_maxtok1024.log"
+            "device charging during run (functional gate)"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -221,7 +220,7 @@
           },
           "error": null,
           "evidence": [
-            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation gate (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
+            "pi5 LLM sweep row: `litert-lm benchmark --backend cpu --cpu-thread-count 4 -p 256 -d 256 --runs 1 --cache memory` (wave-2 driver pi5_llm_bench.py; --cache memory rather than the house --cache no, which OOM-kills every >=1.2B file on the 8 GB Pi — equivalence measured on granite-350m int8, +2-3%), 3 invocations per file with cool-down to <=52 C between them, vcgencmd measure_temp + get_throttled logged per invocation, peak RSS polled from /proc; throughput = median of the three invocations (spread in metrics); a row counts as measured only when the real-generation check (`litert-lm run`, degenerate-output check) passed and every invocation exited 0 with get_throttled 0x0",
             "versions: cpu=Raspberry Pi 5 Model B Rev 1.1, litert-lm=0.16.1, litert-lm-api=0.16.1, platform=Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41, python=3.13.5",
             "cache mode 'memory'; -p 256 -d 256 --runs 1 --cpu-thread-count 4",
             "gate ('What is 17 plus 26? Answer with the number only.'): status pass, exit 0, wall 84.7 s, output head '[thought]  Okay, let\\'s see. The question is \"What is 17 plus 26? Answer with the'",
@@ -274,7 +273,7 @@
     "GPU needs litert-lm >= 0.16.0 (Android OpenCL and macOS, verified by generation); iOS Metal fails at engine creation for this family (LiteRT-LM#3129) — use CPU on iOS (HF card).",
     "A thinking model needs the token budget: GSM8K measured at max-tokens 2048 (int4 72% vs bf16 81%); the reasoning stream arrives on the `thought` channel and the final answer follows after </think> (HF card).",
     "On phone-class hardware the GPU's win is prefill and TTFT (3-6x); decode is bandwidth-bound and roughly a wash — a thinking model's long outputs gain less than its long prompts (HF card, measured).",
-    "0.9.3 does not write ExecutorMetadata itself — add_executor_metadata.py is a mandatory post-step or litert-lm >= 0.15 fails at inference (RESULTS.md)."
+    "0.9.3 does not write ExecutorMetadata itself — add_executor_metadata.py is a mandatory post-step or litert-lm >= 0.15 fails at inference."
   ],
   "schema_version": "1.2"
 }

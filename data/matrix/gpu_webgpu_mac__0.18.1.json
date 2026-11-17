@@ -1,0 +1,33 @@
+{
+  "backend": "gpu_webgpu_mac",
+  "entries": [
+    {
+      "conditions": "Mac Studio M4 Max, macOS 27.0, litert-lm 0.18.1 PyPI wheel, Python API Backend.GPU (WebGPU on Metal): 'Failed to create litert::ml_drift::DelegateKernelLiteRt: INVALID_ARGUMENT: Shape mismatch: {bhwc, {2048, 1, 1, 2048}} vs {bhwc, {1, 1, 2048, 2048}}' (delegate_webgpu.cc:478), then engine.cc:854 'Failed to create engine' (the LLM GPU executor takes no partial delegation)",
+      "constraints": {
+        "weight_only": "DEQUANTIZE->FULLY_CONNECTED (the MLP down projection [2048,7680] and the short-conv out projection [2048,2048] of a .litertlm decoder)"
+      },
+      "dtypes": [
+        "float32",
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-10-28",
+        "litert_version": "litert-lm 0.18.1 (PyPI wheel)",
+        "source_model": "LiquidAI/LFM3-1.7B @40ebe0aa: the form q2_mlp_down+conv_out (not published)"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "the engine is created and every signature is replaced whole (the published LFM3-1.7B files)",
+          "rewrite": "ship the GPU file with dynamic-range int8 or int4 blockwise FCs; keep weight-only FCs to a CPU-only file",
+          "symptom": "a .litertlm with weight-only int8 FCs does not open on the GPU backend"
+        }
+      ],
+      "status": "fallback"
+    }
+  ],
+  "generated_at": "2026-10-29",
+  "litert_version": "0.18.1",
+  "schema_version": "1.0"
+}

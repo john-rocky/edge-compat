@@ -1,0 +1,492 @@
+{
+  "artifacts": [
+    {
+      "file": "oc_e_non_v1_mixed_int4b32_fp16act_ekv4096.litertlm",
+      "sha256": "0dac09e4d6d298216444caf4a0ad0b9a29e71d31953d9568cd0e58de01d7a854",
+      "size_mb": 2910.547
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "p-e-w/Oc-e-Non-v1 rev dbf4e269 (bf16) -> export_hf with its GPU composites; int4 blockwise-32 weights for the linear layers, int8 token table and output layer; fp16 GPU activations; LiteRT-LM 0.19.1's Qwen3 configuration with the checkpoint's sampler (top-k 20, top-p 0.8, temperature 0.7), <|endoftext|> as a second stop token and no thought channel; the checkpoint's tokenizer.json byte for byte (card L35, L69-L70)",
+    "quantization": "int4 (blocks of 32) for the linear layers; int8 token table and output layer; fp16 GPU activations (card L35)",
+    "tool": "litert-torch 0.10.0 export_hf with its GPU composites, quantized with ai-edge-quantizer 0.10.1; one command rebuilds both files (the recipe in john-rocky/hf-to-litertlm REPRODUCE.md) (card L18, L69, L71)",
+    "tool_version": "litert-torch 0.10.0, ai-edge-quantizer 0.10.1; litert_lm_advanced_main built from LiteRT-LM v0.19.0 (771b06e1) for the phone numbers, the PyPI litert-lm 0.19.2 on an Apple M4 Max for the accuracy checks (card L18, L42, L52, L65)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": 2048,
+          "date": "2026-11-15",
+          "decode_tokens_per_s": 9.125,
+          "delegated_ops": 2926,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-ocenon-devicebench",
+            "os_build": "Android 16 (BP4A.251205.006)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Landed 2026-11-15 from the close-out: mlboydaisuke/Oc-e-Non-v1-LiteRT is public and ungated (license apache-2.0, base_model p-e-w/Oc-e-Non-v1 quantized, library_name litert-lm, pipeline_tag text-generation), upload commit fbcff6e942 (2026-11-15 09:10:45 JST), main 19cd5faf33 (a README-only commit, 2026-11-15 12:29:13 JST) at the read; the tree's LFS oid and size of oc_e_non_v1_mixed_int4b32_fp16act_ekv4096.litertlm = artifact_sha256 and 3051929936 B (anonymous, read 2026-11-15 12:47:48 JST).",
+            "binary: litert_lm_advanced_main built for android_arm64 from the LiteRT-LM v0.19.0 tag (commit 771b06e1, 2026-10-28T23:05:58Z; the kit's BUILD_INFO: describe v0.19.0, NDK 29.0.13113456, bazel 7.6.1, built 2026-10-30T19:14:27Z), sha256 2e0b5097..., with the .so files the same build wrote (the kit's SHA256SUMS; every run's setup checked each file's sha256 on the phone: MATCH); its log reads 'Statically linked GPU accelerator registered.' on every run (asserted)",
+            "protocol: a benchmark script (one process per run, a ready check before each: thermal, CPU cap, rest), the run scorer tools/score_leg.py; `./litert_lm_advanced_main --backend=cpu --model_path=<the file> --input_prompt_file=prompts/bench.txt --max_num_tokens=2048 --max_output_tokens=2048 --async=false --benchmark --benchmark_prefill_tokens=1024 --benchmark_decode_tokens=256 --num_iterations=3 --use_session=false` (each run's .meta.json cmd; the phone-side memory guard 1,000,000 kB)",
+            "3 push(es) of ocn_k4h, each 'sha256 phone=0dac09e4d6d29821... MATCH'",
+            "the cell (the card's Performance rule): per process the mean of iterations 2-3 of one engine (iteration 1 = the warm-up), the cell = the mean over the 1 process(es) of this file and backend, prefill, decode and TTFT each; peak_mem_mb = the larger VmHWM of the processes (kB x 1,024 / 10^6; VmHWM does not count the memory the GPU driver holds); each process started after the chain's ready check, 304 s after the previous process",
+            "the card's Performance row (README L60-L63 at main 19cd5faf, the command line L65): Mixed INT4 CPU 36.1 / 9.1 tok/s, 28.5 s, 6.23 GB = this cell at the card's digits",
+            "r1s-t10-k4h-cpu (process 1; started 2026-11-15 08:19:09 JST in r1s hold 3 (11-15 07:59:01-08:22:04 JST); warm (thermal 1, cap none, kgsl_pwrlevel 0); rested 304s since 08:14:05): iterations 39.88 / 9.68 tok/s, TTFT 25.78 s; 36.04 / 9.35 tok/s, TTFT 28.52 s; 36.09 / 8.9 tok/s, TTFT 28.49 s; value (iterations 2-3) 36.06 / 9.12 tok/s, TTFT 28.505 s; init 3595.28 ms; VmHWM_max_kB 6079964 VmSwap_max_kB 541696 MemAvailable_min_kB 4019112 kgsl_page_alloc_max_B 287125504",
+            "CPU = XNNPACK, 'number_of_threads: 4' printed; the delegate lines: prefill_1031 327 / 556 nodes (364 partitions), then on the second pass 2926 / 3226 (146 partitions); decode 290 / 518 (364), then 2708 / 3007 (146); 434 lines for the odml.* composite subgraphs (full_delegation false: the log states a split; the counts are the second pass's prefill_1031 line)"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "cpu_threads": 4.0,
+            "decode_tokens": 256.0,
+            "iterations": 3.0,
+            "max_num_tokens": 2048.0,
+            "prefill_tokens": 1024.0,
+            "proc1_init_total_ms": 3595.28,
+            "proc1_iter1_decode_tok_s": 9.68,
+            "proc1_iter1_prefill_tok_s": 39.88,
+            "proc1_iter1_ttft_s": 25.78,
+            "proc1_iter2_decode_tok_s": 9.35,
+            "proc1_iter2_prefill_tok_s": 36.04,
+            "proc1_iter2_ttft_s": 28.52,
+            "proc1_iter3_decode_tok_s": 8.9,
+            "proc1_iter3_prefill_tok_s": 36.09,
+            "proc1_iter3_ttft_s": 28.49,
+            "proc1_rest_s_before": 304.0,
+            "proc1_thermal_status_at_start": 1.0,
+            "proc1_vmhwm_kb": 6079964.0,
+            "processes": 1.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 6225.883,
+          "prefill_tokens_per_s": 36.065,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 3226,
+          "ttft_ms": 28505.0
+        },
+        "source": "data/device_runs/0.19.0/2026-11-15/oc-e-non-v1-mixed-int4b32-fp16act-ekv4096__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-11-15",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 556,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-ocenon-devicebench",
+            "os_build": "Android 16 (BP4A.251205.006)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Landed 2026-11-15 from the close-out: mlboydaisuke/Oc-e-Non-v1-LiteRT is public and ungated (license apache-2.0, base_model p-e-w/Oc-e-Non-v1 quantized, library_name litert-lm, pipeline_tag text-generation), upload commit fbcff6e942 (2026-11-15 09:10:45 JST), main 19cd5faf33 (a README-only commit, 2026-11-15 12:29:13 JST) at the read; the tree's LFS oid and size of oc_e_non_v1_mixed_int4b32_fp16act_ekv4096.litertlm = artifact_sha256 and 3051929936 B (anonymous, read 2026-11-15 12:47:48 JST).",
+            "binary: litert_lm_advanced_main built for android_arm64 from the LiteRT-LM v0.19.0 tag (commit 771b06e1, 2026-10-28T23:05:58Z; the kit's BUILD_INFO: describe v0.19.0, NDK 29.0.13113456, bazel 7.6.1, built 2026-10-30T19:14:27Z), sha256 2e0b5097..., with the .so files the same build wrote (the kit's SHA256SUMS; every run's setup checked each file's sha256 on the phone: MATCH); its log reads 'Statically linked GPU accelerator registered.' on every run (asserted)",
+            "3 push(es) of ocn_k4h, each 'sha256 phone=0dac09e4d6d29821... MATCH'",
+            "output_match = line D (written 2026-11-14 16:33 JST before any output): the same verdict as the reference on at least 7 of the 8 questions and no reply at the cap (the work applied the same rule to the CPU runs); the reference (Transformers 5.22.1, the bf16 weights computed in float32 on the Mac CPU, greedy) answers all 8 right",
+            "(r1s, r1s hold 2 (11-15 05:24:24-05:50:30 JST); first run 2026-11-15 05:26:02 JST, last 05:28:58): q1 '42' PASS; q2 'Tokyo' PASS; q3 'cold' PASS; q4 '7 days' PASS; q5 '\"Merci\"' PASS; q6 '56' PASS; q7 '0.9' PASS; q8 'Violets are blue.' PASS; reply tokens [3, 3, 2, 3, 5, 3, 4, 7]",
+            "r1s-k4h-gpu-q1 /: prefill_1031: 556 / 556 on LITERT_CL, 1 partition; decode: 518 / 518 on LITERT_CL, 1 partition"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "answers_right": 8.0,
+            "max_num_tokens": 1024.0,
+            "max_output_tokens": 256.0,
+            "questions": 8.0,
+            "reply_tokens_max": 7.0,
+            "verdicts_equal_reference": 8.0
+          },
+          "output_match": true,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "the first 8 of the 12 check questions of line 3 (17 + 25, the capital of Japan, the opposite of 'hot', the days of a week, 'thank you' in French, 8 times 7, 0.9 or 0.11, the rhyme), each with ' Answer briefly.' in its own process, --max_num_tokens=1024 --max_output_tokens=256, no sampler flags (the file's sampler); each verdict by the question's regex against Transformers (float32, greedy)",
+          "total_ops": 556,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.19.0/2026-11-15/oc-e-non-v1-mixed-int4b32-fp16act-ekv4096__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": 2048,
+          "date": "2026-11-15",
+          "decode_tokens_per_s": 18.105,
+          "delegated_ops": 556,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-ocenon-devicebench",
+            "os_build": "Android 16 (BP4A.251205.006)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Landed 2026-11-15 from the close-out: mlboydaisuke/Oc-e-Non-v1-LiteRT is public and ungated (license apache-2.0, base_model p-e-w/Oc-e-Non-v1 quantized, library_name litert-lm, pipeline_tag text-generation), upload commit fbcff6e942 (2026-11-15 09:10:45 JST), main 19cd5faf33 (a README-only commit, 2026-11-15 12:29:13 JST) at the read; the tree's LFS oid and size of oc_e_non_v1_mixed_int4b32_fp16act_ekv4096.litertlm = artifact_sha256 and 3051929936 B (anonymous, read 2026-11-15 12:47:48 JST).",
+            "binary: litert_lm_advanced_main built for android_arm64 from the LiteRT-LM v0.19.0 tag (commit 771b06e1, 2026-10-28T23:05:58Z; the kit's BUILD_INFO: describe v0.19.0, NDK 29.0.13113456, bazel 7.6.1, built 2026-10-30T19:14:27Z), sha256 2e0b5097..., with the .so files the same build wrote (the kit's SHA256SUMS; every run's setup checked each file's sha256 on the phone: MATCH); its log reads 'Statically linked GPU accelerator registered.' on every run (asserted)",
+            "protocol: a benchmark script (one process per run, a ready check before each: thermal, CPU cap, rest), the run scorer tools/score_leg.py; `./litert_lm_advanced_main --backend=gpu --model_path=<the file> --input_prompt_file=prompts/bench.txt --max_num_tokens=2048 --max_output_tokens=2048 --async=false --benchmark --benchmark_prefill_tokens=1024 --benchmark_decode_tokens=256 --num_iterations=3 --use_session=false` (each run's .meta.json cmd; the phone-side memory guard 1,000,000 kB)",
+            "3 push(es) of ocn_k4h, each 'sha256 phone=0dac09e4d6d29821... MATCH'",
+            "the cell (the card's Performance rule): per process the mean of iterations 2-3 of one engine (iteration 1 = the warm-up), the cell = the mean over the 2 process(es) of this file and backend, prefill, decode and TTFT each; peak_mem_mb = the larger VmHWM of the processes (kB x 1,024 / 10^6; VmHWM does not count the memory the GPU driver holds); each process started after the chain's ready check, 305 s after the previous process",
+            "the card's Performance row (README L60-L63 at main 19cd5faf, the command line L65): Mixed INT4 GPU 222.1 / 18.1 tok/s, 4.7 s, 1.73 GB = this cell at the card's digits",
+            "r1s-t2-k4h-gpu (process 1; started 2026-11-15 02:50:31 JST in r1s hold 1 (11-15 02:38:47-03:04:08 JST); warm (thermal 1, cap none, kgsl_pwrlevel 0); rested 305s since 02:45:26): iterations 273.41 / 18.32 tok/s, TTFT 3.8 s; 250.23 / 18.13 tok/s, TTFT 4.15 s; 197.15 / 17.8 tok/s, TTFT 5.25 s; value (iterations 2-3) 223.69 / 17.96 tok/s, TTFT 4.7 s; init 14391.15 ms; VmHWM_max_kB 1685304 VmSwap_max_kB 119556 MemAvailable_min_kB 2748908 kgsl_page_alloc_max_B 5150023680",
+            "r1s-t2-k4h-gpu /: prefill_1031: 556 / 556 on LITERT_CL, 1 partition; decode: 518 / 518 on LITERT_CL, 1 partition",
+            "r1s-t5-k4h-gpu (process 2; started 2026-11-15 05:34:21 JST in r1s hold 2 (11-15 05:24:24-05:50:30 JST); warm (thermal 1, cap none, kgsl_pwrlevel 0); rested 305s since 05:29:16): iterations 261.68 / 18.38 tok/s, TTFT 3.97 s; 234.38 / 18.33 tok/s, TTFT 4.42 s; 206.69 / 18.16 tok/s, TTFT 5.01 s; value (iterations 2-3) 220.53 / 18.24 tok/s, TTFT 4.715 s; init 14026.68 ms; VmHWM_max_kB 1687328 VmSwap_max_kB 92048 MemAvailable_min_kB 2809796 kgsl_page_alloc_max_B 5083410432",
+            "r1s-t5-k4h-gpu /: prefill_1031: 556 / 556 on LITERT_CL, 1 partition; decode: 518 / 518 on LITERT_CL, 1 partition"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "iterations": 3.0,
+            "max_num_tokens": 2048.0,
+            "prefill_tokens": 1024.0,
+            "proc1_init_total_ms": 14391.15,
+            "proc1_iter1_decode_tok_s": 18.32,
+            "proc1_iter1_prefill_tok_s": 273.41,
+            "proc1_iter1_ttft_s": 3.8,
+            "proc1_iter2_decode_tok_s": 18.13,
+            "proc1_iter2_prefill_tok_s": 250.23,
+            "proc1_iter2_ttft_s": 4.15,
+            "proc1_iter3_decode_tok_s": 17.8,
+            "proc1_iter3_prefill_tok_s": 197.15,
+            "proc1_iter3_ttft_s": 5.25,
+            "proc1_rest_s_before": 305.0,
+            "proc1_thermal_status_at_start": 1.0,
+            "proc1_vmhwm_kb": 1685304.0,
+            "proc2_init_total_ms": 14026.68,
+            "proc2_iter1_decode_tok_s": 18.38,
+            "proc2_iter1_prefill_tok_s": 261.68,
+            "proc2_iter1_ttft_s": 3.97,
+            "proc2_iter2_decode_tok_s": 18.33,
+            "proc2_iter2_prefill_tok_s": 234.38,
+            "proc2_iter2_ttft_s": 4.42,
+            "proc2_iter3_decode_tok_s": 18.16,
+            "proc2_iter3_prefill_tok_s": 206.69,
+            "proc2_iter3_ttft_s": 5.01,
+            "proc2_rest_s_before": 305.0,
+            "proc2_thermal_status_at_start": 1.0,
+            "proc2_vmhwm_kb": 1687328.0,
+            "processes": 2.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 1727.824,
+          "prefill_tokens_per_s": 222.1125,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": 556,
+          "ttft_ms": 4707.5
+        },
+        "source": "data/device_runs/0.19.0/2026-11-15/oc-e-non-v1-mixed-int4b32-fp16act-ekv4096__galaxy-s26.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-11-15",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.2",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Landed 2026-11-15 from the close-out: mlboydaisuke/Oc-e-Non-v1-LiteRT is public and ungated (license apache-2.0, base_model p-e-w/Oc-e-Non-v1 quantized, library_name litert-lm, pipeline_tag text-generation), upload commit fbcff6e942 (2026-11-15 09:10:45 JST), main 19cd5faf33 (a README-only commit, 2026-11-15 12:29:13 JST) at the read; the tree's LFS oid and size of oc_e_non_v1_mixed_int4b32_fp16act_ekv4096.litertlm = artifact_sha256 and 3051929936 B (anonymous, read 2026-11-15 12:47:48 JST).",
+            "runtime: the PyPI litert-lm-api 0.19.2 macOS arm64 wheel (Python 3.13.13; liblitert-lm.dylib sha256 13421998..., 50,610,352 B), its Python API (tools/lt_run.py): one Engine per file and backend with max_num_tokens 4096 and no cache directory, a new conversation per question, greedy = SamplerConfig(top_k=1, top_p=0.95, temperature=1.0, seed=0), the file's own activation declaration; CPU = XNNPACK (the default thread count), GPU = WebGPU on Metal; a process a window paused for more than 10 minutes was not used past the pause (send_message's deadline): its unanswered questions went to a new process. Paths are relative",
+            "output_match = line 3 as written before any output (2026-11-14 16:33 JST): (a) the file's verdict equals the reference's on at least 11 of 12, (b) every question the reference ends before the cap ends before the cap here, (c) turn 3 recalls 37 and no turn reaches the cap; reference = Transformers 5.22.1 with the bf16 weights computed in float32 on the Mac CPU, the checkpoint's chat template, greedy",
+            "(questions 1-6 from the process started 2026-11-15 08:09:56 JST, questions 7-12 and the conversation from a new process started 2026-11-15 08:41:39 JST): 11 / 12 verdicts equal (misses: question 10 (fib(10)=55+def): the file's reply ends '= b, a + b\\n    return a\\n```\\n10', the reference '= b, a + b\\n    return b\\n```\\n55'), no reply at the cap; the conversation: 'Kaito, 37' / 'Canberra' / '37'; judge pass"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "conversation_turns": 3.0,
+            "conversation_turns_right": 3.0,
+            "engine_create_s": 2.7,
+            "max_new_tokens": 1024.0,
+            "questions": 12.0,
+            "verdicts_equal_reference": 11.0
+          },
+          "output_match": true,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "the 12 check questions of line 3 (17 + 25, the capital of Japan, the opposite of 'hot', the days of a week, 'thank you' in French, 8 times 7, 0.9 or 0.11, the rhyme, a word problem, fib(10) in Python, the planets in order, a Japanese sentence in English), each with ' Answer briefly.' in a new conversation, and a 3-turn conversation, greedy, at most 1,024 new tokens per reply; verdicts against Transformers (float32, greedy)",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.19.2/2026-11-15/oc-e-non-v1-mixed-int4b32-fp16act-ekv4096__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-11-15",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.2",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Landed 2026-11-15 from the close-out: mlboydaisuke/Oc-e-Non-v1-LiteRT is public and ungated (license apache-2.0, base_model p-e-w/Oc-e-Non-v1 quantized, library_name litert-lm, pipeline_tag text-generation), upload commit fbcff6e942 (2026-11-15 09:10:45 JST), main 19cd5faf33 (a README-only commit, 2026-11-15 12:29:13 JST) at the read; the tree's LFS oid and size of oc_e_non_v1_mixed_int4b32_fp16act_ekv4096.litertlm = artifact_sha256 and 3051929936 B (anonymous, read 2026-11-15 12:47:48 JST).",
+            "runtime: the PyPI litert-lm-api 0.19.2 macOS arm64 wheel (Python 3.13.13; liblitert-lm.dylib sha256 13421998..., 50,610,352 B), its Python API (tools/lt_run.py): one Engine per file and backend with max_num_tokens 4096 and no cache directory, a new conversation per question, greedy = SamplerConfig(top_k=1, top_p=0.95, temperature=1.0, seed=0), the file's own activation declaration; CPU = XNNPACK (the default thread count), GPU = WebGPU on Metal; a process a window paused for more than 10 minutes was not used past the pause (send_message's deadline): its unanswered questions went to a new process. Paths are relative",
+            "output_match = line Q (written before any output): pass = b - c <= 2 sqrt(b + c) against the reference's 100 answers (Transformers, float32, batches of 8, left padding); true when every process passes",
+            "(a new process started 2026-11-15 08:04:53 JST, not paused): 75 / 100 right, reference 83; b 14 / c 6, bar 8.94 = pass; 3 replies at the 512-token cap (the reference 4)",
+            "(a new process started 2026-11-15 09:40:56 JST, not paused): 83 / 100 right, reference 83; b 8 / c 8, bar 8.0 = pass; 1 replies at the 512-token cap (the reference 4)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "max_new_tokens": 512.0,
+            "processes": 2.0,
+            "questions": 100.0,
+            "reference_correct": 83.0,
+            "run1_b": 14.0,
+            "run1_bar": 8.94,
+            "run1_c": 6.0,
+            "run1_capped": 3.0,
+            "run1_correct": 75.0,
+            "run2_b": 8.0,
+            "run2_bar": 8.0,
+            "run2_c": 8.0,
+            "run2_capped": 1.0,
+            "run2_correct": 83.0
+          },
+          "output_match": true,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "GSM8K test, the first 100 questions with a chain-of-thought prompt, one conversation each, greedy, at most 512 new tokens; paired against Transformers (float32, greedy): b = right in the reference and wrong in the file, c = the reverse, pass = b - c <= 2 sqrt(b + c)",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.19.2/2026-11-15/oc-e-non-v1-mixed-int4b32-fp16act-ekv4096__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-11-15",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.2",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Landed 2026-11-15 from the close-out: mlboydaisuke/Oc-e-Non-v1-LiteRT is public and ungated (license apache-2.0, base_model p-e-w/Oc-e-Non-v1 quantized, library_name litert-lm, pipeline_tag text-generation), upload commit fbcff6e942 (2026-11-15 09:10:45 JST), main 19cd5faf33 (a README-only commit, 2026-11-15 12:29:13 JST) at the read; the tree's LFS oid and size of oc_e_non_v1_mixed_int4b32_fp16act_ekv4096.litertlm = artifact_sha256 and 3051929936 B (anonymous, read 2026-11-15 12:47:48 JST).",
+            "runtime: the PyPI litert-lm-api 0.19.2 macOS arm64 wheel (Python 3.13.13; liblitert-lm.dylib sha256 13421998..., 50,610,352 B), its Python API (tools/lt_run.py): one Engine per file and backend with max_num_tokens 4096 and no cache directory, a new conversation per question, greedy = SamplerConfig(top_k=1, top_p=0.95, temperature=1.0, seed=0), the file's own activation declaration; CPU = XNNPACK (the default thread count), GPU = WebGPU on Metal; a process a window paused for more than 10 minutes was not used past the pause (send_message's deadline): its unanswered questions went to a new process. Paths are relative",
+            "output_match = line 3 as written before any output (2026-11-14 16:33 JST): (a) the file's verdict equals the reference's on at least 11 of 12, (b) every question the reference ends before the cap ends before the cap here, (c) turn 3 recalls 37 and no turn reaches the cap; reference = Transformers 5.22.1 with the bf16 weights computed in float32 on the Mac CPU, the checkpoint's chat template, greedy",
+            "(started 2026-11-15 06:01:07 JST, every reply written before the process was paused at 06:02:39; that process's later GSM8K rows are not used): 11 / 12 verdicts equal (misses: question 10 (fib(10)=55+def): the file's reply ends '= b, a + b\\n    return a\\n```\\n10', the reference '= b, a + b\\n    return b\\n```\\n55'), no reply at the cap; the conversation: 'Kaito, 37' / 'Canberra' / '37'; judge pass"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "conversation_turns": 3.0,
+            "conversation_turns_right": 3.0,
+            "engine_create_s": 3.2,
+            "max_new_tokens": 1024.0,
+            "questions": 12.0,
+            "verdicts_equal_reference": 11.0
+          },
+          "output_match": true,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "the 12 check questions of line 3 (17 + 25, the capital of Japan, the opposite of 'hot', the days of a week, 'thank you' in French, 8 times 7, 0.9 or 0.11, the rhyme, a word problem, fib(10) in Python, the planets in order, a Japanese sentence in English), each with ' Answer briefly.' in a new conversation, and a 3-turn conversation, greedy, at most 1,024 new tokens per reply; verdicts against Transformers (float32, greedy)",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.19.2/2026-11-15/oc-e-non-v1-mixed-int4b32-fp16act-ekv4096__mac-studio-m4-max.json"
+      },
+      {
+        "device": "pixel-11-pro",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-11-15",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 2926,
+          "env": {
+            "device": "Pixel 11 Pro",
+            "machine_label": "pixel-11-pro-ocenon-devicebench",
+            "os_build": "Android 17 (CD1A.260905.001.B1)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.0",
+            "soc": "Google Tensor G6",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Landed 2026-11-15 from the close-out: mlboydaisuke/Oc-e-Non-v1-LiteRT is public and ungated (license apache-2.0, base_model p-e-w/Oc-e-Non-v1 quantized, library_name litert-lm, pipeline_tag text-generation), upload commit fbcff6e942 (2026-11-15 09:10:45 JST), main 19cd5faf33 (a README-only commit, 2026-11-15 12:29:13 JST) at the read; the tree's LFS oid and size of oc_e_non_v1_mixed_int4b32_fp16act_ekv4096.litertlm = artifact_sha256 and 3051929936 B (anonymous, read 2026-11-15 12:47:48 JST).",
+            "binary: litert_lm_advanced_main built for android_arm64 from the LiteRT-LM v0.19.0 tag (commit 771b06e1, 2026-10-28T23:05:58Z; the kit's BUILD_INFO: describe v0.19.0, NDK 29.0.13113456, bazel 7.6.1, built 2026-10-30T19:14:27Z), sha256 2e0b5097..., with the .so files the same build wrote (the kit's SHA256SUMS; every run's setup checked each file's sha256 on the phone: MATCH); its log reads 'Statically linked GPU accelerator registered.' on every run (asserted)",
+            "1 push(es) of ocn_k4h, each 'sha256 phone=0dac09e4d6d29821... MATCH'",
+            "output_match = line D (written 2026-11-14 16:33 JST before any output): the same verdict as the reference on at least 7 of the 8 questions and no reply at the cap (the work applied the same rule to the CPU runs); the reference (Transformers 5.22.1, the bf16 weights computed in float32 on the Mac CPU, greedy) answers all 8 right",
+            "(r3p, r3p hold 1 (11-15 06:01:10-06:04:47 JST); first run 2026-11-15 06:02:43 JST, last 06:04:37): q1 '42' PASS; q2 'Tokyo' PASS; q3 'cold' PASS; q4 '7 days' PASS; q5 '\"Merci\"' PASS; q6 '56' PASS; q7 '0.9' PASS; q8 '\"Violets are blue\"' PASS; reply tokens [3, 3, 2, 3, 5, 3, 4, 8]",
+            "CPU = XNNPACK, 'number_of_threads: 4' printed; the delegate lines: prefill_1031 327 / 556 nodes (364 partitions), then on the second pass 2926 / 3226 (146 partitions); decode 290 / 518 (364), then 2708 / 3007 (146); 434 lines for the odml.* composite subgraphs (full_delegation false: the log states a split; the counts are the second pass's prefill_1031 line)"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "answers_right": 8.0,
+            "max_num_tokens": 1024.0,
+            "max_output_tokens": 256.0,
+            "questions": 8.0,
+            "reply_tokens_max": 8.0,
+            "verdicts_equal_reference": 8.0
+          },
+          "output_match": true,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "the first 8 of the 12 check questions of line 3 (17 + 25, the capital of Japan, the opposite of 'hot', the days of a week, 'thank you' in French, 8 times 7, 0.9 or 0.11, the rhyme), each with ' Answer briefly.' in its own process, --max_num_tokens=1024 --max_output_tokens=256, no sampler flags (the file's sampler); each verdict by the question's regex against Transformers (float32, greedy)",
+          "total_ops": 3226,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.19.0/2026-11-15/oc-e-non-v1-mixed-int4b32-fp16act-ekv4096__pixel-11-pro.json"
+      },
+      {
+        "device": "pixel-11-pro",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-11-15",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 556,
+          "env": {
+            "device": "Pixel 11 Pro",
+            "machine_label": "pixel-11-pro-ocenon-devicebench",
+            "os_build": "Android 17 (CD1A.260905.001.B1)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.0",
+            "soc": "Google Tensor G6",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "Landed 2026-11-15 from the close-out: mlboydaisuke/Oc-e-Non-v1-LiteRT is public and ungated (license apache-2.0, base_model p-e-w/Oc-e-Non-v1 quantized, library_name litert-lm, pipeline_tag text-generation), upload commit fbcff6e942 (2026-11-15 09:10:45 JST), main 19cd5faf33 (a README-only commit, 2026-11-15 12:29:13 JST) at the read; the tree's LFS oid and size of oc_e_non_v1_mixed_int4b32_fp16act_ekv4096.litertlm = artifact_sha256 and 3051929936 B (anonymous, read 2026-11-15 12:47:48 JST).",
+            "binary: litert_lm_advanced_main built for android_arm64 from the LiteRT-LM v0.19.0 tag (commit 771b06e1, 2026-10-28T23:05:58Z; the kit's BUILD_INFO: describe v0.19.0, NDK 29.0.13113456, bazel 7.6.1, built 2026-10-30T19:14:27Z), sha256 2e0b5097..., with the .so files the same build wrote (the kit's SHA256SUMS; every run's setup checked each file's sha256 on the phone: MATCH); its log reads 'Statically linked GPU accelerator registered.' on every run (asserted)",
+            "1 push(es) of ocn_k4h, each 'sha256 phone=0dac09e4d6d29821... MATCH'",
+            "output_match = line D (written 2026-11-14 16:33 JST before any output): the same verdict as the reference on at least 7 of the 8 questions and no reply at the cap (the work applied the same rule to the CPU runs); the reference (Transformers 5.22.1, the bf16 weights computed in float32 on the Mac CPU, greedy) answers all 8 right",
+            "(r2p, r2p hold 1 (11-15 01:57:09-02:04:16 JST); first run 2026-11-15 01:58:55 JST, last 02:03:36): q1 '42' PASS; q2 'Tokyo' PASS; q3 'cold' PASS; q4 '7 days' PASS; q5 '\"Merci\"' PASS; q6 '56' PASS; q7 '0.9' PASS; q8 'Violets are blue.' PASS; reply tokens [3, 3, 2, 3, 5, 3, 4, 7]",
+            "r2p-k4h-gpu-q1 /: prefill_1031: 556 / 556 on LITERT_CL, 1 partition; decode: 518 / 518 on LITERT_CL, 1 partition"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "answers_right": 8.0,
+            "max_num_tokens": 1024.0,
+            "max_output_tokens": 256.0,
+            "questions": 8.0,
+            "reply_tokens_max": 7.0,
+            "verdicts_equal_reference": 8.0
+          },
+          "output_match": true,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "the first 8 of the 12 check questions of line 3 (17 + 25, the capital of Japan, the opposite of 'hot', the days of a week, 'thank you' in French, 8 times 7, 0.9 or 0.11, the rhyme), each with ' Answer briefly.' in its own process, --max_num_tokens=1024 --max_output_tokens=256, no sampler flags (the file's sampler); each verdict by the question's regex against Transformers (float32, greedy)",
+          "total_ops": 556,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.19.0/2026-11-15/oc-e-non-v1-mixed-int4b32-fp16act-ekv4096__pixel-11-pro.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3",
+    "id": "oc-e-non-v1-mixed-int4b32-fp16act-ekv4096",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/mlboydaisuke/Oc-e-Non-v1-LiteRT",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Use LiteRT-LM 0.19.0 or newer: the files were checked on 0.19.0 (Android) and 0.19.2 (Mac); earlier releases were not tried, nor phones with 8 GB of memory (card L25).",
+    "An incomplete download: if `run` stops right after the download with no error message from the CLI (a bus error; exit status 138 on a Mac) or with an error log that contains `too large for file size`, the litert-lm CLI (tested on 0.19.2 and litert-lm-nightly 0.20.0.dev20261112; 0.14.0 to 0.19.1 have the same download code) can keep an incomplete download in ~/.litert-lm/cache/huggingface/mlboydaisuke/Oc-e-Non-v1-LiteRT/ and use it again without checking its size; delete that file and run the command again (card L27).",
+    "Question 10 of the Mac checks: the file writes a correct Python function and then gives fib(10) as 10, where the original model gives 55, on both the Mac GPU and CPU (11 of 12 verdicts equal) (card L47-L48, L52).",
+    "Two processes of this file on the Mac GPU gave 75 and 83 on GSM8K (the first 100), with the same text in 39 of the 100 replies: on LiteRT-LM's default Mac GPU path, where the GPU sampler writes the next decode step's input (sampler_handles_input), greedy replies to long prompts have also differed from run to run with other models (card L47, L52).",
+    "4,096 tokens of context: the prompt, the reply and earlier turns together (card L38); at --max_num_tokens=4096, the file's own context, two Galaxy S26 GPU runs decoded 17.91 and 18.26 tokens/s, the card's row is at 2048 (card L65).",
+    "The Galaxy S26 peak (VmHWM) does not count the memory the GPU driver holds (card L65).",
+    "LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/."
+  ],
+  "schema_version": "1.2"
+}

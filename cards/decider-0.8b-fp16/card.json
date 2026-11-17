@@ -10,7 +10,7 @@
   "conversion": {
     "command": "hf-to-litertlm decider_work/ (converter, gates, fixtures); source checkpoint Mapika/decider-0.8b rev 1ea54127d3bd52f6d753d9257b32a6380b873907",
     "quantization": "FP16 casting of fully connected and embedding weights; float compute; fp32 activation preference (Hub card 'Files', 'License and changes').",
-    "tool": "litert-torch fork john-rocky/litert-torch @115a13607c730c81018bb9789138a3e5e5119e3d with the owner's hybrid patch (card 'License and changes')",
+    "tool": "litert-torch fork john-rocky/litert-torch @115a13607c730c81018bb9789138a3e5e5119e3d with the hybrid patch (card 'License and changes')",
     "tool_version": "see the Hub card's Reproduction link (hf-to-litertlm decider_work/); runtime checks on LiteRT-LM 0.17.1 (describe + engine) and ai-edge-litert 2.2.0 (graph reader)"
   },
   "cross_runtime": [],
@@ -46,8 +46,7 @@
             "EXIT=0",
             "peak_mem_mb = VmHWM 6240060 kB x 1024 / 10^6 (the probe's 6093.81 MiB); includes init, prefill and the full decode",
             "conditions before the run: thermal status 0, SKIN 37.9 C, cpufreq cpu0/4/7 at max {'0': [3628800, 3628800], '4': [3628800, 3628800], '7': [4742400, 4742400]}; cold (runtime cache removed), one process, n = 1, started 2026-09-22T23:42:38.158853+00:00",
-            "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_fp16.litertlm r7_fp16_256_r1 /data/local/tmp/gputest_s4/dec08b_prompt_256.txt > /dev/null 2>&1 < /dev/null &",
-            "files: codex-conversions/2026-09-21/decider-08b/logs/s26_r7/r7_fp16_256_r1.log; row source codex-conversions/2026-09-21/decider-08b/results/s26_fp16_rows.jsonl"
+            "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_fp16.litertlm r7_fp16_256_r1 /data/local/tmp/gputest_s4/dec08b_prompt_256.txt > /dev/null 2>&1 < /dev/null &"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -97,10 +96,9 @@
             "ERROR: Following operations are not supported by GPU delegate:",
             "VERBOSE: Replacing 25656 out of 25885 node(s) with delegate (LITERT_CL) node, yielding 2 partitions for subgraph 0 (prefill_1024).",
             "ERROR: Hint fully delegated to single delegate is set, but the graph is not fully delegated.",
-            "lane reading: GPU engine creation rejected partial delegation: EMBEDDING_LOOKUP has empty quantization params; DEQUANTIZE unsupported; fully-delegated hint unmet (exit 2); Engine creation stopped at prefill_1024; remaining signatures were not compiled/run",
+            "reading: GPU engine creation rejected partial delegation: EMBEDDING_LOOKUP has empty quantization params; DEQUANTIZE unsupported; fully-delegated hint unmet (exit 2); Engine creation stopped at prefill_1024; remaining signatures were not compiled/run",
             "conditions before the run: thermal status 0, SKIN 37.9 C; cold, one process, started 2026-09-23T00:14:29.120975+00:00",
-            "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_fp16.litertlm r8_fp16_gpu_256_r1 /data/local/tmp/gputest_s4/dec08b_prompt_256.txt gpu > /dev/null 2>&1 < /dev/null &",
-            "files: codex-conversions/2026-09-21/decider-08b/logs/s26_r8/r8_fp16_gpu_256_r1.log; row source codex-conversions/2026-09-21/decider-08b/results/s26_r8_rows.jsonl"
+            "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_fp16.litertlm r8_fp16_gpu_256_r1 /data/local/tmp/gputest_s4/dec08b_prompt_256.txt gpu > /dev/null 2>&1 < /dev/null &"
           ],
           "failure_class": "engine_create_failed",
           "full_delegation": false,
@@ -148,10 +146,9 @@
             "ERROR: Following operations are not supported by GPU delegate:",
             "VERBOSE: Replacing 25656 out of 25885 node(s) with delegate (LITERT_CL) node, yielding 2 partitions for subgraph 0 (prefill_1024).",
             "ERROR: Hint fully delegated to single delegate is set, but the graph is not fully delegated.",
-            "lane reading: GPU engine creation rejected partial delegation: EMBEDDING_LOOKUP has empty quantization params; DEQUANTIZE unsupported; fully-delegated hint unmet (exit 2); Engine creation stopped at prefill_1024; remaining signatures were not compiled/run",
+            "reading: GPU engine creation rejected partial delegation: EMBEDDING_LOOKUP has empty quantization params; DEQUANTIZE unsupported; fully-delegated hint unmet (exit 2); Engine creation stopped at prefill_1024; remaining signatures were not compiled/run",
             "conditions before the run: thermal status 0, SKIN 37.9 C; cold, one process, started 2026-09-23T00:15:45.471660+00:00",
-            "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_fp16.litertlm r8_fp16_gpu_512_r1 /data/local/tmp/gputest_s4/dec08b_prompt_512.txt gpu > /dev/null 2>&1 < /dev/null &",
-            "files: codex-conversions/2026-09-21/decider-08b/logs/s26_r8/r8_fp16_gpu_512_r1.log; row source codex-conversions/2026-09-21/decider-08b/results/s26_r8_rows.jsonl"
+            "command: cd /data/local/tmp/gputest_s4 && nohup sh dec08b_probe.sh /data/local/tmp/gputest_s4/dec08b_fp16.litertlm r8_fp16_gpu_512_r1 /data/local/tmp/gputest_s4/dec08b_prompt_512.txt gpu > /dev/null 2>&1 < /dev/null &"
           ],
           "failure_class": "engine_create_failed",
           "full_delegation": false,
@@ -201,8 +198,7 @@
             "Init time:            42.3812 s",
             "Decode speed:         18.82 tokens/s (informational, not recorded as decode_tokens_per_s)",
             "litert-lm benchmark CLI 0.17.1 (PyPI), --backend cpu -p 256 -d 8 --runs 3 --cache no --cpu-thread-count 4; CLI mean of 3 measured iterations after one excluded warmup; init from the first measured iteration",
-            "conditions: quiet machine (no other Codex run; supervisor checked); 2026-09-23",
-            "files: codex-conversions/2026-09-21/decider-08b/logs/mac_bench_fp16_quiet.log"
+            "conditions: quiet machine; 2026-09-23"
           ],
           "failure_class": null,
           "full_delegation": null,

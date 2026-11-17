@@ -10,11 +10,63 @@
       "evidence": {
         "date": "2026-08-28",
         "litert_version": "2.2.0",
-        "source_model": "gemv_int4 probe (npubench/factors phase9.log m_gemv_int4_npu)"
+        "source_model": "gemv_int4 probe"
       },
       "op": "DEQUANTIZE",
       "provenance": "measured",
       "status": "delegated"
+    },
+    {
+      "conditions": "dynamic-range int8: float32 activations in and out (no quantization) with per-channel int8 weights (QNN_DATATYPE_SFIXED_POINT_8), the export's dynamic_wi8_afp32 recipe; every FULLY_CONNECTED of the graph (442 per prefill signature, 449 in decode). Galaxy S26 (SM-S942Q, SM8850 Hexagon), Android 16 (build BP4A.251205.006), the Qualcomm compiler plugin of LiteRT 2.2.0's litert_npu_runtime_libraries_jit.zip (libLiteRtCompilerPlugin_Qualcomm.so sha256 425e5caf007f834748c6bf67aff265d7e21512a01910f219fab6b7749ef57732, 'Applying plugin with SDK version: v2.47.0.260601114230', QAIRT 2.47) compiling on the phone (JIT), loaded by a self-built LiteRT-LM main litert_lm_advanced_main (shallow clone 2026-08-21, at or before b12c62c7; sha256 5445b28ca2a5c86d…) with --backend=npu: 'QNN op validation failed: 'FullyConnected_19' (type=FullyConnected)' with inputs QNN_DATATYPE_FLOAT_32 [1,128,2560] (no quantization) and QNN_DATATYPE_SFIXED_POINT_8 [4096,2560] per-channel-quant and output QNN_DATATYPE_FLOAT_32 [128,4096], 'QNN error=3110', 'LiteRT Op #19 'FullyConnected' (code=9) is not supported in Qualcomm Compiler.' (1,333 such lines = every FULLY_CONNECTED of the three decoder signatures); QnnDsp: 'Unsupported input/output datatypes requested for the HTP Op 'FullyConnected' in the node 'FullyConnected_19'. There is a mismatch for the combination of inputs and outputs.' and 'QnnBackend_validateOpConfig failed 3110'; the plugin left them out: 'Partitioned subgraph<0>, selected 5623 ops, from a total of 6177 ops. resulted in 444 partitions.' (subgraph<1> the same, subgraph<2> 5087 of 5536 in 394; the same probe also left out 224 DynamicUpdateSlice ops, code=151, the KV-cache writes); the on-phone compile had not finished after 300 s (timeout, EXIT=124) and no DispatchDelegate line was printed",
+      "constraints": {
+        "weight_dtype": "int8 (per-channel, dynamic-range)"
+      },
+      "dtypes": [
+        "float32",
+        "int8"
+      ],
+      "evidence": {
+        "date": "2026-10-20",
+        "litert_version": "2.2.0",
+        "source_model": "nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16 rev b366b87f, the unpublished dynamic-range int8 build (4,029,994,608 B, sha256 230c553b931493455b32e4dbec9800804fa30b457770dd6d8dc612818c6b8750; deleted afterwards); the published int8 file of litert-community/NVIDIA-Nemotron-Labs-Dory1.0-4B (25632f91…) uses the same dynamic_wi8_afp32 recipe and was not run on the NPU"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured on an 8-block sibling of the same model (static-range, 1,049,127,458 B, sha256 7083ec20…): 'Partitioned subgraph<0>, selected 637 ops, from a total of 637 ops. resulted in 1 partitions.' (subgraph<1> 649 of 649), '1 compiler plugins were applied successfully: Qualcomm compiler plugin (ver 0.1.0)', 'Replacing 1 out of 1 node(s) with delegate (DispatchDelegate)' for prefill_64 and decode; the full 4B static-range graph was also taken whole (6,493 and 5,855 ops, 1 partition each) but its on-phone compile then ran the phone's free memory down from 6.93 to 0.92 GB in 9 s (the harness's 1,000,000 kB guard), so the published files carry no NPU form",
+          "rewrite": "a static-range quantized (SRQ) graph: int16 activations and int8 weights, so every FULLY_CONNECTED reads and writes quantized tensors (litert-torch export_hf's npu_export stages 1-3)",
+          "symptom": "a dynamic-range int8 LLM bundle (float activations, int8 weights) splits into hundreds of NPU partitions per signature (444 / 444 / 394) and its on-phone JIT compile does not finish in 300 s; the run never reaches generation"
+        }
+      ],
+      "status": "fallback"
+    },
+    {
+      "conditions": "Ahead-of-time compile for SM8850 on a Mac: docker image npu-aot-qc:2.2.0-full (ai-edge-litert 2.2.0 + ai-edge-litert-sdk-qualcomm 2.2.0, QAIRT 2.47.0.260601114230), --qualcomm_optimization_level=O3 --qualcomm_log_level=verbose: \"Unsupported input/output datatypes requested for the HTP Op 'FullyConnected' in the node 'FullyConnected_9'. There is a mismatch for the combination of inputs and outputs.\" with \"Requested I/O datatype set: in[0]:QNN_DATATYPE_SFIXED_POINT_16 in[1]:QNN_DATATYPE_SFIXED_POINT_16 out[0]:QNN_DATATYPE_SFIXED_POINT_16\"; the HTP's FullyConnected lists 16-bit weights only as UFIXED_POINT_16 x UFIXED_POINT_16 with an SFIXED_POINT_32 bias (INT16 set 6), \"QnnBackend_validateOpConfig failed 3110\", \"LiteRT Op #9 'FullyConnected' (code=9) is not supported in Qualcomm Compiler.\" (69 such lines); the plugin left every such FC on the CPU: 'Partitioned subgraph<0>, selected 260 ops, from a total of 292 ops. resulted in 33 partitions.' and 'subgraph<1>, selected 178 ops, from a total of 215 ops. resulted in 37 partitions.' The plugin's use_qint16_as_quint16 option is a deprecated no-op (LiteRT 233d09a89 litert/c/options/litert_qualcomm_options.h L114-115). The int16-weight graph came from the quantizer with the policy static_wi16_ai16 added in-process (ai-edge-quantizer-nightly 0.10.0.dev20261023): the stock policy stops at static_wi8_ai16 and silently keeps 8-bit weights for weight_num_bits=16.",
+      "constraints": {
+        "activation": "int16_static_range",
+        "weight": "int16_static_per_channel",
+        "weight_qnn_type": "SFIXED_POINT_16"
+      },
+      "dtypes": [
+        "int16",
+        "int32"
+      ],
+      "evidence": {
+        "date": "2026-10-29",
+        "litert_version": "2.2.0",
+        "source_model": "LiquidAI/LFM3-VL-2B @f83d2b0a: the unpublished probe = a tiny LFM3 decoder with every FULLY_CONNECTED at int16 weights (54,554,374 B bundle, deleted later; the published file has no NPU graph)"
+      },
+      "op": "FULLY_CONNECTED",
+      "provenance": "measured",
+      "rewrite_hints": [
+        {
+          "expected_effect": "measured: the same tiny graph with every FC as an fp16-weight island compiles whole (377 / 377 and 314 / 314 ops, 1 partition each), the 2B forms too (1 partition per signature); the HTP runs the islands at FP16 under relaxed precision, so a host interpreter (fp32) is no proxy for the phone's answers",
+          "rewrite": "keep the FC weights int8 (a16w8) or cast the chosen FCs to fp16-weight float islands (float_casting: fp16 constants + DEQUANTIZE, the FC in float between DEQUANTIZE / QUANTIZE)",
+          "symptom": "a static-range LLM graph whose FULLY_CONNECTED weights are int16 splits into dozens of partitions with those FCs on the CPU"
+        }
+      ],
+      "status": "fallback"
     },
     {
       "conditions": "Builtin GELU is the fast exact-GELU spelling on Hexagon: approximate=false 41.9 ms / approximate=true 38.5 ms vs 85.9 ms for the decomposed tanh chain and 89.8 ms for the 96-op chain emitted for torch.erf (same models/probes, N=50 thermal NONE).",
@@ -45,7 +97,7 @@
       "evidence": {
         "date": "2026-08-28",
         "litert_version": "2.2.0",
-        "source_model": "probe_pf sweep 16 arms (npubench/factors phase9.log; OOM evidence NPU_OP_FACTOR_REPORT.md exp 8)"
+        "source_model": "probe_pf sweep 16 arms"
       },
       "op": "SOFTMAX",
       "provenance": "measured",
@@ -59,7 +111,7 @@
       "status": "delegated"
     },
     {
-      "conditions": "Galaxy S26 (SM-S942Q, SM8850 Hexagon), Android 16 (build BP4A.251205.006.S942QOPS1AZH9), LiteRT 2.2.0 C-API runner (--accel npu+cpu, BURST, JIT with a cold cache): the Qualcomm compiler plugin (QAIRT 2.47.0.260601114230) maps each odml.rms_norm composite to the HTP RmsNorm (q::rmsnorm_fp16 in the compile log, 104 lines for the 104 composite sites; the whole graph 1902 / 1902 ops in 1 partition, DispatchDelegate 1 / 1); the arithmetic is fp16: a site whose fp16-safe rescale needs a clamp (eps x 4^-k underflows fp16) cannot be a composite and stays plain ops (4 sites here); per-token parity equals the plain-op form of the same graph on the 90-window whole set (both miss the lane bar at quiet non-silent tokens: min 0.79147 vs 0.77306); 75.0 vs 96.0 ms per 10 s call, JIT compile 55.8 vs 97.2 s",
+      "conditions": "Galaxy S26 (SM-S942Q, SM8850 Hexagon), Android 16 (build BP4A.251205.006.S942QOPS1AZH9), LiteRT 2.2.0 C-API runner (--accel npu+cpu, BURST, JIT with a cold cache): the Qualcomm compiler plugin (QAIRT 2.47.0.260601114230) maps each odml.rms_norm composite to the HTP RmsNorm (q::rmsnorm_fp16 in the compile log, 104 lines for the 104 composite sites; the whole graph 1902 / 1902 ops in 1 partition, DispatchDelegate 1 / 1); the arithmetic is fp16: a site whose fp16-safe rescale needs a clamp (eps x 4^-k underflows fp16) cannot be a composite and stays plain ops (4 sites here); per-token parity equals the plain-op form of the same graph on the 90-window whole set (both miss the pass bar at quiet non-silent tokens: min 0.79147 vs 0.77306); 75.0 vs 96.0 ms per 10 s call, JIT compile 55.8 vs 97.2 s",
       "constraints": {
         "composite_name": "odml.rms_norm"
       },
@@ -76,7 +128,7 @@
       "status": "delegated"
     }
   ],
-  "generated_at": "2026-10-15",
+  "generated_at": "2026-10-29",
   "litert_version": "2.2.0",
   "schema_version": "1.0",
   "target": {

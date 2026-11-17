@@ -66,7 +66,7 @@
     "benchmarks": {
       "type": "array",
       "items": { "$ref": "benchmark_result.schema.json#/$defs/benchmark_record" },
-      "description": "Owner-measured records, verbatim from the ingested benchmark results file."
+      "description": "Measured records, verbatim from the ingested benchmark results file."
     },
     "delegation": {
       "oneOf": [
@@ -122,7 +122,7 @@
     "pitfalls": {
       "type": "array",
       "items": { "type": "string", "minLength": 1 },
-      "description": "Free-text list authored by the owner in meta.yaml — never generated."
+      "description": "Free-text list written by hand in meta.yaml — never generated."
     },
     "browser": {
       "type": "object",
@@ -151,7 +151,7 @@
       "type": "object",
       "additionalProperties": false,
       "required": ["records"],
-      "description": "On-device behavior (NPU and LiteRT-LM lanes), merged from device-run result files (device_run_result.schema.json) by `edge-card enrich --device-runs` — schema 1.2, Phase 13. Model-level facts ONLY: op-level matrix entries are never derived from these records (the trap rule, device edition). Each entry embeds the accelerator record verbatim (1:1, no reinterpretation) plus the snapshot file it came from.",
+      "description": "On-device behavior (NPU and LiteRT-LM records), merged from device-run result files (device_run_result.schema.json) by `edge-card enrich --device-runs` — schema 1.2, Phase 13. Model-level facts ONLY: op-level matrix entries are never derived from these records (the trap rule, device edition). Each entry embeds the accelerator record verbatim (1:1, no reinterpretation) plus the snapshot file it came from.",
       "properties": {
         "records": {
           "type": "array",

@@ -1,4 +1,4 @@
-Benchmarking model: out_wi8_composite_conv040dev (~/code/litertlm-convert/minicpm5_work/regate_softmax_20260808/out_wi8_composite_conv040dev/model.litertlm)
+Benchmarking model: out_wi8_composite_conv040dev (/path/to/out_wi8_composite_conv040dev/model.litertlm)
 Backend                    : gpu
 Number of tokens in prefill: 256
 Number of tokens in decode : 256

@@ -61,14 +61,14 @@
    "status": "delegated"
   },
   {
-   "conditions": "Constant LHS (baked interpolation matrix) x runtime RHS refuses whole-graph compile. Runtime-activation x runtime-activation BMMs delegate normally (attention probes). Constraint added 2026-09-25 (owner: \u63a8\u5968\u3067): operand_a=constant \u2014 the constant-LHS case; runtime x runtime BMMs are the separate delegated row.",
+   "conditions": "Constant LHS (baked interpolation matrix) x runtime RHS refuses whole-graph compile. Runtime-activation x runtime-activation BMMs delegate normally (attention probes). Constraint added 2026-09-25: operand_a=constant \u2014 the constant-LHS case; runtime x runtime BMMs are the separate delegated row.",
    "dtypes": [
     "float32"
    ],
    "evidence": {
     "date": "2026-08-24",
     "litert_version": "2.2.0",
-    "source_model": "probe_rbmm (npubench/factors phase8.log m_rbmm_gpu)"
+    "source_model": "probe_rbmm"
    },
    "op": "BATCH_MATMUL",
    "provenance": "measured",
@@ -93,14 +93,14 @@
    "evidence": {
     "date": "2026-08-28",
     "litert_version": "2.2.0",
-    "source_model": "gemv probe: 8x Linear(4096x4096)+ReLU T=1 chain (npubench/factors phase9.log m_gemv_int8_gpu vs m_gemv_fp32_gpu)"
+    "source_model": "gemv probe: 8x Linear(4096x4096)+ReLU T=1 chain"
    },
    "op": "DEQUANTIZE",
    "provenance": "measured",
    "rewrite_hints": [
     {
      "expected_effect": "compiles and runs; weight-only quantization buys no latency on either accelerator anyway (perf_factors gemv-weight-dtype-bandwidth-null)",
-     "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU lane",
+     "rewrite": "store weights fp32 or fp16+DEQUANTIZE for the GPU path",
      "symptom": "whole-graph GPU compile fails on a DRQ-int8 weight file"
     }
    ],
@@ -114,7 +114,7 @@
    "evidence": {
     "date": "2026-08-28",
     "litert_version": "2.2.0",
-    "source_model": "dinov2_ab_erf_fp32 vs dinov2_ab_tanh_fp32 (npubench/factors phase5.log; Mali check 2026-08-28)"
+    "source_model": "dinov2_ab_erf_fp32 vs dinov2_ab_tanh_fp32 (Mali check 2026-08-28)"
    },
    "op": "GELU",
    "provenance": "measured",
@@ -128,7 +128,7 @@
    "evidence": {
     "date": "2026-08-28",
     "litert_version": "2.2.0",
-    "source_model": "probe_rb: conv stack + two align_corners=true bilinear x2 upsamples (npubench/factors phase8.log m_rb_gpu; Mali check 2026-08-28)"
+    "source_model": "probe_rb: conv stack + two align_corners=true bilinear x2 upsamples (Mali check 2026-08-28)"
    },
    "op": "RESIZE_BILINEAR",
    "provenance": "measured",
@@ -142,7 +142,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "ABS",
    "provenance": "measured",
@@ -156,7 +156,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "ADD",
    "provenance": "measured",
@@ -173,7 +173,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "BATCH_MATMUL",
    "provenance": "measured",
@@ -187,7 +187,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "CONCATENATION",
    "provenance": "measured",
@@ -204,7 +204,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "CONV_2D",
    "provenance": "measured",
@@ -218,7 +218,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "DIV",
    "provenance": "measured",
@@ -233,7 +233,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "FULLY_CONNECTED",
    "provenance": "measured",
@@ -247,7 +247,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "GELU",
    "provenance": "measured",
@@ -261,7 +261,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "MAXIMUM",
    "provenance": "measured",
@@ -275,7 +275,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, plain nn.LayerNorm export, results/device_logcat_plain_fp16_default.txt; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, plain nn.LayerNorm export; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "MEAN",
    "provenance": "measured",
@@ -289,7 +289,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "MUL",
    "provenance": "measured",
@@ -303,7 +303,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "REDUCE_MAX",
    "provenance": "measured",
@@ -317,7 +317,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, offline variant, fixed T=684 (results/device_logcat_closed_loop_fp32_*.txt, gate_device_offline.json), fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, offline variant, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "RELU",
    "provenance": "measured",
@@ -331,7 +331,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "RESHAPE",
    "provenance": "measured",
@@ -345,7 +345,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "RSQRT",
    "provenance": "measured",
@@ -359,7 +359,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "SLICE",
    "provenance": "measured",
@@ -373,7 +373,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "SOFTMAX",
    "provenance": "measured",
@@ -390,7 +390,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, plain nn.LayerNorm export vs SafeLayerNorm export, gate_device.json runs plain_fp16_default vs safe_fp16_default / safe_fp16_fp32; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, plain nn.LayerNorm export vs SafeLayerNorm export, gate_device.json runs plain_fp16_default vs safe_fp16_default / safe_fp16_fp32; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "SQUARED_DIFFERENCE",
    "provenance": "measured",
@@ -411,7 +411,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "SUB",
    "provenance": "measured",
@@ -425,7 +425,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "SUM",
    "provenance": "measured",
@@ -439,7 +439,7 @@
    "evidence": {
     "date": "2026-09-24",
     "litert_version": "2.2.0",
-    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar, results/device_logcat_safe_fp16_default.txt + gate_device.json)"
+    "source_model": "Nemotron-3-Diarization graph B (31-layer RoPE transformer encoder + sub-pixel conv head, fixed T=541, fp16 weights + DEQUANTIZE; litert-community/Nemotron-3-Diarization-LiteRT; zoo nemotron3diar)"
    },
    "op": "TRANSPOSE",
    "provenance": "measured",

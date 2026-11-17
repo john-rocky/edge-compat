@@ -2,7 +2,7 @@
   "artifact": "Nemotron-3-Nano-4B_int8.litertlm",
   "device": "mac-studio-m4-max",
   "model_id": "nemotron-3-nano-4b-int8",
-  "quantization": "dynamic int8 (linears + embedding; convolutions and the selective scan stay float), fp32 activations declared, reduced 7-signature prefill ladder",
+  "quantization": "dynamic int8 (linears + embedding; convolutions and the selective scan stay float), fp32 activations declared, reduced set of 7 prefill signatures",
   "results": [
     {
       "accelerator": "cpu",

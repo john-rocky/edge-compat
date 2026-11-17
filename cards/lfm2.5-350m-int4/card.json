@@ -36,7 +36,7 @@
           },
           "error": null,
           "evidence": [
-            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…; kit = litertlm-convert team_repack_20261009/r9/binary/prebuilt)",
+            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…)",
             "r1 hold 2026-10-12 15:55:45-16:03:26 JST: [15:57:05] bundle on device: 272b0a1ca55f8b39fe636927deffe4049feb93b5eda7c05a5dbbb3141d6d53f8 (247747696 B, push 6.3 s) = Mac",
             "bench args: --backend=cpu --model_path=/data/local/tmp/aa1_350m/LFM2.5-350M_int4.litertlm --benchmark=true --benchmark_prefill_tokens=1024 --benchmark_decode_tokens=256 --max_num_tokens=2048 --num_iterations=3 --report_peak_memory_footprint=true --metric_proto_file_path=/data/local/tmp/aa1_350m/metrics.pb",
             "VERBOSE: Replacing 487 out of 560 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 88 partitions for subgraph 0 (prefill_1024).",
@@ -44,8 +44,8 @@
             "VERBOSE: Replacing 788 out of 818 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 14 partitions for subgraph 0 (prefill_1024).",
             "VERBOSE: Replacing 737 out of 756 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 14 partitions for subgraph 11 (decode).",
             "[15:58:35] parsed: s26_int4_cpu_timing cpu: gate PASS 1/1 | bench prefill 875.875 decode 90.63 init 602.89 cold 815.6 peak 1120.91 capped 5/7 | answers: 'The capital of France is Paris.'",
-            "timing leg prompt process (device/r1/s26/s26_int4_cpu_timing/cpu_leg.json): \"The capital of France is Paris.\"",
-            "gate leg (device/r1/s26/s26_int4_cpu_gate/cpu_leg.json): 2 of 2 prompt processes answered with the expected word (\"The capital of France is Paris.\")"
+            "timing run prompt process: \"The capital of France is Paris.\"",
+            "check run: 2 of 2 prompt processes answered with the expected word (\"The capital of France is Paris.\")"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -110,7 +110,7 @@
           },
           "error": null,
           "evidence": [
-            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…; kit = litertlm-convert team_repack_20261009/r9/binary/prebuilt)",
+            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…)",
             "r1 hold 2026-10-12 15:55:45-16:03:26 JST: [16:01:08] bundle on device: 272b0a1ca55f8b39fe636927deffe4049feb93b5eda7c05a5dbbb3141d6d53f8 (247747696 B, push 0 s) = Mac",
             "bench args: --backend=gpu --model_path=/data/local/tmp/aa1_350m/LFM2.5-350M_int4.litertlm --benchmark=true --benchmark_prefill_tokens=1024 --benchmark_decode_tokens=256 --max_num_tokens=2048 --num_iterations=3 --report_peak_memory_footprint=true --metric_proto_file_path=/data/local/tmp/aa1_350m/metrics.pb",
             "VERBOSE: Replacing 560 out of 560 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
@@ -126,8 +126,8 @@
             "VERBOSE: Replacing 501 out of 501 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 10 (prefill_1).",
             "VERBOSE: Replacing 519 out of 519 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 11 (decode).",
             "[16:02:39] parsed: s26_int4_gpu_timing gpu: gate PASS 1/1 | bench prefill 4391.315 decode 106.86000000000001 init 1194.9 cold 4037.92 peak 472.211 capped 0/5 | answers: 'The capital of France is Paris.'",
-            "timing leg prompt process (device/r1/s26/s26_int4_gpu_timing/gpu_leg.json): \"The capital of France is Paris.\"",
-            "gate leg (device/r1/s26/s26_int4_gpu_gate/gpu_leg.json): 2 of 2 prompt processes answered with the expected word (\"The capital of France is Paris.\")"
+            "timing run prompt process: \"The capital of France is Paris.\"",
+            "check run: 2 of 2 prompt processes answered with the expected word (\"The capital of France is Paris.\")"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -192,8 +192,8 @@
           },
           "error": null,
           "evidence": [
-            "command (tools/bench_mac.sh, through quiet_wait): ~/venvs/lt0180run/bin/litert-lm benchmark cand/LFM2.5-350M_int4.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
-            "bench/cpu_int4.log: Benchmarking model: LFM2.5-350M_int4.litertlm (/Users/USER/code/litertlm-convert/aa_mobile_work/lfm25_350m/cand/LFM2.5-350M_int4.litertlm) | Backend                    : cpu | Cache                      : no | Prefill speed:        1195.41 tokens/s | Decode speed:         123.11 tokens/s | Init time:            1.1431 s | Time to first token:  0.8649 s",
+            "command (tools/bench_mac.sh): litert-lm benchmark LFM2.5-350M_int4.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+            "Benchmarking model: LFM2.5-350M_int4.litertlm | Backend                    : cpu | Cache                      : no | Prefill speed:        1195.41 tokens/s | Decode speed:         123.11 tokens/s | Init time:            1.1431 s | Time to first token:  0.8649 s",
             "2026-10-12 15:31:34 JST cpu int4 exit 0"
           ],
           "failure_class": null,
@@ -240,8 +240,8 @@
           },
           "error": null,
           "evidence": [
-            "command (tools/bench_mac.sh, through quiet_hold aa1-350m-bench-gpu): ~/venvs/lt0180run/bin/litert-lm benchmark cand/LFM2.5-350M_int4.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
-            "bench/gpu_int4.log: Benchmarking model: LFM2.5-350M_int4.litertlm (/Users/USER/code/litertlm-convert/aa_mobile_work/lfm25_350m/cand/LFM2.5-350M_int4.litertlm) | Backend                    : gpu | Cache                      : no | Prefill speed:        13965.02 tokens/s | Decode speed:         425.85 tokens/s | Init time:            1.1679 s | Time to first token:  0.0757 s",
+            "command (tools/bench_mac.sh): litert-lm benchmark LFM2.5-350M_int4.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+            "Benchmarking model: LFM2.5-350M_int4.litertlm | Backend                    : gpu | Cache                      : no | Prefill speed:        13965.02 tokens/s | Decode speed:         425.85 tokens/s | Init time:            1.1679 s | Time to first token:  0.0757 s",
             "2026-10-12 15:37:03 JST gpu int4 exit 0",
             "2026-10-12 15:37:14 JST gpu int4 verbose exit 0 validation_error=0 shape_mismatch=0 replacing=24"
           ],
@@ -289,7 +289,7 @@
           },
           "error": null,
           "evidence": [
-            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…; kit = litertlm-convert team_repack_20261009/r9/binary/prebuilt)",
+            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…)",
             "r1 hold 2026-10-12 15:55:45-16:00:35 JST: [15:57:48] bundle on device: 272b0a1ca55f8b39fe636927deffe4049feb93b5eda7c05a5dbbb3141d6d53f8 (247747696 B, push 0 s) = Mac",
             "bench args: --backend=cpu --model_path=/data/local/tmp/aa1_350m/LFM2.5-350M_int4.litertlm --benchmark=true --benchmark_prefill_tokens=1024 --benchmark_decode_tokens=256 --max_num_tokens=2048 --num_iterations=3 --report_peak_memory_footprint=true --metric_proto_file_path=/data/local/tmp/aa1_350m/metrics.pb",
             "VERBOSE: Replacing 487 out of 560 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 88 partitions for subgraph 0 (prefill_1024).",
@@ -297,8 +297,8 @@
             "VERBOSE: Replacing 788 out of 818 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 14 partitions for subgraph 0 (prefill_1024).",
             "VERBOSE: Replacing 737 out of 756 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 14 partitions for subgraph 11 (decode).",
             "[15:59:02] parsed: p8a_int4_cpu_timing cpu: gate PASS 1/1 | bench prefill 342.115 decode 51.405 init 1245.32 cold 1457.95 peak 835.961 capped 0/10 | answers: 'The capital of France is Paris.'",
-            "timing leg prompt process (device/r1/p8a/p8a_int4_cpu_timing/cpu_leg.json): \"The capital of France is Paris.\"",
-            "gate leg (device/r2/p8a/p8a_int4_cpu_gate/cpu_leg.json): 1 of 1 prompt processes answered with the expected word (\"The capital of France is Paris.\")"
+            "timing run prompt process: \"The capital of France is Paris.\"",
+            "check run: 1 of 1 prompt processes answered with the expected word (\"The capital of France is Paris.\")"
           ],
           "failure_class": null,
           "full_delegation": false,
@@ -360,7 +360,7 @@
           },
           "error": null,
           "evidence": [
-            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…; kit = litertlm-convert team_repack_20261009/r9/binary/prebuilt)",
+            "binary: Google's prebuilt litert_lm_advanced_main + 6 .so (gs://litert/binaries/latest/android_arm64/litert_lm/, object dated 2026-09-18, 40,382,152 B, sha256 adac974b…)",
             "r2 hold 2026-10-12 16:05:41-16:06:56 JST: [16:05:50] bundle on device: 272b0a1ca55f8b39fe636927deffe4049feb93b5eda7c05a5dbbb3141d6d53f8 (247747696 B, push 5.3 s) = Mac",
             "bench args: --backend=gpu --model_path=/data/local/tmp/aa1_350m/LFM2.5-350M_int4.litertlm --benchmark=true --benchmark_prefill_tokens=1024 --benchmark_decode_tokens=256 --max_num_tokens=2048 --num_iterations=3 --report_peak_memory_footprint=true --metric_proto_file_path=/data/local/tmp/aa1_350m/metrics.pb",
             "VERBOSE: Replacing 560 out of 560 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (prefill_1024).",
@@ -376,8 +376,8 @@
             "VERBOSE: Replacing 501 out of 501 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 10 (prefill_1).",
             "VERBOSE: Replacing 519 out of 519 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 11 (decode).",
             "[16:06:43] parsed: p8a_int4_gpu_timing gpu: gate PASS 1/1 | bench prefill 1245.8649999999998 decode 50.055 init 1833.5 cold 6078.84 peak 872.18 capped 0/8 | answers: 'The capital of France is Paris.'",
-            "timing leg prompt process (device/r2/p8a/p8a_int4_gpu_timing/gpu_leg.json): \"The capital of France is Paris.\"",
-            "gate leg (device/r1/p8a/p8a_int4_gpu_gate/gpu_leg.json): 2 of 2 prompt processes answered with the expected word (\"The capital of France is Paris.\")"
+            "timing run prompt process: \"The capital of France is Paris.\"",
+            "check run: 2 of 2 prompt processes answered with the expected word (\"The capital of France is Paris.\")"
           ],
           "failure_class": null,
           "full_delegation": true,
@@ -433,13 +433,14 @@
     "Runtime: tested on litert-lm 0.18.0 on a Mac; this file was not tried on litert-lm 0.17.1, where the int8 file of the same conversion answered as if no question had been asked (the runtime prefilled 9 tokens for a one-question turn where 0.18.0 prefilled 16) (card L21).",
     "Template: Liquid AI's chat template fails at template creation on litert-lm 0.18.0 ({% generation %} markers), so the bundle carries LiteRT-LM's lfm2 template (byte-identical to models/lfm2/chat_template.jinja at commit 86a7e6d0), which reads message content as a list of parts; stops <|im_end|> and <|endoftext|>, start token <|startoftext|>; marked non-thinking, with the configuration's thought channel kept (card L71, L112).",
     "One Engine per conversation: on the int8 file, an Engine that had already served one conversation changed 2 of the next conversation's 3 answers (Python API, CPU, greedy, 3 of 3 processes); a related open issue is LiteRT-LM #3165; the card advises a new Engine for each conversation (card L75).",
+    "Conversation preface with tools and no messages: LiteRT-LM renders the chat template with an empty message list, and the template reads messages[0] without checking that the list is non-empty, so the render fails with 'Failed to apply template: undefined value' when the preface is prefilled at creation (prefillPrefaceOnInit, default false; creating the conversation fails) and in the preface render (renderPrefaceIntoString and its C++ and C API forms); the same with extra context (such as enable_thinking) and no messages, and in the preface render with an empty preface (run in the runtime on one Qwen3 template; the other templates rendered with minijinja 2.14 and jinja2); read in the source of LiteRT-LM 0.17.0, 0.18.1 and main, measured with the 0.18.1 PyPI package through its C API on these files' template text; the default path, where the first message is rendered with the preface, is not affected (the 0.18.1 Python API and CLI expose neither the flag nor the preface render); a system message or any initial message in the conversation config avoids it (card L116).",
     "Sampler: the bundle's default sampler is temperature 0.1, top-k 50, top-p 1.0 (Liquid AI's recommended repetition_penalty 1.05 is not carried); `run` uses it unless --top-k, --top-p, --temperature or --seed is passed; --top-k 1 gives greedy output (card L69).",
     "Cache: without --cache, `run` writes a compiled-weights cache next to the model (231 MB for this file on CPU); without --backend, `run` uses the CPU (card L67).",
     "Tool calling is declared (model type lfm2); after a tool call the bundle template and Liquid AI's differ in two places (call arguments in double quotes, the tool result wrapped in [ … ]); on litert-lm 0.18.0 (Python API, CPU, greedy) the file returned a parsed get_weather call with {\"city\": \"Paris\"} (card L73).",
     "Which file is faster differs by device: int4 on the Galaxy S26 GPU (2.63 s vs int8 2.94 s for a 1024-token prefill plus 256 decoded tokens), int8 on the Pixel 8a GPU (5.77 vs 5.94 s: there int4 decodes at 50.06 vs 47.9 tok/s and prefills at 1245.9 vs 2410.6 tok/s), within 1 % on the Mac GPU (0.67 vs 0.68 s); 38.6 % smaller than the int8 file; not measured on iOS, not run on the NPU (card L30-L39, L101-L102, L106).",
     "Galaxy S26 CPU: the row ran with the clock lowering during it (lowered in 5 of 7 samples, read every 2 s); decode fell across the three iterations (101.67 -> 97.12 -> 84.14 tok/s) (card L97).",
     "Accuracy: IFEval-lite (first 120 rows of google/IFEval whose instruction types are checked mechanically, prompt-level strict, greedy; comparable only within that table) bf16 81 (67.5 %), this file 79 (65.8 %) on CPU and 78 (65.0 %) on the Mac GPU; 8-question check 7/8 on CPU and on GPU (missing \"Which is larger: 0.9 or 0.11?\" -> \"0.11 is larger than 0.9.\"), bf16 7/8; in a three-turn CPU conversation it answered with a different word (\"large\") than bf16 and completed all three turns; GSM8K 8 of 100 (bf16 2) (card L43, L45, L49-L57).",
-    "License: the LFM Open License v1.0's section 5 conditions commercial use on an annual revenue below 10 million US dollars (card L116)."
+    "License: the LFM Open License v1.0's section 5 conditions commercial use on an annual revenue below 10 million US dollars (card L120)."
   ],
   "schema_version": "1.2"
 }

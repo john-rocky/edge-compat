@@ -19,8 +19,8 @@ task: text-generation
 
 | | |
 |---|---|
-| **Tool** | official upstream litert-torch export_hf (clean worktree at upstream/main, no fork); Qwen2ForCausalLM rides the stock converter, no custom code TODO (owner) — the card pins the tree ('upstream/main'), not a version number |
-| **Command** | `TODO (owner) — not recorded in the source card` |
+| **Tool** | official upstream litert-torch export_hf (clean worktree at upstream/main, no fork); Qwen2ForCausalLM rides the stock converter, no custom code TODO — the card pins the tree ('upstream/main'), not a version number |
+| **Command** | `TODO — not recorded in the source card` |
 | **Quantization** | int4 weights — blockwise (block 32) + OCTAV optimal clipping, symmetric; embedding INT8; integer compute; KV cache 4096. File model.litertlm, ~1.0 GB |
 
 ## Artifacts

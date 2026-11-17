@@ -1,0 +1,63 @@
+{
+  "artifact": "Unlimited-OCR_int8.litertlm",
+  "artifact_sha256": "3ab6cbbc548c8b56c0885673a18231fd086bfbfbf38f70e1d3a1269523fa310c",
+  "device": "pixel-8a",
+  "model_id": "unlimited-ocr-int8",
+  "notes": "Unlimited-OCR_int8.litertlm of litert-community/Unlimited-OCR: baidu/Unlimited-OCR (MIT; a 3.3B OCR model: the DeepEncoder vision tower, SAM ViT-B and CLIP-L with a projector, and a 12-layer DeepSeek-V2 mixture-of-experts decoder) converted to LiteRT-LM as a fast_vlm bundle that reads one 1,024 x 1,024 page per request and writes the page as layout blocks (label, box, content). Published 2026-11-15 (Hub main d1907308 at the read of 2026-11-16). Measured on the published bytes (run batch p8aa). Work dir.",
+  "quantization": "the text decoder (12 layers: the first dense, then 11 mixture-of-experts layers of 64 routed experts, 6 per token, and 2 shared; all 64 routed experts computed as two fully connected ops, the 6 the router picks kept) with dynamic INT8 channelwise weights in its linear layers (the position table stays float) and FP32 activations declared for the GPU; an INT8 embedding table in its own graph; the decoder's and the embedding's weights in external-weights sections of the file; the vision encoder (SAM ViT-B and CLIP-L) and projector with FP16 weights; a 4,096-token context; a KV cache of 405 slots (the 277 prompt positions stay, and a ring holds the last 128 generated positions); signatures prefill_278 and decode; one 1,024 x 1,024 page per request",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": 4096,
+      "date": "2026-11-15",
+      "decode_tokens_per_s": 1.02,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-uocr1-devicebench",
+        "os_build": "Android 16 (CP1A.260505.005)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.2",
+        "soc": "Google Tensor G3 (Mali-G715 GPU)",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Unlimited-OCR `Unlimited-OCR_int8.litertlm` at main d1907308: LFS sha256 3ab6cbbc548c8b56c0885673a18231fd086bfbfbf38f70e1d3a1269523fa310c, 3,795,861,504 B (anonymous Hub API read 2026-11-16 21:21 JST); the repo was created 2026-11-15 with this file, and every run below hashed the same digest",
+        "runtime: the PyPI litert-lm-api 0.19.2 Android wheel (liblitert-lm.so sha256 56de4039367bce14d93076153d39452a798cbe7b004900387036d9fa51eb4153, 22,656,360 B) on CPython 3.14.8, its Python API on the phone: `Engine(model, backend=CPU(thread_count=4), vision_backend=CPU(), max_num_images=1, enable_benchmark=True, max_num_tokens=4096); create_conversation(); send_message_async({'role': 'user', 'content': [image x1, text]}, max_output_tokens=<the case's cap>, no_repeat_ngram_config=NoRepeatNgramConfig(no_repeat_ngram_size=35, window_size=128)); engine.tokenize(text)`; sampling: the file declares no sampler, so the runtime's default applies (top-k 1 = greedy)",
+        "protocol: a benchmark script, one process per request with the runner (each run's command in its record), the phone's state and a ready check before each request, a memory guard on MemAvailable, the runtime's cache next to the file; request_s = from before the Engine to the end of the reply, less the runner's own memory reads; engine_s = Engine + create_conversation (the runner's definitions)",
+        "the run: U8-cpu-line_en (p8aa, 2026-11-15 03:56 JST, cache cold, thermal 0 before; clean; rested 34s since 03:55:41; front com.android.chrome (a system app: left alone); MemAvailable 3946068 kB >= memmin 3000000 kB after 0s); model_sha256 = the artifact; the one request this 8 GB phone was given on the CPU (a check that the file fits; the 19 cases were not run on it)",
+        "output_match = the reply equals the original model's fp32 reading of this picture exactly (the run record's exact match, character error rate 0.0; 37 tokens with EOS), and byte for byte the CPU reply of the Galaxy S26 and the Pixel 11 Pro to the same picture",
+        "prefill_tokens_per_s, decode_tokens_per_s and ttft_ms = the runtime's benchmark info (last_prefill_tokens_per_second, last_decode_tokens_per_second, time_to_first_token_in_second: the 277-token prefill and the decode, the vision encoder not included); first_chunk_s = from the send (vision encoder and prefill) to the first piece of the reply",
+        "delegation (U8-cpu-line_en): prefill_278 815 / 894 on TfLiteXNNPackDelegate (47 partition(s)); decode 791 / 872 on TfLiteXNNPackDelegate (50 partition(s)); main 1 / 4 on TfLiteXNNPackDelegate (2 partition(s)); main 2464 / 2464 on TfLiteXNNPackDelegate (1 partition(s)); main 6 / 7 on TfLiteXNNPackDelegate (3 partition(s))",
+        "full_delegation false = XNNPACK takes 815 of 894 nodes of the decoder's prefill_278 signature (47 partitions) and 791 of 872 of its decode signature (50 partitions), the vision encoder whole (2,464 of 2,464); the rest of the decoder runs on the CPU's default kernels; the vision adapter (XNNPACK 6 of 7 nodes) and the embedding graph (XNNPACK 1 of 4; its table from the external weights) on the CPU, as the runtime log lists them",
+        "peak_mem_mb = the highest VmHWM of the process (phone-side samples, MiB)",
+        "the card: https://huggingface.co/litert-community/Unlimited-OCR (the 8 GB Android phones lines: this run's request time and decode rate)"
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 37.0,
+        "engine_s": 35.43,
+        "first_chunk_s": 26.306,
+        "memavailable_min_kb": 1764172.0,
+        "processes": 1.0,
+        "prompt_tokens": 277.0,
+        "request_s": 96.91
+      },
+      "output_match": true,
+      "peak_mem_mb": 3822.3,
+      "prefill_tokens_per_s": 22.4,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "one request (decoder and vision encoder on the CPU, 4 threads): one 1,024 x 1,024 picture of one printed line (line_en) with the instruction `document parsing.` in a fresh process with an empty runtime cache, the reply compared with the original model's fp32 reading",
+      "total_ops": null,
+      "ttft_ms": 13355.0
+    }
+  ],
+  "schema_version": "1.0"
+}

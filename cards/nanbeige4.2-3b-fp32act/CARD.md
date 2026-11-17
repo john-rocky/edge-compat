@@ -19,8 +19,8 @@ task: text-generation
 
 | | |
 |---|---|
-| **Tool** | same export as the shipped model.litertlm (looped-arch unroll, num_loops=2) with one model.toml repack same lineage as the shipped Nanbeige4.2-3B model.litertlm (built 2026-08-20, gated 2026-08-27) |
-| **Command** | `nanbeige_work/gpu_quest/ repack — prefer_activation_type=fp32 (FINDINGS.md)` |
+| **Tool** | same export as the shipped model.litertlm (looped-arch unroll, num_loops=2) with one model.toml repack same lineage as the shipped Nanbeige4.2-3B model.litertlm (built 2026-08-20, checked 2026-08-27) |
+| **Command** | `gpu_quest/ repack — prefer_activation_type=fp32` |
 | **Quantization** | unchanged from the shipped bundle (repack does not touch weights) |
 
 ## Artifacts
@@ -47,8 +47,8 @@ Model-level on-device results — measured behavior of this exact artifact on th
 
 ## Pitfalls
 
-- The shipped model.litertlm FAILs on GPU while fully delegated: <unk> flood on Adreno (S4 idx 031) and on Mac Metal, with CPU correct on the same prompt — fp16 activations mis-read the loop boundary of the unrolled num_loops=2 graph. The fix is prefer_activation_type=fp32; the controlled A/B (same day, machine, runtime, prompt; weights byte-identical) flips Metal GPU from <unk> flood to a correct answer (ship_gpu_20260827/RESULTS.md).
-- The fix crosses GPU backends: verified on S26 Adreno (2492/2492, real generation; device_runs 2026-08-27) and Mac Metal, plus an Adreno 840 leg (1689685). An earlier Apple-silicon-specific claim was wrong and retracted.
+- The shipped model.litertlm FAILs on GPU while fully delegated: <unk> flood on Adreno (S4 idx 031) and on Mac Metal, with CPU correct on the same prompt — fp16 activations mis-read the loop boundary of the unrolled num_loops=2 graph. The fix is prefer_activation_type=fp32; the controlled A/B (same day, machine, runtime, prompt; weights byte-identical) flips Metal GPU from <unk> flood to a correct answer.
+- The fix crosses GPU backends: verified on S26 Adreno (2492/2492, real generation; device_runs 2026-08-27) and Mac Metal, plus an Adreno 840 run (1689685). An earlier Apple-silicon-specific claim was wrong and retracted.
 - iPhone 17 Pro: NEITHER bundle starts — both fail identically at engine init on memory, so fp32 activations are not the cause and the card carries the wall rather than an iOS row (882e48a; ship record). The output-head corruption investigated separately is family-wide and not caused by this repack (34f9bb1: four causes ruled out).
 
 ---

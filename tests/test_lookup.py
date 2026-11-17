@@ -97,6 +97,141 @@ def test_tie_with_contradictory_statuses_raises() -> None:
         m.lookup("CONV_2D", dtypes=["int8"])
 
 
+_MEASURED_EVIDENCE = {"source_model": "m.tflite", "litert_version": "2.3.0", "date": "2026-11-03"}
+_CARRIED = {
+    "source_model": "probe",
+    "litert_version": "2.1.6",
+    "date": "2026-08-12",
+    "derived_from": {"litert_version": "2.1.6", "date": "2026-08-12"},
+}
+
+
+def test_tie_measured_entry_wins_over_carried_forward_inferred_entry() -> None:
+    measured = entry(
+        op="BATCH_MATMUL",
+        status="crash",
+        provenance="measured",
+        dtypes=["float32"],
+        constraints={"second_input": "constant"},
+        evidence=_MEASURED_EVIDENCE,
+    )
+    m = build(
+        [
+            entry(
+                op="BATCH_MATMUL",
+                status="delegated",
+                provenance="inferred",
+                dtypes=["float32"],
+                constraints={"rank": 3},
+                evidence=_CARRIED,
+            ),
+            measured,
+        ]
+    )
+    verdict = m.lookup(
+        "BATCH_MATMUL", dtypes=["float32"], shape_meta={"rank": 3, "second_input": "constant"}
+    )
+    assert verdict.status == "crash"
+    assert verdict.matched_entry == measured
+    assert verdict.reason == (
+        "matched entry specific to op, dtypes, and constraints; tie resolved: measured over "
+        'inferred (delegated: BATCH_MATMUL [float32] {"rank":3}, derived from 2.1.6 of 2026-08-12)'
+    )
+
+
+def test_tie_measured_entry_overrules_every_contradicting_inferred_entry() -> None:
+    measured = entry(
+        status="fallback", provenance="measured", dtypes=["int8"], evidence=_MEASURED_EVIDENCE
+    )
+    m = build(
+        [
+            entry(status="delegated", provenance="inferred", dtypes=["float32", "int8"]),
+            entry(status="crash", provenance="inferred", dtypes=["int8", "int16"]),
+            entry(status="fallback", provenance="inferred", dtypes=["int8", "uint8"]),
+            measured,
+        ]
+    )
+    verdict = m.lookup("CONV_2D", dtypes=["int8"])
+    assert verdict.status == "fallback"
+    assert verdict.matched_entry == measured
+    assert verdict.reason.startswith(
+        "matched entry specific to op and dtypes; tie resolved: measured over inferred ("
+    )
+    # Both contradicting entries are named; the agreeing inferred entry is not.
+    assert "delegated: CONV_2D [float32,int8] {}" in verdict.reason
+    assert "crash: CONV_2D [int16,int8] {}" in verdict.reason
+    assert "uint8" not in verdict.reason
+
+
+def test_tie_between_two_measured_entries_still_raises() -> None:
+    m = build(
+        [
+            entry(
+                status="incorrect",
+                provenance="measured",
+                dtypes=["float32"],
+                constraints={"buffer_type": "packed"},
+                evidence=_MEASURED_EVIDENCE,
+            ),
+            entry(
+                status="crash",
+                provenance="measured",
+                dtypes=["float32"],
+                constraints={"max_bytes": 1024},
+                evidence=_MEASURED_EVIDENCE,
+            ),
+        ]
+    )
+    with pytest.raises(MatrixLookupTieError):
+        m.lookup(
+            "CONV_2D", dtypes=["float32"], shape_meta={"buffer_type": "packed", "max_bytes": 1024}
+        )
+
+
+def test_tie_with_two_measured_entries_against_inferred_still_raises() -> None:
+    m = build(
+        [
+            entry(
+                status="crash", provenance="measured", dtypes=["int8"], evidence=_MEASURED_EVIDENCE
+            ),
+            entry(
+                status="crash",
+                provenance="measured",
+                dtypes=["float32", "int8"],
+                evidence=_MEASURED_EVIDENCE,
+            ),
+            entry(status="delegated", provenance="inferred", dtypes=["int8", "uint8"]),
+        ]
+    )
+    with pytest.raises(MatrixLookupTieError):
+        m.lookup("CONV_2D", dtypes=["int8"])
+
+
+def test_tie_between_inferred_entries_still_raises() -> None:
+    m = build(
+        [
+            entry(status="delegated", provenance="inferred", dtypes=["int8"], evidence=_CARRIED),
+            entry(status="fallback", provenance="inferred", dtypes=["float32", "int8"]),
+        ]
+    )
+    with pytest.raises(MatrixLookupTieError):
+        m.lookup("CONV_2D", dtypes=["int8"])
+
+
+def test_tie_measured_against_vendor_doc_still_raises() -> None:
+    m = build(
+        [
+            entry(
+                status="crash", provenance="measured", dtypes=["int8"], evidence=_MEASURED_EVIDENCE
+            ),
+            entry(status="delegated", provenance="vendor_doc", dtypes=["float32", "int8"]),
+            entry(status="delegated", provenance="inferred", dtypes=["int8", "uint8"]),
+        ]
+    )
+    with pytest.raises(MatrixLookupTieError):
+        m.lookup("CONV_2D", dtypes=["int8"])
+
+
 def test_tie_with_same_status_is_deterministic() -> None:
     m = build(
         [

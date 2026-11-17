@@ -1,4 +1,4 @@
-"""The LiteRT #10445 class made matchable (DECISIONS #178):
+"""The LiteRT #10445 class made matchable:
 
 - the reader keeps small constant payloads (`TensorInfo.const_data`) so PAD
   paddings can be read without the runtime;

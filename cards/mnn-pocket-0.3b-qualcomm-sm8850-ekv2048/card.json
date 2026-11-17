@@ -1,0 +1,153 @@
+{
+  "artifacts": [
+    {
+      "file": "MNN-Pocket-0.3B_qualcomm_sm8850_ekv2048.litertlm",
+      "sha256": "ab3aa3aa48a27f2170caf025deb59dc5f2e6c392ff6968d73100f3a02c178138",
+      "size_mb": 362.753
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "MNN-Pocket-0.3B_qualcomm_npu_ekv2048.litertlm -> compile_litertlm (backend qualcomm, SoC SM8850), optimization level O3, one compiled context of 319,000,576 bytes for both signatures with their weights shared; every section of the NPU file byte for byte except the main graph, held compiled (card L41, L197)",
+    "quantization": "as the NPU file: int8 weights (one scale per output channel) with 16-bit integer activations; KV cache of 2,048 tokens; one prefill signature of 128 tokens; the main graph compiled for the SM8850 (card L33-L34, L41)",
+    "tool": "the NPU file compiled with litert-torch's NPU compiler at commit 6d4c622 (compile_litertlm, backend qualcomm, SoC SM8850, the small graphs left to the phone's CPU); repro = hf-to-litertlm REPRODUCE.md, entry \"2026-11-07 — the SM8850 file\" (card L197, L201)",
+    "tool_version": "litert-torch 6d4c622 in a container with ai-edge-litert 2.2.0 and the QNN libraries of QAIRT 2.47.0.260601 (ai-edge-litert-sdk-qualcomm 2.2.0); on the phone LiteRT-LM 0.19.1 built from the v0.19.1 tag with the Qualcomm dispatch library and the QNN libraries, without the compiler plugin (card L194, L197)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu",
+          "context_length": null,
+          "date": "2026-11-07",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-mnnpocket-devicebench",
+            "os_build": "Android 16 (BP4A.251205.006)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.1",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT 2.47.0.260601114230 (QNN libraries on the phone; no compiler plugin)"
+          },
+          "error": null,
+          "evidence": [
+            "artifact: litert-community/MNN-Pocket-0.3B `MNN-Pocket-0.3B_qualcomm_sm8850_ekv2048.litertlm` at main 6ea52447: LFS sha256 ab3aa3aa48a27f2170caf025deb59dc5f2e6c392ff6968d73100f3a02c178138, 380374152 B (anonymous Hub API tree read 2026-11-07 13:13:06 JST)",
+            "(hold b1) ITEMJSON full texts: units 50, equal 50, different 0, missing none"
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "replies_compared": 50.0,
+            "replies_equal": 50.0
+          },
+          "output_match": true,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "the NPU file's replies, through litert_lm_advanced_main built from the v0.19.1 tag without the compiler plugin: 8 short questions, two three-turn conversations and GSM8K questions 1-40, each full reply compared character for character with the NPU file's (blank lines at the end of a reply not compared)",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.19.1/2026-11-07/mnn-pocket-0.3b-qualcomm-sm8850-ekv2048__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu",
+          "context_length": 2048,
+          "date": "2026-11-07",
+          "decode_tokens_per_s": 157.7375,
+          "delegated_ops": null,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-mnnpocket-devicebench",
+            "os_build": "Android 16 (BP4A.251205.006)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.1",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT 2.47.0.260601114230 (QNN libraries on the phone; no compiler plugin)"
+          },
+          "error": null,
+          "evidence": [
+            "artifact: litert-community/MNN-Pocket-0.3B `MNN-Pocket-0.3B_qualcomm_sm8850_ekv2048.litertlm` at main 6ea52447: LFS sha256 ab3aa3aa48a27f2170caf025deb59dc5f2e6c392ff6968d73100f3a02c178138, 380374152 B (anonymous Hub API tree read 2026-11-07 13:13:06 JST)",
+            "runtime: LiteRT-LM v0.19.1 built from the tag (7a03724c, android_arm64, NDK 29.0.13113456): litert_lm_advanced_main sha256 5d869be730622b854fb87bf74205c7b083edece8197c9279317749dfd26772b7, the tag's Qualcomm dispatch libLiteRtDispatch_Qualcomm.so 6946f3771068302a894fbaaff53345f9460d211fe50b2866f2fadf388919f533, no compiler plugin in the dispatch folder; QAIRT 2.47.0.260601114230 (QNN JIT libraries) libraries and skel; `--use_hw_cache_update_for_npu=true`; the binary's builds",
+            "command: --backend=npu --input_prompt_file=<one-line file> --max_num_tokens=2048 --max_output_tokens=256 --async=false --use_session=false --benchmark --benchmark_prefill_tokens=1024 --benchmark_decode_tokens=256 --num_iterations=3 (the cell = the mean of runs 2-3 in each of two processes, then the mean of the two; the binary prints TTFT to 0.01 s)",
+            "Device: model=SM-S942Q release=16 build_id=BP4A.251205.006 fingerprint=samsung/m1qjpnx/m1q:16/BP4A.251205.006/S942QOPS1AZH9_SJP1AZH9:user/release-keys",
+            "a13-t1 (run b1, 2026-11-07 08:34:33 JST at the run's start, uncapped (thermal 1, no CPU cap, kgsl_pwrlevel 0); rested 68s since 08:33:25): runs 2-3 prefill 11260.55 / 11260.87, decode 157.7 / 157.37 tok/s, TTFT 0.1 / 0.1 s, Init Total 278.78 ms; VmHWM 159336 kB",
+            "a13-t2 (run b1, 2026-11-07 08:39:15 JST at the run's start, uncapped (thermal 1, no CPU cap, kgsl_pwrlevel 0); rested 79s since 08:37:56): runs 2-3 prefill 11112.15 / 11161.68, decode 157.97 / 157.91 tok/s, TTFT 0.1 / 0.1 s, Init Total 267.31 ms; VmHWM 162468 kB",
+            "WARNING: [compiled_model.cc:949] Compiler plugin path is provided in the environment, but the model is pre-compiled. Plugins won't be applied.",
+            "INFO: [dispatch_delegate.cc:129] DispatchDelegate::Initialize prefill_128",
+            "VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (prefill_128).",
+            "INFO: [litert_dispatch_device_context.cc:248] Creating new QNN context for bytecode 0x6f37738610 (size 319000576)",
+            "INFO: [dispatch_delegate.cc:129] DispatchDelegate::Initialize decode",
+            "VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 1 (decode).",
+            "INFO: [litert_dispatch_device_context.cc:243] Reusing cached QNN context for bytecode 0x6f37738610 (size 319000576)",
+            "WARNING: [compiled_model.cc:1628] Failed to apply compiler plugins: No compiler plugin found",
+            "VERBOSE: Replacing 2 out of 13 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 3 partitions for subgraph 0 (prefill_rope_128).",
+            "VERBOSE: Replacing 2 out of 12 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 3 partitions for subgraph 1 (decode_rope).",
+            "VERBOSE: Replacing 1 out of 4 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2 partitions for subgraph 0 (decode_embedder).",
+            "VERBOSE: Replacing 1 out of 4 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 2 partitions for subgraph 1 (prefill_embedder_128)."
+          ],
+          "failure_class": null,
+          "full_delegation": false,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "engine_creation_s": 0.271,
+            "init_total_ms": 273.045,
+            "iterations": 3.0,
+            "max_num_tokens": 2048.0,
+            "prefill_tokens": 1024.0,
+            "run1_decode_tok_s": 157.535,
+            "run1_init_total_ms": 278.78,
+            "run1_prefill_tok_s": 11260.71,
+            "run1_vmhwm_kb": 159336.0,
+            "run2_decode_tok_s": 157.94,
+            "run2_init_total_ms": 267.31,
+            "run2_prefill_tok_s": 11136.915,
+            "run2_vmhwm_kb": 162468.0,
+            "runs": 2.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 166.3672,
+          "prefill_tokens_per_s": 11198.8125,
+          "provenance": "measured",
+          "runs": true,
+          "total_ops": null,
+          "ttft_ms": 100.0
+        },
+        "source": "data/device_runs/0.19.1/2026-11-07/mnn-pocket-0.3b-qualcomm-sm8850-ekv2048__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "mnn-pocket",
+    "id": "mnn-pocket-0.3b-qualcomm-sm8850-ekv2048",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/MNN-Pocket-0.3B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "SM8850 only: the file is compiled for the Snapdragon SM8850 with QAIRT 2.47.0.260601 and was run only on the Galaxy S26 with that version's QNN libraries; a phone with another Snapdragon chip should take the NPU file (card L39, L189).",
+    "Needs Android binaries built from source, like the NPU file: the v0.19.1 tag's command-line tool with the Qualcomm dispatch library and the QAIRT 2.47.0.260601 QNN libraries (card L104, L189).",
+    "Compiler plugin: removing it from the library folder is optional; with it left in, the file gave the same reply but the engine took 0.37 s instead of 0.27 s while the plugin tried to compile the small graphs for the NPU, and QNN printed errors (one run each). Push it back before running the NPU file again (card L117).",
+    "One prefill signature of 128 tokens: a longer prompt is prefilled 128 tokens at a time (card L188).",
+    "Greedy on the NPU: LiteRT-LM 0.19.1 picks the most likely token at every step on the NPU, so the file's sampling settings do not apply there (card L102).",
+    "Speed against the NPU file: in the same session its processes ran with the CPU clocks capped less than the NPU file's, so part of the decode difference may come from the CPU (which runs the embedding lookup and the small graphs) and part from the two compiles, which differ; neither was measured (card L143).",
+    "Accuracy scope: its replies equal the NPU file's on the 8 short questions, the two three-turn conversations and the first 40 GSM8K questions; the other 60 GSM8K questions were not run on it (card L179)."
+  ],
+  "schema_version": "1.2"
+}

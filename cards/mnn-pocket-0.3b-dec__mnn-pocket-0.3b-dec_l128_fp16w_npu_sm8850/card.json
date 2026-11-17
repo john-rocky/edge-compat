@@ -1,0 +1,230 @@
+{
+  "artifacts": [
+    {
+      "file": "mnn-pocket-0.3b-dec_L128_fp16w_npu_SM8850.tflite",
+      "sha256": "01584b13d8f6a2c7b1b5982854d6935f6b0e24fa6bdc97a37dd02453e45b0299",
+      "size_mb": 472.352
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "the repository's conversion/ (conversion/README.md) holds the scripts and REPRODUCE.md every check (README L150); the card names the tools, not a command line",
+    "quantization": "float16 linear-layer weights, the LoRA adapter folded into the weights first; SiLU written with EXP in place of LOGISTIC for the NPU; compiled for the SM8850 ahead of time (README L20, L80, L129)",
+    "tool": "litert-torch",
+    "tool_version": "0.10.0 (for LiteRT 2.3.0); compiled for the SM8850 with QAIRT 2.50"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-11-07",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 2600,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-mnnpocketdec-capi-runner",
+            "os_build": "Android 16 (BP4A.251205.006.S942QOPS1AZH9)",
+            "runtime": "litert",
+            "runtime_version": "2.3.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT 2.50.0.260828221209"
+          },
+          "error": null,
+          "evidence": [
+            "(tag s26_a_L128, run r4): run DONE rc 0, start 2026-11-07 21:21:17, 322 questions",
+            "Push mnn_pocket_dec_ns4_in_6-27_post_6-27_final-xsilu_L128_w16_SM8850.tflite rc=0 bytes 495296536/495296536 sha256 phone=01584b13d8f6a2c7b1b5982854d6935f6b0e24fa6bdc97a37dd02453e45b0299 = mac = the Hub LFS sha256",
+            "Runner 7e7539e5bd0c73ed… and libs: 12/12 OK",
+            "Device: SM-S942Q 16 BP4A.251205.006.S942QOPS1AZH9",
+            "[\"128\"]: the SM8850 compile on the Mac: plugin rc 0, partition selected 2600 of 2600 ops in 1 partition, SDK v2.50.0.260828221209, output sha256 = the Hub LFS sha256; on the phone runner.replacing: VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (main).",
+            "Context binary SDK version matches current SDK: 2.50.0",
+            "line PASS: 322 questions, same winner 305/305 (not near ties), near ties kept 15/17, max |Δp| 0.0190049, mean |Δp| 0.00169396, control 0.0401, non-finite read-outs 0, winner = the Mac CPU's on the same file 305/305",
+            "Run memory (4 samples): VmHWM_max_kB 539312 VmSwap_max_kB 0 MemAvailable_min_kB 6298528 kgsl_page_alloc_max_B 214831104"
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "arm_files_passed": 15.0,
+            "arm_files_run": 15.0,
+            "compile_ms": 198.3,
+            "line_bar_control_abs_dp": 0.02,
+            "line_bar_max_abs_dp": 0.02,
+            "line_bar_mean_abs_dp": 0.002,
+            "line_bar_near_tie_gap": 0.02,
+            "line_control_abs_dp": 0.04010816857033642,
+            "line_mac_same_file_non_near_tie": 305.0,
+            "line_max_abs_dp": 0.01900492507447421,
+            "line_mean_abs_dp": 0.0016939579806469784,
+            "line_near_tie": 17.0,
+            "line_non_near_tie": 305.0,
+            "line_nonfinite_questions": 0.0,
+            "line_pass": 1.0,
+            "line_questions": 322.0,
+            "line_winner_equal_mac_non_near_tie": 305.0,
+            "line_winner_equal_near_tie": 15.0,
+            "line_winner_equal_non_near_tie": 305.0,
+            "vmhwm_max_kb": 539312.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "the line: 322 questions of the L128 set against the source model's reference; the C-API runner build 7e7539e5 (LiteRT 2.3.0), Qualcomm HTP, the SM8850 context compiled ahead of time on the Mac, HTP performance mode Burst",
+          "total_ops": 2600,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.3.0/2026-11-07/mnn-pocket-0.3b-dec__mnn-pocket-0.3b-dec_l128_fp16w_npu_sm8850__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-11-07",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 2600,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-mnnpocketdec-capi-runner",
+            "os_build": "Android 16 (BP4A.251205.006.S942QOPS1AZH9)",
+            "runtime": "litert",
+            "runtime_version": "2.3.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT 2.50.0.260828221209"
+          },
+          "error": null,
+          "evidence": [
+            "20.58 ms (min 19.53, max 21.25; median of 20 after 5 warm-ups, write+run+readback; run only 20.19 ms; load 0.22 s; no ca… (the cell's value; parity cell: PASS; gate PASS, timing run = check run (4/4 q, dumps equal))",
+            "(tag s26_at_b_L128, run r4): start 2026-11-07 21:29:51, request S/b_default (85 tokens), write_run_read_ms median 20.5775 min 19.527 max 21.251 n 20, run_only_ms median 20.1875",
+            "Push mnn_pocket_dec_ns4_in_6-27_post_6-27_final-xsilu_L128_w16_SM8850.tflite rc=0 bytes 495296536/495296536 sha256 phone=01584b13d8f6a2c7b1b5982854d6935f6b0e24fa6bdc97a37dd02453e45b0299 = mac = the Hub LFS sha256",
+            "Runner 7e7539e5bd0c73ed… and libs: 12/12 OK; extras: rest=60 needs=s26_a_L128",
+            "Device: SM-S942Q 16 BP4A.251205.006.S942QOPS1AZH9",
+            "clock samples: 1 samples, 0 capped, GPU level max 0",
+            "parity: [\"s26_at_b_L128\"]: gate PASS, timing run = check run (4/4 questions equal in every digit, max |Δp| between 0.0), against the check run",
+            "VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (main)."
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 20.5775,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "arm_files_passed": 15.0,
+            "arm_files_run": 15.0,
+            "capped": 0.0,
+            "capped_samples": 0.0,
+            "clock_samples": 1.0,
+            "compile_ms": 216.0,
+            "latency_max_ms": 21.251,
+            "latency_min_ms": 19.527,
+            "request_questions": 3.0,
+            "request_tokens": 85.0,
+            "run_only_p50_ms": 20.1875,
+            "timed_calls": 20.0,
+            "warmup_calls": 5.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "timing: `default_request` (inference.py's DEFAULT_REQUEST) (85 tokens, 3 questions), the median of 20 calls after 5 warm-up calls in one process, a call = write the four inputs, run, read `hidden` back; the C-API runner build 7e7539e5 (LiteRT 2.3.0), Qualcomm HTP, the SM8850 context compiled ahead of time on the Mac, HTP performance mode Burst",
+          "total_ops": 2600,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.3.0/2026-11-07/mnn-pocket-0.3b-dec__mnn-pocket-0.3b-dec_l128_fp16w_npu_sm8850__galaxy-s26.json"
+      },
+      {
+        "device": "galaxy-s26",
+        "run": {
+          "accelerator": "npu_qnn",
+          "context_length": null,
+          "date": "2026-11-07",
+          "decode_tokens_per_s": null,
+          "delegated_ops": 2600,
+          "env": {
+            "device": "Galaxy S26 (SM-S942Q)",
+            "machine_label": "galaxy-s26-mnnpocketdec-capi-runner",
+            "os_build": "Android 16 (BP4A.251205.006.S942QOPS1AZH9)",
+            "runtime": "litert",
+            "runtime_version": "2.3.0",
+            "soc": "Qualcomm SM8850",
+            "vendor_sdk": "QAIRT 2.50.0.260828221209"
+          },
+          "error": null,
+          "evidence": [
+            "20.55 ms (min 19.70, max 21.50; median of 20 after 5 warm-ups, write+run+readback; run only 20.16 ms; load 0.21 s; no ca… (the cell's value; parity cell: PASS; gate PASS, timing run = check run (1/1 q, dumps equal))",
+            "(tag s26_at_a_L128, run r4): start 2026-11-07 21:28:42, request S/a_readme (60 tokens), write_run_read_ms median 20.545 min 19.695 max 21.496 n 20, run_only_ms median 20.1645",
+            "Push mnn_pocket_dec_ns4_in_6-27_post_6-27_final-xsilu_L128_w16_SM8850.tflite rc=0 bytes 495296536/495296536 sha256 phone=01584b13d8f6a2c7b1b5982854d6935f6b0e24fa6bdc97a37dd02453e45b0299 = mac = the Hub LFS sha256",
+            "Runner 7e7539e5bd0c73ed… and libs: 12/12 OK; extras: rest=60 needs=s26_a_L128",
+            "Device: SM-S942Q 16 BP4A.251205.006.S942QOPS1AZH9",
+            "clock samples: 1 samples, 0 capped, GPU level max 0",
+            "parity: [\"s26_at_a_L128\"]: gate PASS, timing run = check run (1/1 questions equal in every digit, max |Δp| between 0.0), against the check run",
+            "VERBOSE: Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (main)."
+          ],
+          "failure_class": null,
+          "full_delegation": true,
+          "latency_p50_ms": 20.545,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "arm_files_passed": 15.0,
+            "arm_files_run": 15.0,
+            "capped": 0.0,
+            "capped_samples": 0.0,
+            "clock_samples": 1.0,
+            "compile_ms": 208.0,
+            "latency_max_ms": 21.496,
+            "latency_min_ms": 19.695,
+            "request_questions": 1.0,
+            "request_tokens": 60.0,
+            "run_only_p50_ms": 20.1645,
+            "timed_calls": 20.0,
+            "warmup_calls": 5.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "timing: `readme_request` (the source model card's example) (60 tokens, 1 question), the median of 20 calls after 5 warm-up calls in one process, a call = write the four inputs, run, read `hidden` back; the C-API runner build 7e7539e5 (LiteRT 2.3.0), Qualcomm HTP, the SM8850 context compiled ahead of time on the Mac, HTP performance mode Burst",
+          "total_ops": 2600,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/2.3.0/2026-11-07/mnn-pocket-0.3b-dec__mnn-pocket-0.3b-dec_l128_fp16w_npu_sm8850__galaxy-s26.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "mnn-pocket",
+    "id": "mnn-pocket-0.3b-dec__mnn-pocket-0.3b-dec_l128_fp16w_npu_sm8850",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/MNN-Pocket-0.3B-Dec-LiteRT",
+    "task": "text-classification"
+  },
+  "pitfalls": [
+    "A decision model, not a chat model: it takes a `state` and typed `questions` (`choice`, `noul`, `score`) and returns the probability of every candidate in one forward pass; it never generates text (README L18).",
+    "The graph is the model body only: it takes the embeddings of the request's tokens, the rotary tables and the attention mask and returns the hidden states after the final norm; the Python host in `host/` builds the request, takes the embeddings from `embedding.safetensors` (the source model's token table) and reads the answers with the source model's head and temperature, as the source model's `inference.py` does (README L20, L147-L148).",
+    "Each file is a static window: `<n>` in the name is the longest request it takes; run the smallest file that holds the request. A request longer than 2,048 tokens raises `ValueError` in the host, which never cuts it; the source model's own limit is 32,768 tokens (README L71, L84).",
+    "The checks measure agreement with the source model's `inference.py`, unchanged, on its own files (float32, CPU, one thread): 2,409 questions on the Mac, a fixed subset of 16 to 322 questions per file on the phones; the bar is the same winner on every question whose two most likely options are more than 0.02 apart, a largest |dp| of at most 0.02 and a mean of at most 0.002 (README L88, L102).",
+    "The repository has no Android host yet: an Android app has to port `host/pocket_dec_litert.py`; the phones ran LiteRT 2.3.0 through its C API with inputs the Mac computed with the host's code (README L137).",
+    "Set the HTP performance mode to Burst: without it the calls on the Galaxy S26 took 5.5 to 6.7 times as long (76.3 ms against 11.3 ms for the 60-token example); in the C API it is `htp_performance_mode = 2` (`kLiteRtQualcommHtpPerformanceModeBurst`) in the Qualcomm options, in Kotlin `CompiledModel.QualcommOptions(htpPerformanceMode = CompiledModel.QualcommOptions.HtpPerformanceMode.BURST)` set as `qualcommOptions` of `CompiledModel.Options` (README L127).",
+    "Compiled ahead of time for the Qualcomm SM8850 (Galaxy S26) with QAIRT 2.50: on the Galaxy S26 a file loads in 0.2 s (64 tokens) to 0.5 s (1,024 tokens) and 1.2 s (2,048 tokens), and the process peaks at 0.55 to 0.70 GB; for a Qualcomm NPU compiled on the phone the repository has the `_npu` files (README L80-L81, L129).",
+    "SiLU is written with EXP in place of LOGISTIC, because the NPU's LOGISTIC returned 0 for inputs below about -5.7 (measured on the Galaxy S26 with QAIRT 2.47, on another model's graph) (README L129).",
+    "Running it needs LiteRT's Qualcomm NPU runtime (Maven `litert-npu-runtime-qualcomm` 2.3.0) and Qualcomm's QAIRT 2.50 libraries; every file ran on the NPU in one partition, with all 2,600 ops (README L129).",
+    "The Qualcomm NPU passes the bar (every winner that is not a near tie, 42 of 54 near ties, largest |dp| 0.0190) but can flip a near tie: in the source model's default example (`department`: `shipping` 0.41064 against `returns` 0.40709) it answers `returns`; from 64 to 1,024 tokens the files compiled ahead of time and the files compiled on the phone gave the same probabilities to every digit (README L97, L102, L104).",
+    "The repository's scripts rebuild the 20 graphs other than the SM8850 files byte for byte on the Mac that made them; compiled again, the 64- and 768-token SM8850 files were the same computation, not the same bytes (README L150)."
+  ],
+  "schema_version": "1.2"
+}

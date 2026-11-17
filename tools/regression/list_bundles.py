@@ -3,11 +3,16 @@
     uv run python tools/regression/list_bundles.py [--out data/regression/bundles.json]
     uv run python tools/regression/list_bundles.py --check data/regression/bundles.json
 
+`--out` is also where the previous list is read from (the `bundle_id` a row
+keeps, the rows of files that left the Hub): a dry run into another path
+starts from a copy of the current list (2026-11-09: a run into an empty path
+renamed 30 of 240 ids and dropped 3 `hub_missing` rows).
+
 Rows come from three sources, all read from the real thing:
 
 (a) the shipping record: every `.litertlm` variant of the generated manifests
-    (`--manifests`, default `$LITERTLM_MANIFESTS` or
-    `~/code/litertlm-convert/manifest/generated`);
+    (`--manifests`, default `$LITERTLM_MANIFESTS` or the one-line path in
+    `manifests.path` next to this script, a machine-local file);
 (b) the lab cards: every `cards/*/card.json` artifact that is a `.litertlm`;
 (c) the Hugging Face API (read-only): every public repo of the own account
     that holds a `.litertlm`, and every `.litertlm` in a public litert-community
@@ -60,7 +65,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 HUB = "https://huggingface.co"
 OWN_ORG = "mlboydaisuke"
 ORGS = (OWN_ORG, "litert-community")
-# The own account is whoever authored this commit (the 2026-10-11 re-ship of
+# The own account is whoever authored this commit (the 2026-10-11 re-upload of
 # Qwen3.5-2B_int8.litertlm); read live, never assumed.
 OWN_SEED_REPO = "litert-community/Qwen3.5-2B"
 OWN_SEED_COMMIT = "4523abeb8b87f381a64a6ddb4906a805b13938bc"
@@ -781,15 +786,24 @@ def _short(value: str | None) -> str:
     return value[:12] if value else "-"
 
 
+_MANIFESTS_FILE = HERE / "manifests.path"
+
+
+def _local_manifests() -> str:
+    """The machine-local default for --manifests: the one line of manifests.path next to this script, if present."""
+    return _MANIFESTS_FILE.read_text(encoding="utf-8").strip() if _MANIFESTS_FILE.is_file() else ""
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--out", default=str(REPO_ROOT / "data" / "regression" / "bundles.json"))
-    ap.add_argument("--manifests", default=os.environ.get(
-        "LITERTLM_MANIFESTS", "~/code/litertlm-convert/manifest/generated"))
+    ap.add_argument("--manifests", default=os.environ.get("LITERTLM_MANIFESTS") or _local_manifests())
     ap.add_argument("--check", metavar="BUNDLES_JSON")
     args = ap.parse_args(argv)
     if args.check:
         return check(Path(args.check))
+    if not args.manifests:
+        ap.error("--manifests (or env LITERTLM_MANIFESTS) is required: the folder of the generated manifests")
     out = Path(args.out)
     previous = json.loads(out.read_text(encoding="utf-8")) if out.exists() else None
     previous_ids = {(r["hf_repo"], r["file"]): r["bundle_id"]

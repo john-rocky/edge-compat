@@ -1,9 +1,9 @@
-"""Catalog regression lane (tools/regression/): the result schema and its
+"""Catalog regression (tools/regression/): the result schema and its
 example fixture, the committed run directories (layout, provenance, the
 generated SUMMARY.md), the own-bundle list, the mechanical judge, and the
 rule that these tools never touch the op-level matrix.
 
-data/regression/ is lab-only until the owner decides otherwise, so every
+data/regression/ is not exported, so every
 test over it holds for an absent directory too (the public mirror).
 """
 
@@ -519,7 +519,7 @@ def test_run_bundle_two_timeouts(monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 
 def test_run_bundle_source_deleted_mid_run(monkeypatch: pytest.MonkeyPatch,
                                            tmp_path: Path) -> None:
-    """A read-only source deleted under the run (2026-10-12: another lane's
+    """A read-only source deleted under the run (2026-10-12: another job's
     close removed the --extra-local copy mid-bundle): NA, not a wall of FAIL."""
     runner = _fake_suite(monkeypatch, tmp_path, dict(GOOD))
     fake_probe = run_regression.Runner.probe
@@ -874,8 +874,8 @@ def test_probe_parsers() -> None:
 
 
 def test_regression_tools_never_touch_the_matrix() -> None:
-    """Same intent as the zero-matrix-writes tests of the web and device
-    lanes: nothing under tools/regression names data/matrix or imports the
+    """Same intent as the zero-matrix-writes tests of the browser sweep and the
+    device runs: nothing under tools/regression names data/matrix or imports the
     matrix package outside its docstrings."""
     for path in sorted(TOOLS.glob("*.py")):
         tree = ast.parse(path.read_text(encoding="utf-8"))

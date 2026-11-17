@@ -1,11 +1,9 @@
 # Browser
 
-`DECISIONS` and `PROGRESS` citations on this page refer to the logs of the private lab repository.
-
 ## `web/sweep` — LiteRT.js browser sweep harness
 
 The Phase 5 instrument (TypeScript + Playwright, the repo's one non-Python
-lane): batch-measures real `.tflite` models on LiteRT.js in headless Chromium
+part): batch-measures real `.tflite` models on LiteRT.js in headless Chromium
 — loads / runs / full-delegation / output-match-vs-CPU / latency p50, per
 model × backend (`wasm_xnnpack`, `webgpu_mldrift`, `webnn` behind
 `--experimental`) — writing one
@@ -81,5 +79,4 @@ matrix snapshots stay empty (honest empty examples under
 `data/examples/matrix_{wasm_xnnpack,webgpu_mldrift,webnn}_example.json`), and
 `edge-lint --backend webgpu_mldrift` (and peers) runs fine while honestly
 reporting `unknown`-dominated verdicts — every unknown becomes a probe-ready
-`needs_probe` signature for the future web runner (see "Deferred" in
-PROGRESS.md).
+`needs_probe` signature for the future web runner.

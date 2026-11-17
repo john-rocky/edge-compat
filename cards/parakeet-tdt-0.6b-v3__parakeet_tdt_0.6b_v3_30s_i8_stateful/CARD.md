@@ -44,10 +44,12 @@ Model-level sweep results — measured behavior of this exact `.tflite` in the b
 
 ## Device runs (NPU / LiteRT-LM)
 
-Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/selfbuilt-66058c82+omni-eval-patches/2026-09-25/parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful__mac-studio-m4-max.json`.
+Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/2.2.0/2026-10-19/parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful__galaxy-s26.json`, `data/device_runs/selfbuilt-66058c82+omni-eval-patches/2026-09-25/parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful__mac-studio-m4-max.json`.
 
 | Device | Accelerator | Status | Full delegation | Output match | Prompt (tokens) | Latency p50 (ms) | Prefill tok/s | Decode tok/s | TTFT (ms) | Peak mem (MB) | Environment | Date | Provenance |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| galaxy-s26 | cpu_xnnpack | fallback | no | - | - | - | - | - | - | 2056.0 | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 (Adreno GPU, Hexagon HTP) · litert 2.2.0 · Android 16 (BP4A.251205.006.S942QOPS1AZH9, security patch 2026-08-05; the run header's device block) | 2026-10-19 | measured |
+| galaxy-s26 | gpu_mldrift | pass | yes | - | - | - | - | - | - | 1881.0 | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 (Adreno GPU, Hexagon HTP) · litert 2.2.0 · Android 16 (BP4A.251205.006.S942QOPS1AZH9, security patch 2026-08-05; the run header's device block) | 2026-10-19 | measured |
 | mac-studio-m4-max | cpu | pass | - | - | - | - | - | - | - | 1825.7 | Mac Studio (Apple M4 Max, 128 GB) · Apple M4 Max · litert-lm selfbuilt-66058c82+omni-eval-patches · macOS 27.0 (26A428) | 2026-09-25 | measured |
 
 ## Pitfalls

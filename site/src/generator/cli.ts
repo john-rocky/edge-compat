@@ -61,7 +61,7 @@ options:
 /** Backends the playground runs live, reference (wasm_xnnpack) first. */
 const PLAYGROUND_RUN_BACKENDS = ['wasm_xnnpack', 'webgpu_mldrift'];
 
-/** Sweep-mirroring playground run parameters (web/sweep defaults, DECISIONS #95). */
+/** Sweep-mirroring playground run parameters (web/sweep defaults). */
 const PLAYGROUND_RUN_CONFIG = {
   warmupRuns: 3,
   timedRuns: 10,

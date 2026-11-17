@@ -35,12 +35,12 @@ No benchmark data yet.
 
 ## Device runs (NPU / LiteRT-LM)
 
-Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-24/paddleocr-vl-1.6__galaxy-s26.json`, `data/device_runs/0.16.0/2026-09-05/paddleocr-vl-1.6__galaxy-s26.json`, `data/device_runs/0.16.0/2026-09-05/paddleocr-vl-1.6__pixel-8a.json`.
+Model-level on-device results — measured behavior of this exact artifact on the recorded device, only meaningful together with that environment. Throughput is conditional on the measured prompt length (Prompt (tokens); '-' = the source stated none): rows differing only there are different measurements, not re-runs. Full records (failure classes, log evidence): `data/device_runs/0.16.0/2026-08-25/paddleocr-vl-1.6__galaxy-s26.json`, `data/device_runs/0.16.0/2026-09-05/paddleocr-vl-1.6__galaxy-s26.json`, `data/device_runs/0.16.0/2026-09-05/paddleocr-vl-1.6__pixel-8a.json`.
 
 | Device | Accelerator | Status | Full delegation | Output match | Prompt (tokens) | Latency p50 (ms) | Prefill tok/s | Decode tok/s | TTFT (ms) | Peak mem (MB) | Environment | Date | Provenance |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | galaxy-s26 | cpu | run_failed | no | - | - | - | - | - | - | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm 0.16.0 · Android 16 | 2026-09-05 | measured |
-| galaxy-s26 | gpu | pass | yes | - | 204 | - | 1238.83 | 35.59 | 190.0 | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm 0.16.0 · Android 16 | 2026-08-24 | measured |
+| galaxy-s26 | gpu | pass | yes | - | 204 | - | 1238.83 | 35.59 | 190.0 | - | Galaxy S26 (SM-S942Q) · Qualcomm SM8850 · litert-lm 0.16.0 · Android 16 | 2026-08-25 | measured |
 | pixel-8a | cpu | run_failed | no | - | - | - | - | - | - | - | Pixel 8a · Tensor G3 · litert-lm 0.16.0 · Android 16 | 2026-09-05 | measured |
 
 ## Pitfalls
@@ -50,7 +50,7 @@ Model-level on-device results — measured behavior of this exact artifact on th
 - Decoder: bit-exact fp32 logits vs the original as a standalone Llama-layout model; shipped fp16 weights are teacher-forced-parity corr 1.0000, top-1 10/10 (HF card Quality).
 - M-RoPE note: the base decoder uses Qwen2-VL-style 3-D M-RoPE while the fast_vlm contract supplies plain sequential positions — identical for text tokens, and an A/B eager test (true M-RoPE vs 1-D) showed no quality loss on OCR/table tasks (HF card).
 - Tokenizer: the base SP model lacks the 1,019 added tokens (<|IMAGE_START|>, <|LOC_0|>…<|LOC_1000|>, <fcel>/<nl> table tokens) — appended as USER_DEFINED pieces at their exact ids (vocab padded to 103,424) so table/spotting output detokenizes on device; prompt template baked in: <|begin_of_sentence|>User: <image>PROMPT\nAssistant:\n, stop </s> (HF card Conversion notes).
-- On the Galaxy S26 and Pixel 8a CPU generation gates (S7 backfill, 2026-09-05) the text-only gate prompt produced a repeated-character flood (degenerate_output rows in data/device_runs/) — an OCR-prompt model asked a plain question; not a card-quality claim either way (device runs).
+- On the Galaxy S26 and Pixel 8a CPU generation checks (S7 backfill, 2026-09-05) the text-only test prompt produced a repeated-character flood (degenerate_output rows in data/device_runs/) — an OCR-prompt model asked a plain question; not a card-quality claim either way (device runs).
 - LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/ (Pi 5 / S26 / Pixel 8a / Mac / iPhone as measured).
 
 ---

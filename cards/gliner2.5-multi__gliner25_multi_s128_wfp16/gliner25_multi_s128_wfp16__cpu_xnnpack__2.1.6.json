@@ -20761,7 +20761,7 @@
     "litert_version": "2.1.6"
   },
   "model": {
-    "path": "/Users/USER/code/codex-conversions/2026-09-19/gliner25-multi/publish/gliner25_multi_s128_wfp16.tflite",
+    "path": "gliner25_multi_s128_wfp16.tflite",
     "sha256": "a4603fbcead732e6d50a0716ce80a79fbecd9e3763c07e7d2463f827a1c8b87d",
     "subgraph_count": 1
   },

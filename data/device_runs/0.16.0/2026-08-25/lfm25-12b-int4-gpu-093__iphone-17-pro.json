@@ -22,8 +22,7 @@
       "error": "delegate_metal.mm:126 newLibraryWithSource: implicit conversions between vector types ('half4' and 'float4') are not permitted -> engine.cc:777 Failed to create engine",
       "evidence": [
         "control cell: app task-derived maxNumTokens (~650), same file/runtime/device as the passing cells — reproduces the 2026-08-12 LiteRT-LM#3129 signature line for line",
-        "root cause established 2026-08-25: maxNumTokens below the exported prefill plan (1024) -> DUS shape rejection -> partial delegation (104/542) -> Metal shader compile failure; NOT a codegen bug",
-        "litertlm-convert/minicpm5_work/ship_lfm25_gpu_0160/device_gate_20260825_maxtok/console_control.log"
+        "root cause established 2026-08-25: maxNumTokens below the exported prefill plan (1024) -> DUS shape rejection -> partial delegation (104/542) -> Metal shader compile failure; NOT a codegen bug"
       ],
       "failure_class": "engine_create_failed",
       "full_delegation": null,
@@ -58,8 +57,7 @@
       "error": null,
       "evidence": [
         "maxNumTokens=1024 (largest exported prefill signature) via BenchmarkApp --litert-max-tokens; all 13 Metal kernels initialize, zero DelegateKernel failures, coherent output ('On-device AI means using artificial intelligence...')",
-        "device charging during run (functional gate; treat throughput as indicative)",
-        "litertlm-convert/minicpm5_work/ship_lfm25_gpu_0160/device_gate_20260825_maxtok/console_maxtok1024.log"
+        "device charging during run (functional gate; treat throughput as indicative)"
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -101,8 +99,7 @@
       },
       "error": null,
       "evidence": [
-        "8-question sanity gate on Metal GPU: 7/8 (missed only the rhyme line 'violets are blue' -> 'red'; same level as the 2026-08-05 iPhone CPU 6/8)",
-        "litertlm-convert/minicpm5_work/ship_lfm25_gpu_0160/device_gate_20260825_maxtok/console_quality_maxtok1024.log"
+        "8-question sanity check on Metal GPU: 7/8 (missed only the rhyme line 'violets are blue' -> 'red'; same level as the 2026-08-05 iPhone CPU 6/8)"
       ],
       "failure_class": null,
       "full_delegation": true,

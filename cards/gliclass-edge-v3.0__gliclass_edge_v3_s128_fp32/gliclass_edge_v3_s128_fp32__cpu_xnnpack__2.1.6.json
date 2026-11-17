@@ -12157,7 +12157,7 @@
     "litert_version": "2.1.6"
   },
   "model": {
-    "path": "/Users/USER/code/codex-conversions/2026-10-02/gliclass-edge-litert/exports/shipment/gliclass_edge_v3_s128_fp32.tflite",
+    "path": "gliclass_edge_v3_s128_fp32.tflite",
     "sha256": "79036f538289fd406e6f33b6a1dda51758c77d5383c7704369248c491dd6dd59",
     "subgraph_count": 1
   },

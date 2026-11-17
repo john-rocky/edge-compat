@@ -1,0 +1,59 @@
+{
+  "artifact": "decide_L2048_fp16fc.tflite",
+  "artifact_sha256": "6684732c1380a6c8595f02c0a42e6bcc04b4342a39409ed781d5a41d356e0a8f",
+  "device": "galaxy-s26",
+  "model_id": "minicpm-ocr-decision-2b__decide_l2048_fp16fc",
+  "notes": "MiniCPM-OCR-Decision-2B (litert-community/MiniCPM-OCR-Decision-2B-LiteRT main 7f589bb7, created 2026-11-06; card license apache-2.0, base model openbmb/MiniCPM-OCR-Jev; anonymous Hub API read 2026-11-07 12:54:30 JST): the `decide` graph, bucket `L2048`, form `fp16fc`. Hub file `decide_L2048_fp16fc.tflite` 2,775,848,480 B at Hub commit(s) be1043e2; artifact_sha256 = its LFS oid = the phone's read-back in each run's hold. Signature `decide`; its I/O as the app read it: inputs embeds float32 [1,2048,2048], valid float32 [1,2048], cos float32 [1,2048,64], sin float32 [1,2048,64] -> outputs hidden float32 [1,2048,2048]. Measured on the Galaxy S26 (SM-S942Q) (device holds of runs r3): one result per run, and per timing set in a timing run. output_match is null on every result: the work compares each row with its own Mac Metal fp32 run of the same rows (metrics.vs_mac_metal_fp32_*: max |d| and the smallest cosine over the rows with the same input bytes), not with a CPU reference of the same bytes under the element rule.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-11-06",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 23553,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-ocrdec-gate-app",
+        "os_build": "Android 16 (build BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": null
+      },
+      "error": "app memory guard: MemAvailable 1397496 kB < mem_guard_kb 1500000 at stage compile",
+      "evidence": [
+        "the d1 gate app (com.mlboydaisuke.d1omni.gate, Kotlin CompiledModel on LiteRT 2.2.0 from Maven; APK sha256 0b6d6f70ac0cf4c7…, the APK the run config installs), one app process per run; per call = write every input + CompiledModel.run() + read every output (the app's write_run_read_ms; the GPU's run() returns before the compute ends and the read waits for it)",
+        "file measured: decide_L2048_fp16fc.tflite = litert-community/MiniCPM-OCR-Decision-2B-LiteRT `decide_L2048_fp16fc.tflite` (2,775,848,480 B) at Hub commit(s) be1043e2, LFS oid 6684732c1380a6c8595f02c0a42e6bcc04b4342a39409ed781d5a41d356e0a8f (Hub tree read 2026-11-07 12:54:30 JST); the phone's copy read back equal (MATCH)",
+        "(app pid 27291): `11-06 00:05:45.717 27291 27359 I tflite  : Replacing 23553 out of 23553 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).`",
+        "Run s_t_tmL2048t started 2026-11-06 00:05:43 JST, ready check `clean; rested 324s since 00:00:18`; build Android 16 BP4A.251205.006.S942QOPS1AZH9 (`ro.build.fingerprint = samsung/m1qjpnx/m1q:16/BP4A.251205.006/S942QOPS1AZH9_SJP1AZH9:user/release-keys`)",
+        "Status APPGUARD, `app memory guard: MemAvailable 1397496 kB < mem_guard_kb 1500000 at stage compile`"
+      ],
+      "failure_class": "memory_guard_stop_during_compile",
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "app_guard_max_anon_plus_swap_kb": 496968.0,
+        "app_guard_min_mem_available_kb": 1397496.0,
+        "app_guard_stop_t_ms": 25864.0,
+        "app_mem_guard_kb": 1500000.0,
+        "battery_temp_tenths_c_end": 394.0,
+        "battery_temp_tenths_c_start": 373.0,
+        "thermal_status_end": 2.0,
+        "thermal_status_start": 0.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "signature": "GPU (ML Drift OpenCL) precision FP32, constant tensor sharing on; gate app r10; timing mode, rows tmL2048t.json; run r3 hold s3 run s_t_tmL2048t",
+      "total_ops": 23553,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

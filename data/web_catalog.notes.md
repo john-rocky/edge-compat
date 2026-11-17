@@ -1,22 +1,22 @@
 # web_catalog notes (exclusions and scope)
 
-Catalog scope: owner's own uploads (zoo README ids x litert-community org),
+Catalog scope: own uploads (zoo README ids x litert-community org),
 .tflite artifacts only — enumerated via the HF API on 2026-08-11,
 refreshed 2026-08-12 (+32 rows, 81 -> 113) and 2026-08-13
 (+2 rows, 113 -> 115: LFM2.5-ColBERT-350M, published after the 08-12 refresh).
 LLM .litertlm bundles are NOT browser-sweepable (LiteRT.js runs .tflite only);
-the LLM lane's data lives in data/device_runs/ (対応表) instead.
+the LLM data lives in data/device_runs/ instead.
 
 On the 2026-08-12 refresh, "own upload" was settled from a primary source
 rather than from the zoo README (which was not resolvable locally): every
 candidate repo's full commit history on the Hub is authored solely by
 mlboydaisuke. The 17 repos touched since the first enumeration were checked
 that way; Matcha-TTS was already catalogued, and the two .litertlm repos
-(LFM2.5-2.6B, granite-4.0-h-350m) belong to the LLM lane.
+(LFM2.5-2.6B, granite-4.0-h-350m) belong to the LLM records.
 
 2026-08-13 additions, same split: three new .litertlm repos published this day
 (LFM2.5-VL-3B, LFM2.5-VL-1.6B, LFM2.5-VL-450M — the LiteRT-LM VLM family) are
-LLM-lane only, not browser-sweepable; their device-run records are in
+LLM records only, not browser-sweepable; their device-run records are in
 `data/device_runs/0.16.0/2026-08-13/` (Pixel 8a console logs, int4/int8 ×
 cpu/gpu each). No new .tflite artifacts were published, so the sweep catalog
 is unchanged at 115 rows + header.
@@ -67,14 +67,14 @@ TIPSv2-B14-DPT-LiteRT, RF-DETR-Seg-Nano-LiteRT (graph A + B).
 
 Same window, NOT catalogued: 16 new .litertlm repos (Falcon-H1 x4, LFM2.5-VL
 x3, Zamba2 x2, Qwen3.5 x2, Nemotron-H-4B, codegemma-7b, Qwen2.5-Coder-1.5B,
-granite-4.1-3b, North-Micro-Vision-Instruct) — LLM lane only, not
+granite-4.1-3b, North-Micro-Vision-Instruct) — LLM records only, not
 browser-sweepable (their device-run data is in data/device_runs/); and
 Moboil (commit author amir1334r, not an own upload; carries no .tflite or
 .litertlm artifact either).
 
 2026-08-22 refresh (+13 rows, 129 -> 142). Scope unchanged (own uploads,
 .tflite only). Enumerated via the HF API: the org holds 324 models, of which
-235 carry a .tflite; the owner's shipped-conversions collection
+235 carry a .tflite; the shipped-conversions collection
 (mlboydaisuke/litert-conversions-shipped-to-litert-community) lists 142 repos,
 95 of them with .tflite artifacts. Sixteen of those 95 had no catalog row.
 Own-upload status was re-confirmed the 08-12 way — every one of the sixteen
@@ -95,7 +95,7 @@ Twelve of the sixteen were small enough to fetch and parse in this run
   repos contribute one row each.
 
 NOT fetched this run — four own-upload .tflite repos totalling 34.6 GB, held
-for an owner call because the size is a different order from anything in the
+for a later decision because the size is a different order from anything in the
 catalog and CI's model cache is already over GitHub's 10 GB limit:
 FLUX.2-klein-4B-LiteRT (21 files, 10.6 GB), Z-Image-Turbo-LiteRT (13, 9.8 GB),
 Bonsai-Image-ternary-4B (5, 9.7 GB), Nemotron-3-Embed-1B (3, 4.6 GB). The
@@ -177,7 +177,7 @@ moved the same files at ~80 MB/min; the fetch was redone through it and hardlink
 into ~/.cache/litert-models under sha256(url).tflite, the harness's cache key.
 
 2026-08-26: granite-docling-258M (published 2026-08-25, sole commit author
-mlboydaisuke, .litertlm only) added to the litertlm comment block — LLM lane,
+mlboydaisuke, .litertlm only) added to the litertlm comment block — LLM records,
 not browser-sweepable. No new own-upload .tflite repos since the 08-24 refresh
 (TIPSv2/DINOv2 were already catalogued).
 
@@ -220,7 +220,7 @@ limit's neighbourhood and duplicates of the wfp16 graphs' arithmetic). Downloads
 Sweep 2.5.3/2026-09-26 of those three rows (mac-studio-m4-max, default flags, one harness process per model): s128 and
 s256 load on wasm_xnnpack but their 3 + 10 runs do not finish inside the default 60 s step budget (`timeout`, i.e. at
 least 4.6 s per run on average; deliberately not re-run with a larger timeout — the record cannot state a non-default
-timeout and the weekly CI would flip it back, DECISIONS #173); s512 loads and every run logs `Failed to allocate
+timeout and the weekly CI would flip it back); s512 loads and every run logs `Failed to allocate
 tensors` (`backend_error` — after the harness fix that stops counting such 0.35 ms non-runs as passes, README "Traps");
 webgpu_mldrift aborts at load (`RuntimeError: Aborted()`) for all three, a generic error naming no op, so no matrix
 evidence. With the older 431 MB (runs) and 712 MB (wasm_memory_ceiling) datapoints the wasm picture is: 660-711 MB
@@ -237,7 +237,7 @@ The local files were hardlinked into ~/.cache/litert-models under sha256(url).tf
 Sweep 2.5.3/2026-09-26 of those five rows (mac-studio-m4-max, default flags, one harness process per model via `--only`, four
 minutes in all): the 707 MB s128 full graph and s256 encoder load on wasm_xnnpack but their 3 + 10 runs do not finish inside the
 default 60 s step budget (`timeout`, i.e. at least 4.6 s per run on average — the GLiNER2.5-Decide s128/s256 outcome again, deliberately
-not re-run with a larger timeout, DECISIONS #173); the 807 MB s512 encoder loads and every run logs `Failed to allocate tensors`
+not re-run with a larger timeout); the 807 MB s512 encoder loads and every run logs `Failed to allocate tensors`
 (`backend_error`, as the 811 MB GLiNER2.5-Decide s512 did); the 53 MB s256 head (12,568 operators, an unrolled T=256 BiLSTM) runs on
 wasm at 2,425 ms p50 (output_match null: wasm is the reference backend); the 56 MB s512 head (25,112 operators) loads but its runs do
 not finish inside the 60 s budget (`timeout`) — the first sub-100 MB timeout in this catalog, operator count rather than bytes.
@@ -246,7 +246,7 @@ op, so no matrix evidence; the WebGPU failure is therefore not a size effect for
 
 2026-09-28: Audio8-TTS-Preview-0.6b (own upload, both Hub commits by mlboydaisuke, rev e8620a9b; license apache-2.0 from the HF API tag; 7 classic .tflite
 graphs of a DualAR TTS + a Python host loop) — five graphs added as rows (fast_ar_int8 68 MB, codec_decoder_fp16_T128 / T192 262 MB, codec_decoder_int8_T128
-132 MB, codec_encoder_fp16_10s 419 MB; input_spec parsed with litert_compat.parser.reader from the local out/ship copies whose sha256 equals the HF LFS sha256
+132 MB, codec_encoder_fp16_10s 419 MB; input_spec parsed with litert_compat.parser.reader from the local copies whose sha256 equals the HF LFS sha256
 (API ?blobs=true and the resolve URLs' x-linked-etag, HEAD 200), static shapes, float32/int32 only, subgraph input order). The int32 inputs are codebook indices
 (0..15 from the dimension spec are valid codes; every gather is clamped in-graph) or token/position ids, so the random inputs measure the graphs, not speech.
 Excluded, recorded in the catalog comment: slow_ar_int8 (552 MB) and slow_ar_int4 (386 MB) carry two signatures (prefill_256, decode; 51 inputs each incl. 48
@@ -258,15 +258,28 @@ refused — with output_match false, max_abs_diff 0.889: a DRQ-int8 graph agains
 decoders and the encoder produce no latency: codec_decoder_fp16_T128 / T192 and the encoder log `Failed to allocate tensors` (T128/T192) or `XNNPack delegate
 failed to reshape runtime` + `Node number 1600 (TfLiteXNNPackDelegate) failed to prepare` (encoder) on wasm_xnnpack (backend_error; 262-419 MB fp16 files whose
 weights unpack to fp32 — below the 431 MB "runs" datapoint by file size, so bytes alone do not explain it); codec_decoder_int8_T128 loads on wasm but its 3 + 10
-runs exceed the 60 s budget (timeout, >= 4.6 s per run; not re-run with a larger timeout, DECISIONS #173). WebGPU: the fp16 T128 decoder fails compile after the
+runs exceed the 60 s budget (timeout, >= 4.6 s per run; not re-run with a larger timeout). WebGPU: the fp16 T128 decoder fails compile after the
 DEQUANTIZE / EMBEDDING_LOOKUP refusals (compile_error, litert_compiled_model_next.h:70), the int8 decoder fails ML Drift kernel init ("Unable to parse bc coord
 for BATCH axis" on convolution1x1, compile_error), T192 and the encoder abort with `RuntimeError: memory access out of bounds` (wasm_memory_ceiling). The op-naming
 lines are staged in data/matrix_staging/webgpu_mldrift__2.5.3-audio8-additions.csv; the rest stays model-level in the sweep records.
 
-2026-10-05: the four graphs for float16 hardware of the typed-decisions lane (own uploads; GLiNER2.5-Decide-LiteRT
+2026-10-05: the four graphs for float16 hardware of the typed-decisions models (own uploads; GLiNER2.5-Decide-LiteRT
 `gliner25_decide_s128_npu_wfp16.tflite` 660 MB at 310090c3, `gliner25_decide_s256_npu_wfp16.tflite` 711 MB and
 `gliner25_decide_s512_fp16hw_wfp16.tflite` 811 MB at 600fe62b; Open-Decision-DeBERTa-v3-Large-LiteRT
 `deberta_v3_large_decision_s256_npu_wfp16.tflite` 713 MB at 26a2b642) are NOT catalogued: above the ~500 MB rule, and each has
 the inputs, outputs and size of a catalogued default graph of its window (660 / 711 / 811 / 713 MB, float32 inputs), whose
 rows already bracket the wasm ceiling (s128 / s256 `timeout`, 811 MB `backend_error`, WebGPU `Aborted()`), so a sweep would add
-no new fact about the ceiling. Their phone records are under data/device_runs/2.2.0/2026-10-04 and 2026-10-05 (DECISIONS #188).
+no new fact about the ceiling. Their phone records are under data/device_runs/2.2.0/2026-10-04 and 2026-10-05.
+
+2026-10-22: three parakeet files that have phone records (data/device_runs/2.2.0/2026-10-19)
+but no catalog row are NOT catalogued. Anonymous HF API read 2026-10-22: litert-community/parakeet-tdt-0.6b-v3 at main
+3ce205aa (last modified 2026-10-17) holds `parakeet_tdt_0.6b_v3_5s_i8_stateful.tflite` (614,261,072 B, LFS sha256 334745b8…)
+and `parakeet_tdt_0.6b_v3_5s_f32_stateful_Qualcomm_SM8850.tflite` (1,275,526,880 B, e9edabe4…); litert-community/parakeet-ctc-0.6b
+at main e3c5b655 (last modified 2026-10-13) holds `parakeet_ctc_0.6b_5s_f32_Qualcomm_SM8850.tflite` (1,210,738,160 B,
+30e431db…); cc-by-4.0 on both. Two standing rules keep them out:
+(1) scope — neither repo is an own upload: none of their 24 and 19 Hub commits (each list reaches the repo's initial commit)
+is by mlboydaisuke, so they are other uploaders' models, out of scope by the rule at the top of this file, not missed;
+(2) size — all three files are above the ~500 MB rule. The 5 s i8 stateful file's model is in the sweep already through the
+own 30 s re-export (parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_30s_i8_stateful, 630 MB; sweep 2.5.3/2026-09-25: wasm_xnnpack
+runs at 7,451 ms p50, webgpu_mldrift `RuntimeError: Aborted()` at load). The two Qualcomm SM8850 files are NPU AOT files;
+no AOT file has a catalog row, so whether LiteRT.js loads one is not measured here.

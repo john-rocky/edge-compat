@@ -32646,7 +32646,7 @@
     "litert_version": "2.1.6"
   },
   "model": {
-    "path": "/Users/USER/code/litertlm-convert/phocinae_work/publish/Phocinae-Largha-150M-LiteRT/phocinae_largha_150m_L512_fp16fc_int8emb.tflite",
+    "path": "phocinae_largha_150m_L512_fp16fc_int8emb.tflite",
     "sha256": "33454add13a442cf43ee84c61555b412dff31ab1744385dc86a2c57477926926",
     "subgraph_count": 1
   },

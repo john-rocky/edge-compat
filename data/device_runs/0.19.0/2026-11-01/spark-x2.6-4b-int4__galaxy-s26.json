@@ -1,0 +1,63 @@
+{
+  "artifact": "Spark-X2.6-4B_int4.litertlm",
+  "artifact_sha256": "096ec69866bf98889218cbeb4fb40b59a1151f5b21506c36b57f615f444667b9",
+  "device": "galaxy-s26",
+  "model_id": "spark-x2.6-4b-int4",
+  "notes": "Spark-X2.6-4B_int4.litertlm of litert-community/Spark-X2.6-4B: the INT4 file of the 4B = the 4B GPU file (its CPU path ends turn 3 of the conversation check empty in 3 of 8 arm-runs, so the card sends CPU use to the INT8 file). XHToken/Spark-X2.6-4B (Apache-2.0) converted to LiteRT-LM; the bundle carries templates/spark26_think.jinja (the vendor template's plain-chat part, thinking on by default, reasoning_effort high or low through extra_context), a `thought` channel and the repo's tokenizer.json byte for byte. Published 2026-10-31 (Hub main f8da7265 at the read). Measured 2026-11-01 in the run r6.",
+  "quantization": "dynamic INT4 (blockwise-128 weights with OCTAV scales, FP32 activations declared), the embedding INT8 in its own TFLite section: litert-torch 0.9.3 export (EXTERNALIZE_EMBEDDER=1 BOCTAV4_128), GPU graph rewrite (odml.cache_update / odml.runtime_bmm, weights byte-equal), prefer_activation_type fp32 on both TFLite sections, 6 prefill signatures, KV cache 4,096",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 4096,
+      "date": "2026-11-01",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-spark26-devicebench",
+        "os_build": "Android 16 (BP4A.251205.006)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Qualcomm SM8850 (Adreno GPU)",
+        "vendor_sdk": null
+      },
+      "error": "PGUARD: MemAvailable 803796 kB < 1000000 kB at uptime 1391333.04: kill -9 23278",
+      "evidence": [
+        "artifact: litert-community/Spark-X2.6-4B `Spark-X2.6-4B_int4.litertlm` at main f8da7265: LFS sha256 096ec69866bf98889218cbeb4fb40b59a1151f5b21506c36b57f615f444667b9, 2482999216 B (anonymous Hub API tree read 2026-11-01 12:17 JST)",
+        "runtime: PyPI litert-lm-api 0.19.0 Android wheel (liblitert-lm.so sha256 28fa8433febc49a99f4bd3ef8cb82c2912457cfe274d97944debeabdeb97fc78, in kit.tar b88b2af1310c, pushed and checked on the phone in the hold's setup), the Python API on the phone, backend gpu, max_num_tokens 4,096, max_output_tokens 2,048, greedy, thinking on: the 8-question check's runs, one process per question",
+        "the memory guard (phone side, the process stopped below 1,000,000 kB MemAvailable, fixed before the run on this 12 GB phone) stopped both attempts while the GPU engine was being built (the first cold, the second with the program cache of the first): \"PGUARD: MemAvailable 967012 kB < 1000000 kB at uptime 1391304.52: kill -9 22048\"; \"PGUARD: MemAvailable 803796 kB < 1000000 kB at uptime 1391333.04: kill -9 23278\"",
+        "per attempt (2}.msamp.txt, 1 s phone-side samples; seconds_to_stop = the stop's uptime - the sampler's start): q1: MemAvailable 6,484,960 -> 967,012 kB in 10.7 s, kgsl page_alloc 7,476,813,824 B, VmRSS 1,700,540 kB at the stop, lmkd 80 lines (0 naming the binary), uptime 1391293 -> 1391307 (no reboot); q2: MemAvailable 7,761,780 -> 803,796 kB in 7.6 s, kgsl page_alloc 7,581,888,512 B, VmRSS 1,878,072 kB at the stop, lmkd 21 lines (0 naming the binary), uptime 1391325 -> 1391334 (no reboot)",
+        "r4i-gpu-q2: status OOM_GUARD, killed_by guard; delegation lines printed before the stop: prefill_1024 2265 / 2265 on LITERT_CL (1 partition(s)); prefill_256 2265 / 2265 on LITERT_CL (1 partition(s)); prefill_64 2265 / 2265 on LITERT_CL (1 partition(s)); prefill_16 2265 / 2265 on LITERT_CL (1 partition(s)); prefill_4 2265 / 2265 on LITERT_CL (1 partition(s)); prefill_1 2051 / 2051 on LITERT_CL (1 partition(s)); decode 2098 / 2098 on LITERT_CL (1 partition(s)); decode_embedder 1 / 4 on TfLiteXNNPackDelegate (2 partition(s)); prefill_embedder_1024 1 / 4 on TfLiteXNNPackDelegate (2 partition(s))",
+        "full_delegation false = the decoder graphs whole on LITERT_CL and the INT8 embedder section's graphs on XNNPACK, by design; the hold ran no timing run (they run only after 8 / 8)"
+      ],
+      "failure_class": "memory_cap_exceeded",
+      "full_delegation": false,
+      "latency_p50_ms": null,
+      "loads": false,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "attempts": 2.0,
+        "kgsl_page_alloc_at_stop_b_attempt1": 7476813824.0,
+        "kgsl_page_alloc_at_stop_b_attempt2": 7581888512.0,
+        "memavailable_at_stop_kb_attempt1": 967012.0,
+        "memavailable_at_stop_kb_attempt2": 803796.0,
+        "memavailable_start_kb_attempt1": 6484960.0,
+        "memavailable_start_kb_attempt2": 7761780.0,
+        "seconds_to_stop_attempt1": 10.7,
+        "seconds_to_stop_attempt2": 7.6,
+        "vmrss_at_stop_kb_attempt1": 1700540.0,
+        "vmrss_at_stop_kb_attempt2": 1878072.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "signature": "the 8 check questions on the phone (2,048-token cap), greedy, thinking on",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

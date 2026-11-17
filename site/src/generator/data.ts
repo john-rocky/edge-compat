@@ -109,7 +109,7 @@ export interface CardBrowserRecord {
 
 /**
  * Deterministic one-word summary of one browser backend record. Mirrors
- * litert_compat.cards.index.browser_status (DECISIONS #62) — the generator
+ * litert_compat.cards.index.browser_status — the generator
  * recomputes it and cross-checks against cards/index.json, so the site can
  * never disagree with the committed catalog.
  */
@@ -147,7 +147,7 @@ export interface CardDeviceRecord {
   latencyP50Ms: number | null;
   decodeTokensPerS: number | null;
   provenance: string;
-  /** litert (.tflite-on-NPU lane) or litert-lm (.litertlm lane). */
+  /** litert (.tflite on an NPU) or litert-lm (.litertlm bundles). */
   runtime: string;
   /** The runtime version this record was verified against (env). */
   runtimeVersion: string;
@@ -202,7 +202,7 @@ export function parseShapeSpec(spec: string): TensorSpec[] | null {
 /**
  * The URL a demo page fetches the model from. A source_url that already
  * points at a .tflite is used as-is; otherwise it is treated as a model-repo
- * URL and the artifact is resolved Hugging-Face style (DECISIONS #66).
+ * URL and the artifact is resolved Hugging-Face style.
  */
 export function resolveModelUrl(sourceUrl: string, artifactFile: string): string {
   if (sourceUrl.endsWith('.tflite')) {

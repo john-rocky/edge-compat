@@ -383,8 +383,8 @@ def rules_reverify(
         bool, typer.Option("--json", help="Machine-readable per-rule results.")
     ] = False,
 ) -> None:
-    """Re-run every rule's declared fixture against the current runtime
-    (spec 11.4). Failing rules are flagged `stale` in their file — never
+    """Re-run every rule's declared fixture against the current runtime.
+    Failing rules are flagged `stale` in their file — never
     auto-deleted; a passing rule's flag is removed. Exit codes: 0 all pass ·
     1 stale rules · 2 data error or verification unavailable."""
     if runtime_version is None:

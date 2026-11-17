@@ -1,7 +1,5 @@
 # Release pipeline (Phase 8): probe suite and `release-check`
 
-`DECISIONS` and `PROGRESS` citations on this page refer to the logs of the private lab repository.
-
 A runtime release used to mean a pile of manual re-checks. The matrix's anti-staleness
 contracts (`carry-forward` makes staleness visible, `diff` makes change diffable, lint
 emits probe-ready `needs_probe` signatures) reduce it to one command:
@@ -22,7 +20,7 @@ what changed, what remains `inferred` (the staleness debt), what needs a device 
 and — given a Phase 3 `build-all` manifest — which models' lint verdicts changed.
 Headless-safe: an unavailable backend is remaining work, not an error.
 
-**Release-watcher hook** (the owner's existing watcher detects new litert versions; wire
+**Release-watcher hook** (an existing release watcher detects new litert versions; wire
 its "on new version" action to):
 
 ```sh
@@ -47,7 +45,7 @@ direction.
 
 Template registry: option-free unary elementwise ops, binary elementwise ops
 (ADD/SUB/MUL/DIV/…), SOFTMAX (beta=1.0), static RESHAPE — plus the graduated
-weighted/structured fp32-activation families (DECISIONS #147–#149): CONV_2D,
+weighted/structured fp32-activation families: CONV_2D,
 DEPTHWISE_CONV_2D, TRANSPOSE_CONV, FULLY_CONNECTED, the pools, BATCH_MATMUL,
 CONCATENATION, TRANSPOSE, SLICE, PAD, SUM/MEAN/REDUCE_MAX/REDUCE_MIN,
 LEAKY_RELU, CAST, GREATER/EQUAL, SELECT/SELECT_V2, the resizes, and
@@ -56,8 +54,7 @@ byte-identical fixture); each fixture is one fixed minimal instantiation
 (SAME padding, stride 1, 2×2 kernels, depth 4) with honest op versions.
 Anything else — quantized-weight forms (DEQUANTIZE included), dynamic-shape
 weighted signatures, option-constrained forms — is reported `unprobeable`
-with a precise reason (extending the registry is additive; see PROGRESS.md
-"Deferred").
+with a precise reason (extending the registry is additive).
 
 ### Runners
 
@@ -74,14 +71,14 @@ tolerance is `incorrect`, not `delegated`. A runner never guesses: no result, no
 Inputs are seeded and deterministic (mulberry32, values in `[0.25, 1.25)` so
 domain-restricted ops stay NaN-free). Default tolerance vs the CPU reference is
 `|out − ref| ≤ max(1e-5, 1e-3·|ref|)` (override with `--tolerance-abs` /
-`--tolerance-rel`; per-backend policy is an open owner decision).
+`--tolerance-rel`; per-backend policy is still open).
 
 The `webgpu_mac` runner records which delegate actually served by scanning the runtime
 log (on ai-edge-litert 2.1.6 macOS wheels, `HardwareAccelerator.GPU` is served by the
 **Metal** delegate) — the result note carries that evidence, so a Mac host-GPU number can
 never masquerade as another backend's.
 
-The adb runners need an owner-provided on-device helper (defaults
+The adb runners need an on-device helper (defaults
 `/data/local/tmp/litert-probe-runner` for `gpu_mldrift_adb` and
 `/data/local/tmp/litert-npu-probe-runner` for `npu_adb`; override with
 `$LITERT_COMPAT_ADB_HELPER` / `$LITERT_COMPAT_NPU_ADB_HELPER`) with this contract:
@@ -89,7 +86,7 @@ invoked as `<helper> --model <pushed.tflite> --backend <backend>`, it prints one
 line `{"status": <matrix status enum>, "max_abs_diff": <float|null>, "note":
 <optional string>}` and exits 0. Missing adb/device/helper → the runner reports
 "unavailable" and affected entries stay `inferred`. NPU probes may additionally
-require per-SoC AOT compilation (vendor SDK linkage is the owner's helper build);
+require per-SoC AOT compilation (vendor SDK linkage is the helper build's job);
 signatures the helper cannot compile surface as unprobeable-with-reason, never as a
 fabricated status.
 

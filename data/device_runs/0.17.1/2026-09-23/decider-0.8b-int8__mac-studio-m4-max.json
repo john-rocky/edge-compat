@@ -3,7 +3,7 @@
   "artifact_sha256": "3e3c03da33034115dade6094c8ae94a90a7169d2a7cb4c6f8145e2dcc49a143b",
   "device": "mac-studio-m4-max",
   "model_id": "decider-0.8b-int8",
-  "notes": "decider-0.8b (litert-community/decider-0.8b-LiteRT, Hub main 52dea2d8, read 2026-10-09): Mapika/decider-0.8b (Apache-2.0, fine-tuned from Qwen/Qwen3.5-0.8B-Base; 18 linear-attention + 6 full-attention layers) as a .litertlm bundle with an identity template, no start token, stop token 248044, ExecutorMetadata for 48 state buffers and an fp32 activation preference. Typed decisions are read from the label logits of each row's last token (prefill ids[:-1], decode ids[-1] once); the runtime's generated text has no decision meaning, so decode rates are evidence only. Probabilities were not measured on the phone: these records establish runtime operation, speed and memory, not equality to the Mac probabilities (the Hub card's conversion-agreement table is Mac CPU / Metal). Lane record: litertlm-convert/decider_work (FINDINGS.md, MODEL_CARD.md = the Hub README). Published as decider-0.8b_int8.litertlm. Digest from the run's bench record (results/mac_bench_int8dyn_quiet.json).",
+  "notes": "decider-0.8b (litert-community/decider-0.8b-LiteRT, Hub main 52dea2d8, read 2026-10-09): Mapika/decider-0.8b (Apache-2.0, fine-tuned from Qwen/Qwen3.5-0.8B-Base; 18 linear-attention + 6 full-attention layers) as a .litertlm bundle with an identity template, no start token, stop token 248044, ExecutorMetadata for 48 state buffers and an fp32 activation preference. Typed decisions are read from the label logits of each row's last token (prefill ids[:-1], decode ids[-1] once); the runtime's generated text has no decision meaning, so decode rates are evidence only. Probabilities were not measured on the phone: these records establish runtime operation, speed and memory, not equality to the Mac probabilities (the Hub card's conversion-agreement table is Mac CPU / Metal). Published as decider-0.8b_int8.litertlm. Digest from the run's bench record.",
   "quantization": "dynamic int8 fully connected weights, int8 channelwise token embedding; convolutions and the delta rule float; fp32 activation preference",
   "results": [
     {
@@ -28,8 +28,7 @@
         "Init time:            40.3517 s",
         "Decode speed:         42.48 tokens/s (informational, not recorded as decode_tokens_per_s)",
         "litert-lm benchmark CLI 0.17.1 (PyPI), --backend cpu -p 256 -d 8 --runs 3 --cache no --cpu-thread-count 4; CLI mean of 3 measured iterations after one excluded warmup; init from the first measured iteration",
-        "conditions: quiet machine (supervisor checked); 2026-09-23",
-        "files: codex-conversions/2026-09-23/decider-08b-gpu/logs/mac_bench_int8dyn_quiet.log"
+        "conditions: quiet machine; 2026-09-23"
       ],
       "failure_class": null,
       "full_delegation": null,

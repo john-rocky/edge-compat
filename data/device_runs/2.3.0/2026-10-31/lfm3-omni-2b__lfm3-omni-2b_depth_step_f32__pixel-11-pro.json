@@ -1,0 +1,66 @@
+{
+  "artifact": "LFM3-Omni-2B_depth_step_f32.tflite",
+  "artifact_sha256": "9e61c47319d8907a60aebeac9605b9b4df3ea3aadb232b708897263d4ef07a21",
+  "device": "pixel-11-pro",
+  "model_id": "lfm3-omni-2b__lfm3-omni-2b_depth_step_f32",
+  "notes": "speech/LFM3-Omni-2B_depth_step_f32.tflite of litert-community/LFM3-Omni-2B-LiteRT (LiquidAI/LFM3-Omni-2B at revision ce2458cb, LFM Open License v1.0): speech output: one step of the depth decoder (called 3 times per audio frame; the host samples the codes). Published as litert-community/LFM3-Omni-2B-LiteRT (upload commit 6450f061, main 7e4f3d23 at the anonymous Hub read 2026-11-01T04:39:11+09:00, each LFS oid and size = artifact_sha256 and the hold's model list). App rows: the photo voice chat sample (a litert-samples app; the builds of its tree, the APK in each signature) opens the bundle's sections and the speech graphs with LiteRT 2.3.0's Kotlin CompiledModel, not through LiteRT-LM; its engine also held the hold's other depth graphs open, and only the graphs named in a signature ran in those answers or readings; airplane mode, a heat gate before each answer or reading (the gate lines in the score files and run.log); the holds' logcat and delegate files hold the delegation lines, which these records do not parse; os_build = the Android version in the app's report (no build id).",
+  "quantization": "float32",
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 11 Pro",
+        "machine_label": "pixel-11-pro-lfm3omni-sample",
+        "os_build": "Android 17",
+        "runtime": "litert",
+        "runtime_version": "2.3.0",
+        "soc": "Google Tensor G6",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "Harness: the APK ee09ccaf18643851ae65df82decc32f0d69ab025e7304ba96a934d4635d7073f",
+        "model files: = the Hub's LFS oids; the phone's sha256 read-back of each",
+        "answer 1: gate m1_step PASS waited=0s thermal=0 batt=326",
+        "answer 6: gate m6_step PASS waited=0s thermal=0 batt=354",
+        "speech_out_1s_ms = the generation loop's ms per second of speech (the app's report); the per-part figures are means over the answers' steps / frames / calls, so latency_p50_ms stays null; the other forms of the order ran depth graphs that are not published and have no record"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "answers": 2.0,
+        "audio_s_total": 14.72,
+        "codec_ms_per_call_mean": 48.142733,
+        "depth_calls_total": 558.0,
+        "depth_ms_per_frame_mean": 41.779056,
+        "first_sound_ms_mean": 4392.239121,
+        "frame_embed_ms_per_call_mean": 0.092156,
+        "lm_step_ms_mean": 73.797928,
+        "prefill_end_ms_mean": 716.593259,
+        "rtf_mean": 1.829301,
+        "sample_ms_per_frame_mean": 0.896128,
+        "speech_out_1s_ms": 1731.938216,
+        "speech_out_1s_ms_answer1": 1665.08788,
+        "speech_out_1s_ms_answer2": 1798.788551,
+        "underruns_total": 11.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "photo voice chat sample (Kotlin host loop, LiteRT 2.3.0 CompiledModel; APK sha256 ee09ccaf1864): speech out with LFM3-Omni-2B_depth_step_f32.tflite x 3 per frame and every part on the CPU (4 threads); the umbrella photo and question umbrella_q1, seed 0, state history; answers 1 and 6 of the order step, split, frame, frame, split, step (2026-10-31 17:15:11 to 17:22:10)",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

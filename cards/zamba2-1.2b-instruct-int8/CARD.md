@@ -45,10 +45,10 @@ Model-level on-device results — measured behavior of this exact artifact on th
 
 ## Pitfalls
 
-- iPhone 17 Pro (Metal): the 8-item composite probe answers 8/8 on CPU; on GPU 6/8, where both misses (8x7 and the rhyme) are questions the HF fp32 reference itself answers incorrectly on this composite — the GPU path tracks the reference model's own behavior (README Correctness).
+- iPhone 17 Pro (Metal): the 8-item composite test answers 8/8 on CPU; on GPU 6/8, where both misses (8x7 and the rhyme) are questions the HF fp32 reference itself answers incorrectly on this composite — the GPU path tracks the reference model's own behavior (README Correctness).
 - Galaxy S26 GPU per the README: runs, 54510/54510 ops across 12 subgraphs on LiteRT GPU (3620 MB); this repo's S26 CPU row is from the S7 backfill, the Pi 5 row from wave 2 (device runs).
 - Requires litert-lm >= 0.15 (README intro).
-- Correctness (README): float export matches the HF model teacher-forced across 48 decode positions (top-1/top-5 identical, corr 1.0000, KL ≈ 0); 8-question gate 8/8 on every lane (GPU and CPU, litert-lm 0.15.0 and 0.16.0), no degeneration, no greedy flips; hermetic prefill-chunk sweep clean (CPU fills 12-51, GPU 12-31).
+- Correctness (README): float export matches the HF model teacher-forced across 48 decode positions (top-1/top-5 identical, corr 1.0000, KL ≈ 0); 8-question check 7/8 in all four runs (GPU and CPU, litert-lm 0.15.0 and 0.16.0), the miss being "Which is larger: 0.9 or 0.11?" answered "0.11 is larger than 0.9."; no degeneration, no greedy flips; hermetic prefill-chunk sweep clean (CPU fills 12-51, GPU 12-31).
 - Hybrid packaging: folded selective scan (batched matmuls, all tensors rank <= 4 — what makes the graph fully delegable on GPU), min-only dt clamp handling (padded prefill positions forced to exact identity steps AFTER the clamp), shared block + adapters traced once per position with tied weights stored once, composite hybrid cache layer, prefill-pad guard (README Conversion notes).
 - Streaming detokenization: the tokenizer's Strip decoder is removed from the bundle — Zamba2's metaspace (SP-BPE) tokenizer otherwise loses every interior space under the runtime's per-token streaming decode; the only behavior change is a sequence-initial space, which the runtime trims (README Conversion notes).
 - License Apache-2.0, inherited from the Zyphra base (README front matter).

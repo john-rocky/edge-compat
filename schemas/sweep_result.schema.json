@@ -38,7 +38,7 @@
       "type": "object",
       "additionalProperties": false,
       "required": ["warmup_runs", "timed_runs", "tolerance_abs", "tolerance_rel", "input_seed"],
-      "description": "Sweep configuration echoed into the output (spec 5.1: warmup and N are config, echoed).",
+      "description": "Sweep configuration echoed into the output (warmup and N are config, echoed).",
       "properties": {
         "warmup_runs": { "type": "integer", "minimum": 0 },
         "timed_runs": { "type": "integer", "minimum": 1 },
@@ -46,7 +46,7 @@
         "tolerance_rel": {
           "type": "number",
           "minimum": 0,
-          "description": "Output-match passes when every element satisfies |out - ref| <= max(tolerance_abs, tolerance_rel * |ref|). Default policy pending owner sign-off (Phase 6 ask); the values used are always echoed here."
+          "description": "Output-match passes when every element satisfies |out - ref| <= max(tolerance_abs, tolerance_rel * |ref|). Default policy not fixed yet; the values used are always echoed here."
         },
         "input_seed": {
           "type": "integer",
@@ -154,7 +154,7 @@
         "machine_label": {
           "type": "string",
           "minLength": 1,
-          "description": "Owner-chosen label for the measuring machine (results are his-hardware-his-label)."
+          "description": "A chosen label for the measuring machine (results are labelled by their hardware)."
         }
       }
     }

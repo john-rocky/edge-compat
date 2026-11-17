@@ -21,7 +21,7 @@
       },
       "error": null,
       "evidence": [
-        "results block: prefill=120.70 decode=20.88 tokens/s (falcon_h1_work/bench_3b.log, quiet window, --cache no, runs 3)"
+        "results block: prefill=120.70 decode=20.88 tokens/s (quiet window, --cache no, runs 3)"
       ],
       "failure_class": null,
       "full_delegation": null,
@@ -59,7 +59,7 @@
       },
       "error": null,
       "evidence": [
-        "results block: prefill=979.31 decode=65.32 tokens/s (falcon_h1_work/bench_3b.log, quiet window, --cache no, runs 3)",
+        "results block: prefill=979.31 decode=65.32 tokens/s (quiet window, --cache no, runs 3)",
         "E0000 gpu_model_builder.cc:4039] TopK requires src tensor C dimension to be divisible by 4. (vocab 65537; family-normal — shipped 1.5B logs the identical line; generation and 8Q unaffected)"
       ],
       "failure_class": null,

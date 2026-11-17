@@ -34932,7 +34932,7 @@
     "litert_version": "2.1.6"
   },
   "model": {
-    "path": "/Users/USER/code/litertlm-convert/ema_tts_work/out/ship/EMA-Lightning-LiteRT/ema_decoder_multi_fp16.tflite",
+    "path": "ema_decoder_multi_fp16.tflite",
     "sha256": "d94569d7b3eebf12cbaebdf4248d3bb8dd10c604ac75e59fdcde56dd6cd902b3",
     "subgraph_count": 2
   },

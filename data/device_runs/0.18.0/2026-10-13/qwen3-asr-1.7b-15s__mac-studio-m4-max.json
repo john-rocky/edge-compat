@@ -5,7 +5,7 @@
  "artifact": "Qwen3-ASR-1.7B-15s.litertlm",
  "artifact_sha256": "fbec6d126627d9de449ba9a4f0dc0a541ab850d710c7aebae2dc65f62736d6bf",
  "quantization": "LM int8 dynamic (int8 embedding table), prefill signatures 128 and 256; audio encoder fp16 weights, fp32 compute, in-graph log-mel, 15 s window (195 audio tokens per window, 203-token prompt; a clip over 15 s goes through two windows); KV cache 1024; the same weights, recipes and template as the 30 s file (litert-community/Qwen3-ASR-1.7B, Hub commit bc22b8c3)",
- "notes": "Speed ladder of litertlm-convert qwen3_asr17_work (rounds 3-5, 2026-10-13; SPEED_LADDER.md rows 12-35 and 56-59, lint PASS): litert-lm-api 0.18.0 (Python) on the Mac Studio M4 Max with the measurement window held (quiet_hold; other lanes' hooked jobs wait, unhooked processes and macOS services still ran: 1-min load average 5-12). latency_p50_ms = the median over the three demo clips of the response (perf_counter around send_message = audio encoder + prefill + decode, median of 5 warm sends per clip in one process with the runtime caches present); prefill / decode tok/s and TTFT are not exposed by the Python API (null). peak_mem_mb = ru_maxrss at the end of the 18-send session (memory-mapped weights included). output_match stays null; metrics carry the 155-clip FLEURS rates of the same file and backend (greedy, one conversation per clip, bar = eager fp32 + 1.0 pt, verdict PASS) and the 18/18 raw = expected demo answers. full_delegation / delegated_ops / total_ops sum the LM subgraphs (prefill signatures + decode) named in the engine's VERBOSE log; the audio encoder is assigned to the CPU by argument and is not counted. GPU = the LM on WebGPU over Metal, the audio encoder on the CPU.",
+ "notes": "Speed comparison (2026-10-13): litert-lm-api 0.18.0 (Python) on the Mac Studio M4 Max with the measurement window held (other jobs that take the lock wait, unhooked processes and macOS services still ran: 1-min load average 5-12). latency_p50_ms = the median over the three demo clips of the response (perf_counter around send_message = audio encoder + prefill + decode, median of 5 warm sends per clip in one process with the runtime caches present); prefill / decode tok/s and TTFT are not exposed by the Python API (null). peak_mem_mb = ru_maxrss at the end of the 18-send session (memory-mapped weights included). output_match stays null; metrics carry the 155-clip FLEURS rates of the same file and backend (greedy, one conversation per clip, bar = eager fp32 + 1.0 pt, verdict PASS) and the 18/18 raw = expected demo answers. full_delegation / delegated_ops / total_ops sum the LM subgraphs (prefill signatures + decode) named in the engine's VERBOSE log; the audio encoder is assigned to the CPU by argument and is not counted. GPU = the LM on WebGPU over Metal, the audio encoder on the CPU.",
  "results": [
   {
    "accelerator": "cpu",
@@ -50,15 +50,14 @@
     "lm_decode_total_ops": 1865.0
    },
    "evidence": [
-    "runtime: litert-lm-api 0.18.0 (PyPI wheel, venv ~/venvs/lt0180run), Engine(backend=CPU(thread_count=4) | GPU(), audio_backend=CPU(thread_count=4)), SamplerConfig(top_k=1, top_p=1.0, temperature=0.0), one conversation per send",
-    "r5/mac/F6_win15_pb128_256_cpu.json: one process, 3 demo clips x (1 + 5) sends, raw = the expected answers 18/18; response (perf_counter around send_message = audio encoder + prefill + decode) warm medians en 0.84671 s, cmn 0.89012 s, ja 1.13742 s; engine load 0.1221 s with the caches present; ru_maxrss at the end 4391993344 B; the Mac's measurement window held (quiet_hold), 1-min load average 3.9619140625 -> 4.72998046875 (other processes running)",
-    "r5/parity_F6_cpu.json: 155 FLEURS clips (en_us / cmn_hans_cn / ja_jp x 50 + 5 examples), greedy, one conversation per clip: en WER 4.348 % (50/1150), zh CER 6.192 % (121/1954), ja CER 5.839 % (157/2689); verdict PASS against eager fp32 + 1.0 pt",
+    "runtime: litert-lm-api 0.18.0 (PyPI wheel), Engine(backend=CPU(thread_count=4) | GPU(), audio_backend=CPU(thread_count=4)), SamplerConfig(top_k=1, top_p=1.0, temperature=0.0), one conversation per send",
+    "One process, 3 demo clips x (1 + 5) sends, raw = the expected answers 18/18; response (perf_counter around send_message = audio encoder + prefill + decode) warm medians en 0.84671 s, cmn 0.89012 s, ja 1.13742 s; engine load 0.1221 s with the caches present; ru_maxrss at the end 4391993344 B; the Mac's measurement window held, 1-min load average 3.9619140625 -> 4.72998046875 (other processes running)",
+    "155 FLEURS clips (en_us / cmn_hans_cn / ja_jp x 50 + 5 examples), greedy, one conversation per clip: en WER 4.348 % (50/1150), zh CER 6.192 % (121/1954), ja CER 5.839 % (157/2689); verdict PASS against eager fp32 + 1.0 pt",
     "Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph prefill_128",
     "Replacing 1126 out of 1298 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph prefill_256",
     "Replacing 1070 out of 1244 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph decode",
     "Replacing 1896 out of 1958 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph prefill_128",
-    "Replacing 1804 out of 1865 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph decode",
-    "records: qwen3_asr17_work/speed/r5/mac/F6_win15_pb128_256_cpu.json; qwen3_asr17_work/speed/r5/parity_F6_cpu.json; SPEED_LADDER.md"
+    "Replacing 1804 out of 1865 node(s) with delegate (TfLiteXNNPackDelegate) ... subgraph decode"
    ],
    "env": {
     "device": "Mac Studio (M4 Max)",
@@ -115,13 +114,12 @@
     "lm_decode_total_ops": 1244.0
    },
    "evidence": [
-    "runtime: litert-lm-api 0.18.0 (PyPI wheel, venv ~/venvs/lt0180run), Engine(backend=CPU(thread_count=4) | GPU(), audio_backend=CPU(thread_count=4)), SamplerConfig(top_k=1, top_p=1.0, temperature=0.0), one conversation per send",
-    "r5/mac/F6_win15_pb128_256_gpu_fp16.json: one process, 3 demo clips x (1 + 5) sends, raw = the expected answers 18/18; response (perf_counter around send_message = audio encoder + prefill + decode) warm medians en 0.34106 s, cmn 0.35836 s, ja 0.45794 s; engine load 0.2027 s with the caches present; ru_maxrss at the end 2517827584 B; the Mac's measurement window held (quiet_hold), 1-min load average 4.72998046875 -> 4.7041015625 (other processes running)",
-    "r5/parity_F6_gpu_fp16.json: 155 FLEURS clips (en_us / cmn_hans_cn / ja_jp x 50 + 5 examples), greedy, one conversation per clip: en WER 4.435 % (51/1150), zh CER 6.244 % (122/1954), ja CER 5.206 % (140/2689); verdict PASS against eager fp32 + 1.0 pt",
+    "runtime: litert-lm-api 0.18.0 (PyPI wheel), Engine(backend=CPU(thread_count=4) | GPU(), audio_backend=CPU(thread_count=4)), SamplerConfig(top_k=1, top_p=1.0, temperature=0.0), one conversation per send",
+    "One process, 3 demo clips x (1 + 5) sends, raw = the expected answers 18/18; response (perf_counter around send_message = audio encoder + prefill + decode) warm medians en 0.34106 s, cmn 0.35836 s, ja 0.45794 s; engine load 0.2027 s with the caches present; ru_maxrss at the end 2517827584 B; the Mac's measurement window held, 1-min load average 4.72998046875 -> 4.7041015625 (other processes running)",
+    "155 FLEURS clips (en_us / cmn_hans_cn / ja_jp x 50 + 5 examples), greedy, one conversation per clip: en WER 4.435 % (51/1150), zh CER 6.244 % (122/1954), ja CER 5.206 % (140/2689); verdict PASS against eager fp32 + 1.0 pt",
     "Replacing 1298 out of 1298 node(s) with delegate (LITERT_WEBGPU) ... subgraph prefill_128",
     "Replacing 1298 out of 1298 node(s) with delegate (LITERT_WEBGPU) ... subgraph prefill_256",
-    "Replacing 1244 out of 1244 node(s) with delegate (LITERT_WEBGPU) ... subgraph decode",
-    "records: qwen3_asr17_work/speed/r5/mac/F6_win15_pb128_256_gpu_fp16.json; qwen3_asr17_work/speed/r5/parity_F6_gpu_fp16.json; SPEED_LADDER.md"
+    "Replacing 1244 out of 1244 node(s) with delegate (LITERT_WEBGPU) ... subgraph decode"
    ],
    "env": {
     "device": "Mac Studio (M4 Max)",

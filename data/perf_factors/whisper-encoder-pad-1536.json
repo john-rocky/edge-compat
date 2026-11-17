@@ -25,7 +25,7 @@
  },
  "factor": 2.0,
  "scope": "third real-model flip (after DINOv2-S 2.05x and TIPSv2 2.30x). Drop-in for the decoder; app change = pad the mel to 3072 columns",
- "notes": "realizes the seq-1500-to-1536 probe row's projection (predicted ~15-16 ms, landed 17.9)",
+ "notes": "realizes the seq-1500-to-1536 test row's projection (predicted ~15-16 ms, landed 17.9)",
  "schema_version": "1.0",
  "provenance": "measured"
 }

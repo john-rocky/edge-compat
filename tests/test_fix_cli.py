@@ -27,7 +27,7 @@ def invoke(*args: str):
 
 
 def test_bare_model_argument_dispatches_to_run() -> None:
-    """`edge-fix MODEL.tflite ...` — the spec's CLI shape."""
+    """`edge-fix MODEL.tflite ...` — the documented CLI shape."""
     result = invoke(MODEL, "--matrix", MATRIX, "--rules", RULES)
     assert result.exit_code == 0, result.output
     assert "edge-fix: fixed" in result.output

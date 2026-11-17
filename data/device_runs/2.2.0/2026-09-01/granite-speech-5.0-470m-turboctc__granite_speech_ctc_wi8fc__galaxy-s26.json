@@ -21,7 +21,7 @@
       },
       "error": null,
       "evidence": [
-        "npubench parity gate row: N=20 median in one process per accelerator, real audio input, output tensors dumped and diffed against the Mac tflite run and the fp32 eager transcript; verdict per leg = transcript == eager AND thermal NONE->NONE",
+        "npubench parity check row: N=20 median in one process per accelerator, real audio input, output tensors dumped and diffed against the Mac tflite run and the fp32 eager transcript; verdict per run = transcript == eager AND thermal NONE->NONE",
         "report key wi8fc_10s_cpu: accel=CPU thermal=NONE->NONE headroom=0.5966667->0.60999995 PASS=True transcript_match_eager=True",
         "transcript: mister quilter is the apostle of the middle classes and we are glad to welcome his gospel"
       ],
@@ -66,7 +66,7 @@
       },
       "error": null,
       "evidence": [
-        "npubench parity gate row: N=20 median in one process per accelerator, real audio input, output tensors dumped and diffed against the Mac tflite run and the fp32 eager transcript; verdict per leg = transcript == eager AND thermal NONE->NONE",
+        "npubench parity check row: N=20 median in one process per accelerator, real audio input, output tensors dumped and diffed against the Mac tflite run and the fp32 eager transcript; verdict per run = transcript == eager AND thermal NONE->NONE",
         "report key wi8fc_30s_cpu: accel=CPU thermal=NONE->NONE headroom=0.6066667->0.6533333 PASS=True transcript_match_eager=True",
         "transcript: linnell is pictures are a sort of up guards and a paintings and mason is exquisite idylls are as national as a jingo poem mister birkket foster is landscapes smile at one much in the same way that mis …[trace truncated]"
       ],
@@ -111,7 +111,7 @@
       },
       "error": null,
       "evidence": [
-        "npubench parity gate row: N=20 median in one process per accelerator, real audio input, output tensors dumped and diffed against the Mac tflite run and the fp32 eager transcript; verdict per leg = transcript == eager AND thermal NONE->NONE",
+        "npubench parity check row: N=20 median in one process per accelerator, real audio input, output tensors dumped and diffed against the Mac tflite run and the fp32 eager transcript; verdict per run = transcript == eager AND thermal NONE->NONE",
         "report key wi8fc_5s_cpu: accel=CPU thermal=NONE->NONE headroom=0.5833333->0.59000003 PASS=True transcript_match_eager=True",
         "transcript: by harry quilter m a"
       ],

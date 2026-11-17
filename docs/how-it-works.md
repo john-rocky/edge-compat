@@ -32,7 +32,7 @@ guess. To verify an install, run the shipped example after `uv sync` in a clone:
 
 **Public mirror.** The public repository is a scrubbed export of the project's private lab
 repository, produced by `tools/export_public.sh`; `EXPORT.md` in the mirror names the source
-commit. Numbered `DECISIONS`/`PROGRESS` citations in these docs refer to the lab's logs.
+commit.
 Site: https://john-rocky.github.io/edge-compat/ — `llms.txt` at the site root.
 
 Developer tooling built around one shared data asset: a **delegate compatibility matrix**
@@ -51,7 +51,7 @@ mirrored in `site/src/shared/branding.ts`, rendered on every public surface and 
 
 ## Not to be confused with
 
-`litertlm-convert/qa/compat_check.py` (and `quant_scan.py`) check a **different axis**:
+Release-day bundle checks (`compat_check.py`, `quant_scan.py`, kept outside this repo) check a **different axis**:
 release-day *runtime-version × shipped-artifact loadability*. This repo's matrix is
 **op-level delegate support** per (backend × LiteRT version). The two are complementary
 and stay separate.
@@ -59,7 +59,7 @@ and stay separate.
 ## Data integrity
 
 - **No fabricated data, ever.** Every entry carries `provenance`:
-  `measured | vendor_doc | inferred | example`. All real data comes from the owner's
+  `measured | vendor_doc | inferred | example`. All real data comes from actual
   measurements; `data/examples/` is clearly marked `"provenance": "example"` and is what
   all tests run against.
 - **One snapshot file per (backend × litert_version).** Delegate op support changes across

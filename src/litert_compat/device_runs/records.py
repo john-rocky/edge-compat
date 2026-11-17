@@ -1,9 +1,9 @@
 """Device-run record validation, snapshot discovery, and append-only writes.
 
-Snapshot layout (spec 13.3, mirroring the sweep for freshness reuse):
+Snapshot layout (mirroring the sweep for freshness reuse):
 `<root>/<runtime_version>/<YYYY-MM-DD>/<model_id>__<device>.json`. The
 version segment is the RUNTIME version axis — litert for the .tflite-on-NPU
-lane, litert-lm for the .litertlm lane — with the runtime named inside every
+records, litert-lm for .litertlm records — with the runtime named inside every
 record's env. A snapshot directory is homogeneous: every record carries the
 same env.runtime, and env.runtime_version equals the directory's version
 segment, so a snapshot can never lie about its own version axis.
@@ -43,13 +43,13 @@ def record_condition(record: dict[str, Any]) -> float | None:
     prompt is a latency floor that understates prefill ~12.7x against a
     205-token prompt), so together with `accelerator` it is the record's
     identity. None for records measured before the condition dimension
-    existed (DECISIONS #162) and for runs whose source states no count."""
+    existed and for runs whose source states no count."""
     metrics = record.get("metrics") or {}
     return metrics.get("prefill_tokens")
 
 
 def record_signature(record: dict[str, Any]) -> str | None:
-    """The signature (subgraph) a CV-lane record measured, for multi-signature
+    """The signature (subgraph) a CV record measured, for multi-signature
     .tflite files whose signatures are different measurements (decode vs
     prefill_128, encode vs decode_1). None for single/default-signature files
     and for every record written before the field existed."""
@@ -86,7 +86,7 @@ def record_sort_key(record: dict[str, Any]) -> tuple[str, bool, float, str]:
 def device_status(record: dict[str, Any]) -> str:
     """Deterministic one-word summary of one accelerator record — the same
     vocabulary and derivation as `litert_compat.cards.index.browser_status`
-    (DECISIONS #62), so the site never grows a second status dialect."""
+    so the site never grows a second status dialect."""
     if not record["loads"]:
         return "load_failed"
     if not record["runs"]:
@@ -261,7 +261,7 @@ def write_device_run(root: Path, doc: dict[str, Any], *, date: str) -> Path:
 def select_device_runs(
     snapshots: list[DeviceRunSnapshot],
 ) -> list[tuple[Path, dict[str, Any]]]:
-    """Cell-wise newest selection over every snapshot given (DECISIONS #165):
+    """Cell-wise newest selection over every snapshot given:
     for each (model_id x device x `record_label`) cell, the record from the
     newest snapshot that measured it — "newest" in this module's snapshot
     order: numeric runtime version, then date, with non-numeric versions

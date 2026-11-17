@@ -19,9 +19,9 @@ task: text-generation
 
 | | |
 |---|---|
-| **Tool** | LiteRT Torch (litert-torch) path, quantized with AI Edge Quantizer; the artifact incorporates LiteRT-LM GPU graph optimizations (composite ops for RoPE, fused QKV, …) (README Conversion Notes) TODO (the README names the converter but not its version) |
-| **Command** | `TODO (not stated in the README)` |
-| **Quantization** | dynamic INT4 block-32 weights, FP32 activations (dynamic_wi4b32_afp32), KV 4096 (README Artifact (Block 32) table) |
+| **Tool** | LiteRT Torch (litert-torch) path, quantized with AI Edge Quantizer; the artifact incorporates LiteRT-LM GPU graph optimizations (composite ops for RoPE, fused QKV, …) (card L66) TODO (the card names the converter but not its version) |
+| **Command** | `TODO (not stated in the card)` |
+| **Quantization** | dynamic INT4 block-32 weights, FP32 activations (dynamic_wi4b32_afp32), KV 4096 (card L62, L66) |
 
 ## Artifacts
 
@@ -46,12 +46,14 @@ Model-level on-device results — measured behavior of this exact artifact on th
 
 ## Pitfalls
 
-- The block-32 build is the CPU file: it degraded more on GSM8K (−9 pt vs bf16 90.0%, against −4 pt for the block-128 build) and produced corrupted output under the iPhone GPU delegate; the corruption is not iPhone-specific — on macOS Metal it degenerates too (question-echo loops, truncated reasoning, measured 2026-08-31 before and after the metadata repair). Use the block-32 file on CPU; block 128 is the recommended build on every backend (README Accuracy note).
-- Both bundles run fully delegated on the Galaxy S26 GPU per the README (3764/3764 ops across 3 subgraphs on LiteRT GPU, 1627 MB); this repo carries the Pi 5 CPU row (device runs).
-- 2026-08-31 metadata-only repairs (weights byte-identical, verified section by section): the thought channel (<think>\n / \n</think>) declared in the bundle metadata and the think pre-fill repaired — without the channel the runtime streams raw reasoning into the answer (README Conversion Notes update).
-- litert-lm 0.18.0 passes message content to the chat template as a list of typed parts; the file published before 2026-10-08 (sha256 a412d77d…) stopped at the template on 0.18.0 with `tried to use + operator on unsupported types string and sequence` while answering on 0.17.1. The 2026-10-08 file (sha256 110098cf…, same size) carries a template that reads content as a string and as parts; only the template section changed, the graph, weights, tokenizer and executor metadata are byte-identical, and for string content it renders the same prompt byte for byte (README 2026-10-07 note).
-- Evaluating a reasoning model at a short token budget understates int4 — benchmark with max_tokens >= 2048 (README Accuracy note).
-- License Apache-2.0, inherited from Qwen/Qwen3-4B-Thinking-2507 (README License).
+- The block-32 build is the CPU file: it degraded more on GSM8K (−9 pt vs bf16 90.0%, against −4 pt for the block-128 build) and produced corrupted output under the iPhone GPU delegate; the corruption is not iPhone-specific — on macOS Metal it degenerates too (question-echo loops, truncated reasoning, measured 2026-08-31 before and after the metadata repair). Use the block-32 file on CPU; block 128 is the recommended build on every backend (card L105-L117).
+- Both bundles run fully delegated on the Galaxy S26 GPU per the card; this file: 3764/3764 ops across 3 subgraphs on LiteRT GPU, 1627 MB (card L115, L137); this repo carries the Pi 5 CPU row (device runs).
+- 2026-08-31 metadata-only repairs (weights byte-identical, verified section by section): the thought channel (<think>\n / \n</think>) declared in the bundle metadata and the think pre-fill repaired — without the channel the runtime streams raw reasoning into the answer (card L68).
+- litert-lm 0.18.0 passes message content to the chat template as a list of typed parts; the file published before 2026-10-08 (sha256 a412d77d…) stopped at the template on 0.18.0 with `tried to use + operator on unsupported types string and sequence` while answering on 0.17.1. The 2026-10-08 file (sha256 110098cf…, same size) carries a template that reads content as a string and as parts; only the template section changed, the graph, weights, tokenizer and executor metadata are byte-identical, and for string content it renders the same prompt byte for byte (card L45).
+- Thinking cannot be switched off: on litert-lm 0.18.0 ThinkingConfig(enable_thinking=False) has no effect on this file (nor on model.litertlm): with a 400-token cap the thought channel uses the whole cap and no answer text appears (measured 2026-10-13); set thinking_token_budget (300 answered 17 × 23 under a 700-token cap) and a cap above it (card L76).
+- Evaluating a reasoning model at a short token budget understates int4 — benchmark with max_tokens >= 2048 (card L72-L74, L108-L110).
+- Conversation preface with tools and no messages: LiteRT-LM renders the chat template with an empty message list, and the template reads messages[0] without checking that the list is non-empty, so the render fails with 'Failed to apply template: undefined value' when the preface is prefilled at creation (prefillPrefaceOnInit, default false; creating the conversation fails) and in the preface render (renderPrefaceIntoString and its C++ and C API forms); the same with extra context (such as enable_thinking) and no messages, and in the preface render with an empty preface (run in the runtime on one Qwen3 template; the other templates rendered with minijinja 2.14 and jinja2); read in the source of LiteRT-LM 0.17.0, 0.18.1 and main, measured with the 0.18.1 PyPI package through its C API on this file's template text; the default path, where the first message is rendered with the preface, is not affected (the 0.18.1 Python API and CLI expose neither the flag nor the preface render); a system message or any initial message in the conversation config avoids it (card L236).
+- License Apache-2.0, inherited from Qwen/Qwen3-4B-Thinking-2507 (card L240-L241).
 - LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/.
 
 ---

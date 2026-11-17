@@ -1,7 +1,7 @@
 """Probe signatures: the complete lookup signature a probe fixture exercises.
 
-Two sources, both spec-fixed: linter `needs_probe` records (already complete
-signatures — §G.3) and `inferred` entries selected out of a matrix snapshot
+Two sources: linter `needs_probe` records (already complete
+signatures) and `inferred` entries selected out of a matrix snapshot
 (their `constraints` map deterministically onto a concrete probe shape).
 A signature that cannot be realized as a fixture is *unprobeable* and is
 surfaced as remaining work — never silently dropped, never guessed around.

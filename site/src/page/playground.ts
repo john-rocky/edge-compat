@@ -2,7 +2,7 @@
  * "Check your model" playground runtime (Phase 9), bundled by esbuild into
  * assets/playground.js.
  *
- * HARD PRIVACY RULE (spec 9.1): the visitor's model never leaves the browser.
+ * HARD PRIVACY RULE: the visitor's model never leaves the browser.
  * The dropped file is read locally, parsed locally, and run locally by
  * LiteRT.js; no code path here sends model bytes — or anything derived from
  * them — over the network. The only fetches this page ever makes are the
@@ -38,8 +38,8 @@ import { mulberry32, p50 } from './prng.ts';
 
 /**
  * Measurement hook: counts of checks and CTA copies only — NEVER anything
- * model-derived (spec 9.3). Deliberately a no-op: the counter choice is the
- * owner's (DECISIONS #69, repo-stats only until an analytics stance is
+ * model-derived. Deliberately a no-op: the counter choice is the
+ * open (repo-stats only until an analytics stance is
  * picked). No cookies, no PII, ever.
  */
 function measure(_event: string): void {
@@ -145,7 +145,7 @@ interface SampleInput {
 
 /**
  * Deterministic random inputs (same PRNG family as the sweep; v1 runs random
- * inputs only — user-supplied tensors are an owner question, DECISIONS #96).
+ * inputs only — user-supplied tensors are an open question).
  */
 function buildRandomInputs(details: readonly TensorDetails[], seed: number): SampleInput[] {
   return details.map((detail, index) => {
@@ -610,7 +610,7 @@ function main(): void {
       evidenceDetails.hidden = evidence.length === 0;
       byId<HTMLElement>('evidence-pre').textContent = evidence.join('\n');
 
-      // CTA (spec 9.3): local lint command + cookbook prompt.
+      // CTA: local lint command + cookbook prompt.
       const webgpuSnapshot = config.matrix.find((m) => m.backend === 'webgpu_mldrift') ?? null;
       byId<HTMLElement>('lint-command').textContent = lintCommand(
         file.name,

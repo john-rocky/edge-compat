@@ -21,7 +21,7 @@
       },
       "error": null,
       "evidence": [
-        "speed figures withheld: this measurement batch was retracted as contaminated (parallel GPU load; owner correction in gpu_audit MATRIX.md, 2026-07-23) — the PASS/FAIL verdict is load-independent and stands"
+        "speed figures withheld: this measurement batch was retracted as contaminated (parallel GPU load; corrected in the gpu_audit matrix, 2026-07-23) — the PASS/FAIL verdict is load-independent and stands"
       ],
       "failure_class": null,
       "full_delegation": null,

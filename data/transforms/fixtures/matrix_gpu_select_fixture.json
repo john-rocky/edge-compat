@@ -2,7 +2,7 @@
   "backend": "gpu_mldrift",
   "entries": [
     {
-      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring an owner-authored fact: SELECT is a CompiledModel GPU blocker per the upstream gpu-clean-conversion skill (litert-samples skills/gpu-clean-conversion/SKILL.md, symptom table row 'SELECT / SELECT_V2') and LITERT_CONVERSION_GUIDE.md (BiRefNet 'Replaced SELECT/NOT_EQUAL'; Mimi: nn.ELU was a 'SELECT x13 blocker')",
+      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring a hand-written fact: SELECT is a CompiledModel GPU blocker per the upstream gpu-clean-conversion skill (litert-samples skills/gpu-clean-conversion/SKILL.md, symptom table row 'SELECT / SELECT_V2') and LITERT_CONVERSION_GUIDE.md (BiRefNet 'Replaced SELECT/NOT_EQUAL'; Mimi: nn.ELU was a 'SELECT x13 blocker')",
       "dtypes": [
         "float32"
       ],
@@ -45,7 +45,7 @@
       "status": "unknown"
     },
     {
-      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring owner-authored facts: elementwise arithmetic is GPU-clean (SKILL.md prescribes the arithmetic replacement; LITERT_CONVERSION_GUIDE.md Roboflow Soccer lists ADD/MUL in the GPU-clean op set)",
+      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring hand-written facts: elementwise arithmetic is GPU-clean (SKILL.md prescribes the arithmetic replacement; LITERT_CONVERSION_GUIDE.md Roboflow Soccer lists ADD/MUL in the GPU-clean op set)",
       "dtypes": [
         "float32"
       ],
@@ -54,7 +54,7 @@
       "status": "delegated"
     },
     {
-      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring owner-authored facts: MUL listed in the GPU-clean op set (LITERT_CONVERSION_GUIDE.md Roboflow Soccer section)",
+      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring hand-written facts: MUL listed in the GPU-clean op set (LITERT_CONVERSION_GUIDE.md Roboflow Soccer section)",
       "dtypes": [
         "float32"
       ],
@@ -63,7 +63,7 @@
       "status": "delegated"
     },
     {
-      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring owner-authored facts: ADD listed in the GPU-clean op set (LITERT_CONVERSION_GUIDE.md Roboflow Soccer section)",
+      "conditions": "SYNTHETIC FIXTURE ENTRY mirroring hand-written facts: ADD listed in the GPU-clean op set (LITERT_CONVERSION_GUIDE.md Roboflow Soccer section)",
       "dtypes": [
         "float32"
       ],

@@ -1,0 +1,72 @@
+{
+  "artifact": "NVIDIA-Nemotron-Labs-Dory1.0-4B_int4.litertlm",
+  "artifact_sha256": "220daaa90b3b32cdfdec393f71253dcf68467eb16ff67bcc027e2371253a21da",
+  "device": "mac-studio-m4-max",
+  "model_id": "nemotron-labs-dory1.0-4b-int4",
+  "notes": "Hub litert-community/NVIDIA-Nemotron-Labs-Dory1.0-4B main 61cb6bbe (read 2026-10-22 16:13:35 JST); NVIDIA-Nemotron-Labs-Dory1.0-4B_int4.litertlm = commit 42ee53ae ('int4 (GPTQ, GPU composites, the GPU file)', 2026-10-22 02:50 UTC), the Hub tree's LFS sha256 / size = the sha256 of the measured file, which is the uploaded file (same inode); the card = the Hub README byte for byte (18444 B, sha256 033b83a0…). The Hub card's Mac table: litert-lm 0.18.0 CLI (PyPI) `litert-lm benchmark <file> --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no` under /usr/bin/time -l, one warm-up and 3 runs per process (the CLI prints the mean of the 3 runs); the two processes are A1 and A2 of one A B B A (c2_gpu_a1 c2_gpu_b1 c2_gpu_b2 c2_gpu_a2) against F4 (the same weights without the GPU composites, never shipped), in one measurement window, each started after the settle check found no other engine or export job; the cell = the mean of the two processes (= their median; the card's rule), each process's values in metrics (run<n>_*); peak_mem_mb = the median of the two processes' peak memory footprint / 10^6 (max resident set size per process in metrics). GPU = WebGPU on Metal with the runtime's default fp16 activations (the file declares none); the delegate bound 113-114 external tensors against 224-225 for the comparison file (the 8-question logs: the KV cache updated in place). Delegation cells null (the benchmark logs state none). Not entered: the comparison arm's two processes (other bytes, never shipped); the Usage commands re-run for the card (the card quotes them); the 8-question and GSM8K checks (correctness checks the card quotes: 8/8, GSM8K thinking off 90 / 100 with fp16 activations); every earlier form's Mac rows (other bytes).",
+  "quantization": "int4 blockwise-32 on the linear layers, codes chosen by GPTQ (Conversion notes), block scales floored at 2^-14; int8 embedding in its own section; the KV-cache writes and attention matmuls as the runtime's GPU composites (fused GPU ops; Conversion notes); no activation type declared: on the GPU it runs with the runtime's default fp16 activations",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-22",
+      "decode_tokens_per_s": 57.705,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "Settle: quiet after 0 s; warm-up + 3 runs; prefill 1033.45 / decode 57.77 tok/s, TTFT 1.0082 s, init 8.0203 s (the CLI prints the mean of the 3 runs); maximum resident set size 3151593472 B, peak memory footprint 4003204264 B; 0 'Validation error' lines",
+        "2026-10-22 03:31:26 [w1] START c2_gpu_b1 cap 320s (disk 351 GB free) / 2026-10-22 03:32:06 [w1] DONE c2_gpu_b1 rc=0 40s",
+        "Settle: quiet after 0 s; warm-up + 3 runs; prefill 1034.34 / decode 57.64 tok/s, TTFT 1.0074 s, init 7.9788 s (the CLI prints the mean of the 3 runs); maximum resident set size 3157360640 B, peak memory footprint 4016082088 B; 0 'Validation error' lines",
+        "2026-10-22 03:32:06 [w1] START c2_gpu_b2 cap 320s (disk 351 GB free) / 2026-10-22 03:32:44 [w1] DONE c2_gpu_b2 rc=0 38s",
+        "2026-10-22 03:33:27 [w1] JUDGE R12_C c2_gpu: A 1012.54 / 45.265, B (F4c) 1033.895 / 57.705 tok/s, decode B/A 1.2748 -> faster (> 1.03)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "init_s": 7.9996,
+        "iterations": 3.0,
+        "max_num_tokens": 2048.0,
+        "prefill_tokens": 1024.0,
+        "run1_decode_tok_s": 57.77,
+        "run1_init_s": 8.0203,
+        "run1_max_rss_mb": 3151.593,
+        "run1_peak_footprint_mb": 4003.204,
+        "run1_prefill_tok_s": 1033.45,
+        "run1_t_s": 5.4222,
+        "run1_ttft_s": 1.0082,
+        "run2_decode_tok_s": 57.64,
+        "run2_init_s": 7.9788,
+        "run2_max_rss_mb": 3157.361,
+        "run2_peak_footprint_mb": 4016.082,
+        "run2_prefill_tok_s": 1034.34,
+        "run2_t_s": 5.4314,
+        "run2_ttft_s": 1.0074,
+        "runs": 2.0,
+        "t_1024_256_s": 5.4268,
+        "warmup_runs": 1.0
+      },
+      "output_match": null,
+      "peak_mem_mb": 4009.643,
+      "prefill_tokens_per_s": 1033.895,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 1007.8
+    }
+  ],
+  "schema_version": "1.0"
+}

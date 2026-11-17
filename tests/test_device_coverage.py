@@ -1,5 +1,4 @@
-"""Cards <-> device-run snapshots: the replace trap and its guard (DECISIONS
-#161 / #165).
+"""Cards <-> device-run snapshots: the replace trap and its guard.
 
 `edge-card enrich` rebuilds a card's device block from exactly the snapshots
 it is given, so a snapshot left off the command line silently removed the
@@ -101,7 +100,7 @@ def test_select_device_runs_is_cell_wise_newest(tmp_path: Path) -> None:
     assert cells == {
         # the 0.1.0 gpu@19tok row is superseded by the 0.2.0 re-measurement...
         ("0.2.0/2026-02-01", "gpu@19tok", 20.0),
-        # ...the 205-token row is a different cell and coexists (#162)...
+        # ...the 205-token row is a different cell and coexists...
         ("0.2.0/2026-03-01", "gpu@205tok", 30.0),
         # ...and cpu stays from 0.1.0: a non-numeric version sorts before every
         # numeric one, whatever its date, so the gallery row loses.

@@ -20,7 +20,7 @@ task: text-generation
 | | |
 |---|---|
 | **Tool** | litert-torch (commit 115a136 + the Falcon-H1 patch of hf-to-litertlm falcon_h1_work/falcon_h1_litert_torch.patch; lightweight export, 1e8-byte lazy-constant threshold); repro = hf-to-litertlm falcon_h1_work/convert_falcon_h1r_7b.sh litert-torch 115a136 + Falcon-H1 patch (torch 2.12.1, transformers 5.14.1, ai-edge-quantizer 0.8.0, litert-converter 0.3.0); packed by the litert-lm 0.18.0 CLI |
-| **Command** | `falcon_h1_work/convert_falcon_h1r_7b.sh (hf-to-litertlm): float export (6 prefill signatures 1024, 256, 64, 16, 4, 1 + decode, KV budget 4096, 176 state buffers = 44 KV pairs + 44 conv windows + 44 SSM states) -> int4 blockwise-32 min-max on the linears with the block scales floored at 2^-14, int8 output projection and embedding -> metadata (the bundle template, no start token, stop ids 11 / 228, the thought channel, fp32 GPU activations, max_num_tokens 4096)` |
+| **Command** | `convert_falcon_h1r_7b.sh (hf-to-litertlm): float export (6 prefill signatures 1024, 256, 64, 16, 4, 1 + decode, KV budget 4096, 176 state buffers = 44 KV pairs + 44 conv windows + 44 SSM states) -> int4 blockwise-32 min-max on the linears with the block scales floored at 2^-14, int8 output projection and embedding -> metadata (the bundle template, no start token, stop ids 11 / 228, the thought channel, fp32 GPU activations, max_num_tokens 4096)` |
 | **Quantization** | int4 blockwise-32 on the linears (block scales floored at 2^-14), int8 output projection and embedding; fp32 GPU activations declared (card L32, L106) |
 
 ## Artifacts

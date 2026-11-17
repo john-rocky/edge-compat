@@ -3,7 +3,7 @@
   "artifact_sha256": "f0f6c37ee62b51372ab28013617aad53793a84aaddd96e1e844d0cea0eb2f11d",
   "device": "pixel-8a",
   "model_id": "embeddinggemma-2-transcribe__eg2_audio_f16safe_fp16w_w30",
-  "notes": "EmbeddingGemma 2 Transcribe, LiteRT form: the audio encoder of google/embeddinggemma-2 (rev 914f7f89; Gemma 4 audio tower + embed_audio) exported to raw LiteRT graphs with an fp16-safe rewrite of its RMSNorm sites (per-site 2^-k rescale, eps x 4^-k, rsqrt clamp, attention mask -30000; bit-identical to the float32 model in fp32), fp16 weights (FLOAT_CASTING on FC / CONV_2D / DEPTHWISE_CONV_2D), one signature per file (audio_30s / audio_10s: mel float32 [1, F, 128] + mask -> soft tokens [1, F/4, 512] + mask), plus reader v1 (a 4-layer transformer over the soft tokens with the 200,000-word table FC and ARG_MAX in-graph) = speech to words on the phone. This file: eg2_audio_f16safe_fp16w_w30.tflite (589273696 B), sha256 = hf_stage FILES.sha256 of the upload set; every phone leg below ran these bytes (sha256 lines in the evidence). Pixel 8a (8 GB): GPU legs through the gate app; the fp32-weight copy of the same rewrite is not given to this GPU (1.17 GB). FP16_WITH_FP32_ACCUM passes the 7-row subset and fails the 41-window whole set at quiet, non-silent tokens of the long recording; FP32 passes. Lane record: litertlm-convert eg2_stt_work (LANE.md, ROUND1–11, SPEED_LADDER.md lint PASS with user-stop 2026-10-14). Landed 2026-10-15 (DECISIONS #216): the file is on the Hub at mlboydaisuke/EmbeddingGemma-2-Transcribe-LiteRT (upload commit 54d0e902cd50bd6f04958a81ab93e02bf5c77b9d = main, 2026-10-14 18:00:44 UTC = 2026-10-15 03:00 JST); its LFS oid equals artifact_sha256 (anonymous API read 2026-10-15 03:08 JST).",
+  "notes": "EmbeddingGemma 2 Transcribe, LiteRT form: the audio encoder of google/embeddinggemma-2 (rev 914f7f89; Gemma 4 audio tower + embed_audio) exported to raw LiteRT graphs with an fp16-safe rewrite of its RMSNorm sites (per-site 2^-k rescale, eps x 4^-k, rsqrt clamp, attention mask -30000; bit-identical to the float32 model in fp32), fp16 weights (FLOAT_CASTING on FC / CONV_2D / DEPTHWISE_CONV_2D), one signature per file (audio_30s / audio_10s: mel float32 [1, F, 128] + mask -> soft tokens [1, F/4, 512] + mask), plus reader v1 (a 4-layer transformer over the soft tokens with the 200,000-word table FC and ARG_MAX in-graph) = speech to words on the phone. This file: eg2_audio_f16safe_fp16w_w30.tflite (589273696 B), sha256 = hf_stage FILES.sha256 of the upload set; every phone run below ran these bytes (sha256 lines in the evidence). Pixel 8a (8 GB): GPU runs through the gate app; the fp32-weight copy of the same rewrite is not given to this GPU (1.17 GB). FP16_WITH_FP32_ACCUM passes the 7-row subset and fails the 41-window whole set at quiet, non-silent tokens of the long recording; FP32 passes. Landed 2026-10-15: the file is on the Hub at mlboydaisuke/EmbeddingGemma-2-Transcribe-LiteRT (upload commit 54d0e902cd50bd6f04958a81ab93e02bf5c77b9d = main, 2026-10-14 18:00:44 UTC = 2026-10-15 03:00 JST); its LFS oid equals artifact_sha256 (anonymous API read 2026-10-15 03:08 JST).",
   "quantization": null,
   "results": [
     {
@@ -23,13 +23,13 @@
       },
       "error": null,
       "evidence": [
-        "Harness: the shared device chain litertlm-convert/community_accel_work/devicebench (chain.sh) driving the gate app d1_omni_work/device/app-debug.r9.apk (sha256 2d89d57a…, LiteRT 2.2.0) in generic mode (one call = write the mel + mask inputs, run, read the soft-token output); scored on the Mac by eg2_stt_work/device_score.py; round 5 legs P2_gpu16_fp16w / P2_gpu16_t_fp16w, 7 rows (2,306 valid tokens).",
+        "Harness: a benchmark script driving the gate app (sha256 2d89d57a…, LiteRT 2.2.0) in generic mode (one call = write the mel + mask inputs, run, read the soft-token output); scored on the Mac; run 5 runs P2_gpu16_fp16w / P2_gpu16_t_fp16w, 7 rows (2,306 valid tokens).",
         "sha256 eg2_audio_f16safe_fp16w_w30.tflite phone=f0f6c37ee62b51372ab28013617aad53793a84aaddd96e1e844d0cea0eb2f11d mac=f0f6c37ee62b51372ab28013617aad53793a84aaddd96e1e844d0cea0eb2f11d MATCH",
         "10-13 21:33:57.736 31215 31238 I tflite  : Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
-        "FAIL P2_gpu16_fp16w: 7/7 rows, 2306 valid tokens, cos mean 0.9998439834 min 0.967799 (row 121-121726-0001_w0), max|d| 1.448e+00; vs Mac same file cos min 0.96783317 max|d| 1.447e+00; Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions f (the lane's bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa); eg2_stt_work/results/pixel8a/p8a_parity_P2_gpu16_fp16w_p2.json)",
-        "latency_p50_ms = the median of the timing leg's calls (write + run + read back) on a rested phone: TIMING P2_gpu16_t_fp16w: 581.6 ms per 30 s window (52xRT), min 568.1 max 583.2 n 10, compile 2963 ms, VmHWM max 2674656 kB, capped 0/5 samples; Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions f (eg2_stt_work/results/pixel8a/p8a_timing_P2_gpu16_t_fp16w_p2.json)",
-        "tokens under 0.99: 4 of 2306 (2 digital silence = the token's 4 mel frames all at log(0.001)); min over the non-silent tokens 0.98366 (eg2_stt_work/results/pixel8a/p8a_bartokens_P2_gpu16_fp16w_p2.json).",
-        "output_match = the lane's bar (not the shared element rule; no element rule over raw outputs was computed for this record); max_abs_diff = max |d| vs the reference over the valid tokens; max_rel_diff null."
+        "FAIL P2_gpu16_fp16w: 7/7 rows, 2306 valid tokens, cos mean 0.9998439834 min 0.967799 (row 121-121726-0001_w0), max|d| 1.448e+00; vs Mac same file cos min 0.96783317 max|d| 1.447e+00; Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions f (the bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa))",
+        "latency_p50_ms = the median of the timing run's calls (write + run + read back) on a rested phone: TIMING P2_gpu16_t_fp16w: 581.6 ms per 30 s window (52xRT), min 568.1 max 583.2 n 10, compile 2963 ms, VmHWM max 2674656 kB, capped 0/5 samples; Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions f",
+        "tokens under 0.99: 4 of 2306 (2 digital silence = the token's 4 mel frames all at log(0.001)); min over the non-silent tokens 0.98366.",
+        "output_match = the bar (not the shared element rule; no element rule over raw outputs was computed for this record); max_abs_diff = max |d| vs the reference over the valid tokens; max_rel_diff null."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -66,7 +66,7 @@
       "prefill_tokens_per_s": null,
       "provenance": "measured",
       "runs": true,
-      "signature": "GpuOptions precision=DEFAULT (fp16); gate app (devicebench generic), round 5 legs P2_gpu16_fp16w / P2_gpu16_t_fp16w, 7 rows (2,306 valid tokens)",
+      "signature": "GpuOptions precision=DEFAULT (fp16); gate app (generic mode), run 5 runs P2_gpu16_fp16w / P2_gpu16_t_fp16w, 7 rows (2,306 valid tokens)",
       "total_ops": 2767,
       "ttft_ms": null
     },
@@ -87,13 +87,13 @@
       },
       "error": null,
       "evidence": [
-        "Harness: the shared device chain litertlm-convert/community_accel_work/devicebench (chain.sh) driving the gate app d1_omni_work/device/app-debug.r9.apk (sha256 2d89d57a…, LiteRT 2.2.0) in generic mode (one call = write the mel + mask inputs, run, read the soft-token output); scored on the Mac by eg2_stt_work/device_score.py; round 5 legs P2_gpu16a32_fp16w / P2_gpu16a32_t_fp16w, 7 rows (2,306 valid tokens; a subset without the long recording).",
+        "Harness: a benchmark script driving the gate app (sha256 2d89d57a…, LiteRT 2.2.0) in generic mode (one call = write the mel + mask inputs, run, read the soft-token output); scored on the Mac; run 5 runs P2_gpu16a32_fp16w / P2_gpu16a32_t_fp16w, 7 rows (2,306 valid tokens; a subset without the long recording).",
         "sha256 eg2_audio_f16safe_fp16w_w30.tflite phone=f0f6c37ee62b51372ab28013617aad53793a84aaddd96e1e844d0cea0eb2f11d mac=f0f6c37ee62b51372ab28013617aad53793a84aaddd96e1e844d0cea0eb2f11d MATCH",
         "10-13 21:35:14.885 32122 32144 I tflite  : Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
-        "PASS P2_gpu16a32_fp16w: 7/7 rows, 2306 valid tokens, cos mean 0.9999896014 min 0.994055 (row 121-121726-0001_w0), max|d| 6.189e-01; vs Mac same file cos min 0.99407002 max|d| 6.181e-01; Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions f (the lane's bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa); eg2_stt_work/results/pixel8a/p8a_parity_P2_gpu16a32_fp16w_p2.json)",
-        "latency_p50_ms = the median of the timing leg's calls (write + run + read back) on a rested phone: TIMING P2_gpu16a32_t_fp16w: 666.4 ms per 30 s window (45xRT), min 653.3 max 670.4 n 10, compile 2894 ms, VmHWM max 2673900 kB, capped 0/5 samples; Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions f (eg2_stt_work/results/pixel8a/p8a_timing_P2_gpu16a32_t_fp16w_p2.json)",
-        "tokens under 0.99: 0 of 2306 (0 digital silence = the token's 4 mel frames all at log(0.001)); min over the non-silent tokens 0.99747 (eg2_stt_work/results/pixel8a/p8a_bartokens_P2_gpu16a32_fp16w_p2.json).",
-        "output_match = the lane's bar (not the shared element rule; no element rule over raw outputs was computed for this record); max_abs_diff = max |d| vs the reference over the valid tokens; max_rel_diff null."
+        "PASS P2_gpu16a32_fp16w: 7/7 rows, 2306 valid tokens, cos mean 0.9999896014 min 0.994055 (row 121-121726-0001_w0), max|d| 6.189e-01; vs Mac same file cos min 0.99407002 max|d| 6.181e-01; Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions f (the bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa))",
+        "latency_p50_ms = the median of the timing run's calls (write + run + read back) on a rested phone: TIMING P2_gpu16a32_t_fp16w: 666.4 ms per 30 s window (45xRT), min 653.3 max 670.4 n 10, compile 2894 ms, VmHWM max 2673900 kB, capped 0/5 samples; Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions f",
+        "tokens under 0.99: 0 of 2306 (0 digital silence = the token's 4 mel frames all at log(0.001)); min over the non-silent tokens 0.99747.",
+        "output_match = the bar (not the shared element rule; no element rule over raw outputs was computed for this record); max_abs_diff = max |d| vs the reference over the valid tokens; max_rel_diff null."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -130,7 +130,7 @@
       "prefill_tokens_per_s": null,
       "provenance": "measured",
       "runs": true,
-      "signature": "GpuOptions precision=FP16_WITH_FP32_ACCUM; gate app (devicebench generic), round 5 legs P2_gpu16a32_fp16w / P2_gpu16a32_t_fp16w, 7 rows (2,306 valid tokens; a subset without the long recording)",
+      "signature": "GpuOptions precision=FP16_WITH_FP32_ACCUM; gate app (generic mode), run 5 runs P2_gpu16a32_fp16w / P2_gpu16a32_t_fp16w, 7 rows (2,306 valid tokens; a subset without the long recording)",
       "total_ops": 2767,
       "ttft_ms": null
     },
@@ -151,12 +151,12 @@
       },
       "error": null,
       "evidence": [
-        "Harness: the shared device chain litertlm-convert/community_accel_work/devicebench (chain.sh) driving the gate app d1_omni_work/device/app-debug.r9.apk (sha256 2d89d57a…, LiteRT 2.2.0) in generic mode (one call = write the mel + mask inputs, run, read the soft-token output); scored on the Mac by eg2_stt_work/device_score.py; round 6 whole set: 41 windows (20 utterances + the long recording's first 10 min) in parts a / b pooled by combine_parts_r6.py.",
+        "Harness: a benchmark script driving the gate app (sha256 2d89d57a…, LiteRT 2.2.0) in generic mode (one call = write the mel + mask inputs, run, read the soft-token output); scored on the Mac; run 6 whole set: 41 windows (20 utterances + the long recording's first 10 min) in parts a / b pooled by combine_parts_r6.py.",
         "sha256 eg2_audio_f16safe_fp16w_w30.tflite phone=f0f6c37ee62b51372ab28013617aad53793a84aaddd96e1e844d0cea0eb2f11d mac=f0f6c37ee62b51372ab28013617aad53793a84aaddd96e1e844d0cea0eb2f11d MATCH",
         "10-13 22:46:27.068 10625 10649 I tflite  : Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
-        "FAIL over the whole set: 20786 valid tokens, cos mean 0.9999817496 min 0.947485, max|d| 1.821; parts: P3_gpu16a32_fp16w_w30a PASS 5420 tokens cos mean 0.9999889 min 0.99120; P3_gpu16a32_fp16w_w30b FAIL 15366 tokens cos mean 0.9999792 min 0.94749; tokens under 0.99 6.0 (digital silence 0.0) (the lane's bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa); eg2_stt_work/results/pixel8a/p8a_parity_P3_gpu16a32_fp16w_w30_full_p3.json, pooled by eg2_stt_work/scripts/combine_parts_r6.py).",
-        "latency_p50_ms = the median of the timing leg's calls (write + run + read back) on a rested phone: TIMING P3_gpu16a32_t_fp16w_w30: 664.2 ms per 30 s window (45xRT), min 652.5 max 668.3 n 10, compile 3056 ms, VmHWM max 2674592 kB, capped 0/5 samples; Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions f (eg2_stt_work/results/pixel8a/p8a_timing_P3_gpu16a32_t_fp16w_w30_p3.json)",
-        "output_match = the lane's bar (not the shared element rule; no element rule over raw outputs was computed for this record); max_abs_diff = max |d| vs the reference over the valid tokens; max_rel_diff null."
+        "FAIL over the whole set: 20786 valid tokens, cos mean 0.9999817496 min 0.947485, max|d| 1.821; parts: P3_gpu16a32_fp16w_w30a PASS 5420 tokens cos mean 0.9999889 min 0.99120; P3_gpu16a32_fp16w_w30b FAIL 15366 tokens cos mean 0.9999792 min 0.94749; tokens under 0.99 6.0 (digital silence 0.0) (the bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa); pooled).",
+        "latency_p50_ms = the median of the timing run's calls (write + run + read back) on a rested phone: TIMING P3_gpu16a32_t_fp16w_w30: 664.2 ms per 30 s window (45xRT), min 652.5 max 668.3 n 10, compile 3056 ms, VmHWM max 2674592 kB, capped 0/5 samples; Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions f",
+        "output_match = the bar (not the shared element rule; no element rule over raw outputs was computed for this record); max_abs_diff = max |d| vs the reference over the valid tokens; max_rel_diff null."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -193,7 +193,7 @@
       "prefill_tokens_per_s": null,
       "provenance": "measured",
       "runs": true,
-      "signature": "GpuOptions precision=FP16_WITH_FP32_ACCUM; gate app (devicebench generic), round 6 whole set: 41 windows (20 utterances + the long recording's first 10 min) in parts a / b pooled by combine_parts_r6.py",
+      "signature": "GpuOptions precision=FP16_WITH_FP32_ACCUM; gate app (generic mode), run 6 whole set: 41 windows (20 utterances + the long recording's first 10 min) in parts a / b pooled by combine_parts_r6.py",
       "total_ops": 2767,
       "ttft_ms": null
     },
@@ -214,13 +214,13 @@
       },
       "error": null,
       "evidence": [
-        "Harness: the shared device chain litertlm-convert/community_accel_work/devicebench (chain.sh) driving the gate app d1_omni_work/device/app-debug.r9.apk (sha256 2d89d57a…, LiteRT 2.2.0) in generic mode (one call = write the mel + mask inputs, run, read the soft-token output); scored on the Mac by eg2_stt_work/device_score.py; round 5 legs P2_gpu32_fp16w / P2_gpu32_t_fp16w, 7 rows (2,306 valid tokens).",
+        "Harness: a benchmark script driving the gate app (sha256 2d89d57a…, LiteRT 2.2.0) in generic mode (one call = write the mel + mask inputs, run, read the soft-token output); scored on the Mac; run 5 runs P2_gpu32_fp16w / P2_gpu32_t_fp16w, 7 rows (2,306 valid tokens).",
         "sha256 eg2_audio_f16safe_fp16w_w30.tflite phone=f0f6c37ee62b51372ab28013617aad53793a84aaddd96e1e844d0cea0eb2f11d mac=f0f6c37ee62b51372ab28013617aad53793a84aaddd96e1e844d0cea0eb2f11d MATCH",
         "10-13 21:36:32.341  1219  1253 I tflite  : Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main).",
-        "PASS P2_gpu32_fp16w: 7/7 rows, 2306 valid tokens, cos mean 1.0000000000 min 1.000000 (row 121-121726-0001_w0), max|d| 5.116e-04; vs Mac same file cos min 1.00000000 max|d| 2.292e-04; Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions f (the lane's bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa); eg2_stt_work/results/pixel8a/p8a_parity_P2_gpu32_fp16w_p2.json)",
-        "latency_p50_ms = the median of the timing leg's calls (write + run + read back) on a rested phone: TIMING P2_gpu32_t_fp16w: 1084.9 ms per 30 s window (28xRT), min 1066.9 max 1088.6 n 10, compile 3497 ms, VmHWM max 3331580 kB, capped 0/6 samples; Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions f (eg2_stt_work/results/pixel8a/p8a_timing_P2_gpu32_t_fp16w_p2.json)",
-        "tokens under 0.99: 0 of 2306 (0 digital silence = the token's 4 mel frames all at log(0.001)); min over the non-silent tokens 1.00000 (eg2_stt_work/results/pixel8a/p8a_bartokens_P2_gpu32_fp16w_p2.json).",
-        "output_match = the lane's bar (not the shared element rule; no element rule over raw outputs was computed for this record); max_abs_diff = max |d| vs the reference over the valid tokens; max_rel_diff null."
+        "PASS P2_gpu32_fp16w: 7/7 rows, 2306 valid tokens, cos mean 1.0000000000 min 1.000000 (row 121-121726-0001_w0), max|d| 5.116e-04; vs Mac same file cos min 1.00000000 max|d| 2.292e-04; Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions f (the bar = valid tokens pooled, cos mean >= 0.999 and min >= 0.99 vs the float32 reference (transformers 5.19.0 EmbeddingGemma2 audio tower + embed_audio, sdpa))",
+        "latency_p50_ms = the median of the timing run's calls (write + run + read back) on a rested phone: TIMING P2_gpu32_t_fp16w: 1084.9 ms per 30 s window (28xRT), min 1066.9 max 1088.6 n 10, compile 3497 ms, VmHWM max 3331580 kB, capped 0/6 samples; Replacing 2767 out of 2767 node(s) with delegate (LITERT_CL) node, yielding 1 partitions f",
+        "tokens under 0.99: 0 of 2306 (0 digital silence = the token's 4 mel frames all at log(0.001)); min over the non-silent tokens 1.00000.",
+        "output_match = the bar (not the shared element rule; no element rule over raw outputs was computed for this record); max_abs_diff = max |d| vs the reference over the valid tokens; max_rel_diff null."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -257,7 +257,7 @@
       "prefill_tokens_per_s": null,
       "provenance": "measured",
       "runs": true,
-      "signature": "GpuOptions precision=FP32; gate app (devicebench generic), round 5 legs P2_gpu32_fp16w / P2_gpu32_t_fp16w, 7 rows (2,306 valid tokens)",
+      "signature": "GpuOptions precision=FP32; gate app (generic mode), run 5 runs P2_gpu32_fp16w / P2_gpu32_t_fp16w, 7 rows (2,306 valid tokens)",
       "total_ops": 2767,
       "ttft_ms": null
     }

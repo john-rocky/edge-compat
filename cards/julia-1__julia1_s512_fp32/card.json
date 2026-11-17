@@ -109,10 +109,10 @@
           },
           "error": null,
           "evidence": [
-            "Debug gate app com.julia.gate (android_gate/, Kotlin CompiledModel 2.2.0), one cold process per run, fixture ids + markers pushed as JSON, host token-table lookup outside the timed interval; timed interval = input writes + run + output readback per row. Source: /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s512_fp32_julia1_token_table_f32.json, logcat /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s512_fp32_julia1_token_table_f32.logcat.txt, state /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s512_fp32_julia1_token_table_f32.state_before.txt / .state_after.txt.",
+            "Debug gate app com.julia.gate (android_gate/, Kotlin CompiledModel 2.2.0), one cold process per run, fixture ids + markers pushed as JSON, host token-table lookup outside the timed interval; timed interval = input writes + run + output readback per row.",
             "conditions: before thermal status 0, battery 34.2 C; after thermal status 0, battery 38.6 C; screen on, USB powered, no cool-start wait.",
-            "parity vs the author's implementation (oracle /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/fixtures/oracle_typed.json + oracle_parity.json, scripts/device_compare.py): same winning option on 706/706 rows (306 boundary = reference top-1 < 0.9); max |dprob| 5e-05; rows over 0.01: 0.",
-            "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) against the Mac ai-edge-litert CPU gate of the same graph bytes and the same host table on the same ids (/Users/USER/code/codex-conversions/2026-09-30/julia1-litert/results/gate_julia1_s512_fp32_cpu_f32.json): 7 violating of 2555 compared option logits, max |d| 0.0003260374069213867.",
+            "parity vs the author's implementation (scripts/device_compare.py): same winning option on 706/706 rows (306 boundary = reference top-1 < 0.9); max |dprob| 5e-05; rows over 0.01: 0.",
+            "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) against the Mac ai-edge-litert CPU check of the same graph bytes and the same host table on the same ids: 7 violating of 2555 compared option logits, max |d| 0.0003260374069213867.",
             "09-30 09:24:51.666 19772 19805 I litert  : [compiled_model.cc:1250] 0 compiler plugins were applied successfully:",
             "09-30 09:24:51.770 19772 19805 I tflite  : Replacing 1704 out of 1704 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main)."
           ],
@@ -171,11 +171,11 @@
           },
           "error": null,
           "evidence": [
-            "Debug gate app com.julia.gate (android_gate/, Kotlin CompiledModel 2.2.0), one cold process per run, fixture ids + markers pushed as JSON, host token-table lookup outside the timed interval; timed interval = input writes + run + output readback per row. Source: /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s512_fp32_julia1_token_table_fp16.json, logcat /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s512_fp32_julia1_token_table_fp16.logcat.txt, state /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_gpu_fp32_julia1_s512_fp32_julia1_token_table_fp16.state_before.txt / .state_after.txt.",
+            "Debug gate app com.julia.gate (android_gate/, Kotlin CompiledModel 2.2.0), one cold process per run, fixture ids + markers pushed as JSON, host token-table lookup outside the timed interval; timed interval = input writes + run + output readback per row.",
             "conditions: before thermal status 1, battery 38.2 C; after thermal status 2, battery 41.3 C; screen on, USB powered, no cool-start wait.",
-            "parity vs the author's implementation (oracle /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/fixtures/oracle_typed.json + oracle_parity.json, scripts/device_compare.py): same winning option on 706/706 rows (306 boundary = reference top-1 < 0.9); max |dprob| 0.0077; rows over 0.01: 0.",
-            "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) against the Mac ai-edge-litert CPU gate of the same graph bytes and the same host table on the same ids (/Users/USER/code/codex-conversions/2026-09-30/julia1-litert/results/gate_julia1_s512_fp32_cpu_f16.json): 6 violating of 2555 compared option logits, max |d| 0.0004076957702636719.",
-            "An earlier sitting of the same form (device/julia_gpu_fp32_s512_fp16table_run1.json, no logcat / state kept): 706/706 same answers, max |dprob| 0.0077, warm median 111.801927 ms.",
+            "parity vs the author's implementation (scripts/device_compare.py): same winning option on 706/706 rows (306 boundary = reference top-1 < 0.9); max |dprob| 0.0077; rows over 0.01: 0.",
+            "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) against the Mac ai-edge-litert CPU check of the same graph bytes and the same host table on the same ids: 6 violating of 2555 compared option logits, max |d| 0.0004076957702636719.",
+            "An earlier measurement run of the same form (no logcat / state kept): 706/706 same answers, max |dprob| 0.0077, warm median 111.801927 ms.",
             "09-30 09:49:48.083 30413 30514 I litert  : [compiled_model.cc:1250] 0 compiler plugins were applied successfully:",
             "09-30 09:49:48.181 30413 30514 I tflite  : Replacing 1704 out of 1704 node(s) with delegate (LITERT_CL) node, yielding 1 partitions for subgraph 0 (main)."
           ],
@@ -234,10 +234,10 @@
           },
           "error": null,
           "evidence": [
-            "Debug gate app com.julia.gate (android_gate/, Kotlin CompiledModel 2.2.0), one cold process per run, fixture ids + markers pushed as JSON, host token-table lookup outside the timed interval; timed interval = input writes + run + output readback per row. Source: /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_npu_fp32_julia1_s512_fp32_julia1_token_table_f32.json, logcat /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_npu_fp32_julia1_s512_fp32_julia1_token_table_f32.logcat.txt, state /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/device/julia_npu_fp32_julia1_s512_fp32_julia1_token_table_f32.state_before.txt / .state_after.txt.",
+            "Debug gate app com.julia.gate (android_gate/, Kotlin CompiledModel 2.2.0), one cold process per run, fixture ids + markers pushed as JSON, host token-table lookup outside the timed interval; timed interval = input writes + run + output readback per row.",
             "conditions: before thermal status 2, battery 40.9 C; after thermal status 2, battery 42.8 C; screen on, USB powered, no cool-start wait.",
-            "parity vs the author's implementation (oracle /Users/USER/code/codex-conversions/2026-09-30/julia1-litert/fixtures/oracle_typed.json + oracle_parity.json, scripts/device_compare.py): same winning option on 685/706 rows (306 boundary = reference top-1 < 0.9); max |dprob| 0.41806; rows over 0.01: 286.",
-            "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) against the Mac ai-edge-litert CPU gate of the same graph bytes and the same host table on the same ids (/Users/USER/code/codex-conversions/2026-09-30/julia1-litert/results/gate_julia1_s512_fp32_cpu_f32.json): 2388 violating of 2555 compared option logits, max |d| 2.629793167114258.",
+            "parity vs the author's implementation (scripts/device_compare.py): same winning option on 685/706 rows (306 boundary = reference top-1 < 0.9); max |dprob| 0.41806; rows over 0.01: 286.",
+            "output_match = shared element rule |out - ref| <= max(1e-5, 1e-3 * |ref|) against the Mac ai-edge-litert CPU check of the same graph bytes and the same host table on the same ids: 2388 violating of 2555 compared option logits, max |d| 2.629793167114258.",
             "09-30 09:28:10.283 21240 21265 I litert  : [compiler_plugin.cc:741] Partitioned subgraph<0>, selected 1704 ops, from a total of 1704 ops. resulted in 1 partitions.",
             "09-30 09:28:50.881 21240 21265 I litert  : [compiled_model.cc:1250] 1 compiler plugins were applied successfully: Qualcomm compiler plugin (ver 0.1.0)",
             "09-30 09:28:50.999 21240 21265 I tflite  : Replacing 1 out of 1 node(s) with delegate (DispatchDelegate) node, yielding 1 partitions for subgraph 0 (main)."

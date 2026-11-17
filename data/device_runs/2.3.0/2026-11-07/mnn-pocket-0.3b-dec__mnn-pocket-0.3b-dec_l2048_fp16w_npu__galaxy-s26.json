@@ -1,0 +1,57 @@
+{
+  "artifact": "mnn-pocket-0.3b-dec_L2048_fp16w_npu.tflite",
+  "artifact_sha256": "8fb1fc76153c92a097f5d5499cd96cf7bc6b490afa48fcc8d30415c24ee72999",
+  "device": "galaxy-s26",
+  "model_id": "mnn-pocket-0.3b-dec__mnn-pocket-0.3b-dec_l2048_fp16w_npu",
+  "notes": "mnn-pocket-0.3b-dec_L2048_fp16w_npu.tflite of litert-community/MNN-Pocket-0.3B-Dec-LiteRT (taobao-mnn/MNN-Pocket-0.3B-Dec, Apache-2.0; the source model's LoRA folded in, linear-layer weights stored as float16): the Qualcomm NPU form, compiled on the phone (SiLU written with EXP), requests of up to 2,048 tokens; takes the token embeddings [1,2048,896], the rotary tables and the attention mask, returns the hidden states after the final norm (the host reads the answers). Hub main 92110e85 (the tree at that commit): LFS sha256 and size = artifact_sha256 (488,906,048 B), the bytes every record's run read back. Phone rows: the C++ runner on LiteRT 2.3.0's C API (one process per run; the host's inputs computed on the Mac), the run records with their run directories (input list, read-back, setup, clock samples). The line (pre-registered): against the reference (the source model's inference.py, float32 CPU, one thread), the winner equal on every question whose reference top two are more than 0.02 apart, max |Δp| <= 0.02, mean |Δp| <= 0.002, the control above 0.02 where the file holds it, the hidden state finite; on a phone the winner also equals the same file's on the Mac CPU, on an NPU one partition holds every op; a runtime passes on a device only when it passes on every file it ran (metrics arm_files_run / arm_files_passed). output_match stays null: the line is against that reference, not the shared element tolerance against a CPU run of the same bytes. The compile on the phone was stopped by the memory watch; L2048 runs on this NPU from its SM8850 file.",
+  "quantization": "fp16 linear-layer weights",
+  "results": [
+    {
+      "accelerator": "npu_qnn",
+      "context_length": null,
+      "date": "2026-11-07",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 2600,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-mnnpocketdec-capi-runner",
+        "os_build": "Android 16 (BP4A.251205.006.S942QOPS1AZH9)",
+        "runtime": "litert",
+        "runtime_version": "2.3.0",
+        "soc": "Qualcomm SM8850",
+        "vendor_sdk": "QAIRT 2.50.0.260828221209"
+      },
+      "error": "2026-11-07 22:42:30 MemAvailable 1417132 kB < 1500000 kB -> kill -9 runner pid 32300",
+      "evidence": [
+        "(tag s26_j_L2048, run r4): run OOM_GUARD rc 137, start 2026-11-07 22:40:48, the 6 requests, none answered",
+        "Push mnn_pocket_dec_ns4_in_6-27_post_6-27_final-xsilu_L2048_w16.tflite rc=0 bytes 488906048/488906048 sha256 phone=8fb1fc76153c92a097f5d5499cd96cf7bc6b490afa48fcc8d30415c24ee72999 = mac = the Hub LFS sha256",
+        "Runner 7e7539e5bd0c73ed… and libs: 12/12 OK",
+        "Device: SM-S942Q 16 BP4A.251205.006.S942QOPS1AZH9",
+        "11-07 22:40:48.921 32300 32300 I litert  : [compiler_plugin.cc:742] Partitioned subgraph<0>, selected 2600 ops, from a total of 2600 ops. resulted in 1 partitions.",
+        "2026-11-07 22:42:30 MemAvailable 1417132 kB < 1500000 kB -> kill -9 runner pid 32300",
+        "Run memory: VmHWM_max_kB 6814564 VmSwap_max_kB 69632 MemAvailable_min_kB 1417132 kgsl_page_alloc_max_B 214724608; the compile never finished and no question was answered (the record's verdict fields over those unanswered questions are not entered)"
+      ],
+      "failure_class": "memory_guard_stop_during_compile",
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "compile_s_at_stop": 101.079,
+        "mem_available_kb_at_stop": 1417132.0,
+        "memory_guard_kb": 1500000.0,
+        "vmhwm_max_kb": 6814564.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "signature": "the line: the L2048 set against the source model's reference; the C-API runner build 7e7539e5 (LiteRT 2.3.0), Qualcomm HTP, the graph compiled on the phone by the compiler plugin, HTP performance mode Burst",
+      "total_ops": 2600,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,0 +1,102 @@
+{
+  "artifact": "LFM3-Omni-2B_frame_embed_f32.tflite",
+  "artifact_sha256": "71b68529124ef770a495554ea6928f42a66c8c0f2756df2452b15b22bdbc707d",
+  "device": "pixel-8a",
+  "model_id": "lfm3-omni-2b__lfm3-omni-2b_frame_embed_f32",
+  "notes": "LFM3-Omni-2B_frame_embed_f32.tflite of litert-community/LFM3-Omni-2B-LiteRT (the file omni_frame_embed_f32.tflite, the same bytes): the frame embedding (12 audio codes -> the LM's next input row [1, 1, 2048], the 12 codebook rows summed). Part of the speech-out path, run by the Python runner the repo ships (examples/run_omni.py); the phones ran the graph alone with the fixtures, the end-to-end speech loop on a phone waits on an Android runner. LANDED: speech/LFM3-Omni-2B_frame_embed_f32.tflite is in the Hub tree of litert-community/LFM3-Omni-2B-LiteRT from upload commit 6450f0619f63d9c5f8eb3e628a2ab477b53d78b9 (2026-10-28T15:04:52Z); the anonymous tree read at 2026-11-01T12:09:49+09:00 (main a287b6e6) gives LFS oid 71b68529124ef770a495554ea6928f42a66c8c0f2756df2452b15b22bdbc707d and 198,281,972 B = artifact_sha256. The speech loop on a phone has since run in the photo voice chat sample.",
+  "quantization": "float32",
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-10-28",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 2,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-lfm3omni-r17-runner",
+        "os_build": "Android 16 (build CP1A.260505.005)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "harness: runner 102a0f0a815df1a2… 3247448 B and libs: 12/12 OK; one process per run; one call = write the inputs + run + read the outputs back (latency_p50_ms = that median; run_ms = the run alone)",
+        "Replacing [2, 7, 'TfLiteXNNPackDelegate', 2], ready 'check run, not waited for clean (thermal 1, cap none, gpu_cooling 0); rested 8s since 19:22:00', memory 'VmHWM_max_kB  VmSwap_max_kB  MemAvailable_min_kB 4499368 mali_total_gpu_mem_max_B 248700928'",
+        "output_match = the part line: max |d| <= 1e-5 against the same graph on the Mac CPU (ai-edge-litert 2.3.0, XNNPACK)"
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": 0.013,
+      "loads": true,
+      "max_abs_diff": 0.0,
+      "max_rel_diff": null,
+      "metrics": {
+        "call_ms_max": 0.015,
+        "call_ms_median": 0.013,
+        "call_ms_min": 0.008,
+        "compile_ms": 135.3,
+        "max_abs_vs_mac_cpu": 0.0,
+        "parity_fixtures": 8.0,
+        "run_ms_median": 0.012
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "C-API runner, CPU (XNNPACK, the runner's default threads), 30 timed calls after the parity pass (run P_cpu_femb)",
+      "total_ops": 7,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-10-28",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 7,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-lfm3omni-r17-runner",
+        "os_build": "Android 16 (build CP1A.260505.005)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "harness: runner 102a0f0a815df1a2… 3247448 B and libs: 12/12 OK; one process per run; one call = write the inputs + run + read the outputs back (latency_p50_ms = that median; run_ms = the run alone)",
+        "Replacing [7, 7, 'LITERT_CL', 1], ready 'check run, not waited for clean (thermal 1, cap none, gpu_cooling 0); rested 6s since 19:23:08', memory 'VmHWM_max_kB 882576 VmSwap_max_kB 0 MemAvailable_min_kB 3905256 mali_total_gpu_mem_max_B 248700928'",
+        "output_match = the part line: max |d| <= 1e-5 against the same graph on the Mac CPU (ai-edge-litert 2.3.0, XNNPACK)"
+      ],
+      "failure_class": null,
+      "full_delegation": true,
+      "latency_p50_ms": 1.454,
+      "loads": true,
+      "max_abs_diff": 0.0,
+      "max_rel_diff": null,
+      "metrics": {
+        "call_ms_max": 2.185,
+        "call_ms_median": 1.454,
+        "call_ms_min": 1.014,
+        "compile_ms": 1039.9,
+        "max_abs_vs_mac_cpu": 0.0,
+        "parity_fixtures": 8.0,
+        "run_ms_median": 0.211,
+        "vmhwm_max_kb": 882576.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "C-API runner, GPU accelerator at fp32 precision (--gpu-precision fp32), 30 timed calls after the parity pass (run P_g32_femb)",
+      "total_ops": 7,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

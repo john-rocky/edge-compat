@@ -43,10 +43,10 @@ Model-level on-device results — measured behavior of this exact artifact on th
 
 ## Pitfalls
 
-- Exported on litert-torch main 1b96312 specifically to pick up the DUS-folder fix (1ed2caaaf, post-0.9.2) and the INT64-free ShortConv lowering; 0.9.1-lineage exports leave INT64 ADD/CAST/SUM + GATHER_ND in Lfm2ShortConv_conv and stall GPU delegation at 536/579 ops (DEVICE_GATE 2026-08-05; ship_lfm25_gpu_variant_20260812/RESULTS.md §1).
-- litert-torch main writes the ExecutorMetadata section natively — release 0.9.3 does not; litert-lm >=0.15 requires it for the hybrid conv/attention state buffers (regate_softmax_20260811/RESULTS.md 手順 4).
-- iOS Metal still fails engine creation on this file (ml_drift Metal codegen: implicit half4*float4 conversion, metal/common.mm) while the SAME file fully delegates and passes on Mac WebGPU at 4780/271.6 tok/s — runtime-side wall, re-test on each litert-lm release (DEVICE_GATE 2026-08-05).
-- odml.softmax composites are stripped at export in this build (converter 0.3.0-era did not lower them; litert-converter >=0.3.1 lowers natively — see the lfm25-12b-wi8-composite variant that verifies this) (DEVICE_GATE 2026-08-05; regate_softmax_20260811/RESULTS.md).
+- Exported on litert-torch main 1b96312 specifically to pick up the DUS-folder fix (1ed2caaaf, post-0.9.2) and the INT64-free ShortConv lowering; 0.9.1-lineage exports leave INT64 ADD/CAST/SUM + GATHER_ND in Lfm2ShortConv_conv and stall GPU delegation at 536/579 ops (DEVICE_GATE 2026-08-05; §1).
+- litert-torch main writes the ExecutorMetadata section natively — release 0.9.3 does not; litert-lm >=0.15 requires it for the hybrid conv/attention state buffers.
+- iOS Metal still fails engine creation on this file (ml_drift Metal codegen: implicit half4*float4 conversion) while the SAME file fully delegates and passes on Mac WebGPU at 4780/271.6 tok/s — runtime-side wall, re-test on each litert-lm release (DEVICE_GATE 2026-08-05).
+- odml.softmax composites are stripped at export in this build (converter 0.3.0-era did not lower them; litert-converter >=0.3.1 lowers natively — see the lfm25-12b-wi8-composite variant that verifies this) (DEVICE_GATE 2026-08-05).
 
 ---
 

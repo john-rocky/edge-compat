@@ -13,7 +13,7 @@ export interface TensorSpec {
 /**
  * One backend row of the env-labeled sweep table shown next to the live run.
  * Values come verbatim from the card's `browser.backends` records (Phase 6);
- * `status` uses the index vocabulary (DECISIONS #62):
+ * `status` uses the index vocabulary:
  * load_failed | run_failed | output_mismatch | fallback | pass.
  */
 export interface SweepDisplayRecord {

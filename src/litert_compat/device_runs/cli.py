@@ -53,7 +53,7 @@ from litert_compat.matrix.canonical import load_json
 
 device_run_app = typer.Typer(
     no_args_is_help=True,
-    help="Device-run results (Phase 13): NPU and LiteRT-LM lanes.",
+    help="Device-run results (Phase 13): NPU and LiteRT-LM records.",
 )
 
 OutOpt = Annotated[
@@ -71,7 +71,7 @@ ArtifactShaOpt = Annotated[
         help="sha256 of the exact bytes measured, VERBATIM from a primary source (the "
         "ship's upload log, ship_sha256.txt, the curated manifest, or the hosting API read "
         "on the ship day) — never hand-computed from a file that may not be the one the log "
-        "ran. Omit when no source states it (DECISIONS #167).",
+        "ran. Omit when no source states it.",
     ),
 ]
 
@@ -79,7 +79,7 @@ DateOpt = Annotated[
     str,
     typer.Option(
         "--date",
-        help="Measurement date (YYYY-MM-DD). The source does not stamp one; the owner "
+        help="Measurement date (YYYY-MM-DD). The source does not stamp one; the caller "
         "supplies it — file mtimes are never used.",
     ),
 ]
@@ -109,8 +109,8 @@ def validate(
             exists=True,
             file_okay=False,
             help="Also check every card's device block against the snapshots under PATH: "
-            "each measured cell present, from its newest snapshot, verbatim (DECISIONS "
-            "#165). PATH must be a snapshot root.",
+            "each measured cell present, from its newest snapshot, verbatim. "
+            "PATH must be a snapshot root.",
         ),
     ] = None,
 ) -> None:
@@ -180,7 +180,7 @@ def ingest_gpu_audit(
         typer.Option(
             "--runtime-version",
             help="litert-lm version behind this log. Not stamped in the log; recover it "
-            "(git history / lockfiles) rather than guess (owner decision #2).",
+            "(git history / lockfiles) rather than guess.",
         ),
     ],
     date: DateOpt,
@@ -196,22 +196,22 @@ def ingest_gpu_audit(
         str | None,
         typer.Option(
             "--quantization",
-            help="Quant variant, if the owner states it. Never inferred from file names.",
+            help="Quant variant, if the source states it. Never inferred from file names.",
         ),
     ] = None,
     speeds_contaminated: Annotated[
         bool,
         typer.Option(
             "--speeds-contaminated",
-            help="This log belongs to a batch whose speed figures the owner retracted "
+            help="This log belongs to a batch whose speed figures were retracted "
             "(2026-07-22 contamination): the PASS/FAIL verdict is ingested, every "
-            "throughput/latency figure is withheld (owner decision #5).",
+            "throughput/latency figure is withheld.",
         ),
     ] = False,
     artifact_sha256: ArtifactShaOpt = None,
     out: OutOpt = Path("data/device_runs"),
 ) -> None:
-    """Ingest one gpu_audit log into a device-run record (LiteRT-LM Mac GPU lane).
+    """Ingest one gpu_audit log into a device-run record (LiteRT-LM on the Mac GPU).
 
     The verdict comes from the log body only: the CLI's exit code is untrusted
     (it is 0 even when engine creation fails) and summary.txt rows are not 1:1
@@ -253,8 +253,8 @@ def ingest_gpu_audit(
         ops = ", ".join(sorted(set(parsed.unsupported_ops)))
         typer.echo(
             f"note: log names unsupported op(s): {ops} — log-backed op-level matrix "
-            "evidence, held back until the litert-lm version/date recovery lands "
-            "(owner decision #2). This tool writes no matrix rows.",
+            "evidence, held back until the litert-lm version/date recovery lands. "
+            "This tool writes no matrix rows.",
             err=True,
         )
 
@@ -291,7 +291,7 @@ def ingest_console_log(
         typer.Option(
             "--delegate-tag",
             help="Delegate whose 'Replacing N out of M' lines count as delegated. "
-            "LITERT_CL for the Android OpenCL lane; a partially delegated graph also "
+            "LITERT_CL for Android OpenCL; a partially delegated graph also "
             "prints TfLiteXNNPackDelegate lines for the CPU remainder, and counting "
             "both would invent residency.",
         ),
@@ -305,7 +305,7 @@ def ingest_console_log(
     machine_label: Annotated[str | None, typer.Option("--machine-label")] = None,
     quantization: Annotated[
         str | None,
-        typer.Option("--quantization", help="Quant variant, if the owner states it."),
+        typer.Option("--quantization", help="Quant variant, if the source states it."),
     ] = None,
     prefill_tokens: Annotated[
         int | None,
@@ -332,7 +332,7 @@ def ingest_console_log(
 ) -> None:
     """Ingest a `litert_lm_main` / `litert-lm benchmark` console log.
 
-    The Android lane runs the runtime binary directly, so unlike gpu_gate_mac.sh
+    On Android the runtime binary runs directly, so unlike gpu_gate_mac.sh
     there is no wrapper header naming the artifact or the backend; both are
     caller-supplied here.
     """
@@ -381,7 +381,7 @@ def ingest_console_log(
         ops = ", ".join(sorted(set(parsed.unsupported_ops)))
         typer.echo(
             f"note: log names unsupported op(s): {ops} — log-backed op-level matrix "
-            "evidence. This tool writes no matrix rows; stage them for owner review.",
+            "evidence. This tool writes no matrix rows; stage them for review.",
             err=True,
         )
 
@@ -410,9 +410,9 @@ def ingest_devicemark(
     machine_label: Annotated[str | None, typer.Option("--machine-label")] = None,
     out: OutOpt = Path("data/device_runs"),
 ) -> None:
-    """Ingest devicemark leaderboard rows (LiteRT-LM lane; decode throughput).
+    """Ingest devicemark leaderboard rows (LiteRT-LM; decode throughput).
 
-    Only `*__litertlm` rows are this lane — `coreai` rows are skipped with a
+    Only `*__litertlm` rows are ingested — `coreai` rows are skipped with a
     note (they belong in a card's cross_runtime list). Estimated memory
     (mem_measured: false) is carried as metrics.peak_mem_est_mb, never as a
     measured peak_mem_mb.
@@ -478,7 +478,7 @@ def ingest_npubench(
             "--repo-for",
             help="<file>=<repo> for journals whose rows carry no repo/slug (the Pixel 8a "
             "run_p8a.py shape); repeatable; taken from the sweep's own README. A row that "
-            "names a different repo for that file is refused (DECISIONS #167(d)).",
+            "names a different repo for that file is refused.",
         ),
     ] = None,
     out: OutOpt = Path("data/device_runs"),
@@ -559,7 +559,7 @@ def ingest_compat_check(
             "--model-id-for",
             help="<repo tail>/<file>=<model id> (or <file>=<id>): file this result under the "
             "given id instead of the mechanical one — for continuity when a report carries "
-            "only one of a repo's artifacts (DECISIONS #168); repeatable.",
+            "only one of a repo's artifacts; repeatable.",
         ),
     ] = None,
     out: OutOpt = Path("data/device_runs"),
@@ -567,9 +567,9 @@ def ingest_compat_check(
     """Ingest a compat_check report (litert-lm version x artifact loadability).
 
     Refuse-until-sampled: only the `ok` status on the `llm` lane has a staged
-    real sample; other branches are refused by name until the owner supplies
-    one (owner decision #3). This lane stays a device-run input — the
-    runtime-version axis is NOT absorbed into the matrix (spec §F.2).
+    real sample; other branches are refused by name until someone supplies
+    one. This source stays a device-run input — the
+    runtime-version axis is NOT absorbed into the matrix.
     """
     try:
         doc = load_json(report)
@@ -663,7 +663,7 @@ def ingest_yardstick(
     machine_label: Annotated[str | None, typer.Option("--machine-label")] = None,
     quantization: Annotated[
         str | None,
-        typer.Option("--quantization", help="Quant variant, if the owner states it."),
+        typer.Option("--quantization", help="Quant variant, if the source states it."),
     ] = None,
     artifact_sha256: ArtifactShaOpt = None,
     out: OutOpt = Path("data/device_runs"),
@@ -815,10 +815,10 @@ def ingest_npubench_parity(
     machine_label: Annotated[str | None, typer.Option("--machine-label")] = None,
     out: OutOpt = Path("data/device_runs"),
 ) -> None:
-    """Ingest an npubench `#parity` gate report (keyed JSON, on-device parity).
+    """Ingest an npubench `#parity` check report (keyed JSON, on-device parity).
 
     The report names no files, signatures, or timestamps: the caller maps them
-    from the lane's own scripts and logcat. Parity figures land in metrics;
+    from the run's own scripts and logcat. Parity figures land in metrics;
     output_match stays null (the report's own criterion, not the shared
     tolerance policy).
     """
@@ -880,7 +880,7 @@ def ingest_pi5_llm(
             "--model-id-for",
             help="<repo tail>/<file>=<model id> (or <file>=<id>) for bundles whose catalog id is the "
             "cards' hand-chosen one rather than the mechanical repo-derived id; repeatable. Joins "
-            "across lanes stay a rendering concern — this only names the id the row is filed under.",
+            "across sources stay a rendering concern — this only names the id the row is filed under.",
         ),
     ] = None,
     out: OutOpt = Path("data/device_runs"),
@@ -889,7 +889,7 @@ def ingest_pi5_llm(
 
     The runtime version is read from each row's own `versions["litert-lm"]`, the
     date from its `ts`; throughput is the row's median over three invocations with
-    the spread kept in `metrics`; rows whose own generation gate did not pass, or
+    the spread kept in `metrics`; rows whose own generation check did not pass, or
     whose invocations exited non-zero / throttled, are skipped, never guessed.
     """
     try:

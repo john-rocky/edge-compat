@@ -51,18 +51,18 @@ through `quiet_wait.py`, one process at a time.
 ## Roles
 
 Suite v1 asks chat questions. `roles.py` names the repos whose model is not a
-chat model (classifier, ocr, translate, transform, decision) or runs on an NPU
-only (npu-only), quoting each model card; every `bundles.json` row carries its
-repo's `role` (else `chat`). Those bundles still run every check; `SUMMARY.md`
+chat model (classifier, ocr, translate, transform, decision, gui-agent) or runs
+on an NPU only (npu-only), quoting each model card; every `bundles.json` row
+carries its repo's `role` (else `chat`). Those bundles still run every check; `SUMMARY.md`
 counts them apart (chat-only totals in the header, `(<role>)` after the bundle
 id, FAIL and NA subtotals by role). Records are not changed.
 
 ## A new wheel
 
 ```sh
-/opt/homebrew/opt/python@3.14/bin/python3.14 -m venv ~/venvs/lt<ver>run && ~/venvs/lt<ver>run/bin/pip install litert-lm==<ver>
+/opt/homebrew/opt/python@3.14/bin/python3.14 -m venv <venv> && <venv>/bin/pip install litert-lm==<ver>
 uv run python tools/regression/list_bundles.py --check data/regression/bundles.json   # exit 1: regenerate the list first
-uv run python tools/regression/run_regression.py --wheel <ver> --python ~/venvs/lt<ver>run/bin/python \
+uv run python tools/regression/run_regression.py --wheel <ver> --python <venv>/bin/python \
     --bundles data/regression/bundles.json --out data/regression/<ver>/$(date +%F) --work <scratch dir> \
     --retry-fails [--order-first '<regex>']
 uv run python tools/regression/summarize.py data/regression/<ver>/<date> --prev data/regression/<previous wheel>/<its latest date>
@@ -83,7 +83,7 @@ uv run python tools/regression/summarize.py data/regression/<ver>/<date> --prev 
   moves on. Exit codes: 0 done; 3 = 10 bundles in a row created no engine;
   4 = the free disk would fall under the file's size + 30 GB; 5 = 5 bundles
   in a row failed to download; 6 = quiet_wait gave up on 3 checks. Without
-  `--only` the code is also written to `<work>/logs/full_run.done`.
+  `--only` the code is also written to `<workdir>/logs/full_run.done`.
   `SUMMARY.md` is regenerated after every bundle.
 
 `--check` re-reads the Hub for every listed row and exits 1 when a row's
@@ -113,7 +113,7 @@ When the judge changes, re-judge a recorded run instead of running it again
 
 ```sh
 uv run python tools/regression/run_regression.py --rejudge data/regression/<ver>/<date> \
-    --raw <work>/run [--previous-judge <label of the judge that wrote it>]
+    --raw <workdir>/run [--previous-judge <label of the judge that wrote it>]
 ```
 
 Every record is judged again from the probe JSON it was judged from (paired
@@ -141,12 +141,12 @@ verdicts of the same judge, and `notes` add `, m earlier attempts`.
 - `data/regression/<wheel>/<YYYY-MM-DD>/<bundle_id>.json` — one result per
   bundle (`schemas/regression_result.schema.json`), and the generated
   `SUMMARY.md` of that directory (never hand-edited).
-- Logs stay in the work directory: `<work>/logs/<bundle_id>/<check_id>.log`,
+- Logs stay in the work directory: `<workdir>/logs/<bundle_id>/<check_id>.log`,
   and so do the probe JSONs `--rejudge` reads:
-  `<work>/run/<bundle_id>/<check_id>.json` (the first attempt of a re-run
+  `<workdir>/run/<bundle_id>/<check_id>.json` (the first attempt of a re-run
   check: `<check_id>.a1.json`).
 
-Downloads (`<work>/dl/`) and engine caches (`<work>/cache/<bundle_id>/`) are
+Downloads (`<workdir>/dl/`) and engine caches (`<workdir>/cache/<bundle_id>/`) are
 deleted after each bundle unless `--keep`. HF cache blobs and `--extra-local`
 copies are read, never written, moved or deleted.
 

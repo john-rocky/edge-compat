@@ -1,0 +1,106 @@
+{
+  "artifact": "Spark-X2.6-1.7B_int8.litertlm",
+  "artifact_sha256": "e81b8821826bbb67aae7d6666b69ca4e5869513b9c490ef9bebece6e6d29a863",
+  "device": "mac-studio-m4-max",
+  "model_id": "spark-x2.6-1.7b-int8",
+  "notes": "Spark-X2.6-1.7B_int8.litertlm of litert-community/Spark-X2.6-1.7B: the INT8 file of the 1.7B, the faster 1.7B file on the Mac GPU. XHToken/Spark-X2.6-1.7B (Apache-2.0) converted to LiteRT-LM; the bundle carries templates/spark26_think.jinja (the vendor template's plain-chat part, thinking on by default, reasoning_effort high or low through extra_context), a `thought` channel, 15 stop entries and the repo's tokenizer.json byte for byte. Published 2026-10-31 (Hub main 9b9bd0f4).",
+  "quantization": "dynamic INT8 (per-channel INT8 weights on every linear and the embedding, FP32 activations declared): litert-torch 0.9.3 export (dynamic_wi8_afp32), GPU graph rewrite (odml.cache_update / odml.runtime_bmm, weights byte-equal), prefer_activation_type fp32, 11 prefill signatures, KV cache 4,096",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 4096,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Spark-X2.6-1.7B `Spark-X2.6-1.7B_int8.litertlm` at main 9b9bd0f4 (published 2026-10-31): LFS sha256 e81b8821826bbb67aae7d6666b69ca4e5869513b9c490ef9bebece6e6d29a863, 1835670688 B (anonymous Hub API tree read 2026-10-31 23:55 JST); the same digest as",
+        "runtime: litert-lm 0.19.0 Python API from PyPI, backend gpu, greedy, thinking on (the bundle's template templates/spark26_think.jinja (the vendor template's plain-chat part, thinking on by default, reasoning_effort high or low through extra_context)), one process per check question",
+        "8 check questions (max_output_tokens 2,048, every thought closed, the answer right): 8 / 8, unfinished 0, verdict PASS",
+        "3-turn conversation (plant a fact, 23 + 19, recall), two conversations per process, both with the runtime's default channel filtering (the gate's arms: the argument not passed, then filter_channel_content_from_kv_cache=True), 1 fresh process(es): 2 / 2 conversations pass",
+        "task line, fixed before any bundle number: GSM8K test first 100, greedy, thinking on, max_output_tokens 3,584 at KV 4,096, the bundle's correct count >= Transformers bf16's - 5; this file 80 / 100 (unfinished 14) against bf16 84, line 79 -> PASS"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "gsm8k_bf16_right": 84.0,
+        "gsm8k_line": 79.0,
+        "gsm8k_questions": 100.0,
+        "gsm8k_right": 80.0,
+        "gsm8k_unfinished": 14.0,
+        "multiturn_arm_runs": 2.0,
+        "multiturn_arm_runs_pass": 2.0,
+        "questions": 8.0,
+        "right": 8.0,
+        "unfinished": 0.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "the 8 check questions (2,048-token cap) and the 3-turn conversation, greedy, thinking on; GSM8K test first 100 at 3,584 output tokens",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": 2048,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": 151.46,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Spark-X2.6-1.7B `Spark-X2.6-1.7B_int8.litertlm` at main 9b9bd0f4 (published 2026-10-31): LFS sha256 e81b8821826bbb67aae7d6666b69ca4e5869513b9c490ef9bebece6e6d29a863, 1835670688 B (anonymous Hub API tree read 2026-10-31 23:55 JST); the same digest as",
+        "runtime: litert-lm 0.19.0 CLI from PyPI, `litert-lm benchmark <file> -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --backend gpu --cache no` (one warm-up then the mean of 3 runs per process), the `GPU WebGPU` accelerator",
+        "cell = the mean of two processes in one Mac measurement window (window R 12:13-12:17, the A B B A pair against the int4-mlp file)",
+        "init_time_s_summed_*: the CLI's `Init time`, which counts engine creation twice (LiteRT-LM #4057)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens": 256.0,
+        "decode_tokens_per_s_p1": 152.01,
+        "decode_tokens_per_s_p2": 150.91,
+        "init_time_s_summed_p1": 2.9548,
+        "init_time_s_summed_p2": 2.939,
+        "prefill_tokens": 1024.0,
+        "processes": 2.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": 3012.9,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": 346.5
+    }
+  ],
+  "schema_version": "1.0"
+}

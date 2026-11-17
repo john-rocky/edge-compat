@@ -1,0 +1,101 @@
+{
+  "artifact": "LFM3-1.7B_mixed_int4_ekv2048.litertlm",
+  "artifact_sha256": "0400d8ffdb00e4bbe1209120e2c7baf05322a8c900839b0a94cc28f599011196",
+  "device": "mac-studio-m4-max",
+  "model_id": "lfm3-1.7b-mixed-int4-ekv2048",
+  "notes": "litert-community/LFM3-1.7B-LiteRT: LFM3-1.7B_mixed_int4_ekv2048.litertlm, a LiteRT-LM generic_model conversion of LiquidAI/LFM3-1.7B at revision 40ebe0aa (LFM Open License v1.0): a hybrid decoder (13 short-convolution, 6 global-attention and 5 sliding-window layers), text in, text out; it thinks in a <think> block by default (enable_thinking switches it off); tool calls come back as XML text (no LiteRT-LM parser reads them). One conversation per Engine (a new conversation on a used Engine continues from the last one's convolution state). Mac rows: the published bytes themselves, run r7 (2026-10-29 00:44–00:46 JST, litert-lm 0.18.1 from PyPI, outside a measurement window = no speed figure; the work took no Mac timing). The card's command blocks ran on the mixed int4 2,048 file on the Mac GPU (run r11 and the upload's check, 'The capital of Japan is Tokyo.') = no row. Landed 2026-10-29: litert-community/LFM3-1.7B-LiteRT is public, upload commit 9bbda264c6 (2026-10-29T04:51:50+00:00), main 9bbda264c6 at the read; the tree's LFS oid and size of LFM3-1.7B_mixed_int4_ekv2048.litertlm = artifact_sha256 and 1441620928 B (anonymous, read 2026-10-29T14:06:54+09:00).",
+  "quantization": "MLP gate and up projections (w1 / w3) int4 blockwise-32 (min-max, block scales floored at 2^-14); every other fully connected weight, the tied lm_head and the embedding table int8 channelwise (dynamic_wi8_afp32: the CPU quantizes activations to int8 at run time); no activation type declared (the GPU runs float16 activations by default); sampler TOP_P k 50 / p 1 / temperature 0.1; KV cache 2,048 tokens",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": 2048,
+      "date": "2026-10-29",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "bytes: LFM3-1.7B_mixed_int4_ekv2048.litertlm = q1bc2s.litertlm, 1441620928 B, sha256 0400d8ffdb00e4bbe1209120e2c7baf05322a8c900839b0a94cc28f599011196 (new_sha256; the upload stage linked this file)",
+        "runtime: litert-lm 0.18.1 (PyPI) Python API (tools/r7_gate8_sampler.py); the CPU = XNNPACK (TopPSampler, no UNIMPLEMENTED line)",
+        "output_match = the line 3a question part (fixed before any converted number): every verdict (scripts/verify_quality.py's regex) equals HF bfloat16's (8 / 8 right)",
+        "Right 8 / 8, verdicts = HF bfloat16 8 / 8, misses []; run r7 2026-10-29 00:44–00:46 JST, outside a measurement window (no speed figure)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "questions": 8.0,
+        "right": 8.0,
+        "same_text_as_greedy": 6.0,
+        "think_tag_in_answer": 1.0,
+        "thought_channel_opened": 0.0,
+        "verdicts_equal_hf_bf16": 8.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "the 8 check questions (scripts/verify_quality.py), thinking off, the file's own sampler (no session sampler: TOP_P k 50 / p 1 / temperature 0.1), max 512 tokens, one Engine per question; verdicts against HF bfloat16's",
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": 2048,
+      "date": "2026-10-29",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.18.1",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "bytes: LFM3-1.7B_mixed_int4_ekv2048.litertlm = q1bc2s.litertlm, 1441620928 B, sha256 0400d8ffdb00e4bbe1209120e2c7baf05322a8c900839b0a94cc28f599011196 (new_sha256; the upload stage linked this file)",
+        "runtime: litert-lm 0.18.1 (PyPI) Python API (tools/r7_gate8_sampler.py); the GPU = WebGPU on Metal (the wheel registers 'GPU WebGPU'; the static GPU sampler drew the tokens: 'Sampler will handle decode input tensors.')",
+        "output_match = the line 3a question part (fixed before any converted number): every verdict (scripts/verify_quality.py's regex) equals HF bfloat16's (8 / 8 right)",
+        "Right 8 / 8, verdicts = HF bfloat16 8 / 8, misses []; run r7 2026-10-29 00:44–00:46 JST, outside a measurement window (no speed figure)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "questions": 8.0,
+        "right": 8.0,
+        "same_text_as_greedy": 6.0,
+        "think_tag_in_answer": 1.0,
+        "thought_channel_opened": 1.0,
+        "verdicts_equal_hf_bf16": 8.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "the 8 check questions (scripts/verify_quality.py), thinking off, the file's own sampler (no session sampler: TOP_P k 50 / p 1 / temperature 0.1), max 512 tokens, one Engine per question; verdicts against HF bfloat16's",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

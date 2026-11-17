@@ -3,7 +3,7 @@
   "artifact_sha256": "e4eedb0098a7727196184960c3c5fd47972921c8ded3981832c217f054357da0",
   "device": "galaxy-s26",
   "model_id": "open-decision-deberta-v3-large__deberta_v3_large_decision_s256_npu_wfp16",
-  "notes": "Open Decision DeBERTa-v3-large LiteRT (litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT; deberta_v3_large_decision_s256_npu_wfp16.tflite published at 26a2b642) measured by the typed-decisions lane (rounds 11-21, 2026-10-04 / 2026-10-05): the hfmodels-android SDK device test (family deberta_decision, a request's questions packed into one forward as the author's decide() does) and, where named, the lane's native runner. `signature` names the precision, the harness and (when two runs of one form share a date) the run (DECISIONS #186 / #188). artifact_sha256 = the dev descriptor's sha256 for the graph, asserted equal to the published file's. Lane record: <notes> (§知見 2); generator: <work>/r24/litert_compat_records.py.",
+  "notes": "Open Decision DeBERTa-v3-large LiteRT (litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT; deberta_v3_large_decision_s256_npu_wfp16.tflite published at 26a2b642) measured (2026-10-04 / 2026-10-05): the hfmodels-android SDK device test (family deberta_decision, a request's questions packed into one forward as the author's decide() does) and, where named, the native runner. `signature` names the precision, the harness and (when two runs of one form share a date) the run. artifact_sha256 = the dev descriptor's sha256 for the graph, asserted equal to the published file's.",
   "quantization": null,
   "results": [
     {
@@ -23,10 +23,9 @@
       },
       "error": null,
       "evidence": [
-        "native runner leg od_d_npu of round 16 on the Galaxy S26 (LiteRT 2.2.0 C API, one process per graph; timed = input write + run + output readback, the median of the timed rounds after warm-up); graph sha256 e4eedb0098a7727196184960c3c5fd47972921c8ded3981832c217f054357da0 = the published deberta_v3_large_decision_s256_npu_wfp16.tflite (litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT@26a2b642; r21-report.md §F: the Hub at 26a2b642 lists it, LFS sha256 e4eedb00, 712,671,952 B).",
+        "native runner run od_d_npu of run 16 on the Galaxy S26 (LiteRT 2.2.0 C API, one process per graph; timed = input write + run + output readback, the median of the timed rounds after warm-up); graph sha256 e4eedb0098a7727196184960c3c5fd47972921c8ded3981832c217f054357da0 = the published deberta_v3_large_decision_s256_npu_wfp16.tflite (litert-community/Open-Decision-DeBERTa-v3-Large-LiteRT@26a2b642; r21-report.md §F: the Hub at 26a2b642 lists it, LFS sha256 e4eedb00, 712,671,952 B).",
         "delegate: 1/1 DispatchDelegate, fully_accelerated true; compile_ms 200368.3.",
-        "the lane's bar on the 143 SDK-gate requests (argmax 100 %, max |dp| <= 0.01): PASS; the runner keeps the outputs, but no element-rule comparison against a CPU run of the same bytes was made (adapter rule, #179(1)).",
-        "source: K/r16/results/device_summary.json (tag od_d_npu), K/r16/device/od_d_npu/; <work>/r16-report.md; generator <work>/r24/litert_compat_records.py."
+        "the bar on the 143 SDK-gate requests (argmax 100 %, max |dp| <= 0.01): PASS; the runner keeps the outputs, but no element-rule comparison against a CPU run of the same bytes was made (adapter rule)."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -66,7 +65,7 @@
       "prefill_tokens_per_s": null,
       "provenance": "measured",
       "runs": true,
-      "signature": "QualcommOptions htpPerformanceMode=BURST, JIT (first compile, empty cache); native runner decide_runner (LiteRT 2.2.0 C API), round 16",
+      "signature": "QualcommOptions htpPerformanceMode=BURST, JIT (first compile, empty cache); native runner decide_runner (LiteRT 2.2.0 C API), run 16",
       "total_ops": 1,
       "ttft_ms": null
     }

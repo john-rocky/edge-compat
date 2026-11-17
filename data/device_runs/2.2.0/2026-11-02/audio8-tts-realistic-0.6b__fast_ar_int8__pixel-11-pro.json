@@ -1,0 +1,65 @@
+{
+  "artifact": "fast_ar_int8.tflite",
+  "artifact_sha256": "0a0bc9f0a969c09f9b2af69231a677db3cb93852b2b8a04609413096b5e48ac0",
+  "device": "pixel-11-pro",
+  "model_id": "audio8-tts-realistic-0.6b__fast_ar_int8",
+  "notes": "Audio8-TTS-Realistic-0.6b (litert-community/Audio8-TTS-Realistic-0.6b main c0b80e3c, created 2026-11-02; upstream Edge0/Audio8-TTS-Realistic-0.6b, Apache-2.0): the fast AR (10 residual codebooks per frame), dynamic-range int8 weights, one call per codebook. Measured on the Pixel 11 Pro before the upload, on the bytes that were then uploaded (each record's evidence names the run and the phone's read-back): the runner records give one result per run and one runner process per run on the fixtures (metrics.fixtures); the pipeline record (signature 'pipeline …') is the Android app speaking the two speed sentences, en_ref_4 and ja_ref_1, three times each per run.",
+  "quantization": null,
+  "results": [
+    {
+      "accelerator": "cpu_xnnpack",
+      "context_length": null,
+      "date": "2026-11-02",
+      "decode_tokens_per_s": null,
+      "delegated_ops": 262,
+      "env": {
+        "device": "Pixel 11 Pro",
+        "machine_label": "pixel-11-pro-audio8-ar-runner",
+        "os_build": "Android 17 (build CD1A.260905.001.B1)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Google Tensor G6",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "the LiteRT C API runner a8c_runner (run r2a's runner plus the state pairs of the AR graphs, private; binary sha256 ac76eb04fde43053…, built against the LiteRT v2.2.0 headers) with the LiteRT 2.2.0 Maven libLiteRt.so, driven by a benchmark script, one runner process per run; per call = input write + run + read back of output 0; --cpu-threads 4",
+        "file measured: the cur_fast_drq8_v3.tflite = the Hub's fast_ar_int8.tflite (67780320 B, sha256 0a0bc9f0a969c09f9b2af69231a677db3cb93852b2b8a04609413096b5e48ac0 = the Hub LFS oid of litert-community/Audio8-TTS-Realistic-0.6b main c0b80e3c (tree read 2026-11-02 16:45:09 JST)); the phone's copy read back MATCH",
+        "`Replacing 262 out of 283 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 10 partitions for subgraph 0 (main).`",
+        "output_match from the score of the raw outputs (the phone's against the same graph's Mac CPU outputs ref_cur_drq8, 3 fixtures): max |d| 0.0 = every element equal, so |out - ref| <= max(1e-5, 1e-3 * |ref|) holds (true)",
+        "Run p1-c-fstep-cur 2026-11-02 09:44:06 – 2026-11-02 09:44:09, ready check `uncapped` (clean; rested 32s since 09:43:32; front com.android.systemui (a system app: left alone)); row",
+        "`40.9 ms (21.32 + 10 × 1.96)`; row r3-7: `36.7 ms (17.05 + 10 × 1.96)`",
+        "thread count corrected 2026-11-08: this runner build passed --cpu-threads under the CPU option name \"cpu_options\"; LiteRT 2.2.0 and 2.3.2 read the name \"xnnpack\" and drop an option under another name without an error, so the CPU work of this run ran on one thread. Read on 2026-11-08: the same runner binaries with the same library (libLiteRt.so 97355a36…) ran one thread on the same two phones (/proc/<pid>/task, CPU time over wall time 0.99), and the fixed runner on four threads gave the same outputs."
+      ],
+      "failure_class": null,
+      "full_delegation": false,
+      "latency_p50_ms": 1.962,
+      "loads": true,
+      "max_abs_diff": 0.0,
+      "max_rel_diff": null,
+      "metrics": {
+        "argmax_equal_mac_cpu": 3.0,
+        "compile_ms": 151.7,
+        "cos_vs_mac_cpu_min": 0.9999999999999999,
+        "fixtures": 3.0,
+        "max_abs_diff_vs_mac_cpu_scored": 0.0,
+        "mem_available_kb_min_during": 10456504.0,
+        "nonfinite_values": 0.0,
+        "per_call_ms_max": 9.617,
+        "per_call_ms_min": 1.859,
+        "run_only_median_ms": 1.96,
+        "timed_calls": 20.0,
+        "warmup_calls": 3.0
+      },
+      "output_match": true,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "CPU XNNPACK 1 thread",
+      "total_ops": 283,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

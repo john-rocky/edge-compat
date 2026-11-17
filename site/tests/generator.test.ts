@@ -82,7 +82,7 @@ function walk(dir: string, prefix = ''): string[] {
   return files;
 }
 
-void describe('status vocabulary (mirrors litert_compat.cards.index, DECISIONS #62)', () => {
+void describe('status vocabulary (mirrors litert_compat.cards.index)', () => {
   void test('all five words derive deterministically', () => {
     assert.equal(browserStatus(record({ loads: false, runs: false })), 'load_failed');
     assert.equal(browserStatus(record({ runs: false })), 'run_failed');
@@ -196,7 +196,7 @@ void describe('device runs column (Phase 13)', () => {
     assert.match(html, /example-phone<\/code> npu_qnn:/);
     assert.match(html, /status-fallback/);
     assert.match(html, /Example Phone · Example SoC · litert 0\.0\.0-example/);
-    // The LLM-lane record shows decode throughput and the litert-lm env.
+    // The LLM record shows decode throughput and the litert-lm env.
     assert.match(html, /45\.6 tok\/s decode/);
     assert.match(html, /litert-lm 0\.0\.0-example/);
   });
@@ -463,7 +463,7 @@ void describe('launch lineup build (--lineup, Phase 12.2)', () => {
 
   void test('demo pages only for curated ids; the index still shows everything', () => {
     const lineupFile = path.join(base, 'lineup.txt');
-    fs.writeFileSync(lineupFile, '# 初弾 lineup (test)\nexample-web-a\n');
+    fs.writeFileSync(lineupFile, '# first lineup (test)\nexample-web-a\n');
     const outDir = path.join(base, 'curated');
     runBuild(outDir, ['--lineup', lineupFile]);
 

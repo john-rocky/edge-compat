@@ -19,7 +19,7 @@ task: text-classification
 
 | | |
 |---|---|
-| **Tool** | litert-torch fork john-rocky/litert-torch @115a13607c730c81018bb9789138a3e5e5119e3d with the owner's hybrid patch (card 'License and changes') see the Hub card's Reproduction link (hf-to-litertlm decider_work/); runtime checks on LiteRT-LM 0.17.1 (describe + engine) and ai-edge-litert 2.2.0 (graph reader) |
+| **Tool** | litert-torch fork john-rocky/litert-torch @115a13607c730c81018bb9789138a3e5e5119e3d with the hybrid patch (card 'License and changes') see the Hub card's Reproduction link (hf-to-litertlm decider_work/); runtime checks on LiteRT-LM 0.17.1 (describe + engine) and ai-edge-litert 2.2.0 (graph reader) |
 | **Command** | `hf-to-litertlm decider_work/ (converter, gates, fixtures); source checkpoint Mapika/decider-0.8b rev 1ea54127d3bd52f6d753d9257b32a6380b873907` |
 | **Quantization** | FP16 casting of fully connected and embedding weights; float compute; fp32 activation preference (Hub card 'Files', 'License and changes'). |
 

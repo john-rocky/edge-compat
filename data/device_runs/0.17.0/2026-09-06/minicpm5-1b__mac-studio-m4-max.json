@@ -21,7 +21,7 @@
       },
       "error": null,
       "evidence": [
-        "compat_check status ok (runtime /Users/USER/code/litertlm-convert/.qa-venvs/litert-lm-0.17.0/bin/litert-lm 0.17.0); fixed-question answer: '[thought] \\nWe are asked: \"What is 17 + 25? Answer briefly.\" So we need to compute the sum of 17 and 25. The sum is 42. We should answer briefly, so just \"42\" or maybe \"17+25=42\". But the instruction says \"Answer briefly.\" So we can simply say \"42\". I\\'ll answer: 42.\\n [/thought]\\n\\n\\n42'"
+        "compat_check status ok (runtime 0.17.0); fixed-question answer: '[thought] \\nWe are asked: \"What is 17 + 25? Answer briefly.\" So we need to compute the sum of 17 and 25. The sum is 42. We should answer briefly, so just \"42\" or maybe \"17+25=42\". But the instruction says \"Answer briefly.\" So we can simply say \"42\". I\\'ll answer: 42.\\n [/thought]\\n\\n\\n42'"
       ],
       "failure_class": null,
       "full_delegation": null,

@@ -19,7 +19,7 @@ task: text-generation
 
 | | |
 |---|---|
-| **Tool** | litert-torch (via litertlm-convert scripts/export_simple_template.py) 0.10.0 (editable dev checkout 115a136 + local patches) |
+| **Tool** | litert-torch (via scripts/export_simple_template.py) 0.10.0 (editable dev checkout 115a136 + local patches) |
 | **Command** | `python scripts/extract_text_backbone.py mistralai/Ministral-3-3B-Reasoning-2512 src_models/ministral-3-3b-reasoning-text && EXTERNALIZE_EMBEDDER=1 FORCE_SPM=1 CACHE=4096 python scripts/export_simple_template.py src_models/ministral-3-3b-reasoning-text out/ministral-3-3b-reasoning-ext templates/mistral_simple.jinja BOCTAV4` |
 | **Quantization** | int4 blockwise-32 symmetric + OCTAV clipping; tied embedding/lm_head int8 (BOCTAV4) |
 

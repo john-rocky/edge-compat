@@ -1,0 +1,65 @@
+{
+  "artifact": "lfm3_audio_codec_decoder_f12_r4b2.tflite",
+  "artifact_sha256": "9dbbbcf870c1be4e166b77c1948ca4e34e8e069780236c15066f1d3c8ed52cbd",
+  "device": "pixel-8a",
+  "model_id": "lfm3-audio-2b__lfm3_audio_codec_decoder_f12_r4b2",
+  "notes": "lfm3_audio_codec_decoder_f12_r4b2.tflite of litert-community/LFM3-Audio-2B-LiteRT (LiquidAI/LFM3-Audio-2B at revision 9d49701c, LFM Open License v1.0): speech output: the audio codec decoder, 12 frames (0.96 s) of codes to 24 kHz audio frames per call, its state carried between calls. Published as litert-community/LFM3-Audio-2B-LiteRT (upload commit 976325ac, main 32c07192; anonymous Hub read 2026-10-30T21:51:09+09:00, each LFS oid and size = artifact_sha256). App rows (Pixel 8a 4C131JEKB15210, Android 16, hold p7a on 2026-10-29): the Android app with LiteRT 2.3.0's Kotlin CompiledModel, no NPU library; os_build: the app runs do not record it. The Mac timing rows and the Pixel 8a text decode on the card ran earlier builds with the same decoder bytes that were not published, so they have no record.",
+  "quantization": "float32",
+  "results": [
+    {
+      "accelerator": "gpu_mldrift",
+      "context_length": null,
+      "date": "2026-10-29",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Pixel 8a",
+        "machine_label": "pixel-8a-lfm3audio-app",
+        "os_build": null,
+        "runtime": "litert",
+        "runtime_version": "2.3.0",
+        "soc": "Google Tensor G3",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "harness: the app (app/kotlin_cpu_gpu) with APK sha256 759659acb4089411f9eefd2d6c19acba5a99288fa4c0103387d6d8eef5a84823 (LiteRT 2.3.0 from Maven: litert, litert-gpu); the hold's inputs = the published digests",
+        "greedy check (identity of p7a run g7x): 3 / 3 sentences equal in frames, tokens and PCM bytes to r6a:p6/g3c (the app before the four host-side changes)",
+        "other arms in metrics (arm_<letter>_<hold>): b = the app before the four host-side changes, s = + state in place, c = + codec on its own thread, h = + fast sampler, p / l = arm D with fewer helper threads / 6 decoder threads, g = arm D with the decoder on the GPU (its own result in the bundle file); every arm read the same published files"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "arm_b_p7a_speech_out_1s_ms": 1700.044,
+        "arm_h_p7a_speech_out_1s_ms": 1515.649,
+        "codec_ms_per_call": 69.694,
+        "first_audio_ms": 2056.519,
+        "frame_ms_per_frame": 0.895,
+        "legs": 2.0,
+        "lm_ms_per_step": 50.624,
+        "loop_ms_per_frame": 109.784,
+        "pass_ms_per_pass": 16.851,
+        "proj_ms_per_frame": 4.855,
+        "sample_ms_per_frame": 1.337,
+        "speech_out_1s_ms": 1372.3,
+        "speech_out_1s_ms_leg1": 1313.523,
+        "speech_out_1s_ms_leg2": 1431.077,
+        "this_graph_ms_per_call_mean": 69.694,
+        "warmup_speech_out_1s_ms": 1145.977
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "Android app (the Kotlin host loop, LiteRT 2.3.0 CompiledModel; APK sha256 759659acb408), speech out at the app's default (decoder CPU 4 threads with the state in place and the text head only before text slots, depth projection CPU, depth pass CPU, frame embed CPU, codec GPU fp32 on its own thread); one English sentence of about 10 s, warm-up 1 + 3 measured answers per run, hold p7a runs t7d1 / t7d2",
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

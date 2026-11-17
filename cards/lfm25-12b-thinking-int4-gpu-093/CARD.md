@@ -19,8 +19,8 @@ task: text-generation
 
 | | |
 |---|---|
-| **Tool** | litert-torch (via litertlm-convert minicpm5_work convert_lfm25.py + quantize_litertlm.py + add_executor_metadata.py) 0.9.3 (~/venvs/ltconv040dev: litert-converter 0.3.1, ai-edge-quantizer 0.8.0, litert-lm 0.15.0 builder; ship_lfm25_gpu_variant_20260812/RESULTS.md) |
-| **Command** | `python convert_lfm25.py LiquidAI/LFM2.5-1.2B-Thinking out_thinking_fp --fp && python quantize_litertlm.py apply out_thinking_fp/model.litertlm LFM2.5-1.2B-Thinking_int4_gpu.litertlm --recipe wi4b32_wi8 --algo octav && python scripts/add_executor_metadata.py  # RESULTS.md pipeline; upstream ShortConv fix, composite lowered by converter 0.3.1` |
+| **Tool** | litert-torch (via convert_lfm25.py + quantize_litertlm.py + add_executor_metadata.py) 0.9.3 (litert-converter 0.3.1, ai-edge-quantizer 0.8.0, litert-lm 0.15.0 builder) |
+| **Command** | `python convert_lfm25.py LiquidAI/LFM2.5-1.2B-Thinking out_thinking_fp --fp && python quantize_litertlm.py apply out_thinking_fp/model.litertlm LFM2.5-1.2B-Thinking_int4_gpu.litertlm --recipe wi4b32_wi8 --algo octav && python scripts/add_executor_metadata.py  # upstream ShortConv fix, composite lowered by converter 0.3.1` |
 | **Quantization** | int4 blockwise-32 + OCTAV linears, int8 embedding, convs float (same recipe as the CPU int4 file, re-exported so it runs on the GPU — HF card) |
 
 ## Artifacts
@@ -50,7 +50,7 @@ Model-level on-device results — measured behavior of this exact artifact on th
 - GPU needs litert-lm >= 0.16.0 (Android OpenCL and macOS, verified by generation); iOS Metal fails at engine creation for this family (LiteRT-LM#3129) — use CPU on iOS (HF card).
 - A thinking model needs the token budget: GSM8K measured at max-tokens 2048 (int4 72% vs bf16 81%); the reasoning stream arrives on the `thought` channel and the final answer follows after </think> (HF card).
 - On phone-class hardware the GPU's win is prefill and TTFT (3-6x); decode is bandwidth-bound and roughly a wash — a thinking model's long outputs gain less than its long prompts (HF card, measured).
-- 0.9.3 does not write ExecutorMetadata itself — add_executor_metadata.py is a mandatory post-step or litert-lm >= 0.15 fails at inference (RESULTS.md).
+- 0.9.3 does not write ExecutorMetadata itself — add_executor_metadata.py is a mandatory post-step or litert-lm >= 0.15 fails at inference.
 
 ---
 

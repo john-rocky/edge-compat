@@ -17,7 +17,7 @@ container TOC and linted statically — the report's `model.path` is marked
 `::TFLiteModel@section<i>` and `model.sha256` hashes the analyzed embedded
 bytes, so container analysis is always visible as such. Exactly one
 `TFLiteModel` section is required; ambiguous multi-model bundles are refused
-with the section listing (E2E bundle audits stay in litertlm-convert).
+with the section listing (end-to-end bundle audits are out of scope here).
 Pipeline: parse → classify every node through
 `Matrix.lookup` (signature from the node's output tensors) → simulate
 partitions (maximal runs of delegate-claimed nodes in execution order; every

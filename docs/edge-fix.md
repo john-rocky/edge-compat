@@ -1,7 +1,5 @@
 # edge-fix: diagnosis and repair (Phase 10)
 
-`DECISIONS` and `PROGRESS` citations on this page refer to the logs of the private lab repository.
-
 The matrix's `rewrite_hints` are human prose; `edge-fix` promotes them to
 executable, deterministic graph surgery: lint finds why a model won't delegate, fix
 makes it delegate — then proves it didn't change the math.
@@ -38,12 +36,12 @@ models the rewrite path cannot round-trip faithfully — multiple subgraphs, cus
 ops, custom quantization `details`, unregistered builtin-options tables are refused
 with precise reasons, never silently dropped). Real converter output — quantized
 tensors, model metadata, signature defs, appended-weight buffers, optional `-1`
-inputs — round-trips faithfully (DECISIONS #153–#155).
+inputs — round-trips faithfully.
 
-### Transform rules: machinery from the toolkit, knowledge from the owner
+### Transform rules: machinery from the toolkit, knowledge from the rule author
 
 Rules are JSON files (`<id>.json`, `schemas/transform_rule.schema.json`) in a rules
-directory — `data/transforms/` for the owner's real rules (none yet; the committed
+directory — `data/transforms/` for the real rules (none yet; the committed
 example-provenance rules live in `data/examples/transforms/` and are exercised only
 on synthetic fixtures). Every applied change in a fix report traces to a rule `id`
 with its evidence; unmatched findings are reported, never guessed at. Matrix schema
@@ -64,7 +62,7 @@ validate` dry-runs the rule against it and requires the fix to succeed end-to-en
 rules are refused with a precise reason, not errors.)
 
 `action` is a **closed vocabulary** — anything not expressible in it is not a rule;
-the vocabulary is extended by spec amendment, not freeform actions. One worked
+the vocabulary is extended by changing the engine, not by freeform actions. One worked
 example per action (each committed under `data/examples/transforms/`):
 
 - **`replace_op`** — swap the operator in place, inputs/outputs verbatim.

@@ -1,0 +1,62 @@
+{
+  "artifact": "Qwen2.5-VL-72B-Instruct_q4_ekv2048.litertlm",
+  "artifact_sha256": "6feca2058cac144ad425bad6ce0ebf1f60b168e8aaf48be421ccc753abfe8dac",
+  "device": "mac-studio-m4-max",
+  "model_id": "qwen2.5-vl-72b-instruct-int4",
+  "notes": "Qwen2.5-VL-72B-Instruct_q4_ekv2048.litertlm of litert-community/Qwen2.5-VL-72B-Instruct-LiteRT: the LiteRT-LM bundle of Qwen/Qwen2.5-VL-72B-Instruct at revision 89c86200 (Qwen LICENSE AGREEMENT) — one picture at 448x448 (256 image tokens) and text in, text out, context 2,048. Published 2026-10-31 (upload commit 9ac47fea); the Mac row ran the published bytes in the run-3 speed window. The CPU rows on the card ran an earlier build with a 4,096-token cache that was not published, so they have no record.",
+  "quantization": "text decoder written with the LiteRT Tensor API from the bf16 checkpoint: fully connected weights int4 blockwise-128 (ai-edge-quantizer 0.10.0's functions, block scales floored at 2^-14), output layer int8 per channel, norms and biases fp32, declared fp32 activations; signatures prefill 32 / 128 / 1024 and decode over a 2048-token KV cache; token embedding table int8 per channel outside the decoder (EMBEDDER section); vision encoder and adapter fp32 weights, declared fp32 activations",
+  "results": [
+    {
+      "accelerator": "gpu",
+      "context_length": 2048,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": 8.31,
+      "delegated_ops": null,
+      "env": {
+        "device": "Mac Studio (M4 Max, Mac16,9)",
+        "machine_label": "mac-studio-m4-max",
+        "os_build": "macOS 27.0 (26A428)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": "Apple M4 Max",
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Qwen2.5-VL-72B-Instruct-LiteRT commit 9ac47fea, LFS sha256 6feca2058cac144ad425bad6ce0ebf1f60b168e8aaf48be421ccc753abfe8dac and 44789536688 bytes read back from the Hub on 2026-10-31 = the bytes of the speed window",
+        "runtime: litert-lm 0.19.0 (PyPI) Python API, backend GPU (WebGPU) and vision_backend GPU, cache_dir ':nocache', max_num_images 1",
+        "q72s_p32c2048_cats_q1, q72s_p32c2048_cats_q1_t2, q72s_p32c2048_cats_q2, q72s_p32c2048_kitchen_q3 (one process; BenchmarkInfo per question)",
+        "output_match = the run-3 line for the 72B: the replies of the 3 picture questions and MMStar-20 word for word the same as the previous file's (23 of 23), whose replies Transformers (bf16 weights, fp32 arithmetic) follows at 83 of 84 positions",
+        "peak_mem_mb = 46 GiB x 1024: the highest macOS phys_footprint sample (every 15 s, whole GiB)"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "decode_tokens_per_s_max": 8.33,
+        "decode_tokens_per_s_min": 8.27,
+        "engine_create_s": 14.27,
+        "first_text_s_q2": 4.755,
+        "first_text_s_q3": 5.408,
+        "follow_up_first_text_s": 0.962,
+        "follow_up_prompt_tokens": 18.0,
+        "image_size_px": 448.0,
+        "image_tokens": 256.0,
+        "prefill_tokens": 285.0,
+        "questions": 3.0
+      },
+      "output_match": true,
+      "peak_mem_mb": 47104,
+      "prefill_tokens_per_s": 63.6,
+      "provenance": "measured",
+      "runs": true,
+      "signature": "one 448x448 picture + a short question, greedy, no system message; one process, three questions in fresh conversations (medians) and one follow-up question on the same picture",
+      "total_ops": null,
+      "ttft_ms": 4602.1
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -1,10 +1,10 @@
 """Backend -> snapshot resolution over a snapshots directory (Phase 14).
 
-Policy (spec 14.1): exactly one snapshot for the backend -> that one; multiple
+Policy: exactly one snapshot for the backend -> that one; multiple
 versions -> the highest numeric version unless pinned; anything ambiguous ->
 error, never a coin flip (the playground's refusal pattern). Snapshot identity
 comes from each file's own `backend` / `litert_version` fields — file names
-are never trusted (Integration Rules §D: one file per backend x version).
+are never trusted (one file per backend x version).
 
 Discovery is strict, matching the sweep/device-run pattern: every `*.json`
 in the directory must be a readable snapshot header; anything else is an

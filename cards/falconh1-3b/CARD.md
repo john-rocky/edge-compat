@@ -19,7 +19,7 @@ task: text-generation
 
 | | |
 |---|---|
-| **Tool** | litert-torch + hybrid-cache patch (repro = hf-to-litertlm falcon_h1_work/) TODO(owner): patched-checkout version not pinned in the HF card |
+| **Tool** | litert-torch + hybrid-cache patch (repro = hf-to-litertlm falcon_h1_work/) TODO: patched-checkout version not pinned in the HF card |
 | **Command** | `hf-to-litertlm falcon_h1_work/ reproduction script + patch` |
 | **Quantization** | post-hoc dynamic int8 over linears + embedding only; convs and the scan stay float; fp32 activations declared for GPU |
 

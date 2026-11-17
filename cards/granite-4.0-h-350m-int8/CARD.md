@@ -19,15 +19,15 @@ task: text-generation
 
 | | |
 |---|---|
-| **Tool** | litert-torch (README Conversion section; sibling card granite-4.0-h-350m-int8-gpu carries the lane record) TODO (the README names the converter but not its version) |
-| **Command** | `TODO (not stated in the README)` |
-| **Quantization** | int8 dynamic weight-only on linears + embedding; convs/SSM float (README file table) |
+| **Tool** | litert-torch with the patch (card L121, Reproduce: conversion script, litert-torch patch and test harnesses in hf-to-litertlm granite_work/; sibling card granite-4.0-h-350m-int8-gpu carries the record) TODO (the card names the converter but not its version) |
+| **Command** | `TODO (not stated in the card)` |
+| **Quantization** | int8 dynamic weight-only on linears + embedding; convs/SSM float (card L31) |
 
 ## Artifacts
 
 | File | SHA-256 | Size (MB) |
 |---|---|---|
-| `granite-4.0-h-350m_int8.litertlm` | `feae9e8c2aa8832c254770e88d81e80c424ab9b5c0e9a3f3d2689b3ace4810f1` | 415.775 |
+| `granite-4.0-h-350m_int8.litertlm` | `46d2781278e77d965c480dce0ba2754e86b3b70be3ab30dcada069044a7d1011` | 415.775 |
 
 ## Performance
 
@@ -47,11 +47,13 @@ Model-level on-device results — measured behavior of this exact artifact on th
 
 ## Pitfalls
 
-- Requires litert-lm >= 0.15 — the Mamba2 conv/SSM state buffers are bound through 0.15's generalized state binding (README intro).
-- Correctness (README): a float export matches the HF model exactly at every decode position (8-step teacher-forced, per-position max |logit diff| <= 3.9e-4, corr 1.000000, top-1 identical), both the chunked prefill path and the single-token path.
-- The bundle does NOT prepend a BOS token — matches Granite's official chat template; at 350M scale a prepended <|end_of_text|> measurably degrades greedy answers (README Correctness).
-- Known limitation — engine state reuse, not quantization: if one Engine object is reused across many conversations whose prompts share a growing common prefix, a reply can stop after a few tokens (on the int8 file at chat-templated lengths 33-37, on _int8_gpu at 37-41); fresh engine per conversation avoids it (README Correctness).
-- This file is the CPU build: on the Galaxy S26 GPU the README records 'does not run' (109 of 3673 / 3807 ops in the first subgraph reached) for the int8 and fp16 files — the _int8_gpu sibling (rank-<=4 selective scan, fp32 activations declared) is the GPU file (README S26 table).
+- Requires litert-lm >= 0.15 — the Mamba2 conv/SSM state buffers are bound through 0.15's generalized state binding (card L24).
+- Correctness: a float export matches the HF model exactly at every decode position (8-step teacher-forced, per-position max |logit diff| <= 3.9e-4, corr 1.000000, top-1 identical), both the chunked prefill path and the single-token path (card L40).
+- The bundle does NOT prepend a BOS token — matches Granite's official chat template; at 350M scale a prepended <|end_of_text|> measurably degrades greedy answers (card L42).
+- Known limitation — engine state reuse, not quantization: if one Engine object is reused across many conversations whose prompts share a growing common prefix, a reply can stop after a few tokens (on the int8 file at chat-templated lengths 33-37, on _int8_gpu at 37-41); fresh engine per conversation avoids it (card L44).
+- Tool calls on litert-lm 0.18.0: since the 2026-10-14 re-pack of the repo's three files (metadata only: llm_model_type qwen2p5, and the chat template now renders tool results) the runtime parses the tool call and the tool result reaches the model; the earlier files returned the call as message text, a <tool_call> block (card L48).
+- This file is the CPU build: on the Galaxy S26 GPU the card records 'does not run' (109 of 3673 / 3807 ops in the first subgraph reached) for the int8 and fp16 files — the _int8_gpu sibling (rank-<=4 selective scan, fp32 activations declared) is the GPU file (card L75-L79).
+- Conversation preface with tools and no messages: LiteRT-LM renders the chat template with an empty message list, and the template reads messages[0] without checking that the list is non-empty, so the render fails with 'Failed to apply template: undefined value' when the preface is prefilled at creation (prefillPrefaceOnInit, default false; creating the conversation fails) and in the preface render (renderPrefaceIntoString and its C++ and C API forms); the same with extra context (such as enable_thinking) and no messages, and in the preface render with an empty preface (run in the runtime on one Qwen3 template; the other templates rendered with minijinja 2.14 and jinja2); read in the source of LiteRT-LM 0.17.0, 0.18.1 and main, measured with the 0.18.1 PyPI package through its C API on these files' template text; the default path, where the first message is rendered with the preface, is not affected (the 0.18.1 Python API and CLI expose neither the flag nor the preface render); a system message or any initial message in the conversation config avoids it (card L135).
 - LiteRT-LM .litertlm bundle: LiteRT.js cannot run it, so delegation stays null and there is no browser block; device rows come from data/device_runs/.
 
 ---

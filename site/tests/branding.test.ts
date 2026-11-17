@@ -1,7 +1,7 @@
 /**
  * Branding parity (Phase 12.1): the TS constants in src/shared/branding.ts
  * mirror src/litert_compat/branding.py exactly, parsed from the Python
- * source — the DECISIONS #93 pattern. A rename or disclosure-wording change
+ * source. A rename or disclosure-wording change
  * edits the Python side first, then this test forces the mirror.
  */
 import * as assert from 'node:assert/strict';

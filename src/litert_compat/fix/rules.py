@@ -1,6 +1,6 @@
 """Transform rule files: load, validate, scaffold.
 
-Rules are owner-authored JSON files (`<id>.json`) in a rules directory,
+Rules are hand-written JSON files (`<id>.json`) in a rules directory,
 validating against `schemas/transform_rule.schema.json` plus the semantic
 checks here. Loading is strict: an invalid rule file is a data defect that
 fails the whole run (like an invalid matrix snapshot) — with one deliberate

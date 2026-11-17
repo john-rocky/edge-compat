@@ -1,0 +1,94 @@
+{
+  "artifact": "Qwen3_1.7B.litertlm",
+  "artifact_sha256": "e40599625f3e446d6522674586a40566d6a3a117af608f6e9ea46ac86d326461",
+  "device": "iphone-18-pro",
+  "model_id": "qwen3-1.7b",
+  "notes": "Since 2026-10-31 these bytes are `Qwen3_1.7B.litertlm` on main. With the v0.18.1 package on the same phone the same day no file gave a GPU answer (0.6B and 4B: Metal compile error `half4` from `float4` at engine creation; 1.7B: engine built, the first decode failed in top_k_metal_sampler.mm:223).",
+  "quantization": "dynamic INT8 (channel-wise INT8 weights, FP32 activations): LiteRT Torch export_hf 0a81bf6f3 with --apply_gpu_composites=True (RMSNorm, QK-norm + RoPE, attention, SwiGLU and KV-cache-update composites; fused QKV and gate / up), prefill 128 / 1024, cache 32,768, metadata context 4,096; its INT4 / INT8 FULLY_CONNECTED and EMBEDDING_LOOKUP weights moved to one TFLiteWeights section at the end of the file (LiteRT external weights; hf-to-litertlm tools/externalize, the other sections raw-identical)",
+  "results": [
+    {
+      "accelerator": "cpu",
+      "context_length": null,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 18 Pro (iPhone19,2)",
+        "machine_label": "iphone-18-pro-d178check",
+        "os_build": "iOS 27.2 (24B5099f)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Qwen3-1.7B `Qwen3_1.7B.litertlm` at main since 2026-10-31 (commit ebb4eef4c07c0ecf019fa3cf7b501771d44ca21f, the replacement under the kept name): LFS sha256 e40599625f3e446d6522674586a40566d6a3a117af608f6e9ea46ac86d326461, 1754890240 B (anonymous Hub API tree read 2026-10-31 14:20 JST)",
+        "app: edge-llm-bench BenchmarkApp, a check build (unsigned build + codesign with a wildcard profile, no memory entitlement; bundle id …d178check) linking CLiteRTLM.xcframework.zip@v0.19.0 sha256:b7b2450fc084058adc5185498f8b7810a9297e054a10cf55818b62e1d5f8d65d (engineVersion v0.19.0); the file side-loaded into the app's container as model.litertlm and its sha256 read back on the phone: \"D1 04:49:11 OK the phone's 17 hashes e40599625f3e446d6522674586a40566d6a3a117af608f6e9ea46ac86d326461\"",
+        "the app's quality task: greedy, 256 tokens, thinking left to the template, one launch with --purge-engine-cache, 2026-10-31 04:51:33 JST",
+        "question 1 (\"What is 17 + 25?\"): the stream holds 42 — \"Okay, let's tackle these questions one by one. \\n\\n1. 17 + 25: That's straightforward addition. 17 plus 25 equals 42. I'll go with 42.\\n\\n2. Capital of Ja\"",
+        "peak footprint during decode 792.6 MB (the app's own reading); crash logs new during the slot: BenchmarkApp.diskwrites_resource-2026-10-31-045104.ips, S2YnnBench-2026-10-31-045131.ips, no JetsamEvent"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "app_peak_during_decode_mb": 792.6,
+        "generated_tokens": 256.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    },
+    {
+      "accelerator": "gpu",
+      "context_length": null,
+      "date": "2026-10-31",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "iPhone 18 Pro (iPhone19,2)",
+        "machine_label": "iphone-18-pro-d178check",
+        "os_build": "iOS 27.2 (24B5099f)",
+        "runtime": "litert-lm",
+        "runtime_version": "0.19.0",
+        "soc": null,
+        "vendor_sdk": null
+      },
+      "error": null,
+      "evidence": [
+        "artifact: litert-community/Qwen3-1.7B `Qwen3_1.7B.litertlm` at main since 2026-10-31 (commit ebb4eef4c07c0ecf019fa3cf7b501771d44ca21f, the replacement under the kept name): LFS sha256 e40599625f3e446d6522674586a40566d6a3a117af608f6e9ea46ac86d326461, 1754890240 B (anonymous Hub API tree read 2026-10-31 14:20 JST)",
+        "app: edge-llm-bench BenchmarkApp, a check build (unsigned build + codesign with a wildcard profile, no memory entitlement; bundle id …d178check) linking CLiteRTLM.xcframework.zip@v0.19.0 sha256:b7b2450fc084058adc5185498f8b7810a9297e054a10cf55818b62e1d5f8d65d (engineVersion v0.19.0); the file side-loaded into the app's container as model.litertlm and its sha256 read back on the phone: \"D1 04:49:11 OK the phone's 17 hashes e40599625f3e446d6522674586a40566d6a3a117af608f6e9ea46ac86d326461\"",
+        "the app's quality task: greedy, 256 tokens, thinking left to the template, one launch with --purge-engine-cache, 2026-10-31 04:51:12 JST",
+        "question 1 (\"What is 17 + 25?\"): the stream holds 42 — \"Okay, let's tackle these questions one by one. \\n\\n1. 17 + 25: That's straightforward addition. 17 plus 25 equals 42. So the answer is 42.\\n\\n2. Capital o\"",
+        "peak footprint during decode 785.0 MB (the app's own reading); crash logs new during the slot: BenchmarkApp.diskwrites_resource-2026-10-31-045104.ips, S2YnnBench-2026-10-31-045131.ips, no JetsamEvent",
+        "GPU path lines: INFO: [accelerator_registry.cc:54] RegisterAccelerator: ptr=0x12af4a6a0, name=GPU Metal | INFO: [gpu_registry.cc:121] Statically linked GPU accelerator registered. | INFO: [gpu_environment.cc:421] Created Metal device from provided device id"
+      ],
+      "failure_class": null,
+      "full_delegation": null,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "app_peak_during_decode_mb": 785.0,
+        "generated_tokens": 256.0
+      },
+      "output_match": null,
+      "peak_mem_mb": null,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": true,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}

@@ -22,7 +22,7 @@ type Accelerator = 'wasm' | 'webgpu';
 
 /**
  * Measurement hook: page loads, backend used, CTA copies. Deliberately a
- * no-op — the counter choice is the owner's (DECISIONS #69: repo-stats only
+ * no-op — the counter choice is open (repo-stats only
  * until an analytics stance is picked). No cookies, no PII, ever.
  */
 function measure(_event: string): void {

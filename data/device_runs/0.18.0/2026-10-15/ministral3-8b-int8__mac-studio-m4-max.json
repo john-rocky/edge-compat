@@ -3,7 +3,7 @@
   "artifact_sha256": "f2f6e6621fa84a7c5c295b7a190270aa77453417de707c94daf6c144e2f9418b",
   "device": "mac-studio-m4-max",
   "model_id": "ministral3-8b-int8",
-  "notes": "Hub litert-community/Ministral-3-8B-Instruct-2512 (upload commit f61f6659). Lane litertlm-convert aa_mobile_b2_work/ministral3_8b: the clean re-measurement of the shipped files (round r2b, 2026-10-15: GPU pass 20:08:50-20:14:56 JST, CPU pass 21:10:14-21:42:50 JST; SPEED_LADDER.md rows 3c / 4c / 6c / 8c, the Mac ship rows) = the Hub card's Mac table. litert-lm 0.18.0 CLI benchmark, --cache no, 1024-token prefill / 256 decode / context 2048, one warmup then the mean of 3 iterations; two passes per file in ABBA order (int8, int4, int4, int8), each run in its own quiet window (8 windows released rc=0 in bench/clean_holds.log), each pass inside the lane's export slot (no export or quantize beside it; bench/clean_slot.log), the CPU runs behind a RAM gate (reclaimable >= 85 GB x 3, bench/clean_ram_gate.log) and a swap guard. Cells = the median of the two passes (per-pass values in metrics). GPU = WebGPU on Metal; the verbose run of the same bytes on 2026-10-14 (bench/gpu_int8_gpuc_verbose.log) delegated all 7 decoder signatures whole to LITERT_WEBGPU (1586 / 1417 / 1448 nodes) - not printed in these runs, so the delegation cells are null here. The first measurement of 2026-10-14 (round r2, not in a slot; ladder rows 3 / 4 / 6 / 8) is not entered; these cells are within 0.4-1.9 % of it. Galaxy S26: The int8 file's one Galaxy S26 GPU try (2026-10-14, lane round r2b, device/r1/s26/i8_gpu_timing; SPEED_LADDER.md rows 10 / 10b = no-go) is not a record: the phone restarted during the engine warm-up, so loads / runs cannot be set (the #199(3) shape). Facts: Ministral-3-8B-Instruct-2512_int8_gpuc.litertlm (device-side sha256 = Mac = the Hub file) pushed in 234.4 s; before the warm process uptime 347784.61 s, MemAvailable 7,138,148 kB, thermal status 1 / skin 39.9 C; 5 decoder signatures (prefill_1024 .. prefill_4) delegated whole to LITERT_CL, then no log line; the 2-second sampler's lowest MemAvailable 692,668 kB, kgsl temperature up to 86.4 C, the clock ceiling down to 191 MHz; its last sample: MemAvailable 712,452 kB, 84.9 C, process rss 92,108 kB (VmHWM 629,916 kB) - the pressure is not in the process RSS, the cause is not established; the driver: '[09:45:04] run warm: litert_lm_advanced_main --backend=gpu -…' -> '[09:49:19] DEVICE GONE during warm'; the restart proven on 2026-10-15 15:30 JST by /proc/uptime 106830.65 s (ro.boot.bootreason=reboot; device/r1/s26/after_reboot.txt) = the boot epoch 1791938976.09 s of the later holds' state files (2026-10-14 09:49:36 JST). The lane does not start an 8B-class int8 engine on this phone again (a rule after one drop, not a measured limit).",
+  "notes": "Hub litert-community/Ministral-3-8B-Instruct-2512 (upload commit f61f6659). The clean re-measurement of the shipped files (2026-10-15: GPU pass 20:08:50-20:14:56 JST, CPU pass 21:10:14-21:42:50 JST) = the Hub card's Mac table. litert-lm 0.18.0 CLI benchmark, --cache no, 1024-token prefill / 256 decode / context 2048, one warmup then the mean of 3 iterations; two passes per file in ABBA order (int8, int4, int4, int8), each run in its own quiet window (8 windows released rc=0), each pass with no export or quantize job beside it, the CPU runs behind a RAM gate (reclaimable >= 85 GB x 3) and a swap guard. Cells = the median of the two passes (per-pass values in metrics). GPU = WebGPU on Metal; the verbose run of the same bytes on 2026-10-14 delegated all 7 decoder signatures whole to LITERT_WEBGPU (1586 / 1417 / 1448 nodes) - not printed in these runs, so the delegation cells are null here. The first measurement of 2026-10-14 (not on a quiet machine) is not entered; these cells are within 0.4-1.9 % of it. Galaxy S26: The int8 file's one Galaxy S26 GPU try (2026-10-14; no-go) is not a record: the phone restarted during the engine warm-up, so loads / runs cannot be set (that shape). Facts: Ministral-3-8B-Instruct-2512_int8_gpuc.litertlm (device-side sha256 = Mac = the Hub file) pushed in 234.4 s; before the warm process uptime 347784.61 s, MemAvailable 7,138,148 kB, thermal status 1 / skin 39.9 C; 5 decoder signatures (prefill_1024 .. prefill_4) delegated whole to LITERT_CL, then no log line; the 2-second sampler's lowest MemAvailable 692,668 kB, kgsl temperature up to 86.4 C, the clock ceiling down to 191 MHz; its last sample: MemAvailable 712,452 kB, 84.9 C, process rss 92,108 kB (VmHWM 629,916 kB) - the pressure is not in the process RSS, the cause is not established; the driver: '[09:45:04] run warm: litert_lm_advanced_main --backend=gpu -…' -> '[09:49:19] DEVICE GONE during warm'; the restart proven on 2026-10-15 15:30 JST by /proc/uptime 106830.65 s (ro.boot.bootreason=reboot) = the boot epoch 1791938976.09 s of the later holds' state files (2026-10-14 09:49:36 JST). The work does not start an 8B-class int8 engine on this phone again (a rule after one drop, not a measured limit).",
   "quantization": "int8 dynamic on linears, float activations; GPU-composite graph (odml.cache_update / odml.runtime_bmm)",
   "results": [
     {
@@ -23,10 +23,10 @@
       },
       "error": null,
       "evidence": [
-        "command (both passes): /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_b2_work/ministral3_8b/ship/Ministral-3-8B-Instruct-2512_int8.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
-        "pass 1 (bench/clean_cpu_int8_p1.log): prefill 122.77 / decode 11.48 tok/s, TTFT 8.4284 s, init 60.1686 s",
-        "pass 2 (bench/clean_cpu_int8_p2.log): prefill 125.32 / decode 11.5 tok/s, TTFT 8.2581 s, init 55.3633 s",
-        "process footprint (swap guard, 15 s samples, binary GB): max 50 GB (bench/clean_cpu_int8_p1.guard.log, _p2.guard.log); no guard kill"
+        "command (both passes): litert-lm benchmark Ministral-3-8B-Instruct-2512_int8.litertlm --backend cpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+        "pass 1: prefill 122.77 / decode 11.48 tok/s, TTFT 8.4284 s, init 60.1686 s",
+        "pass 2: prefill 125.32 / decode 11.5 tok/s, TTFT 8.2581 s, init 55.3633 s",
+        "process footprint (swap guard, 15 s samples, binary GB); no guard kill"
       ],
       "failure_class": null,
       "full_delegation": null,
@@ -77,9 +77,9 @@
       },
       "error": null,
       "evidence": [
-        "command (both passes): /Users/USER/venvs/lt0180run/bin/litert-lm benchmark /Users/USER/code/litertlm-convert/aa_mobile_b2_work/ministral3_8b/ship/Ministral-3-8B-Instruct-2512_int8.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
-        "pass 1 (bench/clean_gpu_int8_p1.log): prefill 784.97 / decode 47.51 tok/s, TTFT 1.3256 s, init 4.8365 s",
-        "pass 2 (bench/clean_gpu_int8_p2.log): prefill 784.69 / decode 45.81 tok/s, TTFT 1.3269 s, init 4.8565 s"
+        "command (both passes): litert-lm benchmark Ministral-3-8B-Instruct-2512_int8.litertlm --backend gpu -p 1024 -d 256 --max-num-tokens 2048 --runs 3 --cache no",
+        "pass 1: prefill 784.97 / decode 47.51 tok/s, TTFT 1.3256 s, init 4.8365 s",
+        "pass 2: prefill 784.69 / decode 45.81 tok/s, TTFT 1.3269 s, init 4.8565 s"
       ],
       "failure_class": null,
       "full_delegation": null,

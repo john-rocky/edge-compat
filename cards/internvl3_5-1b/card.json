@@ -10,7 +10,7 @@
   "conversion": {
     "command": "bash scripts/ship_internvl3_5_1b.sh",
     "quantization": "vision tower int8; Qwen3-0.6B decoder int4 blockwise-32 symmetric + OCTAV; input embedding int8 (externalized section)",
-    "tool": "litert-torch (litertlm-convert fast_vlm pipeline, scripts/ship_internvl3_5_1b.sh)",
+    "tool": "litert-torch (fast_vlm pipeline, scripts/ship_internvl3_5_1b.sh)",
     "tool_version": "0.10.0 (editable dev checkout 115a136 + local patches)"
   },
   "cross_runtime": [],
@@ -68,7 +68,7 @@
         "run": {
           "accelerator": "gpu",
           "context_length": null,
-          "date": "2026-08-24",
+          "date": "2026-08-25",
           "decode_tokens_per_s": 43.45,
           "delegated_ops": 1298,
           "env": {
@@ -106,7 +106,7 @@
           "total_ops": 1298,
           "ttft_ms": 230.0
         },
-        "source": "data/device_runs/0.16.0/2026-08-24/internvl3_5-1b__galaxy-s26.json"
+        "source": "data/device_runs/0.16.0/2026-08-25/internvl3_5-1b__galaxy-s26.json"
       }
     ]
   },

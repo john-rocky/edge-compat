@@ -1,0 +1,338 @@
+{
+  "artifacts": [
+    {
+      "file": "qwen3_32b_int8_ekv4096.litertlm",
+      "sha256": "c4d505aa0339e4e9fe5a6974b6e915e2dcfd2c441f2c865b6518df06b4b6008a",
+      "size_mb": 31368.284
+    }
+  ],
+  "benchmarks": [],
+  "conversion": {
+    "command": "Qwen/Qwen3-32B rev 9216db57 (bf16) -> export_hf with GPU composites, one prefill and one decode signature whose lengths LiteRT-LM sets at load time (prefill 1,024 and KV 4,096 by default); int8 per channel for every linear layer, lm_head and token table; LiteRT-LM 0.19.1's own Qwen3 metadata byte for byte (chat template with enable_thinking, a thought channel, stop token <|im_end|>, sampler top-k 20 / top-p 0.95 / temperature 0.6); the checkpoint's tokenizer.json byte for byte (card L29, L33, L35)",
+    "quantization": "int8 per channel for every linear layer, lm_head and token table; fp32 activations declared; for the GPU backend (card L19, L29)",
+    "tool": "litert-torch 0.10.0 export_hf with GPU composites (one prefill and one decode signature), quantized with ai-edge-quantizer 0.10.1; repro = john-rocky/hf-to-litertlm",
+    "tool_version": "litert-torch 0.10.0, ai-edge-quantizer 0.10.1; LiteRT-LM 0.19.1 built from its tag (7a03724c) for every number on the card, the PyPI litert-lm 0.19.1 for one question on the GPU (card L19, L23, L71)"
+  },
+  "cross_runtime": [],
+  "delegation": null,
+  "device": {
+    "records": [
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": null,
+          "date": "2026-11-09",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "bytes: every row ran qwen3_32b_int8_ekv4096.litertlm (each run's command or meta names that path), written 11:39:02 JST by the int8 build and not modified after (mtime), hashed by the upload (preupload_qwen3_32b_int8_ekv4096.litertlm.json: sha256 c4d505aa0339e4e9fe5a6974b6e915e2dcfd2c441f2c865b6518df06b4b6008a, 32892029424 B) = the Hub's LFS oid at upload commit d8c78c1d and at main d8aa56b3",
+            "runtime: the PyPI litert-lm 0.19.1 macOS arm64 wheel (Python 3.13, liblitert-lm.dylib sha256 c61e0faa...), its own CLI through tools/release_run.sh: `litert-lm run <file> --backend cpu --top-k 1 --cache disk --verbose --prompt 'What is 17 + 25? Answer briefly.'` (the XNNPACK weight cache the run wrote next to the file, 32,040,421,144 B, removed after the run)",
+            "/ .out.txt: started 12:08:36 JST, ended 12:11:03 JST, rc 0, the reply's last line '17 + 25 = 42.'; a loadability check of the released runtime (output_match null: one fixed question, not a comparison with a reference)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "questions": 1.0,
+            "rc": 0.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "one fixed question ('What is 17 + 25? Answer briefly.') through the PyPI litert-lm 0.19.1 CLI (`litert-lm run`, top-k 1), the released runtime's loadability check",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.19.1/2026-11-09/qwen3-32b-int8-ekv4096__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "cpu",
+          "context_length": 2048,
+          "date": "2026-11-09",
+          "decode_tokens_per_s": 5.03,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "bytes: every row ran qwen3_32b_int8_ekv4096.litertlm (each run's command or meta names that path), written 11:39:02 JST by the int8 build and not modified after (mtime), hashed by the upload (preupload_qwen3_32b_int8_ekv4096.litertlm.json: sha256 c4d505aa0339e4e9fe5a6974b6e915e2dcfd2c441f2c865b6518df06b4b6008a, 32892029424 B) = the Hub's LFS oid at upload commit d8c78c1d and at main d8aa56b3",
+            "runtime: litert_lm_advanced_main built from the LiteRT-LM v0.19.1 tag (7a03724c; sha256 6f0eba84..., env/b0191/run/SHA256SUMS, with the tag's prebuilt macos_arm64 libwebgpu_dawn.dylib and libGemmaModelConstraintProvider.dylib); `--backend=cpu --benchmark --benchmark_prefill_tokens=1024 --benchmark_decode_tokens=256 --num_iterations=2 --max_num_tokens=2048 --cache_dir= --report_peak_memory_footprint`; CPU = XNNPACK, number_of_threads 4 (the runtime's default; the log prints it), which quantizes each int8 layer's input to int8 at run time; the log prints no node count",
+            "window w1 of 2026-11-09: the cell (the CPU arm ran one process): iteration 2 of 2 of one engine (iteration 1 = the warm-up); ttft_ms = iteration 2's; peak_mem_mb = the largest 'Peak system ram usage' the runtime printed (--report_peak_memory_footprint)",
+            "(started 2026-11-09 12:48:01 JST, CPU 89 % idle): iterations 54.26 / 4.84 tok/s, TTFT 19.08 s; 50.41 / 5.03 tok/s, TTFT 20.51 s; Init Total 79914.75 ms; Peak system ram usage up to 5557.46 MB; the guard's peak physical footprint 5.8 GB (vmmap)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "cpu_threads": 4.0,
+            "decode_tokens": 256.0,
+            "iterations": 2.0,
+            "max_num_tokens": 2048.0,
+            "prefill_tokens": 1024.0,
+            "proc1_cpu_idle_at_start_pct": 89.0,
+            "proc1_guard_peak_footprint_gb": 5.8,
+            "proc1_init_total_ms": 79914.75,
+            "proc1_iter1_decode_tok_s": 4.84,
+            "proc1_iter1_prefill_tok_s": 54.26,
+            "proc1_iter1_ttft_s": 19.08,
+            "proc1_iter2_decode_tok_s": 5.03,
+            "proc1_iter2_prefill_tok_s": 50.41,
+            "proc1_iter2_ttft_s": 20.51,
+            "proc1_peak_system_ram_mb": 5557.46,
+            "processes": 1.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 5557.46,
+          "prefill_tokens_per_s": 50.41,
+          "provenance": "measured",
+          "runs": true,
+          "signature": null,
+          "total_ops": null,
+          "ttft_ms": 20510.0
+        },
+        "source": "data/device_runs/0.19.1/2026-11-09/qwen3-32b-int8-ekv4096__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-11-09",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "bytes: every row ran qwen3_32b_int8_ekv4096.litertlm (each run's command or meta names that path), written 11:39:02 JST by the int8 build and not modified after (mtime), hashed by the upload (preupload_qwen3_32b_int8_ekv4096.litertlm.json: sha256 c4d505aa0339e4e9fe5a6974b6e915e2dcfd2c441f2c865b6518df06b4b6008a, 32892029424 B) = the Hub's LFS oid at upload commit d8c78c1d and at main d8aa56b3",
+            "runtime: the PyPI litert-lm 0.19.1 macOS arm64 wheel (Python 3.13, liblitert-lm.dylib sha256 c61e0faa...), its own CLI through tools/release_run.sh: `litert-lm run <file> --backend gpu --top-k 1 --cache no --verbose --prompt 'What is 17 + 25? Answer briefly.'` (GPU = WebGPU on Metal)",
+            "/ .out.txt: started 12:07:39 JST, ended 12:08:35 JST, rc 0, the reply's last line '42.'; a loadability check of the released runtime (output_match null: one fixed question, not a comparison with a reference)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "questions": 1.0,
+            "rc": 0.0
+          },
+          "output_match": null,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "one fixed question ('What is 17 + 25? Answer briefly.') through the PyPI litert-lm 0.19.1 CLI (`litert-lm run`, top-k 1), the released runtime's loadability check",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.19.1/2026-11-09/qwen3-32b-int8-ekv4096__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": null,
+          "date": "2026-11-09",
+          "decode_tokens_per_s": null,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "bytes: every row ran qwen3_32b_int8_ekv4096.litertlm (each run's command or meta names that path), written 11:39:02 JST by the int8 build and not modified after (mtime), hashed by the upload (preupload_qwen3_32b_int8_ekv4096.litertlm.json: sha256 c4d505aa0339e4e9fe5a6974b6e915e2dcfd2c441f2c865b6518df06b4b6008a, 32892029424 B) = the Hub's LFS oid at upload commit d8c78c1d and at main d8aa56b3",
+            "runtime: litert_lm_advanced_main built from the LiteRT-LM v0.19.1 tag (7a03724c; sha256 6f0eba84...), one process per question: `--backend=gpu --max_output_tokens=2048 --sampler_top_k=1 --sampler_handles_input=false --disable_cache=true --input_prompt=<question>` (the conversation: the three user turns on stdin to one process); the file's own chat template with thinking on (its default)",
+            "output_match = line 3 as written before any output (the dated lines of 2026-11-09): (a) every question's verdict (its regex on the answer after the thought) equals the reference's, (b) every question the reference ends with the stop token ends with it here, (c) the 3-turn conversation recalls turn 1's number in turn 3; reference = Transformers with the bf16 checkpoint on the Mac's GPU (MPS), greedy, whose token choices agree with a float32 CPU run at 729 of 733 positions (line R)",
+            "/ .md: 12 / 12 verdicts equal, 12 / 12 stopped, the conversation passed (turn 3: 'Your lucky number is **37**.'), verdict PASS; = the card's Accuracy table (README at main d8aa56b3)"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "answers_right": 12.0,
+            "conversation_turns": 3.0,
+            "conversation_turns_right": 3.0,
+            "ended_with_stop_token": 12.0,
+            "max_new_tokens": 2048.0,
+            "peak_footprint_gb_max": 36.75,
+            "questions": 12.0,
+            "reply_tokens_max": 1685.0,
+            "run_seconds_max": 160.7,
+            "verdicts_equal_transformers_bf16": 12.0
+          },
+          "output_match": true,
+          "peak_mem_mb": null,
+          "prefill_tokens_per_s": null,
+          "provenance": "measured",
+          "runs": true,
+          "signature": "the 12 check questions of line 3 (arithmetic, facts, two translations, a rhyme, 0.9 vs 0.11, a word problem, fib(10) in Python, the planets in order) and a 3-turn conversation, greedy (--sampler_top_k=1), thinking on, at most 2,048 new tokens per answer, one process per question; verdicts against Transformers (bf16)",
+          "total_ops": null,
+          "ttft_ms": null
+        },
+        "source": "data/device_runs/0.19.1/2026-11-09/qwen3-32b-int8-ekv4096__mac-studio-m4-max.json"
+      },
+      {
+        "device": "mac-studio-m4-max",
+        "run": {
+          "accelerator": "gpu",
+          "context_length": 2048,
+          "date": "2026-11-09",
+          "decode_tokens_per_s": 11.86,
+          "delegated_ops": null,
+          "env": {
+            "device": "Mac Studio (M4 Max, Mac16,9)",
+            "machine_label": "mac-studio-m4-max",
+            "os_build": "macOS 27.0 (26A428)",
+            "runtime": "litert-lm",
+            "runtime_version": "0.19.1",
+            "soc": "Apple M4 Max",
+            "vendor_sdk": null
+          },
+          "error": null,
+          "evidence": [
+            "bytes: every row ran qwen3_32b_int8_ekv4096.litertlm (each run's command or meta names that path), written 11:39:02 JST by the int8 build and not modified after (mtime), hashed by the upload (preupload_qwen3_32b_int8_ekv4096.litertlm.json: sha256 c4d505aa0339e4e9fe5a6974b6e915e2dcfd2c441f2c865b6518df06b4b6008a, 32892029424 B) = the Hub's LFS oid at upload commit d8c78c1d and at main d8aa56b3",
+            "runtime: litert_lm_advanced_main built from the LiteRT-LM v0.19.1 tag (7a03724c; sha256 6f0eba84..., env/b0191/run/SHA256SUMS, with the tag's prebuilt macos_arm64 libwebgpu_dawn.dylib and libGemmaModelConstraintProvider.dylib); `--backend=gpu --benchmark --benchmark_prefill_tokens=1024 --benchmark_decode_tokens=256 --num_iterations=4 --max_num_tokens=2048 --disable_cache=true --report_peak_memory_footprint --sampler_handles_input=false`; GPU = WebGPU on Metal (the log selects 'Apple M4 Max, arch=metal-3, backend=Metal'); the log prints no partition or node count",
+            "window w1 of 2026-11-09: the cell: per process the mean of iterations 2-4 of one engine (iteration 1 = the warm-up), the cell = the median of the 3 processes' values, prefill and decode each; ttft_ms = the median of the processes' iteration 2-N mean TTFT; peak_mem_mb = the largest 'Peak system ram usage' the runtime printed (--report_peak_memory_footprint) in any iteration of any process",
+            "(started 2026-11-09 12:35:13 JST, CPU 91 % idle): iterations 179.29 / 12.23 tok/s, TTFT 5.79 s; 169.56 / 12.32 tok/s, TTFT 6.12 s; 184.09 / 12.31 tok/s, TTFT 5.64 s; 153.2 / 12.36 tok/s, TTFT 6.77 s; Init Total 12653.03 ms; Peak system ram usage up to 34295.6 MB; the guard's peak physical footprint 35.97 GB (vmmap)",
+            "(started 2026-11-09 12:41:24 JST, CPU 92 % idle): iterations 179.77 / 11.88 tok/s, TTFT 5.78 s; 171.1 / 12.28 tok/s, TTFT 6.07 s; 161.47 / 11.4 tok/s, TTFT 6.43 s; 136.92 / 11.9 tok/s, TTFT 7.56 s; Init Total 8724.0 ms; Peak system ram usage up to 34180.8 MB; the guard's peak physical footprint 35.86 GB (vmmap)",
+            "(started 2026-11-09 12:43:39 JST, CPU 82 % idle): iterations 148.46 / 10.31 tok/s, TTFT 6.99 s; 160.4 / 11.99 tok/s, TTFT 6.47 s; 160.74 / 10.96 tok/s, TTFT 6.46 s; 160.47 / 12.19 tok/s, TTFT 6.46 s; Init Total 10697.64 ms; Peak system ram usage up to 34185.4 MB; the guard's peak physical footprint 35.86 GB (vmmap)",
+            "the card's Performance row (README L44 at main d8aa56b3): 160.54 / 11.86 tok/s, peak footprint 35.97 GB = the largest guard reading (vmmap, decimal GB); the runtime's own peak print is the peak_mem_mb here"
+          ],
+          "failure_class": null,
+          "full_delegation": null,
+          "latency_p50_ms": null,
+          "loads": true,
+          "max_abs_diff": null,
+          "max_rel_diff": null,
+          "metrics": {
+            "decode_tokens": 256.0,
+            "iterations": 4.0,
+            "max_num_tokens": 2048.0,
+            "prefill_tokens": 1024.0,
+            "proc1_cpu_idle_at_start_pct": 91.0,
+            "proc1_guard_peak_footprint_gb": 35.97,
+            "proc1_init_total_ms": 12653.03,
+            "proc1_iter1_decode_tok_s": 12.23,
+            "proc1_iter1_prefill_tok_s": 179.29,
+            "proc1_iter1_ttft_s": 5.79,
+            "proc1_iter2_decode_tok_s": 12.32,
+            "proc1_iter2_prefill_tok_s": 169.56,
+            "proc1_iter2_ttft_s": 6.12,
+            "proc1_iter3_decode_tok_s": 12.31,
+            "proc1_iter3_prefill_tok_s": 184.09,
+            "proc1_iter3_ttft_s": 5.64,
+            "proc1_iter4_decode_tok_s": 12.36,
+            "proc1_iter4_prefill_tok_s": 153.2,
+            "proc1_iter4_ttft_s": 6.77,
+            "proc1_peak_system_ram_mb": 34295.6,
+            "proc2_cpu_idle_at_start_pct": 92.0,
+            "proc2_guard_peak_footprint_gb": 35.86,
+            "proc2_init_total_ms": 8724.0,
+            "proc2_iter1_decode_tok_s": 11.88,
+            "proc2_iter1_prefill_tok_s": 179.77,
+            "proc2_iter1_ttft_s": 5.78,
+            "proc2_iter2_decode_tok_s": 12.28,
+            "proc2_iter2_prefill_tok_s": 171.1,
+            "proc2_iter2_ttft_s": 6.07,
+            "proc2_iter3_decode_tok_s": 11.4,
+            "proc2_iter3_prefill_tok_s": 161.47,
+            "proc2_iter3_ttft_s": 6.43,
+            "proc2_iter4_decode_tok_s": 11.9,
+            "proc2_iter4_prefill_tok_s": 136.92,
+            "proc2_iter4_ttft_s": 7.56,
+            "proc2_peak_system_ram_mb": 34180.8,
+            "proc3_cpu_idle_at_start_pct": 82.0,
+            "proc3_guard_peak_footprint_gb": 35.86,
+            "proc3_init_total_ms": 10697.64,
+            "proc3_iter1_decode_tok_s": 10.31,
+            "proc3_iter1_prefill_tok_s": 148.46,
+            "proc3_iter1_ttft_s": 6.99,
+            "proc3_iter2_decode_tok_s": 11.99,
+            "proc3_iter2_prefill_tok_s": 160.4,
+            "proc3_iter2_ttft_s": 6.47,
+            "proc3_iter3_decode_tok_s": 10.96,
+            "proc3_iter3_prefill_tok_s": 160.74,
+            "proc3_iter3_ttft_s": 6.46,
+            "proc3_iter4_decode_tok_s": 12.19,
+            "proc3_iter4_prefill_tok_s": 160.47,
+            "proc3_iter4_ttft_s": 6.46,
+            "proc3_peak_system_ram_mb": 34185.4,
+            "processes": 3.0
+          },
+          "output_match": null,
+          "peak_mem_mb": 34295.6,
+          "prefill_tokens_per_s": 160.537,
+          "provenance": "measured",
+          "runs": true,
+          "signature": null,
+          "total_ops": null,
+          "ttft_ms": 6463.3
+        },
+        "source": "data/device_runs/0.19.1/2026-11-09/qwen3-32b-int8-ekv4096__mac-studio-m4-max.json"
+      }
+    ]
+  },
+  "model": {
+    "family": "qwen3",
+    "id": "qwen3-32b-int8-ekv4096",
+    "license": "apache-2.0",
+    "source_url": "https://huggingface.co/litert-community/Qwen3-32B",
+    "task": "text-generation"
+  },
+  "pitfalls": [
+    "Use the GPU: on LiteRT-LM 0.19.1's CPU backend the file runs, but the runtime quantizes each int8 layer's input to int8, and the file's top-1 token matched the bf16 checkpoint's at 18 of 24 positions of the test prompt (3 runs, identical), one miss at a 5.1-logit margin; without it, 23 of 24. The CPU was not checked on the 12 questions (card L23, L63).",
+    "Long replies: with LiteRT-LM 0.19.1 a blocking send_message still generating after 10 minutes fails with DEADLINE_EXCEEDED; the M4 Max GPU decodes about 12 tokens/s, so on a slower machine a long thought can hit that limit; use send_message_async, or cap max_output_tokens (card L64).",
+    "A message that does not fit: on LiteRT-LM 0.18.1 and 0.19.1, after a message fails because it does not fit in the context window, every later message in that conversation fails too (Task failed with state: 7); start a new conversation (card L65).",
+    "Size: the file is 32.9 GB; the Apple M4 Max (128 GB) GPU benchmark peaked at a 35.97 GB physical footprint (vmmap); no phone was tried (card L29, L44, L48-L49).",
+    "The card's numbers come from litert_lm_advanced_main built from the v0.19.1 tag (its command-line tool has the benchmark and sampler flags), with --sampler_handles_input=false on the GPU; without --sampler_top_k=1 the CLI samples with the file's TOP_P settings (card L23, L46, L67-L76, L82, L86).",
+    "Thinking is on by default; the source card advises against greedy decoding in thinking mode (endless repetitions); the card's checks are greedy only to compare token by token (card L21, L53).",
+    "No int4 file: an int4 version of the same export (block 128, min-max) failed the accuracy check (on the GPU, 3 of 12 questions and one of 3 turns ran to the 2,048-token cap; on the CPU, 12 of 24 next tokens matched the bf16 checkpoint's) (card L34)."
+  ],
+  "schema_version": "1.2"
+}

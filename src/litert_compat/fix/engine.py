@@ -1,6 +1,6 @@
 """The fix engine: lint → match → plan → apply → re-lint gate → verify.
 
-Safety contract (spec §10.3), enforced here:
+Safety contract, enforced here:
 - The input file is never modified; every rewrite happens on a loaded copy.
 - The plan is deterministic and conflict-checked: a target claimed by more
   than one rule is left untouched and reported — never resolved by order of

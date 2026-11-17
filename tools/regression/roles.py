@@ -14,7 +14,17 @@ Stdlib only.
 from __future__ import annotations
 
 DEFAULT = "chat"
-VALUES = (DEFAULT, "classifier", "ocr", "translate", "transform", "decision", "npu-only")
+VALUES = (
+    DEFAULT,
+    "classifier",
+    "ocr",
+    "translate",
+    "transform",
+    "decision",
+    "gui-agent",
+    "asr",
+    "npu-only",
+)
 
 ROLES = {
     # "... so a policy-adaptive safety classifier runs fully on-device ... with no network
@@ -29,6 +39,12 @@ ROLES = {
     # "... is a page-level document-parsing model ...: given a document page image it emits
     # a Markdown transcription in reading order"
     "mlboydaisuke/OvisOCR2-LiteRT": "ocr",
+    # "On a Galaxy S26 this file reads a paragraph of text in about ... and a page in about
+    # ... on the CPU, engine creation included ..."
+    "litert-community/Xiaomi-OCR-0": "ocr",
+    # "On an iPhone 18 Pro this file reads a page in about ... on the CPU, and on a Galaxy S26
+    # in ..., engine creation included ..."
+    "litert-community/Unlimited-OCR-2": "ocr",
     # "... is Tencent's "fast-thinking" multilingual translation model: ... tuned to follow
     # translation instructions rather than chat."
     "litert-community/Hy-MT2-1.8B": "translate",
@@ -41,6 +57,12 @@ ROLES = {
     # "Give it one image and lettered questions, and it returns a probability for each
     # option."
     "litert-community/decider-2b-vision-LiteRT": "decision",
+    # "... on a Mac M4 Max GPU it reads a screenshot and writes a GUI agent's next action in
+    # ..., from process start to exit ..."
+    "litert-community/Mage-VL-Cowork": "gui-agent",
+    # "This repository is a conversion of ibm-granite/granite-speech-5.0-2b to LiteRT-LM ...: it
+    # takes 16 kHz audio and returns the transcript ..."
+    "litert-community/granite-speech-5.0-2b": "asr",
     # "A static-range-quantized (SRQ) .litertlm of ... that a Qualcomm device compiles for
     # its own Hexagon NPU (HTP) at load time (JIT)." A backend rather than a role: CPU and
     # GPU create no engine for it, so suite v1 counts it apart the same way.

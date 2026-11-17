@@ -21,7 +21,7 @@
       },
       "error": null,
       "evidence": [
-        "hand-recorded device phase: litertlm-convert reports/gpu_audit/MATRIX.md 実機フェーズ table (committed 0559ad3, 2026-07-23; Gallery 1.0.15 official Benchmark, ML Drift GPU, p256/d256 x3 runs; runtime version axis = the Gallery app version — the embedded litert-lm version is not recorded)",
+        "hand-recorded device phase: device-phase table (committed 0559ad3, 2026-07-23; Gallery 1.0.15 official Benchmark, ML Drift GPU, p256/d256 x3 runs; runtime version axis = the Gallery app version — the embedded litert-lm version is not recorded)",
         "row: '✅ 合格 | 136.6 / 7.84 (TTFT 2.0s, 初回 init 48.8s)' — model-specific slowness on real ML Drift"
       ],
       "failure_class": null,

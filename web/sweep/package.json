@@ -17,7 +17,7 @@
     "sweep:batches": "npm run build && node --experimental-strip-types src/node/batches.ts"
   },
   "dependencies": {
-    "@litertjs/core": "^2.5.3",
+    "@litertjs/core": "^2.6.0",
     "ajv": "^8.17.1",
     "playwright": "^1.54.0"
   },

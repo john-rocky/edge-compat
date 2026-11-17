@@ -3,7 +3,7 @@
   "artifact_sha256": "6ecbca381adf232dd3a3af4ec7dd790d92601a5ff6be0ed4f9030c6345b5fa20",
   "device": "galaxy-s26",
   "model_id": "gliner2.5-decide__gliner25_decide_s256_npu_wfp16",
-  "notes": "GLiNER2.5-Decide LiteRT (litert-community/GLiNER2.5-Decide-LiteRT; gliner25_decide_s256_npu_wfp16.tflite published at 600fe62b) measured by the typed-decisions lane (rounds 11-22, 2026-10-04 / 2026-10-05): the hfmodels-android SDK device test (family gliner2_decide of hfmodels-litert EncoderDecisions, one question = one gliner2 task) and, where named, the lane's native runner. `signature` names the precision, the harness and (when two runs of one form share a date) the run (DECISIONS #186 / #188). artifact_sha256 = the dev descriptor's sha256 for the graph, asserted equal to the published file's. Lane record: <notes> (§知見 2); generator: <work>/r24/litert_compat_records.py.",
+  "notes": "GLiNER2.5-Decide LiteRT (litert-community/GLiNER2.5-Decide-LiteRT; gliner25_decide_s256_npu_wfp16.tflite published at 600fe62b) measured (2026-10-04 / 2026-10-05): the hfmodels-android SDK device test (family gliner2_decide of hfmodels-litert EncoderDecisions, one question = one gliner2 task) and, where named, the native runner. `signature` names the precision, the harness and (when two runs of one form share a date) the run. artifact_sha256 = the dev descriptor's sha256 for the graph, asserted equal to the published file's.",
   "quantization": null,
   "results": [
     {
@@ -23,10 +23,9 @@
       },
       "error": null,
       "evidence": [
-        "native runner leg s256_gpu_fp16acc32 of round 14 on the Galaxy S26 (LiteRT 2.2.0 C API, one process per graph; timed = input write + run + output readback, the median of the timed rounds after warm-up); graph sha256 6ecbca381adf232dd3a3af4ec7dd790d92601a5ff6be0ed4f9030c6345b5fa20 = the published gliner25_decide_s256_npu_wfp16.tflite (litert-community/GLiNER2.5-Decide-LiteRT@600fe62b; r23-report.md: the two graphs at 600fe62b, 710,631,840 B 6ecbca38).",
+        "native runner run s256_gpu_fp16acc32 of run 14 on the Galaxy S26 (LiteRT 2.2.0 C API, one process per graph; timed = input write + run + output readback, the median of the timed rounds after warm-up); graph sha256 6ecbca381adf232dd3a3af4ec7dd790d92601a5ff6be0ed4f9030c6345b5fa20 = the published gliner25_decide_s256_npu_wfp16.tflite (litert-community/GLiNER2.5-Decide-LiteRT@600fe62b; r23-report.md: the two graphs at 600fe62b, 710,631,840 B 6ecbca38).",
         "delegate: 1878/1878 LITERT_CL, fully_accelerated true; compile_ms 3456.9.",
-        "the lane's bar on the card's 42 phone requests (argmax 100 %, max |dp| <= 0.01): PASS; the runner keeps the outputs, but no element-rule comparison against a CPU run of the same bytes was made (adapter rule, #179(1)).",
-        "source: K/r14/results/device_summary.json (tag s256_gpu_fp16acc32), K/r14/device/s256_gpu_fp16acc32/; <work>/r14-report.md; generator <work>/r24/litert_compat_records.py."
+        "the bar on the card's 42 phone requests (argmax 100 %, max |dp| <= 0.01): PASS; the runner keeps the outputs, but no element-rule comparison against a CPU run of the same bytes was made (adapter rule)."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -61,7 +60,7 @@
       "prefill_tokens_per_s": null,
       "provenance": "measured",
       "runs": true,
-      "signature": "GpuOptions precision=FP16_WITH_FP32_ACCUM; native runner npu_ab_runner (LiteRT 2.2.0 C API), round 14",
+      "signature": "GpuOptions precision=FP16_WITH_FP32_ACCUM; native runner npu_ab_runner (LiteRT 2.2.0 C API), run 14",
       "total_ops": 1878,
       "ttft_ms": null
     },
@@ -82,10 +81,9 @@
       },
       "error": null,
       "evidence": [
-        "native runner leg s256_gpu_fp32 of round 14 on the Galaxy S26 (LiteRT 2.2.0 C API, one process per graph; timed = input write + run + output readback, the median of the timed rounds after warm-up); graph sha256 6ecbca381adf232dd3a3af4ec7dd790d92601a5ff6be0ed4f9030c6345b5fa20 = the published gliner25_decide_s256_npu_wfp16.tflite (litert-community/GLiNER2.5-Decide-LiteRT@600fe62b; r23-report.md: the two graphs at 600fe62b, 710,631,840 B 6ecbca38).",
+        "native runner run s256_gpu_fp32 of run 14 on the Galaxy S26 (LiteRT 2.2.0 C API, one process per graph; timed = input write + run + output readback, the median of the timed rounds after warm-up); graph sha256 6ecbca381adf232dd3a3af4ec7dd790d92601a5ff6be0ed4f9030c6345b5fa20 = the published gliner25_decide_s256_npu_wfp16.tflite (litert-community/GLiNER2.5-Decide-LiteRT@600fe62b; r23-report.md: the two graphs at 600fe62b, 710,631,840 B 6ecbca38).",
         "delegate: 1878/1878 LITERT_CL, fully_accelerated true; compile_ms 4009.0.",
-        "the lane's bar on the card's 42 phone requests (argmax 100 %, max |dp| <= 0.01): PASS; the runner keeps the outputs, but no element-rule comparison against a CPU run of the same bytes was made (adapter rule, #179(1)).",
-        "source: K/r14/results/device_summary.json (tag s256_gpu_fp32), K/r14/device/s256_gpu_fp32/; <work>/r14-report.md; generator <work>/r24/litert_compat_records.py."
+        "the bar on the card's 42 phone requests (argmax 100 %, max |dp| <= 0.01): PASS; the runner keeps the outputs, but no element-rule comparison against a CPU run of the same bytes was made (adapter rule)."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -120,7 +118,7 @@
       "prefill_tokens_per_s": null,
       "provenance": "measured",
       "runs": true,
-      "signature": "GpuOptions precision=FP32; native runner npu_ab_runner (LiteRT 2.2.0 C API), round 14",
+      "signature": "GpuOptions precision=FP32; native runner npu_ab_runner (LiteRT 2.2.0 C API), run 14",
       "total_ops": 1878,
       "ttft_ms": null
     },
@@ -141,10 +139,9 @@
       },
       "error": null,
       "evidence": [
-        "native runner leg s256_jit_npu_first of round 14 on the Galaxy S26 (LiteRT 2.2.0 C API, one process per graph; timed = input write + run + output readback, the median of the timed rounds after warm-up); graph sha256 6ecbca381adf232dd3a3af4ec7dd790d92601a5ff6be0ed4f9030c6345b5fa20 = the published gliner25_decide_s256_npu_wfp16.tflite (litert-community/GLiNER2.5-Decide-LiteRT@600fe62b; r23-report.md: the two graphs at 600fe62b, 710,631,840 B 6ecbca38).",
+        "native runner run s256_jit_npu_first of run 14 on the Galaxy S26 (LiteRT 2.2.0 C API, one process per graph; timed = input write + run + output readback, the median of the timed rounds after warm-up); graph sha256 6ecbca381adf232dd3a3af4ec7dd790d92601a5ff6be0ed4f9030c6345b5fa20 = the published gliner25_decide_s256_npu_wfp16.tflite (litert-community/GLiNER2.5-Decide-LiteRT@600fe62b; r23-report.md: the two graphs at 600fe62b, 710,631,840 B 6ecbca38).",
         "delegate: 1/1 DispatchDelegate, fully_accelerated true; compile_ms 305652.1.",
-        "the lane's bar on the card's 42 phone requests (argmax 100 %, max |dp| <= 0.01): PASS; the runner keeps the outputs, but no element-rule comparison against a CPU run of the same bytes was made (adapter rule, #179(1)).",
-        "source: K/r14/results/device_summary.json (tag s256_jit_npu_first), K/r14/device/s256_jit_npu_first/; <work>/r14-report.md; generator <work>/r24/litert_compat_records.py."
+        "the bar on the card's 42 phone requests (argmax 100 %, max |dp| <= 0.01): PASS; the runner keeps the outputs, but no element-rule comparison against a CPU run of the same bytes was made (adapter rule)."
       ],
       "failure_class": null,
       "full_delegation": true,
@@ -182,7 +179,7 @@
       "prefill_tokens_per_s": null,
       "provenance": "measured",
       "runs": true,
-      "signature": "QualcommOptions htpPerformanceMode=BURST, JIT (first compile, empty cache); native runner npu_ab_runner (LiteRT 2.2.0 C API), round 14",
+      "signature": "QualcommOptions htpPerformanceMode=BURST, JIT (first compile, empty cache); native runner npu_ab_runner (LiteRT 2.2.0 C API), run 14",
       "total_ops": 1,
       "ttft_ms": null
     }

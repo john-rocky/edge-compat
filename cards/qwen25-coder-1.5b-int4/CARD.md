@@ -20,7 +20,7 @@ task: text-generation
 | | |
 |---|---|
 | **Tool** | litert-torch (hf-to-litertlm `qwen25coder_work/convert_qwen25_coder.sh`; export_simple_template.py) litert-torch 0.9.3 (litert-converter 0.3.1, ai-edge-quantizer 0.8.0, litert-lm-builder 0.16.0) — stated on the published HF card |
-| **Command** | `CACHE=4096 PREFILL=1024,256,64,16,4,1 EXTERNALIZE_EMBEDDER=1 python scripts/export_simple_template.py src_models/qwen25-coder-1.5b out_qwen25_coder qwen25coder_work/qwen25_coder_simple.jinja BOCTAV4` |
+| **Command** | `CACHE=4096 PREFILL=1024,256,64,16,4,1 EXTERNALIZE_EMBEDDER=1 python scripts/export_simple_template.py src_models/qwen25-coder-1.5b out_qwen25_coder qwen25_coder_simple.jinja BOCTAV4` |
 | **Quantization** | int4 weights, blockwise-32 + OCTAV, symmetric (BOCTAV4) on linears; int8 embedding, externalised (tied lm_head) |
 
 ## Artifacts
@@ -48,9 +48,9 @@ Model-level on-device results — measured behavior of this exact artifact on th
 ## Pitfalls
 
 - EXTERNALIZE_EMBEDDER=1 is required, not cosmetic: the model ties embedding and lm_head, and BOCTAV4 (int4 linears + int8 embedding) describes one tensor two ways — the quantizer resolves it by copying the 151936x1536 table once per prefill signature (7 copies, 1.63 GB, 65% of the file, no error). Externalising removes the conflict (HF card / REPRODUCE.md).
-- The upstream chat template injects a default system prompt ('You are Qwen, created by Alibaba Cloud…') when none is supplied; a generic ChatML template omits it and runs the model outside its tuned state — the bundle carries a template that reproduces the default (FINDINGS.md / REPRODUCE.md).
+- The upstream chat template injects a default system prompt ('You are Qwen, created by Alibaba Cloud…') when none is supplied; a generic ChatML template omits it and runs the model outside its tuned state — the bundle carries a template that reproduces the default.
 - Requires litert-lm >= 0.16 (HF card).
-- Pixel 8a 2026-08-19: fully delegated on Mali OpenCL (1243/1243 per prefill signature, 1132/1132 decode, zero rejections); GPU buys prefill/TTFT (0.54 s vs 2.44 s on CPU), not decode (12.0 vs 12.6 tok/s — same LPDDR) (FINDINGS.md).
+- Pixel 8a 2026-08-19: fully delegated on Mali OpenCL (1243/1243 per prefill signature, 1132/1132 decode, zero rejections); GPU buys prefill/TTFT (0.54 s vs 2.44 s on CPU), not decode (12.0 vs 12.6 tok/s — same LPDDR).
 
 ---
 

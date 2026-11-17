@@ -1,4 +1,4 @@
-"""CSV import: the neutral interchange format for the owner's curated op table.
+"""CSV import: the neutral interchange format for a curated op table.
 
 Forgiving on input (whitespace trimmed, any column order, unknown columns
 warned and ignored), strict on output (the result must pass validation).

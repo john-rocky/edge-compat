@@ -1,0 +1,59 @@
+{
+  "artifact": "parakeet_tdt_0.6b_v3_5s_f32_stateful_Qualcomm_SM8850.tflite",
+  "artifact_sha256": "e9edabe48ffd853ddebac6c83804752edf0e1e567b26954aae0d3e964f72a486",
+  "device": "galaxy-s26",
+  "model_id": "parakeet-tdt-0.6b-v3__parakeet_tdt_0.6b_v3_5s_f32_stateful_qualcomm_sm8850",
+  "notes": "parakeet-tdt-0.6b-v3 5 s window file compiled ahead of time for SM8850 (litert-community/parakeet-tdt-0.6b-v3 @ 3ce205aa928f, sha256 = the Hub LFS oid; the phone's copy matched) through the litert-samples speech_recognition Android app (LiteRT 2.2.0 CompiledModel; Kotlin jLibrosa mel; the app's TdtDecoder or CTC decoder and LevenshteinTokenMerger; default options = GPU FP32, NPU HIGH_PERFORMANCE, CPU 4 threads) driven by an androidTest harness with a front activity (cpuset top-app, CPUs 0-7, JIT under instrumentation); LibriSpeech test-clean through the Open ASR Leaderboard normalizer, corpus WER of the app's text (pipeline-level, not the .tflite alone). Metric suffixes: _s4 = every 4th of the 2620 utterances sorted by duration (655, 13,117 words) back to back, WER only (the engine CPUs' clock ceiling fell past the cpu-cap line, so no RTF); _s32 = every 32nd (82 utterances, 626.36 s) one at a time after the CPU clock ceiling recovers, rtf_burst = processing seconds / audio seconds; _per_window = median over the app's input windows; _sum_s = the stage's time summed over the run. The app's HTP performance mode is HIGH_PERFORMANCE. Cause of the failure not established.",
+  "quantization": "fp32, compiled ahead of time for SM8850 (the litert-community 5 s f32 stateful Qualcomm_SM8850 file)",
+  "results": [
+    {
+      "accelerator": "npu_qnn",
+      "context_length": null,
+      "date": "2026-10-19",
+      "decode_tokens_per_s": null,
+      "delegated_ops": null,
+      "env": {
+        "device": "Galaxy S26 (SM-S942Q)",
+        "machine_label": "galaxy-s26-asr-sample-app",
+        "os_build": "Android 16 (BP4A.251205.006.S942QOPS1AZH9, security patch 2026-08-05; the run header's device block)",
+        "runtime": "litert",
+        "runtime_version": "2.2.0",
+        "soc": "Qualcomm SM8850 (Adreno GPU, Hexagon HTP)",
+        "vendor_sdk": "LiteRT 2.2.0 qualcomm_runtime_v81 libLiteRtDispatch_Qualcomm.so + QAIRT 2.47.0 (libQnnHtp, libQnnHtpV81Stub, libQnnHtpV81Skel, libQnnSystem and the other Qualcomm libs listed with their sha256 in the campaign's LOCK.json) in the app's native lib dir"
+      },
+      "error": "QnnDsp <E> Failed to find memHandle 0x6; graphExecuteRpcMemWrite failed for inputs; Graph qnn_partition_1 failed in execution with err 6004 -> LiteRtException: Failed to invoke the compiled model (with the app decoder fix: the warm-up utterance's second 5 s window, its second qnn_partition_1 run; each of the 10 smoke rows at its first qnn_partition_1 run)",
+      "evidence": [
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-10-19-asr-fix-v1-s26-android/summary/b-l3f-litert-npu-5s-fix-smoke10.summary.json: fix_ (smoke 10): {\"tag\": \"b-l3f-litert-npu-5s-fix-smoke10\", \"rows_selected\": 10, \"rows_ok\": 0, \"wer_percent\": 100.0, \"deletions\": 499, \"reference_words\": 499, \"empty_hypotheses\": 10, \"vmhwm_kb_max\": 1501500, \"litert_version\": \"2.2.0\", \"input_ms\": 5000}",
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/docs/asr-fix-v1.md: metrics prefixed fix_ = the same file under the same app with its TdtDecoder loop fixed (stop before encoder frame min(maxTimeIndex, ceil(n / 8) + 4), n = floor(v / 160), v = the window's samples up to its last non-zero one; at most 10 non-blank symbols per encoder frame; run argument tdt_fix); measured in another measurement run with no anchor, so its RTF is not compared with the unprefixed one within 16-25 %",
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-10-19-asr-fix-v1-s26-android/NOTES.md: NpuAccelerator registered, QNN graphs qnn_partition_0 / _1 / _2 loaded, DispatchDelegate took 1 / 1 node for encode, decode and decode_1; warm-up utterance, first 5 s window: every decoder step gave token 0 with duration 0 and the 10-symbol cap moved it on one frame at a time (63 x 10 = 630 steps); second window: the encoder and one qnn_partition_1 run finished, the next qnn_partition_1 run failed (Failed to find memHandle 0x6 ... err 6004 -> Failed to invoke the compiled model); each of the 10 rows failed the same way at its first qnn_partition_1 run",
+        "https://github.com/john-rocky/edge-llm-bench/blob/main/results/raw/2026-10-19-asr-litert-app-v1-s26-android/NOTES.md: app as shipped (l3-litert-npu-5s-smoke3): the first utterance gave no row in 10 min and the watchdog restarted the process, the second process stalled the same way on the next utterance and was stopped; in the two processes qnn_partition_2 (decode_1) finished 26,135 and 26,615 times, its buffers registered and released around each run (QnnMem_register / QnnMem_deRegister); the merger logged decode: tokenId=0, timestamp=0 every ~12 ms in the live process: the decoder emitted token 0 with duration 0 and never left frame 0 (the app's TdtDecoder has no per-frame symbol cap); whether the NPU's outputs are wrong from the first window was not verified (the log buffer held only the last minutes, l3-litert-npu-5s-smoke3.loop-excerpt.txt); load 878.8 ms (first process), 599.6 ms (second)"
+      ],
+      "failure_class": "invoke_failed",
+      "full_delegation": true,
+      "latency_p50_ms": null,
+      "loads": true,
+      "max_abs_diff": null,
+      "max_rel_diff": null,
+      "metrics": {
+        "app_as_shipped_decode_1_runs_both_processes": 52750,
+        "app_as_shipped_load_first_process_ms": 878.8,
+        "app_as_shipped_load_second_process_ms": 599.6,
+        "fix_load_cold_ms": 1014.5,
+        "fix_reference_words_smoke10": 499,
+        "fix_rows_ok_smoke10": 0,
+        "fix_rows_smoke10": 10,
+        "fix_warmup_window_1_decoder_steps": 630,
+        "fix_wer_percent_smoke10": 100.0
+      },
+      "output_match": false,
+      "peak_mem_mb": 1466.3,
+      "prefill_tokens_per_s": null,
+      "provenance": "measured",
+      "runs": false,
+      "signature": null,
+      "total_ops": null,
+      "ttft_ms": null
+    }
+  ],
+  "schema_version": "1.0"
+}
