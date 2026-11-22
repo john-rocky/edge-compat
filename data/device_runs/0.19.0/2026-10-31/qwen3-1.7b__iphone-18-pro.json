@@ -14,7 +14,7 @@
       "delegated_ops": null,
       "env": {
         "device": "iPhone 18 Pro (iPhone19,2)",
-        "machine_label": "iphone-18-pro-d178check",
+        "machine_label": "iphone-18-pro-check",
         "os_build": "iOS 27.2 (24B5099f)",
         "runtime": "litert-lm",
         "runtime_version": "0.19.0",
@@ -24,7 +24,7 @@
       "error": null,
       "evidence": [
         "artifact: litert-community/Qwen3-1.7B `Qwen3_1.7B.litertlm` at main since 2026-10-31 (commit ebb4eef4c07c0ecf019fa3cf7b501771d44ca21f, the replacement under the kept name): LFS sha256 e40599625f3e446d6522674586a40566d6a3a117af608f6e9ea46ac86d326461, 1754890240 B (anonymous Hub API tree read 2026-10-31 14:20 JST)",
-        "app: edge-llm-bench BenchmarkApp, a check build (unsigned build + codesign with a wildcard profile, no memory entitlement; bundle id …d178check) linking CLiteRTLM.xcframework.zip@v0.19.0 sha256:b7b2450fc084058adc5185498f8b7810a9297e054a10cf55818b62e1d5f8d65d (engineVersion v0.19.0); the file side-loaded into the app's container as model.litertlm and its sha256 read back on the phone: \"D1 04:49:11 OK the phone's 17 hashes e40599625f3e446d6522674586a40566d6a3a117af608f6e9ea46ac86d326461\"",
+        "app: edge-llm-bench BenchmarkApp, a check build (unsigned build + codesign with a wildcard profile, no memory entitlement; bundle id …check) linking CLiteRTLM.xcframework.zip@v0.19.0 sha256:b7b2450fc084058adc5185498f8b7810a9297e054a10cf55818b62e1d5f8d65d (engineVersion v0.19.0); the file side-loaded into the app's container as model.litertlm and its sha256 read back on the phone: \"D1 04:49:11 OK the phone's 17 hashes e40599625f3e446d6522674586a40566d6a3a117af608f6e9ea46ac86d326461\"",
         "the app's quality task: greedy, 256 tokens, thinking left to the template, one launch with --purge-engine-cache, 2026-10-31 04:51:33 JST",
         "question 1 (\"What is 17 + 25?\"): the stream holds 42 — \"Okay, let's tackle these questions one by one. \\n\\n1. 17 + 25: That's straightforward addition. 17 plus 25 equals 42. I'll go with 42.\\n\\n2. Capital of Ja\"",
         "peak footprint during decode 792.6 MB (the app's own reading); crash logs new during the slot: BenchmarkApp.diskwrites_resource-2026-10-31-045104.ips, S2YnnBench-2026-10-31-045131.ips, no JetsamEvent"
@@ -55,7 +55,7 @@
       "delegated_ops": null,
       "env": {
         "device": "iPhone 18 Pro (iPhone19,2)",
-        "machine_label": "iphone-18-pro-d178check",
+        "machine_label": "iphone-18-pro-check",
         "os_build": "iOS 27.2 (24B5099f)",
         "runtime": "litert-lm",
         "runtime_version": "0.19.0",
@@ -65,7 +65,7 @@
       "error": null,
       "evidence": [
         "artifact: litert-community/Qwen3-1.7B `Qwen3_1.7B.litertlm` at main since 2026-10-31 (commit ebb4eef4c07c0ecf019fa3cf7b501771d44ca21f, the replacement under the kept name): LFS sha256 e40599625f3e446d6522674586a40566d6a3a117af608f6e9ea46ac86d326461, 1754890240 B (anonymous Hub API tree read 2026-10-31 14:20 JST)",
-        "app: edge-llm-bench BenchmarkApp, a check build (unsigned build + codesign with a wildcard profile, no memory entitlement; bundle id …d178check) linking CLiteRTLM.xcframework.zip@v0.19.0 sha256:b7b2450fc084058adc5185498f8b7810a9297e054a10cf55818b62e1d5f8d65d (engineVersion v0.19.0); the file side-loaded into the app's container as model.litertlm and its sha256 read back on the phone: \"D1 04:49:11 OK the phone's 17 hashes e40599625f3e446d6522674586a40566d6a3a117af608f6e9ea46ac86d326461\"",
+        "app: edge-llm-bench BenchmarkApp, a check build (unsigned build + codesign with a wildcard profile, no memory entitlement; bundle id …check) linking CLiteRTLM.xcframework.zip@v0.19.0 sha256:b7b2450fc084058adc5185498f8b7810a9297e054a10cf55818b62e1d5f8d65d (engineVersion v0.19.0); the file side-loaded into the app's container as model.litertlm and its sha256 read back on the phone: \"D1 04:49:11 OK the phone's 17 hashes e40599625f3e446d6522674586a40566d6a3a117af608f6e9ea46ac86d326461\"",
         "the app's quality task: greedy, 256 tokens, thinking left to the template, one launch with --purge-engine-cache, 2026-10-31 04:51:12 JST",
         "question 1 (\"What is 17 + 25?\"): the stream holds 42 — \"Okay, let's tackle these questions one by one. \\n\\n1. 17 + 25: That's straightforward addition. 17 plus 25 equals 42. So the answer is 42.\\n\\n2. Capital o\"",
         "peak footprint during decode 785.0 MB (the app's own reading); crash logs new during the slot: BenchmarkApp.diskwrites_resource-2026-10-31-045104.ips, S2YnnBench-2026-10-31-045131.ips, no JetsamEvent",
